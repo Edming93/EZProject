@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,18 +96,17 @@
         width: 90px;
         justify-content: center;
     }
-    
+
     .menu1,.menu2,.menu3,.menu4,.menu5 {
         width: 100px;
         justify-content: center;
         display: inline-block;
     }
-    .menu1_a {
+    .menu2_a {
         font-weight: bold;
         padding-bottom:5px;
         border-bottom: 3px solid #0059df;
     }
-    
 
     .banner_container {
         width: 100%;
@@ -131,6 +129,68 @@
         border-radius: 23px;
     }
 
+    .match_menu_container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid #eee;
+    }
+
+    .match_menu_area {
+        max-width: 1024px;
+        width:1024px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .match_menu_content {
+        width: 100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+    }
+
+    /* .date_container {
+        width: 100%;
+        height: 90px;
+    }
+    .date_nav {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+    .select_filter {
+        width: 100%;
+        height: 46px;
+    } */
+
+    .rental_list_container {
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        
+    }
+    
+    .rental_list_area {
+        width: 1024px;
+        max-width: 1024px;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .rental_list_content {
+        width: 100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+    }
 
     .match_list_container {
         width: 100%;
@@ -151,9 +211,6 @@
     .match_menu_content {
         width: 100%;
         height:100%;
-	    flex-direction: column;
-	    display: flex;
-	    align-items: center;
     }
 
     
@@ -186,6 +243,43 @@
     }
     .etc_icon {
         margin-left:10px;
+    }
+
+/* ------------------------------ */
+
+.mainpage-post{
+        
+        width: 1024px;
+        display: flex;
+        flex-direction: column;
+    }
+    .mainpage-post .calender{
+        flex : 1;
+        display: flex;
+        width: 1024px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .mainpage-post .settingbutton{
+        flex: 1;
+        display: flex;
+        width: 1024px;
+    }
+    .mainpage-post .date ul{
+       
+       list-style-type: none;
+    }
+    .mainpage-post .date ul li{
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        text-align: center;
+    }
+    .mainpage-post .date ul li a{
+        text-decoration: none;
+    }
+    .mainpage-post .date ul li:hover{
+       background-color: blue;
     }
 
 </style>
@@ -226,53 +320,32 @@
         <div class="big_menu_area">
             <div class="big_menu_content">
                 <div class="menu menu1"><a class="menu1_a" href="${pageContext.request.contextPath}/">소셜 매치</a></div>
-                <div class="menu menu2"><a class="menu2_a" href="${pageContext.request.contextPath}/team/team">팀 매치</a></div>
+                <div class="menu menu2"><a class="menu2_a" href="${pageContext.request.contextPath}/">팀 매치</a></div>
                 <div class="menu menu3"><a class="menu3_a" href="${pageContext.request.contextPath}/rental/rental">구장 예약</a></div>
                 <div class="menu menu4"><a class="menu4_a" href="#">랭킹</a></div>
-                <div class="menu menu5"><a class="menu5_a" href="${pageContext.request.contextPath}/review/reviewmain">커뮤니티</a></div>
+                <div class="menu menu5"><a class="menu5_a" href="#">커뮤니티</a></div>
             </div>
         </div>
-
     </div>
+    
+    
+    
+    
     
         <div class="banner_container">
             <div class="banner_content_area">
                 <div class="banner_content">
-                    <img class="banner_image" src="image/banner-manner_pc.png" alt="">
+                    <img class="banner_image" src="../image/banner-new_stadium_pc_cnh_rental2.png" alt="">
                 </div>
             </div>
         </div>
-<!--     <div class="match_menu_container"> -->
-<!--         <div class="match_menu_area"> -->
-<!--             <div class="match_menu_content"> -->
-            
-<!--                 <div class="date_nav"> -->
-
-<!--                     <div class="date_container"> -->
-<!--                         <div class="swiper_tabs"> -->
-
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="select_filter"> -->
-<!--                         <div class="filter_content"> -->
-                            
-<!--                         </div> -->
-
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
-    <div class="match_list_container">
+    <div class="match_menu_container">
         <div class="match_menu_area">
             <div class="match_menu_content">
-				            
-            <jsp:include page="./social/social.jsp"></jsp:include>
-
+            	<jsp:include page="./team.jsp"></jsp:include>
+            				
             </div>
-        </div>
-
-
+        </div> 
     </div>
 
     <div class="bottom_banner">
@@ -284,14 +357,12 @@
         <div class="footer_right"></div>
         
     </footer>
-
-<script type="text/javascript">
-	let main_logo = document.querySelector(".main_logo");
-	
-	main_logo.addEventListener("click",function() {
-		location.href="${pageContext.request.contextPath}";
-	});
-</script>
-</div>
+	<script type="text/javascript">
+		let main_logo = document.querySelector(".main_logo");
+		
+		main_logo.addEventListener("click",function() {
+			location.href="${pageContext.request.contextPath}";
+		});
+	</script>
 </body>
 </html>

@@ -3,16 +3,15 @@ package com.sample.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
-import com.sample.vo.GlistVO;
+import com.sample.vo.TlistVO;
 
 @Mapper
-public interface GlistDAO {
+public interface TeamDAO {
 	
-	public List<GlistVO> list(GlistVO vo);
+	public List<TlistVO> list(TlistVO vo);
 	
-	public GlistVO info(int num);
+	public TlistVO info(int num);
 	
 	public int subgame(int num);
 	

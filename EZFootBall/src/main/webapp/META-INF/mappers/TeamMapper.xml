@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sample.dao.GlistDAO">
-	<select id="list" resultType="GlistVO" parameterType="GlistVO">
+<mapper namespace="com.sample.dao.TeamDAO">
+	<select id="list" resultType="TlistVO" parameterType="TlistVO">
 		select sgame_num,game_name,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,filed_name,
@@ -28,12 +28,12 @@
 			<if test="gameMacth != null">
 				and game_macth like #{gameMacth}
 			</if>
-				and game_type = 'S'
+				and game_type = 'T'
 		</where>
 	</select>
 	
 	
-	<select id="info" resultType="GlistVO">
+	<select id="info" resultType="TlistVO">
 		select sgame_num,game_name,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,filed_name,
@@ -43,20 +43,20 @@
 			<if test="close != null">
 				and sgame_num = #{num}
 			</if>
-				and game_type = 'S'
+			and game_type = 'T'
 		</where>
 	</select>
 	
 	<update id="subgame">
 		UPDATE gamelist 
 		SET game_pnum = game_pnum+1
-		WHERE sgame_num = #{num} and game_type = 'S'
+		WHERE sgame_num = #{num} and game_type = 'T'
 	</update>
 	
 	<update id="maxgame">
 		UPDATE gamelist 
 		SET close = 'false'
-		WHERE sgame_num = #{num} and game_type = 'S'
+		WHERE sgame_num = #{num} and game_type = 'T'
 	</update>
 	
 </mapper>
