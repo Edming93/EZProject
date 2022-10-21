@@ -81,6 +81,8 @@
     	
     	.matchgame{
     		display: flex;
+    		color: black;
+    		text-decoration: none;
     	}
     	.game_time{
     		flex: 1;
@@ -129,32 +131,56 @@
                     document.getElementById("day").children[i].append(newp);
                 } else if ((i + 1) % 7 == (ct + 1)) {
                     var newp = document.createElement("p");
-                    newp.innerText = week[num + 1];
+                    if(num+1>=7){
+                    	newp.innerText = week[num + 1-7];
+                    }else{
+                    	newp.innerText = week[num + 1];
+                    }
                     document.getElementById("day").children[i].append(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 2)) {
                     var newp = document.createElement("p");
-                    newp.innerText = week[num + 2];
+                    if(num+2>=7){
+                    	newp.innerText = week[num + 2-7];
+                    }else{
+                    	newp.innerText = week[num + 2];
+                    }
                     document.getElementById("day").children[i].append(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 3)) {
                     var newp = document.createElement("p");
-                    newp.innerText = week[num + 3];
+                    if(num+3>=7){
+                    	newp.innerText = week[num + 3-7];
+                    }else{
+                    	newp.innerText = week[num + 3];
+                    }
                     document.getElementById("day").children[i].append(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 4)) {
                     var newp = document.createElement("p");
-                    newp.innerText = week[num + 4];
+                    if(num+4>=7){
+                    	newp.innerText = week[num + 4-7];
+                    }else{
+                    	newp.innerText = week[num + 4];
+                    }
                     document.getElementById("day").children[i].append(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 5)) {
                     var newp = document.createElement("p");
-                    newp.innerText = week[num + 5];
+                    if(num+5>=7){
+                    	newp.innerText = week[num + 5-7];
+                    }else{
+                    	newp.innerText = week[num + 5];
+                    }
                     document.getElementById("day").children[i].append(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 6)) {
                     var newp = document.createElement("p");
-                    newp.innerText = week[num + 6];
+                    if(num+6>=7){
+                    	newp.innerText = week[num + 6-7];
+                    }else{
+                    	newp.innerText = week[num + 6];
+                    }
                     document.getElementById("day").children[i].append(newp);
                 } else if ((i + 1) % 7 == (ct - 6)) {
                     if (num < 6) {
@@ -268,7 +294,7 @@
         document.getElementById("<%=today%>").style.backgroundColor="rgb(7, 104, 231)";
         
         var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
-		e.preventDefault();
+        dayday = day;
 	      
 	      let data = {place:"null" ,close:"null",xgender:"null",ygender:"null",day:day};
 	      
@@ -284,9 +310,11 @@
 	         document.getElementById("result").innerHTML = " ";
 	         
 	         for ( let name in data) {
-	            const div_out = document.createElement("div");
+	            const div_out = document.createElement("a");
 	              div_out.className = "matchgame";
 	              div_out.id = data[name].sgameNum;
+	              div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
+	              
 	              
 	              let middiv = document.createElement("div");/*가운데  */
 	              middiv.className = "mid_div";
@@ -309,7 +337,25 @@
 	              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
-	              bdiv.innerText = "신청";
+	              
+	              
+	              var pnum = data[name].gamePnum;/*신청인원  */
+	              var minp = data[name].gameMinp;/*최소인원  */
+	              var maxp = data[name].gameMaxp;/*최대인원  */
+	              
+	              
+	              if(pnum == maxp){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(minp - pnum <=3){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+	              
+	              
 	             
 	              div_out.append(tdiv);
 	              middiv.append(ndiv);
@@ -327,10 +373,6 @@
 	      });
 	};
 </script>
-
-
-
-
 
 <!--날짜  -->
 <script type="text/javascript">
@@ -360,9 +402,17 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
         if(local == "null"){
            local = null;
         }
+        var level = document.getElementById("level").value;
+        if(level == null){
+            level = null;
+         }
+        var mvar = document.getElementById("mvar").value;
+        if(mvar == null){
+      	  mvar = null;
+         }
         
         
-        let data = {place:local, close:clo, xgender:xgen, ygender:ygen, day:day};
+        let data = {place:local, close:clo, xgender:xgen, ygender:ygen, day:day, level:level,mver:mvar};
         
         fetch("${pageContext.request.contextPath}/msocial/slist",{
            method : "POST", // PUT, PATCH, DELETE
@@ -375,9 +425,10 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
            const result = document.getElementById("result");
            document.getElementById("result").innerHTML = " ";
            for ( let name in data) {
-        	   const div_out = document.createElement("div");
+        	   const div_out = document.createElement("a");
 	              div_out.className = "matchgame";
 	              div_out.id = data[name].sgameNum;
+	              div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
 	              
 	              let middiv = document.createElement("div");/*가운데  */
 	              middiv.className = "mid_div";
@@ -400,7 +451,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
-	              bdiv.innerText = "신청";
+	              
+	              var pnum = data[name].gamePnum;/*신청인원  */
+	              var minp = data[name].gameMinp;/*최소인원  */
+	              var maxp = data[name].gameMaxp;/*최대인원  */
+	              
+	              
+	              if(pnum == maxp){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(minp - pnum <=3){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
 	             
 	              div_out.append(tdiv);
 	              middiv.append(ndiv);
@@ -425,25 +491,45 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 
   
   <div id="settingbutton"> 
-   <select name="" id="local">
-      <option id="null" value="null">지역</option>
-      <option id="서울" value="서울">서울</option>
-      <option id="경기도" value="경기도">경기도</option>
-      <option id="강원도" value="강원도">강원도</option>
-      <option id="경상도" value="경상도">경상도</option>
-      <option id="전라도" value="전라도">전라도</option>
-      <option id="충청도" value="충청도">충청도</option>
-      <option id="제주도" value="제주도">제주도</option>
-   </select>
+	   <select name="" id="local">
+	      <option id="null" value="null">지역</option>
+	      <option id="서울" value="서울">서울</option>
+	      <option id="경기도" value="경기도">경기도</option>
+	      <option id="강원도" value="강원도">강원도</option>
+	      <option id="경상도" value="경상도">경상도</option>
+	      <option id="전라도" value="전라도">전라도</option>
+	      <option id="충청도" value="충청도">충청도</option>
+	      <option id="제주도" value="제주도">제주도</option>
+	   </select>
 
-   <div>
-      마감 가리기 <input type="checkbox" name="" id="close">
-   </div>
+	   <div>
+	      마감 가리기 <input type="checkbox" name="" id="close">
+	   </div>
 
-   <div>
-      남 <input type="checkbox" name="" id="ygender"> 
-      여 <input type="checkbox" name="" id="xgender">
-   </div>
+	   <div>
+	      남 <input type="checkbox" name="" id="ygender"> 
+	      여 <input type="checkbox" name="" id="xgender">
+	   </div>
+	   
+	   
+	   <select name="" id="level">
+		   <option id="null" value="null">레벨</option>
+		   <option id="서울" value="브론즈">브론즈</option>
+		   <option id="경기도" value="실버">실버</option>
+		   <option id="강원도" value="골드">골드</option>
+	   </select>
+	   
+	   <select name="" id="mvar">
+		   <option id="null" value="null">매치형태</option>
+		   <option id="서울" value="5vs5">5vs5</option>
+		   <option id="경기도" value="6vs6">6vs6</option>
+	   </select>
+		
+	   
+	   <div>
+	   		<div id="listreset">대충초기화모양</div>
+	   </div>
+   
    </div>
 
    <div id="result">
@@ -463,15 +549,23 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
       var xgen = document.getElementById("xgender").checked;
 	   // 맨 처음 선택된 애가 null이면  
        if(re == null){
-         var ac = document.getElementById("local").value;
-         
+    	   var ac = document.getElementById("local").value;
          
        }else{
           var ac = document.getElementById("local").value;
-       } 
+       }
+	   
+       var level = document.getElementById("level").value;
+       if(level == null){
+           level = null;
+        }
+       var mvar = document.getElementById("mvar").value;
+       if(mvar == null){
+     	  mvar = null;
+        }
       
       
-      let data = {place:ac ,close:clo,xgender:xgen,ygender:ygen,day:dayday};
+      let data = {place:ac ,close:clo,xgender:xgen,ygender:ygen,day:dayday, level:level,mver:mvar};
       
       fetch("${pageContext.request.contextPath}/msocial/slist",{
          method : "POST", // PUT, PATCH, DELETE
@@ -485,9 +579,10 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          document.getElementById("result").innerHTML = " ";
          
          for ( let name in data) {
-        	 const div_out = document.createElement("div");
+        	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
              div_out.id = data[name].sgameNum;
+             div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -510,7 +605,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
-             bdiv.innerText = "신청";
+             
+             var pnum = data[name].gamePnum;/*신청인원  */
+             var minp = data[name].gameMinp;/*최소인원  */
+             var maxp = data[name].gameMaxp;/*최대인원  */
+             
+             
+             if(pnum == maxp){
+           	  bdiv.innerText = " 마감 ";
+           	  bdiv.style.backgroundColor = "#aaa";
+             }else if(minp - pnum <=3){
+           	  bdiv.innerText = " 마감 임박 ";
+           	  bdiv.style.backgroundColor = "red";
+             }else{
+           	  bdiv.innerText = " 신청 ";
+           	  bdiv.style.backgroundColor = "blue";
+             }
             
              div_out.append(tdiv);
              middiv.append(ndiv);
@@ -538,15 +648,23 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	  var ygen = document.getElementById("ygender").checked;
       var xgen = document.getElementById("xgender").checked;
       var local = document.getElementById("local").value;
-      if(local == "null"){
+      if(local == null){
          local = null;
       }
+      var level = document.getElementById("level").value;
+      if(level == null){
+          level = null;
+       }
+      var mvar = document.getElementById("mvar").value;
+      if(mvar == null){
+    	  mvar = null;
+       }
       
       var ac = this.checked;
       
       document.getElementById("close").checked = ac;
       
-      let data = {place:local ,close:ac,xgender:xgen,ygender:ygen,day:dayday};
+      let data = {place:local ,close:ac,xgender:xgen,ygender:ygen,day:dayday, level:level,mver:mvar};
       
       fetch("${pageContext.request.contextPath}/msocial/slist",{
          method : "POST", // PUT, PATCH, DELETE
@@ -560,9 +678,10 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          document.getElementById("result").innerHTML = " ";
          
          for ( let name in data) {
-        	 const div_out = document.createElement("div");
+        	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
              div_out.id = data[name].sgameNum;
+             div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -585,7 +704,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
-             bdiv.innerText = "신청";
+
+             var pnum = data[name].gamePnum;/*신청인원  */
+             var minp = data[name].gameMinp;/*최소인원  */
+             var maxp = data[name].gameMaxp;/*최대인원  */
+             
+             
+             if(pnum == maxp){
+           	  bdiv.innerText = " 마감 ";
+           	  bdiv.style.backgroundColor = "#aaa";
+             }else if(minp - pnum <=3){
+           	  bdiv.innerText = " 마감 임박 ";
+           	  bdiv.style.backgroundColor = "red";
+             }else{
+           	  bdiv.innerText = " 신청 ";
+           	  bdiv.style.backgroundColor = "blue";
+             }
             
              div_out.append(tdiv);
              middiv.append(ndiv);
@@ -613,15 +747,23 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
       var local = document.getElementById("local").value;
       var clo = document.getElementById("close").checked;
       var xgen = document.getElementById("xgender").checked;
-      if(local == "null"){
+      if(local == null){
          local = null;
       }
+      var level = document.getElementById("level").value;
+      if(level == null){
+          level = null;
+       }
+      var mvar = document.getElementById("mvar").value;
+      if(mvar == null){
+    	  mvar = null;
+       }
       
       var ac = this.checked;
       
       document.getElementById("ygender").checked = ac;
       
-      let data = {place:local, close:clo, xgender:xgen, ygender:ac, day:dayday};
+      let data = {place:local, close:clo, xgender:xgen, ygender:ac, day:dayday, level:level,mver:mvar};
       
       fetch("${pageContext.request.contextPath}/msocial/slist",{
          method : "POST", // PUT, PATCH, DELETE
@@ -634,10 +776,12 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          const result = document.getElementById("result");
          document.getElementById("result").innerHTML = " ";
          
+         
          for ( let name in data) {
-        	 const div_out = document.createElement("div");
+        	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
              div_out.id = data[name].sgameNum;
+             div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -660,7 +804,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
-             bdiv.innerText = "신청";
+
+             var pnum = data[name].gamePnum;/*신청인원  */
+             var minp = data[name].gameMinp;/*최소인원  */
+             var maxp = data[name].gameMaxp;/*최대인원  */
+             
+             
+             if(pnum == maxp){
+           	  bdiv.innerText = " 마감 ";
+           	  bdiv.style.backgroundColor = "#aaa";
+             }else if(minp - pnum <=3){
+           	  bdiv.innerText = " 마감 임박 ";
+           	  bdiv.style.backgroundColor = "red";
+             }else{
+           	  bdiv.innerText = " 신청 ";
+           	  bdiv.style.backgroundColor = "blue";
+             }
             
              div_out.append(tdiv);
              middiv.append(ndiv);
@@ -689,15 +848,23 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
       var local = document.getElementById("local").value;
       var clo = document.getElementById("close").checked;
       var ygen = document.getElementById("ygender").checked;
-      if(local == "null"){
+      if(local == null){
          local = null;
       }
+      var level = document.getElementById("level").value;
+      if(level == null){
+          level = null;
+       }
+      var mvar = document.getElementById("mvar").value;
+      if(mvar == null){
+    	  mvar = null;
+       }
       
       var ac = this.checked;
       
       document.getElementById("xgender").checked = ac;
       
-      let data = {place:local, close:clo, xgender:ac, ygender:ygen, day:dayday};
+      let data = {place:local, close:clo, xgender:ac, ygender:ygen, day:dayday, level:level,mver:mvar};
       
       fetch("${pageContext.request.contextPath}/msocial/slist",{
          method : "POST", // PUT, PATCH, DELETE
@@ -710,9 +877,10 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          const result = document.getElementById("result");
          document.getElementById("result").innerHTML = " ";
          for ( let name in data) {
-        	 const div_out = document.createElement("div");
+        	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
              div_out.id = data[name].sgameNum;
+             div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -735,7 +903,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
-             bdiv.innerText = "신청";
+             
+             var pnum = data[name].gamePnum;/*신청인원  */
+             var minp = data[name].gameMinp;/*최소인원  */
+             var maxp = data[name].gameMaxp;/*최대인원  */
+             
+             
+             if(pnum == maxp){
+           	  bdiv.innerText = " 마감 ";
+           	  bdiv.style.backgroundColor = "#aaa";
+             }else if(minp - pnum <=3){
+           	  bdiv.innerText = " 마감 임박 ";
+           	  bdiv.style.backgroundColor = "red";
+             }else{
+           	  bdiv.innerText = " 신청 ";
+           	  bdiv.style.backgroundColor = "blue";
+             }
             
              div_out.append(tdiv);
              middiv.append(ndiv);
@@ -755,6 +938,300 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
       
    });
    </script>
+   <!--레벨  -->
+   <script type="text/javascript">
+   var re = document.getElementById("level").value;
+   
+   document.getElementById("level").addEventListener("change",function(e){
+	  var clo = document.getElementById("close").checked;
+      var ygen = document.getElementById("ygender").checked;
+      var xgen = document.getElementById("xgender").checked;
+      var local = document.getElementById("local").value;
+      if(local == "null"){
+          local = null;
+       }
+      var mvar = document.getElementById("mvar").value;
+      if(mvar == null){
+    	  mvar = null;
+       }
+      if(re == null){
+    	   var ac = document.getElementById("level").value;
+         
+       }else{
+          var ac = document.getElementById("level").value;
+       } 
+      
+      
+      let data = {place:local ,close:clo,xgender:xgen,ygender:ygen,day:dayday,level:ac,mver:mvar};
+      
+      fetch("${pageContext.request.contextPath}/msocial/slist",{
+         method : "POST", // PUT, PATCH, DELETE
+         headers : {
+            "Content-Type" : "application/json"},
+         body : JSON.stringify(data)
+      }).then(response => response.json()) 
+      
+      .then(data => {
+         const result = document.getElementById("result");
+         document.getElementById("result").innerHTML = " ";
+         
+         for ( let name in data) {
+        	 const div_out = document.createElement("a");
+             div_out.className = "matchgame";
+             div_out.id = data[name].sgameNum;
+             div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
+             
+             let middiv = document.createElement("div");/*가운데  */
+             middiv.className = "mid_div";
+             let infodiv = document.createElement("div"); /*아래  */
+             infodiv.className = "info_div";
+             let tdiv = document.createElement("div");
+             tdiv.className = "game_time";
+             let ndiv = document.createElement("div");
+             let gdiv = document.createElement("div");
+             gdiv.className = "gender_div";
+             let mdiv = document.createElement("div");
+             mdiv.className = "match_div";
+             let ldiv = document.createElement("div");
+             ldiv.className = "level_div";
+             let bdiv  = document.createElement("div");
+             bdiv.className = "close";
+             
+             tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
+             mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
+             ldiv.innerText = "경기레벨"+ ":" + data[name].level;
+             
+             var pnum = data[name].gamePnum;/*신청인원  */
+             var minp = data[name].gameMinp;/*최소인원  */
+             var maxp = data[name].gameMaxp;/*최대인원  */
+             
+             
+             if(pnum == maxp){
+           	  bdiv.innerText = " 마감 ";
+           	  bdiv.style.backgroundColor = "#aaa";
+             }else if(minp - pnum <=3){
+           	  bdiv.innerText = " 마감 임박 ";
+           	  bdiv.style.backgroundColor = "red";
+             }else{
+           	  bdiv.innerText = " 신청 ";
+           	  bdiv.style.backgroundColor = "blue";
+             }
+            
+             div_out.append(tdiv);
+             middiv.append(ndiv);
+             infodiv.append(gdiv);
+             infodiv.append(mdiv);
+             infodiv.append(ldiv);
+             middiv.append(infodiv);
+             div_out.append(middiv);
+             div_out.append(bdiv);
+             result.append(div_out);
+         }
+         
+      }).catch(error => {
+         console.log("error");
+      });
+   });
+   </script>
+   
+  <!--매치형태  -->
+  <script type="text/javascript">
+  var re = document.getElementById("mvar").value;
+  
+  document.getElementById("mvar").addEventListener("change",function(e){
+	 var clo = document.getElementById("close").checked;
+     var ygen = document.getElementById("ygender").checked;
+     var xgen = document.getElementById("xgender").checked;
+     var local = document.getElementById("local").value;
+     if(local == "null"){
+         local = null;
+      }
+     var level = document.getElementById("level").value;
+     if(level == null){
+         level = null;
+      }
+     
+      if(re == null){
+   	   var ac = document.getElementById("mvar").value;
+        
+      }else{
+         var ac = document.getElementById("mvar").value;
+      } 
+     
+     
+     let data = {place:local ,close:clo,xgender:xgen,ygender:ygen,day:dayday,level:level,mver:ac};
+     
+     fetch("${pageContext.request.contextPath}/msocial/slist",{
+        method : "POST", // PUT, PATCH, DELETE
+        headers : {
+           "Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+     }).then(response => response.json()) 
+     
+     .then(data => {
+        const result = document.getElementById("result");
+        document.getElementById("result").innerHTML = " ";
+        
+        for ( let name in data) {
+       	 const div_out = document.createElement("a");
+            div_out.className = "matchgame";
+            div_out.id = data[name].sgameNum;
+            div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
+            
+            let middiv = document.createElement("div");/*가운데  */
+            middiv.className = "mid_div";
+            let infodiv = document.createElement("div"); /*아래  */
+            infodiv.className = "info_div";
+            let tdiv = document.createElement("div");
+            tdiv.className = "game_time";
+            let ndiv = document.createElement("div");
+            let gdiv = document.createElement("div");
+            gdiv.className = "gender_div";
+            let mdiv = document.createElement("div");
+            mdiv.className = "match_div";
+            let ldiv = document.createElement("div");
+            ldiv.className = "level_div";
+            let bdiv  = document.createElement("div");
+            bdiv.className = "close";
+            
+            tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
+            ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+            gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
+            mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
+            ldiv.innerText = "경기레벨"+ ":" + data[name].level;
+            
+            var pnum = data[name].gamePnum;/*신청인원  */
+            var minp = data[name].gameMinp;/*최소인원  */
+            var maxp = data[name].gameMaxp;/*최대인원  */
+            
+            
+            if(pnum == maxp){
+          	  bdiv.innerText = " 마감 ";
+          	  bdiv.style.backgroundColor = "#aaa";
+            }else if(minp - pnum <=3){
+          	  bdiv.innerText = " 마감 임박 ";
+          	  bdiv.style.backgroundColor = "red";
+            }else{
+          	  bdiv.innerText = " 신청 ";
+          	  bdiv.style.backgroundColor = "blue";
+            }
+           
+            div_out.append(tdiv);
+            middiv.append(ndiv);
+            infodiv.append(gdiv);
+            infodiv.append(mdiv);
+            infodiv.append(ldiv);
+            middiv.append(infodiv);
+            div_out.append(middiv);
+            div_out.append(bdiv);
+            result.append(div_out);
+        }
+        
+     }).catch(error => {
+        console.log("error");
+     });
+  });
+  </script>
+
+   <!--초기화  -->
+   <script type="text/javascript">
+   document.getElementById("listreset").addEventListener("click",function(e){
+	      document.getElementById("local").value = null;
+	      document.getElementById("close").checked = false;
+	      document.getElementById("ygender").checked = false;
+	      document.getElementById("xgender").checked = false;
+	      document.getElementById("level").value = null;
+	      document.getElementById("mvar").value = null;
+	      
+	      var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
+	      
+	      for(var j = 0; j < document.getElementById("day").childElementCount; j++){
+	    		document.getElementById("day").children[j].style.backgroundColor="#fff";
+	    	};
+	    	document.getElementById("<%=today%>").style.backgroundColor="rgb(7, 104, 231)";
+	   
+	   
+	      let data = {day:day};
+	      
+	      fetch("${pageContext.request.contextPath}/msocial/listall",{
+	         method : "POST", // PUT, PATCH, DELETE
+	         headers : {
+	            "Content-Type" : "application/json"},
+	         body : JSON.stringify(data)
+	      }).then(response => response.json()) 
+	      
+	      .then(data => {
+	         const result = document.getElementById("result");
+	         document.getElementById("result").innerHTML = " ";
+	         for ( let name in data) {
+	        	 const div_out = document.createElement("a");
+	             div_out.className = "matchgame";
+	             div_out.id = data[name].sgameNum;
+	             div_out.href="${pageContext.request.contextPath}/msocial/info?num="+data[name].sgameNum;
+	             
+	             let middiv = document.createElement("div");/*가운데  */
+	             middiv.className = "mid_div";
+	             let infodiv = document.createElement("div"); /*아래  */
+	             infodiv.className = "info_div";
+	             let tdiv = document.createElement("div");
+	             tdiv.className = "game_time";
+	             let ndiv = document.createElement("div");
+	             let gdiv = document.createElement("div");
+	             gdiv.className = "gender_div";
+	             let mdiv = document.createElement("div");
+	             mdiv.className = "match_div";
+	             let ldiv = document.createElement("div");
+	             ldiv.className = "level_div";
+	             let bdiv  = document.createElement("div");
+	             bdiv.className = "close";
+	             
+	             tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
+	             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	             gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
+	             mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
+	             ldiv.innerText = "경기레벨"+ ":" + data[name].level;
+	             
+	             var pnum = data[name].gamePnum;/*신청인원  */
+	              var minp = data[name].gameMinp;/*최소인원  */
+	              var maxp = data[name].gameMaxp;/*최대인원  */
+	              
+	              
+	              if(pnum == maxp){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(minp - pnum <=3){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+	            
+	             div_out.append(tdiv);
+	             middiv.append(ndiv);
+	             infodiv.append(gdiv);
+	             infodiv.append(mdiv);
+	             infodiv.append(ldiv);
+	             middiv.append(infodiv);
+	             div_out.append(middiv);
+	             div_out.append(bdiv);
+	             result.append(div_out);
+	         }
+	         
+	      }).catch(error => {
+	         console.log("error");
+	      });
+	      
+	      
+	   });
+   </script>
+  
+  
+  
+  
+
   </div>
 </body>
 </html>

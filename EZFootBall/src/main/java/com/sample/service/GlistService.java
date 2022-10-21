@@ -15,21 +15,24 @@ public class GlistService {
 
 	public GlistService(GlistDAO dao) {
 		super();
-		this.dao = dao;
+		this.dao =dao;
 	}
 	
-	public void list(Model model) {
-		model.addAttribute("list",dao.list());
+	public List<GlistVO> list(Model model,GlistVO vo) {
+		return dao.list(vo);
+		//model.addAttribute("list", vo);
 	}
 	
-	public void sociallisttrue(Model model,GlistVO vo) {
-	    model.addAttribute("list", dao.sociallisttrue(vo));
+	public void info(int num,Model model) {
+		model.addAttribute("matchinfo", dao.info(num));
 	}
 	
-	public List<GlistVO> sociallist(GlistVO vo) {
-	    return dao.sociallist(vo);
+	public void subgame(int num) {
+		dao.subgame(num);
 	}
-	
+	public void maxgame(int num) {
+		dao.maxgame(num);
+	}
 	
 	
 	

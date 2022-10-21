@@ -6,7 +6,22 @@ public class DataVO {
 	private String ygender;
 	private String xgender;
 	private String day;
+	private String level;
+	private String mver;
+	
 
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public String getMver() {
+		return mver;
+	}
+	public void setMver(String mver) {
+		this.mver = mver;
+	}
 	public String getPlace() {
 		return place;
 	}

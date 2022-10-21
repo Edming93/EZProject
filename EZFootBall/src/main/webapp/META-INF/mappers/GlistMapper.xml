@@ -3,62 +3,64 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.GlistDAO">
-	<select id="list" resultType="GlistVO">
-		select *
+	<select id="list" resultType="GlistVO" parameterType="GlistVO">
+		select sgame_num,game_name,game_day,game_gender,
+		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
+		game_macth,game_place,close,game_pnum,game_mag,filed_name,
+		filed_address,game_minp,game_maxp
 		from gamelist
-	</select>
-	
-	<select id="sociallist" resultType="GlistVO" parameterType="GlistVO">
-		SELECT *
-		FROM gamelist
 		<where>
 			<if test="gameDay != null">
 				and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
 			</if>
 			<if test="gamePlace != null">
-				and game_place = #{gamePlace}
+				and game_place like #{gamePlace}
 			</if>
 			<if test="gameGender != null">
 				and game_gender = #{gameGender}
 			</if>
 			<if test="close != null">
 				and close = #{close}
+			</if>
+			<if test="level != null">
+				and level like #{level}
+			</if>
+			<if test="gameMacth != null">
+				and game_macth like #{gameMacth}
+			</if>
+			<if test="gameType != null">
+				and game_type = 'S'
 			</if>
 		</where>
 	</select>
 	
-	<!-- <select id="sociallist" resultType="GlistVO">
-		SELECT *
-		FROM gamelist
-		<where>
-				and DATE_FORMAT(game_time, '%Y-%m-%d') = '2022-10-16'
-			<if test="gamePlace != null">
-				and game_place = #{gamePlace}
-			</if>
-			<if test="gameGender != null">
-				and game_gender = #{gameGender}
-			</if>
-			<if test="close != null">
-				and close = #{close}
-			</if>
-		</where>
-	</select> -->
 	
-	<select id="sociallisttrue" resultType="GlistVO" parameterType="GlistVO">
-		SELECT *
-		FROM gamelist
+	<select id="info" resultType="GlistVO">
+		select sgame_num,game_name,game_day,game_gender,
+		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
+		game_macth,game_place,close,game_pnum,game_mag,filed_name,
+		filed_address,game_minp,game_maxp
+		from gamelist
 		<where>
-			<if test="gamePlace != null">
-				and game_place = #{gamePlace}
-			</if>
-			<if test="gameGender != null">
-				and game_gender = #{gameGender}
-			</if>
 			<if test="close != null">
-				and close = #{close}
+				and sgame_num = #{num}
+			</if>
+			<if test="gameType != null">
+				and game_type = 'S'
 			</if>
 		</where>
 	</select>
 	
+	<update id="subgame">
+		UPDATE gamelist 
+		SET game_pnum = game_pnum+1
+		WHERE sgame_num = #{num} and game_type = 'S'
+	</update>
+	
+	<update id="maxgame">
+		UPDATE gamelist 
+		SET close = 'false'
+		WHERE sgame_num = #{num} and game_type = 'S'
+	</update>
 	
 </mapper>
