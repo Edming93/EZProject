@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("commentVO")
 public class ReviewCommentVO {
   private int id;
-  private String owner;
+  private String userName;
   private String content;
   private String createDate;
 
@@ -25,14 +25,6 @@ public class ReviewCommentVO {
     this.id = id;
   }
 
-  public String getOwner() {
-    return owner;
-  }
-
-  public void setOwner(String owner) {
-    this.owner = owner;
-  }
-
   public String getContent() {
     return content;
   }
@@ -41,10 +33,20 @@ public class ReviewCommentVO {
     this.content = content;
   }
 
+public String getUserName() {
+	return userName;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+
 @Override
 public String toString() {
-	return "CommentVO [id=" + id + ", owner=" + owner + ", content=" + content + ", createDate=" + createDate + "]";
+	return "ReviewCommentVO [id=" + id + ", userName=" + userName + ", content=" + content + ", createDate="
+			+ createDate + "]";
 }
+
   
   
 

@@ -97,15 +97,15 @@
 			let content = document.getElementById("content").value;
 			/* const simple_data = {owner, content}; */
 			const simple_data = {content};
-			
+			console.log(simple_data);
 			//댓글 작성
 			$.ajax({
-				url : "${pageContext.request.contextPath}/review/comment",
+				url : "${pageContext.request.contextPath}/review/comment/save",
 				type : "POST",
 				contentType:"application/json; charset=utf-8",
 				dataType : "json",
 				data : JSON.stringify(simple_data),
-				anync : false,
+				/* anync : false, */
 				success : function(data){
 					console.log(data);
 					if(data.state == "ok"){
@@ -117,9 +117,8 @@
 						
 						const div2 = document.createElement("div");
 						div2.classList.add('test2');
-					
 						const cname = document.createElement("h4");
-						cname.innerText = "작성자 :"+data.vo.owner;
+						cname.innerText = "작성자 :"+data.vo.userName;
 						const ccontent = document.createElement("p");
 						ccontent.innerText = content;
 						const cdate = document.createElement("h3");
@@ -225,7 +224,7 @@
 		window.addEventListener("DOMContentLoaded", function(){
 			$.ajax({
 				url : "${pageContext.request.contextPath}/review/comment",
-				type : "GET",
+				type : "POST",
 				contentType:"application/json; charset=utf-8",
 				dataType : "json",
 				success : function(data){
@@ -236,7 +235,7 @@
 						div.style.border = "1px solid black";
                         const div2 = document.createElement("div");
 						const cname = document.createElement("h4");
-						cname.innerText = "작성자 :"+comment.owner;
+						cname.innerText = "작성자 :"+comment.userName;
 						const ccontent = document.createElement("p");
 						ccontent.innerText = comment.content;
 						const cdate = document.createElement("h3");

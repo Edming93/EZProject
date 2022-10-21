@@ -3,6 +3,8 @@ package com.sample.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.ReviewCommentService;
 import com.sample.vo.ReviewCommentVO;
+import com.sample.vo.UserVO;
 
 
 
@@ -39,23 +42,27 @@ public class ReviewCommentController {
 	
 	// 페이지 이동
 	@GetMapping("/reviewmain")
-	public String move() {
+	public String move(HttpSession session) {
+         UserVO vo = (UserVO) session.getAttribute("sessionVO");
+         System.out.println(vo.getUserName());
 		return "review/reviewmain";
 	}
 	
 	// 모든 커멘트를 가져오는 개체
-	@GetMapping("/comment")
+	@PostMapping("/comment")
 	@ResponseBody
 	public List<ReviewCommentVO> getAllComment(){
 		return service.getCommentAllList();
 	}
 	
 	// 커멘트를 저장
-	@PostMapping("/comment")
+	@PostMapping("/comment/save")
 	@ResponseBody
-	public Map<String,Object> setComment(@RequestBody ReviewCommentVO vo){
-		System.out.println(vo.getOwner());
+	public Map<String, Object> setComment(HttpSession session, @RequestBody ReviewCommentVO vo) {
+        UserVO vo2 = (UserVO) session.getAttribute("sessionVO");
+        System.out.println(vo2.getUserName());
 		System.out.println(vo.getContent());
+		vo.setUserName(vo2.getUserName());
 		return service.setComment(vo);
 	}
 	
