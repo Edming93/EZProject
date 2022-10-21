@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.dao.GlistDAO">
+	<select id="list" resultType="GlistVO">
+		select *
+		from gamelist
+	</select>
+	
+	<select id="sociallist" resultType="GlistVO" parameterType="GlistVO">
+		SELECT *
+		FROM gamelist
+		<where>
+			<if test="gameDay != null">
+				and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
+			</if>
+			<if test="gamePlace != null">
+				and game_place = #{gamePlace}
+			</if>
+			<if test="gameGender != null">
+				and game_gender = #{gameGender}
+			</if>
+			<if test="close != null">
+				and close = #{close}
+			</if>
+		</where>
+	</select>
+	
+	<!-- <select id="sociallist" resultType="GlistVO">
+		SELECT *
+		FROM gamelist
+		<where>
+				and DATE_FORMAT(game_time, '%Y-%m-%d') = '2022-10-16'
+			<if test="gamePlace != null">
+				and game_place = #{gamePlace}
+			</if>
+			<if test="gameGender != null">
+				and game_gender = #{gameGender}
+			</if>
+			<if test="close != null">
+				and close = #{close}
+			</if>
+		</where>
+	</select> -->
+	
+	<select id="sociallisttrue" resultType="GlistVO" parameterType="GlistVO">
+		SELECT *
+		FROM gamelist
+		<where>
+			<if test="gamePlace != null">
+				and game_place = #{gamePlace}
+			</if>
+			<if test="gameGender != null">
+				and game_gender = #{gameGender}
+			</if>
+			<if test="close != null">
+				and close = #{close}
+			</if>
+		</where>
+	</select>
+	
+	
+</mapper>

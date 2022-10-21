@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+	*{
+		box-sizing: border-box;
+		margin: 0;
+	}
+	#container {
+		width: 550px;
+		margin: 0 auto;
+	}
+	#searchbar {
+		float:right;
+		display:flex;
+		flex-direction:row;
+		width: 450px;
+		background-color: #f7f7f7;
+		padding: 7px;
+	}
+	#search {
+		width: 380px;
+		height: 24px;
+		border: none;
+		background: none;
+		outline: none;
+	}
+	.icon {
+		cursor: pointer;
+		display: inline-block;	
+	}
+	#searchbox {
+		clear:both;
+		width: 100%;
+		height: 500px;
+		max-height: 500px;
+		background: #ccc;
+		overflow: auto;
+		display: none;
+	}
+	#keyword{
+		padding: 15px;
+		width: 100%;
+		height: 70px;
+	}
+	#keyword > p{
+		font-size: 12px;
+		color: #5b7282;
+		margin-bottom: 5px;
+	}
+	
+	#keywords > li {
+		list-style-type: none;
+		display: inline-block;
+		padding: 2px 5px;
+		background-color: #fff;
+		color: #999;
+		border-radius: 15px;
+		font-size: 12px;
+		margin: 0 5px;
+	}
+	
+	#keywords > li > span:nth-child(2) {
+		cursor: pointer;
+	}
+	section.sch {
+		padding: 15px;
+	}
+	
+	section.sch:nth-child(3){
+		overflow: auto;
+	}
+	
+	.schheader{
+		padding: 20px 0;
+	}
+	
+	.schmain {
+		display: flex;
+		flex-wrap: wrap;
+   		justify-content: space-between;
+   		align-items: center;
+   		text-align: center;
+   		height: 80px;
+	}
+	
+	.schmain > a {
+	    display: flex;
+    	flex-direction: column;
+    	justify-content:center;
+		text-decoration: none;
+		color: #000;
+		width: 33%;
+		height:100%;
+		background: #fff;
+	}
+	
+	#keywords, .stadiumlist{
+		padding: 0;
+	}
+	
+	.stadiumlist li{
+		padding: 15px 0;
+		list-style-type: none;
+		border-bottom: 1px solid #aaa;
+		background: #fff;
+	}
+	
+	.stadiumlist li a {
+		text-decoration: none;
+		color :#000;
+		padding: 5px;
+	}
+	
+	.hide {
+		display: none;
+	}
+	
+	.closebtn {
+		float: right;
+		margin: 10px 10px 0 0;
+		cursor: pointer;
+	}
+	
+	.closebtn > img{
+		width: 20px;
+		height: 20px;
+		background-color: #fff;
+	}
+	
+	#searchbtn {
+		padding: 0;
+	}
+	
+	#search_result_box {
+		clear: both;
+		width: 100%;
+		height: 500px;
+		max-height: 500px;
+		background: #ccc;
+		overflow: auto;
+		display: none;
+	}
+	
+	#search_result_box_inner {
+		padding: 15px;
+		width: 100%;
+		height: 70px;
+	}
+	
+	#search_result_list {
+		padding: 0;
+	}
+	
+	#search_result_list > li {
+		padding: 15px 0;
+		list-style-type: none;
+		border-bottom: 1px solid #aaa;
+		background: #fff;
+	}
+	
+	#search_result_list > li > a{
+		text-decoration: none;
+		color :#000;
+		padding: 5px;
+	}
+	
+
+	
