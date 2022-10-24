@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.TeamDAO">
 	<select id="list" resultType="TlistVO" parameterType="TlistVO">
-		select sgame_num,game_day,game_gender,
+		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
-		game_macth,game_place,close,game_pnum,game_mag,filed_name,
-		filed_address,game_minp,game_maxp
+		game_macth,game_place,close,game_pnum,game_mag,field_name,
+		field_address,game_minp,game_maxp
 		from gamelist
 		<where>
 			<if test="gameDay != null">
@@ -34,14 +34,14 @@
 	
 	
 	<select id="info" resultType="TlistVO">
-		select sgame_num,game_day,game_gender,
+		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
-		game_macth,game_place,close,game_pnum,game_mag,filed_name,
-		filed_address,game_minp,game_maxp
+		game_macth,game_place,close,game_pnum,game_mag,field_name,
+		field_address,game_minp,game_maxp
 		from gamelist
 		<where>
 			<if test="close != null">
-				and sgame_num = #{num}
+				and game_code = #{num}
 			</if>
 			and game_type = 'T'
 		</where>
@@ -50,13 +50,13 @@
 	<update id="subgame">
 		UPDATE gamelist 
 		SET game_pnum = game_pnum+1
-		WHERE sgame_num = #{num} and game_type = 'T'
+		WHERE game_code = #{num} and game_type = 'T'
 	</update>
 	
 	<update id="maxgame">
 		UPDATE gamelist 
 		SET close = 'false',game_pnum = game_pnum+1
-		WHERE sgame_num = #{num} and game_type = 'T'
+		WHERE game_code = #{num} and game_type = 'T'
 	</update>
 	
 	<insert id="setslist" parameterType="DataVO">
@@ -70,8 +70,5 @@
 		where user_code = #{userCode}
 	</select>
 	
-	<select id="team">
-		
-	</select>
 	
 </mapper>

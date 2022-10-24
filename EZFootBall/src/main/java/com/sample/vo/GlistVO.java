@@ -18,8 +18,8 @@ public class GlistVO {
     private int gameMaxp;
     private int gamePnum;
     private String gameMag;
-    private String filedName;
-    private String filedAddress;
+    private String fieldName;
+    private String fieldAddress;
 	
     
 	public int getGameCode() {
@@ -106,18 +106,19 @@ public class GlistVO {
 	public void setGameMag(String gameMag) {
 		this.gameMag = gameMag;
 	}
-	public String getFiledName() {
-		return filedName;
+	public String getFieldName() {
+		return fieldName;
 	}
-	public void setFiledName(String filedName) {
-		this.filedName = filedName;
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
 	}
-	public String getFiledAddress() {
-		return filedAddress;
+	public String getFieldAddress() {
+		return fieldAddress;
 	}
-	public void setFiledAddress(String filedAddress) {
-		this.filedAddress = filedAddress;
+	public void setFieldAddress(String fieldAddress) {
+		this.fieldAddress = fieldAddress;
 	}
+
     
 	
 	
