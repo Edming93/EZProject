@@ -512,12 +512,24 @@ window.onload = function(){
 
 			});
 			
+			// 유효성 검사
 		
 			let able_id = document.querySelector(".able_id");
 			let input_id = document.getElementById("input_id");
 			let click_btn = document.getElementById("click_btn");
 			
 			input_id.addEventListener("input",function() {
+				
+	            for (i=0; i<input_id.value.length; i++){
+	            	//문자를 반환(정수형), 범위 검사 가능
+	                   var ch = input_id.value.charAt(i);
+	                   //입력된 문자를 검사
+	                   if ( ( ch < "a" || ch > "z") && (ch < "A" || ch > "Z") && (ch < "0" || ch > "9" ) )
+	                   {
+	   					alert("영문과 숫자로만 입력이 가능합니다!");
+	                    form_ck.userId.select();
+	                   }
+	            }
 				
 				if(input_id.value.length == 0) {
 					able_id.innerHTML = "";
@@ -541,6 +553,8 @@ window.onload = function(){
 				<%}%>
 			
 			});
+			
+
 
 			
 			let input_pw = document.getElementById("input_pw");
@@ -554,6 +568,20 @@ window.onload = function(){
 			
 			input_pwck.addEventListener("input",function() {
 		
+				if(input_pw.value == input_pwck.value) {
+					able_pw_ck.innerHTML = "비밀번호가 일치합니다.";
+					able_pw_ck.setAttribute("style","display:block;");
+				}else if(input_pw.value != input_pwck.value) {
+					able_pw_ck.innerHTML = "비밀번호가 일치하지 않습니다.";
+					able_pw_ck.setAttribute("style","display:block;");
+				}else if(input_pw.value.length <8 || input_pw.value.length > 17){
+					able_pw.innerHTML = "비밀번호는 비밀번호는 8~16크기의 숫자,영문자로 이루어져야 합니다.";
+					able_pw.setAttribute("style","display:block;");
+				}
+			});
+			
+			input_pw.addEventListener("input",function() {
+				
 				if(input_pw.value == input_pwck.value) {
 					able_pw_ck.innerHTML = "비밀번호가 일치합니다.";
 					able_pw_ck.setAttribute("style","display:block;");

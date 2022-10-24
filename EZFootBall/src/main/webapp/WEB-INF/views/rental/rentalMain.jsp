@@ -5,14 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>이지풋볼</title>
-<link rel="icon" href="./image/ez_con.png">
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_con.png">
 <style>
     * {
         box-sizing: border-box;
         margin: 0px;
     }
-    
-    
+
     .container {
         width: 100%;
         margin: 0 auto;
@@ -172,7 +171,6 @@
         height:100%;
         display:flex;
         justify-content: center;
-        
     }
     
     .rental_list_area {
@@ -212,8 +210,6 @@
         width: 100%;
         height:100%;
     }
-
-    
 
     .bottom_banner {
         width:100%;
@@ -327,10 +323,6 @@
             </div>
         </div>
     </div>
-    
-    
-    
-    
     
         <div class="banner_container">
             <div class="banner_content_area">
