@@ -2,6 +2,8 @@ package com.sample.vo;
 
 import org.apache.ibatis.type.Alias;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Alias("commentVO")
 public class ReviewCommentVO {
   private int id;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sample.vo.ReviewCommentVO;
-
 
 @Mapper
 public interface ReviewCommentDAO {

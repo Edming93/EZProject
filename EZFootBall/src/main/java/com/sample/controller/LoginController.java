@@ -51,6 +51,11 @@ public class LoginController {
 		return "redirect:/home";
 	}
 	
+	@GetMapping("/logincheck")
+	@ResponseBody
+	public boolean loginCheck(HttpSession session) {
+		return session.getAttribute("sessionVO") != null;
+	}
 	
 	@GetMapping("/signUp")
 	public String getSignUp(UserVO vo,Model model) {
