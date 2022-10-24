@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.sample.vo.DataVO;
 import com.sample.vo.TlistVO;
+import com.sample.vo.UinVO;
 
 @Mapper
 public interface TeamDAO {
@@ -16,5 +18,9 @@ public interface TeamDAO {
 	public int subgame(int num);
 	
 	public int maxgame(int num);
+	
+	public int setslist(DataVO vo);
+	
+	public UinVO abile(int usercode);
 	
 }

@@ -2,11 +2,16 @@ package com.sample.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sample.dao.GlistDAO;
+import com.sample.vo.DataVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.SjoinVO;
+import com.sample.vo.UinVO;
 
 @Service
 public class GlistService {
@@ -31,9 +36,25 @@ public class GlistService {
 		dao.subgame(num);
 	}
 	public void maxgame(int num) {
+		System.out.println("ser");
 		dao.maxgame(num);
 	}
 	
+	public List<SjoinVO> joinlist(int num){
+		return dao.joinlist(num);
+	}
 	
+	public List<UinVO> joininfo(int id) {
+		return dao.joininfo(id);
+	}
+	
+	public void setslist(DataVO vo) {
+		dao.setslist(vo);
+	}
+	
+	public UinVO abil(int usercode, HttpSession session) {
+		session.setAttribute("urabil",dao.abile(usercode));
+		return dao.abile(usercode);
+	}
 	
 }

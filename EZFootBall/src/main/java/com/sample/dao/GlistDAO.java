@@ -3,9 +3,10 @@ package com.sample.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
+import com.sample.vo.DataVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.SjoinVO;
+import com.sample.vo.UinVO;
 
 @Mapper
 public interface GlistDAO {
@@ -18,4 +19,11 @@ public interface GlistDAO {
 	
 	public int maxgame(int num);
 	
+	public List<SjoinVO> joinlist(int num);
+	
+	public List<UinVO> joininfo(int userid);
+	
+	public UinVO abile(int userid);
+	
+	public int setslist(DataVO vo);
 }

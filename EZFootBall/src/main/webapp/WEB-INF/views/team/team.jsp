@@ -333,7 +333,7 @@
 	              bdiv.className = "close";
 	              
 	              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-	              ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	              ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
 	              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -343,17 +343,31 @@
 	              var minp = data[name].gameMinp;/*최소인원  */
 	              var maxp = data[name].gameMaxp;/*최대인원  */
 	              
-	              
-	              if(pnum == maxp){
-	            	  bdiv.innerText = " 마감 ";
-	            	  bdiv.style.backgroundColor = "#aaa";
-	              }else if(minp - pnum <=3){
-	            	  bdiv.innerText = " 마감 임박 ";
-	            	  bdiv.style.backgroundColor = "red";
+	              if(data[name].gameMacth == '5vs5'){
+	            	  if(pnum == 2){
+	            		  bdiv.innerText = " 마감 ";
+		            	  bdiv.style.backgroundColor = "#aaa";
+	            	  }else{
+	            		  bdiv.innerText = " 신청 ";
+		            	  bdiv.style.backgroundColor = "blue";
+	            	  }
+	            	  
 	              }else{
-	            	  bdiv.innerText = " 신청 ";
-	            	  bdiv.style.backgroundColor = "blue";
+	            	  if(pnum == 3){
+		            	  bdiv.innerText = " 마감 ";
+		            	  bdiv.style.backgroundColor = "#aaa";
+		              }else if(pnum ==2){
+		            	  bdiv.innerText = " 마감 임박 ";
+		            	  bdiv.style.backgroundColor = "red";
+		              }else{
+		            	  bdiv.innerText = " 신청 ";
+		            	  bdiv.style.backgroundColor = "blue";
+		              }
+	            	  
 	              }
+	              
+	              
+	              
 	              
 	              
 	             
@@ -447,7 +461,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              bdiv.className = "close";
 	              
 	              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-	              ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	              ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
 	              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -457,15 +471,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              var maxp = data[name].gameMaxp;/*최대인원  */
 	              
 	              
-	              if(pnum == maxp){
-	            	  bdiv.innerText = " 마감 ";
-	            	  bdiv.style.backgroundColor = "#aaa";
-	              }else if(minp - pnum <=3){
-	            	  bdiv.innerText = " 마감 임박 ";
-	            	  bdiv.style.backgroundColor = "red";
+	              if(data[name].gameMacth == '5vs5'){
+	            	  if(pnum == 2){
+	            		  bdiv.innerText = " 마감 ";
+		            	  bdiv.style.backgroundColor = "#aaa";
+	            	  }else{
+	            		  bdiv.innerText = " 신청 ";
+		            	  bdiv.style.backgroundColor = "blue";
+	            	  }
+	            	  
 	              }else{
-	            	  bdiv.innerText = " 신청 ";
-	            	  bdiv.style.backgroundColor = "blue";
+	            	  if(pnum == 3){
+		            	  bdiv.innerText = " 마감 ";
+		            	  bdiv.style.backgroundColor = "#aaa";
+		              }else if(pnum ==2){
+		            	  bdiv.innerText = " 마감 임박 ";
+		            	  bdiv.style.backgroundColor = "red";
+		              }else{
+		            	  bdiv.innerText = " 신청 ";
+		            	  bdiv.style.backgroundColor = "blue";
+		              }
+	            	  
 	              }
 	             
 	              div_out.append(tdiv);
@@ -601,7 +627,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -611,15 +637,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              var maxp = data[name].gameMaxp;/*최대인원  */
              
              
-             if(pnum == maxp){
-           	  bdiv.innerText = " 마감 ";
-           	  bdiv.style.backgroundColor = "#aaa";
-             }else if(minp - pnum <=3){
-           	  bdiv.innerText = " 마감 임박 ";
-           	  bdiv.style.backgroundColor = "red";
+             if(data[name].gameMacth == '5vs5'){
+           	  if(pnum == 2){
+           		  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+           	  }else{
+           		  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+           	  }
+           	  
              }else{
-           	  bdiv.innerText = " 신청 ";
-           	  bdiv.style.backgroundColor = "blue";
+           	  if(pnum == 3){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(pnum ==2){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+           	  
              }
             
              div_out.append(tdiv);
@@ -700,7 +738,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -710,15 +748,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              var maxp = data[name].gameMaxp;/*최대인원  */
              
              
-             if(pnum == maxp){
-           	  bdiv.innerText = " 마감 ";
-           	  bdiv.style.backgroundColor = "#aaa";
-             }else if(minp - pnum <=3){
-           	  bdiv.innerText = " 마감 임박 ";
-           	  bdiv.style.backgroundColor = "red";
+             if(data[name].gameMacth == '5vs5'){
+           	  if(pnum == 2){
+           		  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+           	  }else{
+           		  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+           	  }
+           	  
              }else{
-           	  bdiv.innerText = " 신청 ";
-           	  bdiv.style.backgroundColor = "blue";
+           	  if(pnum == 3){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(pnum ==2){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+           	  
              }
             
              div_out.append(tdiv);
@@ -800,7 +850,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -810,15 +860,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              var maxp = data[name].gameMaxp;/*최대인원  */
              
              
-             if(pnum == maxp){
-           	  bdiv.innerText = " 마감 ";
-           	  bdiv.style.backgroundColor = "#aaa";
-             }else if(minp - pnum <=3){
-           	  bdiv.innerText = " 마감 임박 ";
-           	  bdiv.style.backgroundColor = "red";
+             if(data[name].gameMacth == '5vs5'){
+           	  if(pnum == 2){
+           		  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+           	  }else{
+           		  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+           	  }
+           	  
              }else{
-           	  bdiv.innerText = " 신청 ";
-           	  bdiv.style.backgroundColor = "blue";
+           	  if(pnum == 3){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(pnum ==2){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+           	  
              }
             
              div_out.append(tdiv);
@@ -899,7 +961,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -909,15 +971,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              var maxp = data[name].gameMaxp;/*최대인원  */
              
              
-             if(pnum == maxp){
-           	  bdiv.innerText = " 마감 ";
-           	  bdiv.style.backgroundColor = "#aaa";
-             }else if(minp - pnum <=3){
-           	  bdiv.innerText = " 마감 임박 ";
-           	  bdiv.style.backgroundColor = "red";
+             if(data[name].gameMacth == '5vs5'){
+           	  if(pnum == 2){
+           		  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+           	  }else{
+           		  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+           	  }
+           	  
              }else{
-           	  bdiv.innerText = " 신청 ";
-           	  bdiv.style.backgroundColor = "blue";
+           	  if(pnum == 3){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(pnum ==2){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+           	  
              }
             
              div_out.append(tdiv);
@@ -998,7 +1072,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -1008,17 +1082,28 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              var maxp = data[name].gameMaxp;/*최대인원  */
              
              
-             if(pnum == maxp){
-           	  bdiv.innerText = " 마감 ";
-           	  bdiv.style.backgroundColor = "#aaa";
-             }else if(minp - pnum <=3){
-           	  bdiv.innerText = " 마감 임박 ";
-           	  bdiv.style.backgroundColor = "red";
+             if(data[name].gameMacth == '5vs5'){
+           	  if(pnum == 2){
+           		  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+           	  }else{
+           		  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+           	  }
+           	  
              }else{
-           	  bdiv.innerText = " 신청 ";
-           	  bdiv.style.backgroundColor = "blue";
+           	  if(pnum == 3){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(pnum ==2){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+           	  
              }
-            
              div_out.append(tdiv);
              middiv.append(ndiv);
              infodiv.append(gdiv);
@@ -1097,7 +1182,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             bdiv.className = "close";
             
             tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-            ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+            ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
             gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
             mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
             ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -1107,15 +1192,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             var maxp = data[name].gameMaxp;/*최대인원  */
             
             
-            if(pnum == maxp){
-          	  bdiv.innerText = " 마감 ";
-          	  bdiv.style.backgroundColor = "#aaa";
-            }else if(minp - pnum <=3){
-          	  bdiv.innerText = " 마감 임박 ";
-          	  bdiv.style.backgroundColor = "red";
+            if(data[name].gameMacth == '5vs5'){
+          	  if(pnum == 2){
+          		  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+          	  }else{
+          		  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+          	  }
+          	  
             }else{
-          	  bdiv.innerText = " 신청 ";
-          	  bdiv.style.backgroundColor = "blue";
+          	  if(pnum == 3){
+	            	  bdiv.innerText = " 마감 ";
+	            	  bdiv.style.backgroundColor = "#aaa";
+	              }else if(pnum ==2){
+	            	  bdiv.innerText = " 마감 임박 ";
+	            	  bdiv.style.backgroundColor = "red";
+	              }else{
+	            	  bdiv.innerText = " 신청 ";
+	            	  bdiv.style.backgroundColor = "blue";
+	              }
+          	  
             }
            
             div_out.append(tdiv);
@@ -1188,7 +1285,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	             bdiv.className = "close";
 	             
 	             tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-	             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
 	             gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	             mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	             ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -1198,15 +1295,27 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              var maxp = data[name].gameMaxp;/*최대인원  */
 	              
 	              
-	              if(pnum == maxp){
-	            	  bdiv.innerText = " 마감 ";
-	            	  bdiv.style.backgroundColor = "#aaa";
-	              }else if(minp - pnum <=3){
-	            	  bdiv.innerText = " 마감 임박 ";
-	            	  bdiv.style.backgroundColor = "red";
+	              if(data[name].gameMacth == '5vs5'){
+	            	  if(pnum == 2){
+	            		  bdiv.innerText = " 마감 ";
+		            	  bdiv.style.backgroundColor = "#aaa";
+	            	  }else{
+	            		  bdiv.innerText = " 신청 ";
+		            	  bdiv.style.backgroundColor = "blue";
+	            	  }
+	            	  
 	              }else{
-	            	  bdiv.innerText = " 신청 ";
-	            	  bdiv.style.backgroundColor = "blue";
+	            	  if(pnum == 3){
+		            	  bdiv.innerText = " 마감 ";
+		            	  bdiv.style.backgroundColor = "#aaa";
+		              }else if(pnum ==2){
+		            	  bdiv.innerText = " 마감 임박 ";
+		            	  bdiv.style.backgroundColor = "red";
+		              }else{
+		            	  bdiv.innerText = " 신청 ";
+		            	  bdiv.style.backgroundColor = "blue";
+		              }
+	            	  
 	              }
 	            
 	             div_out.append(tdiv);

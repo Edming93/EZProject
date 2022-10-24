@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
 import com.sample.vo.TlistVO;
+import com.sample.vo.UinVO;
+import com.sample.vo.UserVO;
 
 @Controller
 @RequestMapping("/team")
@@ -116,34 +118,60 @@ public class TeamController {
 	}
 	
 	@GetMapping("/tinfo")
-	public String info(Model model,@RequestParam("num") String snum,HttpServletRequest request) {
+	public String info(Model model,@RequestParam("num") String snum,HttpSession session) {
 		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("gamenum", snum);
 		int num = Integer.parseInt(snum);
 		
 		service.info(num, model);
-		System.out.println(num);
+		
+		UserVO lovi = (UserVO)session.getAttribute("sessionVO");
+		System.out.println(lovi.getUserCode());
+		UinVO abil = service.abil(lovi.getUserCode(),session);
+		System.out.println("info오늘 팀코드"+service.abil(lovi.getUserCode(),session).getTeamCode());
 	    
 	    return "team/matchinfo";
 	}
 	
 	@GetMapping("/tsubgame")
-	public String subgame(@RequestParam("num") String snum) {
-		int num = Integer.parseInt(snum);
-		System.out.println("team");
-		service.subgame(num);
+	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
+		int num = Integer.parseInt(snum);		
+		
+		if(session.getAttribute("sessionVO") != null) {
+			System.out.println(session.getAttribute("urabil"));
+			UinVO uvo = (UinVO)session.getAttribute("urabil");
+			System.out.println(uvo.getTeamCode());
+			int team_code = uvo.getTeamCode();
+			dvo.setGame_num(num);
+			dvo.setUser_code(team_code);
+			System.out.println(team_code);
+			service.setslist(dvo);
+			service.subgame(num);
+		}else {
+			return "loginPage/login";
+		}
+		
 		
 		return "team/teamMain";
 	}
 	
 	@GetMapping("/tmaxgame")
-	public String maxgame(@RequestParam("num") String snum) {
+	public String maxgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);
-		System.out.println("마감");
 		
-		service.maxgame(num);
+		if(session.getAttribute("sessionVO") != null) {
+			UinVO uvo = (UinVO)session.getAttribute("urabil");
+			int team_code = uvo.getTeamCode();
+			System.out.println(team_code);
+			dvo.setGame_num(num);
+			dvo.setTeam_code(team_code);
+			System.out.println(dvo.getTeam_code());
+			service.setslist(dvo);
+			service.maxgame(num);
+		}else {
+			return "loginPage/login";
+		}
+		
+	
 		/* System.out.println(service.maxgame(num)); */
 		
 		return "team/teamMain";

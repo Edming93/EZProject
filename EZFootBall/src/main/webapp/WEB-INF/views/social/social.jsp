@@ -70,6 +70,7 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            border-radius: 30px;
         }
 
         #settingbutton{
@@ -333,7 +334,7 @@
 	              bdiv.className = "close";
 	              
 	              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-	              ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	              ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
 	              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -447,7 +448,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              bdiv.className = "close";
 	              
 	              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-	              ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	              ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
 	              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -601,7 +602,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -700,7 +701,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -800,7 +801,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -899,7 +900,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -998,7 +999,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              bdiv.className = "close";
              
              tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
              gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
              mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
              ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -1097,7 +1098,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             bdiv.className = "close";
             
             tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-            ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+            ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
             gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
             mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
             ldiv.innerText = "경기레벨"+ ":" + data[name].level;
@@ -1188,7 +1189,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	             bdiv.className = "close";
 	             
 	             tdiv.innerText = "경기시간:"+ ":" + data[name].gameTime;
-	             ndiv.innerText = "경기이름:"+ ":" + data[name].gameName;
+	             ndiv.innerText = "경기이름:"+ ":" + data[name].filedName;
 	             gdiv.innerText = "경기성별"+ ":" + data[name].gameGender;
 	             mdiv.innerText = "경기매치"+ ":" + data[name].gameMacth;
 	             ldiv.innerText = "경기레벨"+ ":" + data[name].level;

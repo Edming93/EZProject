@@ -1,8 +1,23 @@
+<%@page import="com.sample.vo.UinVO"%>
+<%@page import="com.sample.vo.UserVO"%>
 <%@page import="com.sample.vo.GlistVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+	String lv = null;
+	String level = null;
+	if( (UinVO)session.getAttribute("urabil") != null) {
+		UinVO vo = (UinVO)session.getAttribute("urabil");
+		level =vo.getUserLevel();
+		if(level != null){
+			lv = level.substring(0,level.length()-1);
+		}
+	}else {
+		lv = null;
+	}
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,29 +43,116 @@
 		<div>경기명 : ${matchinfo.gameName}</div>
 		<div>주소 : 경기장데이터</div>
 	</div>
+	
+	<div>
+		신청자 목록		
+	</div>
+	
+	<div id="list">
+	</div>
+	
+	<!--신청자 목록 출력  -->
+	<script type="text/javascript">
+	window.onload = function(e) {
+		 let data = {game_num:${matchinfo.sgameNum}};
+		 
+	      fetch("${pageContext.request.contextPath}/msocial/joinlist",{
+	         method : "POST", // PUT, PATCH, DELETE
+	         headers : {
+	            "Content-Type" : "application/json"},
+	         body : JSON.stringify(data)
+	      }).then(response => response.json()) 
+	      
+	      .then(data => {
+	    	  
+	         
+	         for ( let name in data) {
+	           
+	        	   let data2 = {user_code:data[name].userCode}
+	        	   fetch("${pageContext.request.contextPath}/msocial/joininfo",{
+	      	         method : "POST", // PUT, PATCH, DELETE
+	      	         headers : {
+	      	            "Content-Type" : "application/json"},
+	      	         body : JSON.stringify(data2)
+	      	      }).then(response => response.json()) 
+	      	      .then(data2 => {  
+	      	    	  
+	      	         for ( let name2 in data2) {
+	      	        	const divlist = document.createElement("div");
+	      	        	
+	      	        	var divn = document.createElement("div");
+	      	        	divn.innerText = name + "이름 : " + data2[name2].userName;
+	      	        	
+	      	        	var divd = document.createElement("div");
+	      	        	divd.innerText = name + "성별 : " + data2[name2].userGender;
+	      	        	
+	      	        	var divg = document.createElement("div");
+	      	        	divg.innerText = name + "팀 : " + data2[name2].userGroup;
+	      	        	
+	      	        	var divv = document.createElement("div");
+	      	        	divv.innerText = name + "승률 : " + data2[name2].userVr;
+	      	        	
+	      	        	var divl = document.createElement("div");
+	      	        	divl.innerText = name + "레벨 : " + data2[name2].userLevel;
+	      	        	
+	      	        	divlist.append(divn);
+	      	        	divlist.append(divd);
+	      	        	divlist.append(divg);
+	      	        	divlist.append(divv);
+	      	        	divlist.append(divl);
+	      	        	
+	      	        	document.getElementById("list").append(divlist);
+	      	        	
+	      	         }
+	      	         
+	      	      }).catch(error => {
+	      	         console.log("error");
+	      	      });
+			
+	         }
+	         
+	      }).catch(error => {
+	         console.log("error");
+	      });
+	};
+	</script>
+	
 	<button id="subbtn">
 		신청 버튼
 	</button>
 	<script type="text/javascript">
 	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
-	console.log(${matchinfo.gameMaxp} - ${matchinfo.gamePnum});
-	if(aa <=1) {
-		console.log("마감");
-		
-	}else {
-		
-		console.log("추가");
-	}
-	
+	var lev = '${matchinfo.level}';
+	var level = lev.substring(0,lev.length-1);
 	document.getElementById("subbtn").addEventListener("click",function(){
 		
-		if(aa <1) {
-			console.log("마감");
-			location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.sgameNum}
+		if(<%=lv%> == null){
+			if(aa == 1) {
+				location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.sgameNum}
+			}else if(aa <1){
+				alert("마감된 경기 입니다");
+				location.href = "${pageContext.request.contextPath}/"
+			}
+			else {
+				location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.sgameNum}
+			}
+		}else if('<%=lv%>' == level){
+			if(aa == 1) {
+				location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.sgameNum}
+			}else if(aa <1){
+				alert("마감된 경기 입니다");
+				location.href = "${pageContext.request.contextPath}/"
+			}
+			else {
+				location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.sgameNum}
+			}
 		}else {
-			location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.sgameNum}
-			console.log("추가");
+			alert("레벨에 맞지 않아 신청 할 수 없습니다");
 		}
+		
+		
+		
+		
 	});
 	
 	

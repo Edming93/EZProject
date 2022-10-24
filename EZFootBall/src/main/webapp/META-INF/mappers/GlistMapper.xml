@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.GlistDAO">
 	<select id="list" resultType="GlistVO" parameterType="GlistVO">
-		select sgame_num,game_name,game_day,game_gender,
+		select sgame_num,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,filed_name,
 		filed_address,game_minp,game_maxp
@@ -34,7 +34,7 @@
 	
 	
 	<select id="info" resultType="GlistVO">
-		select sgame_num,game_name,game_day,game_gender,
+		select sgame_num,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,filed_name,
 		filed_address,game_minp,game_maxp
@@ -55,8 +55,32 @@
 	
 	<update id="maxgame">
 		UPDATE gamelist 
-		SET close = 'false'
+		SET game_pnum = game_pnum+1, close = 'false'
 		WHERE sgame_num = #{num} and game_type = 'S'
 	</update>
 	
+ 	<insert id="setslist" parameterType="DataVO">
+		INSERT game_sjoinlist (game_num, user_code) 
+		VALUES (#{game_num}, #{user_code})
+	</insert>
+	
+	
+	<select id="joinlist" resultType="SjoinVO">
+		select *
+		from game_sjoinlist
+		where game_num = #{num}
+	</select>
+	
+	
+	<select id="joininfo" resultType="UinVO">
+		select *
+		from user_abil
+		where user_code = #{userid}
+	</select>
+	
+	<select id="abile" resultType="UinVO">
+		select *
+		from user_abil
+		where user_code = #{usercode}
+	</select>
 </mapper>

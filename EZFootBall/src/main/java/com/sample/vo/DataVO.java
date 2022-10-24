@@ -1,5 +1,8 @@
 package com.sample.vo;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("DataVO")
 public class DataVO {
 	private String place;
 	private String close;
@@ -8,8 +11,19 @@ public class DataVO {
 	private String day;
 	private String level;
 	private String mver;
+	private String type;
+	private int game_num;
+	private int user_code;
+	private int team_code;
+	
 	
 
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getLevel() {
 		return level;
 	}
@@ -51,6 +65,24 @@ public class DataVO {
 	}
 	public void setDay(String day) {
 		this.day = day;
+	}
+	public int getGame_num() {
+		return game_num;
+	}
+	public void setGame_num(int game_num) {
+		this.game_num = game_num;
+	}
+	public int getUser_code() {
+		return user_code;
+	}
+	public void setUser_code(int user_code) {
+		this.user_code = user_code;
+	}
+	public int getTeam_code() {
+		return team_code;
+	}
+	public void setTeam_code(int team_code) {
+		this.team_code = team_code;
 	}
 
 	

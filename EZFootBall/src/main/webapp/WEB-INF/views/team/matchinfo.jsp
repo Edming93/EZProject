@@ -33,19 +33,14 @@
 	<script type="text/javascript">
 	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
 	console.log(${matchinfo.gameMaxp} - ${matchinfo.gamePnum});
-	if(aa <=1) {
-		console.log("마감");
-		
-	}else {
-		
-		console.log("추가");
-	}
-	
 	document.getElementById("subbtn").addEventListener("click",function(){
 		if(aa < 1) {
-			console.log("마감");
+			alert("마감된 경기 입니다");
+			location.href = "${pageContext.request.contextPath}/team/team"
+		}else if(aa ==1){
 			location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.sgameNum}
-		}else {
+		}
+		else {
 			location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.sgameNum}
 			console.log("추가");
 		}

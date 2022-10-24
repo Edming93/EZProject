@@ -2,9 +2,7 @@ package com.sample.controller;
 
 
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sample.service.GlistService;
 import com.sample.vo.DataVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.SjoinVO;
+import com.sample.vo.UinVO;
+import com.sample.vo.UserVO;
 
 @Controller
 @RequestMapping("/msocial")
@@ -113,36 +114,73 @@ public class SocialController {
 	}
 	
 	@GetMapping("/info")
-	public String info(Model model,@RequestParam("num") String snum,HttpServletRequest request) {
+	public String info(Model model,@RequestParam("num") String snum,HttpSession session) {
 		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("gamenum", snum);
 		int num = Integer.parseInt(snum);
 		
 		service.info(num, model);
-		System.out.println(model.getAttribute("matchinfo"));
+		if((UserVO)session.getAttribute("sessionVO") != null) {
+			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
+			UinVO abil = service.abil(lovi.getUserCode(),session);
+		}
+		
 	    
 	    return "social/matchinfo";
 	}
 	
 	@GetMapping("/subgame")
-	public String subgame(@RequestParam("num") String snum) {
+	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);
 		
-		service.subgame(num);
+		if(session.getAttribute("sessionVO") != null) {
+			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
+			System.out.println(lovi.getUserId());
+			int user_code = lovi.getUserCode();
+			dvo.setGame_num(num);
+			dvo.setUser_code(user_code);
+			service.setslist(dvo);
+			service.subgame(num);
+		}else {
+			return "loginPage/login";
+		}
 		
 		return "index";
 	}
 	
 	@GetMapping("/maxgame")
-	public String maxgame(@RequestParam("num") String snum) {
+	public String maxgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);
-		System.out.println("마감");
-		
-		service.maxgame(num);
-		/* System.out.println(service.maxgame(num)); */
-		
+		if(session.getAttribute("sessionVO") != null) {
+			System.out.println(session.getAttribute("sessionVO"));
+			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
+			System.out.println(lovi.getUserId());
+			int user_code = lovi.getUserCode();
+			dvo.setGame_num(num);
+			dvo.setUser_code(user_code);
+			service.setslist(dvo);
+			service.maxgame(num);
+		}else {
+			return "loginPage/login";
+		}
 		return "index";
 	}
+	
+	@PostMapping("/joinlist")
+	@ResponseBody
+	public List<SjoinVO> joinlist (@RequestBody DataVO dvo,HttpSession session){
+		System.out.println("joinlist");
+		int num = dvo.getGame_num();
+		return service.joinlist(num);
+	}
+	
+	@PostMapping("/joininfo")
+	@ResponseBody
+	public List<UinVO> joininfo (@RequestBody DataVO dvo,HttpSession session){
+		System.out.println("joininfo");
+		int id = dvo.getUser_code();
+		System.out.println(id);
+		return service.joininfo(id);
+	}
+	
+	
 }
