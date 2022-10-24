@@ -4,7 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("GlistVO")
 public class GlistVO {
-	private int sgameNum;
+	private int gameCode;
 	private String gameType;
     private String gameName;
     private String gameDay;
@@ -22,12 +22,11 @@ public class GlistVO {
     private String filedAddress;
 	
     
-    
-	public int getSgameNum() {
-		return sgameNum;
+	public int getGameCode() {
+		return gameCode;
 	}
-	public void setSgameNum(int sgameNum) {
-		this.sgameNum = sgameNum;
+	public void setGameCode(int gameCode) {
+		this.gameCode = gameCode;
 	}
 	public String getGameType() {
 		return gameType;

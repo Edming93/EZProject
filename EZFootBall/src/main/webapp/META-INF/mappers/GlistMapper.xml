@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.GlistDAO">
 	<select id="list" resultType="GlistVO" parameterType="GlistVO">
-		select sgame_num,game_day,game_gender,
+		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,filed_name,
 		filed_address,game_minp,game_maxp
@@ -34,14 +34,14 @@
 	
 	
 	<select id="info" resultType="GlistVO">
-		select sgame_num,game_day,game_gender,
+		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,filed_name,
 		filed_address,game_minp,game_maxp
 		from gamelist
 		<where>
-			<if test="close != null">
-				and sgame_num = #{num}
+			<if test="num != null">
+				and game_code = #{num}
 			</if>
 				and game_type = 'S'
 		</where>
@@ -50,17 +50,17 @@
 	<update id="subgame">
 		UPDATE gamelist 
 		SET game_pnum = game_pnum+1
-		WHERE sgame_num = #{num} and game_type = 'S'
+		WHERE game_code = #{num} and game_type = 'S'
 	</update>
 	
 	<update id="maxgame">
 		UPDATE gamelist 
 		SET game_pnum = game_pnum+1, close = 'false'
-		WHERE sgame_num = #{num} and game_type = 'S'
+		WHERE game_code = #{num} and game_type = 'S'
 	</update>
 	
  	<insert id="setslist" parameterType="DataVO">
-		INSERT game_sjoinlist (game_num, user_code) 
+		INSERT game_sjoinlist (game_code, user_code) 
 		VALUES (#{game_num}, #{user_code})
 	</insert>
 	
@@ -68,7 +68,7 @@
 	<select id="joinlist" resultType="SjoinVO">
 		select *
 		from game_sjoinlist
-		where game_num = #{num}
+		where game_code = #{num}
 	</select>
 	
 	

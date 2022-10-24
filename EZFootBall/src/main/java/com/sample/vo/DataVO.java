@@ -13,6 +13,7 @@ public class DataVO {
 	private String mver;
 	private String type;
 	private int game_num;
+	private int game_code;
 	private int user_code;
 	private int team_code;
 	
@@ -71,6 +72,12 @@ public class DataVO {
 	}
 	public void setGame_num(int game_num) {
 		this.game_num = game_num;
+	}
+	public int getGame_code() {
+		return game_code;
+	}
+	public void setGame_code(int game_code) {
+		this.game_code = game_code;
 	}
 	public int getUser_code() {
 		return user_code;

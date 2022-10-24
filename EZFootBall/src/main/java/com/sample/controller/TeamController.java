@@ -145,6 +145,7 @@ public class TeamController {
 			System.out.println(uvo.getTeamCode());
 			int team_code = uvo.getTeamCode();
 			dvo.setGame_num(num);
+			dvo.setGame_code(num);
 			dvo.setUser_code(team_code);
 			System.out.println(team_code);
 			service.setslist(dvo);
@@ -166,6 +167,7 @@ public class TeamController {
 			int team_code = uvo.getTeamCode();
 			System.out.println(team_code);
 			dvo.setGame_num(num);
+			dvo.setGame_code(num);
 			dvo.setTeam_code(team_code);
 			System.out.println(dvo.getTeam_code());
 			service.setslist(dvo);

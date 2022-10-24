@@ -2,7 +2,9 @@ package com.sample.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -36,8 +38,6 @@ public class SocialController {
 	@PostMapping("/slist")
 	@ResponseBody
 	public List<GlistVO> betest(@RequestBody DataVO dvo,GlistVO gvo,Model model){
-		
-		System.out.println("컨트롤러");
 		
 		//날짜 설정
 		gvo.setGameDay(dvo.getDay());
@@ -103,9 +103,6 @@ public class SocialController {
 	@ResponseBody
 	public List<GlistVO> listall(@RequestBody DataVO dvo,GlistVO gvo,Model model){
 		 //최초 진입 시 실행
-		System.out.println("컨트롤러2");
-		
-		System.out.println(dvo.getDay());
 		
 		gvo.setGameDay(dvo.getDay());
 		
@@ -131,11 +128,11 @@ public class SocialController {
 	@GetMapping("/subgame")
 	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);
-		
+		System.out.println("/subgame");
 		if(session.getAttribute("sessionVO") != null) {
 			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
-			System.out.println(lovi.getUserId());
 			int user_code = lovi.getUserCode();
+			dvo.setGame_code(num);
 			dvo.setGame_num(num);
 			dvo.setUser_code(user_code);
 			service.setslist(dvo);
@@ -150,12 +147,12 @@ public class SocialController {
 	@GetMapping("/maxgame")
 	public String maxgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);
+		System.out.println("/maxgame");
 		if(session.getAttribute("sessionVO") != null) {
-			System.out.println(session.getAttribute("sessionVO"));
 			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
-			System.out.println(lovi.getUserId());
 			int user_code = lovi.getUserCode();
 			dvo.setGame_num(num);
+			dvo.setGame_code(num);
 			dvo.setUser_code(user_code);
 			service.setslist(dvo);
 			service.maxgame(num);
@@ -178,7 +175,6 @@ public class SocialController {
 	public List<UinVO> joininfo (@RequestBody DataVO dvo,HttpSession session){
 		System.out.println("joininfo");
 		int id = dvo.getUser_code();
-		System.out.println(id);
 		return service.joininfo(id);
 	}
 	
