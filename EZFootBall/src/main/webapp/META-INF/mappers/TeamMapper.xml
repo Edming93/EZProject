@@ -70,4 +70,48 @@
 		where user_code = #{userCode}
 	</select>
 	
+	<!-- 팀 매치정보 등록  -->
+	<insert id="matchReg">
+		insert into match_reg
+		(mgender,mtype,mdate,mtime,mfieldname,mpay,mteamname)
+		values
+		(#{mGender},#{mType},#{mDate},#{mTime},#{mFieldName},#{mPay},#{mTeamName})
+	</insert>
+	
+	<!-- 등록된 팀 매치 정보 출력  -->
+	<select id="getMatchList" resultType="MatchRegVO">
+		select match_code, mgender, mtype, mdate, mtime, mfieldname, mpay, mteamname, mstate 
+		from match_reg
+	</select>
+	
+	<!-- 팀 등록시 팀 추가  -->
+	<insert id="insertTeamMember">
+		insert into team_member
+		(team_name, tmember1, tmember2, tmember3, tmember4, tmember5, tmember6, 
+		 user_code1, user_code2, user_code3, user_code4, user_code5, user_code6)
+		values
+		(#{teamName},#{tmember1},#{tmember2},#{tmember3},#{tmember4},#{tmember5},#{tmember6},
+		 #{userCode1},#{userCode2},#{userCode3},#{userCode4},#{userCode5},#{userCode6})
+	</insert>
+	
+	<!-- 추가된 팀 전체 리스트 출력 -->
+	<select id="getTeamList" resultType="TeamMemberVO">
+		select team_code, team_name, tmember1, tmember2, tmember3, tmember4, tmember5, tmember6,
+		user_code1, user_code2, user_code3, user_code4, user_code5, user_code6
+		from team_member
+	</select>
+	
+	<select id="getTeamListWhere" resultType="TeamMemberVO">
+		select team_code, team_name
+		from team_member
+		where team_name LIKE CONCAT ('%',#{teamName},'%')
+	</select>
+	
+	<!-- 팀리스트중 teamName, teamCode 출력 -->
+	<select id="getTeamList123" resultType="TeamMemberVO">
+		select team_code, team_name
+		from team_member
+		where team_code = #{teamCode}
+	</select>
+	
 </mapper>

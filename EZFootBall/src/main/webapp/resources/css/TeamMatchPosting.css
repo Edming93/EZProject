@@ -1,0 +1,463 @@
+@charset "UTF-8";
+
+
+*{
+    box-sizing : border-box;
+    margin : 2px auto;
+ 
+}
+.posting{
+    display: flex;
+    background-color: white;
+   
+    width: 1024px;
+    border: 1px solid white;
+}
+.posting_subcon{
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid white;
+}
+.title {
+    width: 100%;
+    text-align: center;
+    
+}
+.title p{
+    font-weight: 700;
+    font-size : 30px;
+    margin-bottom: 20px;
+    
+}
+.hurry{
+    width: 100%;
+}
+.hurry .sub_title1{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+
+.hurry .option select {
+    width: 100%; /* 원하는 너비설정 */
+     padding: .8em .5em; /* 여백으로 높이 설정 */
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+     border: 1px solid #999;
+     appearance: none;
+ 
+}
+.gender{
+    width: 100%;
+}
+.gender .sub_title1{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+
+.gender .option select {
+    width: 100%; /* 원하는 너비설정 */
+     padding: .8em .5em; /* 여백으로 높이 설정 */
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+     border: 1px solid #999;
+     appearance: none;
+}
+.match_type{
+    width: 100%;
+}
+.match_type .sub_title1{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.match_type .option select{
+    padding-left: 10px;
+}
+.match_type .option select {
+    width: 100%; /* 원하는 너비설정 */
+     padding: .8em .5em; /* 여백으로 높이 설정 */
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+     border: 1px solid #999;
+     appearance: none;
+
+}
+.match_date{
+    width: 100%;
+}
+.match_date .sub_title2{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+
+.match_date input{
+    width: 100%;
+    height: 40px;
+    padding-left: 5px;
+
+}
+.match_time{
+    width: 100%;
+}
+.match_time .sub_title2_1{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.match_time .match_time_span{
+    font-size: 12px;
+    color : red;
+}
+
+.match_time .option select{
+    padding-left: 10px;
+}
+.match_time .option select {
+    width: 100%; /* 원하는 너비설정 */
+     padding: .8em .5em; /* 여백으로 높이 설정 */
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+     border: 1px solid #999;
+     appearance: none;
+
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    width : 100%;
+    
+}
+.field_div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+}
+.field .sub_title3{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.field .field_div .search_map{
+    display: flex;
+    width: 100%;
+   
+}
+.field .field_div .search_map input{
+    width: 70%;
+    height: 40px;
+    
+}
+.field .field_div .search_map .map_button{
+    height: 40px;
+    width: 30%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.field .field_div .search_map a {
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+}
+.payment{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+}
+.payment .sub_title4{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.payment_text{
+    width: 100%;
+}
+.payment input{
+    width: 100%;
+    height: 40px;
+
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+}
+.field_div{
+    display: flex;
+    flex-direction: column;
+   
+}
+.field .sub_title3{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.field .field_div .search_map{
+    display: flex;
+    width: 100%;
+    align-content: space-between;
+}
+.field .field_div .search_map input{
+    width: 70%;
+    height: 40px;
+   
+}
+.field .field_div .search_map .map_button{
+    height: 40px;
+    width: 30%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.field .field_div .search_map a {
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+}
+.submit_button{
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#writer_submit{
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+}
+#writer_submit:hover{
+    cursor: pointer;
+}
+
+.team_search{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 3%;
+}
+.team_search_div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+}
+.team_search .sub_title3{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.team_search .team_search_div .search_team{
+    display: flex;
+    width: 100%;
+    align-content: space-between;
+}
+.team_search .team_search_div .search_team input{
+
+    height: 40px;
+   
+}
+.team_search .team_search_div .search_team .team_search_button{
+    height: 40px;
+    width: 25%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.team_search .team_search_div .search_team .team_button{
+    height: 40px;
+    width: 25%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.team_search .team_search_div .search_team .team_search_button .btn-open-popup {
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+}
+.team_search .team_search_div .search_team .team_button .tbtn {
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+}
+
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal.show {
+    display: block;
+  }
+
+  .modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .modal_inner_box{
+    display: flex;
+
+  }
+ 
+  .modal_search_button{
+    background-color: black;
+    display: flex;
+    justify-content : center;
+    align-items : center;
+    
+  }
+  .modal_search_button a{
+  	color : white;
+  	font-weight : 700;
+  	text-decoration : none;
+  }
+  .modal_confirm{
+  	background-color : black;
+  	margin-left : 5px;
+  	display: flex;
+    justify-content : center;
+    align-items : center;
+  }
+  
+   .modal_confirm a{
+   	color : white;
+  	font-weight : 700;
+  	text-decoration : none;
+   }
+   #modaldata{
+   	height : 100%;
+   	overflow : auto;
+   }
+   
+   /* 지도검색 modal창 디자인 */
+    .modal22 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal22.show {
+  display: block;
+}
+
+.modal22_body22 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 1300px;
+  height: 700px;
+
+  padding: 30px;
+
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+  overflow : hidden;
+}
+
+.modal22_body22 a{
+	background-color : black;
+}
+
+#map{
+		width : 100vw;
+		height : 50vh;
+	}
+	.map_search{
+		width : 80%;
+		height : 60px;
+		display : flex;
+		justify-content : space-between;
+	}
+	.map_search .search_area{
+		width : 84%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+	}
+	.map_search .search_area #search{
+		width : 100%;
+		height : 80%;
+		
+	}
+	.map_search .search_button{
+		width : 7%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+		background-color : black;
+	}
+	
+	.map_search .search_button a{
+		color : white;
+		font-size : 20px;
+		text-decoration : none;
+	}
+	.map_search .confirm_button{
+		width : 7%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+		background-color : black;
+	}
+	.map_search .confirm_button a{
+		
+		background-color : black;
+	}
+
+   

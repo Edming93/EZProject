@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.TeamDAO;
 import com.sample.vo.DataVO;
+import com.sample.vo.MatchRegVO;
+import com.sample.vo.TeamMemberVO;
 import com.sample.vo.TlistVO;
 import com.sample.vo.UinVO;
 
@@ -46,5 +48,34 @@ public class TeamService {
 		return dao.abile(usercode);
 	}
 	
-	
+	//-----------------정욱 10.24---------------------------------------
+	//----------------------posting page--------------------------------------------------
+		// 매치정보 insert 하는 메서드
+		public boolean matchReg1( MatchRegVO vo) {
+			System.out.println("서비ㅅ서비스");
+			System.out.println(vo.getmDate());
+			System.out.println(vo.getmTime());
+			System.out.println(vo.getmFieldName());
+			
+			return (dao.matchReg(vo)>0?true:false);
+		}
+		
+		// insert 된 리스트를 가져오는 메서드
+		public void getMatchList1(Model model) {
+			model.addAttribute("matchList", dao.getMatchList());
+			System.out.println("여기는왜탐?");
+		}
+		
+		public List<TeamMemberVO> getTeamNameListSer(TeamMemberVO vo){
+			return dao.getTeamListWhere(vo);
+		}
+		
+		//-------------------------------registration page-----------------------------------------	
+		
+		public boolean TeamMemberList(TeamMemberVO vo) {
+				System.out.println(vo.getTmember2());
+			
+			return (dao.insertTeamMember(vo)>0)?true:false;
+		}
+		//-----------------------------------------------------
 }

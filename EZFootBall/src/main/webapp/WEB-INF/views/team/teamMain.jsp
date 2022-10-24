@@ -281,6 +281,10 @@
     .mainpage-post .date ul li:hover{
        background-color: blue;
     }
+    .posting{
+    	width : 50px;
+    	height : 50px;
+    }
 
 </style>
 </head>
@@ -327,7 +331,9 @@
             </div>
         </div>
     </div>
-    
+    <div id="posting123">
+    	<span><img src="${pageContext.request.contextPath}/image/close1.jpg" id="posting"/></span>
+    </div>
     
     
     
@@ -363,6 +369,12 @@
 		main_logo.addEventListener("click",function() {
 			location.href="${pageContext.request.contextPath}";
 		});
+		
+		/* 글쓰기 아이콘 누를시 이동 */
+		document.getElementById("posting").addEventListener("click",function(){
+			location.href="${pageContext.request.contextPath}/team/posting";
+		});
+		
 	</script>
 </body>
 </html>
