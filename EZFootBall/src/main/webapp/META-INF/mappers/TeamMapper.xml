@@ -70,5 +70,17 @@
 		where user_code = #{userCode}
 	</select>
 	
+	<select id="teamcode" resultType="int">
+		SELECT DISTINCT team_code
+		FROM game_tjoinlist
+		WHERE game_code = #{gameCode};
+	</select>
+	
+	<select id="joininfo" resultType="UinVO">
+		select *
+		from user_abil
+		where team_code = #{teamCode}
+	</select>
+	
 	
 </mapper>

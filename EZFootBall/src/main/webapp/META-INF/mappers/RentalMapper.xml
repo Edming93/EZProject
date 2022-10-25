@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.RentalDAO">
 	<select id="rvListAll" resultType="GlistVO" parameterType="GlistVO">
-		select sgame_num,game_type,game_name,DATE_FORMAT(game_day,'%Y-%m-%d') AS game_day,game_gender,
+		select game_code,game_type,game_name,DATE_FORMAT(game_day,'%Y-%m-%d') AS game_day,game_gender,
 		DATE_FORMAT(game_time, '%H') AS game_time,level,
-		game_macth,game_place,close,game_pnum,game_mag,filed_name,
-		filed_address,game_minp,game_maxp
+		game_macth,game_place,close,game_pnum,game_mag,field_name,
+		field_address,game_minp,game_maxp
 		from gamelist
 		<where>
 			<if test="gameDay != null">

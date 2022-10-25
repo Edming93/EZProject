@@ -127,11 +127,11 @@ public class TeamController {
 		
 		service.info(num, model);
 		
-		UserVO lovi = (UserVO)session.getAttribute("sessionVO");
-		System.out.println(lovi.getUserCode());
-		UinVO abil = service.abil(lovi.getUserCode(),session);
-		System.out.println("info오늘 팀코드"+service.abil(lovi.getUserCode(),session).getTeamCode());
-	    
+		if((UserVO)session.getAttribute("sessionVO") != null) {
+			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
+			UinVO abil = service.abil(lovi.getUserCode(),session);
+		}
+		
 	    return "team/matchinfo";
 	}
 	
@@ -180,6 +180,22 @@ public class TeamController {
 		/* System.out.println(service.maxgame(num)); */
 		
 		return "team/teamMain";
+	}
+	
+	@PostMapping("/joinlist")
+	@ResponseBody
+	public List<Integer> joinlist (@RequestBody DataVO dvo,HttpSession session){
+		System.out.println("joinlist");
+		int gameCode = dvo.getGame_code();
+		return service.teamcode(gameCode);
+	}
+	
+	@PostMapping("/joininfo")
+	@ResponseBody
+	public List<UinVO> joininfo (@RequestBody DataVO dvo,HttpSession session){
+		System.out.println("joininfo");
+		int teamCode = dvo.getTeam_code();
+		return service.joininfo(teamCode);
 	}
 	
 //--------------------정욱 10.24 ----------------------------------	

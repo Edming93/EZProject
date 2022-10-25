@@ -7,11 +7,13 @@
 <%
 	String lv = null;
 	String level = null;
+	int id = 0;
 	if( (UinVO)session.getAttribute("urabil") != null) {
 		UinVO vo = (UinVO)session.getAttribute("urabil");
 		level =vo.getUserLevel();
 		if(level != null){
 			lv = level.substring(0,level.length()-1);
+			id = vo.getUserCode();
 		}
 	}else {
 		lv = null;
@@ -51,10 +53,17 @@
 	<div id="list">
 	</div>
 	
+	<button id="subbtn">
+		신청 버튼
+	</button>
+	
 	<!--신청자 목록 출력  -->
 	<script type="text/javascript">
+	/* document.getElementById("subbtn").disabled = true; */
+	var list = [];
+	const closed = null;
 	window.onload = function(e) {
-		 let data = {game_num:${matchinfo.sgameNum}};
+		 let data = {game_num:${matchinfo.gameCode}};
 		 
 	      fetch("${pageContext.request.contextPath}/msocial/joinlist",{
 	         method : "POST", // PUT, PATCH, DELETE
@@ -64,10 +73,7 @@
 	      }).then(response => response.json()) 
 	      
 	      .then(data => {
-	    	  
-	         
-	         for ( let name in data) {
-	           
+	         for ( let name in data) {   	        	
 	        	   let data2 = {user_code:data[name].userCode}
 	        	   fetch("${pageContext.request.contextPath}/msocial/joininfo",{
 	      	         method : "POST", // PUT, PATCH, DELETE
@@ -103,6 +109,7 @@
 	      	        	
 	      	        	document.getElementById("list").append(divlist);
 	      	        	
+	      	        	list.push(data2[name2].userCode); 
 	      	         }
 	      	         
 	      	      }).catch(error => {
@@ -116,43 +123,43 @@
 	      });
 	};
 	</script>
-	
-	<button id="subbtn">
-		신청 버튼
-	</button>
+	<!--버튼 클릭  -->
 	<script type="text/javascript">
+	if('${matchinfo.close}' == 'false') {
+		document.getElementById("subbtn").disabled = true;
+	}
+	
 	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
 	var lev = '${matchinfo.level}';
 	var level = lev.substring(0,lev.length-1);
+	
 	document.getElementById("subbtn").addEventListener("click",function(){
-		
-		if(<%=lv%> == null){
-			if(aa == 1) {
-				location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.sgameNum}
-			}else if(aa <1){
-				alert("마감된 경기 입니다");
-				location.href = "${pageContext.request.contextPath}/"
+		var cnt = 0;
+		for(var i=0; i<list.length; i++){
+			if(list[i] == '<%=id%>'){
+				cnt++;
 			}
-			else {
-				location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.sgameNum}
-			}
-		}else if('<%=lv%>' == level){
-			if(aa == 1) {
-				location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.sgameNum}
-			}else if(aa <1){
-				alert("마감된 경기 입니다");
-				location.href = "${pageContext.request.contextPath}/"
-			}
-			else {
-				location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.sgameNum}
-			}
-		}else {
-			alert("레벨에 맞지 않아 신청 할 수 없습니다");
 		}
 		
-		
-		
-		
+		if (cnt > 0) {
+			alert("이미 신청한 경기 입니다");
+		}else {
+			if('<%=lv%>' == null){
+				if(aa == 1) {
+					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+				}else{
+					location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+				}
+			}else if('<%=lv%>' == level){
+				if(aa == 1) {
+					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+				}else{
+					location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+				}
+			}else {
+				alert("레벨에 맞지 않아 신청 할 수 없습니다");
+			}
+		}
 	});
 	
 	

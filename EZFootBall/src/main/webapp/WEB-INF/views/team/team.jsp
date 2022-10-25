@@ -312,8 +312,8 @@
 	         for ( let name in data) {
 	            const div_out = document.createElement("a");
 	              div_out.className = "matchgame";
-	              div_out.id = data[name].sgameNum;
-	              div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+	              div_out.id = data[name].gameCode;
+	              div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
 	              
 	              
 	              let middiv = document.createElement("div");/*가운데  */
@@ -441,8 +441,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
            for ( let name in data) {
         	   const div_out = document.createElement("a");
 	              div_out.className = "matchgame";
-	              div_out.id = data[name].sgameNum;
-	              div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+	              div_out.id = data[name].gameCode;
+	              div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
 	              
 	              let middiv = document.createElement("div");/*가운데  */
 	              middiv.className = "mid_div";
@@ -607,8 +607,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          for ( let name in data) {
         	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
-             div_out.id = data[name].sgameNum;
-             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+             div_out.id = data[name].gameCode;
+             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -718,8 +718,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          for ( let name in data) {
         	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
-             div_out.id = data[name].sgameNum;
-             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+             div_out.id = data[name].gameCode;
+             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -830,8 +830,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          for ( let name in data) {
         	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
-             div_out.id = data[name].sgameNum;
-             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+             div_out.id = data[name].gameCode;
+             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -941,8 +941,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          for ( let name in data) {
         	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
-             div_out.id = data[name].sgameNum;
-             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+             div_out.id = data[name].gameCode;
+             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -1052,8 +1052,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
          for ( let name in data) {
         	 const div_out = document.createElement("a");
              div_out.className = "matchgame";
-             div_out.id = data[name].sgameNum;
-             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+             div_out.id = data[name].gameCode;
+             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
              
              let middiv = document.createElement("div");/*가운데  */
              middiv.className = "mid_div";
@@ -1162,8 +1162,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
         for ( let name in data) {
        	 const div_out = document.createElement("a");
             div_out.className = "matchgame";
-            div_out.id = data[name].sgameNum;
-            div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+            div_out.id = data[name].gameCode;
+            div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
             
             let middiv = document.createElement("div");/*가운데  */
             middiv.className = "mid_div";
@@ -1265,8 +1265,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	         for ( let name in data) {
 	        	 const div_out = document.createElement("a");
 	             div_out.className = "matchgame";
-	             div_out.id = data[name].sgameNum;
-	             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].sgameNum;
+	             div_out.id = data[name].gameCode;
+	             div_out.href="${pageContext.request.contextPath}/team/tinfo?num="+data[name].gameCode;
 	             
 	             let middiv = document.createElement("div");/*가운데  */
 	             middiv.className = "mid_div";

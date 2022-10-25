@@ -25,6 +25,10 @@ public interface TeamDAO {
 	
 	public UinVO abile(int usercode);
 	
+	public List<Integer> teamcode (int gameCode);
+	
+	public List<UinVO> joininfo (int teamCode);
+	
 	//----------------------정욱 10.24-------------------------
 	//----------------------registeration page--------------------------------------------------
 		// 팀 멤버 등록 

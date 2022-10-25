@@ -48,6 +48,14 @@ public class TeamService {
 		return dao.abile(usercode);
 	}
 	
+	public List<Integer> teamcode (int gameCode){
+		return dao.teamcode(gameCode);
+	}
+	
+	public List<UinVO> joininfo (int teamCode){
+		return dao.joininfo(teamCode);
+	}
+	
 	//-----------------정욱 10.24---------------------------------------
 	//----------------------posting page--------------------------------------------------
 		// 매치정보 insert 하는 메서드
