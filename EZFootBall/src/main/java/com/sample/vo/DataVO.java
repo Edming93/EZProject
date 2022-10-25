@@ -17,7 +17,8 @@ public class DataVO {
 	private int user_code;
 	private int team_code;
 	
-	
+	private int gameCode;
+	private int teamCode;
 
 	public String getType() {
 		return type;
@@ -90,6 +91,18 @@ public class DataVO {
 	}
 	public void setTeam_code(int team_code) {
 		this.team_code = team_code;
+	}
+	public int getGameCode() {
+		return gameCode;
+	}
+	public void setGameCode(int gameCode) {
+		this.gameCode = gameCode;
+	}
+	public int getTeamCode() {
+		return teamCode;
+	}
+	public void setTeamCode(int teamCode) {
+		this.teamCode = teamCode;
 	}
 
 	

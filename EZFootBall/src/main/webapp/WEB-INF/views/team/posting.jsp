@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>팀매치 게시글 등록</title>
 
      <link rel="stylesheet" href="${pageContext.request.contextPath }/js/jquery-ui.css"/>
     <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
@@ -25,7 +25,7 @@
                 <p>매치 방식</p>
             </div>
             <div class="option">
-                <select name="mType" id="mType">
+                <select name="gameMacth" id="gameMacth">
                     <option value="">매치방식을 선택해주세요</option>
                     <option value="5vs5">5vs5</option>
                     <option value="6vs6">6vs6</option>
@@ -37,10 +37,10 @@
                 <p>성별</p>
             </div>
             <div class="option">
-                <select name="mGender" id="mGender">
+                <select name="gameGender" id="gameGender">
                     <option value="">매치 성별을 선택해주세요</option>
-                    <option value="남자">남자</option>
-                    <option value="여자">여자</option>
+                    <option value="남">남자</option>
+                    <option value="여">여자</option>
                     <option value="혼성">혼성</option>
                 </select>
             </div>
@@ -50,20 +50,24 @@
                 <p>경기 날짜</p>
             </div>
             <div class="calender">
-            <input type="text" name="mDate" id="txtDate" placeholder="더블클릭 하세요">
+            <input type="text" name="gameDay" id="txtDate" placeholder="더블클릭 하세요">
             </div>
         </div>
         <div class="match_time">
             <div class="sub_title2_1">
-                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 소셜매치 경기시간입니다.)</span></p>
+                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 예약마감입니다.)</span></p>
             </div>
             <div class="option">
-                <select name="mTime" id="mTime">
+                <select name="gameTime" id="gameTime">
                     <option value="">매치시작 시간을 선택해주세요</option>
-                    <option value="PM12">PM12</option>
-                    <option value="PM2">PM2</option>
-                    <option value="PM6">PM6</option>
-                    <option value="PM10">PM10</option>
+                    <option value="08:00:00">AM8</option>
+                    <option value="10:00:00">AM10</option>
+                    <option value="12:00:00">PM12</option>
+                    <option value="14:00:00">PM2</option>
+                    <option value="16:00:00">PM4</option>
+                    <option value="18:00:00">PM6</option>
+                    <option value="20:00:00">PM8</option>
+                    <option value="22:00:00">PM10</option>
                 </select>
             </div>
         </div>
@@ -73,39 +77,103 @@
                     <p>경기장</p>
                 </div>
                 <div class="search_map">
-                <input type="text" name="mFieldName" id="mFieldName" >
+                <input type="text" name="gameName" id="gameName" >
                     <div class="modal22">
 				      <div class="modal22_body22">지도 검색하기
 				      	<a href="#" id="closebutton">닫기</a>
-				      	
+
 				      	<div class="map_search">
-	
 							<div class="search_area">
 								<input type="text" name="search" id="search" placeholder="주소를 정확히 입력하세요 서비스가 좋지않아 죄송합니다" />
 							</div>
 							<div class="search_button">
-								<a href="${pageContext.request.contextPath}/mapsearch" id="searcha">검색</a>
+								<a href="#" id="searcha">검색</a>
 							</div>
 							<div class="confirm_button">
 								<a href="#">확인</a>
-								
 							</div>
-							
 						</div>
 						<div id="map" class="gamefield_picture mapview"></div>
 						<div id="maparea"></div>
-				      	
+						<div id="mapcontent"></div>
 				      </div>
-				      	
 				    </div>
 				    <div class="map_button">
 				    <a href="#" class="btn-open-popup22">지도 검색</a>
 					</div>
-                  
-                    
+                   <script type="text/javascript">
+                    document.getElementById("searcha").addEventListener("click", function(){
+                        			let fieldAddress = document.getElementById("search").value;
+                        			const gameName = document.getElementById("gameName");
+                        			console.log(search);
+                        			console.log("1231231231");
+                        			
+                        			const simple_data = {fieldAddress};
+                        			
+                        			$.ajax({
+                        				url : "${pageContext.request.contextPath}/teammatch/getMap",
+                        				type : "POST",
+                        				contentType:"application/json; charset=utf-8",
+                        				dataType : "json",
+                        				data : JSON.stringify(simple_data),
+                        				success : function(data){
+                        					console.log("11111");
+                        					console.log(data);
+                        					for(const comment of data){
+                        						console.log(comment.fieldName);
+                        						const comdiv = document.getElementById("mapcontent");
+                        						console.log("2222");
+                        						const div = document.createElement("div");
+     
+                        						div.style.border = "1px solid black";
+                        						div.style.width = "500px";
+                        						div.addEventListener("click",function(){
+                        							gameName.value = comment.fieldName; 
+                        							console.log(search);
+                        							console.log(comment.fieldName);
+                        							
+                        							modal2.classList.remove('show');
+                        						});
+                        						const h4 = document.createElement("h4");
+                        						h4.innerText = "구장이름 :"+comment.fieldName;
+                        						const p = document.createElement("p");
+                        						p.innerText = "구장주소 :"+comment.fieldAddress;
+                        						const a = document.createElement("a");
+                        						a.innerText = "선택";
+                        						
+                        						
+                        						div.append(h4);
+                        						div.append(p);
+                        						div.append(a);
+                        						comdiv.append(div);
+                        					}
+
+                        				},
+                        				error : function(e){
+                        					alert(e);
+                        				}
+                        			});
+                        			
+                        		});
              
-                    
+                    </script>
                 </div>
+            </div>
+        </div>
+        <div class="match_place">
+            <div class="sub_title_place">
+                <p>매치 지역 <span class="match_place_span">(목록에서 지역을 선택해주세요)</span></p>
+            </div>
+            <div class="option">
+                <select name="gamePlace" id="gameplace">
+                    <option value="">지역을 선택해주세요</option>
+                    <option value="서울">서울</option>
+                    <option value="경기도">경기도</option>
+                    <option value="충청도">충청도</option>
+                    <option value="강원도">강원도</option>
+                    <option value="제주도">제주도</option>
+                    <option value="전라도">전라도</option>
+                </select>
             </div>
         </div>
         <div class="payment">
@@ -113,7 +181,7 @@
                 <p>참가비</p>
             </div>
             <div class="payment_text">
-                <input type="text" name="mPay" id="mPay" placeholder="참가비를 입력하세요">
+                <input type="text" name="gamePay" id="gamePay" placeholder="참가비를 입력하세요">
             </div>
         </div>
         <div class="team_search">
@@ -149,7 +217,7 @@
                         			const simple_data = {teamName};
                         			
                         			$.ajax({
-                        				url : "${pageContext.request.contextPath}/teammatch/getTeam",
+                        				url : "${pageContext.request.contextPath}/team/getTeam",
                         				type : "POST",
                         				contentType:"application/json; charset=utf-8",
                         				dataType : "json",
@@ -334,7 +402,6 @@
          } 
      });   
      </script>
-	
 </body>
 </html>
  

@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.TeamDAO;
 import com.sample.vo.DataVO;
+import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
+import com.sample.vo.SearchVO;
 import com.sample.vo.TeamMemberVO;
 import com.sample.vo.TlistVO;
 import com.sample.vo.UinVO;
@@ -84,6 +86,30 @@ public class TeamService {
 				System.out.println(vo.getTmember2());
 			
 			return (dao.insertTeamMember(vo)>0)?true:false;
+		}
+		// 매치 작성 후 완료버튼시 insert into gamelist
+		
+		public boolean putTeamMatchGlist(GlistVO vo) {
+			
+			return (dao.putTeamMatchGlist(vo)>0)?true:false;
+		}
+		
+		// 지도에서 주소값 불러오기
+		
+		public List<SearchVO> getGameMap(SearchVO vo){
+			
+			System.out.println("서비스"+vo.getFieldName());
+			return dao.getGameMapWhere(vo);
+		}
+		
+		
+		public int getTeamMatchGlist() {
+			
+			return dao.getTeamMatchGlist();
+		}
+		
+		public void gameTJoinList(DataVO vo) {
+			dao.gameTJoinList(vo);
 		}
 		//-----------------------------------------------------
 }

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
+import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
+import com.sample.vo.SearchVO;
 import com.sample.vo.TeamMemberVO;
 import com.sample.vo.TlistVO;
 import com.sample.vo.UinVO;
@@ -200,54 +202,66 @@ public class TeamController {
 	
 //--------------------정욱 10.24 ----------------------------------	
 	// 글쓰기 눌렀을 경우 매치 작성페이지로 이동
-	@GetMapping("/posting")
-	public String movePostingPage(Model model) {
-		
-		return "team/posting";
-	}
-	
-	
-	// 매치 작성 중 팀 틍록하기 버튼 클릭시
-	
-	@GetMapping("/register")
-	public String register() {
-		
-		return "team/registeration";
-	}
-	
-	// 매치 작성 후 완료버튼 클릭시
-	
-	@PostMapping("/postingFinish")
-	public String matchreg12( @ModelAttribute("MatchRegVO") MatchRegVO vo, Model model) {
-		
-		if(service.matchReg1( vo)) {
-			
-			return "team/main";
-		}else {
+		@GetMapping("/posting")
+		public String movePostingPage(Model model) {
 			
 			return "team/posting";
 		}
-	}
-	// 팀 등록시 완료 버튼 눌렀을 경우
-	
-	@PostMapping("/teamUpdate")
-	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo) {
 		
-		if(service.TeamMemberList(vo)) {
-			System.out.println(vo.getTmember3());
-			System.out.println("---컨트롤러---");
-			return "team/posting";
-		}else {
-			return "team/main";
+		
+		// 매치 작성 중 팀 틍록하기 버튼 클릭시
+		
+		@GetMapping("/register")
+		public String register() {
+			
+			return "team/registeration";
 		}
-	}
+		
+		
+		// 팀 등록시 완료 버튼 눌렀을 경우
+		
+		@PostMapping("/teamUpdate")
+		public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo) {
+			
+			if(service.TeamMemberList(vo)) {
+				System.out.println(vo.getTmember3());
+				System.out.println("---컨트롤러---");
+				return "team/posting";
+			}else {
+				return "team/main";
+			}
+		}
 
-	// 모달창에서 팀이름 검색시 팀 리스트 출력
-	@PostMapping("/getTeam")
-	@ResponseBody
-	public List<TeamMemberVO> getTeamNameList(@RequestBody TeamMemberVO vo){
-		return service.getTeamNameListSer(vo);
-	}
+		// 모달창에서 팀이름 검색시 팀 리스트 출력
+		@PostMapping("/getTeam")
+		@ResponseBody
+		public List<TeamMemberVO> getTeamNameList(@RequestBody TeamMemberVO vo){
+			return service.getTeamNameListSer(vo);
+		}
+		
+		@PostMapping("/postingFinish")
+		public String putTeamMatchGlist(@ModelAttribute("GlistVO") GlistVO vo, DataVO vo1) {
+			
+			if(service.putTeamMatchGlist(vo)) {
+				int Gnum =	service.getTeamMatchGlist();
+				vo1.setGameCode(Gnum);
+					service.gameTJoinList(vo1);
+				return "teammatch/main";
+			}else {
+				
+				return "teammatch/posting";
+			}
+		}
+		
+		// 지도에서 주소 입력후 검색 눌렀을때
+		@PostMapping("/getMap")
+		@ResponseBody
+		public List<SearchVO> getMapInfo(@RequestBody SearchVO vo){
+			
+			System.out.println("컨트롤러" + vo.getFieldName());
+			System.out.println(service.getGameMap(vo));
+			return service.getGameMap(vo); 
+		}
 	
 	//------------------------------------------------------		
 }

@@ -82,5 +82,62 @@
 		where team_code = #{teamCode}
 	</select>
 	
+	<!-- 지도 검색 -->
+	<select id="getGameMapWhere" resultType="searchVO">
+		select 
+		field_code, field_name, field_address, field_call, field_rentalfee, field_type,
+		field_img1, field_img2, field_img3, field_img4, field_img5
+		from gamefield_info
+		where field_name LIKE CONCAT ('%',#{fieldName},'%')
+	</select>
+	
+	
+	
+	<!-- 팀 등록시 팀 추가  -->
+	<insert id="insertTeamMember">
+		insert into team_member
+		(team_name, tmember1, tmember2, tmember3, tmember4, tmember5, tmember6, 
+		 user_code1, user_code2, user_code3, user_code4, user_code5, user_code6)
+		values
+		(#{teamName},#{tmember1},#{tmember2},#{tmember3},#{tmember4},#{tmember5},#{tmember6},
+		 #{userCode1},#{userCode2},#{userCode3},#{userCode4},#{userCode5},#{userCode6})
+	</insert>
+	
+	<!-- 추가된 팀 전체 리스트 출력 -->
+	<select id="getTeamList" resultType="TeamMemberVO">
+		select team_code, team_name, tmember1, tmember2, tmember3, tmember4, tmember5, tmember6,
+		user_code1, user_code2, user_code3, user_code4, user_code5, user_code6
+		from team_member
+	</select>
+	
+	<select id="getTeamListWhere" resultType="TeamMemberVO">
+		select team_code, team_name
+		from team_member
+		where team_name LIKE CONCAT ('%',#{teamName},'%')
+	</select>
+	
+	<!-- 팀리스트중 teamName, teamCode 출력 -->
+	<select id="getTeamList123" resultType="TeamMemberVO">
+		select team_code, team_name
+		from team_member
+		where team_code = #{teamCode}
+	</select>
+	
+	<!-- git DB합치는 과정> matchList 추가  -->
+	
+	<insert id="putTeamMatchGlist">
+		insert into gamelist (game_macth, game_gender, game_name, game_type, game_day, game_time, game_pay, game_minp, game_maxp, game_pnum, game_place)
+		values (#{gameMacth},#{gameGender}, #{gameName}, 'T', #{gameDay}, #{gameTime}, #{gamePay}, 2, 2, 1, #{gamePlace})
+	</insert>
+	
+	<select id="getTeamMatchGlist" resultType="int">
+		select game_num
+		order by desc limit 1
+	</select>
+	
+	<insert id="gameTJoinList">
+		insert into game_tjoinlist(game_code, team_code)
+		values (#{gameCode},#{teamCode})
+	</insert>
 	
 </mapper>

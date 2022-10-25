@@ -278,8 +278,8 @@
 }
 .team_search .team_search_div .search_team .team_button{
     height: 40px;
-    width: 25%;
-    background-color: black;
+    width: 30%;
+    background-color: rgb(67, 69, 80);
     display: flex;
     align-items: center;
     justify-content: center;
