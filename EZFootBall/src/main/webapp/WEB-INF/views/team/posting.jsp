@@ -345,7 +345,7 @@
       });
 
       modal2.addEventListener('click', (event) => {
-        if (event.target === modal) {
+        if (event.target === modal2) {
           modal2.classList.toggle('show');
 
           if (!modal2.classList.contains('show')) {

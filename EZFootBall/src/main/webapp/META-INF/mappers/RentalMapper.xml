@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.RentalDAO">
 	<select id="rvListAll" resultType="GlistVO" parameterType="GlistVO">
-		select game_code,game_type,field_name,DATE_FORMAT(game_day,'%Y-%m-%d') AS game_day,game_gender,
-		DATE_FORMAT(game_time, '%H') AS game_time,level,
+		select game_code,game_type,field_name,GROUP_CONCAT(DATE_FORMAT(game_time, '%H') ORDER BY game_time asc)as game_time,game_gender,
+		DATE_FORMAT(game_time, '%H') AS game_time,level,field_code,
 		game_macth,game_place,close,game_pnum,game_mag,
 		field_address,game_minp,game_maxp
 		from gamelist
@@ -22,15 +22,12 @@
 			<if test="gameMacth != null">
 				and game_macth = #{gameMacth}
 			</if>
-			<if test="gameType != null">
-				and game_type = #{gameType}
-			</if>
 		</where>
-		group by field_name order by game_time,field_name
+		GROUP BY field_name, game_day
 	</select>
 	
 	<select id="selectTime" resultType="GlistVO">
-		select field_name,DATE_FORMAT(game_time, '%H') AS game_time from gamelist
+		select field_name,GROUP_CONCAT(DATE_FORMAT(game_time, '%H')) as game_day from gamelist
 			<where>
 				<if test="gameDay != null">
 					and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
@@ -39,6 +36,32 @@
 					and field_name = #{fieldName}
 				</if>
 			</where>
-		
 	</select>
+	
+	<select id="fieldInfo" resultType="gameFieldInfoVO">
+		select field_code,field_name,field_address,field_rentalfee,field_type,
+		field_img1,field_img2,field_img3,field_img4,field_img5
+		from gamefield_info where field_code = #{fieldCode}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

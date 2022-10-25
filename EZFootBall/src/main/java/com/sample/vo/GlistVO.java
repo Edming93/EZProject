@@ -20,8 +20,15 @@ public class GlistVO {
     private String gameMag;
     private String fieldName;
     private String fieldAddress;
-	
     
+    private int fieldCode;
+
+	public int getFieldCode() {
+		return fieldCode;
+	}
+	public void setFieldCode(int fieldCode) {
+		this.fieldCode = fieldCode;
+	}
 	public int getGameCode() {
 		return gameCode;
 	}
