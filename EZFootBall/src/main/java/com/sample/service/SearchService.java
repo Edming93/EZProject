@@ -28,8 +28,9 @@ public class SearchService {
 		model.addAttribute("searchVO", searchDAO.selectNum(id));
 	}
 
-	public List<RecentVO> getRecentAllList() {
-		return searchDAO.selectRecentList();
+	public List<RecentVO> getRecentAllList(RecentVO recentVO) {
+		List<RecentVO> list = searchDAO.selectRecentList(recentVO);
+		return list;
 	}
 
 	public Map<String, String> setRecent(RecentVO recentVO) {
@@ -53,4 +54,14 @@ public class SearchService {
 		}
 		return map;
 	}
+
+	public List<SearchVO> SearchAll(SearchVO searchVO) {
+		List<SearchVO> list = searchDAO.selectScout(searchVO);
+		return list;
+	}
+
+	/*
+	 * public List<SearchDataVO> getSearchList() { return
+	 * searchDAO.selectSearchList(); }
+	 */
 }

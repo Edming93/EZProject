@@ -3,8 +3,6 @@ package com.sample.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +33,7 @@ public class SearchController {
 	}
 
 	@GetMapping("/stadium/{id}")
-	public String stadium(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+	public String stadium(@PathVariable("id") int id, Model model) {
 
 		searchService.fieldNum(model, id);
 		return "result";
@@ -47,22 +45,51 @@ public class SearchController {
 		return "Redirect:search";
 	}
 
-	@GetMapping("recent")
+	@GetMapping("/recent")
 	@ResponseBody
-	public List<RecentVO> getRecentAll() {
-		return searchService.getRecentAllList();
+	public List<RecentVO> getRecentAll(RecentVO recentVO) {
+		recentVO.setUserCode(52);
+		System.out.println("받아오기: " + recentVO.getUserCode());
+		return searchService.getRecentAllList(recentVO);
 	}
 
-	@PostMapping("recent")
+	@PostMapping("/recent")
 	@ResponseBody
 	public Map<String, String> setRecent(@RequestBody RecentVO recentVO) {
+		recentVO.setUserCode(51);
+		System.out.println("post :" + recentVO.getSearchData());
 		return searchService.setRecent(recentVO);
 	}
 
-	@PostMapping("delete_recent")
+	@PostMapping("/delete_recent")
 	@ResponseBody
 	public Map<String, String> deleteRecent(@RequestBody RecentVO recentVO) {
+		recentVO.setUserCode(52);
 		return searchService.deleteRecent(recentVO);
 	}
+
+	@PostMapping("/recent_list")
+	@ResponseBody
+	public List<SearchVO> setSearch(@RequestBody SearchVO searchVO) {
+
+		/*
+		 * System.out.println("post :" + searchDataVO.getSearchText());
+		 * 
+		 * System.out.println("return1 : " + searchService.SearchAll(searchDataVO));
+		 * System.out.println("return2 : " +
+		 * searchService.SearchAll(searchDataVO).get(0).getFieldName());
+		 */
+
+		return searchService.SearchAll(searchVO);
+	}
+
+	/*
+	 * @GetMapping("/recent_list")
+	 * 
+	 * @ResponseBody public List<SearchDataVO> getSearchAll() {
+	 * System.out.println("get :" +
+	 * searchService.getSearchList().get(0).getFieldName()); return
+	 * searchService.getSearchList(); }
+	 */
 
 }

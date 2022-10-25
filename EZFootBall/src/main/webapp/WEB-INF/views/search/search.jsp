@@ -10,9 +10,10 @@
 		<!-- CSS , JS -->
 		<script src="js/jquery-3.6.1.min.js"></script>
 		<link rel="stylesheet" href="css/search.css" />
-		<style>
-			
-		</style>
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 		<body>
 			<h1>검색창</h1>
@@ -24,7 +25,8 @@
 							<circle data-v-454f7528="" cx="10.5" cy="10.5" r="6" stroke="#222836"></circle>
 							<path data-v-454f7528="" stroke="#222836" d="M14.354 14.646l4.949 4.95"></path>
 						</svg>
-						<label for="search"><input type="text" name="search" id="search" placeholder="검색창" list=""/></label>
+						<label for="search"><input type="text" name="search" id="search" placeholder="검색창"
+								list="" /></label>
 						<button id="searchbtn">검색</button>
 					</div>
 				</form>
@@ -59,7 +61,8 @@
 						<div class="schmain2">
 							<ul class="stadiumlist">
 								<c:forEach items="${list}" var="field">
-									<li><a class="recent" href="${pageContext.request.contextPath}/stadium/${field.fieldCode}">${field.fieldName}</a>
+									<li><a class="recent"
+											href="${pageContext.request.contextPath}/stadium/${field.fieldCode}">${field.fieldName}</a>
 									</li>
 								</c:forEach>
 							</ul>
@@ -70,17 +73,9 @@
 					<span class="closebtn"><img src="image/close1.jpg" /></span>
 					<h5 id="search_result_box_inner"></h5>
 					<section class="sch">
+						<ul id="insert_target"></ul>
 						<ul id="search_result_list">
-							<li><a href="">임시결과창1</a></li>
-							<li><a href="">임시결과창2</a></li>
-							<li><a href="">임시결과창3</a></li>
-							<li><a href="">임시결과창4</a></li>
-							<li><a href="">임시결과창5</a></li>
-							<li><a href="">임시결과창6</a></li>
-							<li><a href="">임시결과창7</a></li>
-							<li><a href="">임시결과창8</a></li>
-							<li><a href="">임시결과창9</a></li>
-							<li><a href="">임시결과창10</a></li>
+							<!-- 검색어 자동저장 -->
 						</ul>
 					</section>
 				</div>
@@ -105,213 +100,292 @@
 				});
 			</script>
 
+			
+
 			<script type="text/javascript">
-				/* 모달하다망함 */
-				$('#search').on("click", function () {
-					if($('#search').val() == null || $('#search').val() == ''){
-						$('#searchbox').show();
-						$('#search_result_box').hide();
-					}
-					/* if($.trim($('#search').val()) != null || $.trim($('#search').val() != '')){
-						$('#searchbox').hide();
-						$('#search_result_box').show();
-					} */
-				});
-				/* $(document).on('click',function(e){
-					if($("#searchbox").is(e.target)){
-						$("#searchbox").hide();
-					}
-				}); */
-
-				/* 최근 검색어 저장 - 이벤트리스너 수정필요*/
-				// document.getElementById("res").addEventListener("click", function () {
-				// 	const search = document.getElementById("search").value;
-				// 	const ul = document.getElementById("keywords");
-				// 	var li = document.createElement("li");
-				// 	var span = document.createElement("span");
-				// 	span.innerText = " x ";
-				// 	/* 여따가 검색어 저장해야함 */
-				// 	li.append(search);
-				// 	li.append(span);
-				// 	ul.prepend(li);
-				// 	console.log(search);
-				// 	span.addEventListener("click", function () {
-				// 		span.parentElement.remove();
-				// 	});
-				// });
-				/* 최근 검색어 추가하기 */
-				const readd = document.querySelectorAll(".recent");
-				readd.forEach(el => {
-					el.addEventListener("click", recentAdd);
-				});
-
-				/* 함수 영역 추가 */
-				function recentAdd() {
-					const searchData = document.getElementById("search").value;
-
-					if (searchData.trim() == '' || searchData.trim() == null) {
-						return;
-					}
-
-					const ul = document.getElementById("keywords");
-
-					const simple_data = { searchData };
-
-					$.ajax({
-						url: "${pageContext.request.contextPath}/recent",
-						type: "POST",
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						data: JSON.stringify(simple_data),
-						success: function (data) {
-							console.log(data);
-
-							if (data.state == "ok") {
-								const li = document.createElement("li");
-								const span1 = document.createElement("span");
-								const span2 = document.createElement("span");
-								span2.innerText = " x ";
-								span1.classList.add("recent_data");
-								span1.innerText = searchData;
-								li.append(span1);
-								li.append(span2);
-								ul.append(li);
-								span2.addEventListener("click", function () {
-									const searchData = span1.innerText;
-									const simple_data = { searchData };
-									$.ajax({
-										url: "${pageContext.request.contextPath}/delete_recent",
-										type: "POST",
-										contentType: "application/json; charset=utf-8",
-										dataType: "json",
-										data: JSON.stringify(simple_data),
-										success: function (data) {
-											console.log(data);
-											if (data.state == "ok") {
-												span2.parentElement.remove();
-											}
-										},
-										error: function (e) {
-											alert(e);
-										}
-									})
-								});
-							}
-						},
-						error: function (e) {
-							alert(e);
-						}
-					});
-				}
-
-				/* 최근검색어 받아오기 */
-				window.addEventListener("DOMContentLoaded", function () {
-					$.ajax({
-						url: "${pageContext.request.contextPath}/recent_list",
-						type: "GET",
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						success: function (data) {
-							const ul = document.getElementById("keywords");
-
-							for (let recent of data) { // json타입은 .으로 접근이 안되서어서 for문으로 접근을 하게 만듬
-								const li = document.createElement("li");
-								const span1 = document.createElement("span");
-								const span2 = document.createElement("span");
-								span2.innerText = " x ";
-								span1.classList.add("recent_data");
-								span1.innerText = recent.searchData;
-								li.append(span1);
-								li.append(span2);
-								ul.append(li);
-								span2.addEventListener("click", function () {
-									const searchData = span1.innerText;
-									const simple_data = { searchData };
-									$.ajax({
-										url: "${pageContext.request.contextPath}/delete_recent",
-										type: "POST",
-										contentType: "application/json; charset=utf-8",
-										dataType: "json",
-										data: JSON.stringify(simple_data),
-										success: function (data) {
-											console.log(data);
-											if (data.state == "ok") {
-												span2.parentElement.remove();
-											}
-										},
-										error: function (e) {
-											alert(e);
-										}
-									})
-								});
-							}
-						},
-						error: function (e) {
-							alert(e);
-						}
-					});
-				});
+				/* 인풋창 입력시 데이터 실시간 받아오기 */
+				$("#search").on("keyup", function (e) {
+					// textarea 입력된 글자수 길이 확인
+					var inputLength = $(this).val().trim().length;
 					
-			</script>
-
-			<script type="text/javascript">
-				/* 검색창에입력시 ul안에 텍스트입력 */
-				/* function printText(data) {
-					const input = document.getElementById("search").value;
-					const searchbox = document.getElementById("searchbox");
-					const searchbox2 = document.getElementById("search_result_box");
-					if(input != null){
-						searchbox.style.display = "none";
-						searchbox2.style.display = "block";
-						searchbox2.innerHTML = "<h1>'"+input+"'에 대한 검색결과</h1>";
-					} else if (input === null){
-						searchbox.style.display = "block";
-						searchbox2.style.display = "none";
-					}
-				} */
-					$("#search").on("keyup", function(){
-						// textarea 입력된 글자수 길이 확인
-						var inputLength = $(this).val().length;
-
-						// textarea 에 작성된 전체 데이터 확인
+					// textarea 에 작성된 전체 데이터 확인
 						var totalText = $(this).val();
-
+						// if (e.keyCode != 37 && e.keyCode != 39) {
+						
 						// textarea 에 현재 입력된 데이터 확인 
 						var nowText = totalText.substring(inputLength - 1, inputLength);
-
-						$("#search_result_box_inner").text("'"+totalText+"'에 대한 검색결과");
-
-						if(inputLength != 0){
-							$("#searchbox").css("display", "none");
-							$("#search_result_box").css("display", "block");
-						} else{
+						
+						$("#search_result_box_inner").text("'" + totalText + "'에 대한 검색결과");
+						
+						if (inputLength == 0) {
 							$("#searchbox").css("display", "block");
 							$("#search_result_box").css("display", "none");
+						} else {
+							$("#searchbox").css("display", "none");
+							$("#search_result_box").css("display", "block");
 						}
-					});
+						
+						// if (e.keyCode != 8 && !e.altKey && !e.ctrlKey && e.keyCode != 16 && e.keyCode != 17 && e.keyCode != 18 && e.keyCode != 19 && e.keyCode != 20 && e.keyCode != 27 && e.keyCode != 37 && e.keyCode != 39) {
+						const searchText = document.getElementById("search").value;
+						const simple_data1 = { searchText };
 
-					const simple_data = {totalText};
-					$.ajax({
-						url: "${pageContext.request.contextPath}/recent_list",
-						type: "POST",
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						data: JSON.stringify(simple_data),
-						success: function (data) {
-							console.log(data);
+						const lastText = searchText.charAt(searchText.length - 1);
+						$.ajax({
+							url: "${pageContext.request.contextPath}/recent_list",
+							type: "POST",
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							data: JSON.stringify(simple_data1),
+							success: function (data) {
+								// console.log(data);
+								// console.dir(data);
+								const ul = document.getElementById("search_result_list");
 
-							if (data.state == "ok") {
-								const li = document.createElement("li");
-								const span1 = document.createElement("span");
-								const span2 = document.createElement("span");
+								if (ul.hasChildNodes() /*&& (inputLength == 0 || data.length === 0 || lastText != nowText) */) {
+									while (ul.hasChildNodes()) {
+										ul.removeChild(ul.firstChild);
+									}
+								}
 								
-								
+								for (let list of data) {
+									const li = document.createElement("li");
+									const a = document.createElement("a");
+									if (inputLength > 0 && list.fieldName.trim() != null) {
+										console.log((list.fieldName) - 1);
+										console.log(list.fieldName);
+										a.innerText = list.fieldName;
+										a.href = "${pageContext.request.contextPath}/stadium/" + list.fieldCode;
+										a.classList.add("recent");
+										li.append(a);
+										ul.append(li);
+									}
+									$(".recent").on("click", recentAdd);
+
+									console.log("list :" + list.fieldName - 1 == list.fieldName);
+									console.log("--------------------");
+								}
+							},
+							error: function (e2) {
+								alert(e2);
 							}
-						},
-						error: function (e) {
-							alert(e);
-						}
+
+						});
+						/* const fieldName = searchText;
+						const simple_data = { fieldName };
+						$.ajax({
+							url: "${pageContext.request.contextPath}/recent_list",
+							type: "GET",
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							data: JSON.stringify(simple_data),
+							success: function (data) {
+								console.log(data);
+								for (let recent of data) {
+									cosnole.log("field Text :" + recent.fieldName);
+								}
+							},
+							error: function (e) {
+								alert(e);
+							}
+						}); */
+
+
+						/* 답없음 */
+						/* var isComplete = false;
+						var ref = [
+							{ key: 1, name: '데이터1' },
+							{ key: 2, name: '데이터2' },
+							{ key: 3, name: '자바스크립트' },
+							{ key: 4, name: 'Json' },
+						];
+	
+						var txt = $(this).val();
+	
+						ref.forEach(function (arg) {
+							if (arg.name.indexOf(txt) > -1) {
+								$("#search_result_list").append("<li>").text(arg.name).attr({ 'key': arg.key });
+							}
+						});
+	
+						$('#search_result_list').children().each(function () {
+							$(this).click(function () {
+								$('#search').val($(this).text());
+								$('#insert_target').val("key : " + $(this).attr('key') + ", data : " + $(this).text());
+								$('#search_result_list').children().remove();
+								isComplete = true;
+							});
+						});*/
+
+
+						/* $(function () {
+							$("#seearch").autocomplete({
+								source: function (request, response) {
+									$.ajax({
+										url: "${pageContext.request.contextPath}/recent_list",
+										type: "POST",
+										dataType: "json",
+										data: JSON.stringify(request.term),
+										success: function (data) {
+											response(
+												$.map(data, function (item) {
+													return {
+														label: item.AREA_NAME,
+														value: item.AREA_NAME,
+														idx: item.IDX,
+													}
+												})
+											)
+										}
+									})
+								},
+								focus: function(event, ui){
+									return false;
+								},
+								select: function(event,ui){
+									console.log(ui.item.idx)
+								},
+								delay: 100,
+								autoFocus: true
+							});
+						}) */
+					// }
 					});
+				
+				
+
+			</script>
+			
+			<script type="text/javascript">
+			/* 모달하다망함 */
+			$('#search').on("click", function () {
+				if ($('#search').val() == null || $('#search').val() == '') {
+					$('#searchbox').show();
+					$('#search_result_box').hide();
+				}
+				/* if($.trim($('#search').val()) != null || $.trim($('#search').val() != '')){
+					$('#searchbox').hide();
+					$('#search_result_box').show();
+				} */
+			});
+			/* $(document).on('click',function(e){
+				if($("#searchbox").is(e.target)){
+					$("#searchbox").hide();
+				}
+			}); */
+
+
+			/* 최근 검색어 추가하기 */
+			const readd = document.querySelectorAll(".recent");
+			readd.forEach(el => {
+				el.addEventListener("click", recentAdd);
+			});
+
+			/* 함수 영역 추가 */
+			function recentAdd() {
+				const searchData = document.getElementById("search").value;
+				
+				if (searchData.trim() == '' || searchData.trim() == null) {
+					return;
+				}
+
+				const ul = document.getElementById("keywords");
+
+				const simple_data = { searchData };
+
+				$.ajax({
+					url: "${pageContext.request.contextPath}/recent",
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					data: JSON.stringify(simple_data),
+					success: function (data) {
+						console.log(data);
+
+						if (data.state == "ok") {
+							const li = document.createElement("li");
+							const span1 = document.createElement("span");
+							const span2 = document.createElement("span");
+							span2.innerText = " x ";
+							span1.classList.add("recent_data");
+							span1.innerText = searchData;
+							li.append(span1);
+							li.append(span2);
+							ul.append(li);
+							span2.addEventListener("click", function () {
+								const searchData = span1.innerText;
+								const simple_data = { searchData };
+								$.ajax({
+									url: "${pageContext.request.contextPath}/delete_recent",
+									type: "POST",
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									data: JSON.stringify(simple_data),
+									success: function (data) {
+										console.log(data);
+										if (data.state == "ok") {
+											span2.parentElement.remove();
+										}
+									},
+									error: function (e) {
+										alert(e);
+									}
+								})
+							});
+						}
+					},
+					error: function (e) {
+						alert(e);
+					}
+				});
+			}
+
+			/* 최근검색어 받아오기 */
+			window.addEventListener("DOMContentLoaded", function () {
+				$.ajax({
+					url: "${pageContext.request.contextPath}/recent",
+					type: "GET",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function (data) {
+						const ul = document.getElementById("keywords");
+
+						for (let recent of data) { // json타입은 .으로 접근이 안되서어서 for문으로 접근을 하게 만듬
+							const li = document.createElement("li");
+							const span1 = document.createElement("span");
+							const span2 = document.createElement("span");
+							span2.innerText = " x ";
+							span1.classList.add("recent_data");
+							span1.innerText = recent.searchData;
+							li.append(span1);
+							li.append(span2);
+							ul.append(li);
+							span2.addEventListener("click", function () {
+								const searchData = span1.innerText;
+								const simple_data = { searchData };
+								$.ajax({
+									url: "${pageContext.request.contextPath}/delete_recent",
+									type: "POST",
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									data: JSON.stringify(simple_data),
+									success: function (data) {
+										console.log(data);
+										if (data.state == "ok") {
+											span2.parentElement.remove();
+										}
+									},
+									error: function (e) {
+										alert(e);
+									}
+								})
+							});
+						}
+					},
+					error: function (e) {
+						alert(e);
+					}
+				});
+			});
 			</script>
 		</body>
 

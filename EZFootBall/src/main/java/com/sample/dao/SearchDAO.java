@@ -13,9 +13,11 @@ public interface SearchDAO {
 
 	public SearchVO selectNum(int id);
 
-	public SearchVO selectScout(SearchVO vo);
+	/* public List<SearchDataVO> selectSearchList(); */
 
-	public List<RecentVO> selectRecentList();
+	public List<RecentVO> selectRecentList(RecentVO vo);
+
+	public List<SearchVO> selectScout(SearchVO vo);
 
 	public int insertRecent(RecentVO vo);
 

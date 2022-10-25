@@ -23,6 +23,9 @@ public class SearchVO {
 	private String fieldImg4;
 	private String fieldImg5;
 
+	// 검색어 자동완성 텍스트
+	private String searchText;
+
 	public int getFieldCode() {
 		return fieldCode;
 	}
@@ -111,4 +114,11 @@ public class SearchVO {
 		this.fieldImg5 = fieldImg5;
 	}
 
+	public String getSearchText() {
+		return searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
+	}
 }
