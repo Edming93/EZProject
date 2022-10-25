@@ -19,5 +19,23 @@
 	<select id="userIdList" resultType="UserVO">
 		select user_id from user_info
 	</select>
+	
+	<!-- 추가 -->
+	<select id="searchUser1" resultType="UserVO">
+		select user_id, user_name, user_email1, user_email2
+		from user_info
+		where user_name = #{userName} and user_email1 = #{userEmail1} and user_email2 = #{userEmail2}
+	</select>
+	
+	<select id="searchUser2" resultType="UserVO">
+		select user_id, user_name, user_email1, user_email2
+		from user_info
+		where user_id = #{userId} and user_email1 = #{userEmail1} and user_email2 = #{userEmail2}
+	</select>
+	
+	<update id="newPassword">
+		update user_info set user_pw = #{userPw}
+		where user_id = #{userId}
+	</update>
 </mapper>
 

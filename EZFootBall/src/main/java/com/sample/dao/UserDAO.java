@@ -9,12 +9,18 @@ import com.sample.vo.UserVO;
 @Mapper
 public interface UserDAO {
 	public UserVO idPwCheck(UserVO vo);
-	
+
 	public String userId(String id);
-	
+
 	public void insertUser(UserVO vo);
-	
+
 	public List<UserVO> userIdList();
-	
+
 	public void insertGameStat(UserVO vo);
+
+	public UserVO searchUser1(UserVO vo);
+
+	public UserVO searchUser2(UserVO vo);
+
+	public void newPassword(UserVO vo);
 }

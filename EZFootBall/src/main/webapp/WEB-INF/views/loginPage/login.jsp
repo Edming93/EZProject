@@ -143,7 +143,7 @@
                 
                 <div class="id_footer">
                 	<div class="id_foot">
-	                    <button type="button" id="sign_up"><a href="${pageContext.request.contextPath}/loginPage/findInfo">ID/PW찾기</a></button>
+	                    <button type="button" id="sign_up"><a href="${pageContext.request.contextPath}/find/findInfo">ID/PW찾기</a></button>
 	                </div>
 	                <div class="id_foot">
 	                    <button type="button" id="sign_up"><a href="${pageContext.request.contextPath}/loginPage/signUp">회원가입</a></button>
