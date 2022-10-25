@@ -246,11 +246,10 @@
 							 	target.disabled = false;
 							 	document.getElementsByClassName("test2")[0].style.display = "block";
 							 	const content = updateinput.value;
-							 	const id = data.vo.id;
-							 	console.log(id);
+							 	const reviewCode = data.vo.reviewCode;
 							 	const createDate = new Date();
 							 	console.log(createDate);
-							 	const simple_data = {id, content, createDate};
+							 	const simple_data = {reviewCode, content, createDate};
 							 	
 							 	$.ajax({
 							 			url : "${pageContext.request.contextPath}/review/comment/edit",
@@ -276,8 +275,8 @@
 						
 						//삭제 버튼 이벤트 리스너
 						btn2.addEventListener("click", function(){
-							const id = data.vo.id;
-							const simple_data = {id};
+							const reviewCode = data.vo.reviewCode;
+							const simple_data = {reviewCode};
 							$.ajax({
 								url : "${pageContext.request.contextPath}/review/comment/delete",
 								type : "delete",
@@ -375,8 +374,8 @@
 							 	const content = updateinput.value;
 							 	const createDate = new Date();
 							 	//아이디값 받아오는게 문제듯
-							 	const id = comment.id;
-							 	const simple_data = {id, content, createDate};
+							 	const reviewCode = comment.reviewCode;
+							 	const simple_data = {reviewCode, content, createDate};
 							 		$.ajax({
 							 			url : "${pageContext.request.contextPath}/review/comment/edit",
 							 			type : "PUT",
@@ -398,8 +397,8 @@
 						
 						//삭제 버튼 이벤트
 						btn2.addEventListener("click", function(){
-							const id = comment.id;
-							const simple_data = {id};
+							const reviewCode = comment.reviewCode;
+							const simple_data = {reviewCode};
 							$.ajax({
 								url : "${pageContext.request.contextPath}/review/comment/delete",
 								type : "delete",

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Alias("commentVO")
 public class ReviewCommentVO {
-  private int id;
+  private int reviewCode;
   private String userName;
   private String content;
   private String createDate;
@@ -19,13 +19,6 @@ public class ReviewCommentVO {
     this.createDate = createDate;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public String getContent() {
     return content;
@@ -43,10 +36,18 @@ public void setUserName(String userName) {
 	this.userName = userName;
 }
 
+public int getReviewCode() {
+	return reviewCode;
+}
+
+public void setReviewCode(int reviewCode) {
+	this.reviewCode = reviewCode;
+}
+
 @Override
 public String toString() {
-	return "ReviewCommentVO [id=" + id + ", userName=" + userName + ", content=" + content + ", createDate="
-			+ createDate + "]";
+	return "ReviewCommentVO [reviewCode=" + reviewCode + ", userName=" + userName + ", content=" + content
+			+ ", createDate=" + createDate + "]";
 }
 
   

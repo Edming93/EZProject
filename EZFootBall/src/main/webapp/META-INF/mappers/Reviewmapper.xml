@@ -4,21 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.ReviewCommentDAO">
 	<select id="selectCommentList" resultType="commentVO">
-		select id, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date
-		from comment
+		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date
+		from review
 	</select>
-	<insert id="insertComment" keyProperty="id">
-		insert into comment(user_name, content) values(#{userName}, #{content})
+	<insert id="insertComment" keyProperty="reviewCode">
+		insert into review(user_name, content) values(#{userName}, #{content})
 	</insert>
 	<update id="updateComment">
-   		update comment SET content = #{content}, create_date = now() WHERE id = #{id}
+   		update review SET content = #{content}, create_date = now() WHERE review_code = #{reviewCode}
 	</update>
 	<delete id="deleteComment">
-		delete from comment where id = #{id}
+		delete from review where review_code = #{reviewCode}
 	</delete>
 	<select id="selectComment" resultType="commentVO">
-		select id, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date
-		from comment
-		where id = #{id}
+		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date
+		from review
+		where review_code = #{reviewCode}
 	</select>
 </mapper>
