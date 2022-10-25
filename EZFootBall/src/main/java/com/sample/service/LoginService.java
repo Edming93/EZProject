@@ -43,6 +43,7 @@ public class LoginService {
 		}else {
 			vo.setUserBirth(vo.getUserBirthYear()+vo.getUserBirthMonth()+vo.getUserBirthDay());
 			dao.insertUser(vo);
+			dao.insertGameStat(vo);
 			System.out.println("가입에 성공하셨습니다!");
 		}
 	}

@@ -15,4 +15,6 @@ public interface UserDAO {
 	public void insertUser(UserVO vo);
 	
 	public List<UserVO> userIdList();
+	
+	public void insertGameStat(UserVO vo);
 }

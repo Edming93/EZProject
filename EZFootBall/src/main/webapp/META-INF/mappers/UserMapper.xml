@@ -4,13 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.UserDAO">
 	<select id="idPwCheck" resultType="UserVO">
-		select user_code,user_name,user_id from user_info where user_id=#{userId} and user_pw=#{userPw}
+		select * from user_info where user_id=#{userId} and user_pw=#{userPw}
 	</select>
 	<select id="userId" resultType="String">
 		select user_id from user_info where user_id= #{userId}
 	</select>
-	<insert id="insertUser">
+	<insert id="insertUser" keyProperty="userCode">
 		insert into user_info (user_id,user_pw,user_name,user_birth,user_gender,user_local,user_district,user_address,user_email1,user_email2) values(#{userId},#{userPw},#{userName},#{userBirth},#{userGender},#{userLocal},#{userDistrict},#{userAddress},#{userEmail1},#{userEmail2})
+	</insert>
+	<insert id="insertGameStat">
+		insert into user_abil (user_code,user_name,user_gender) value(#{userCode},#{userName},#{userGender});
 	</insert>
 	
 	<select id="userIdList" resultType="UserVO">
