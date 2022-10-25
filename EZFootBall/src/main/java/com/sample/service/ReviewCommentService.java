@@ -70,9 +70,6 @@ public class ReviewCommentService {
 	}
 	
 	
-//	public int setComment(CommentVO vo) {
-//		return bbsDAO.insertComment(vo);
-//	}
 	
 	public Map<String, String> editComment(ReviewCommentVO vo) {
 	  Map<String, String> map = new HashMap<String,String>();
