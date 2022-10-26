@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +8,7 @@
    <meta charset="UTF-8">
    <title>이지풋볼</title>
    <link rel="icon" href="${pageContext.request.contextPath}/image/ez_con.png">
+   <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
    <style>
    
       * {
@@ -19,8 +21,8 @@
          width: 100%;
          margin: 0 auto;
          display: grid;
-         grid-template-columns: 20% 60% 20%;
-         grid-template-rows: 56px 448px 100px 88px 1fr 1fr ;
+    	 grid-template-columns: 23% 54% 23%;
+         grid-template-rows: 65px 448px 85px 88px 1fr 1fr ;
          gap: 5px 5px;
          grid-auto-flow: row;
          grid-template-areas: ". header ." 
@@ -159,35 +161,36 @@
          height: 100%;
       }
 
-      .filed_address {
+      .field_address {
          font-size: 13px;
       }
 
       .address_copy,
       .open_map {
          color: rgb(0, 60, 255);
+         text-decoration: none;
       }
 
-      .filed_container {
+      .field_container {
          grid-area: title;
          display: flex;
          flex-direction: column;
          align-items: center;
       }
 
-      .filed_content_area {
+      .field_content_area {
          width: 100%;
          display: flex;
          flex-direction: column;
          padding: 20px;
-         border-bottom: 8px solid #eee;
+
       }
 
-      .filed_content {
+      .field_content {
          display: flex;
       }
 
-      .filed_address {
+      .field_address {
          margin-top: 10px;
       }
 
@@ -195,30 +198,141 @@
          grid-area: menu;
          display: flex;
          justify-content: center;
-
+         margin-top: 10px;
 
       }
-
       .menu_content {
-         grid-area: content;
          display: flex;
          width: 100%;
+		 border-bottom: 2px solid #e1e1e1;
+		 border-top: 2px solid #e1e1e1;
       }
 
       .menu_name {
-         width: 80px;
-         height: 50px;
+         width: 125px;
+         height: 100%;
          display: flex;
          justify-content: center;
          align-items: center;
       }
+      
+      .menu_title {
+         color:black;
+      	 text-decoration: none;
+		 height: 30px;
+		 line-height: 30px;
+      }
+      
+      .field_plant {
+      	 font-weight : bold;
+      	 border-bottom: 3px solid #798777;
+      }
+      
+      .content_container {
+         grid-area:content;
+         display: flex;
+         flex-direction: column;
+		 padding: 0px 50px;
+    	 padding-bottom: 110px;
+    	 padding-top: 50px;
+      }
+      
+      .content_content {
+         display: flex;
+         flex-direction: row;
+         width:100%;
+         margin-top:15px;
+         justify-content: space-between;
+      }
+      
+      .field_info_area {
+         display: flex;
+         width:50%;
+         flex-direction: column;
+      }
 
-      .bottom_banner {
+      .content_count {
+         width: 100%;
+         margin: 15px 0px;
+         display: flex;
+         justify-content: space-between;
+      }
+
+      .field_info {
+         width:50%;
+      }
+      .plant_info {
+         width:45%;
+      }
+
+      .field_image {
+         width:165px;
+         height:100px;
+         margin-bottom: 20px;
+      }
+      
+      .content_field_name {
+         width:100%;
+         margin-bottom: 10px;
+         font-weight: bold;
+      }
+      
+      .content_field_info {
+         color:gray;
+         font-size:13px;
+      }
+
+      .field_etc_area {
+         display: flex;
+         width: 45%;
+         flex-direction: column;
+         
+      }
+      
+      .etc {
+	    font-size: 16px;
+	    margin-bottom: 20px;
+	    display: flex;
+	    line-height: 27px;
+      }
+      
+      .etc_stroke {
+         color:rgb(187, 187, 187);
+      }
+
+      .icon_size {
+         font-size: 27px;
+
+      }
+
+      .notice_container {
          grid-area: notice;
          width: 100%;
-         height: 205px;
-         background-color: #cef8e8;
+         margin-top: 10px;
+		 border-top: 2px solid #e1e1e1;
       }
+      
+      .notice_title {
+         margin-bottom: 35px;
+         margin-top: 50px;
+
+      }
+
+      .notice {
+         margin: 20px 0px;
+         font-size:14px;
+      }
+      
+      .notice_content h4 {
+         display: flex;
+      }
+
+      .icon_notice {
+         font-size: 23px;
+
+      }
+
+
 
       footer {
          width: 100%;
@@ -303,25 +417,101 @@
             </div>
          </div>
       </div>
-      <div class="filed_container">
-         <div class="filed_content_area">
-            <h3 class="filed_name">${field.fieldName}</h3>
-            <div class="filed_address">${field.fieldAddress}
-               <span class="address_copy">주소 복사</span>
+      <div class="field_container">
+         <div class="field_content_area">
+            <h3 class="field_name">${field.fieldName}</h3>
+            <div class="field_address">${field.fieldAddress}
+               <a class="address_copy" href="#" onclick="clip(); return false;">주소 복사</a></span>
                <span class="open_map">지도 보기</span>
             </div>
          </div>
       </div>
+
+      <script type="text/javascript">
+
+         function clip(){
+         
+            var url = '';
+            var textarea = document.createElement("textarea");
+            document.body.appendChild(textarea);
+            url = '${field.fieldAddress}';
+            textarea.value = url;
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("경기장 주소가 복사되었습니다.")
+         }
+         
+         </script>
       <div class="menu_container">
          <div class="menu_content">
-            <div class="menu_name field_info">시설</div>
-            <div class="menu_name filed_reservation">구장 예약</div>
+            <div class="menu_name"><a href="#" class="field_plant menu_title">시설</a></div>
+            <div class="menu_name"><a href="#" class="field_reservation menu_title">구장 예약</a></div>
          </div>
+      </div>
+      <div class="content_container">
+         <div class="content_count">
+            <h3 class="field_info">구장 정보</h3>
+            <h3 class="plant_info">시설 정보</h3>
+         </div>
+         <div class="content_content">
+            <div class="field_info_area">
+               <div class="field_img_area">
+                  <c:if test="${field.fieldImg1 != null}">
+                     <img class="field_image img1" src="${field.fieldImg1}" alt="">
+                 </c:if>
+                 <c:if test="${field.fieldImg2 != null}">
+                     <img class="field_image img2" src="${field.fieldImg2}" alt="">
+                 </c:if>
+                 <c:if test="${field.fieldImg3 != null}">
+                     <img class="field_image img3" src="${field.fieldImg3}" alt="">
+                 </c:if>
+                 <c:if test="${field.fieldImg4 != null}">
+                     <img class="field_image img4" src="${field.fieldImg4}" alt="">
+                 </c:if>
+                 <c:if test="${field.fieldImg5 != null}">
+                     <img class="field_image img5" src="${field.fieldImg5}" alt="">
+                 </c:if>
+               </div>
+                  <div class="content_field_name">A구장</div>
+                  <div class="content_field_info">${field.fieldSize} / ${field.fieldInOut} / ${field.fieldGrass}</div>
+            </div>
+
+            <div class="field_etc_area">
+               <div class="etc"><iconify-icon class="icon_size" icon="icon-park:spikedshoes"></iconify-icon>　풋살화 대여</div>
+               <div class="etc"><iconify-icon class="icon_size" icon="icon-park:basketball-clothes"></iconify-icon>　운동복 대여</div>
+               <div class="etc"><iconify-icon class="icon_size" icon="ant-design:car-outlined"></iconify-icon>　주차</div>
+               <!-- <iconify-icon icon="icon-park-outline:basketball-clothes"></iconify-icon> -->
+               <div class="etc etc_stroke"><iconify-icon class="icon_size" icon="akar-icons:water"></iconify-icon>　<s>정수기</s></div>
+               <div class="etc"><iconify-icon class="icon_size" icon="cil:toilet"></iconify-icon>　화장실</div>
+               <div class="etc"><iconify-icon class="icon_size" icon="material-symbols:smoking-rooms-rounded"></iconify-icon>　흡연실</div>
+               <div class="etc etc_stroke"><iconify-icon class="icon_size" icon="majesticons:bath-shower-line"></iconify-icon>　<s>샤워실</s></div>
+            </div>
+         </div>
+
       </div>
 
 
-
-      <div class="bottom_banner">
+      <div class="notice_container">
+         <div class="notice_title">
+            <h3>공지사항</h3>
+         </div>
+         
+         <div class="notice_content">
+            <h4>
+               <iconify-icon class="icon_notice" icon="ion:information-circle-outline"></iconify-icon>
+               　안내 사항
+            </h4>
+            <ul>
+               <li class="notice">흡연 : 지정구역 외에 흡연시 과태료 부과 </li>
+               <li class="notice">주차관련 : 사전 주차 등록시 20대 3시간 무료 (매니저에게 주차번호 전달 필요)</li>
+               <li class="notice">물/음료 : 자판기에서 구매가능. 정수기 여부X</li>
+               <li class="notice">풋살화 대여 : 비오는날 제외, 대여 가능</li>
+               <li class="notice">공 대여 : 대여 가능</li>
+               <li class="notice">조끼 대여 : 대여 가능</li>
+            </ul>
+            
+         </div>
 
       </div>
 

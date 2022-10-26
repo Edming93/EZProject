@@ -26,21 +26,22 @@
 		GROUP BY field_name, game_day
 	</select>
 	
-	<select id="selectTime" resultType="GlistVO">
-		select field_name,GROUP_CONCAT(DATE_FORMAT(game_time, '%H')) as game_day from gamelist
-			<where>
-				<if test="gameDay != null">
-					and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
-				</if>
-				<if test="fieldName != null">
-					and field_name = #{fieldName}
-				</if>
-			</where>
-	</select>
+<!-- 	<select id="selectTime" resultType="GlistVO"> -->
+<!-- 		select field_name,GROUP_CONCAT(DATE_FORMAT(game_time, '%H')) as game_day from gamelist -->
+<!-- 			<where> -->
+<!-- 				<if test="gameDay != null"> -->
+<!-- 					and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay} -->
+<!-- 				</if> -->
+<!-- 				<if test="fieldName != null"> -->
+<!-- 					and field_name = #{fieldName} -->
+<!-- 				</if> -->
+<!-- 			</where> -->
+<!-- 	</select> -->
 	
 	<select id="fieldInfo" resultType="gameFieldInfoVO">
 		select field_code,field_name,field_address,field_rentalfee,field_type,
-		field_img1,field_img2,field_img3,field_img4,field_img5
+		field_img1,field_img2,field_img3,field_img4,field_img5,field_size,
+		field_in_out,field_grass
 		from gamefield_info where field_code = #{fieldCode}
 	</select>
 	

@@ -23,6 +23,30 @@ public class GameFieldInfoVO {
 	
 	private String address;
 	
+	
+	private String fieldSize;
+	private String fieldInOut;
+	private String fieldGrass;
+	
+	public String getFieldSize() {
+		return fieldSize;
+	}
+	public void setFieldSize(String fieldSize) {
+		this.fieldSize = fieldSize;
+	}
+	public String getFieldInOut() {
+		return fieldInOut;
+	}
+	public void setFieldInOut(String fieldInOut) {
+		this.fieldInOut = fieldInOut;
+	}
+	public String getFieldGrass() {
+		return fieldGrass;
+	}
+	public void setFieldGrass(String fieldGrass) {
+		this.fieldGrass = fieldGrass;
+	}
+	
 	public String getAddress() {
 		return address;
 	}
