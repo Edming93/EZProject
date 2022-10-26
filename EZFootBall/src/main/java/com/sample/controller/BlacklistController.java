@@ -29,13 +29,8 @@ public class BlacklistController {
 	// 페이지 이동
 	@GetMapping("/blacklistmain")
 	public String move(HttpSession session, Model model) {
-		 UserVO vo = (UserVO) session.getAttribute("sessionVO");
 		
-		  System.out.println("controller:"+vo.getUserName());
-		  System.out.println("controller:"+vo.getUserId());
-
 		service.getBlackList(model);
-		 model.addAttribute("userdata", vo);
 		return "/blacklist/blacklistmain";
 	}
 

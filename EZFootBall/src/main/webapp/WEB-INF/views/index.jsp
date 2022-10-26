@@ -98,7 +98,7 @@
         justify-content: center;
     }
     
-    .menu1,.menu2,.menu3,.menu4,.menu5 {
+    .menu1,.menu2,.menu3,.menu4,.menu5,.menu6 {
         width: 100px;
         justify-content: center;
         display: inline-block;
@@ -230,6 +230,7 @@
                 <div class="menu menu3"><a class="menu3_a" href="${pageContext.request.contextPath}/rental/rental">구장 예약</a></div>
                 <div class="menu menu4"><a class="menu4_a" href="${pageContext.request.contextPath}/rank/rank">랭킹</a></div>
                 <div class="menu menu5"><a class="menu5_a" href="${pageContext.request.contextPath}/review/reviewmain">커뮤니티</a></div>
+                <div class="menu menu6"><a class="menu5_a" href="${pageContext.request.contextPath}/blacklist/blacklistmain">블랙리스트</a></div>
             </div>
         </div>
 
