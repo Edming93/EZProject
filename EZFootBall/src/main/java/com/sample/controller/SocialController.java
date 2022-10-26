@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.GlistService;
 import com.sample.vo.DataVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.SjoinVO;
 import com.sample.vo.UinVO;
@@ -133,7 +134,6 @@ public class SocialController {
 			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
 			int user_code = lovi.getUserCode();
 			dvo.setGame_code(num);
-			dvo.setGame_num(num);
 			dvo.setUser_code(user_code);
 			service.setslist(dvo);
 			service.subgame(num);
@@ -141,7 +141,7 @@ public class SocialController {
 			return "loginPage/login";
 		}
 		
-		return "index";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/maxgame")
@@ -151,7 +151,6 @@ public class SocialController {
 		if(session.getAttribute("sessionVO") != null) {
 			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
 			int user_code = lovi.getUserCode();
-			dvo.setGame_num(num);
 			dvo.setGame_code(num);
 			dvo.setUser_code(user_code);
 			service.setslist(dvo);
@@ -159,14 +158,15 @@ public class SocialController {
 		}else {
 			return "loginPage/login";
 		}
-		return "index";
+		/* return "index"; */
+		return "redirect:/";
 	}
 	
 	@PostMapping("/joinlist")
 	@ResponseBody
 	public List<SjoinVO> joinlist (@RequestBody DataVO dvo,HttpSession session){
 		System.out.println("joinlist");
-		int num = dvo.getGame_num();
+		int num = dvo.getGame_code();
 		return service.joinlist(num);
 	}
 	
@@ -176,6 +176,14 @@ public class SocialController {
 		System.out.println("joininfo");
 		int id = dvo.getUser_code();
 		return service.joininfo(id);
+	}
+	
+	@PostMapping("/fieldinfo")
+	@ResponseBody
+	public List<GameFieldInfoVO> fieldInfoVO (@RequestBody GlistVO vo) {
+		int fieldcode = vo.getFieldCode();
+		System.out.println("field_info");
+		return service.fieldinfo(fieldcode);
 	}
 	
 	

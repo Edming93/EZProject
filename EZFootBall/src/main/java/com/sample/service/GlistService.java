@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.GlistDAO;
 import com.sample.vo.DataVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.SjoinVO;
 import com.sample.vo.UinVO;
@@ -56,5 +57,9 @@ public class GlistService {
 		session.setAttribute("urabil",dao.abile(usercode));
 		return dao.abile(usercode);
 	}
+	public List<GameFieldInfoVO> fieldinfo (int fieldcode) {
+		return dao.fieldinfo(fieldcode);
+	}
+	
 	
 }

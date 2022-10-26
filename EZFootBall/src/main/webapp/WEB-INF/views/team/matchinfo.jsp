@@ -2,6 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	int td = -1;
+	if( (UinVO)session.getAttribute("urabil") != null) {
+		UinVO vo = (UinVO)session.getAttribute("urabil");
+		td = vo.getTeamCode();
+		if(vo.getTeamCode() != 0){
+			td = vo.getTeamCode();
+		}else {
+			td = 0;
+		}
+	}
+	System.out.println(td);
+	
+%>
 
 <!DOCTYPE html>
 <html>
@@ -38,6 +52,7 @@
 	
 	<!--신청자 목록  -->
 	<script type="text/javascript">
+	var list = [];
 	window.onload = function(e) {
 		 let data = {game_code:${matchinfo.gameCode}};
 		 
@@ -51,6 +66,7 @@
 	      .then(data => {
 	         for ( let name in data) {
 	        	 console.log(data[name])
+	        	 list.push(data[name]);
 	        	 const divlist = document.createElement("div");
 	        	 
 	        	 let data2 = {team_code:data[name]}
@@ -96,6 +112,7 @@
 	      	      });
 	        	 
 	        	 document.getElementById("list").append(divlist); 
+	        	 
 	         }
 	         
 	      }).catch(error => {
@@ -108,11 +125,26 @@
 		document.getElementById("subbtn").disabled = true;
 	}
 	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
+	console.log(aa);
 	document.getElementById("subbtn").addEventListener("click",function(){
-		if(aa == 1) {
-			location.href = "${pageContext.request.contextPath}/team/maxgame?num="+${matchinfo.gameCode}
-		}else{
-			location.href = "${pageContext.request.contextPath}/team/subgame?num="+${matchinfo.gameCode}
+		var cnt = 0;
+		for(var i=0; i<list.length; i++){
+			if(list[i] == '<%=td%>'){
+				cnt++;
+			}
+		}
+		if('<%=td%>' == 0) {
+			alert("소속된 팀이 없으면 신청 할 수 없습니다.");
+		}else {
+			if(cnt > 0) {
+				alert("이미 신청한 경기 입니다.");
+			}else{
+				if(aa == 1) {
+					location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
+				}else{
+					location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+				}
+			}
 		}
 	});
 	

@@ -12,7 +12,6 @@ public class DataVO {
 	private String level;
 	private String mver;
 	private String type;
-	private int game_num;
 	private int game_code;
 	private int user_code;
 	private int team_code;
@@ -68,12 +67,6 @@ public class DataVO {
 	public void setDay(String day) {
 		this.day = day;
 	}
-	public int getGame_num() {
-		return game_num;
-	}
-	public void setGame_num(int game_num) {
-		this.game_num = game_num;
-	}
 	public int getGame_code() {
 		return game_code;
 	}
@@ -105,10 +98,5 @@ public class DataVO {
 		this.teamCode = teamCode;
 	}
 
-	
-	
-	
-	
-	
 	
 }

@@ -5,8 +5,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String lv = null;
-	String level = null;
+	String lv = "null";
+	String level = "null";
 	int id = 0;
 	if( (UinVO)session.getAttribute("urabil") != null) {
 		UinVO vo = (UinVO)session.getAttribute("urabil");
@@ -16,7 +16,7 @@
 			id = vo.getUserCode();
 		}
 	}else {
-		lv = null;
+		lv = "null";
 	}
 	
 %>
@@ -42,8 +42,9 @@
 	</div>
 	<div>
 		<div>시간 : ${matchinfo.gameTime}</div>
-		<div>경기명 : ${matchinfo.gameName}</div>
-		<div>주소 : 경기장데이터</div>
+		<div>경기장명 : ${matchinfo.fieldName}</div>
+		<div>주소 : ${matchinfo.fieldAddress}</div>
+		<div>참여비 : </div>
 	</div>
 	
 	<div>
@@ -61,9 +62,8 @@
 	<script type="text/javascript">
 	/* document.getElementById("subbtn").disabled = true; */
 	var list = [];
-	const closed = null;
 	window.onload = function(e) {
-		 let data = {game_num:${matchinfo.gameCode}};
+		 let data = {game_code:${matchinfo.gameCode}};
 		 
 	      fetch("${pageContext.request.contextPath}/msocial/joinlist",{
 	         method : "POST", // PUT, PATCH, DELETE
@@ -144,7 +144,7 @@
 		if (cnt > 0) {
 			alert("이미 신청한 경기 입니다");
 		}else {
-			if('<%=lv%>' == null){
+			if('<%=lv%>' == "null"){
 				if(aa == 1) {
 					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
 				}else{
@@ -161,10 +161,34 @@
 			}
 		}
 	});
-	
-	
 		
-		
+	</script>
+	
+	<!--경기장 정보 가져오기  -->
+	<script type="text/javascript">
+		var field_code = ${matchinfo.fieldCode};
+		let data = {fieldCode : field_code};
+		 
+	      fetch("${pageContext.request.contextPath}/msocial/fieldinfo",{
+	         method : "POST", // PUT, PATCH, DELETE
+	         headers : {
+	            "Content-Type" : "application/json"},
+	         body : JSON.stringify(data)
+	      }).then(response => response.json()) 
+	      
+	      .then(data => {
+	         for ( let name in data) {  
+	        	 
+	        	 console.log(data[name].fieldImg1);
+	        	 var ndiv = document.createElement("img");
+	             ndiv.src = data[name].fieldImg1;
+	             document.getElementById("list").append(ndiv);
+	             
+	         }
+	         
+	      }).catch(error => {
+	         console.log("error");
+	      });
 	</script>
 </body>
 </html>

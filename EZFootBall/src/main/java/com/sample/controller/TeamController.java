@@ -139,25 +139,24 @@ public class TeamController {
 	
 	@GetMapping("/tsubgame")
 	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
-		int num = Integer.parseInt(snum);		
+		int num = Integer.parseInt(snum);	
 		
 		if(session.getAttribute("sessionVO") != null) {
 			System.out.println(session.getAttribute("urabil"));
 			UinVO uvo = (UinVO)session.getAttribute("urabil");
 			System.out.println(uvo.getTeamCode());
 			int team_code = uvo.getTeamCode();
-			dvo.setGame_num(num);
 			dvo.setGame_code(num);
-			dvo.setUser_code(team_code);
-			System.out.println(team_code);
+			dvo.setTeam_code(team_code);
+			System.out.println(dvo.getTeam_code());
 			service.setslist(dvo);
 			service.subgame(num);
 		}else {
 			return "loginPage/login";
 		}
 		
-		
-		return "team/teamMain";
+//		"team/teamMain"
+		return "redirect:/team/team";
 	}
 	
 	@GetMapping("/tmaxgame")
@@ -168,7 +167,6 @@ public class TeamController {
 			UinVO uvo = (UinVO)session.getAttribute("urabil");
 			int team_code = uvo.getTeamCode();
 			System.out.println(team_code);
-			dvo.setGame_num(num);
 			dvo.setGame_code(num);
 			dvo.setTeam_code(team_code);
 			System.out.println(dvo.getTeam_code());
@@ -178,10 +176,8 @@ public class TeamController {
 			return "loginPage/login";
 		}
 		
-	
-		/* System.out.println(service.maxgame(num)); */
 		
-		return "team/teamMain";
+		return "redirect:/team/team";
 	}
 	
 	@PostMapping("/joinlist")

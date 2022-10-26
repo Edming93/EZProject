@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.sample.vo.DataVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.SjoinVO;
 import com.sample.vo.UinVO;
@@ -26,4 +27,6 @@ public interface GlistDAO {
 	public UinVO abile(int userid);
 	
 	public int setslist(DataVO vo);
+	
+	public List<GameFieldInfoVO> fieldinfo(int fieldcode);
 }

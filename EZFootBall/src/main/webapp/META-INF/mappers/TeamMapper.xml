@@ -14,7 +14,7 @@
 				and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
 			</if>
 			<if test="gamePlace != null">
-				and game_place like #{gamePlace}
+				and field_address like #{gamePlace}
 			</if>
 			<if test="gameGender != null">
 				and game_gender = #{gameGender}
@@ -60,8 +60,8 @@
 	</update>
 	
 	<insert id="setslist" parameterType="DataVO">
-		INSERT game_tjoinlist (game_num, team_code) 
-		VALUES (#{game_num}, #{team_code})
+		INSERT game_tjoinlist (game_code, team_code) 
+		VALUES (#{game_code}, #{team_code})
 	</insert>
 	
 	<select id="abile" resultType="UinVO">

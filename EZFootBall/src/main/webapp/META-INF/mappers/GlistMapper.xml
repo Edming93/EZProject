@@ -5,16 +5,16 @@
 <mapper namespace="com.sample.dao.GlistDAO">
 	<select id="list" resultType="GlistVO" parameterType="GlistVO">
 		select game_code,game_day,game_gender,
-		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
+		DATE_FORMAT(game_time, '%H') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp
+		field_address,game_minp,game_maxp,field_code
 		from gamelist
 		<where>
 			<if test="gameDay != null">
 				and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
 			</if>
 			<if test="gamePlace != null">
-				and game_place like #{gamePlace}
+				and field_address like #{gamePlace}
 			</if>
 			<if test="gameGender != null">
 				and game_gender = #{gameGender}
@@ -30,6 +30,7 @@
 			</if>
 				and game_type = 'S'
 		</where>
+		ORDER BY game_time
 	</select>
 	
 	
@@ -37,7 +38,7 @@
 		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp
+		field_address,game_minp,game_maxp,field_code
 		from gamelist
 		<where>
 			<if test="num != null">
@@ -61,7 +62,7 @@
 	
  	<insert id="setslist" parameterType="DataVO">
 		INSERT game_sjoinlist (game_code, user_code) 
-		VALUES (#{game_num}, #{user_code})
+		VALUES (#{game_code}, #{user_code})
 	</insert>
 	
 	
@@ -82,5 +83,11 @@
 		select *
 		from user_abil
 		where user_code = #{usercode}
+	</select>
+	
+	<select id="fieldinfo" resultType="GameFieldInfoVO">
+		select *
+		from gamefield_info
+		where field_code = #{fieldcode}
 	</select>
 </mapper>
