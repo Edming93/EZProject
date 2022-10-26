@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.dao.BlacklistDAO">
+	<select id="selectBBSCount" resultType="int">
+		select count(*) from blacklist;
+	</select>
+	
+	<select id="selectBlackList" resultType="BlacklistVO">
+		select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
+		from blacklist
+		where is_delete = 0
+		order by blacklist_code desc
+		limit #{start}, #{cntPerPage}
+	</select>
+	
+	<select id="selectBlackListdetail" resultType="BlacklistVO">
+		select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
+		from blacklist
+		where is_delete = 0
+		and blacklist_code = #{blacklistCode}
+	</select>
+
+	
+</mapper>
