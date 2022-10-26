@@ -26,7 +26,17 @@ public class UserVO {
 
 	public static final long serialKey = 1231254653L;
 	
+	// 정욱 사용
+
+	private String tmember;
 	
+	public String getTmember() {
+		return tmember;
+	}
+
+	public void setTmember(String tmember) {
+		this.tmember = tmember;
+	}
 	
 	
 	

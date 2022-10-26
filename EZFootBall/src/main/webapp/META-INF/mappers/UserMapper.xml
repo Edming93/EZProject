@@ -37,5 +37,10 @@
 		update user_info set user_pw = #{userPw}
 		where user_id = #{userId}
 	</update>
+	
+		<!-- 정욱 팀 등록시 매퍼사용 -->
+	<select id="getUserList" parameterType="UserVO" resultType="UserVO">
+		select * from user_info where user_name = #{tmember}
+	</select>
 </mapper>
 

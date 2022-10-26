@@ -22,7 +22,15 @@ public class GlistVO {
     private String fieldAddress;
     
     private int fieldCode;
-
+    private String mTeamName;
+    
+	
+  	public String getmTeamName() {
+  		return mTeamName;
+  	}
+  	public void setmTeamName(String mTeamName) {
+  		this.mTeamName = mTeamName;
+  	}
 	public int getFieldCode() {
 		return fieldCode;
 	}

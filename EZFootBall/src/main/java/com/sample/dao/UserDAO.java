@@ -23,4 +23,7 @@ public interface UserDAO {
 	public UserVO searchUser2(UserVO vo);
 
 	public void newPassword(UserVO vo);
+	
+	// 정욱 팀 등록시 사용
+		public List<UserVO> getUserList( UserVO vo);
 }

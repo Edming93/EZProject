@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sample.service.LoginService;
 import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
 import com.sample.vo.GlistVO;
@@ -30,12 +31,14 @@ import com.sample.vo.UserVO;
 public class TeamController {
 	
 	private TeamService service;
+	private LoginService Lservice;
 	
-	public TeamController(TeamService service) {
+	public TeamController(TeamService service, LoginService lservice) {
 		super();
 		this.service = service;
+		Lservice = lservice;
 	}
-	
+
 	@GetMapping("/team")
 	public String moveRental() {
 		return "team/teamMain";
@@ -196,68 +199,107 @@ public class TeamController {
 		return service.joininfo(teamCode);
 	}
 	
-//--------------------정욱 10.24 ----------------------------------	
+///--------------------정욱 10.24 ----------------------------------	
 	// 글쓰기 눌렀을 경우 매치 작성페이지로 이동
-		@GetMapping("/posting")
-		public String movePostingPage(Model model) {
+	@GetMapping("/posting")
+	public String movePostingPage(Model model) {
+		
+		return "team/posting";
+	}
+	
+
+
+	// 모달창에서 팀이름 검색시 팀 리스트 출력
+	@PostMapping("/getTeam")
+	@ResponseBody
+	public List<TeamMemberVO> getTeamNameList(@RequestBody TeamMemberVO vo){
+		System.out.println("getTEam :" + vo.getTeamName());
+		System.out.println("getTEam :" + vo.getTeamCode());
+		return service.getTeamNameListSer(vo);
+	}
+	
+	
+	// 팀 매치 작성 완료 버튼시 이동하는 로직
+	@PostMapping("/postingFinish")
+	public String putTeamMatchGlist(@ModelAttribute("GlistVO") GlistVO vo, DataVO vo1) {
+		
+		if(service.putTeamMatchGlist(vo)) {
+			int Gnum =	service.getTeamMatchGlist();
+			vo1.setGameCode(Gnum);
+			System.out.println("제발제발제발----- :"+vo.getmTeamName());
+			
+			int Tnum = service.getTeamNameT(vo);
+			vo1.setTeamCode(Tnum);
+			
+			System.out.println("컨트롤러---- :" + Gnum);
+			System.out.println("컨트롤러---- :" + Tnum);
+			
+			service.gameTJoinList(vo1);
+			
+			return "team/teamMain";
+		}else {
 			
 			return "team/posting";
 		}
-		
-		
-		// 매치 작성 중 팀 틍록하기 버튼 클릭시
-		
-		@GetMapping("/register")
-		public String register() {
-			
-			return "team/registeration";
-		}
-		
-		
-		// 팀 등록시 완료 버튼 눌렀을 경우
-		
-		@PostMapping("/teamUpdate")
-		public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo) {
-			
-			if(service.TeamMemberList(vo)) {
-				System.out.println(vo.getTmember3());
-				System.out.println("---컨트롤러---");
-				return "team/posting";
-			}else {
-				return "team/main";
-			}
-		}
-
-		// 모달창에서 팀이름 검색시 팀 리스트 출력
-		@PostMapping("/getTeam")
-		@ResponseBody
-		public List<TeamMemberVO> getTeamNameList(@RequestBody TeamMemberVO vo){
-			return service.getTeamNameListSer(vo);
-		}
-		
-		@PostMapping("/postingFinish")
-		public String putTeamMatchGlist(@ModelAttribute("GlistVO") GlistVO vo, DataVO vo1) {
-			
-			if(service.putTeamMatchGlist(vo)) {
-				int Gnum =	service.getTeamMatchGlist();
-				vo1.setGameCode(Gnum);
-					service.gameTJoinList(vo1);
-				return "teammatch/main";
-			}else {
-				
-				return "teammatch/posting";
-			}
-		}
-		
-		// 지도에서 주소 입력후 검색 눌렀을때
-		@PostMapping("/getMap")
-		@ResponseBody
-		public List<SearchVO> getMapInfo(@RequestBody SearchVO vo){
-			
-			System.out.println("컨트롤러" + vo.getFieldName());
-			System.out.println(service.getGameMap(vo));
-			return service.getGameMap(vo); 
-		}
+	}
 	
-	//------------------------------------------------------		
+	// 지도에서 주소 입력후 검색 눌렀을때
+	@PostMapping("/getMap")
+	@ResponseBody
+	public List<SearchVO> getMapInfo(@RequestBody SearchVO vo){
+		
+		System.out.println("맵컨트롤러" + vo.getFieldName());
+		System.out.println(service.getGameMap(vo));
+		return service.getGameMap(vo); 
+	}
+	
+	
+	// 매치 작성 중 팀 틍록하기 버튼 클릭시
+	
+	@GetMapping("/register")
+	public String register() {
+		
+		return "team/registeration";
+	}
+	
+	
+	// 팀 등록시 완료 버튼 눌렀을 경우
+	
+	@PostMapping("/teamUpdate")
+	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo) {
+		
+		if(service.TeamMemberList(vo)) {
+			System.out.println(vo.getTmember3());
+			System.out.println("---컨트롤러---");
+			return "team/posting";
+		}else {
+			return "team/main";
+		}
+	}
+	
+	// 팀 등록시 이름 입력 후 확인버튼 눌러 회원코드 연결
+	@PostMapping("/usercode")
+	@ResponseBody
+	public List<UserVO> Usercode(@RequestBody UserVO vo) {
+		
+		return Lservice.getUserList(vo);
+		
+		
+	}
+	
+//	@PostMapping("/timeListR")
+//	@ResponseBody
+//	public List<GlistVO> timeList(@RequestBody GlistVO gvo){
+//		
+//		return service.timeList(gvo);
+//	}
+	
+	@PostMapping("/timeListR")
+	@ResponseBody
+	public List<GlistVO> checkTime(@RequestBody GlistVO gvo){
+		
+		return service.checkTime(gvo);
+	}
+	
+	//------------------------------------------------------			
 }

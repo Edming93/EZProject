@@ -82,16 +82,14 @@
 		where team_code = #{teamCode}
 	</select>
 	
-	<!-- 지도 검색 -->
-	<select id="getGameMapWhere" resultType="searchVO">
+	<!-- 팀 등록시 지도 검색 -->
+	<select id="getGameMapWhere" resultType="GameFieldInfoVO">
 		select 
 		field_code, field_name, field_address, field_call, field_rentalfee, field_type,
 		field_img1, field_img2, field_img3, field_img4, field_img5
 		from gamefield_info
-		where field_name LIKE CONCAT ('%',#{fieldName},'%')
+		where field_address LIKE CONCAT ('%',#{address},'%')
 	</select>
-	
-	
 	
 	<!-- 팀 등록시 팀 추가  -->
 	<insert id="insertTeamMember">
@@ -111,13 +109,13 @@
 	</select>
 	
 	<select id="getTeamListWhere" resultType="TeamMemberVO">
-		select team_code, team_name
+		select team_code, team_name, tmember1, tmember2, tmember3, tmember4, tmember5, tmember6
 		from team_member
 		where team_name LIKE CONCAT ('%',#{teamName},'%')
 	</select>
 	
 	<!-- 팀리스트중 teamName, teamCode 출력 -->
-	<select id="getTeamList123" resultType="TeamMemberVO">
+	<select id="getTeamListTeamCo" resultType="TeamMemberVO">
 		select team_code, team_name
 		from team_member
 		where team_code = #{teamCode}
@@ -125,19 +123,37 @@
 	
 	<!-- git DB합치는 과정> matchList 추가  -->
 	
-	<insert id="putTeamMatchGlist">
-		insert into gamelist (game_macth, game_gender, game_name, game_type, game_day, game_time, game_pay, game_minp, game_maxp, game_pnum, game_place)
-		values (#{gameMacth},#{gameGender}, #{gameName}, 'T', #{gameDay}, #{gameTime}, #{gamePay}, 2, 2, 1, #{gamePlace})
+	<insert id="putTeamMatchGlist" parameterType="GlistVO">
+		insert into gamelist (game_macth, game_gender, field_name, field_address, game_type, game_day, game_time, game_pay, game_minp, game_maxp, game_pnum, game_place, close, field_code)
+		values (#{gameMacth},#{gameGender}, #{fieldName}, #{fieldAddress}, 'T', #{gameDay}, #{gameTime}, #{gamePay}, 2, 2, 1, #{gamePlace}, 'true', #{fieldCode})
 	</insert>
 	
+	<!-- TjoinList에 insert 하기 -->
 	<select id="getTeamMatchGlist" resultType="int">
-		select game_num
-		order by desc limit 1
+		select game_code
+		from gamelist
+		order by game_code desc limit 1
+	</select>
+	
+	<!-- TjoinList에 insert 하기 -->
+	<select id="getTeamName" resultType="int">
+		select team_code
+		from team_member
+		where team_name = #{mTeamName}
 	</select>
 	
 	<insert id="gameTJoinList">
 		insert into game_tjoinlist(game_code, team_code)
 		values (#{gameCode},#{teamCode})
 	</insert>
+	
+	
+	<!-- 시간 option 유효성 검사.. 제2의 방법 -->
+	<select id="checkTime" resultType="GlistVO">
+		select field_name, game_time, game_day, game_type
+		from gamelist
+		where field_name = #{fieldName} and game_day=#{gameDay}
+	</select>
+	
 	
 </mapper>

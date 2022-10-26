@@ -21,6 +21,15 @@ public class GameFieldInfoVO {
 	private String fieldImg4; 
 	private String fieldImg5;
 	
+	private String address;
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	public int getFieldCode() {
 		return fieldCode;
 	}

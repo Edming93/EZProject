@@ -59,5 +59,13 @@ public interface TeamDAO {
 			
 			public int gameTJoinList(DataVO vo);
 			
+			public int getTeamName(GlistVO vo);
+			
+			// 시간 유효성 검사
+			public List<GlistVO> selectTimeR(GlistVO vo);
+			
+			// 시간 유효성 검사2
+			public List<GlistVO> checkTime(GlistVO vo);
+			
 		//-----------------------------------------------
 }

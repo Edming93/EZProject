@@ -25,6 +25,19 @@ public class SearchVO {
 
 	// 검색어 자동완성 텍스트
 	private String searchText;
+	// 팀 매치 작성 지도사용
+	
+	private String address;
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 
 	public int getFieldCode() {
 		return fieldCode;

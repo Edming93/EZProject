@@ -20,18 +20,7 @@
         <div class="title">
             <p>매치 작성</p>
         </div>
-        <div class="match_type">
-            <div class="sub_title1">
-                <p>매치 방식</p>
-            </div>
-            <div class="option">
-                <select name="gameMacth" id="gameMacth">
-                    <option value="">매치방식을 선택해주세요</option>
-                    <option value="5vs5">5vs5</option>
-                    <option value="6vs6">6vs6</option>
-                </select>
-            </div>
-        </div>
+        
          <div class="gender">
             <div class="sub_title1">
                 <p>성별</p>
@@ -50,24 +39,24 @@
                 <p>경기 날짜</p>
             </div>
             <div class="calender">
-            <input type="text" name="gameDay" id="txtDate" placeholder="더블클릭 하세요">
+            <input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭 하세요" autocomplete="off">
             </div>
         </div>
-        <div class="match_time">
-            <div class="sub_title2_1">
-                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 예약마감입니다.)</span></p>
+       <div class="match_place">
+            <div class="sub_title_place">
+                <p>매치 지역 <span class="match_place_span">(목록에서 지역을 선택해주세요)</span></p>
             </div>
             <div class="option">
-                <select name="gameTime" id="gameTime">
-                    <option value="">매치시작 시간을 선택해주세요</option>
-                    <option value="08:00:00">AM8</option>
-                    <option value="10:00:00">AM10</option>
-                    <option value="12:00:00">PM12</option>
-                    <option value="14:00:00">PM2</option>
-                    <option value="16:00:00">PM4</option>
-                    <option value="18:00:00">PM6</option>
-                    <option value="20:00:00">PM8</option>
-                    <option value="22:00:00">PM10</option>
+                <select name="gamePlace" id="gameplace">
+                    <option value="">지역을 선택해주세요</option>
+                    <option value="서울">서울</option>
+                    <option value="인천">인천</option>
+                    <option value="경기도">경기도</option>
+                    <option value="충청도">충청도</option>
+                    <option value="강원도">강원도</option>
+                    <option value="경상도">경상도</option>
+                    <option value="전라도">전라도</option>
+                    <option value="제주도">제주도</option>
                 </select>
             </div>
         </div>
@@ -77,10 +66,10 @@
                     <p>경기장</p>
                 </div>
                 <div class="search_map">
-                <input type="text" name="gameName" id="gameName" >
+                <input type="text" name="fieldName" id="fieldName" >
                     <div class="modal22">
 				      <div class="modal22_body22">지도 검색하기
-				      	<a href="#" id="closebutton">닫기</a>
+				      
 
 				      	<div class="map_search">
 							<div class="search_area">
@@ -103,34 +92,39 @@
 					</div>
                    <script type="text/javascript">
                     document.getElementById("searcha").addEventListener("click", function(){
-                        			let fieldAddress = document.getElementById("search").value;
-                        			const gameName = document.getElementById("gameName");
-                        			console.log(search);
-                        			console.log("1231231231");
+                        			const address = document.getElementById("search").value;
+                        			const fieldName = document.getElementById("fieldName");
+                        			const fieldAddress = document.getElementById("fieldAddress");
+                        			const fieldCode = document.getElementById("fieldCode");
+                        			const gamePay = document.getElementById("gamePay");
+                        			const gameMacth = document.getElementById("gameMacth");
                         			
-                        			const simple_data = {fieldAddress};
+                        			console.log(address);
+                        			const simple_data = {address};
                         			
                         			$.ajax({
-                        				url : "${pageContext.request.contextPath}/teammatch/getMap",
+                        				url : "${pageContext.request.contextPath}/team/getMap",
                         				type : "POST",
                         				contentType:"application/json; charset=utf-8",
                         				dataType : "json",
                         				data : JSON.stringify(simple_data),
                         				success : function(data){
-                        					console.log("11111");
-                        					console.log(data);
+                        					
                         					for(const comment of data){
-                        						console.log(comment.fieldName);
+                        						
                         						const comdiv = document.getElementById("mapcontent");
-                        						console.log("2222");
+                        						
                         						const div = document.createElement("div");
      
                         						div.style.border = "1px solid black";
                         						div.style.width = "500px";
                         						div.addEventListener("click",function(){
-                        							gameName.value = comment.fieldName; 
-                        							console.log(search);
-                        							console.log(comment.fieldName);
+                        							fieldName.value = comment.fieldName; 
+                        							fieldAddress.value = comment.fieldAddress;
+                        							fieldCode.value = comment.fieldCode;
+                        							gamePay.value = comment.fieldRentalfee;
+                        							gameMacth.value = comment.fieldType;
+                        							
                         							
                         							modal2.classList.remove('show');
                         						});
@@ -146,6 +140,44 @@
                         						div.append(p);
                         						div.append(a);
                         						comdiv.append(div);
+                        						 
+                        						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                        					      mapOption = {
+                        					         
+                        					          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                        					          level: 3 // 지도의 확대 레벨
+                        					      };  
+
+                        					     // 지도를 생성합니다    
+                        					     var map = new kakao.maps.Map(mapContainer, mapOption);
+                        					     
+                        					     // 주소-좌표 변환 객체를 생성합니다
+                        					     var geocoder = new kakao.maps.services.Geocoder();
+                        					     
+                        					     // 주소로 좌표를 검색합니다
+                        					     geocoder.addressSearch(comment.fieldAddress, function(result, status) {
+                        					     
+                        					         // 정상적으로 검색이 완료됐으면 
+                        					          if (status === kakao.maps.services.Status.OK) {
+                        					     
+                        					             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                        					     
+                        					             // 결과값으로 받은 위치를 마커로 표시합니다
+                        					             var marker = new kakao.maps.Marker({
+                        					                 map: map,
+                        					                 position: coords
+                        					             });
+                        					     
+                        					             // 인포윈도우로 장소에 대한 설명을 표시합니다
+                        					             var infowindow = new kakao.maps.InfoWindow({
+                        					                 content: '<div style="width:150px;text-align:center;padding:6px 0;">'+comment.fieldName+'</div>'
+                        					             });
+                        					             infowindow.open(map, marker);
+                        					     
+                        					             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                        					             map.setCenter(coords);
+                        					         } 
+                        					     });   
                         					}
 
                         				},
@@ -160,20 +192,156 @@
                 </div>
             </div>
         </div>
-        <div class="match_place">
-            <div class="sub_title_place">
-                <p>매치 지역 <span class="match_place_span">(목록에서 지역을 선택해주세요)</span></p>
+        
+         <div class="match_time">
+            <div class="sub_title2_1">
+                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 예약마감입니다.)</span></p>
             </div>
             <div class="option">
-                <select name="gamePlace" id="gameplace">
-                    <option value="">지역을 선택해주세요</option>
-                    <option value="서울">서울</option>
-                    <option value="경기도">경기도</option>
-                    <option value="충청도">충청도</option>
-                    <option value="강원도">강원도</option>
-                    <option value="제주도">제주도</option>
-                    <option value="전라도">전라도</option>
+                <select name="gameTime" id="gameTime">
+                    <option value="">매치시작 시간을 선택해주세요</option>
+                    <option id="reservation1" value="08:00:00">AM8</option>
+                    <option id="reservation2" value="10:00:00">AM10</option>
+                    <option id="reservation3" value="12:00:00">PM12</option>
+                    <option id="reservation4" value="14:00:00">PM2</option>
+                    <option id="reservation5" value="16:00:00">PM4</option>
+                    <option id="reservation6" value="18:00:00">PM6</option>
+                    <option id="reservation7" value="20:00:00">PM8</option>
+                    <option id="reservation8" value="22:00:00">PM10</option>
                 </select>
+            </div>
+            <script type="text/javascript">
+            	
+            	
+            document.getElementById("gameTime").addEventListener("click",function(){
+            			
+            			let res1 = document.getElementById("reservation1").value;
+            			let res2 = document.getElementById("reservation2").value;
+            			let res3 = document.getElementById("reservation3").value;
+            			let res4 = document.getElementById("reservation4").value;
+            			let res5 = document.getElementById("reservation5").value;
+            			let res6 = document.getElementById("reservation6").value;
+            			let res7 = document.getElementById("reservation7").value;
+            			let res8 = document.getElementById("reservation8").value;
+            			
+//                     	let gameTime = document.getElementById("gameTime");
+                    	let fieldName = document.getElementById("fieldName").value;
+                    	let gameDay = document.getElementById("txtDate").value;
+                    	
+                    	console.log(fieldName);
+            			console.log(gameDay);
+            			const simple_data = {gameDay, fieldName};
+            			
+            			
+            			console.log("11111111111111");
+            			$.ajax({
+            				url : "${pageContext.request.contextPath}/team/timeListR",
+            				type : "POST",
+            				contentType:"application/json; charset=utf-8",
+            				dataType : "json",
+            	 			data : JSON.stringify(simple_data),
+            				success : function(data){
+            					console.log(data);
+            					console.log("2222222222222")
+            					
+            				
+            					for(let comment of data){
+            						if(fieldName == comment.fieldName && 
+            							res1 == comment.gameTime &&
+            							gameDay == comment.gameDay &&
+            							(comment.gameType == 'S' || comment.gameType =='T')){
+            							
+            							document.getElementById("reservation1").style.display = "none";
+            							}
+            						else if(fieldName == comment.fieldName && 
+                							res2 == comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation2").style.display = "none";
+                							}
+            						else if(fieldName == comment.fieldName && 
+                							res3 == comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation3").style.display = "none";
+                							}
+            						else if(fieldName == comment.fieldName && 
+                							res4 == comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation4").style.display = "none";
+                							}
+            						else if(fieldName == comment.fieldName && 
+                							res5 == comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation5").style.display = "none";
+                							}
+            						else if(fieldName == comment.fieldName && 
+                							res6== comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation6").style.display = "none";
+                							}
+            						else if(fieldName == comment.fieldName && 
+                							res7 == comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation7").style.display = "none";
+                							}
+            						else if(fieldName == comment.fieldName && 
+                							res8 == comment.gameTime &&
+                							gameDay == comment.gameDay &&
+                							(comment.gameType == 'S' || comment.gameType =='T')){
+                							
+            							document.getElementById("reservation8").style.display = "none";
+                							}	
+            						
+            					
+            							
+            				
+            						}
+            					},
+            				
+            				error : function(e){
+            					alert(e);
+            				}
+            			});
+            		});
+            			
+            		
+            		
+            	
+            </script>
+        </div>
+        <div class="payment">
+            <div class="sub_title4">
+                <p>경기장 주소</p>
+            </div>
+            <div class="payment_text">
+                <input type="text" name="fieldAddress" id="fieldAddress" placeholder="경기장 선택시 자동입력됩니다.">
+            </div>
+        </div>
+         <div class="payment">
+            <div class="sub_title4">
+                <p>매치 방식</p>
+            </div>
+            <div class="payment_text">
+                <input type="text" name="gameMacth" id="gameMacth" placeholder="경기장 선택시 자동입력됩니다.">
+            </div>
+        </div>
+        <div class="payment">
+            <div class="sub_title4">
+                <p>경기장 코드</p>
+            </div>
+            <div class="payment_text">
+                <input type="text" name="fieldCode" id="fieldCode" placeholder="경기장 선택시 자동입력됩니다.">
             </div>
         </div>
         <div class="payment">
@@ -181,22 +349,21 @@
                 <p>참가비</p>
             </div>
             <div class="payment_text">
-                <input type="text" name="gamePay" id="gamePay" placeholder="참가비를 입력하세요">
+                <input type="text" name="gamePay" id="gamePay" placeholder="경기장 선택시 자동입력됩니다.">
             </div>
         </div>
         <div class="team_search">
             <div class="team_search_div">
                 <div class="sub_title3">
-                    <p>팀 이름</p>
+                    <p>팀 이름<span class="sub_title3_span">(팀 이름을 알아도 검색기능을 사용해주세요)</span></p>
                 </div>
                 <div class="search_team">
-                <input type="text" name="mTeamName" id="mTeamName" >
+                <input type="text" name="mTeamName" id="mTeamName" placeholder="팀 검색을 이용해주세요">
                     <div class="team_search_button">
                         <div class="modal">
                             <div class="modal_body"><h2>팀 검색하기</h2>
                         
                                 <div class="modal_inner_box">
-                                	
                                 	
                                     <div class="modal_team_search">
                                         <input type="text" name="modalText" id="modalText">
@@ -212,10 +379,11 @@
                                 document.getElementById("modalsearchbutton").addEventListener("click", function(){
                         			let teamName = document.getElementById("modalText").value;
                         			const mteamName = document.getElementById("mTeamName");
+                        			let gameMacth1 = document.getElementById("gameMacth").value;
                         			
   
                         			const simple_data = {teamName};
-                        			
+                        			console.log(gameMacth1);
                         			$.ajax({
                         				url : "${pageContext.request.contextPath}/team/getTeam",
                         				type : "POST",
@@ -227,22 +395,22 @@
                         					
                         					for(let comment of data){
                         						const comdiv = document.getElementById("modaldata");
-                        						
+                        						console.log(comment.tmember6);
                         						const div = document.createElement("div");
                         						div.setAttribute("id","teamSelect");
                         						div.style.border = "1px solid black";
                         						div.style.width = "180px";
                         						div.addEventListener("click",function(){
+                        							
                         							mteamName.value = comment.teamName; 
-                        							console.log(mteamName);
-                        							console.log(comment.teamName);
                         							const modal = document.querySelector('.modal');
-                        							      
-													        modal.classList.toggle('show');
+                  							      
+											        modal.classList.toggle('show');
 
-                        							        if (modal.classList.contains('show')) {
-                        							          body.style.overflow = 'hidden';
-                        							        }	
+                							        if (modal.classList.contains('show')) {
+                							          body.style.overflow = 'hidden';
+                        							}
+                        								
                         						});
                         						const h4 = document.createElement("h4");
                         						h4.innerText = "팀코드 :"+comment.teamCode;
@@ -354,9 +522,7 @@
         }
       });
       
-      document.getElementById("closebutton").addEventListener("click",function(){
-    	  modal2.classList.remove('show');
-      });
+     
      
       </script>
 		
@@ -401,6 +567,27 @@
              map.setCenter(coords);
          } 
      });   
+     </script>
+     <script type="text/javascript">
+//      	document.getElementById("gameTime").addEventListener("click",function(){
+     		
+     		
+     
+// 	     	const date = document.getElementById("txtDate").value;
+// 	     	const gameName = document.getElementById("fieldName").value;
+// 	     	const social = document.querySelectorAll(".social");
+	     	
+// 	     	console.log("유효성검사" + date);
+// 	     	console.log("gameName" + gameName);
+	     	
+// 	     	if( date != null && fieldName != null){
+// 	     		for( var x=0; x<social.length; x++){
+// 	     			social[x].style.display = 'none';
+// 	     		}
+// 	     	}
+     	
+//      	});
+     	
      </script>
 </body>
 </html>

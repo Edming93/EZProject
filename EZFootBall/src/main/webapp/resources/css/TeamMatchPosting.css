@@ -253,10 +253,14 @@
     width: 100%;
    
 }
-.team_search .sub_title3{
+.team_search .sub_title3 {
     width: 100%;
     float: left;
     padding-left: 5px;
+}
+.team_search .team_search_div .sub_title3 .sub_title3_span{
+    font-size: 12px;
+    color : red;
 }
 .team_search .team_search_div .search_team{
     display: flex;
@@ -278,7 +282,7 @@
 }
 .team_search .team_search_div .search_team .team_button{
     height: 40px;
-    width: 30%;
+    width: 35%;
     background-color: rgb(67, 69, 80);
     display: flex;
     align-items: center;
@@ -295,6 +299,7 @@
     color: white;
 }
 
+ /* 팀 검색 modal 창 */
   .modal {
     position: absolute;
     top: 0;
@@ -412,7 +417,7 @@
 }
 
 #map{
-		width : 100vw;
+		width : 75vw;
 		height : 50vh;
 	}
 	.map_search{
@@ -459,5 +464,28 @@
 		
 		background-color : black;
 	}
+	
+	.match_place{
+    width: 100%;
+}
+.match_place .sub_title_place{
+    width: 100%;
+    float: left;
+    padding-left: 5px;
+}
+.match_place .option select{
+    padding-left: 10px;
+}
+.match_place .option select {
+    width: 100%; /* 원하는 너비설정 */
+     padding: .8em .5em; /* 여백으로 높이 설정 */
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+     border: 1px solid #999;
+     appearance: none;
 
+}
+.match_place .match_place_span{
+    font-size: 12px;
+    color : red;
+}
    
