@@ -135,6 +135,7 @@ document.getElementById("inittext").addEventListener("click", function(){
 				}
 		}
 		});
+	
 });
 </script>
 

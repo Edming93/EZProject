@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import com.sample.dao.BlacklistDAO;
 import com.sample.dao.UserDAO;
 import com.sample.vo.BlacklistPageVO;
+import com.sample.vo.BlacklistVO;
 
 
 
@@ -33,6 +34,9 @@ public class BlacklistService {
 		model.addAttribute("BlacklistVO", blackDAO.selectBlackListdetail(blacklistCode));
 	}
 	
+	public boolean setBlackList(BlacklistVO vo) {
+		return (blackDAO.insertBlackList(vo)>0)?true:false;
+	}
 	
 
 }

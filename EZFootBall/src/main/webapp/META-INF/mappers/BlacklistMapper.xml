@@ -24,5 +24,8 @@
 		and blacklist_code = #{blacklistCode}
 	</select>
 
-	
+	<insert id="insertBlackList">
+		insert into blacklist(blacklist_local, blacklist_title, user_id, user_name, blacklist_content)
+		values(#{blacklistLocal}, #{blacklistTitle}, #{userId}, #{userName}, #{blacklistContent})
+	</insert>
 </mapper>

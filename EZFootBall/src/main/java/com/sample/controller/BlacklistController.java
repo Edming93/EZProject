@@ -42,7 +42,37 @@ public class BlacklistController {
 		model.addAttribute("userdata", vo);
 		service.getBlackListContent(model, blacklistCode);
 		return "blacklist/detailpage";
-
 	}
+	
+	@GetMapping("/bbs/set")
+	public String setBBS(@SessionAttribute("sessionVO")UserVO uvo, 
+			@ModelAttribute("bbsVO")BlacklistVO bvo, Model model) {
+		System.out.println(uvo);
+		if(uvo != null ) {
+			String[] cateList = {"공지","잡담","공유","비밀","	알림","고민"};
+			model.addAttribute("cateList", cateList);
+			return "bbs4/set";
+		}else {
+			return "redirect:/bbs4/login";
+		}
+	}
+	
+	@PostMapping("/bbs/set")
+	public String setBBSResult(@SessionAttribute("sessionVO")UserVO uvo, BlacklistVO bvo) {
+		if(uvo != null ) {
+			bvo.setUserCode(uvo.getUserCode());
+			bvo.setUserName(uvo.getUserName());
+			if(service.setBlackList(bvo)) {
+				return "redirect:/bbs4/bbs";
+			}else{
+				return "bbs4/set";
+			}
+		}else {
+			return "redirect:/bbs4/login";			
+		}
+	}
+	
+	
+	
 	
 }
