@@ -60,7 +60,6 @@ public class BlacklistController {
 	@PostMapping("/bbs/set")
 	public String setBBSResult(@SessionAttribute("sessionVO")UserVO uvo, BlacklistVO bvo) {
 		if(uvo != null ) {
-			bvo.setUserCode(uvo.getUserCode());
 			bvo.setUserName(uvo.getUserName());
 			if(service.setBlackList(bvo)) {
 				return "redirect:/bbs4/bbs";
