@@ -51,6 +51,7 @@
                     <img src="${fieldlistbyid.fieldImg5}">
                     
                 </div>
+<!--                 지도 들어오는부분 -->
                 <div class="map_picture">
                     <div id="map" class="gamefield_picture mapview"></div>
                 </div>

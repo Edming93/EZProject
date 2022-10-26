@@ -263,6 +263,7 @@
 		    align-items: center;
 		    padding: 20px 0px;
 		    border: 1px solid #C7C7C7;
+		    cursor: pointer;
       }
       .menu_title_area2:hover {
       		background-color: #C7C7C7;
@@ -416,7 +417,6 @@
 
       .rv_btn_area {
          grid-area: btn;
-         text-align: center;
          margin: 30px;
          position: sticky;
          top: 88%;
@@ -431,7 +431,7 @@
          border-radius: 45px;
          font-weight: bold;
          font-size: 22px;
-         
+         cursor: pointer;
       }
    </style>
 </head>
@@ -614,6 +614,13 @@
          main_logo.addEventListener("click", function () {
             location.href = "${pageContext.request.contextPath}";
          });
+         
+         
+         let rv_btn = document.querySelector(".rv_btn");
+         
+         rv_btn.addEventListener("click",function() {
+             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${field.fieldCode};
+         })
       </script>
    </div>
 </body>
