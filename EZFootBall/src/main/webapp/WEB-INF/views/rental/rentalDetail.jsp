@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
 <head>
    <meta charset="UTF-8">
    <title>이지풋볼</title>
-   <link rel="icon" href="${pageContext.request.contextPath}/image/ez_con.png">
+   <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
    <style>
    
@@ -25,7 +26,7 @@
          grid-template-rows: 65px 448px 85px 88px 1fr 1fr ;
          gap: 5px 5px;
          grid-auto-flow: row;
-         grid-template-areas: ". header ." 
+         grid-template-areas: ". header btn" 
                               ". banner ." 
                               ". title  ."
                               ". menu ."
@@ -54,15 +55,15 @@
       }
 
       .header_left {
-         width: 70px;
+         width: 95px;
          display: flex;
          justify-content: center;
          align-items: center;
       }
 
       .main_logo {
-         background: url("${pageContext.request.contextPath}/image/ez_logo.svg") no-repeat center;
-         background-size: 65px 35px;
+         background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
+         background-size: 95px 35px;
          cursor: pointer;
       }
 
@@ -70,11 +71,24 @@
          width: 65px;
          height: 35px;
       }
+      .search_input_area {
+      	 position: relative;
+      }
 
       .search_input {
          width: 375px;
-         height: 25px;
-
+         height: 35px;
+         background-color: white;
+         border: 1px solid #e5e5e5;
+         border-radius: 10px;
+      }
+      
+      .glass {
+      	 font-size: 20px;
+	     position: absolute;
+	     right: 13px;
+	     top: 8px;
+	     color: #464a54;
       }
 
       .header_right {
@@ -128,7 +142,7 @@
       .menu1_a {
          font-weight: bold;
          padding-bottom: 5px;
-         border-bottom: 3px solid #0059df;
+         border-bottom: 3px solid #26A653;
       }
 
 
@@ -204,8 +218,8 @@
       .menu_content {
          display: flex;
          width: 100%;
-		 border-bottom: 2px solid #e1e1e1;
-		 border-top: 2px solid #e1e1e1;
+		 border-bottom: 1px solid #ebebeb;
+		 border-top: 1px solid #ebebeb;
       }
 
       .menu_name {
@@ -217,24 +231,60 @@
       }
       
       .menu_title {
-         color:black;
+         color:white;
       	 text-decoration: none;
 		 height: 30px;
 		 line-height: 30px;
       }
-      
-      .field_plant {
-      	 font-weight : bold;
-      	 border-bottom: 3px solid #798777;
+      .menu_title2 {
+      	 color:#C7C7C7;
+      	 text-decoration: none;
       }
+      
+      .menu_title_area {
+			background-color: #26A653;
+		    width: 110px;
+		    height: 35px;
+		    text-align: center;
+		    border-radius: 20px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    padding: 20px 0px;
+		    
+      }
+      .menu_title_area2 {
+		    width: 110px;
+		    height: 35px;
+		    text-align: center;
+		    border-radius: 20px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    padding: 20px 0px;
+		    border: 1px solid #C7C7C7;
+      }
+      .menu_title_area2:hover {
+      		background-color: #C7C7C7;
+            color:white;
+      }
+      
+      .menu_title_area2:hover .menu_title2 {
+            color:white;
+      }
+/*       .field_plant { */
+/*       	 font-weight : bold; */
+/*       	 border-bottom: 3px solid #798777; */
+/*       } */
       
       .content_container {
          grid-area:content;
          display: flex;
          flex-direction: column;
-		 padding: 0px 50px;
-    	 padding-bottom: 110px;
+    	 padding: 0px 20px;
+    	 padding-bottom: 35px;
     	 padding-top: 50px;
+    	 
       }
       
       .content_content {
@@ -309,7 +359,8 @@
          grid-area: notice;
          width: 100%;
          margin-top: 10px;
-		 border-top: 2px solid #e1e1e1;
+		 border-top: 1px solid #ebebeb;
+		 padding: 0px 20px;
       }
       
       .notice_title {
@@ -355,10 +406,32 @@
 
       .login_icon {
          margin-left: 15px;
+         line-height: 0px;
       }
 
       .etc_icon {
          margin-left: 10px;
+         line-height: 0px;
+      }
+
+      .rv_btn_area {
+         grid-area: btn;
+         text-align: center;
+         margin: 30px;
+         position: sticky;
+         top: 88%;
+      }
+
+      .rv_btn {
+         width: 240px;
+         height: 70px;
+         background-color: #e8f2ff;
+         color: rgb(26, 124, 255);
+         border: 1px solid rgb(100 166 255);
+         border-radius: 45px;
+         font-weight: bold;
+         font-size: 22px;
+         
       }
    </style>
 </head>
@@ -372,10 +445,14 @@
 
                </div>
                <div class="header_right login_btn etc_btn">
-                  <input type="text" class="search_input">
+                  <div class="search_input_area">
+	                  <input type="text" class="search_input">
+	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
+                  </div>
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
+                        <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
                               fill="#464A54" />
@@ -387,7 +464,7 @@
                   </div>
                   <div class="etc_icon">
                      <a href="${pageContext.request.contextPath}/etc/etc">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path
                               d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
                               fill="#464A54" />
@@ -445,8 +522,16 @@
          </script>
       <div class="menu_container">
          <div class="menu_content">
-            <div class="menu_name"><a href="#" class="field_plant menu_title">시설</a></div>
-            <div class="menu_name"><a href="#" class="field_reservation menu_title">구장 예약</a></div>
+            <div class="menu_name">
+            	<div class="menu_title_area">
+            		<a href="#" class="field_plant menu_title">시설</a>
+            	</div>
+            </div>
+            <div class="menu_name">
+                <div class="menu_title_area2">
+            		<a href="#" class="field_reservation menu_title2">구장 예약</a>
+            	</div>
+            </div>
          </div>
       </div>
       <div class="content_container">
@@ -512,7 +597,14 @@
             </ul>
             
          </div>
-
+      </div>
+      
+      <div class="rv_btn_area">
+         <div class="rv_btn_content">
+            <button class="rv_btn">
+               예약하기
+            </button>
+         </div>
       </div>
 
 

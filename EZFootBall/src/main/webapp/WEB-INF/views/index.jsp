@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이지풋볼</title>
-<link rel="icon" href="./image/ez_con.png">
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <style>
     * {
         box-sizing: border-box;
@@ -41,14 +41,14 @@
         justify-content: space-between;
     }
     .header_left {
-        width:70px;
+        width:95px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .main_logo{
-    	background: url("${pageContext.request.contextPath}/image/ez_logo.svg") no-repeat center;
-    	background-size:65px 35px;
+         background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
+         background-size: 95px 35px;
     	cursor: pointer;
     }
     .ez_icon {
@@ -106,7 +106,7 @@
     .menu1_a {
         font-weight: bold;
         padding-bottom:5px;
-        border-bottom: 3px solid #0059df;
+        border-bottom: 3px solid #26A653;
     }
     
 
