@@ -67,10 +67,6 @@
          cursor: pointer;
       }
 
-      .ez_icon {
-         width: 65px;
-         height: 35px;
-      }
       .search_input_area {
       	 position: relative;
       }
@@ -168,6 +164,7 @@
          width: 100%;
          /* 추후에 사이즈 media로 변경 */
          white-space: nowrap;
+         position: relative;
       }
 
       .banner_image {
@@ -181,8 +178,10 @@
 
       .address_copy,
       .open_map {
-         color: rgb(0, 60, 255);
+         color: rgb(26, 124, 255);
          text-decoration: none;
+         cursor: pointer;
+         margin-right:5px;
       }
 
       .field_container {
@@ -220,6 +219,7 @@
          width: 100%;
 		 border-bottom: 1px solid #ebebeb;
 		 border-top: 1px solid #ebebeb;
+		 padding:20px;
       }
 
       .menu_name {
@@ -384,8 +384,6 @@
 
       }
 
-
-
       footer {
          width: 100%;
          height: 423px;
@@ -423,15 +421,41 @@
       }
 
       .rv_btn {
-         width: 240px;
-         height: 70px;
-         background-color: #e8f2ff;
-         color: rgb(26, 124, 255);
-         border: 1px solid rgb(100 166 255);
-         border-radius: 45px;
-         font-weight: bold;
-         font-size: 22px;
-         cursor: pointer;
+		    width: 220px;
+		    height: 70px;
+		    background-color: #e8f2ff;
+		    color: rgb(26, 124, 255);
+		    border: 1px solid rgb(187 216 255);
+		    border-radius: 45px;
+		    font-weight: bold;
+		    font-size: 22px;
+		    cursor: pointer;
+      }
+      
+      .map_picture {
+      	width:100%;
+      	height:100%;
+      	visibility: hidden;
+      }
+       #map { 
+       	width:100%; 
+       	height:100%; 
+       	position: relative; 
+       } 
+      
+      .picture_area {
+      	width:100%;
+      	height:100%;
+      	position: absolute;
+    	top: 0px;
+      }
+      
+      .map_toggle {
+      	visibility: visible;
+      }
+      
+      .change_text {
+      	color:#C7C7C7;;
       }
    </style>
 </head>
@@ -485,12 +509,16 @@
       <div class="banner_container">
          <div class="banner_content_area">
             <div class="banner_content">
-
-               <img class="banner_image img1" src="${field.fieldImg1}" alt="">
-               <img class="banner_image img2" src="${field.fieldImg2}" alt="">
-               <img class="banner_image img3" src="${field.fieldImg3}" alt="">
-               <img class="banner_image img4" src="${field.fieldImg4}" alt="">
-               <img class="banner_image img5" src="${field.fieldImg5}" alt="">
+			   <div class="map_picture">
+			   		<div id="map"></div>
+			   </div>
+			   <div class="picture_area">
+	               <img class="banner_image img1" src="${field.fieldImg1}" alt="">
+	               <img class="banner_image img2" src="${field.fieldImg2}" alt="">
+	               <img class="banner_image img3" src="${field.fieldImg3}" alt="">
+	               <img class="banner_image img4" src="${field.fieldImg4}" alt="">
+	               <img class="banner_image img5" src="${field.fieldImg5}" alt="">
+	           </div>
             </div>
          </div>
       </div>
@@ -499,7 +527,7 @@
             <h3 class="field_name">${field.fieldName}</h3>
             <div class="field_address">${field.fieldAddress}
                <a class="address_copy" href="#" onclick="clip(); return false;">주소 복사</a></span>
-               <span class="open_map">지도 보기</span>
+               <span class="open_map" id="mapbtn">지도 보기</span>
             </div>
          </div>
       </div>
@@ -566,7 +594,6 @@
                <div class="etc"><iconify-icon class="icon_size" icon="icon-park:spikedshoes"></iconify-icon>　풋살화 대여</div>
                <div class="etc"><iconify-icon class="icon_size" icon="icon-park:basketball-clothes"></iconify-icon>　운동복 대여</div>
                <div class="etc"><iconify-icon class="icon_size" icon="ant-design:car-outlined"></iconify-icon>　주차</div>
-               <!-- <iconify-icon icon="icon-park-outline:basketball-clothes"></iconify-icon> -->
                <div class="etc etc_stroke"><iconify-icon class="icon_size" icon="akar-icons:water"></iconify-icon>　<s>정수기</s></div>
                <div class="etc"><iconify-icon class="icon_size" icon="cil:toilet"></iconify-icon>　화장실</div>
                <div class="etc"><iconify-icon class="icon_size" icon="material-symbols:smoking-rooms-rounded"></iconify-icon>　흡연실</div>
@@ -622,6 +649,64 @@
              location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${field.fieldCode};
          })
       </script>
+      
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65331bb5f71196e87528297b0af9ceb4&libraries=services"></script>
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 2 // 지도의 확대 레벨
+            };
+
+        // 지도를 생성합니다    
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch('${field.fieldAddress}', function (result, status) {
+
+            // 정상적으로 검색이 완료됐으면 
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${field.fieldName}</div>'
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        });   
+    </script>
+    <script type="text/javascript">
+    	let mapbtn = document.getElementById("mapbtn");
+    	
+    	mapbtn.addEventListener("click", function () {
+        	let banner_area = document.querySelector(".banner_content");
+        	
+            const map_picture = document.querySelector(".map_picture");
+            map_picture.classList.toggle("map_toggle");
+			
+            mapbtn.classList.toggle("change_text");
+            if(mapbtn.classList.contains("change_text")){
+            	mapbtn.innerText="지도 닫기";
+            }else {
+            	mapbtn.innerText="지도 보기";
+            }
+        });
+    </script>
    </div>
 </body>
 
