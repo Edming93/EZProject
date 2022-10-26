@@ -23,6 +23,8 @@ public class UserVO {
 	
 	private String userAddress1;
 	private String userAddress2;
+	
+	private int userScore;
 
 	public static final long serialKey = 1231254653L;
 	
@@ -228,6 +230,16 @@ public class UserVO {
 	public void setUserEmail2(String userEmail2) {
 		this.userEmail2 = userEmail2;
 	}
+
+	public int getUserScore() {
+		return userScore;
+	}
+
+	public void setUserScore(int userScore) {
+		this.userScore = userScore;
+	}
+	
+	
 
 
 
