@@ -127,12 +127,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
 		//비로그인시 댓글 창 클릭하면 로그인 페이지로 이동
-		
-		
-	//$() document.getelementbyid
-	
-		
-		
+
 	document.getElementById("content").addEventListener("click", function(){
 		//로그인 여부
 		//로그인 컨트롤러에서 logincheck를 ajax로 불러옴

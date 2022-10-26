@@ -228,7 +228,7 @@
                 <div class="menu menu1"><a class="menu1_a" href="${pageContext.request.contextPath}/">소셜 매치</a></div>
                 <div class="menu menu2"><a class="menu2_a" href="${pageContext.request.contextPath}/team/team">팀 매치</a></div>
                 <div class="menu menu3"><a class="menu3_a" href="${pageContext.request.contextPath}/rental/rental">구장 예약</a></div>
-                <div class="menu menu4"><a class="menu4_a" href="#">랭킹</a></div>
+                <div class="menu menu4"><a class="menu4_a" href="${pageContext.request.contextPath}/blacklist/blacklistmain">랭킹</a></div>
                 <div class="menu menu5"><a class="menu5_a" href="${pageContext.request.contextPath}/review/reviewmain">커뮤니티</a></div>
             </div>
         </div>
