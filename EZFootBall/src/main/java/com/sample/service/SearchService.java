@@ -21,6 +21,7 @@ public class SearchService {
 	}
 
 	public List<SearchVO> selectList() {
+		System.out.println("dao : " + searchDAO.selectAll().get(0).getFieldName());
 		return searchDAO.selectAll();
 	}
 

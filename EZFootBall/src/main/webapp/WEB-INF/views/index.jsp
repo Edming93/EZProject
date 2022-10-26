@@ -198,8 +198,8 @@
                 <div class="header_left main_logo">
 <!-- 					<img class="ez_icon" src="/image/ez_logo.svg"> -->
                 </div>
+                 <jsp:include page="./search/search.jsp"></jsp:include>
                 <div class="header_right login_btn etc_btn">
-                    <input type="text" class="search_input">
                     <div class="login_icon">
                         <a href="${pageContext.request.contextPath}/loginPage/login">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
