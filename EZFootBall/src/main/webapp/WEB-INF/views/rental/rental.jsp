@@ -437,7 +437,6 @@
 					}else{
 						rental_div.className = "time rental_span_able";
 						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-						
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -530,12 +529,13 @@
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
+					let time = parseInt(timeset[i]);
 					if(game_time.includes(timeset[i])){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode;
+						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -616,12 +616,13 @@
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
+					let time = parseInt(timeset[i]);
 					if(game_time.includes(timeset[i])){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode;
+						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -696,6 +697,7 @@
 
 			for(let i=0; i<timeset.length; i++){
 				// true 혹은 false 반환
+				let time = parseInt(timeset[i]);
 				if(type_input == false && game_time.includes(timeset[i])){
 					let rental_div = document.createElement("div");
 					rental_div.className = "time rental_span_disable";
@@ -706,7 +708,7 @@
 				}else{
 					let rental_div = document.createElement("div");
 					rental_div.className = "time rental_span_able";
-					rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode;
+					rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
 					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					rental_area.append(rental_div);
 					
@@ -785,12 +787,13 @@
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
+					let time = parseInt(timeset[i]);
 					if(game_time.includes(timeset[i])){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode;
+						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -861,13 +864,14 @@
 
  				for(let i=0; i<timeset.length; i++){
  					// true 혹은 false 반환
+ 					let time = parseInt(timeset[i]);
  					let rental_div = document.createElement("a");
  					if(game_time.includes(timeset[i])){
  						rental_div.className = "time rental_span_disable";
  						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
  					}else{
  						rental_div.className = "time rental_span_able";
- 						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode;
+ 						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
  						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
  					}
  					rental_area.append(rental_div);

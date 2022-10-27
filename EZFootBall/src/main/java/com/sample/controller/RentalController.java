@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.service.RentalService;
 import com.sample.vo.DataVO;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.UserVO;
 
 @Controller
 @RequestMapping("/rental")
@@ -111,7 +115,13 @@ public class RentalController {
 	
 	
 	@GetMapping("/resultField")
-	public String fieldResultMove() {
+	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,
+			HttpSession session) {
+		System.out.println("주소와? "+fvo.getFieldAddress());
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
+		fvo.setUserCode(uvo.getUserCode());
+		fvo.setUserPayment(fvo.getFieldRentalfee());
+		service.insertFieldReservation(fvo);
 		return "rental/resultField";
 	}
 	

@@ -45,11 +45,14 @@
 		from gamefield_info where field_code = #{fieldCode}
 	</select>
 	
-	<select id="matchInfo" resultType="GlistVO">
-		select game_code, game_day, game_time, game_macth,level
-		from gamelist where field_code = #{fieldCode}
-	</select>
-	
+<!-- 	<select id="matchInfo" resultType="GlistVO"> -->
+<!-- 		select game_code, game_day, game_time, game_macth,level -->
+<!-- 		from gamelist where field_code = #{fieldCode} -->
+<!-- 	</select> -->
+	<insert id="insertFieldReservation" parameterType="FieldReservationVO">
+		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time)
+		values(${rvType},${fieldCode},${fieldName},${fieldAddress},${fieldType},${fieldRentalfee},${userCode},${userPayment},${gameDay},${gameTime})
+	</insert>
 	
 	
 	

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.sample.dao.RentalDAO;
 import com.sample.vo.DataVO;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 
@@ -36,6 +37,10 @@ public class RentalService {
 	public void matchInfo(int fieldCode,Model model) {
 		System.out.println("매치 필드코드 : "+fieldCode);
 		model.addAttribute("match",dao.matchInfo(fieldCode));
+	}
+	
+	public void insertFieldReservation(FieldReservationVO vo) {
+		dao.insertFieldReservation(vo);
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 
@@ -16,4 +17,5 @@ public interface RentalDAO {
 	@MapKey("fieldCode") 
 	public GameFieldInfoVO fieldInfo(int fieldCode);
 	public GlistVO matchInfo(int fieldCode);
+	public void insertFieldReservation(FieldReservationVO vo);
 }

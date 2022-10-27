@@ -260,7 +260,7 @@
          margin-bottom: 20px;
       }
       
-      .pay_area:nth-child(2) {
+      .pay_total_area {
          margin-top:10px;
 
       }
@@ -279,9 +279,14 @@
          font-weight: bold;
 
       }
+      
+      .pay_money {
+      	font-weight: 100;
+      }
 
       .pay_total {
          font-size:18px;
+         font-weight:bold;
          color:#343434;
 
       }
@@ -501,25 +506,34 @@
                   <div class="pay_area">
                      <span class="pay_title">이용금액</span>
                      <span class="pay">
-                     	<span class="rental_fee">${field.fieldRentalfee}</span>
+                     	<span class="rental_fee amount_fee pay_money">${field.fieldRentalfee}</span>
                      	<span class="pay_won">원</span>
+                     </span>   
+                  </div>
+                  <div class="pay_area">
+                     <span class="pay_title">할인쿠폰</span>
+                     	<span class="pay">
+                     		<span class="rental_fee pay_money">0</span>
+                     		<span class="pay_won">원</span>
                      </span>
                   </div>
                   <hr>
-                  <div class="pay_area">
+                  <div class="pay_area pay_total_area">
                      <span class="pay_title pay_total">총 금액</span>
                      <span class="pay pay_total">
-                     	<span class="rental_fee">${field.fieldRentalfee}</span>
+                     	<span class="rental_fee total_fee">${field.fieldRentalfee}</span>
                      	<span class="pay_won">원</span>
                      </span>
                   </div>
                   
                   <script type="text/javascript">
                   window.onload = function() {
-                  let pay = document.querySelectorAll(".rental_fee");
+                  let amount_fee = document.querySelector(".amount_fee");
+                  let total_fee = document.querySelector(".total_fee");
+                  
 
-                  pay[0].innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
-                  pay[1].innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
+                  amount_fee.innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
+                  total_fee.innerHTML = Number(${field.fieldRentalfee - 0}).toLocaleString();
                   }
                   </script>
                   
@@ -531,8 +545,14 @@
          </div>
 
       </div>
-      
-
+      			<style>
+      				#ming {
+      					width:200px;
+      					height:100px;
+      					border:1px solid black;
+      				}
+      			</style>
+                     <button id="ming">ming~</button>
 
    
    </div>
@@ -560,7 +580,8 @@
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
             	if(${match.gameType eq null}){ // 구장예약일 경우
-                 	location.href = "${pageContext.request.contextPath}/rental/resultField";
+                  	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+${field.fieldCode}+"&fieldName="+${field.fieldName}+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+${field.fieldRentalfee}
+                  					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+${time};
             	}else { // 팀매치 예약일 경우
             		location.href = "${pageContext.request.contextPath}/rental/resultTeam";
             	}
@@ -570,7 +591,11 @@
             }
          });
       }
-   </script>
-</body>
+      
+      document.getElementById("ming").addEventListener("click",function(){
+        	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName='${field.fieldName}'&fieldAddress='${field.fieldAddress}'&fieldRentalfee=${field.fieldRentalfee}&fieldType='${field.fieldType}'&gameDay='${day}'&gameTime='${time}:00:00'&rvType='G'";
+    	  
+      });
+   </script>
 
 </html>
