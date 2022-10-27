@@ -24,8 +24,16 @@ public class GlistVO {
     private int fieldCode;
     private String mTeamName;
     
+    private int gamePay;
+    
 	
-  	public String getmTeamName() {
+  	public int getGamePay() {
+		return gamePay;
+	}
+	public void setGamePay(int gamePay) {
+		this.gamePay = gamePay;
+	}
+	public String getmTeamName() {
   		return mTeamName;
   	}
   	public void setmTeamName(String mTeamName) {

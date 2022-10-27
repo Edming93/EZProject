@@ -201,7 +201,7 @@
             let num = week.indexOf("<%=we%>");
             let ct = <%=today%>% 7;
 
-            for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
+            for (var i = 0; i < 7; i++) {
             	if(week[i]=='MONDAY'){
             		week[0]='월';
             	}else if(week[i]=='TUESDAY'){
@@ -217,6 +217,10 @@
             	}else if(week[i]=='SUNDAY'){
             		week[6]='일';
             	};
+			}
+            
+            for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
+
             	
                 if ((i + 1) % 7 == ct) {
                     var newp = document.createElement("div");

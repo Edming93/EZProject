@@ -46,8 +46,8 @@
         align-items: center;
     }
     .main_logo{
-    	background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
-    	background-size:95px 35px;
+         background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
+         background-size: 95px 35px;
     	cursor: pointer;
     }
     .ez_icon {
@@ -87,6 +87,7 @@
         justify-content: center;
 	    margin-bottom: 13px;
 	    margin-top: 13px;
+	    align-items: center;
         
     }
     .big_menu_area {
@@ -111,8 +112,8 @@
         width: 90px;
         justify-content: center;
     }
-
-    .menu1,.menu2,.menu3,.menu4,.menu5 {
+    
+    .menu1,.menu2,.menu3,.menu4,.menu5,.menu6 {
         width: 100px;
         justify-content: center;
         display: inline-block;

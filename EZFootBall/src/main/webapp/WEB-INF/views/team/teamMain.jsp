@@ -76,6 +76,7 @@
         justify-content: center;
 	    margin-bottom: 13px;
 	    margin-top: 13px;
+	    align-items: center;
         
     }
     .big_menu_area {
