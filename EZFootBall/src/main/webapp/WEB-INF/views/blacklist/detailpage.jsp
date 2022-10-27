@@ -76,15 +76,15 @@
 		</div>
 		<div class="editdelete" id="editdelete">
 		<c:if test="${BlacklistVO.userId eq requestScope.userdata.userId}">
-		<button>수정</button>
-		<button>삭제</button>
+		<button id="editbtn">수정</button>
+		<button id="deletebtn">삭제</button>
 		</c:if>
 		</div>
 		<div class="main">
 			<p>${BlacklistVO.blacklistContent}</p>
 		</div>
 		<div class="footer">
-			<button id="return">뒤로가기</button>
+			<button id="backbtn">뒤로가기</button>
 		</div>
 		<div class="comment" id="comment"></div>
 		<div class="insert" id="insert">
@@ -95,8 +95,14 @@
 	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
-
+	
+	document.getElementById("backbtn").addEventListener("click",function(){
+		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain";
+	});
+	
+	
 document.getElementById("inittext").addEventListener("click", function(){
+
 	//로그인 여부
 	//로그인 컨트롤러에서 logincheck를 ajax로 불러옴
 
@@ -136,6 +142,17 @@ document.getElementById("inittext").addEventListener("click", function(){
 		}
 		});
 	
+});
+
+document.getElementById("editbtn").addEventListener("click",function(){
+	location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}";
+});
+
+document.getElementById("deletebtn").addEventListener("click",function(){
+	let isDelete = confirm("정말로 삭제하시겠습니까?");
+	if(isDelete){
+		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}";
+	}
 });
 </script>
 
