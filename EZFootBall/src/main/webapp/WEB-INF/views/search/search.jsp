@@ -446,8 +446,11 @@
 							for (const list of data) {
 								const li2 = document.createElement("li");
 								const a2 = document.createElement("a");
-								a2.innerText = list.fieldName;
+								const p = document.createElement("p");
+								p.innerText = list.fieldName;
+// 								a2.innerText = list.fieldName;
 								a2.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode=" + list.fieldCode;
+								a2.append(p);
 								li2.append(a2);
 								ul2.append(li2);		
 							}
