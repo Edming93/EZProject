@@ -21,4 +21,9 @@ public interface BlacklistDAO {
 	//게시판 insert
 	public int insertBlackList(BlacklistVO vo);
 	
+	//게시판 update
+	public int updateBlackList(BlacklistVO vo);
+	
+	//게시판 delete
+	public int deleteBlackList(BlacklistVO vo);
 }

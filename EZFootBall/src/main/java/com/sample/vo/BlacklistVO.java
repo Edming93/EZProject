@@ -12,6 +12,7 @@ public class BlacklistVO {
 	private String blacklistContent;
 	private String blacklistCreateDate;
 	private String blacklistLocal;
+	private int isDelete;
 	
 	public int getBlacklistCode() {
 		return blacklistCode;
@@ -60,6 +61,12 @@ public class BlacklistVO {
 	}
 	public void setUserCode(int userCode) {
 		this.userCode = userCode;
+	}
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	

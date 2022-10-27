@@ -28,4 +28,18 @@
 		insert into blacklist(blacklist_local, blacklist_title, user_id, user_name, blacklist_content, user_code)
 		values(#{blacklistLocal}, #{blacklistTitle}, #{userId}, #{userName}, #{blacklistContent}, #{userCode})
 	</insert>
+	
+	<update id="updateBlackList">
+		update blacklist set blacklist_local = #{blacklistLocal}, blacklist_title=#{blacklistTitle}, blacklist_content=#{blacklistContent}
+		where blacklist_code = #{blacklistCode} and user_code = #{userCode}
+	</update>
+	
+	<update id="deleteBlackList">
+		update blacklist set is_delete = 1 
+		where blacklist_code = #{blacklistCode} and user_code = #{userCode}
+	</update>
+	
+	<!-- <delete id="deleteBlackList">
+		delete from blacklist where blacklist_code = #{blacklistCode} and user_code = #{userCode}
+	</delete> -->
 </mapper>

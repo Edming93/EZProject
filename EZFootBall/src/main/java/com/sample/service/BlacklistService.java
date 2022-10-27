@@ -38,5 +38,11 @@ public class BlacklistService {
 		return (blackDAO.insertBlackList(vo)>0)?true:false;
 	}
 	
-
+	public boolean editBlackList(BlacklistVO vo) {
+		return (blackDAO.updateBlackList(vo)>0)?true:false;
+	}
+	
+	public boolean deleteBlackList(BlacklistVO vo) {
+		return (blackDAO.deleteBlackList(vo)>0)?true:false;
+	}
 }
