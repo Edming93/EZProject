@@ -96,7 +96,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
 	
-	const commentmain = document.getElementById("comment");
+	const commentMain = document.getElementById("comment");
 
 	window.addEventListener('DOMContentLoaded', (e) => {
 		fetch("${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}")
