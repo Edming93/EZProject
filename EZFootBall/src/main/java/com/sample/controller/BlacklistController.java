@@ -1,5 +1,7 @@
 package com.sample.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -9,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.service.BlacklistService;
+import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistVO;
 import com.sample.vo.UserVO;
 
@@ -112,19 +116,23 @@ public class BlacklistController {
 		}
 	}
 
-	
 	// 페이지 삭제
 	@GetMapping("/blacklistmain/deletebbs/{blacklistCode}")
 	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo, 
 			@PathVariable("blacklistCode") String blacklistCode) {
 		bvo.setUserCode(uvo.getUserCode());
-		bvo.setUserId(uvo.getUserId());
 		if(service.deleteBlackList(bvo)) {
 			return "redirect:/blacklist/blacklistmain";
 		}else{
 			return "redirect:/blacklist/blacklistmain/"+bvo.getBlacklistCode();
 		}
-
+	}
+	
+	//댓글 view
+	@GetMapping("/comment/{blackCode}")
+	@ResponseBody
+	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode")int blackCode){
+		return service.getCommentList(blackCode);
 	}
 	
 	

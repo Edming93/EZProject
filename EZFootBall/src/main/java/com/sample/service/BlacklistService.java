@@ -1,11 +1,14 @@
 package com.sample.service;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sample.dao.BlacklistDAO;
 import com.sample.dao.UserDAO;
+import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistPageVO;
 import com.sample.vo.BlacklistVO;
 
@@ -44,5 +47,9 @@ public class BlacklistService {
 	
 	public boolean deleteBlackList(BlacklistVO vo) {
 		return (blackDAO.deleteBlackList(vo)>0)?true:false;
+	}
+	
+	public List<BlacklistCommentVO> getCommentList(int blackCode) {
+		return blackDAO.selectBlackListComment(blackCode);
 	}
 }

@@ -39,7 +39,11 @@
 		where blacklist_code = #{blacklistCode} and user_code = #{userCode}
 	</update>
 	
-	<!-- <delete id="deleteBlackList">
-		delete from blacklist where blacklist_code = #{blacklistCode} and user_code = #{userCode}
-	</delete> -->
+	<select id="selectBlackListComment" resultType="BlacklistcommentVO">
+		select comment_code, black_code, user_code, user_name, content, 
+		date_format(bcoment_create_date, '%Y-%m-%d %H:%i') bcoment_create_date, order_code
+		from blacklist_comment
+		where is_delete = 0
+		and black_code = #{blackCode}
+	</select>
 </mapper>

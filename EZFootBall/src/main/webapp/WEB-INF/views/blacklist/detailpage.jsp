@@ -96,6 +96,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
 	
+	const commentmain = document.getElementById("comment");
+
+	window.addEventListener('DOMContentLoaded', (e) => {
+		fetch("${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}")
+		  .then(response => response.json())
+		  .then(data => {
+			  
+			  for(obj of data) {    
+				  const mainDiv = document.createElement("div");
+				  mainDiv.style.border = "1px solid black";
+				  mainDiv.style.padding = "5px";
+				  const h4 = document.createElement("h4");
+				  h4.innerText = obj.userName;
+				  const p = document.createElement("p");
+				  p.innerText = obj.content;
+				  
+				  mainDiv.append(h4);
+				  mainDiv.append(p);
+				  
+				  commentMain.append(mainDiv);
+			  }
+			  
+			  
+		  }).catch(err => {
+			  console.log(err);
+		  });
+	});
+	
+	
+	
+	
+	
 	document.getElementById("backbtn").addEventListener("click",function(){
 		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain";
 	});
@@ -154,6 +186,8 @@ document.getElementById("deletebtn").addEventListener("click",function(){
 		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}";
 	}
 });
+
+
 </script>
 
 
