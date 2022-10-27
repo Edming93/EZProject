@@ -141,6 +141,7 @@
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 <div class="container">
     <div class="header_container">
@@ -187,7 +188,7 @@
     	<div class="main_area">
     		<div class="main_content">
 			<h1>${userVO.userId} 유저</h1>
-				<form action="#" id="change" method="post">
+				<form action="${pageContext.request.contextPath}/myPage/changePw/result" id="change" method="post">
 					<label for="pw1">기존 비밀번호 <br /> <input type="password" name="pw1" id="pw1" /></label><br />
 					<hr />
 					<label for="new_pw1">새 비밀번호 <br /> <input type="password" name="new_pw1" id="new_pw1" /></label><br />
@@ -217,6 +218,109 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
+
+<script type="text/javascript">
+	
+		$('#btn').click(function(){
+			if(($('#new_pw1').val().length < 8 || $('#new_pw1').val().length > 16) || ($('#new_pw2').val().length < 8 || $('#new_pw2').val().length > 16) ){
+				Swal.fire(
+					'비밀번호를 확인해주세요',
+					'비밀번호는 8~16 크기의 숫자, 영문자로 이루어져야 합니다.',
+					'warning'
+				)
+				// alert("비밀번호는 8~16 크기의 숫자, 영문자로 이루어져야 합니다.");
+				return;
+			}else if($('#new_pw1').val() != $('#new_pw2').val()){
+				Swal.fire(
+						'비밀번호를 확인해주세요',
+						'비밀번호와 비밀번호확인이 다릅니다. 다시 입력해주세요.',
+						'warning'
+					)
+				// alert("비밀번호와 비밀번호확인이 다릅니다. 다시 입력해주세요.");
+				return;
+			}else if($('#pw1').val() == $('#new_pw1').val() && $('#pw1').val() == $('#new_pw2').val()) {
+				Swal.fire(
+						'비밀번호가 동일합니다.',
+						'기존 비밀번호에 입력한 값과 변경할 비밀번호를 동일하게 설정할 수 없습니다. 다시 입력해주세요.',
+						'warning'
+					)
+				return;
+			}
+			for(let i=0; i < $('#new_pw1').val().length; i++){
+				const pw1 = $('#new_pw1').val().charAt(i);
+				if((pw1 < "a" || pw1 > "z") && (pw1 < "A" || pw1 > "Z") && (pw1 < "0" || pw1 > "9")){
+					Swal.fire(
+							'비밀번호를 확인해주세요',
+							'비밀번호는 숫자, 영문자로 이루어져야 합니다.',
+							'warning'
+						)
+					// alert("비밀번호는 숫자, 영문자로 이루어져야 합니다.");
+					return;
+				}
+			}
+		
+			// 현재비밀번호가 입력된 pw와 동일한지 확인
+// 			$("#btn").on("click", function(){
+				
+				const data1 = { "pass1" : $('#pw1').val() };
+				$.ajax({
+					type : 'post',
+					url: "${pageContext.request.contextPath}/myPage/changePw/isPassword",
+// 					contentType: "application/json; charset=utf-8",
+// 					dataType: "json",
+					data: data1,
+					async: false,
+					success : function (data) {
+						console.dir("data : " +  data);
+						console.log(data.state);
+						if(data.state == "ok"){
+							Swal.fire({
+								  position: 'center',
+								  icon: 'success',
+								  title: '비밀번호가 성공적으로 설정되었습니다.',
+								  showConfirmButton: false,
+								  timer: 2000
+							});
+	 						setTimeout(formStart, 2000);
+						}else if(data.state == "no"){
+							Swal.fire({
+								  position: 'center',
+								  icon: 'error',
+								  title: '현재 비밀번호가 맞지 않습니다',
+								  showConfirmButton: false,
+								  timer: 2000
+							});
+						}
+					}			
+				}); // end ajax
+				
+				
+				
+				
+				
+				
+// 			});
+	
+// 				Swal.fire({
+// 					  position: 'center',
+// 					  icon: 'success',
+// 					  title: '비밀번호가 성공적으로 설정되었습니다.',
+// 					  showConfirmButton: false,
+// 					  timer: 2000
+// 				});
+
+// 				setTimeout(formStart, 2000);
+
+				// alert("비밀번호가 성공적으로 설정되었습니다.");
+				function formStart(){
+					$('#change').submit();
+				}
+		});
+		
+		$('#return').click(function(){
+			$(location).attr("href","${pageContext.request.contextPath}/myPage/myPage");
+		});
+	</script>
 </div>
 </body>
 </html>
