@@ -12,40 +12,44 @@
     <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/jquery-ui.js"></script>
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/TeamMatchPosting.css">
+ 	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 </head>
 <body>
-    <div class="posting">
-        <div class="posting_subcon">
+    <div class="container">
+    	
+        <div class="sub_con">
         <form action="${pageContext.request.contextPath }/team/postingFinish" method="post">
-        <div class="title">
-            <p>매치 작성</p>
-        </div>
-        
-         <div class="gender">
-            <div class="sub_title1">
-                <p>성별</p>
+        	<div class="title">
+	            <span class="ticon"><iconify-icon icon="fluent-emoji-flat:four-leaf-clover"></iconify-icon></span>
+	            <h1>매치 작성</h1>
+	            <span class="ticon"><iconify-icon icon="fluent-emoji-flat:four-leaf-clover"></iconify-icon></span>
+        	</div>
+        	<div class="subt">
+	         	<div class="gender">
+		                <p>성별</p><span class="gicon"><iconify-icon icon="mdi:gender-transgender" style="color: #26a653;"></iconify-icon></span>
+		            </div>
+		            <div class="option">
+		                <select name="gameGender" id="gameGender">
+		                    <option value="">매치 성별을 선택해주세요</option>
+		                    <option value="남">남자</option>
+		                    <option value="여">여자</option>
+		                    <option value="혼성">혼성</option>
+		                </select>
+		            </div>
+        		</div>
+        	
+        <div class="subt">
+            <div class="date">
+                <p>경기 날짜</p><span class="dicon"><iconify-icon icon="ic:round-date-range" style="color: #26a653;"></iconify-icon></span>
             </div>
-            <div class="option">
-                <select name="gameGender" id="gameGender">
-                    <option value="">매치 성별을 선택해주세요</option>
-                    <option value="남">남자</option>
-                    <option value="여">여자</option>
-                    <option value="혼성">혼성</option>
-                </select>
+            <div class="dinput">
+            	<input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭 하세요" autocomplete="off">
             </div>
-        </div>
-        <div class="match_date">
-            <div class="sub_title2">
-                <p>경기 날짜</p>
-            </div>
-            <div class="calender">
-            <input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭 하세요" autocomplete="off">
-            </div>
-        </div>
-       <div class="match_place">
-            <div class="sub_title_place">
-                <p>매치 지역 <span class="match_place_span">(목록에서 지역을 선택해주세요)</span></p>
-            </div>
+      	</div>
+      	<div class="subt">
+       		<div class="matchp">
+            	<p>매치 지역 <span class="match_place_span">(목록에서 지역을 선택해주세요)</span></p><span class="micon"><iconify-icon icon="fa6-solid:location-crosshairs" style="color: #26a653;"></iconify-icon></span>
+       		</div>
             <div class="option">
                 <select name="gamePlace" id="gameplace">
                     <option value="">지역을 선택해주세요</option>
@@ -59,27 +63,25 @@
                     <option value="제주도">제주도</option>
                 </select>
             </div>
-        </div>
-        <div class="field">
-            <div class="field_div">
-                <div class="sub_title3">
-                    <p>경기장</p>
+         </div>
+        <div class="subt">
+          
+                <div class="matchf">
+                    <p>경기장</p><span class="ficon"><iconify-icon icon="tabler:soccer-field" style="color: #26a653;"></iconify-icon></span>
                 </div>
-                <div class="search_map">
+                <div class="matchf_in">
                 <input type="text" name="fieldName" id="fieldName" >
                     <div class="modal22">
-				      <div class="modal22_body22">지도 검색하기
-				      
+				      <div class="modal22_body22"><strong style="font-size : 30px">지도 검색하기</strong>
+				      <span id="mapclose"><img src="${pageContext.request.contextPath }/image.close1.jpg"/></span>
 
 				      	<div class="map_search">
 							<div class="search_area">
 								<input type="text" name="search" id="search" placeholder="주소를 정확히 입력하세요 서비스가 좋지않아 죄송합니다" />
+								
 							</div>
 							<div class="search_button">
 								<a href="#" id="searcha">검색</a>
-							</div>
-							<div class="confirm_button">
-								<a href="#">확인</a>
 							</div>
 						</div>
 						<div id="map" class="gamefield_picture mapview"></div>
@@ -87,7 +89,7 @@
 						<div id="mapcontent"></div>
 				      </div>
 				    </div>
-				    <div class="map_button">
+				    <div class="fbutton">
 				    <a href="#" class="btn-open-popup22">지도 검색</a>
 					</div>
                    <script type="text/javascript">
@@ -98,8 +100,8 @@
                         			const fieldCode = document.getElementById("fieldCode");
                         			const gamePay = document.getElementById("gamePay");
                         			const gameMacth = document.getElementById("gameMacth");
-                        			
-                        			console.log(address);
+                        			const comdiv = document.getElementById("mapcontent");
+                        		
                         			const simple_data = {address};
                         			
                         			$.ajax({
@@ -110,28 +112,30 @@
                         				data : JSON.stringify(simple_data),
                         				success : function(data){
                         					
+                        					comdiv.innerHTML = "";
                         					for(const comment of data){
-                        						
-                        						const comdiv = document.getElementById("mapcontent");
-                        						
+
+                        		
                         						const div = document.createElement("div");
      
                         						div.style.border = "1px solid black";
-                        						div.style.width = "500px";
+                        						div.style.width = "800px";
+                        						div.style.margin = "0 auto";
                         						div.addEventListener("click",function(){
+                        							
                         							fieldName.value = comment.fieldName; 
                         							fieldAddress.value = comment.fieldAddress;
                         							fieldCode.value = comment.fieldCode;
-                        							gamePay.value = comment.fieldRentalfee;
+                        							gamePay.value = comment.fieldRentalfee.toLocaleString();
                         							gameMacth.value = comment.fieldType;
                         							
                         							
                         							modal2.classList.remove('show');
                         						});
                         						const h4 = document.createElement("h4");
-                        						h4.innerText = "구장이름 :"+comment.fieldName;
+                        						h4.innerText = "구장이름 : "+comment.fieldName;
                         						const p = document.createElement("p");
-                        						p.innerText = "구장주소 :"+comment.fieldAddress;
+                        						p.innerText = "구장주소 : "+comment.fieldAddress;
                         						const a = document.createElement("a");
                         						a.innerText = "선택";
                         						
@@ -190,12 +194,12 @@
              
                     </script>
                 </div>
-            </div>
+            
         </div>
         
-         <div class="match_time">
-            <div class="sub_title2_1">
-                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 예약마감입니다.)</span></p>
+         <div class="subt">
+            <div class="matcht">
+                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 예약마감입니다.)</span></p><span class="timeicon"><iconify-icon icon="bx:time-five" style="color: #26a563;"></iconify-icon></span>
             </div>
             <div class="option">
                 <select name="gameTime" id="gameTime">
@@ -302,8 +306,6 @@
                 							
             							document.getElementById("reservation8").style.display = "none";
                 							}	
-            						
-            					
             							
             				
             						}
@@ -314,52 +316,54 @@
             				}
             			});
             		});
-            			
-            		
-            		
-            	
             </script>
         </div>
-        <div class="payment">
-            <div class="sub_title4">
-                <p>경기장 주소</p>
+        <div class="subt">
+            <div class="matchadd">
+                <p>경기장 주소</p><span class="addicon"><iconify-icon icon="ant-design:home-filled" style="color: #26a563;"></iconify-icon></span>
             </div>
-            <div class="payment_text">
+            <div class="addinput">
                 <input type="text" name="fieldAddress" id="fieldAddress" placeholder="경기장 선택시 자동입력됩니다.">
             </div>
         </div>
-         <div class="payment">
-            <div class="sub_title4">
-                <p>매치 방식</p>
-            </div>
-            <div class="payment_text">
-                <input type="text" name="gameMacth" id="gameMacth" placeholder="경기장 선택시 자동입력됩니다.">
-            </div>
+         <div class="subt1">
+         	<div class="innersubt1">
+	            <div class="matchtype">
+	                <p>매치 방식</p><span class="matchicon"><iconify-icon icon="emojione-monotone:vs-button" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	            </div>
+	            <div class="typeinput">
+	                <input type="text" name="gameMacth" id="gameMacth" placeholder="경기장 선택시 자동입력됩니다.">
+	            </div>
+	       </div>
+	       <div class="innersubt1">
+	            <div class="matchc">
+	                <p>경기장 코드</p><span class="cicon"><iconify-icon icon="simple-icons:codemagic" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	            </div>
+	            <div class="cinput">
+	                <input type="text" name="fieldCode" id="fieldCode" placeholder="경기장 선택시 자동입력됩니다.">
+	            </div>
+	       </div>
+	       <div class="innersubt1">
+	            <div class="matchpay">
+	                <p>참가비</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	            </div>
+	            <div class="payinput">
+	                <input type="text" name="gamePay" id="gamePay" placeholder="경기장 선택시 자동입력됩니다."/>
+	            </div>
+            </div> 
+           
         </div>
-        <div class="payment">
-            <div class="sub_title4">
-                <p>경기장 코드</p>
-            </div>
-            <div class="payment_text">
-                <input type="text" name="fieldCode" id="fieldCode" placeholder="경기장 선택시 자동입력됩니다.">
-            </div>
-        </div>
-        <div class="payment">
-            <div class="sub_title4">
-                <p>참가비</p>
-            </div>
-            <div class="payment_text">
-                <input type="text" name="gamePay" id="gamePay" placeholder="경기장 선택시 자동입력됩니다.">
-            </div>
-        </div>
-        <div class="team_search">
-            <div class="team_search_div">
-                <div class="sub_title3">
-                    <p>팀 이름<span class="sub_title3_span">(팀 이름을 알아도 검색기능을 사용해주세요)</span></p>
+        <div class="subt">
+           
+                <div class="team">
+                    <p>팀 이름<span class="sub_title3_span">(팀 이름을 알아도 검색기능을 사용해주세요)</span></p><span class="teamicon"><iconify-icon icon="fluent:people-team-20-filled" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
                 </div>
-                <div class="search_team">
-                <input type="text" name="mTeamName" id="mTeamName" placeholder="팀 검색을 이용해주세요">
-                    <div class="team_search_button">
+                <div class="innerteam">
+	                <div class="teaminput">
+	                	<input type="text" name="mTeamName" id="mTeamName" placeholder="팀 검색을 이용해주세요">
+	                	<input type="hidden" name="teamCode" id="teamCode"/>
+	                </div>
+                    <div class="sbutton">
                         <div class="modal">
                             <div class="modal_body"><h2>팀 검색하기</h2>
                         
@@ -380,10 +384,11 @@
                         			let teamName = document.getElementById("modalText").value;
                         			const mteamName = document.getElementById("mTeamName");
                         			let gameMacth1 = document.getElementById("gameMacth").value;
-                        			
+                        			let teamCode = document.getElementById("teamCode");
+                        			const comdiv = document.getElementById("modaldata");
   
                         			const simple_data = {teamName};
-                        			console.log(gameMacth1);
+                        		
                         			$.ajax({
                         				url : "${pageContext.request.contextPath}/team/getTeam",
                         				type : "POST",
@@ -392,17 +397,25 @@
                         				data : JSON.stringify(simple_data),
                         				success : function(data){
                         					
-                        					
+                        					comdiv.innerHTML="";
                         					for(let comment of data){
-                        						const comdiv = document.getElementById("modaldata");
-                        						console.log(comment.tmember6);
+                        
                         						const div = document.createElement("div");
                         						div.setAttribute("id","teamSelect");
                         						div.style.border = "1px solid black";
                         						div.style.width = "180px";
-                        						div.addEventListener("click",function(){
-                        							
-                        							mteamName.value = comment.teamName; 
+                        						div.style.backgroundColor = "#F8EDE3";
+
+                        						if(gameMacth1 == "6vs6"){
+													
+														div.addEventListener("click",function(){
+															if(comment.tmember6 != ''){
+			                         							mteamName.value = comment.teamName; 
+			                         							teamCode.value = comment.teamCode;
+															}else {
+																alert("5명이서 참가할 수 없습니다.");
+																}
+							
                         							const modal = document.querySelector('.modal');
                   							      
 											        modal.classList.toggle('show');
@@ -410,8 +423,27 @@
                 							        if (modal.classList.contains('show')) {
                 							          body.style.overflow = 'hidden';
                         							}
-                        								
-                        						});
+														});
+                        						}else if(gameMacth1 == "5vs5"){
+													
+													div.addEventListener("click",function(){
+														if(comment.tmember6 == ''){
+		                         							mteamName.value = comment.teamName; 
+		                         							teamCode.value = comment.teamCode;
+														}else {
+															alert("6명이서 참가할 수 없습니다.");
+															}
+				
+                    							const modal = document.querySelector('.modal');
+              							      
+										        modal.classList.toggle('show');
+
+            							        if (modal.classList.contains('show')) {
+            							          body.style.overflow = 'hidden';
+                    							}
+													});
+                    						}						
+
                         						const h4 = document.createElement("h4");
                         						h4.innerText = "팀코드 :"+comment.teamCode;
                         						const p = document.createElement("p");
@@ -438,19 +470,21 @@
                         </div>
                         <a href="#" class="btn-open-popup">팀 검색</a>
                     </div>
-                    <div class="team_button">
+                    <div class="rbutton">
                         <a class="tbtn" href="${pageContext.request.contextPath}/team/register">팀 등록하기</a>
                     </div>
                 </div>
-            </div>
+         
         </div>
       
-        <div class="submit_button">
-            <button type="submit" id="writer_submit">작성 완료</button>
+        <div class="submit">
+            <button type="submit" id="subtn">팀 매치 작성 완료!</button>
         </div>
+         
         </form>
+        </div>
     </div>
-    </div>
+   
    
 
     <script type="text/javascript">
@@ -511,16 +545,21 @@
           body.style.overflow = 'hidden';
         }
       });
-
-      modal2.addEventListener('click', (event) => {
-        if (event.target === modal2) {
-          modal2.classList.toggle('show');
-
-          if (!modal2.classList.contains('show')) {
-            body.style.overflow = 'auto';
-          }
-        }
+		
+      document.getElementById("mapclose").addEventListener("click",function(){
+    	  modal2.classList.remove('show');
       });
+      
+      
+//       modal2.addEventListener('click', (event) => {
+//         if (event.target === modal2) {
+//           modal2.classList.toggle('show');
+
+//           if (!modal2.classList.contains('show')) {
+//             body.style.overflow = 'auto';
+//           }
+//         }
+//       });
       
      
      
@@ -568,27 +607,7 @@
          } 
      });   
      </script>
-     <script type="text/javascript">
-//      	document.getElementById("gameTime").addEventListener("click",function(){
-     		
-     		
-     
-// 	     	const date = document.getElementById("txtDate").value;
-// 	     	const gameName = document.getElementById("fieldName").value;
-// 	     	const social = document.querySelectorAll(".social");
-	     	
-// 	     	console.log("유효성검사" + date);
-// 	     	console.log("gameName" + gameName);
-	     	
-// 	     	if( date != null && fieldName != null){
-// 	     		for( var x=0; x<social.length; x++){
-// 	     			social[x].style.display = 'none';
-// 	     		}
-// 	     	}
-     	
-//      	});
-     	
-     </script>
+	
 </body>
 </html>
  

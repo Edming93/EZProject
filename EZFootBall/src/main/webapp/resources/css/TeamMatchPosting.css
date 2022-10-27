@@ -3,303 +3,512 @@
 
 *{
     box-sizing : border-box;
-    margin : 2px auto;
- 
 }
-.posting{
-    display: flex;
-    background-color: white;
-   
-    width: 1024px;
-    border: 1px solid white;
-}
-.posting_subcon{
-    display: flex;
-    background-color: white;
-    flex-direction: column;
-    width: 500px;
-    border: 1px solid white;
-}
-.title {
-    width: 100%;
-    text-align: center;
+.container {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-template-areas: '. sub .';
+    justify-items: center;
     
-}
-.title p{
-    font-weight: 700;
-    font-size : 30px;
-    margin-bottom: 20px;
     
-}
-.hurry{
-    width: 100%;
-}
-.hurry .sub_title1{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
 }
 
-.hurry .option select {
-    width: 100%; /* 원하는 너비설정 */
-     padding: .8em .5em; /* 여백으로 높이 설정 */
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
-     border: 1px solid #999;
-     appearance: none;
- 
+
+
+.sub_con{
+    grid-area: sub;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 66%;
+    background-color: #f8f7e5;
+    
 }
+/* 공통 틀 css */
+.subt{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+/* 매치작성 제목 */
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+/* 경기 성별 */
 .gender{
-    width: 100%;
-}
-.gender .sub_title1{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-
-.gender .option select {
-    width: 100%; /* 원하는 너비설정 */
-     padding: .8em .5em; /* 여백으로 높이 설정 */
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
-     border: 1px solid #999;
-     appearance: none;
-}
-.match_type{
-    width: 100%;
-}
-.match_type .sub_title1{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-.match_type .option select{
-    padding-left: 10px;
-}
-.match_type .option select {
-    width: 100%; /* 원하는 너비설정 */
-     padding: .8em .5em; /* 여백으로 높이 설정 */
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
-     border: 1px solid #999;
-     appearance: none;
-
-}
-.match_date{
-    width: 100%;
-}
-.match_date .sub_title2{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-
-.match_date input{
-    width: 100%;
-    height: 40px;
-    padding-left: 5px;
-
-}
-.match_time{
-    width: 100%;
-}
-.match_time .sub_title2_1{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-.match_time .match_time_span{
-    font-size: 12px;
-    color : red;
-}
-
-.match_time .option select{
-    padding-left: 10px;
-}
-.match_time .option select {
-    width: 100%; /* 원하는 너비설정 */
-     padding: .8em .5em; /* 여백으로 높이 설정 */
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
-     border: 1px solid #999;
-     appearance: none;
-
-}
-
-.field{
     display: flex;
-    flex-direction: column;
-    width : 100%;
-    
+  
 }
-.field_div{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-   
-}
-.field .sub_title3{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-.field .field_div .search_map{
-    display: flex;
-    width: 100%;
-   
-}
-.field .field_div .search_map input{
-    width: 70%;
-    height: 40px;
-    
-}
-.field .field_div .search_map .map_button{
-    height: 40px;
-    width: 30%;
-    background-color: #26A653;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.field .field_div .search_map a {
-    text-decoration: none;
-    font-weight: 700;
-    color: white;
-}
-.payment{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-   
-}
-.payment .sub_title4{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-.payment_text{
-    width: 100%;
-}
-.payment input{
-    width: 100%;
-    height: 40px;
-
-}
-
-.field{
-    display: flex;
-    flex-direction: column;
-}
-.field_div{
-    display: flex;
-    flex-direction: column;
-   
-}
-.field .sub_title3{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-.field .field_div .search_map{
-    display: flex;
-    width: 100%;
-    align-content: space-between;
-}
-.field .field_div .search_map input{
-    width: 70%;
-    height: 40px;
-   
-}
-.field .field_div .search_map .map_button{
-    height: 40px;
-    width: 30%;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.field .field_div .search_map a {
-    text-decoration: none;
-    font-weight: 700;
-    color: white;
-}
-.submit_button{
-    width: 100%;
-    height: 40px;
-    background-color: #26A653;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#writer_submit{
-    width: 100%;
-    height: 40px;
-    background-color: black;
-    border: none;
-    color: white;
+.gender p {
     font-weight: 700;
     font-size: 15px;
 }
-#writer_submit:hover{
-    cursor: pointer;
+
+.gicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2%;
+}
+.option{
+ 
+    width: 100%;
+}
+#gameGender{
+     width: 100%; /* 원하는 너비설정 */
+	 padding : 0 10px;
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background-color : white; 
+     border: 1px solid #999;
+     height : 30px;
+     border-radius : 10px;
+     appearance: none;
 }
 
-.team_search{
+/* 매치 날짜 */
+.date {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 3%;
 }
-.team_search_div{
+
+.date p {
+    font-weight: 700;
+    font-size: 15px;
+}
+.dicon{
     display: flex;
-    flex-direction: column;
-    width: 100%;
-   
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
 }
-.team_search .sub_title3 {
+
+.dinput{
     width: 100%;
-    float: left;
-    padding-left: 5px;
 }
-.team_search .team_search_div .sub_title3 .sub_title3_span{
+
+#txtDate{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    padding-left : 10px;
+}
+/* 매치 지역 */
+.matchp{
+    display: flex;
+}
+
+.matchp p{
+    font-weight: 700;
+    font-size: 15px;
+}
+.micon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.option{
+	width : 100%;
+}
+
+#gameplace{
+     width: 100%; /* 원하는 너비설정 */
+	 padding : 0 10px;
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background-color : white; 
+     border: 1px solid #999;
+     height : 30px;
+     border-radius : 10px;
+     appearance: none;
+}
+
+.matchp .match_place_span{
     font-size: 12px;
     color : red;
 }
-.team_search .team_search_div .search_team{
+
+/* 경기장 검색 */
+.matchf{
     display: flex;
+}
+
+.matchf p {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.ficon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+.matchf_in {
+    display: flex;
+}
+
+.matchf_in .finput{
+    width: 60%;
+}
+
+#fieldName{
+    width: 70%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.fbutton{
+    height: 30px;
+    width: 30%;
+    background-color: #26a653;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.fbutton a {
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+}
+
+   /* 지도검색 modal창 디자인 */
+    .modal22 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal22.show {
+  display: block;
+}
+
+.modal22_body22 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 1200px;
+  height: 700px;
+
+  padding: 30px;
+
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+  overflow : hidden;
+}
+
+
+.modal22_body22 a{
+	background-color : #26a563;
+	color : white;
+	font-weight : 700;
+}
+
+#map{
+		width : 75vw;
+		height : 50vh;
+	}
+	.map_search{
+		width : 80%;
+		height : 60px;
+		display : flex;
+		justify-content : space-between;
+	}
+	.map_search .search_area{
+		width : 90%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+	}
+	.map_search .search_area #search{
+		width : 100%;
+		height : 80%;
+		border-radius : 10px;
+		
+	}
+	.map_search .search_button{
+		width : 8%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+		background-color : #26a563;
+		height : 50px;
+		margin-top : 5px;
+		border-radius : 10px;
+	}
+	
+	.map_search .search_button a{
+		color : white;
+		font-size : 20px;
+		text-decoration : none;
+	}
+	
+	
+
+/* 경기장 시간 */
+.matcht {
+    display: flex;
+}
+.matcht p {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.timeicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+
+.option{
+	width : 100%;
+}
+#gameTime{
+     width: 100%; /* 원하는 너비설정 */
+	 padding : 0 10px;
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background-color : white; 
+     border: 1px solid #999;
+     height : 30px;
+     border-radius : 10px;
+     appearance: none;
+}
+.matcht .match_time_span{
+    font-size: 12px;
+    color : red;
+}
+
+/* 경기장 주소 */
+.matchadd{
+    display: flex;
+}
+
+.matchadd p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.addicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+.addinput {
     width: 100%;
-    align-content: space-between;
 }
-.team_search .team_search_div .search_team input{
 
-    height: 40px;
-   
+#fieldAddress{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
 }
-.team_search .team_search_div .search_team .team_search_button{
-    height: 40px;
-    width: 25%;
-    background-color: #26A653;
+
+
+/* 경기장 선택시 자동완성 부분 매치방식, 매치코드, 참가비 */
+.subt1{
+    width: 100%;
+    display: flex;
+}
+.innersubt1{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.matchtype{
+    display: flex;
+}
+
+.matchtype p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.matchicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.typeinput{
+    width: 100%;
+}
+
+#gameMacth{
+    width: 95%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.matchc{
+    display: flex;
+}
+
+.matchc p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.cicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.cinput{
+    width: 100%;
+}
+
+#fieldCode{
+    width: 95%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.matchpay{
+    display: flex;
+}
+
+.matchpay p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.payicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.payinput{
+    width: 100%;
+}
+
+#gamePay{
+    width: 95%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+/* 팀 선택 */
+.team{
+    display: flex;
+}
+
+.team p{
+    font-size: 15px;
+    font-weight: 700;
+}
+.team .sub_title3_span{
+    font-size: 12px;
+    color : red;
+}
+.teamicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.innerteam{
+    display: flex;
+    justify-content: space-between;
+}
+.teaminput {
+    width: 40%;
+}
+
+#mTeamName{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+}
+.sbutton{
+    width: 28%;
+    background-color: #26a563;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.sbutton a{
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+}
+.rbutton{
+    width: 28%;
+    background-color: #26a563;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+
+}
+
+.submit{
+    width: 100%;
+    height: 50px;
+    background-color: #889E81;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 }
-.team_search .team_search_div .search_team .team_button{
-    height: 40px;
-    width: 35%;
-    background-color: #26A653;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.team_search .team_search_div .search_team .team_search_button .btn-open-popup {
-    text-decoration: none;
+.submit #subtn{
+  border: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
     font-weight: 700;
-    color: white;
-}
-.team_search .team_search_div .search_team .team_button .tbtn {
-    text-decoration: none;
-    font-weight: 700;
-    color: white;
+    font-size: 30px;
+    background-color: #889E81;
+
 }
 
- /* 팀 검색 modal 창 */
+.rbutton a {
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+}
+/* 팀 검색 modal 창 */
   .modal {
     position: absolute;
     top: 0;
@@ -373,126 +582,9 @@
    	height : 100%;
    	overflow : auto;
    }
-   
-   /* 지도검색 modal창 디자인 */
-    .modal22 {
-  position: absolute;
-  top: 0;
-  left: 0;
 
-  width: 100%;
-  height: 100%;
 
-  display: none;
 
-  background-color: rgba(0, 0, 0, 0.4);
-}
 
-.modal22.show {
-  display: block;
-}
 
-.modal22_body22 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
 
-  width: 1400px;
-  height: 900px;
-
-  padding: 30px;
-
-  text-align: center;
-
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-
-  transform: translateX(-50%) translateY(-50%);
-  overflow : hidden;
-}
-#hahaha{
-	 width: 1400px;
-  height: 900px;
-}
-
-.modal22_body22 a{
-	background-color : black;
-}
-
-#map{
-		width : 75vw;
-		height : 50vh;
-	}
-	.map_search{
-		width : 80%;
-		height : 60px;
-		display : flex;
-		justify-content : space-between;
-	}
-	.map_search .search_area{
-		width : 84%;
-		
-		display : flex;
-		justify-content : center;
-		align-items : center;
-	}
-	.map_search .search_area #search{
-		width : 100%;
-		height : 80%;
-		
-	}
-	.map_search .search_button{
-		width : 7%;
-		
-		display : flex;
-		justify-content : center;
-		align-items : center;
-		background-color : black;
-	}
-	
-	.map_search .search_button a{
-		color : white;
-		font-size : 20px;
-		text-decoration : none;
-	}
-	.map_search .confirm_button{
-		width : 7%;
-		
-		display : flex;
-		justify-content : center;
-		align-items : center;
-		background-color : black;
-	}
-	.map_search .confirm_button a{
-		
-		background-color : black;
-	}
-	
-	.match_place{
-    width: 100%;
-}
-.match_place .sub_title_place{
-    width: 100%;
-    float: left;
-    padding-left: 5px;
-}
-.match_place .option select{
-    padding-left: 10px;
-}
-.match_place .option select {
-    width: 100%; /* 원하는 너비설정 */
-     padding: .8em .5em; /* 여백으로 높이 설정 */
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
-     border: 1px solid #999;
-     appearance: none;
-
-}
-.match_place .match_place_span{
-    font-size: 12px;
-    color : red;
-}
-
-#search {
-	padding : 20px;
-}
