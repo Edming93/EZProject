@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -90,16 +92,34 @@ public class RentalController {
 	}
 	
 	@GetMapping("/rentalDetail")
-	public String rentalDetailMove(@RequestParam("fieldCode") String fieldCode,Model model) {
+	public String rentalDetailMove(@RequestParam("fieldCode") int fieldCode,Model model) {
 		System.out.println("필드코드 : "+fieldCode);
 		service.fieldInfo(fieldCode,model);
 		return 	"rental/rentalDetail";
 	}
 	
-	@GetMapping("rentalPayment")
-	public String rentalPaymentMove(@RequestParam("fieldCode") String fieldCode) {
+	@GetMapping("/rentalPayment")
+	public String rentalPaymentMove(@RequestParam("fieldCode") int fieldCode,Model model,
+									@RequestParam("day") String day,@RequestParam("time") int time) {
+		service.fieldInfo(fieldCode,model);
+		model.addAttribute("day",day);
+		model.addAttribute("time",time);
+		
+		System.out.println("여기까지오나?");
 		return "rental/rentalPayment";
 	}
+	
+	
+	@GetMapping("/resultField")
+	public String fieldResultMove() {
+		return "rental/resultField";
+	}
+	
+	@GetMapping("/resultTeam")
+	public String teamResultMove() {
+		return "rental/resultTeam";
+	}
+	
 
 	
 		

@@ -28,8 +28,14 @@ public class RentalService {
 		return dao.selectTime(gvo);
 	}
 	
-	public void fieldInfo(String fieldCode,Model model) {
-		System.out.println("서비스 필드코드 : "+fieldCode);
+	public void fieldInfo(int fieldCode,Model model) {
+		System.out.println("필드 필드코드 : "+fieldCode);
 		model.addAttribute("field",dao.fieldInfo(fieldCode)); 
 	}
+	
+	public void matchInfo(int fieldCode,Model model) {
+		System.out.println("매치 필드코드 : "+fieldCode);
+		model.addAttribute("match",dao.matchInfo(fieldCode));
+	}
+	
 }

@@ -2,6 +2,7 @@ package com.sample.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sample.vo.GameFieldInfoVO;
@@ -12,5 +13,7 @@ public interface RentalDAO {
 
 	public List<GlistVO> rvListAll(GlistVO vo);
 	public List<GlistVO> selectTime(GlistVO vo);
-	public GameFieldInfoVO fieldInfo(String fieldCode);
+	@MapKey("fieldCode") 
+	public GameFieldInfoVO fieldInfo(int fieldCode);
+	public GlistVO matchInfo(int fieldCode);
 }

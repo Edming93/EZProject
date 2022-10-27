@@ -37,7 +37,7 @@
 <!-- 				</if> -->
 <!-- 			</where> -->
 <!-- 	</select> -->
-	
+
 	<select id="fieldInfo" resultType="gameFieldInfoVO">
 		select field_code,field_name,field_address,field_rentalfee,field_type,
 		field_img1,field_img2,field_img3,field_img4,field_img5,field_size,
@@ -45,6 +45,10 @@
 		from gamefield_info where field_code = #{fieldCode}
 	</select>
 	
+	<select id="matchInfo" resultType="GlistVO">
+		select game_code, game_day, game_time, game_macth,level
+		from gamelist where field_code = #{fieldCode}
+	</select>
 	
 	
 	

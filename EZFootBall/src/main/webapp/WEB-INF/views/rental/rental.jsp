@@ -165,8 +165,24 @@
             let week = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
             let num = week.indexOf("<%=we%>");
             let ct = <%=today%>% 7;
-
+            
             for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
+            	if(week[i]=='MONDAY'){
+            		week[0]='월';
+            	}else if(week[i]=='TUESDAY'){
+            		week[1]='화';
+            	}else if(week[i]=='WEDNESDAY'){
+            		week[2]='수';
+            	}else if(week[i]=='THURSDAY'){
+            		week[3]='목';
+            	}else if(week[i]=='FRIDAY'){
+            		week[4]='금';
+            	}else if(week[i]=='SATURDAY'){
+            		week[5]='토';
+            	}else if(week[i]=='SUNDAY'){
+            		week[6]='일';
+            	};
+            		
                 if ((i + 1) % 7 == ct) {
                     var newp = document.createElement("p");
                     newp.innerText = week[num];
@@ -410,13 +426,16 @@
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
+					let time = parseInt(timeset[i]);
+
 					if(game_time.includes(timeset[i])){
 						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode;
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+						
+						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
 					}
 					rental_area.append(rental_div);
 				}

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +10,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
    <script src="https://kit.fontawesome.com/4b992414b9.js" crossorigin="anonymous"></script>
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +22,7 @@
    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
    <style>
       * {
-         margin: 0 auto;
+         margin: 0;
          padding: 0 auto;
          box-sizing: border-box;
          font-family: 'Noto Sans KR', sans-serif;
@@ -28,6 +31,19 @@
       body {
          background-color: white;
          height: 100vh;
+      }
+      
+      .container {
+         width: 100%;
+         margin: 0 auto;
+         display: grid;
+         grid-template-columns: 23% 54% 23%;
+         grid-template-rows: 65px 448px 1fr;
+         gap: 5px 5px;
+         grid-auto-flow: row;
+         grid-template-areas: ". header ."
+            ". rv_info ."
+            ". pay_info  ."
       }
 
       .header_container {
@@ -89,18 +105,6 @@
          align-items: center;
       }
 
-      .container {
-         width: 100%;
-         margin: 0 auto;
-         display: grid;
-         grid-template-columns: 23% 54% 23%;
-         grid-template-rows: 65px 400px 1fr;
-         gap: 5px 5px;
-         grid-auto-flow: row;
-         grid-template-areas: ". header ."
-            ". rv_info ."
-            ". pay_info  ."
-      }
 
       .rv_info_container {
          grid-area: rv_info;
@@ -114,7 +118,7 @@
          background: #343434;
          background-size: 111% 100%;
          color: #dbdbdb;
-         background-image: url("./image/football-488714_960_720_1.png");
+         background-image: url("${pageContext.request.contextPath}/image/football-488714_960_720_1.png");
       }
 
       .payment_container {
@@ -134,13 +138,13 @@
 
       .rv_day h3 {
          margin: 0px;
-         font-size: 25px;
+         font-size: 23px;
       }
 
       .rv_day h4,
       .rv_time h4 {
          color: #A9A9A9;
-         font-size: 18px;
+         font-size: 16px;
          font-weight: 100;
       }
 
@@ -161,7 +165,7 @@
       }
 
       .rv_time h3 {
-         font-size: 22px;
+         font-size: 19px;
          margin-bottom: 15px;
       }
 
@@ -172,6 +176,26 @@
       .rv_info_content h3 {
          margin-bottom: 10px;
 
+      }
+      .rv_result_area {
+         display: flex;
+         justify-content: space-around;
+         width: 100px;
+
+      }
+      .rv_name {
+         font-size: 15px;
+
+      }
+      .rv_result {
+         font-size: 15px;
+         font-weight: bold;
+
+      }
+      .result_match {
+         font-size:13px;
+         font-weight: 100;
+         color:#8C8C8C;
       }
 
       .alarm_icon {
@@ -184,15 +208,20 @@
          width:100%;
          display: flex;
          margin-top: 10px;
-         
+         justify-content: space-between;
       }
 
       .rv_info_area {
-         width:50%;
-         padding:20px;
-
+         width:48%;
+         padding-top: 30px;
 
       }
+
+      .pay_info_area {
+         width:48%;
+         padding-top: 30px;
+      }
+
       .rv_info_content {
          margin-top:25px;
          box-sizing: border-box;
@@ -207,14 +236,11 @@
          background-clip: content-box,border-box;
 
          display: flex;
-         justify-content: space-around;
+		 justify-content: space-evenly;
          align-items: center;
       }
 
-      .pay_info_area {
-         width:50%;
-         padding:20px;
-      }
+
       .rv_info_title {
          display: flex;
          margin-bottom: 20px;
@@ -223,12 +249,48 @@
          
          
       }
+      .pay_content {
+         position: sticky;
+         top: 50px;
+      }
 
-
+      .pay_area {
+         display: flex;
+         justify-content: space-between;
+         margin-bottom: 20px;
+      }
       
+      .pay_area:nth-child(2) {
+         margin-top:10px;
 
+      }
+      .pay_info_content {
+         display: flex;
+         flex-direction: column;
+         
+      }
+      
+      .pay_title {
+         color:#7C7C7C;
+      }
+      
+      .pay {
+         font-size: 16px;
+         font-weight: bold;
 
+      }
 
+      .pay_total {
+         font-size:18px;
+         color:#343434;
+
+      }
+
+      .pay_won {
+         font-size: 13px;
+         margin-left: 3px;
+
+      }
 
       .payment_container {
          margin-top: 20px;
@@ -236,25 +298,45 @@
 
       #payment_btn {
          display: flex;
-         width: 90%;
+         width: 100%;
+         color:white;
+         font-size: 15px;
+         border-radius: 10px;
          align-items: center;
          justify-content: center;
-         height: 40px;
-         background-color: gray;
+         height: 55px;
+         background-color:#26A653;
          border: gray;
          cursor: pointer;
       }
 
+      .rv_info_content_area {
+         height:240px;
+
+      }
+
       .notice_container {
-         margin-top:20px;
          width: 100%;
+         
          
       }
 
       .notice_area {
-         margin-bottom: 20px;
-         
+         display: flex;
+         flex-direction: column;
+         flex-wrap:nowrap;
+         margin-bottom: 70px;
       }
+      .title_point {
+         color: rgb(26, 124, 255);
+      }
+      
+    .login_icon {
+        margin-left:15px;
+    }
+    .etc_icon {
+        margin-left:10px;
+    }
    </style>
 
 </head>
@@ -267,6 +349,13 @@
                <div class="header_left main_logo">
 
                </div>
+      <script type="text/javascript">
+         let main_logo = document.querySelector(".main_logo");
+
+         main_logo.addEventListener("click", function () {
+            location.href = "${pageContext.request.contextPath}";
+         });
+      </script>
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
                      <input type="text" class="search_input">
@@ -310,59 +399,134 @@
             <h3>
                <iconify-icon class="alarm_icon" icon="grommet-icons:alarm"></iconify-icon> 예약 정보
             </h3>
-            <h4>10/26 수</h4>
-            <h4>PM06:00 ~ PM08:00</h4>
+            <h4>${day}</h4>
+            <h4>${time}:00 ~ ${time+2}:00 시</h4>
          </div>
          <div class="rv_time">
-            <h3 class="field_name">이정욱 경기장</h3>
-            <h4>강원도 강릉시 종합운동장길 69</h4>
+            <h3 class="field_name">${field.fieldName}</h3>
+            <h4>${field.fieldAddress}</h4>
          </div>
       </div>
 
       <div class="reservation_container">
          <div class="rv_info_area">
-            <h3 class="rv_info_title">예약 정보</h3>
-            <div class="rv_info_content">
-               <div>
-                  <span class="rv_type">매치 종류</span>
-                  <span class="rv_type_result">6v6 매치</span>
-               </div>
-               <div>
-                  <span class="rv_level">레벨</span>
-                  <span class="rv_level_result">Lv.브론즈3</span>
+            <div class="rv_info_content_area">
+               <h3 class="rv_info_title">예약 정보</h3>
+               <div class="rv_info_content">
+                  <div class="rv_result_area">
+                     <span class="rv_name">종류</span>
+                     	<c:if test="${match.gameType} == T">
+                     <span class="rv_result">팀 <span class="result_match">매치</span></span>
+                     </c:if>
+                        <c:if test="${match.gameType eq null}">
+                     <span class="rv_result">구장 <span class="result_match">예약</span></span>
+                     	</c:if>
+                  </div>
+                  <div class="rv_result_area">
+                     <span class="rv_name">형태</span>
+                     <span class="rv_result">${field.fieldType} <span class="result_match">매치</span></span>
+                  </div>
+                  <c:if test="${match.gameType} == T">
+                  	<div class="rv_result_area">
+                     	<span class="rv_result">레벨 </span>
+                    </div>
+                  </c:if>
+<%--                      <span class="rv_result">${match.level}</span> --%>
+                  
                </div>
             </div>
 
             <div class="notice_container">
                <div class="notice_area">
-                  <span class="rv_info_title">유의사항</span>
-                  <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi molestias harum id? Perferendis sint sit, soluta laudantium saepe quae nesciunt molestiae, harum quisquam et ipsam animi laborum facilis! Distinctio, sint!</span>
+                  <div class="rv_info_title">환불 규정</div>
+                  <span>
+                     주의해주세요! 2일 전부터는 환불이 불가능합니다!<br>
+                     매치 시간에 가까울수록 신청 취소 수수료가 커져요. <br>
+                     7일 전까지는 100% 캐시 환불입니다.<br><br>
+
+                     호우 경보, 대설 경보, 태풍 주의보, 태풍 경보 등 천재지변으로 구장 <br>이용이 어려울 경우에는 전액 캐시 환불해 드립니다.<br><br>
+                     
+                     시간 당 5mm 이상 비가 내리면, 예약 날짜를 변경할 수 있습니다.<br> 기상청 날씨누리 정보 기준으로 매치 2시간 전 지역 일기예보를 따릅니다.<br><br>
+
+                     7일 이전 : 100% 환불<br>
+                     5일 ~ 7일 : 80% 환불<br>
+                     3일 ~ 5일 : 50% 환불<br>
+                     당일 ~ 2일 : 0% 환불<br><br>
+                  </span>
                </div>
                <div class="notice_area">
-                  <span class="rv_info_title">코로나19</span>
-                  <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum dolor accusantium enim, quas quis asperiores quibusdam, tempora provident libero minima praesentium, dignissimos hic ratione sint nisi illo! Dolorem, iusto illo.</span>
+                  <div class="rv_info_title title_point">이것만은 꼭 지켜주세요!</div>
+                  <span>
+                     1. 다음 경기팀을 위해 제시간에 경기를 마쳐주세요.<br>
+                        예약 시간을 초과하지 않도록 5분전에 마무리 하는게 좋아요.<br><br>
+
+                     2. 축구화 안돼요. 풋살화(TF)를 신고 플레이 해주세요.<br>
+                        풋살장에서 축구화(FG,HG,AG,MG) 착용은 나와 상대방의 부상을 <br>유발합니다!<br><br>
+
+                     3. 다른 사용자나 인근 주민에게 피해를 끼치는 행동을 삼가주세요.<br>
+                        민원으로 시설 사용이 중단될 수도 있습니다.<br><br>
+
+                     4. 이용자 부주의로 시설을 파손하면, 손해배상을 청구할 수 있습니다. <br>            
+                  </span>
                </div>
-      
+               <div class="notice_area">
+                  <div class="rv_info_title">코로나19</div>
+                  <span>
+                     코로나19에 확진된 사람은 재택 치료 기간 동안 매치에 참여할 수 없어요. <br>
+                     다른 사용자들을 위해 조금만 조심해주세요 :)
+                  </span>
+               </div>
+               <div class="notice_area">
+                  <div class="rv_info_title">부상과 보험</div>
+                  <span>
+                     EZ풋볼은 상대를 배려하고, 나를 지키는 안전한 플레이를 권장합니다. <br>
+                     다른 사람에게 피해를 끼치는 경우 이용이 정지될 수 있습니다. <br> <br>
+
+                     경기 규칙 안에서 발생한 부상 대부분은 책임을 묻기 어렵다는 판결 사례가 많습니다. <br> <br>
+                     
+                     과도한 힘을 사용해 일부러 상대를 다치게 할 경우 법원이 배상을 결정한 판례가 있습니다. <br> <br>
+                     
+                     플랩에서 직접 운용하는 보험 상품은 없습니다.  <br>소셜 매치 참여 전 실손의료보험 가입 여부를 확인해 주세요. <br> <br>
+                     
+                     실비 보험이 없다면, 스포츠 안전재단의 스포츠여행자공제(국내)와 다른 민간 보험사의 상품도 가입 가능함을 알립니다. <br> <br>
+                  </span>
+               </div>
             </div>
          </div>
 
          <div class="pay_info_area">
-            <h3 class="rv_info_title">결제</h3>
-            <div class="pay_info_content">
-               <div>
-                  <span class="pay_title">이용금액</span>
-                  <span class="pay">10,000원</span>
+            <div class="pay_content">
+               <h3 class="rv_info_title">결제</h3>
+               <div class="pay_info_content">
+                  <div class="pay_area">
+                     <span class="pay_title">이용금액</span>
+                     <span class="pay">
+                     	<span class="rental_fee">${field.fieldRentalfee}</span>
+                     	<span class="pay_won">원</span>
+                     </span>
+                  </div>
+                  <hr>
+                  <div class="pay_area">
+                     <span class="pay_title pay_total">총 금액</span>
+                     <span class="pay pay_total">
+                     	<span class="rental_fee">${field.fieldRentalfee}</span>
+                     	<span class="pay_won">원</span>
+                     </span>
+                  </div>
+                  
+                  <script type="text/javascript">
+                  window.onload = function() {
+                  let pay = document.querySelectorAll(".rental_fee");
+
+                  pay[0].innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
+                  pay[1].innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
+                  }
+                  </script>
+                  
+                  <div class="payment_container">
+                     <button id="payment_btn" onclick="requestPay()">결제하기</button>
+                  </div>
                </div>
-               <hr>
-               <div>
-                  <span class="pay_title total_pay">총 금액</span>
-                  <span class="pay">10,000원</span>
-               </div>
-               
-               <div class="payment_container">
-                  <button id="payment_btn" onclick="requestPay()">결제하기</button>
-               </div>
-               
             </div>
          </div>
 
@@ -374,10 +538,6 @@
    </div>
 
 
-
-
-
-
    <script>
       var IMP = window.IMP; // 생략가능
       IMP.init('imp44418126'); // <-- 본인 가맹점 식별코드 삽입
@@ -387,8 +547,8 @@
             pg: "inicis",
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: '비싼거',
-            amount: '5000',
+            name: '${field.fieldName}',
+            amount: '100',
             buyer_email: 'iamport@siot.do',
             buyer_name: '구매자',
             buyer_tel: '010-1234-5678',
@@ -396,9 +556,17 @@
             buyer_postcode: '123-456'
          }, function (rsp) { // callback
             if (rsp.success) {
-
+            	alert("결제에 성공하셨습니다!");
+            	/* 구장예약 , 매치내역경로 이동 */
+            	/* 임시경로 설정 */
+            	if(${match.gameType eq null}){ // 구장예약일 경우
+                 	location.href = "${pageContext.request.contextPath}/rental/resultField";
+            	}else { // 팀매치 예약일 경우
+            		location.href = "${pageContext.request.contextPath}/rental/resultTeam";
+            	}
             } else {
-
+				alert("결제에 실패하셨습니다!");
+	             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${field.fieldCode};
             }
          });
       }

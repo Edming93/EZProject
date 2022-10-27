@@ -23,7 +23,7 @@
          margin: 0 auto;
          display: grid;
     	 grid-template-columns: 23% 54% 23%;
-         grid-template-rows: 65px 448px 85px 88px 1fr 1fr ;
+         grid-template-rows: 65px 420px 85px 88px 1fr 1fr ;
          gap: 5px 5px;
          grid-auto-flow: row;
          grid-template-areas: ". header btn" 

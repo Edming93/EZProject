@@ -131,9 +131,7 @@ public class ServletAppContext implements WebMvcConfigurer {
 		mainReg.addPathPatterns("/");
 		mainReg.excludePathPatterns("/home");
 		loginReg.addPathPatterns("/loginPage/login");
-//		
-//		socialReg.addPathPatterns("/");
-//		
+
 	}
 	
     @Bean

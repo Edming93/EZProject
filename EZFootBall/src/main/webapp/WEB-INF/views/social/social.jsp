@@ -202,6 +202,22 @@
             let ct = <%=today%>% 7;
 
             for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
+            	if(week[i]=='MONDAY'){
+            		week[0]='월';
+            	}else if(week[i]=='TUESDAY'){
+            		week[1]='화';
+            	}else if(week[i]=='WEDNESDAY'){
+            		week[2]='수';
+            	}else if(week[i]=='THURSDAY'){
+            		week[3]='목';
+            	}else if(week[i]=='FRIDAY'){
+            		week[4]='금';
+            	}else if(week[i]=='SATURDAY'){
+            		week[5]='토';
+            	}else if(week[i]=='SUNDAY'){
+            		week[6]='일';
+            	};
+            	
                 if ((i + 1) % 7 == ct) {
                     var newp = document.createElement("div");
                     newp.innerText = week[num];
