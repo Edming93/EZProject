@@ -116,7 +116,7 @@
          grid-template-areas: ". ."
             "re_info field_info";
          background: #343434;
-         background-size: 111% 100%;
+         background-size: 100% 100%;
          color: #dbdbdb;
          background-image: url("${pageContext.request.contextPath}/image/football-488714_960_720_1.png");
       }
@@ -180,7 +180,7 @@
       .rv_result_area {
          display: flex;
          justify-content: space-around;
-         width: 100px;
+		 width: 145px;
 
       }
       .rv_name {
@@ -419,7 +419,7 @@
                <h3 class="rv_info_title">예약 정보</h3>
                <div class="rv_info_content">
                   <div class="rv_result_area">
-                     <span class="rv_name">종류</span>
+                     <span class="rv_name">매치종류</span>
                      	<c:if test="${match.gameType} == T">
                      <span class="rv_result">팀 <span class="result_match">매치</span></span>
                      </c:if>
@@ -428,7 +428,7 @@
                      	</c:if>
                   </div>
                   <div class="rv_result_area">
-                     <span class="rv_name">형태</span>
+                     <span class="rv_name">매치형태</span>
                      <span class="rv_result">${field.fieldType} <span class="result_match">매치</span></span>
                   </div>
                   <c:if test="${match.gameType} == T">

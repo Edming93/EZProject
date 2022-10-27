@@ -133,7 +133,7 @@
         height: 100%;
         display: flex;
         justify-content: center;
-        background-color: #fafafa;
+/*         background-color: #fafafa; */
     }
     .banner_content_area {
         max-width: 1024px;
@@ -142,6 +142,7 @@
         justify-content: center;
         align-items: center;
         padding: 15px;
+        margin-bottom: 45px;
     }
     .banner_image {
         width: 100%;
@@ -151,10 +152,10 @@
 
 
     .match_list_container {
-        width: 100%;
-        height: 3700px;
-        display: flex;
-        justify-content: center;
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+	    justify-content: center;
     }
 
     .match_menu_area {

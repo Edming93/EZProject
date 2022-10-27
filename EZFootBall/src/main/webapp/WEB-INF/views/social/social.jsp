@@ -44,6 +44,7 @@
 
         #datelist {
             display: flex;
+    		width: 100%;
         }
 
         #datelist button {
@@ -71,14 +72,15 @@
             display: none;
         } 
         #day li {
-            display: inline-block;
-            width: 125px;
-            height: 70px;
-            margin: 5px;
-            padding: 0;
-            text-align: center;
-            border-radius: 30px;
-            border: 1px solid black;
+		    display: inline-block;
+		    width: 75px;
+		    height: 70px;
+		    margin: 30px;
+		    padding: 0;
+		    text-align: center;
+		    border-radius: 71px;
+		    border: 1px solid #e1e1e1;
+		    color: #c7c7c7;
         }
         .idaydiv{
         	padding-top: 15px;
@@ -89,20 +91,23 @@
         }
 
         #settingbutton{
-        	flex: 1;
-        	display: flex;
-        	position : relative;
-        	height: 40px;
-        	margin: 10px 0 ;
+		    flex: 1;
+		    display: flex;
+		    position: relative;
+		    height: 40px;
+		    margin-top: 20px;
+		    font-size: 12px;
+		    margin-bottom: 40px;
+		    margin-left: 20px;
     	}
     	
-    	#local{
+    	.local{
     		width: 100px;
     		border-radius: 30px;
     		margin-right: 10px;
     	}
     	
-    	#closediv{
+    	.closediv{
     		width: 100px;
     		border-radius: 30px;
     		display: flex;
@@ -112,8 +117,8 @@
     		margin-right: 10px;
     	}
     	.gender{
-    		width: 100px;
-    		border-radius: 30px;
+    		width: 42px;
+    		border-radius: 55px;
     		display: flex;
     		align-items: center;
     		justify-content: center;
@@ -133,53 +138,93 @@
     		border-radius: 30px;
     		margin-right: 10px;
     	}
-    	#listreset{
+    	.listreset{
     		width: 100px;
     		border-radius: 30px;
     		border: 1px solid black;
+    		display: flex;
+    		justify-content: center;
+    		align-items: center;
+    
+    		
     	}
     	.matchgame{
-    		display: flex;
-    		color: black;
-    		text-decoration: none;
-    		padding: 10px 0;
-    		border-bottom: 1px solid #aaa;
-    		height: 100px;
+			display: flex;
+		    color: black;
+		    text-decoration: none;
+		    padding: 10px 0;
+		    border-bottom: 1px solid #efefef;
+		    height: 80px;
+		    align-items: center;
+		    justify-content: space-around;
     	}
     	.game_time{
-    		flex: 1;
-    		font-size: 30px;
-    		margin-left: 10px;
+		    font-size: 16px;
+		    display: flex;
+		    justify-content: center;
+		    font-weight: 700;
+    	}
+    	
+    	.gamename {
+    		font-size: 20px;
     	}
     	.mid_div{
-    		flex: 8;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		    width: 700px;
     	}
     	.close{
-    		flex: 1;
-    		border-radius: 30px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		
+		    border-radius: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    background-color: white;
+		    border: 1px solid #26A653;
+		    width: 110px;
+    		height: 40px;
+		    font-size: small;
+		    color: #26A653;
     		
     	}
     	.close > div {
     		font-weight: bold;
     	}
     	.info_div{
-    		display: flex;
+		    display: flex;
+		    width: 200px;
+    		justify-content: space-between;
+		    color: #848484;
     	}
-    	.gamename {
-    		height: 45px;
-    		font-size: 30px;
+
+    	
+    	#dpre, #dnext {
+    	    display: flex;
+    		justify-content: center;
+    		align-items: center;
     	}
+    	.select_border {
+   			border: 1px solid #A9A9A9;
+   			font-size: 12px;
+   		}
+    	.active {
+		   background-color:#26A653;
+	   	   color:white;
+	       border:1px solid #26A653;
+   		}
+		.bigger {
+			width: 105px;
+	        height: 100px;
+	        margin: 15px;
+		}
+
     </style>
 </head>
 <body>
 <div id="out">
 <section id="date">
         <div id="datelist">
-            <button id="dpre"> ◀ </button>
+            <div id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </div>
                     <div id="div1">
                         <ul id="day">
                             <% for(int i=fday; i<=eday; i++) { %>
@@ -189,7 +234,7 @@
                                 <%} %>
                         </ul>
                     </div>
-             <button id="dnext"> ▶ </button>
+             <div id="dnext"> <img src="${pageContext.request.contextPath}/image/right_btn.svg"> </div>
         </div>
         <button id="btn"> 확인 </button>
 </section>
@@ -346,6 +391,8 @@
                         document.getElementById("day").children[i].append(newp);
                     }
                 }
+                
+                
             }
             
             document.getElementById("btn").addEventListener("click", function () {
@@ -388,7 +435,12 @@
         var monthdata = <%=month%>;
         var daydata = <%=today%>;
         
-        document.getElementById("<%=today%>").style.backgroundColor="rgb(7, 104, 231)";
+        document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
+        document.getElementById("<%=today%>").style.color="rgb(36 36 36)";
+<%--         document.getElementById("<%=today%>").style.width="105px"; --%>
+<%--         document.getElementById("<%=today%>").style.height="100px"; --%>
+<%--         document.getElementById("<%=today%>").style.margin="15px"; --%>
+
         
         var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
         dayday = day;
@@ -433,13 +485,14 @@
 	             /* 경기시간 */
 	              tdiv.innerText = data[name].gameTime + ":00";
 	              /* 경기이름 */
-	              ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+<%-- 	              ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName; --%>
+	              ndiv.innerText = data[name].fieldName;
 	              /* 경기 성별 */
-	              gdiv.innerText = data[name].gameGender;
+	              gdiv.innerText = data[name].gameMacth;
 	              /* 경기매치 */
-	              mdiv.innerText = data[name].gameMacth;
+	              mdiv.innerText = data[name].level;
 	              /* 경기레벨 */
-	              ldiv.innerText = data[name].level;
+	              ldiv.innerText = data[name].gameGender;
 	              
 	              
 	              var pnum = data[name].gamePnum;/*신청인원  */
@@ -451,15 +504,19 @@
 	              if(pnum == maxp){
 	            	  textdiv.innerText = " 마감 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "#aaa";
+	            	  bdiv.style.border = "0px";
+	            	  bdiv.style.color = "#BBBBBB";
+	            	  
 	              }else if(minp - pnum <=3){
 	            	  textdiv.innerText = " 마감 임박 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "red";
+	            	  bdiv.style.border ="1px solid #E95656";
+	            	  bdiv.style.color = "#E95656";
+	            	  
 	              }else{
-	            	  textdiv.innerText = " 신청 ";
+	            	  textdiv.innerText = " 신청하기 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "blue";
+	            	  bdiv.style.backgroundColor = "white";
 	              }
 	              
 	              
@@ -491,8 +548,11 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
     document.getElementById("day").children[i].addEventListener("click", function (e) {
     	for(var j = 0; j < document.getElementById("day").childElementCount; j++){
     		document.getElementById("day").children[j].style.backgroundColor="#fff";
+    		document.getElementById("day").children[j].style.color='#C7C7C7';
     	};
-    	this.style.backgroundColor="rgb(7, 104, 231)";
+    	this.style.backgroundColor="#e8f2ff";
+    	this.style.color="rgb(36 36 36)";
+
 
         var yeardata = <%=year%>;
         var monthdata = <%=month%>;
@@ -610,7 +670,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 
   
   <div id="settingbutton"> 
-	   <select name="" id="local">
+	   <select name="" id="local" class="select_border local">
 	      <option id="null" value="null">지역</option>
 	      <option id="서울" value="서울">서울</option>
 	      <option id="인천" value="인천">인천</option>
@@ -623,31 +683,26 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	   </select>
 
 	   
-	    <label for="close" id="closediv">마감 가리기</label> <input type="checkbox" name="close" id="close" style="display: none";>
-	   
-
-	   
-	    <label for="ygender" class="gender" id="sla"> 남 </label> <input type="checkbox" name="ygender" id="ygender" style="display: none";> 
-	    <label for="xgender" class="gender" id="du"> 여 </label> <input type="checkbox" name="xgender" id="xgender" style="display: none";>
-	   
-	   
-	   
-	   <select name="" id="level">
-		   <option id="null" value="null">레벨</option>
-		   <option id="브론즈" value="브론즈">브론즈</option>
-		   <option id="실버" value="실버">실버</option>
-		   <option id="골드" value="골드">골드</option>
-	   </select>
-	   
-	   <select name="" id="mvar">
+	   <select name="" id="mvar" class="select_border mvar">
 		   <option id="null" value="null">매치형태</option>
 		   <option id="5" value="5vs5">5vs5</option>
 		   <option id="6" value="6vs6">6vs6</option>
 	   </select>
 		
+	   <select name="" id="level" class="select_border level">
+		   <option id="null" value="null">레벨</option>
+		   <option id="브론즈" value="브론즈">브론즈</option>
+		   <option id="실버" value="실버">실버</option>
+		   <option id="골드" value="골드">골드</option>
+	   </select>
+		
+	  <label for="close" id="closediv" class="select_border closediv">마감 가리기</label> <input type="checkbox" name="close" id="close" style="display: none";>
+	
+	   <label for="ygender" class="select_border gender" id="sla"> 남 </label> <input type="checkbox" name="ygender" id="ygender" style="display: none";> 
+	   <label for="xgender" class="select_border gender" id="du"> 여 </label> <input type="checkbox" name="xgender" id="xgender" style="display: none";>
 	   
-	   <div id="listreset">
-	   		대충초기화모양
+	   <div id="listreset" class="select_border listreset">
+	   		RESET
 	   </div>
    
    </div>
@@ -661,6 +716,14 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
    var re = document.getElementById("local").value;
    
    document.getElementById("local").addEventListener("change",function(e){
+	      if(document.getElementById("local").value == "null"){
+	    	  document.getElementById("local").classList.remove("active");
+	      }else{
+	    	  document.getElementById("local").classList.add("active"); 
+	      }
+	   
+	   
+	   
 	   // 마감 여부 선택 돼있는지 체크가 돼있으면 트루 , 아니면 펄스
       var clo = document.getElementById("close").checked;
 	   // 남자
@@ -775,11 +838,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
    var close = document.getElementById("close").checked;
    
    document.getElementById("close").addEventListener("change",function(e){
-	   if(this.checked == true) {
-			  document.getElementById("closediv").style.backgroundColor = "red";
-		  }else{
-			  document.getElementById("closediv").style.backgroundColor = "#fff";
-		  }
+	   document.getElementById("closediv").classList.toggle("active");
 	  
 	  var ygen = document.getElementById("ygender").checked;
       var xgen = document.getElementById("xgender").checked;
@@ -891,12 +950,10 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
    
    var ygen = document.getElementById("ygender").checked;
    
-   document.getElementById("ygender").addEventListener("change",function(e){
-	  if(this.checked == true) {
-		  document.getElementById("sla").style.backgroundColor = "red";
-	  }else{
-		  document.getElementById("sla").style.backgroundColor = "#fff";
-	  }
+   
+   document.getElementById("ygender").addEventListener("click",function(e){
+	   document.getElementById("sla").classList.toggle("active");
+ 
 	  
       var local = document.getElementById("local").value;
       var clo = document.getElementById("close").checked;
@@ -1012,11 +1069,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
    var xgen = document.getElementById("xgender").checked;
    
    document.getElementById("xgender").addEventListener("change",function(e){
-	   if(this.checked == true) {
-			  document.getElementById("du").style.backgroundColor = "red";
-		  }else{
-			  document.getElementById("du").style.backgroundColor = "#fff";
-		  }
+	   document.getElementById("du").classList.toggle("active");
       var local = document.getElementById("local").value;
       var clo = document.getElementById("close").checked;
       var ygen = document.getElementById("ygender").checked;
@@ -1131,6 +1184,14 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
       var ygen = document.getElementById("ygender").checked;
       var xgen = document.getElementById("xgender").checked;
       var local = document.getElementById("local").value;
+      
+      
+      if(document.getElementById("level").value == "null"){
+    	  document.getElementById("level").classList.remove("active");
+      }else{
+    	  document.getElementById("level").classList.add("active"); 
+      }
+      
       if(local == "null"){
           local = null;
        }
@@ -1239,6 +1300,13 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
   var re = document.getElementById("mvar").value;
   
   document.getElementById("mvar").addEventListener("change",function(e){
+	  
+      if(document.getElementById("mvar").value == "null"){
+    	  document.getElementById("mvar").classList.remove("active");
+      }else{
+    	  document.getElementById("mvar").classList.add("active"); 
+      }
+      
 	 var clo = document.getElementById("close").checked;
      var ygen = document.getElementById("ygender").checked;
      var xgen = document.getElementById("xgender").checked;
@@ -1357,9 +1425,12 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	      document.getElementById("level").value = null;
 	      document.getElementById("mvar").value = null;
 	      
-	      document.getElementById("closediv").style.backgroundColor = "#fff";
-	      document.getElementById("sla").style.backgroundColor = "#fff";
-	      document.getElementById("du").style.backgroundColor = "#fff";
+	      document.getElementById("local").classList.remove("active");
+	      document.getElementById("closediv").classList.remove("active");
+	      document.getElementById("sla").classList.remove("active");
+	      document.getElementById("du").classList.remove("active");
+	      document.getElementById("level").classList.remove("active");
+	      document.getElementById("mvar").classList.remove("active");
 	   
 	      let data = {day:dayday};
 	      
