@@ -80,8 +80,7 @@
             </div>
         </div>
     </div>
-   </div>
-    <div class="container">
+     <div class="container">
     	
         <div class="sub_con">
         <form action="${pageContext.request.contextPath }/team/postingFinish" method="post">
@@ -146,10 +145,10 @@
 								
 							</div>
 							<div class="search_button">
-								<a href="#" id="searcha">검색</a>
+								<span id="searcha">검색</span>
 							</div>
 							<div class="search_button">
-								<a href="#" id="mapclose">닫기</a>
+								<span  id="mapclose">닫기</span>
 							</div>
 						</div>
 						<div id="map" class="gamefield_picture mapview"></div>
@@ -158,7 +157,7 @@
 				      </div>
 				    </div>
 				    <div class="fbutton">
-				    <a href="#" class="btn-open-popup22">지도 검색</a>
+				    <span class="btn-open-popup22">지도 검색</span>
 					</div>
                    <script type="text/javascript">
                     document.getElementById("searcha").addEventListener("click", function(){
@@ -194,11 +193,12 @@
                         							fieldName.value = comment.fieldName; 
                         							fieldAddress.value = comment.fieldAddress;
                         							fieldCode.value = comment.fieldCode;
-                        							gamePay.value = comment.fieldRentalfee.toLocaleString()/2;
+                        							gamePay.value = comment.fieldRentalfee;
                         							gameMacth.value = comment.fieldType;
                         							
                         							
                         							modal2.classList.remove('show');
+                        							body.style.overflow="scroll";
                         						});
                         						const h4 = document.createElement("h4");
                         						h4.innerText = "구장이름 : "+comment.fieldName;
@@ -223,6 +223,7 @@
                         					     // 지도를 생성합니다    
                         					     var map = new kakao.maps.Map(mapContainer, mapOption);
                         					     
+                        					     
                         					     // 주소-좌표 변환 객체를 생성합니다
                         					     var geocoder = new kakao.maps.services.Geocoder();
                         					     
@@ -242,7 +243,7 @@
                         					     
                         					             // 인포윈도우로 장소에 대한 설명을 표시합니다
                         					             var infowindow = new kakao.maps.InfoWindow({
-                        					                 content: '<div style="width:150px;text-align:center;padding:6px 0;">'+comment.fieldName+'</div>'
+                        					                 content: '<div style="width:150px;text-align:center;">'+comment.fieldName+'</div>'
                         					             });
                         					             infowindow.open(map, marker);
                         					     
@@ -441,7 +442,7 @@
                                         <input type="text" name="modalText" id="modalText">
                                     </div>
                                     <div class="modal_search_button">
-                                        <a href="#" id="modalsearchbutton"> >검색</a>
+                                        <span id="modalsearchbutton"> 검색</span>
                                     </div>
                                 
                                     
@@ -473,6 +474,8 @@
                         						div.style.border = "1px solid black";
                         						div.style.width = "180px";
                         						div.style.backgroundColor = "#F8EDE3";
+                        						div.style.lineHeight = "5px";
+                        						div.style.height= "20%";
 
                         						if(gameMacth1 == "6vs6"){
                         							console.log("????1111111");
@@ -480,9 +483,11 @@
 															if(comment.tmember6 != ''){
 			                         							mteamName.value = comment.teamName; 
 			                         							teamCode.value = comment.teamCode;
+			                         							body.style.overflow="scroll";
 			                         							
 															}else {
 																alert("5명이서 참가할 수 없습니다.");
+																body.style.overflow="scroll";
 																}
 							
                         							const modal = document.querySelector('.modal');
@@ -499,9 +504,11 @@
 														if(comment.tmember6 == ''){
 		                         							mteamName.value = comment.teamName; 
 		                         							teamCode.value = comment.teamCode;
+		                         							body.style.overflow="scroll";
 		                         							
 														}else {
 															alert("6명이서 참가할 수 없습니다.");
+															body.style.overflow="scroll";
 															}
 				
                     							const modal = document.querySelector('.modal');
@@ -538,7 +545,7 @@
                                 </script>
                             </div>
                         </div>
-                        <a href="#" class="btn-open-popup">팀 검색</a>
+                        <span class="btn-open-popup">팀 검색</span>
                     </div>
                     <div class="rbutton">
                         <a class="tbtn" href="${pageContext.request.contextPath}/team/register">팀 등록하기</a>
@@ -554,6 +561,8 @@
         </form>
         </div>
     </div>
+   </div>
+   
    
    
 
@@ -596,7 +605,7 @@
           modal.classList.toggle('show');
 
           if (!modal.classList.contains('show')) {
-            body.style.overflow = 'auto';
+            body.style.overflow = 'scroll';
           }
         }
       });
@@ -618,6 +627,7 @@
 		
       document.getElementById("mapclose").addEventListener("click",function(){
     	  modal2.classList.remove('show');
+    	  body.style.overflow = "scroll";
       });
       
       

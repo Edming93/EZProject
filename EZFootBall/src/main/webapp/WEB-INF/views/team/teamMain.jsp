@@ -44,25 +44,40 @@
         justify-content: space-between;
     }
     .header_left {
-        width:70px;
+        width:95px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .main_logo{
-    	background: url("${pageContext.request.contextPath}/image/ez_logo.svg") no-repeat center;
-    	background-size:65px 35px;
-    	cursor: pointer;
+         background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
+         background-size: 95px 35px;
+       cursor: pointer;
     }
     .ez_icon {
         width: 65px;
         height:35px;
     }
-    .search_input {
-        width:375px;
-        height:25px;
+    
+      .search_input_area {
+          position: relative;
+      }
 
-    }
+      .search_input {
+         width: 375px;
+         height: 35px;
+         background-color: white;
+         border: 1px solid #e5e5e5;
+         border-radius: 10px;
+      }
+      
+      .glass {
+          font-size: 20px;
+        position: absolute;
+        right: 13px;
+        top: 8px;
+        color: #464a54;
+      }
     .header_right {
         display: flex;
         justify-content: center;
@@ -74,16 +89,16 @@
         height: 70px;
         display: flex;
         justify-content: center;
-	    margin-bottom: 13px;
-	    margin-top: 13px;
-	    align-items: center;
+       margin-bottom: 13px;
+       margin-top: 13px;
+       align-items: center;
         
     }
     .big_menu_area {
         max-width: 1024px;
         width: 1024px;
-	    padding-top: 15px;
-	    padding-bottom: 15px;
+       padding-top: 15px;
+       padding-bottom: 15px;
     }
 
     .big_menu_content {
@@ -101,8 +116,8 @@
         width: 90px;
         justify-content: center;
     }
-
-    .menu1,.menu2,.menu3,.menu4,.menu5 {
+    
+    .menu1,.menu2,.menu3,.menu4,.menu5,.menu6 {
         width: 100px;
         justify-content: center;
         display: inline-block;
@@ -110,7 +125,7 @@
     .menu2_a {
         font-weight: bold;
         padding-bottom:5px;
-        border-bottom: 3px solid #0059df;
+        border-bottom: 3px solid #26A653;
     }
 
     .banner_container {
@@ -287,8 +302,10 @@
        background-color: blue;
     }
     .posting{
-    	width : 50px;
-    	height : 50px;
+    	position: fixed;
+	    left: 92%;
+	    top: 75%;
+	    width: 50px;
     }
 
 </style>

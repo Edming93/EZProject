@@ -20,12 +20,14 @@
     }
     .posting{
         display: flex;
-        
         flex-direction: column;
         width: 100%;
+        height : 700px;
         border: 1px solid white;
         justify-content: center;
     	align-items: center;
+    	background : url("${pageContext.request.contextPath}/image/flower.PNG") no-repeat;
+    	background-size : cover;
     }
     
     .team_info{
@@ -34,31 +36,36 @@
     }
     .team_info .team_register{
         display: flex;
+        flex-direction : column;
         justify-content: center;
+        align-items: center;
         font-weight: 700;
         font-size: 40px;
-        width: 500px;
+        width: 100%;
         padding-left: 5px;
     }
+    .add_info{
+    	color : red;
+    	text-decoration : underline;
+    	font-size : 20px;
+    }
     .team_info .team_name{
-        width: 500px;
+        width: 100%;
         float: left;
-       
-       
     }
     .team_info .team_name p{
-        margin-left: 5px;
+      
         font-weight: 700;
         font-size: 20px;
     }
     .team_info .team_name input{
-        width: 490px;
+        width: 100%;
         height: 40px;
-        margin-left: 5px;
+        padding-left : 5px;
     }
     .team_info table{
         background-color: white;
-        width : 98%;
+        width : 100%;
         
     }
     .team_info table tr td input{
@@ -69,29 +76,29 @@
     }
 
     .submit_button{
-        width: 480px;
+    	margin-top: 20px;
+        width: 100%;
         height: 40px;
-        background-color: black;
+        background-color: #26a563;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius : 10px;
     }
     #writer_submit{
-        width: 480px;
+        width: 100%;
         height: 40px;
-        background-color: black;
+        background-color:  #26a563;
         border: none;
-        color: white;
+        color: black;
         font-weight: 700;
         font-size: 15px;
+         border-radius : 10px;
     }
     #writer_submit:hover{
         cursor: pointer;
     }
-    .add_info{
-    	color : red;
-    	text-decoration : underline;
-    }
+
    	
    	/* 헤더  */
    			.main_logo{
@@ -283,14 +290,14 @@
        
         <div class="team_info">
             <div class="team_register">
-                <p>팀 등록하기</p>
+                <p>팀 등록하기</p><span class="add_info">※5명팀은 5명만 적어주세요</span>
             </div>
             <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post">
             <div class="team_name">
                 <p>팀 이름</p>
                 <input type="text" name="teamName" id="teamName" placeholder="매력있는 팀 이름 정하기">
             </div>
-            <p class="add_info">※5명팀은 5명만 적어주세요</p>
+           
             <table>
                 <tr>
                     <th>이름</th>
