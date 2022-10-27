@@ -14,7 +14,7 @@
     <style>
     *{
         box-sizing : border-box;
-        margin : 2px auto;
+        
         
      
     }
@@ -26,7 +26,6 @@
         border: 1px solid white;
         justify-content: center;
     	align-items: center;
-}
     }
     
     .team_info{
