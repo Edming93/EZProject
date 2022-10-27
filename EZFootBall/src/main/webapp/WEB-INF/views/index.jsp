@@ -60,6 +60,7 @@
     
       .search_input_area {
       	 position: relative;
+      	 margin-left: auto;
       }
 
       .search_input {
@@ -180,6 +181,7 @@
         height:205px;
         background-color: #cef8e8;
     }
+    
     footer {
         width: 100%;
         height: 423px;
@@ -215,11 +217,12 @@
                <div class="header_left main_logo">
 
                </div>
-               <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
-	                  <input type="text" class="search_input">
+		          <jsp:include page="./search/search.jsp"></jsp:include>
+<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
+	              <div class="header_right login_btn etc_btn">
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->

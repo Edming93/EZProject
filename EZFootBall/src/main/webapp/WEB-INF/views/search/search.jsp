@@ -19,14 +19,13 @@
 			<div id="container">
 				<form action="${pageContext.request.contextPath}/search_result" method="get">
 					<div id="searchbar">
-						<svg class="icon" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-							class="icon">
-							<circle data-v-454f7528="" cx="10.5" cy="10.5" r="6" stroke="#222836"></circle>
-							<path data-v-454f7528="" stroke="#222836" d="M14.354 14.646l4.949 4.95"></path>
-						</svg>
-						<label for="search"><input type="text" name="search" id="search" placeholder="검색창"
-								list="" /></label>
-						<button id="searchbtn" disabled="disabled">검색</button>
+<!-- 						<svg class="icon" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" -->
+<!-- 							class="icon"> -->
+<%-- 							<circle data-v-454f7528="" cx="10.5" cy="10.5" r="6" stroke="#222836"></circle> --%>
+<!-- 							<path data-v-454f7528="" stroke="#222836" d="M14.354 14.646l4.949 4.95"></path> -->
+<!-- 						</svg> -->
+						<input type="text" name="search" id="search" placeholder="검색창" list="" />
+<!-- 						<button id="searchbtn" disabled="disabled">검색</button> -->
 					</div>
 				</form>
 				<div id="searchbox" class="saerchbox2">
