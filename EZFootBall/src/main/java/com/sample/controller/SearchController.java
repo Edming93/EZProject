@@ -33,7 +33,7 @@ public class SearchController {
 	public List<SearchVO> searchBar(SearchVO searchVO, Model model) {
 		List<SearchVO> list = searchService.selectList();
 		model.addAttribute("list", list);
-		System.out.println("list : " + list.get(0).getFieldName());
+//		System.out.println("list : " + list.get(0).getFieldName());
 		return list;
 	}
 
@@ -56,7 +56,7 @@ public class SearchController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		if (uvo != null) {
 			recentVO.setUserCode(uvo.getUserCode());
-			System.out.println("받아오기: " + recentVO.getUserCode());
+//			System.out.println("받아오기: " + recentVO.getUserCode());
 		} else {
 			recentVO.setUserCode(0);
 		}
@@ -69,7 +69,7 @@ public class SearchController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		if (uvo != null) {
 			recentVO.setUserCode(uvo.getUserCode());
-			System.out.println("post :" + recentVO.getSearchData());
+//			System.out.println("post :" + recentVO.getSearchData());
 		} else {
 			recentVO.setUserCode(0);
 		}
@@ -82,7 +82,7 @@ public class SearchController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		if (uvo != null) {
 			recentVO.setUserCode(uvo.getUserCode());
-			System.out.println("post :" + recentVO.getSearchData());
+//			System.out.println("post :" + recentVO.getSearchData());
 		} else {
 			recentVO.setUserCode(0);
 		}

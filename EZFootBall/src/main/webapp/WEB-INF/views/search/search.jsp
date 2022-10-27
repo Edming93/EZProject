@@ -41,13 +41,13 @@
 							<h3>다양한 매치</h3>
 						</div>
 						<div class="schmain">
-							<a href="">
+							<a href="${pageContext.request.contextPath}/home">
 								<p>소셜매치</p>
 							</a>
-							<a href="">
+							<a href="${pageContext.request.contextPath}/team/team">
 								<p>팀매치</p>
 							</a>
-							<a href="">
+							<a href="${pageContext.request.contextPath}/rental/rental">
 								<p>구장예약</p>
 							</a>
 						</div>
@@ -155,7 +155,7 @@
 									console.log((list.fieldName) - 1);
 									console.log(list.fieldName);
 									a.innerText = list.fieldName;
-									a.href = "${pageContext.request.contextPath}/stadium/" + list.fieldCode;
+									a.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode=" + list.fieldCode;
 									a.classList.add("recent");
 									li.append(a);
 									ul.append(li);
@@ -413,7 +413,7 @@
 											console.log((list.fieldName) - 1);
 											console.log(list.fieldName);
 											a.innerText = list.fieldName;
-											a.href = "${pageContext.request.contextPath}/stadium/" + list.fieldCode;
+											a.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode=" + list.fieldCode;
 											a.classList.add("recent");
 											li.append(a);
 											ul.append(li);
@@ -447,7 +447,7 @@
 								const li2 = document.createElement("li");
 								const a2 = document.createElement("a");
 								a2.innerText = list.fieldName;
-								a2.href = "${pageContext.request.contextPath}/stadium/"+list.fieldCode;
+								a2.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode=" + list.fieldCode;
 								li2.append(a2);
 								ul2.append(li2);		
 							}

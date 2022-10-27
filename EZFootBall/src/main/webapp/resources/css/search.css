@@ -16,7 +16,8 @@
 		
 	}
 	#search {
-		width: 375px;
+		width: 35vw;
+		max-width: 375px;
         height: 35px;
         background-color: white;
         border: 1px solid #e5e5e5;
@@ -29,7 +30,9 @@
 	
 	#searchbox {
 		position: absolute;
-		width: 550px;
+		right: 0;
+		width: 45vw;
+		max-width: 550px;
 		height: 500px;
 		max-height: 500px;
 		background: #ffeae8;
@@ -132,7 +135,9 @@
 	
 	#search_result_box {
 		position: absolute;
-		width: 550px;
+		right: 0;
+		width: 45vw;
+		max-width: 550px;
 		height: 500px;
 		max-height: 500px;
 		background: #ffeae8;
