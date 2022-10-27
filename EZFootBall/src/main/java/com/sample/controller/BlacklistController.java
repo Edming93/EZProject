@@ -63,9 +63,12 @@ public class BlacklistController {
 	@PostMapping("/blacklistmain/setbbs")
 	public String setBBSResult(@SessionAttribute("sessionVO") UserVO uvo, BlacklistVO bvo) {
 		System.out.println(uvo);
+		
 		if (uvo != null) {
+			System.out.println(uvo.getUserCode());
 			bvo.setUserId(uvo.getUserId());
 			bvo.setUserName(uvo.getUserName());
+			bvo.setUserCode(uvo.getUserCode());
 			if (service.setBlackList(bvo)) {
 				return "redirect:/blacklist/blacklistmain";
 			} else {
@@ -75,5 +78,7 @@ public class BlacklistController {
 			return "redirect:/loginPage/login";
 		}
 	}
+	
+	
 
 }

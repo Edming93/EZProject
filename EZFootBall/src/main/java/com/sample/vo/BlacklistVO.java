@@ -7,6 +7,7 @@ public class BlacklistVO {
 	private int blacklistCode;
 	private String userId;
 	private String userName;
+	private int userCode;
 	private String blacklistTitle;
 	private String blacklistContent;
 	private String blacklistCreateDate;
@@ -53,6 +54,12 @@ public class BlacklistVO {
 	}
 	public void setBlacklistLocal(String blacklistLocal) {
 		this.blacklistLocal = blacklistLocal;
+	}
+	public int getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(int userCode) {
+		this.userCode = userCode;
 	}
 
 	
