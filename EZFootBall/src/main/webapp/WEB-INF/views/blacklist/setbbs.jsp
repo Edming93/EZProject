@@ -51,14 +51,14 @@ textarea {
 		<div class="container">
 			<div class="header">
 				<h4>지역 :</h4>
-				<form:select path="category">
-					<form:options items="${cateList}"/>
+				<form:select path="blacklistLocal">
+					<form:options items="${blacklistLocal}"/>
 				</form:select>
 				<h4>제목 :</h4>
-				<form:input path="title"/>
+				<form:input path="blacklistTitle"/>
 			</div>
 			<div class="main">
-				<form:textarea path="content"/>
+				<form:textarea path="blacklistContent"/>
 			</div>
 			<div class="footer">
 				<button>전송</button>
