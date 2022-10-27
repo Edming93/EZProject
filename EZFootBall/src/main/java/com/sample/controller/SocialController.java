@@ -180,9 +180,10 @@ public class SocialController {
 	
 	@PostMapping("/fieldinfo")
 	@ResponseBody
-	public List<GameFieldInfoVO> fieldInfoVO (@RequestBody GlistVO vo) {
+	public GameFieldInfoVO fieldInfo (@RequestBody GlistVO vo) {
 		int fieldcode = vo.getFieldCode();
-		System.out.println("field_info");
+		System.out.println("fieldinfo");
+		System.out.println(service.fieldinfo(fieldcode).getFieldImg1());
 		return service.fieldinfo(fieldcode);
 	}
 	

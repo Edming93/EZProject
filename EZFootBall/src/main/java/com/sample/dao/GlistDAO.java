@@ -28,5 +28,6 @@ public interface GlistDAO {
 	
 	public int setslist(DataVO vo);
 	
-	public List<GameFieldInfoVO> fieldinfo(int fieldcode);
+	public GameFieldInfoVO fieldinfo(int fieldcode);
+	
 }

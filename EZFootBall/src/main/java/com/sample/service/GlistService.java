@@ -57,7 +57,7 @@ public class GlistService {
 		session.setAttribute("urabil",dao.abile(usercode));
 		return dao.abile(usercode);
 	}
-	public List<GameFieldInfoVO> fieldinfo (int fieldcode) {
+	public GameFieldInfoVO fieldinfo (int fieldcode) {
 		return dao.fieldinfo(fieldcode);
 	}
 	
