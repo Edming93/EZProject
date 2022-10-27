@@ -20,7 +20,7 @@
 		select user_id from user_info
 	</select>
 	
-	<!-- 추가 -->
+	<!-- 아이디 패스워드 찾기 사용 -->
 	<select id="searchUser1" resultType="UserVO">
 		select user_id, user_name, user_email1, user_email2
 		from user_info
@@ -38,9 +38,17 @@
 		where user_id = #{userId}
 	</update>
 	
-		<!-- 정욱 팀 등록시 매퍼사용 -->
+	<!-- 정욱 팀 등록시 매퍼사용 -->
 	<select id="getUserList" parameterType="UserVO" resultType="UserVO">
 		select * from user_info where user_name = #{tmember}
 	</select>
+	
+	<!-- 마이페이지 조회용 -->
+	<select id="getUserAbil" resultType="UinVO">
+		SELECT * FROM user_abil
+		WHERE user_code = #{userCode}
+	</select>
+	
+	
 </mapper>
 

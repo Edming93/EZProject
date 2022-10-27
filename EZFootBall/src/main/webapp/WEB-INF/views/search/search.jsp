@@ -8,10 +8,10 @@
 			<title>Insert title here</title>
 		</head>
 		<!-- CSS , JS -->
-		<script src="js/jquery-3.6.1.min.js"></script>
-		<link rel="stylesheet" href="css/search.css" />
+		<script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css" />
 
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -29,7 +29,7 @@
 					</div>
 				</form>
 				<div id="searchbox" class="saerchbox2">
-					<span class="closebtn"><img src="image/close1.jpg" /></span>
+					<span class="closebtn"><img src="${pageContext.request.contextPath}/image/close1.jpg" /></span>
 					<div id="keyword">
 						<p>최근 검색어</p>
 						<ul id="keywords">
