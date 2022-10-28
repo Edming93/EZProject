@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sample.service.LoginService;
 import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
 import com.sample.vo.SearchVO;
@@ -187,7 +188,10 @@ public class TeamController {
 	@ResponseBody
 	public List<Integer> joinlist (@RequestBody DataVO dvo,HttpSession session){
 		System.out.println("joinlist");
-		int gameCode = dvo.getGame_code();
+		System.out.println(dvo.getGameCode());
+		int gameCode = dvo.getGameCode();
+		System.out.println(gameCode);
+		System.out.println(service.teamcode(gameCode).get(0));
 		return service.teamcode(gameCode);
 	}
 	
@@ -197,6 +201,15 @@ public class TeamController {
 		System.out.println("joininfo");
 		int teamCode = dvo.getTeam_code();
 		return service.joininfo(teamCode);
+	}
+	
+	@PostMapping("/fieldinfo")
+	@ResponseBody
+	public GameFieldInfoVO fieldInfo (@RequestBody GlistVO vo) {
+		int fieldcode = vo.getFieldCode();
+		System.out.println("fieldinfo");
+		System.out.println(service.fieldinfo(fieldcode).getFieldImg1());
+		return service.fieldinfo(fieldcode);
 	}
 	
 ///--------------------정욱 10.24 ----------------------------------	

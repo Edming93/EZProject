@@ -39,7 +39,7 @@
         #date {
             display: flex;
             width: 1024px;
-            height: 100px;
+            height: 150px;
         }
 
         #datelist {
@@ -55,7 +55,6 @@
 
         #div1{
             width: 980px;
-            height: 100px;
             display: flex;
     		align-items: center;
         }
@@ -83,12 +82,15 @@
 		    color: #c7c7c7;
         }
         .idaydiv{
-        	padding-top: 15px;
-        	height: 30px;
         }
-        #day li > div {
+        .idate{
+        	padding-top: 12px;
+        	font-size: 20px;
         	font-weight: bold;
         }
+        /* #day li > div {
+        	font-weight: bold;
+        } */
 
         #settingbutton{
 		    flex: 1;
@@ -236,7 +238,7 @@
                     </div>
              <div id="dnext"> <img src="${pageContext.request.contextPath}/image/right_btn.svg"> </div>
         </div>
-        <button id="btn"> 확인 </button>
+        
 </section>
 
 
@@ -269,142 +271,152 @@
             	
                 if ((i + 1) % 7 == ct) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     newp.innerText = week[num];
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 } else if ((i + 1) % 7 == (ct + 1)) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     if(num+1>=7){
                     	newp.innerText = week[num + 1-7];
                     }else{
                     	newp.innerText = week[num + 1];
                     }
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 2)) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     if(num+2>=7){
                     	newp.innerText = week[num + 2-7];
                     }else{
                     	newp.innerText = week[num + 2];
                     }
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 3)) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     if(num+3>=7){
                     	newp.innerText = week[num + 3-7];
                     }else{
                     	newp.innerText = week[num + 3];
                     }
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 4)) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     if(num+4>=7){
                     	newp.innerText = week[num + 4-7];
                     }else{
                     	newp.innerText = week[num + 4];
                     }
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 5)) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     if(num+5>=7){
                     	newp.innerText = week[num + 5-7];
                     }else{
                     	newp.innerText = week[num + 5];
                     }
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 }
                 else if ((i + 1) % 7 == (ct + 6)) {
                     var newp = document.createElement("div");
+                    newp.className = "idate";
                     if(num+6>=7){
                     	newp.innerText = week[num + 6-7];
                     }else{
                     	newp.innerText = week[num + 6];
                     }
-                    document.getElementById("day").children[i].append(newp);
+                    document.getElementById("day").children[i].prepend(newp);
                 } else if ((i + 1) % 7 == (ct - 6)) {
                     if (num < 6) {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 6 + 7];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     } else {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 6];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     }
                 }
                 else if ((i + 1) % 7 == (ct - 5)) {
                     if (num < 5) {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 5 + 7];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     } else {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 5];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     }
                 }
                 else if ((i + 1) % 7 == (ct - 4)) {
                     if (num < 4) {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 4 + 7];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     } else {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 4];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     }
                 }
                 else if ((i + 1) % 7 == (ct - 3)) {
                     if (num < 3) {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 3 + 7];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     } else {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 3];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     }
                 }
                 else if ((i + 1) % 7 == (ct - 2)) {
                     if (num < 2) {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 2 + 7];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     } else {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 2];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     }
 
                 }
                 else if ((i + 1) % 7 == (ct - 1)) {
                     if (num < 1) {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 1 + 7];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     } else {
                         var newp = document.createElement("div");
+                        newp.className = "idate";
                         newp.innerText = week[num - 1];
-                        document.getElementById("day").children[i].append(newp);
+                        document.getElementById("day").children[i].prepend(newp);
                     }
                 }
                 
                 
             }
             
-            document.getElementById("btn").addEventListener("click", function () {
-                let pscrollleft = document.querySelector("#div1 ul").scrollLeft;
-
-                let str = `
-                scrollLeft : ${pscrollleft}
-                `
-                // alert(str);
-                console.log(str);
-                //여기 삭제해야댐~~~~
-            });
+            
             var set = <%=today%>
 
             document.querySelector("#div1 ul").scrollLeft = (set - 1) * 150;
@@ -437,6 +449,7 @@
         
         document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
         document.getElementById("<%=today%>").style.color="rgb(36 36 36)";
+        document.getElementById("<%=today%>").style.transform = "scale(1.5)";
 <%--         document.getElementById("<%=today%>").style.width="105px"; --%>
 <%--         document.getElementById("<%=today%>").style.height="100px"; --%>
 <%--         document.getElementById("<%=today%>").style.margin="15px"; --%>
@@ -549,11 +562,14 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
     	for(var j = 0; j < document.getElementById("day").childElementCount; j++){
     		document.getElementById("day").children[j].style.backgroundColor="#fff";
     		document.getElementById("day").children[j].style.color='#C7C7C7';
+    		document.getElementById("day").children[j].style.transition = "all 0.2s linear";
+            document.getElementById("day").children[j].style.transform = "scale(1.0)";
     	};
     	this.style.backgroundColor="#e8f2ff";
     	this.style.color="rgb(36 36 36)";
+    	this.style.transition = "all 0.2 linear";
+        this.style.transform = "scale(1.5)";
 
-    	
 
         var yeardata = <%=year%>;
         var monthdata = <%=month%>;
@@ -619,7 +635,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	             /* 경기시간 */
 	              tdiv.innerText = data[name].gameTime + ":00";
 	              /* 경기이름 */
-	              ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+	              ndiv.innerText = data[name].fieldName;
 	              /* 경기 성별 */
 	              gdiv.innerText = data[name].gameGender;
 	              /* 경기매치 */
@@ -634,18 +650,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              
 				 var textdiv = document.createElement("div");
 	              
-	              if(pnum == maxp){
+				 if(pnum == maxp){
 	            	  textdiv.innerText = " 마감 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "#aaa";
+	            	  bdiv.style.border = "0px";
+	            	  bdiv.style.color = "#BBBBBB";
+	            	  
 	              }else if(minp - pnum <=3){
 	            	  textdiv.innerText = " 마감 임박 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "red";
+	            	  bdiv.style.border ="1px solid #E95656";
+	            	  bdiv.style.color = "#E95656";
+	            	  
 	              }else{
-	            	  textdiv.innerText = " 신청 ";
+	            	  textdiv.innerText = " 신청하기 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "blue";
+	            	  bdiv.style.backgroundColor = "white";
 	              }
 	             
 	              div_out.append(tdiv);
@@ -806,15 +826,19 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              if(pnum == maxp){
            	  textdiv.innerText = " 마감 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "#aaa";
+           	  bdiv.style.border = "0px";
+           	  bdiv.style.color = "#BBBBBB";
+           	  
              }else if(minp - pnum <=3){
            	  textdiv.innerText = " 마감 임박 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "red";
+           	  bdiv.style.border ="1px solid #E95656";
+           	  bdiv.style.color = "#E95656";
+           	  
              }else{
-           	  textdiv.innerText = " 신청 ";
+           	  textdiv.innerText = " 신청하기 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "blue";
+           	  bdiv.style.backgroundColor = "white";
              }
             
              div_out.append(tdiv);
@@ -917,15 +941,19 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              if(pnum == maxp){
            	  textdiv.innerText = " 마감 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "#aaa";
+           	  bdiv.style.border = "0px";
+           	  bdiv.style.color = "#BBBBBB";
+           	  
              }else if(minp - pnum <=3){
            	  textdiv.innerText = " 마감 임박 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "red";
+           	  bdiv.style.border ="1px solid #E95656";
+           	  bdiv.style.color = "#E95656";
+           	  
              }else{
-           	  textdiv.innerText = " 신청 ";
+           	  textdiv.innerText = " 신청하기 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "blue";
+           	  bdiv.style.backgroundColor = "white";
              }
              
              
@@ -1034,15 +1062,19 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              if(pnum == maxp){
            	  textdiv.innerText = " 마감 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "#aaa";
+           	  bdiv.style.border = "0px";
+           	  bdiv.style.color = "#BBBBBB";
+           	  
              }else if(minp - pnum <=3){
            	  textdiv.innerText = " 마감 임박 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "red";
+           	  bdiv.style.border ="1px solid #E95656";
+           	  bdiv.style.color = "#E95656";
+           	  
              }else{
-           	  textdiv.innerText = " 신청 ";
+           	  textdiv.innerText = " 신청하기 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "blue";
+           	  bdiv.style.backgroundColor = "white";
              }
              
             
@@ -1147,15 +1179,19 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              if(pnum == maxp){
            	  textdiv.innerText = " 마감 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "#aaa";
+           	  bdiv.style.border = "0px";
+           	  bdiv.style.color = "#BBBBBB";
+           	  
              }else if(minp - pnum <=3){
            	  textdiv.innerText = " 마감 임박 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "red";
+           	  bdiv.style.border ="1px solid #E95656";
+           	  bdiv.style.color = "#E95656";
+           	  
              }else{
-           	  textdiv.innerText = " 신청 ";
+           	  textdiv.innerText = " 신청하기 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "blue";
+           	  bdiv.style.backgroundColor = "white";
              }
             
              div_out.append(tdiv);
@@ -1267,15 +1303,19 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              if(pnum == maxp){
            	  textdiv.innerText = " 마감 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "#aaa";
+           	  bdiv.style.border = "0px";
+           	  bdiv.style.color = "#BBBBBB";
+           	  
              }else if(minp - pnum <=3){
            	  textdiv.innerText = " 마감 임박 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "red";
+           	  bdiv.style.border ="1px solid #E95656";
+           	  bdiv.style.color = "#E95656";
+           	  
              }else{
-           	  textdiv.innerText = " 신청 ";
+           	  textdiv.innerText = " 신청하기 ";
            	  bdiv.append(textdiv);
-           	  bdiv.style.backgroundColor = "blue";
+           	  bdiv.style.backgroundColor = "white";
              }
              
             
@@ -1386,15 +1426,19 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             if(pnum == maxp){
           	  textdiv.innerText = " 마감 ";
           	  bdiv.append(textdiv);
-          	  bdiv.style.backgroundColor = "#aaa";
+          	  bdiv.style.border = "0px";
+          	  bdiv.style.color = "#BBBBBB";
+          	  
             }else if(minp - pnum <=3){
           	  textdiv.innerText = " 마감 임박 ";
           	  bdiv.append(textdiv);
-          	  bdiv.style.backgroundColor = "red";
+          	  bdiv.style.border ="1px solid #E95656";
+          	  bdiv.style.color = "#E95656";
+          	  
             }else{
-          	  textdiv.innerText = " 신청 ";
+          	  textdiv.innerText = " 신청하기 ";
           	  bdiv.append(textdiv);
-          	  bdiv.style.backgroundColor = "blue";
+          	  bdiv.style.backgroundColor = "white";
             }
            
            
@@ -1487,18 +1531,22 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	              
 				 var textdiv = document.createElement("div");
 	              
-	              if(pnum == maxp){
+				 if(pnum == maxp){
 	            	  textdiv.innerText = " 마감 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "#aaa";
+	            	  bdiv.style.border = "0px";
+	            	  bdiv.style.color = "#BBBBBB";
+	            	  
 	              }else if(minp - pnum <=3){
 	            	  textdiv.innerText = " 마감 임박 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "red";
+	            	  bdiv.style.border ="1px solid #E95656";
+	            	  bdiv.style.color = "#E95656";
+	            	  
 	              }else{
-	            	  textdiv.innerText = " 신청 ";
+	            	  textdiv.innerText = " 신청하기 ";
 	            	  bdiv.append(textdiv);
-	            	  bdiv.style.backgroundColor = "blue";
+	            	  bdiv.style.backgroundColor = "white";
 	              }
 	              
 	            

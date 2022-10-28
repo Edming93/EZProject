@@ -20,6 +20,7 @@ public class TlistVO {
     private String gameMag;
     private String fieldName;
     private String fieldAddress;
+    private String fieldCode;
     
 	public int getGameCode() {
 		return gameCode;
@@ -116,6 +117,12 @@ public class TlistVO {
 	}
 	public void setFieldAddress(String fieldAddress) {
 		this.fieldAddress = fieldAddress;
+	}
+	public String getFieldCode() {
+		return fieldCode;
+	}
+	public void setFieldCode(String fieldCode) {
+		this.fieldCode = fieldCode;
 	}
     
 	

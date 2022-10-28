@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.TeamDAO;
 import com.sample.vo.DataVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
 import com.sample.vo.SearchVO;
@@ -56,6 +57,10 @@ public class TeamService {
 	
 	public List<UinVO> joininfo (int teamCode){
 		return dao.joininfo(teamCode);
+	}
+	
+	public GameFieldInfoVO fieldinfo (int fieldcode) {
+		return dao.fieldinfo(fieldcode);
 	}
 	
 	//-----------------정욱 10.24---------------------------------------

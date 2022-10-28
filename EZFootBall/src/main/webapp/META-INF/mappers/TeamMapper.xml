@@ -7,7 +7,7 @@
 		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp
+		field_address,game_minp,game_maxp,field_code
 		from gamelist
 		<where>
 			<if test="gameDay != null">
@@ -37,7 +37,7 @@
 		select game_code,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp
+		field_address,game_minp,game_maxp,field_code
 		from gamelist
 		<where>
 			<if test="close != null">

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sample.vo.DataVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
 import com.sample.vo.SearchVO;
@@ -30,6 +31,8 @@ public interface TeamDAO {
 	public List<Integer> teamcode (int gameCode);
 	
 	public List<UinVO> joininfo (int teamCode);
+	
+	public GameFieldInfoVO fieldinfo(int fieldcode);
 	
 	//----------------------정욱 10.24-------------------------
 		//----------------------registeration page--------------------------------------------------
