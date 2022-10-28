@@ -386,10 +386,10 @@
         
       }
       .match_left{
-      	width: 35%;
+      	width: 50%;
       }
       .match_right{
-      	width: 60%;
+      	width: 45%;
       }
       .subbtn{
          width: 100px;
@@ -731,7 +731,36 @@
       <div class="match_container">
       	
       	<div class="match_left">
-      	<div class="content_count">
+      		<div class="content_count">
+            <h3 class="match_info">게임정보</h3>
+         </div>
+     	 
+     	 <div class="match_content" id="match_content">
+     	 	<div class="etc">
+     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime}
+     	 	</div>
+     	 	<div class="etc">
+     	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
+     	 	</div>
+     	 	<div class="etc">
+     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　20000 / 인당
+     	 		<!-- <script type="text/javascript">
+     	 			if(${matchinfo.gameMacth} == '5vs5'){
+     	 				document.getElementById("pay").innerText = "20000";
+     	 			}else if (${matchinfo.gameMacth} == '6vs6') {
+     	 				document.getElementById("pay").innerText = "20000";
+     	 			}
+     	 		</script> -->
+     	 	</div>
+     	 </div>
+      	
+      	
+     	 
+     	 
+     	 </div>
+     	 
+     	<div class="match_right">
+      		<div class="content_count">
             <h3 class="match_info">매치포인트</h3>
          </div>
      	 
@@ -759,68 +788,10 @@
      	 		<iconify-icon class="icon_size" icon="icon-park-twotone:spikedshoes" style="color: #26a653;" width="27" height="27"></iconify-icon>　풋살화/운동화
      	 	</div>
      	 </div>
-     	 </div>
-     	 
-     	<div class="match_right">
-      	<div class="content_count">
-            <h3 class="match_info">게임정보</h3>
-         </div>
-     	 
-     	 <div class="match_content" id="match_content">
-     	 	<div class="etc">
-     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime}
-     	 	</div>
-     	 	<div class="etc">
-     	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
-     	 	</div>
-     	 	<div class="etc">
-     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　20000
-     	 		<!-- <script type="text/javascript">
-     	 			if(${matchinfo.gameMacth} == '5vs5'){
-     	 				document.getElementById("pay").innerText = "20000";
-     	 			}else if (${matchinfo.gameMacth} == '6vs6') {
-     	 				document.getElementById("pay").innerText = "20000";
-     	 			}
-     	 		</script> -->
-     	 	</div>
-     	 	<div class="etc">
-     	 		<button class="subbtn" id="etcsubbtn">신청하기</button>
-     	 	</div>
-     	 </div>
-     	 </div>
+     	</div>
      	 
      	 
      </div>
-     
-     <!-- 신청하기 -->
-     <script type="text/javascript">
-	     if('${matchinfo.close}' == 'false') {
-	 		document.getElementById("etcsubbtn").disabled = true;
-	 	}
-	 	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
-	 	console.log(aa);
-	 	document.getElementById("etcsubbtn").addEventListener("click",function(){
-	 		var cnt = 0;
-	 		for(var i=0; i<list.length; i++){
-	 			if(list[i] == '<%=td%>'){
-	 				cnt++;
-	 			}
-	 		}
-	 		if('<%=td%>' == 0) {
-	 			alert("소속된 팀이 없으면 신청 할 수 없습니다.");
-	 		}else {
-	 			if(cnt > 0) {
-	 				alert("이미 신청한 경기 입니다.");
-	 			}else{
-	 				if(aa == 1) {
-	 					location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
-	 				}else{
-	 					location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
-	 				}
-	 			}
-	 		}
-	 	});
-     </script>
 
       <!-- 신청자 목록 -->
       <div class="list_container">
@@ -1157,6 +1128,10 @@
       let rv_btn = document.querySelector(".rv_btn");
       if('${matchinfo.close}' == 'false') {
     	  rv_btn.disabled = true;
+    	  rv_btn.innerText = "마감된경기";
+    	  rv_btn.style.backgroundColor="rgb(190 191 193)";
+    	  rv_btn.style.color = "rgb(241 247 255)";
+    	  rv_btn.style.borderColor = "rgb(190 191 193)";
   		}
       var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
       var lev = '${matchinfo.level}';

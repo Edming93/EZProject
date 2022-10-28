@@ -769,6 +769,11 @@
      <script type="text/javascript">
      if('${matchinfo.close}' == 'false') {
  		document.getElementById("etcsubbtn").disabled = true;
+ 		document.getElementById("etcsubbtn").innerText = "마감된경기";
+ 		document.querySelector(".menu_title_area2").style.backgroundColor="rgb(190 191 193)";
+ 		document.getElementById("etcsubbtn").style.color = "rgb(241 247 255)";
+ 		document.querySelector(".menu_title_area2").style.borderColor = "rgb(190 191 193)";
+ 		
  	}
  	
  	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
@@ -1130,6 +1135,10 @@
 	      let rv_btn = document.querySelector(".rv_btn");
 	      if('${matchinfo.close}' == 'false') {
 	    	  rv_btn.disabled = true;
+	    	  rv_btn.innerText = "마감된경기";
+	    	  rv_btn.style.backgroundColor="rgb(190 191 193)";
+	    	  rv_btn.style.color = "rgb(241 247 255)";
+	    	  rv_btn.style.borderColor = "rgb(190 191 193)";
 	  		}
 	      var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
 	      var lev = '${matchinfo.level}';
