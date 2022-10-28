@@ -82,6 +82,12 @@
 		where team_code = #{teamCode}
 	</select>
 	
+	<select id="fieldinfo" resultType="GameFieldInfoVO"> 
+		select * 
+		from gamefield_info 
+		where field_code = #{fieldcode} 
+	</select>
+	
 	<!-- 팀 등록시 지도 검색 -->
 	<select id="getGameMapWhere" resultType="GameFieldInfoVO">
 		select 

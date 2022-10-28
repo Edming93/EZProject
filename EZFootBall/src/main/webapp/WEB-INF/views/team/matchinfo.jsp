@@ -292,10 +292,6 @@
       .menu_title_area2:hover .menu_title2 {
             color:white;
       }
-/*       .field_plant { */
-/*       	 font-weight : bold; */
-/*       	 border-bottom: 3px solid #798777; */
-/*       } */
       
       .content_container {
          grid-area:content;
@@ -410,26 +406,46 @@
          padding-top: 50px;
          border-top: 1px solid #ebebeb;
       }
+      
       .list_content{
       	 display: grid;
-         grid-template-columns: repeat(3, 1fr);
-         
+         grid-template-columns: repeat(2, 1fr);
+         justify-content:space-between;
       }
-      .list_num{
+      /* .list_num{
       	margin-bottom: 30px;
       	border: 2px solid #26a653;
       	border-radius: 15px;
       	width: 70%;
       	padding: 20px;
-      }
+      } */
       
-      .list_num >div {
+      /* .list_num >div {
       	padding-bottom: 15px;
-      }
+      } */
       .listno{
          font-size: 16px;
          display: flex;
          line-height: 27px;
+         padding-bottom : 5px;
+      } 
+      .listno:last-child{
+      	padding-bottom : 5px;
+      	border-bottom: 1px solid #d3f1e1;
+      }
+      .list_team{
+      	font-size: 16px;
+        display: flex;
+        line-height: 50px;
+      }
+      .teamdiv{
+      	width:90%;
+      	padding: 15px;
+      	border: 2px solid #26a653;
+      	border-radius: 15px;;
+      }
+      .memberdiv{
+      	padding: 10px;
       }
       
       .rule_container{
@@ -901,10 +917,9 @@
 	        	      
 	        	      .then(data3 => {
 	        	         for ( let name in data3) {
-	        	        	 console.log("엥");
 	        	        	 list.push(data3[name]);
-	        	        	 console.log(data3[0]);
 	        	        	 const divlist = document.createElement("div");
+	        	        	 divlist.className = "teamdiv";
 	        	        	 
 	        	        	 
 	        	        	 let data4 = {team_code:data3[name]}
@@ -917,8 +932,10 @@
 	        	      	      }).then(response => response.json()) 
 	        	      	      .then(data4 => {  
 	        	      	    	  
+	        	      	    	var divg = document.createElement("div");
 	        	      	         for ( let name2 in data4) {
 	        	      	        	const divinlist = document.createElement("div");
+	        	      	        	divinlist.className = "memberdiv";
 	        	      	        	
 	        	      	        	var divn = document.createElement("div");
 	    	  	      	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data4[name2].userName;
@@ -928,9 +945,9 @@
 	    	  	      	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data4[name2].userGender;
 	    	  	      	        	divd.className = "listno";
 	    	  	      	        	
-	    	  	      	        	var divg = document.createElement("div");
-	    	  	      	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data4[name2].userGroup;
-	    	  	      	        	divg.className = "listno";
+	    	  	      	        	/* var divg = document.createElement("div"); */
+	    	  	      	        	divg.innerHTML = "<iconify-icon icon='material-symbols:groups' style='color: #26a653;' width='40' height='40'></iconify-icon>" +"　" + data4[name2].userGroup;
+	    	  	      	        	divg.className = "list_team";
 	    	  	      	        	
 	    	  	      	        	var divv = document.createElement("div");
 	    	  	      	        	divv.innerHTML ="<iconify-icon icon='fluent-emoji-flat:trophy' width='27' height='27'></iconify-icon>"+ "　　" + data4[name2].userVr;
@@ -940,17 +957,18 @@
 	    	  	      	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data4[name2].userLevel;
 	    	  	      	        	divl.className = "listno";
 	        	      	        	
-	        	      	        	
 	        	      	        
 	        	      	        	divinlist.append(divn);
 	        	      	        	divinlist.append(divd);
-	        	      	        	divinlist.append(divg);
+	        	      	        	/* divinlist.append(divg); */
 	        	      	        	divinlist.append(divv);
 	        	      	        	divinlist.append(divl);
 	        	      	        	
 	        	      	        	divlist.append(divinlist);
 	        	      	        	
+	        	      	        	
 	        	      	         }
+	        	      	       divlist.prepend(divg);
 	        	      	         
 	        	      	      }).catch(error => {
 	        	      	         console.log("error");
