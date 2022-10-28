@@ -54,6 +54,12 @@
 		values(${rvType},${fieldCode},${fieldName},${fieldAddress},${fieldType},${fieldRentalfee},${userCode},${userPayment},${gameDay},${gameTime})
 	</insert>
 	
+	<!-- 내가 만듬 -->
+	<select id="getFieldReservation" resultType="FieldReservationVO">
+		SELECT *, DATE_FORMAT(game_time, '%H:%i') game_time1, DATE_FORMAT(DATE_ADD(game_time, INTERVAL 2 HOUR), '%H:%i') game_time2 FROM field_reservation
+		WHERE user_code = #{userCode}
+	</select>
+	
 	
 	
 	

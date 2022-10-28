@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>구장예약 내역</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -94,14 +94,15 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
+    background-color: #ccc;
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
-    height: 900px;
-/*     background-color: #ffaaaa; */
+/*     height: 900px; */
+    min-height: 900px;
+    background-color: #ffaaaa;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
@@ -111,118 +112,62 @@
 .main_content1 {
 	display: flex;
 	flex-direction: column;
-	width: 36%;
+	width: 98%;
 	/* height: 98%; */
 	height:90%;
-/* 	background-color: #fff; */
-}
-
-.main_content2 {
-	width: 62%;
-	height:90%;
 	background-color: #fff;
-	padding: 0 30px;
 }
 
-.main_left1 {
+.main_box1 {
 	width: 100%;
-	height: 35%;
+	height: 100%;
 	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
 /* 	background-color: #fffaec; */
 /* 	color: #fff; */
 }
 
-#user_info > ul {
+
+#rantal_nav	{
+	display: block;
+	width: 100%;
+	height: 50%;
+	border: 1px solid black;
+}
+
+
+#rantal_list{
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.8rem;
+}
+
+#rantal_list th, td {
+	border: 1px solid black;
+	padding: 10px;
+	text-align: center;
+}
+
+.collapsible {
+	display: none;
+}
+
+.rantal_content{
+	padding: 10px;
+}
+
+.rantal_content > ul {
+	display:flex;
 	list-style-type: none;
 	padding: 0;
+	text-align: left;
+	justify-content: center;
 }
 
-#user_info > ul > li{
-	padding: 10px 0;
-}
-
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
-}
-
-.main_right1 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-	
-}
-
-.main_right2 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.name1 {
+.rantal_content > ul > li {
 	display: inline-block;
-}
-
-.main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_left2 > ul > li {
-	margin-bottom: 30px;
-}
-
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
-}
-
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
-}
-
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
+	padding: 15px 5px;
+	border: 1px solid black;
+	margin-right: 20px;
 }
 
 
@@ -309,47 +254,77 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
+			<h1 class="main_title">구장예약 내역</h1>
 				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : ${uinVO.userVr*100}% <span>(00전 00승 00패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
+					<section class="main_box1">
+						<div id="rantal_nav">
+							<table id="rantal_list">
+								<!-- <thead> -->
+									<tr>
+										<th>예약번호</th>
+										<th>구장명</th>
+										<th>구장위치</th>
+										<th>매치일자</th>
+										<th>매치시간</th>
+										<th>상태</th>
+									</tr>
+								<!-- </thead> -->
+								<!-- <tbody> -->
+<!-- 									<tr class="rantal_item"> -->
+<!-- 										<td>111111</td> -->
+<!-- 										<td>대충 어딘가 경기장</td> -->
+<!-- 										<td>대충어디도 어디시 어디동 11</td> -->
+<!-- 										<td>2022-01-02</td> -->
+<!-- 										<td>14:00 ~ 16:00</td> -->
+<!-- 										<td>예약완료</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr class="collapsible"> -->
+<!-- 										<td class="rantal_content" colspan="10" height="100px"> -->
+<!-- 											<ul> -->
+<!-- 												<li>매치종류 : 구장예약</li> -->
+<!-- 												<li>매치형태 : 6:6</li> -->
+<!-- 												<li>예약자 : 사람1</li> -->
+<!-- 												<li>예약신청일 : 2022-01-01</li> -->
+<!-- 												<li>결제금액 : 120,000</li> -->
+<!-- 											</ul> -->
+<!-- 										</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr class="rantal_item"> -->
+<!-- 										<td>222222</td> -->
+<!-- 										<td>대충 어딘가 경기장</td> -->
+<!-- 										<td>대충어디도 어디시 어디동 11</td> -->
+<!-- 										<td>2022-01-02</td> -->
+<!-- 										<td>14:00 ~ 16:00</td> -->
+<!-- 										<td>예약완료</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr class="collapsible"> -->
+<!-- 										<td class="rantal_content" colspan="10" height="100px"> -->
+<!-- 											<ul> -->
+<!-- 												<li>매치종류 : 팀예약</li> -->
+<!-- 												<li>매치형태 : 6:6</li> -->
+<!-- 												<li>예약자 : 사람1</li> -->
+<!-- 												<li>예약신청일 : 2022-01-01</li> -->
+<!-- 												<li>결제금액 : 120,000</li> -->
+<!-- 											</ul> -->
+<!-- 										</td> -->
+<!-- 									</tr> -->
+								<!-- </tbody> -->
+							</table>
 						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">랭킹시스템 소개</a></li>
-							<li><a href="#">EZ풋볼 규칙설명</a></li>
-							<li><a href="#">대충 머시기 있지않을까..?</a></li>
-						</ul>
-					</section>
-				</div>
-				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
-						</ul>
+						
+						
+<!-- 										<li>예약번호 : 111111</li> -->
+<!-- 										<li>예약일자 : 2022-01-01</li> -->
+<!-- 										<li>예약구장 : 대충어딘가경기장</li> -->
+<!-- 										<li>구장위치 : 대충어디도 어디시 어디동 11</li> -->
+<!-- 										<li>매치타입 : 6:6</li> -->
+<!-- 										<li>구장비용 : 120,000원</li> -->
+<!-- 										<li>예약자 : 사람1</li> -->
+<!-- 										<li>결제금액 : 120,000원</li> -->
+<!-- 										<li>매치(대여)일자 : 2022-01-02</li> -->
+<!-- 										<li>매치시간 : 09:00:00</li> -->
+<!-- 										<li>상태 : 예약완료</li> -->
+							
 					</section>
 				</div>
             </div>
@@ -373,6 +348,66 @@ footer {
         </script>
         <script type="text/javascript">
         
+        	// 목록 받아오기
+        	window.addEventListener("DOMContentLoaded", function(){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/myPage/getRentalList",
+						type: "GET",
+						contentType: "application/json; charset=utf-8",
+						dataType: "json",
+						async: false,
+						success: function(data){
+							const table = document.getElementById("rantal_list");
+						
+							console.log(data);
+							for (const list of data.list) {
+								console.log(data.userName);
+								const tr1 = document.createElement("tr");
+								const tr2 = document.createElement("tr");
+								const td1 = document.createElement("td");
+
+								tr1.innerHTML = 
+									"<td>"+list.rvCode+"</td>"+
+									"<td><a href='${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+ list.fieldCode+"'>"+list.fieldName+"</a></td>"+
+									"<td>"+list.fieldAddress+"</td>"+
+									"<td>"+list.gameDay+"</td>"+
+									"<td>"+list.gameTime1+" ~ "+list.gameTime2+"</td>"+
+									"<td>"+"예약완료"+"</td>";
+									
+								td1.innerHTML = "<ul><li>매치종류 : "+list.rvType+"</li>"+
+									"<li>매치형태 : "+list.fieldType+"</li>"+
+									"<li>예약신청일 : "+list.rvDay+"</li>"+
+									"<li>예약자 : "+data.userName+"</li>"+
+									"<li>결제금액 : "+list.userPayment+"</li>"+
+									"</ul>";
+								td1.classList.add("rantal_content");
+								td1.style.height = "100px";
+								td1.colSpan = "10";
+								tr1.classList.add("rantal_item");
+								tr2.classList.add("collapsible");
+								tr2.append(td1);
+								table.append(tr1);
+								table.append(tr2);
+								
+							}
+								// list 누르면 아래 박스추가
+					        	$('.rantal_item').on("click",function(){
+									$(this).next().nextAll('.collapsible').hide();
+									$(this).next().prevAll('.collapsible').hide();
+										console.log($(this).next().css('display'));
+									if($(this).next().css('display') == "table-row"){
+										$(this).next().hide();
+										return;
+									}
+					        		$(this).next().show();
+					        	});
+							
+						},
+						error: function(e){
+							alert(e);
+						}
+					})
+				});
         </script>
 	</div>
 </body>

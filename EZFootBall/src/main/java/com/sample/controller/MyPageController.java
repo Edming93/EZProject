@@ -1,6 +1,7 @@
 package com.sample.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.FindService;
 import com.sample.service.LoginService;
+import com.sample.service.RentalService;
 import com.sample.service.UinService;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 
@@ -26,12 +29,15 @@ public class MyPageController {
 	private LoginService loginService;
 	private UinService uinService;
 	private FindService findService;
+	private RentalService rentalService;
 
-	public MyPageController(LoginService loginService, UinService uinService, FindService findService) {
+	public MyPageController(LoginService loginService, UinService uinService, FindService findService,
+			RentalService rentalService) {
 		super();
 		this.loginService = loginService;
 		this.uinService = uinService;
 		this.findService = findService;
+		this.rentalService = rentalService;
 	}
 
 	@GetMapping("myPage")
@@ -85,6 +91,34 @@ public class MyPageController {
 		} else {
 			map.put("state", "no");
 		}
+		return map;
+	}
+
+	// 경기내역
+	@GetMapping("/matchList")
+	public String matchList() {
+
+		return "/myPage/matchList";
+	}
+
+	// 구장예약 내역
+	@GetMapping("/rentalList")
+	public String rentalList(UserVO userVO, HttpSession session, Model model) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		model.addAttribute("userVO", userVO);
+		return "/myPage/rentalList";
+	}
+
+	@GetMapping("/getRentalList")
+	@ResponseBody
+	public Map<String, Object> getRentalList(UserVO userVO, HttpSession session, Model model) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		System.out.println("구장예약자 이름 : " + userVO.getUserName() + userVO.getUserCode());
+		int userCode = userVO.getUserCode();
+		Map<String, Object> map = new HashMap<>();
+		List<FieldReservationVO> list = rentalService.getFieldReservationVO(userCode);
+		map.put("userName", userVO.getUserName());
+		map.put("list", list);
 		return map;
 	}
 

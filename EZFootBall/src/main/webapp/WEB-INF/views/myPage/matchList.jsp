@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>경기내역</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -94,14 +94,14 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
+    background-color: #ccc;
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
     height: 900px;
-/*     background-color: #ffaaaa; */
+    background-color: #ffaaaa;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
@@ -111,119 +111,22 @@
 .main_content1 {
 	display: flex;
 	flex-direction: column;
-	width: 36%;
+	width: 98%;
 	/* height: 98%; */
 	height:90%;
-/* 	background-color: #fff; */
-}
-
-.main_content2 {
-	width: 62%;
-	height:90%;
 	background-color: #fff;
-	padding: 0 30px;
 }
 
-.main_left1 {
-	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
-}
 
-#user_info > ul {
-	list-style-type: none;
-	padding: 0;
-}
 
-#user_info > ul > li{
-	padding: 10px 0;
-}
 
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
-}
 
-.main_right1 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-	
-}
 
-.main_right2 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-	
-}
 
-.name1 {
-	display: inline-block;
-}
 
-.main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
 
-.main_left2 > ul > li {
-	margin-bottom: 30px;
-}
 
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
-}
 
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
-}
-
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
-}
 
 
 .bottom_banner {
@@ -309,49 +212,49 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
+			<h1 class="main_title">경기 내역</h1>
 				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : ${uinVO.userVr*100}% <span>(00전 00승 00패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">랭킹시스템 소개</a></li>
-							<li><a href="#">EZ풋볼 규칙설명</a></li>
-							<li><a href="#">대충 머시기 있지않을까..?</a></li>
-						</ul>
-					</section>
+<!-- 					<section class="main_left1"> -->
+<!-- 						<div id="user_info"> -->
+<!-- 							<ul> -->
+<%-- 								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li> --%>
+<%-- 								<li>주소 : ${userVO.userLocal }</li> --%>
+<%-- 								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li> --%>
+<%-- 								<li>랭크 : ${uinVO.userLevel }</li> --%>
+<%-- 								<li>승률 : ${uinVO.userVr*100}% <span>(00전 00승 00패)</span></li> --%>
+<%-- 								<li>Team : ${uinVO.userGroup }</li> --%>
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</section> -->
+<!-- 					<section class="main_left2"> -->
+<!-- 						<ul> -->
+<!-- 							<li><a href="#">공지사항</a></li> -->
+<!-- 							<li><a href="#">랭킹시스템 소개</a></li> -->
+<!-- 							<li><a href="#">EZ풋볼 규칙설명</a></li> -->
+<!-- 							<li><a href="#">대충 머시기 있지않을까..?</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</section> -->
 				</div>
-				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
-						</ul>
-					</section>
-				</div>
+<!-- 				<div class="main_content2"> -->
+<!-- 					<section class="main_right1"> -->
+<!-- 						<h3>도구</h3> -->
+<!-- 						<ul> -->
+<!-- 							<li><a href="">경기내역</a></li> -->
+<!-- 							<li><a href="">구장예약 내역</a></li> -->
+<%-- 							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li> --%>
+<%-- 							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li> --%>
+<!-- 						</ul> -->
+<!-- 					</section> -->
+<!-- 					<section class="main_right2"> -->
+<!-- 						<h3>더보기</h3> -->
+<!-- 						<ul> -->
+<!-- 							<li><a href="">고객문의</a></li> -->
+<!-- 							<li><a href="">자주 묻는 질문 (Q&A)</a></li> -->
+<!-- 							<li><a href="">매니저 지원</a></li> -->
+<!-- 							<li><a href="">구장제휴</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</section> -->
+<!-- 				</div> -->
             </div>
         </div>
 

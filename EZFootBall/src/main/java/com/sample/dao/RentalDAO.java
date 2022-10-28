@@ -13,9 +13,16 @@ import com.sample.vo.GlistVO;
 public interface RentalDAO {
 
 	public List<GlistVO> rvListAll(GlistVO vo);
+
 	public List<GlistVO> selectTime(GlistVO vo);
-	@MapKey("fieldCode") 
+
+	@MapKey("fieldCode")
 	public GameFieldInfoVO fieldInfo(int fieldCode);
+
 	public GlistVO matchInfo(int fieldCode);
+
 	public void insertFieldReservation(FieldReservationVO vo);
+
+	// 마이페이지 구장예약 리스트 불러오기
+	public List<FieldReservationVO> getFieldReservation(int userCode);
 }

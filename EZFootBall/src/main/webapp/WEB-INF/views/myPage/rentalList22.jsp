@@ -94,14 +94,15 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
+    background-color: #ccc;
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
-    height: 900px;
-/*     background-color: #ffaaaa; */
+/*     height: 900px; */
+    min-height: 900px;
+    background-color: #ffaaaa;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
@@ -111,119 +112,55 @@
 .main_content1 {
 	display: flex;
 	flex-direction: column;
-	width: 36%;
+	width: 98%;
 	/* height: 98%; */
 	height:90%;
-/* 	background-color: #fff; */
-}
-
-.main_content2 {
-	width: 62%;
-	height:90%;
 	background-color: #fff;
-	padding: 0 30px;
 }
 
-.main_left1 {
+.main_box1 {
 	width: 100%;
-	height: 35%;
+	height: 100%;
 	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
 /* 	background-color: #fffaec; */
 /* 	color: #fff; */
 }
 
-#user_info > ul {
-	list-style-type: none;
-	padding: 0;
-}
 
-#user_info > ul > li{
-	padding: 10px 0;
-}
-
-.main_left2 {
+#rantal_nav	{
+	display: block;
 	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
+	height: 50px;
+	border: 1px solid black;
 }
 
-.main_right1 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-	
-}
 
-.main_right2 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.name1 {
-	display: inline-block;
-}
-
-.main_left2 > ul{
+#rantal_list{
 	list-style-type: none;
 	padding: 0;
 	margin: 10px 0;
 }
 
-.main_left2 > ul > li {
-	margin-bottom: 30px;
+#rantal_list > li {
+/* 	margin-bottom: 20px; */
 }
 
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
+#rantal_list > li > div {
+	display: flex;
+	border-radius: 15px;
+	border: 1px solid #26a653;
 	text-align: center;
 	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
+	height: 150px;
+	padding: 10px;
+/* 	background-color: #fffaec; */
 }
 
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
 
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
-}
 
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
-}
+
+
+
 
 
 .bottom_banner {
@@ -309,47 +246,44 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
+			<h1 class="main_title">구장예약 내역</h1>
 				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : ${uinVO.userVr*100}% <span>(00전 00승 00패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
+					<section class="main_box1">
+						<div id="rantal_nav"></div>
+						<ul id="rantal_list">
+							<li>
+								<div class="rantal_list_item">
+									<ul>
+										<li>예약번호 : 111111</li>
+										<li>예약신청일 : 2022-01-01</li>
+										<li>예약구장 : 대충어딘가경기장</li>
+										<li>구장위치 : 대충어디도 어디시 어디동 11</li>
+										<li>매치타입 : 6:6</li>
+										<li>구장비용 : 120,000원</li>
+										<li>예약자 : 사람1</li>
+										<li>결제금액 : 120,000원</li>
+										<li>매치(대여)일자 : 2022-01-02</li>
+										<li>매치시간 : 09:00:00</li>
+										<li>상태 : 예약완료</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="rantal_list_item">
+									리스트2
+								</div>
+							</li>
+							<li>
+								<div class="rantal_list_item">
+									리스트3
+								</div>
+							</li>
+							<li>
+								<div class="rantal_list_item">
+									리스트4
+								</div>
+							</li>
 							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">랭킹시스템 소개</a></li>
-							<li><a href="#">EZ풋볼 규칙설명</a></li>
-							<li><a href="#">대충 머시기 있지않을까..?</a></li>
-						</ul>
-					</section>
-				</div>
-				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
-						</ul>
 					</section>
 				</div>
             </div>
