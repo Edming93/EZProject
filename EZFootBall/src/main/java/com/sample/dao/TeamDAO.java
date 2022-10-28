@@ -13,6 +13,7 @@ import com.sample.vo.SearchVO;
 import com.sample.vo.TeamMemberVO;
 import com.sample.vo.TlistVO;
 import com.sample.vo.UinVO;
+import com.sample.vo.UserVO;
 
 @Mapper
 public interface TeamDAO {
@@ -80,6 +81,12 @@ public interface TeamDAO {
 			
 			// 결제버튼 누를시
 			public void insertFieldRVT(FieldReservationVO vo);
+			
+			// 팀 등록시 필요한 유저정보 가져오는 것
+			public UserVO getUserInfo(String str);
+			
+			// 정욱 팀 등록시 사용
+			public List<UinVO> getUserList(UinVO vo);
 
 		//-----------------------------------------------
 }

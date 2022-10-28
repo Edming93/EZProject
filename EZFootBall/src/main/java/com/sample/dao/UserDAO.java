@@ -26,8 +26,6 @@ public interface UserDAO {
 
 	public void newPassword(UserVO vo);
 
-	// 정욱 팀 등록시 사용
-	public List<UserVO> getUserList(UserVO vo);
 
 	// 유저 레벨, 승률 조회 사용
 	public UinVO getUserAbil(int userCode);

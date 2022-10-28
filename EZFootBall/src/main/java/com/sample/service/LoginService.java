@@ -54,10 +54,5 @@ public class LoginService {
 	}
 	
 
-	// 정욱 사용
-		public List<UserVO> getUserList(UserVO vo) {
-			
-			
-			return dao.getUserList(vo);
-		}
+	
 }

@@ -301,11 +301,16 @@ public class TeamController {
 		return service.getGameMap(vo); 
 	}
 	
-	
 	// 매치 작성 중 팀 틍록하기 버튼 클릭시
+	// 유저정보도 같이 불러오는 것
 	
 	@GetMapping("/register")
-	public String register() {
+	public String register(HttpSession Session,  Model model) {
+		UserVO uvo = (UserVO)Session.getAttribute("sessionVO");
+		System.out.println("세션세션 : "+uvo.getUserCode());
+		System.out.println("아이디아이디 : "+uvo.getUserId());
+		
+		service.getUserInfo(uvo.getUserId(), model);
 		
 		return "team/registeration";
 	}
@@ -325,22 +330,13 @@ public class TeamController {
 		}
 	}
 	
-	// 팀 등록시 이름 입력 후 확인버튼 눌러 회원코드 연결
 	@PostMapping("/usercode")
 	@ResponseBody
-	public List<UserVO> Usercode(@RequestBody UserVO vo) {
+	public List<UinVO> Usercode(@RequestBody UinVO vo) {
 		
-		return Lservice.getUserList(vo);
-		
-		
+		return service.getUserList(vo);
 	}
 	
-//	@PostMapping("/timeListR")
-//	@ResponseBody
-//	public List<GlistVO> timeList(@RequestBody GlistVO gvo){
-//		
-//		return service.timeList(gvo);
-//	}
 	
 	@PostMapping("/timeListR")
 	@ResponseBody

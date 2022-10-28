@@ -26,8 +26,7 @@
         border: 1px solid white;
         justify-content: center;
     	align-items: center;
-    	background : url("${pageContext.request.contextPath}/image/flower.PNG") no-repeat;
-    	background-size : cover;
+    
     }
     
     .team_info{
@@ -304,9 +303,9 @@
                     <th>회원코드</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="tmember1" class="tmem" placeholder="이름을 입력하세요"></td>
+                    <td><input type="text" name="tmember1" class="tmem" placeholder="이름을 입력하세요" value="${user.userName}"></td>
                     <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode1" class="userCode" placeholder="회원코드"></td>
+                    <td><input type="text" name="userCode1" class="userCode" placeholder="회원코드" value="${user.userCode}"></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="tmember2" class="tmem" placeholder="이름을 입력하세요"></td>
@@ -347,11 +346,11 @@
   		
   	
    		btns[i].addEventListener("click", function(){
-   		let tmember = document.getElementsByClassName("tmem")[i].value;
+   		let userName = document.getElementsByClassName("tmem")[i].value;
 		let userCode = document.getElementsByClassName("userCode")[i];
 		
 		
-		const simple_data = {tmember};
+		const simple_data = {userName};
 		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/team/usercode",
@@ -361,9 +360,17 @@
  			data : JSON.stringify(simple_data),
 			success : function(data){
 				
-				
+				console.log(data);
 				for(let comment of data){
-					userCode.value = comment.userCode;
+					if(comment.teamCode != null){
+					
+						alert("팀이 존재하여 추가할 수 없습니다.");
+						
+						
+					}
+					else{
+						userCode.value = comment.userCode;
+					}
 				}
 
 			},

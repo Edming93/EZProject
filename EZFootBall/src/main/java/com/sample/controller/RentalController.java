@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.service.RentalService;
+import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GlistVO;
@@ -28,10 +29,12 @@ import com.sample.vo.UserVO;
 public class RentalController {
 	
 	private RentalService service;
+	private TeamService Tservice;
 	
-	public RentalController(RentalService service) {
+	public RentalController(RentalService service, TeamService tservice) {
 		super();
 		this.service = service;
+		Tservice = tservice;
 	}
 
 	@GetMapping("/rental")
@@ -143,12 +146,14 @@ public class RentalController {
 	}
 	
 	@GetMapping("/resultTeam")
-	public String teamResultMove() {
+	public String teamResultMove(FieldReservationVO rvo, HttpSession session) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
+		rvo.setUserCode(uvo.getUserCode());
+		rvo.setUserPayment(rvo.getFieldRentalfee());
+		Tservice.insertFieldRVT(rvo);
 		return "rental/resultTeam";
-	}
-	
 
-	
+	}
 		
 	
 }

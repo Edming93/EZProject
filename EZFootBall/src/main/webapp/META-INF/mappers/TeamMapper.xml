@@ -188,4 +188,16 @@
 		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime})
 	</insert>
 	
+	<!-- 팀등록시 로그인한 정보 가져오기 -->
+	<select id="getUserInfo" resultType="UserVO">
+		select user_code, user_id, user_name from user_info
+		where user_id = #{userId}
+	</select>
+	
+	<!-- 정욱 팀 등록시 매퍼사용 -->
+	<select id="getUserList" parameterType="UinVO" resultType="UinVO">
+		select * from user_abil where user_name = #{userName}
+	</select>
+	
+	
 </mapper>
