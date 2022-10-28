@@ -31,8 +31,6 @@
        	width: 1024px;
        }
        #out * {
-            /* margin: 10px; */
-        	/* border: 1px solid black; */
             box-sizing: border-box;
         }
 
@@ -80,6 +78,7 @@
 		    border-radius: 71px;
 		    border: 1px solid #e1e1e1;
 		    color: #c7c7c7;
+		    cursor: pointer;
         }
         .idaydiv{
         }
@@ -88,9 +87,6 @@
         	font-size: 20px;
         	font-weight: bold;
         }
-        /* #day li > div {
-        	font-weight: bold;
-        } */
 
         #settingbutton{
 		    flex: 1;
@@ -101,6 +97,7 @@
 		    font-size: 12px;
 		    margin-bottom: 40px;
 		    margin-left: 20px;
+		    align-items: center;
     	}
     	
     	.local{
@@ -109,7 +106,7 @@
     		margin-right: 10px;
     	}
     	
-    	.rv_check {
+    	.type_input {
     		border-radius: 30px;
 		    display: flex;
 		    align-items: center;
@@ -190,6 +187,70 @@
 			width: 105px;
 	        height: 100px;
 	        margin: 15px;
+		}
+		
+		.rental_area {
+          display:flex;
+       	}
+       	.time {
+          display : inline-block;
+          width:140px;
+          height:50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+       	}
+		
+		.rental_span_able {
+          background-color: rgb(232, 242, 255);
+		  cursor: pointer;
+		  text-decoration: none;
+		  color: black;
+		  border-radius: 11px;
+		  border: 0px !important;
+       }
+       .rental_span_disable {
+          text-decoration: none;
+		  color: #A9A9A9;
+		  border-radius: 11px;
+		  border: 0px !important;
+       }
+       
+		#result {
+			display: flex;
+	    	flex-direction: column;
+		}
+		.result_content {
+			display: flex;
+		    color: black;
+		    text-decoration: none;
+		    padding: 25px 20px;
+		    border-bottom: 1px solid #efefef;
+		    justify-content: space-around;
+		    flex-direction: column;
+		}
+		.title_area {
+	
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: column;
+		}
+		
+	
+		.size_span {
+			font-size:13px;
+			margin-bottom: 20px;
+	    	display: flex;
+		}
+		
+		.field_title {
+			margin-bottom: 10px;
+	    	display: flex;
+	    	cursor: pointer;
+		}
+		
+		input:focus, select:focus, option:focus, textarea:focus, button:focus{
+		outline: none;
 		}
 
     </style>
@@ -423,7 +484,7 @@
          <option id="제주도" value="제주도">제주도</option>
       </select>
 
-      <label for="rv_check" id="type_input" class="select_border rv_check">예약가능시간</label> <input type="checkbox" id="rv_check" style="display: none";>
+      <label for="type_input" id="rv_check" class="select_border type_input">예약가능시간</label> <input type="checkbox" id="type_input" style="display: none";>
       
       <select name="" id="field_size" class="select_border size">
          <option id="null" value="null">크기</option>
@@ -441,37 +502,15 @@
     
    </div>
    
-<style>
-	.result_content {
-	    display: flex;
-	    color: black;
-	    text-decoration: none;
-	    padding: 10px 0;
-	    border-bottom: 1px solid #efefef;
-	    height: 80px;
-	    justify-content: space-around;
-	    flex-direction: column;
-	}
-	.title_area {
-		display: flex;
-    	width: 235px;
-    	justify-content: space-between;
-	}
-	나 오십분되면 칼같이 나갈구야
-	
-
-	.size_span {
-		font-size:13px;
-	}
-</style>
 <script type="text/javascript">
 <!--  처음 로딩시  -->
 	window.onload = function() {
 
-		document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
-        document.getElementById("<%=today%>").style.color="rgb(36 36 36)";
+		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
+        document.getElementById("<%=today%>").style.color="#fff";
+        document.getElementById("<%=today%>").style.border="1px solid #26A653";
         document.getElementById("<%=today%>").style.transform = "scale(1.5)";
-        
+
 		let day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
 
 		today = day;
@@ -549,12 +588,14 @@
          today_li.forEach(function(e) {
             e.style.backgroundColor="#fff";
     		e.style.color='#C7C7C7';
+    		e.style.border="1px solid #A9A9A9";
     		e.style.transition = "all 0.2s linear";
             e.style.transform = "scale(1.0)";
          });
       
-         e.style.backgroundColor="#e8f2ff";
-     	 e.style.color="rgb(36 36 36)";
+         e.style.backgroundColor="#26A653";
+     	 e.style.color="#fff";
+     	 e.style.border="1px solid #26A653";
     	 e.style.transition = "all 0.2 linear";
          e.style.transform = "scale(1.5)";
 
@@ -597,14 +638,16 @@
         
            for (let data of list) {
 	            const content_area = document.createElement("div"); // 가장 바깥
+	            content_area.className = "result_content";
 	            const title_div = document.createElement("div"); // 구장명 표기
+	            title_div.className = "title_area";
 	            const h3 = document.createElement("h3");
 	            h3.className = "field_title";
-	            console.log("필드코드 : "+data.fieldCode);
 	            h3.addEventListener("click",function() {
 	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
 	            });
 	            const match_type = document.createElement("span");
+	            match_type.className = "size_span";
 	            h3.innerHTML = data.fieldName;
 	            match_type.innerHTML = "크기 "+data.gameMacth;
 	            
@@ -690,14 +733,16 @@
        
           for (let data of list) {
 	            const content_area = document.createElement("div"); // 가장 바깥
+	            content_area.className = "result_content";
 	            const title_div = document.createElement("div"); // 구장명 표기
+	            title_div.className = "title_area";
 	            const h3 = document.createElement("h3");
 	            h3.className = "field_title";
-	            console.log("필드코드 : "+data.fieldCode);
 	            h3.addEventListener("click",function() {
 	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
 	            });
 	            const match_type = document.createElement("span");
+	            match_type.className = "size_span";
 	            h3.innerHTML = data.fieldName;
 	            match_type.innerHTML = "크기 "+data.gameMacth;
 	            
@@ -743,7 +788,7 @@
    let type_input = document.getElementById("type_input");
    
    type_input.addEventListener("click",function(){
-	  document.getElementById("type_input").classList.toggle("active");
+	  document.getElementById("rv_check").classList.toggle("active");
      
       let local_select = document.getElementById("local").value;
       if(local_select == "null"){
@@ -772,15 +817,16 @@
        
        for (let data of list) {
            const content_area = document.createElement("div"); // 가장 바깥
+           content_area.className = "result_content";
            const title_div = document.createElement("div"); // 구장명 표기
+           title_div.className = "title_area";
            const h3 = document.createElement("h3");
            h3.className = "field_title";
-           
            h3.addEventListener("click",function() {
            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
            });
-           
            const match_type = document.createElement("span");
+           match_type.className = "size_span";
            h3.innerHTML = data.fieldName;
            match_type.innerHTML = "크기 "+data.gameMacth;
            
@@ -869,14 +915,16 @@
       
          for (let data of list) {
 	            const content_area = document.createElement("div"); // 가장 바깥
+	            content_area.className = "result_content";
 	            const title_div = document.createElement("div"); // 구장명 표기
+	            title_div.className = "title_area";
 	            const h3 = document.createElement("h3");
 	            h3.className = "field_title";
-	            console.log("필드코드 : "+data.fieldCode);
 	            h3.addEventListener("click",function() {
 	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
 	            });
 	            const match_type = document.createElement("span");
+	            match_type.className = "size_span";
 	            h3.innerHTML = data.fieldName;
 	            match_type.innerHTML = "크기 "+data.gameMacth;
 	            
@@ -924,7 +972,7 @@
  	      document.getElementById("field_size").value = null;
  	      
 	      document.getElementById("local").classList.remove("active");
-	      document.getElementById("type_input").classList.remove("active");
+	      document.getElementById("rv_check").classList.remove("active");
 	      document.getElementById("field_size").classList.remove("active");
 
 	      var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
@@ -946,16 +994,18 @@
           
              for (let data of list) {
  	            const content_area = document.createElement("div"); // 가장 바깥
- 	            const title_div = document.createElement("div"); // 구장명 표기
- 	            const h3 = document.createElement("h3");
- 	            h3.className = "field_title";
- 	            console.log("필드코드 : "+data.fieldCode);
- 	            h3.addEventListener("click",function() {
- 	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
- 	            });
- 	            const match_type = document.createElement("span");
- 	            h3.innerHTML = data.fieldName;
- 	            match_type.innerHTML = "크기 "+data.gameMacth;
+	            content_area.className = "result_content";
+	            const title_div = document.createElement("div"); // 구장명 표기
+	            title_div.className = "title_area";
+	            const h3 = document.createElement("h3");
+	            h3.className = "field_title";
+	            h3.addEventListener("click",function() {
+	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
+	            });
+	            const match_type = document.createElement("span");
+	            match_type.className = "size_span";
+	            h3.innerHTML = data.fieldName;
+	            match_type.innerHTML = "크기 "+data.gameMacth;
  	            
  	            title_div.append(h3);
  	            title_div.append(match_type);

@@ -27,4 +27,9 @@ public interface RentalDAO {
 
 	// 마이페이지 구장예약 리스트 불러오기
 	public List<FieldReservationVO> getFieldReservation(int userCode);
+	
+	// 예약테이블 등록시 유효성검사
+	public FieldReservationVO rvCheck(FieldReservationVO vo);
+	
+	public void insertRvInGameList(GlistVO vo);
 }

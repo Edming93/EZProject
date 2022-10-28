@@ -29,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.goodee.interceptor.LoginInterceptor;
 import com.goodee.interceptor.MainInterceptor;
 import com.goodee.interceptor.SocialInterceptor;
+import com.goodee.interceptor.paymentInterceptor;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
 @Configuration
@@ -119,9 +120,11 @@ public class ServletAppContext implements WebMvcConfigurer {
 		
 		LoginInterceptor loginInter = new LoginInterceptor();
 		MainInterceptor mainInter = new MainInterceptor();
+		paymentInterceptor payInter = new paymentInterceptor();
 		//SocialInterceptor socialInter = new SocialInterceptor();
 		InterceptorRegistration loginReg = registry.addInterceptor(loginInter);
 		InterceptorRegistration mainReg = registry.addInterceptor(mainInter);
+		InterceptorRegistration payReg = registry.addInterceptor(payInter);
 		//InterceptorRegistration socialReg = registry.addInterceptor(socialInter);
 		
 		
@@ -131,6 +134,7 @@ public class ServletAppContext implements WebMvcConfigurer {
 		mainReg.addPathPatterns("/");
 		mainReg.excludePathPatterns("/home");
 		loginReg.addPathPatterns("/loginPage/login");
+		payReg.addPathPatterns("/rentalPayment");
 
 	}
 	

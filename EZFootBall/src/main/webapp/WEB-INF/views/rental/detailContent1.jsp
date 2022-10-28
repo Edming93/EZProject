@@ -27,7 +27,7 @@
       
       .field_info_area {
          display: flex;
-         width:50%;
+         width:70%;
          flex-direction: column;
       }
 
@@ -39,7 +39,7 @@
       }
 
       .field_info {
-         width:50%;
+         width:70%;
       }
       .plant_info {
          width:45%;
@@ -111,6 +111,14 @@
       .icon_notice {
          font-size: 23px;
 
+      }
+      .menu_title_area2:hover {
+      		background-color: #26A653;
+            color:white;
+      }
+      
+      .menu_title_area2:hover .menu_title2 {
+            color:white;
       }
 </style>
 </head>

@@ -27,12 +27,10 @@ public class RentalService {
 	}
 
 	public void fieldInfo(int fieldCode, Model model) {
-		System.out.println("필드 필드코드 : " + fieldCode);
 		model.addAttribute("field", dao.fieldInfo(fieldCode));
 	}
 
 	public void matchInfo(int fieldCode, Model model) {
-		System.out.println("매치 필드코드 : " + fieldCode);
 		model.addAttribute("match", dao.matchInfo(fieldCode));
 	}
 
@@ -50,4 +48,14 @@ public class RentalService {
 		List<FieldReservationVO> list = dao.getFieldReservation(userCode);
 		return list;
 	}
+	
+	// 예약테이블 등록시 유효성검사
+	public FieldReservationVO rvCheck(FieldReservationVO vo) {
+		return dao.rvCheck(vo); 
+	}
+	
+	public void insertRvInGameList(GlistVO gvo) {
+		dao.insertRvInGameList(gvo);
+	}
+	
 }

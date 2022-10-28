@@ -78,7 +78,27 @@
 				GROUP BY field_name, game_day
 	</select>
 	
-	
+	<select id="rvCheck" resultType="FieldReservationVO">
+		select count(*) from field_reservation
+		<where> 
+		<if test="userCode != null">
+			and user_code = #{userCode}
+		</if>
+		<if test="gameDay != null">
+		and game_day = #{gameDay}
+		</if>
+		<if test="gameTime != null">
+		and game_time = #{gameTime}
+		</if>
+		<if test="rvType != null">
+		and rv_type = #{rvType}
+		</if>
+		</where>
+	</select>
+	<insert id="insertRvInGameList">
+		insert into gamelist (game_type,field_code,field_name,field_address,game_macth,DATE_FORMAT(game_day, '%Y-%m-%d')as game_day,game_time)
+		values(#{gameType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameMacth},#{gameDay},#{gameTime});
+	</insert>
 	
 	
 	

@@ -3,8 +3,26 @@
     pageEncoding="UTF-8"%>
     <%
     	request.setCharacterEncoding("utf-8");
-    	//String id_ck = (String)session.getAttribute("id_ck");
-		
+
+    	String id_ck = "";
+    	String val = "";
+    	
+    	Cookie[] cookies = request.getCookies();
+    	
+        	for(Cookie cookie : cookies) {
+        		if(cookie.getName().equals("userId")){
+        			val = cookie.getValue();
+        		}
+        	}
+        	
+        	for(Cookie cookie : cookies) {
+        		if(cookie.getName().equals("id_ck")){
+        			id_ck = cookie.getValue();
+        		}
+        	}
+
+    	System.out.println("var값 : " + val);
+    	System.out.println("id_ck : " +id_ck);
     	
     %>
 <!DOCTYPE html>
@@ -132,10 +150,10 @@
     <div class="container">
         <div class="content">
             <form action="${pageContext.request.contextPath}/loginPage/login" method="post">
-                <input class="input" type="text" placeholder="ID" name="userId" id="id_input" value="">
+                <input class="input" type="text" placeholder="ID" name="userId" id="id_input" value="<%=val%>">
                 <input class="input" type="password" placeholder="password" name="userPw">
                 <label class="radio_label"> 
-                <input class="radio" type="checkbox" name="id_remem" id="id_remem" value="checked" > 아이디 기억하기</label>
+                <input class="radio" type="checkbox" name="id_remem" id="id_remem" value="checked" <%=id_ck %>> 아이디 기억하기</label>
                 <button id="login">Login</button>
                 <div class="user_question">
                 	<a href="#">회원이 아니신가요?</a>

@@ -33,7 +33,7 @@
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
-		    border: 1px solid #C7C7C7;
+/* 		    border: 1px solid #C7C7C7; */
 			padding: 8px 0px;
 			cursor: pointer;
 		    
@@ -47,12 +47,13 @@
 		    justify-content: center;
 		    align-items: center;
 			padding: 8px 0px;	
-		    border: 1px solid #26A653;
+/* 		    border: 1px solid #26A653; */
 		    cursor: pointer;
       }
       .menu_title_area:hover {
       		background-color: #26A653;
             color:white;
+
       }
       
       .menu_title_area:hover .menu_title {
@@ -111,7 +112,7 @@
     <div class="match_menu_container">
         <div class="match_menu_area">
             <div class="match_menu_content">
-				<jsp:include page="./rentalSelect.jsp"></jsp:include>
+				<jsp:include page="./rental2.jsp"></jsp:include>
             				
             </div>
         </div> 

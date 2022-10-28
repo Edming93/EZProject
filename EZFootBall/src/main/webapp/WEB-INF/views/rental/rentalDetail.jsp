@@ -247,7 +247,7 @@
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
-		    border: 1px solid #26A653;
+/* 		    border: 1px solid #26A653; */
 			padding: 8px 0px;
 		    
       }
@@ -259,17 +259,10 @@
 		    justify-content: center;
 		    align-items: center;
 			padding: 8px 0px;	
-		    border: 1px solid #C7C7C7;
+/* 		    border: 1px solid #C7C7C7; */
 		    cursor: pointer;
       }
-      .menu_title_area2:hover {
-      		background-color: #C7C7C7;
-            color:white;
-      }
-      
-      .menu_title_area2:hover .menu_title2 {
-            color:white;
-      }
+
 
       footer {
          width: 100%;

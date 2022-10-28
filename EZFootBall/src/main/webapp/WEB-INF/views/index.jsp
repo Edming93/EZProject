@@ -142,7 +142,7 @@
         justify-content: center;
         align-items: center;
         padding: 15px;
-        margin-bottom: 45px;
+    	margin-bottom: 30px;
     }
     .banner_image {
         width: 100%;

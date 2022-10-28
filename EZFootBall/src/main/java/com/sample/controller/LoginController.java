@@ -1,5 +1,8 @@
 package com.sample.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -32,22 +35,54 @@ public class LoginController {
 	}
 
 	@GetMapping("/login")
-	public String getLogin(UserVO vo, HttpSession session) {
-		if (service.isUser(vo, session)) {
-		}
+	public String getLogin() {
 		return "loginPage/login";
 	}
 
 	@PostMapping("/login")
-	public String postLogin(UserVO vo, HttpSession session) {
-		System.out.println(service.isUser(vo, session));
-		return (service.isUser(vo, session)) ? "redirect:/home" : "loginPage/login";
+	public String postLogin(UserVO vo, HttpServletRequest request, HttpServletResponse response) {
+		String url = null;
+		
+		String id_ck = request.getParameter("id_remem");
+		if(id_ck == null) {
+			id_ck = "n";
+		}
+
+		HttpSession session = request.getSession();
+		if(service.isUser(vo, session)) {
+			url = "redirect:/home";
+			
+			session.setAttribute("userId", vo.getUserId());
+			session.setMaxInactiveInterval(300);
+			
+			if(id_ck.equals("checked")) {
+				Cookie cookie1 = new Cookie("userId", vo.getUserId());
+				Cookie cookie2 = new Cookie("id_ck", id_ck);
+				response.addCookie(cookie1);
+				response.addCookie(cookie2);
+				session.setAttribute("id_ck", id_ck);
+			} else if (id_ck == "n"){
+				Cookie cookie1 = new Cookie("userId",vo.getUserId());
+				Cookie cookie2 = new Cookie("id_ck", id_ck);
+				cookie1.setMaxAge(0);
+				cookie2.setMaxAge(0);
+				response.addCookie(cookie1);
+				response.addCookie(cookie2);
+				session.setAttribute("id_ck", id_ck);
+			}
+
+		}else {
+			url = "loginPage/login";
+		}
+		
+		
+		return url;
 	}
 
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/home";
+		return "redirect:/loginPage/login";
 	}
 
 	@GetMapping("/logincheck")
@@ -110,5 +145,4 @@ public class LoginController {
 			return "0";
 		}
 	}
-
 }

@@ -137,12 +137,25 @@ public class RentalController {
 	@GetMapping("/resultField")
 	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,
 			HttpSession session) {
-		System.out.println("주소와? "+fvo.getFieldAddress());
-		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
-		service.insertFieldReservation(fvo);
-		return "rental/resultField";
+		
+		gvo.setGameType(fvo.getRvType());
+		gvo.setGameMacth(fvo.getFieldType());
+		
+		System.out.println(gvo.getGameType()+"/"+gvo.getFieldCode()+"/"+gvo.getFieldName()+"/"+gvo.getFieldAddress()+"/"+gvo.getGameMacth()+"/"+gvo.getGameDay()+"/"+gvo.getGameTime());
+		
+		// 구장 예약테이블에 신청한 정보가 없으면
+		System.out.println("fvo 정보 : "+ fvo);
+		if(service.rvCheck(fvo) == null) {
+			service.insertFieldReservation(fvo);
+			service.insertRvInGameList(gvo);
+			return "rental/resultField";
+		}else {
+			System.out.println("이미 신청한 경기 표시하기");
+			return "redirect:/rental/rentalPayment";
+		}
 	}
 	
 	@GetMapping("/resultTeam")
