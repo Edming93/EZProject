@@ -7,10 +7,13 @@
 <%
 	String lv = "null";
 	String level = "null";
+	String user_gender = "null";
 	int id = 0;
+	
 	if( (UinVO)session.getAttribute("urabil") != null) {
 		UinVO vo = (UinVO)session.getAttribute("urabil");
 		level =vo.getUserLevel();
+		user_gender=vo.getUserGender();
 		if(level != null){
 			lv = level.substring(0,level.length()-1);
 			id = vo.getUserCode();
@@ -18,6 +21,9 @@
 	}else {
 		lv = "null";
 	}
+	
+	System.out.println(user_gender);
+	
 	
 %>
 <!DOCTYPE html>
@@ -259,8 +265,10 @@
 		 line-height: 30px;
       }
       .menu_title2 {
-      	 color:#C7C7C7;
+      	 color: #26a563;
       	 text-decoration: none;
+      	 background: none;
+      	 border: none;
       }
       
       .menu_title_area {
@@ -271,6 +279,7 @@
 		    border-radius: 20px;
 		    display: flex;
 		    justify-content: center;
+		    border: 1px solid #26a563;
 		    align-items: center;
 		    padding: 20px 0px;
 		    
@@ -284,21 +293,20 @@
 		    justify-content: center;
 		    align-items: center;
 		    padding: 20px 0px;
-		    border: 1px solid #C7C7C7;
+		    
+		    background-color: #d3f1e1;
+		    border: 1px solid #26a563;
 		    cursor: pointer;
       }
       .menu_title_area2:hover {
-      		background-color: #C7C7C7;
+      		background-color: #26A653;
             color:white;
       }
       
       .menu_title_area2:hover .menu_title2 {
             color:white;
       }
-/*       .field_plant { */
-/*       	 font-weight : bold; */
-/*       	 border-bottom: 3px solid #798777; */
-/*       } */
+      
       
       .content_container {
          grid-area:content;
@@ -310,7 +318,6 @@
     	 border-top: 1px solid #ebebeb;
     	 
       }
-      
       
       .content_content {
          display: flex;
@@ -391,20 +398,10 @@
         
       }
       .match_left{
-      	width: 35%;
+      	width: 50%;
       }
       .match_right{
-      	width: 60%;
-      }
-      .subbtn{
-         width: 100px;
-         height: 35px;
-         background-color: #d3f1e1;
-         color: #26a563;
-         border: 1px solid #26a563;
-         border-radius: 45px;
-         font-weight: bold;
-         cursor: pointer;
+      	width: 45%;
       }
       .list_container{
          grid-area: list;
@@ -678,7 +675,7 @@
             </div>
             <div class="menu_name">
                 <div class="menu_title_area2">
-            		<a href="#" class="field_reservation menu_title2">구장 예약</a>
+            		<button class="field_reservation menu_title2" id="etcsubbtn">신청 하기</button>
             	</div>
             </div>
          </div>
@@ -716,7 +713,33 @@
       <div class="match_container">
       	
       	<div class="match_left">
+      	
       	<div class="content_count">
+            <h3 class="match_info">게임정보</h3>
+         </div>
+     	 
+     	 <div class="match_content" id="match_content">
+     	 	<div class="etc">
+     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime}
+     	 	</div>
+     	 	<div class="etc">
+     	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
+     	 	</div>
+     	 	<div class="etc">
+     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　20000 / 인당
+     	 		<!-- <script type="text/javascript">
+     	 			if(${matchinfo.gameMacth} == '5vs5'){
+     	 				document.getElementById("pay").innerText = "20000";
+     	 			}else if (${matchinfo.gameMacth} == '6vs6') {
+     	 				document.getElementById("pay").innerText = "20000";
+     	 			}
+     	 		</script> -->
+     	 	</div>
+     	 </div>
+     	 </div>
+     	 
+     	<div class="match_right">
+      		<div class="content_count">
             <h3 class="match_info">매치포인트</h3>
          </div>
      	 
@@ -737,35 +760,7 @@
      	 		<iconify-icon class="icon_size" icon="icon-park-twotone:spikedshoes" style="color: #26a653;" width="27" height="27"></iconify-icon>　풋살화/운동화
      	 	</div>
      	 </div>
-     	 </div>
-     	 
-     	<div class="match_right">
-      	<div class="content_count">
-            <h3 class="match_info">게임정보</h3>
-         </div>
-     	 
-     	 <div class="match_content" id="match_content">
-     	 	<div class="etc">
-     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime}
-     	 	</div>
-     	 	<div class="etc">
-     	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
-     	 	</div>
-     	 	<div class="etc">
-     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　20000
-     	 		<!-- <script type="text/javascript">
-     	 			if(${matchinfo.gameMacth} == '5vs5'){
-     	 				document.getElementById("pay").innerText = "20000";
-     	 			}else if (${matchinfo.gameMacth} == '6vs6') {
-     	 				document.getElementById("pay").innerText = "20000";
-     	 			}
-     	 		</script> -->
-     	 	</div>
-     	 	<div class="etc">
-     	 		<button class="subbtn" id="etcsubbtn">신청하기</button>
-     	 	</div>
-     	 </div>
-     	 </div>
+     	</div>
      	 
      	 
      </div>
@@ -793,15 +788,41 @@
  		}else {
  			if('<%=lv%>' == "null"){
  				if(aa == 1) {
- 					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+ 					if('${matchinfo.gameGender}' == '혼성'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+ 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+ 					}else{
+ 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+ 					}
  				}else{
- 					location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					if('${matchinfo.gameGender}' == '혼성'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else{
+ 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+ 					}
+ 					
  				}
  			}else if('<%=lv%>' == level){
  				if(aa == 1) {
- 					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+ 					if('${matchinfo.gameGender}' == '혼성'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+ 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+ 					}else{
+ 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+ 					}
  				}else{
- 					location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					if('${matchinfo.gameGender}' == '혼성'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else{
+ 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+ 					}
+ 					
  				}
  			}else {
  				alert("레벨에 맞지 않아 신청 할 수 없습니다" + '<%=lv%>');
@@ -1123,26 +1144,51 @@
 	  		}
 	  		
 	  		if (cnt > 0) {
-	  			alert("이미 신청한 경기 입니다");
-	  		}else {
-	  			if('<%=lv%>' == "null"){
-	  				if(aa == 1) {
-	  					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
-	  				}else{
-	  					location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
-	  				}
-	  			}else if('<%=lv%>' == level){
-	  				if(aa == 1) {
-	  					location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
-	  				}else{
-	  					location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
-	  				}
-	  			}else {
-	  				alert("레벨에 맞지 않아 신청 할 수 없습니다");
-	  			}
-	  		}
+	 			alert("이미 신청한 경기 입니다");
+	 		}else {
+	 			if('<%=lv%>' == "null"){
+	 				if(aa == 1) {
+	 					if('${matchinfo.gameGender}' == '혼성'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+	 					}else{
+	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+	 					}
+	 				}else{
+	 					if('${matchinfo.gameGender}' == '혼성'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+	 					}else{
+	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+	 					}
+	 					
+	 				}
+	 			}else if('<%=lv%>' == level){
+	 				if(aa == 1) {
+	 					if('${matchinfo.gameGender}' == '혼성'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
+	 					}else{
+	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+	 					}
+	 				}else{
+	 					if('${matchinfo.gameGender}' == '혼성'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+	 					}else{
+	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+	 					}
+	 					
+	 				}
+	 			}else {
+	 				alert("레벨에 맞지 않아 신청 할 수 없습니다" + '<%=lv%>');
+	 			}
+	 		}
 	    	  
-	          //location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${matchinfo.fieldCode};
 	      });
       </script>
       

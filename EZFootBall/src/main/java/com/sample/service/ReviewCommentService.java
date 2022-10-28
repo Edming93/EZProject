@@ -46,6 +46,7 @@ public class ReviewCommentService {
 	}
 	
 	//저장
+	//스트링 스트링을 스트링 오브젝트로 변경하기
 	public Map<String, Object> setComment(ReviewCommentVO vo){
 		Map<String, Object> map = new HashMap<String,Object>();
 		System.out.println();
@@ -60,11 +61,7 @@ public class ReviewCommentService {
 		}else {
 			map.put("state", "error");
 		}
-//		if(commentDAO.insertComment(vo) > 0) {
-//			map.put("state", "ok");			
-//		}else {
-//			map.put("state", "error");
-//		}
+
 		return map;
 		//모델로 보냄
 	}

@@ -52,4 +52,8 @@ public class BlacklistService {
 	public List<BlacklistCommentVO> getCommentList(int blackCode) {
 		return blackDAO.selectBlackListComment(blackCode);
 	}
+	
+	public int setBlacklistComment(BlacklistCommentVO vo) {
+		return blackDAO.insertBlackListComment(vo);
+	}
 }

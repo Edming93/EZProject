@@ -31,4 +31,7 @@ public interface BlacklistDAO {
 	
 	//게시판 댓글 view
 	public List<BlacklistCommentVO>selectBlackListComment(@Param("blackCode") int blackCode);
+	
+	//게시판 댓글 삽입
+	public int insertBlackListComment(BlacklistCommentVO vo);
 }
