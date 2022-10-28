@@ -12,6 +12,7 @@ public class DataVO {
 	private String level;
 	private String mver;
 	private String type;
+	private int code;
 	private int game_code;
 	private int user_code;
 	private int team_code;
@@ -19,6 +20,14 @@ public class DataVO {
 	private int gameCode;
 	private int teamCode;
 
+	
+	
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
 	public String getType() {
 		return type;
 	}

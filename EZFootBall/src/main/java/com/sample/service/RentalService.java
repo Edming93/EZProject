@@ -39,6 +39,11 @@ public class RentalService {
 	public void insertFieldReservation(FieldReservationVO vo) {
 		dao.insertFieldReservation(vo);
 	}
+	
+
+	public List<GlistVO> rvListSelect(GlistVO vo) {
+		return dao.rvListSelect(vo);
+	}	
 
 	// 마이페이지 구장예약 정보 불러오기
 	public List<FieldReservationVO> getFieldReservationVO(int userCode) {

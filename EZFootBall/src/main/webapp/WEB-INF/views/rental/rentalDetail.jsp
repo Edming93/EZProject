@@ -233,8 +233,6 @@
       .menu_title {
          color:white;
       	 text-decoration: none;
-		 height: 30px;
-		 line-height: 30px;
       }
       .menu_title2 {
       	 color:#C7C7C7;
@@ -243,25 +241,24 @@
       
       .menu_title_area {
 			background-color: #26A653;
-		    width: 110px;
-		    height: 35px;
+		    width: 100px;
 		    text-align: center;
 		    border-radius: 20px;
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
-		    padding: 20px 0px;
+		    border: 1px solid #26A653;
+			padding: 8px 0px;
 		    
       }
       .menu_title_area2 {
-		    width: 110px;
-		    height: 35px;
+		    width: 100px;
 		    text-align: center;
 		    border-radius: 20px;
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
-		    padding: 20px 0px;
+			padding: 8px 0px;	
 		    border: 1px solid #C7C7C7;
 		    cursor: pointer;
       }
@@ -272,116 +269,6 @@
       
       .menu_title_area2:hover .menu_title2 {
             color:white;
-      }
-/*       .field_plant { */
-/*       	 font-weight : bold; */
-/*       	 border-bottom: 3px solid #798777; */
-/*       } */
-      
-      .content_container {
-         grid-area:content;
-         display: flex;
-         flex-direction: column;
-    	 padding: 0px 20px;
-    	 padding-bottom: 35px;
-    	 padding-top: 50px;
-    	 
-      }
-      
-      .content_content {
-         display: flex;
-         flex-direction: row;
-         width:100%;
-         margin-top:15px;
-         justify-content: space-between;
-      }
-      
-      .field_info_area {
-         display: flex;
-         width:50%;
-         flex-direction: column;
-      }
-
-      .content_count {
-         width: 100%;
-         margin: 15px 0px;
-         display: flex;
-         justify-content: space-between;
-      }
-
-      .field_info {
-         width:50%;
-      }
-      .plant_info {
-         width:45%;
-      }
-
-      .field_image {
-         width:165px;
-         height:100px;
-         margin-bottom: 20px;
-      }
-      
-      .content_field_name {
-         width:100%;
-         margin-bottom: 10px;
-         font-weight: bold;
-      }
-      
-      .content_field_info {
-         color:gray;
-         font-size:13px;
-      }
-
-      .field_etc_area {
-         display: flex;
-         width: 45%;
-         flex-direction: column;
-         
-      }
-      
-      .etc {
-	    font-size: 16px;
-	    margin-bottom: 20px;
-	    display: flex;
-	    line-height: 27px;
-      }
-      
-      .etc_stroke {
-         color:rgb(187, 187, 187);
-      }
-
-      .icon_size {
-         font-size: 27px;
-
-      }
-
-      .notice_container {
-         grid-area: notice;
-         width: 100%;
-         margin-top: 10px;
-		 border-top: 1px solid #ebebeb;
-		 padding: 0px 20px;
-      }
-      
-      .notice_title {
-         margin-bottom: 35px;
-         margin-top: 50px;
-
-      }
-
-      .notice {
-         margin: 20px 0px;
-         font-size:14px;
-      }
-      
-      .notice_content h4 {
-         display: flex;
-      }
-
-      .icon_notice {
-         font-size: 23px;
-
       }
 
       footer {
@@ -552,88 +439,28 @@
          <div class="menu_content">
             <div class="menu_name">
             	<div class="menu_title_area">
-            		<a href="#" class="field_plant menu_title">시설</a>
+            		<a href="${pageContext.request.contextPath}/rental/rentalDetail?fieldCode=${field.fieldCode}" class="field_plant menu_title">시설</a>
             	</div>
             </div>
             <div class="menu_name">
                 <div class="menu_title_area2">
-            		<a href="#" class="field_reservation menu_title2">구장 예약</a>
+            		<a href="${pageContext.request.contextPath}/rental/rentalDetail2?fieldCode=${field.fieldCode}&num=1" class="field_reservation menu_title2">구장 예약</a>
             	</div>
             </div>
          </div>
       </div>
-      <div class="content_container">
-         <div class="content_count">
-            <h3 class="field_info">구장 정보</h3>
-            <h3 class="plant_info">시설 정보</h3>
-         </div>
-         <div class="content_content">
-            <div class="field_info_area">
-               <div class="field_img_area">
-                  <c:if test="${field.fieldImg1 != null}">
-                     <img class="field_image img1" src="${field.fieldImg1}" alt="">
-                 </c:if>
-                 <c:if test="${field.fieldImg2 != null}">
-                     <img class="field_image img2" src="${field.fieldImg2}" alt="">
-                 </c:if>
-                 <c:if test="${field.fieldImg3 != null}">
-                     <img class="field_image img3" src="${field.fieldImg3}" alt="">
-                 </c:if>
-                 <c:if test="${field.fieldImg4 != null}">
-                     <img class="field_image img4" src="${field.fieldImg4}" alt="">
-                 </c:if>
-                 <c:if test="${field.fieldImg5 != null}">
-                     <img class="field_image img5" src="${field.fieldImg5}" alt="">
-                 </c:if>
-               </div>
-                  <div class="content_field_name">A구장</div>
-                  <div class="content_field_info">${field.fieldSize} / ${field.fieldInOut} / ${field.fieldGrass}</div>
-            </div>
+	
+				<c:choose>
+					<c:when test="${num == 1}">
+						<jsp:include page="./detailContent2.jsp"></jsp:include>
+					</c:when>
+					<c:otherwise>
+						<jsp:include page="./detailContent1.jsp"></jsp:include>
+					</c:otherwise>
+				</c:choose>
 
-            <div class="field_etc_area">
-               <div class="etc"><iconify-icon class="icon_size" icon="icon-park:spikedshoes"></iconify-icon>　풋살화 대여</div>
-               <div class="etc"><iconify-icon class="icon_size" icon="icon-park:basketball-clothes"></iconify-icon>　운동복 대여</div>
-               <div class="etc"><iconify-icon class="icon_size" icon="ant-design:car-outlined"></iconify-icon>　주차</div>
-               <div class="etc etc_stroke"><iconify-icon class="icon_size" icon="akar-icons:water"></iconify-icon>　<s>정수기</s></div>
-               <div class="etc"><iconify-icon class="icon_size" icon="cil:toilet"></iconify-icon>　화장실</div>
-               <div class="etc"><iconify-icon class="icon_size" icon="material-symbols:smoking-rooms-rounded"></iconify-icon>　흡연실</div>
-               <div class="etc etc_stroke"><iconify-icon class="icon_size" icon="majesticons:bath-shower-line"></iconify-icon>　<s>샤워실</s></div>
-            </div>
-         </div>
-
-      </div>
-
-
-      <div class="notice_container">
-         <div class="notice_title">
-            <h3>공지사항</h3>
-         </div>
-         
-         <div class="notice_content">
-            <h4>
-               <iconify-icon class="icon_notice" icon="ion:information-circle-outline"></iconify-icon>
-               　안내 사항
-            </h4>
-            <ul>
-               <li class="notice">흡연 : 지정구역 외에 흡연시 과태료 부과 </li>
-               <li class="notice">주차관련 : 사전 주차 등록시 20대 3시간 무료 (매니저에게 주차번호 전달 필요)</li>
-               <li class="notice">물/음료 : 자판기에서 구매가능. 정수기 여부X</li>
-               <li class="notice">풋살화 대여 : 비오는날 제외, 대여 가능</li>
-               <li class="notice">공 대여 : 대여 가능</li>
-               <li class="notice">조끼 대여 : 대여 가능</li>
-            </ul>
-            
-         </div>
-      </div>
-      
-      <div class="rv_btn_area">
-         <div class="rv_btn_content">
-            <button class="rv_btn">
-               예약하기
-            </button>
-         </div>
-      </div>
-
+	
+	
 
       <script type="text/javascript">
          let main_logo = document.querySelector(".main_logo");
@@ -642,12 +469,12 @@
             location.href = "${pageContext.request.contextPath}";
          });
          
+         // 예약하기 버튼 추후 삭제예정
+//          let rv_btn = document.querySelector(".rv_btn");
          
-         let rv_btn = document.querySelector(".rv_btn");
-         
-         rv_btn.addEventListener("click",function() {
-             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${field.fieldCode};
-         })
+//          rv_btn.addEventListener("click",function() {
+//              location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${field.fieldCode};
+//          })
       </script>
       
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65331bb5f71196e87528297b0af9ceb4&libraries=services"></script>

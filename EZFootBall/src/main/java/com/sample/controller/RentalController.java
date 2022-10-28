@@ -87,6 +87,7 @@ public class RentalController {
 		
 		return service.rvlistALL(gvo);
 	}
+
 	
 	@PostMapping("/timeList")
 	@ResponseBody
@@ -95,11 +96,27 @@ public class RentalController {
 		return service.timeList(gvo);
 	}
 	
+	@PostMapping("/rvListSelect")
+	@ResponseBody
+	public List<GlistVO> rvListSelect(@RequestBody DataVO dvo,GlistVO gvo){
+		gvo.setGameDay(dvo.getDay());
+		gvo.setFieldCode(dvo.getCode());
+		return service.rvListSelect(gvo);
+	}
+
+	
 	@GetMapping("/rentalDetail")
 	public String rentalDetailMove(@RequestParam("fieldCode") int fieldCode,Model model) {
-		System.out.println("필드코드 : "+fieldCode);
 		service.fieldInfo(fieldCode,model);
 		return 	"rental/rentalDetail";
+	}
+	
+	@GetMapping("/rentalDetail2")
+	public String rentalDetail2Move(@RequestParam("fieldCode") int fieldCode,
+									@RequestParam("num") int num,Model model) {
+		service.fieldInfo(fieldCode,model);
+		model.addAttribute("num",num);
+		return "rental/rentalDetail";
 	}
 	
 	@GetMapping("/rentalPayment")

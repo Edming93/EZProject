@@ -61,7 +61,22 @@
 	</select>
 	
 	
-	
+	<select id="rvListSelect" resultType="GlistVO">
+		select game_code,game_type,field_name,GROUP_CONCAT(DATE_FORMAT(game_time, '%H') ORDER BY game_time asc)as game_time,game_gender,
+		DATE_FORMAT(game_time, '%H') AS game_time,level,field_code,
+		game_macth,game_place,close,game_pnum,game_mag,
+		field_address,game_minp,game_maxp
+		from gamelist
+		<where>
+			<if test="fieldCode != null">
+				and field_code = #{fieldCode}
+			</if>
+			<if test="gameDay != null">
+				and DATE_FORMAT(game_day, '%Y-%m-%d') = #{gameDay}
+			</if>
+		</where>
+				GROUP BY field_name, game_day
+	</select>
 	
 	
 	

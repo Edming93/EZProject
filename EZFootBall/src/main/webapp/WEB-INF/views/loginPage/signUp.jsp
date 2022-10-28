@@ -426,9 +426,8 @@ window.onload = function(){
         <div>
         <select class="input" name="userGender">
             <option selected disabled>성별</option> <!--'성별'벨류 선택하면 안되게 만드는 방법-->
-            <option value="male">남자</option>
-            <option value="female">여자</option>
-            <option value="sex_x">선택안함</option>
+            <option value="남성">남자</option>
+            <option value="여성">여자</option>
             </select>
        	</div>
         <div>

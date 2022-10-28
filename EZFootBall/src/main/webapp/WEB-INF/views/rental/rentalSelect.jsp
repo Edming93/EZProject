@@ -109,21 +109,36 @@
     		margin-right: 10px;
     	}
     	
-    	.rv_check {
-    		border-radius: 30px;
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		    background-color: white;
-		    width: 110px;
-    		height: 40px;
-    	}
-    	.size{
+    	.closediv{
     		width: 100px;
     		border-radius: 30px;
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+    		border: 1px solid black;
+    		margin-right: 10px;
+    	}
+    	.gender{
+    		width: 42px;
+    		border-radius: 55px;
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+    		border: 1px solid black;
+    		margin-right: 10px;
+    	}
+    	#level{
+    		width: 100px;
+    		border-radius: 30px;
+    		margin-right: 10px;
     	}
     	option {
     		text-align: center;
+    	}
+    	#mvar{
+    		width: 100px;
+    		border-radius: 30px;
+    		margin-right: 10px;
     	}
     	.listreset{
     		width: 100px;
@@ -145,23 +160,29 @@
 		    align-items: center;
 		    justify-content: space-around;
     	}
-    	.game_time{
-		    font-size: 16px;
-		    display: flex;
-		    justify-content: center;
-		    font-weight: 700;
-    	}
-    	
-    	.gamename {
-    		font-size: 20px;
-    	}
+
     	.mid_div{
 		    display: flex;
 		    align-items: center;
 		    justify-content: space-between;
 		    width: 700px;
     	}
-
+    	.close{
+		    border-radius: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    background-color: white;
+		    border: 1px solid #26A653;
+		    width: 110px;
+    		height: 40px;
+		    font-size: small;
+		    color: #26A653;
+    		
+    	}
+    	.close > div {
+    		font-weight: bold;
+    	}
     	.info_div{
 		    display: flex;
 		    width: 200px;
@@ -169,6 +190,7 @@
 		    color: #848484;
     	}
 
+    	
     	#dpre, #dnext {
     	    display: flex;
     		justify-content: center;
@@ -177,9 +199,6 @@
     	.select_border {
    			border: 1px solid #A9A9A9;
    			font-size: 12px;
-   			height:100%;
-   			margin-right: 10px;
-   			cursor: pointer;
    		}
     	.active {
 		   background-color:#26A653;
@@ -191,7 +210,6 @@
 	        height: 100px;
 	        margin: 15px;
 		}
-
     </style>
 </head>
 <body>
@@ -411,73 +429,28 @@
             });
 </script>
 
-  <div id="settingbutton"> 
-      <select name="" id="local" class="select_border local">
-         <option id="null" value="null">지역</option>
-         <option id="서울" value="서울">서울</option>
-         <option id="경기도" value="경기도">경기도</option>
-         <option id="강원도" value="강원도">강원도</option>
-         <option id="경상도" value="경상도">경상도</option>
-         <option id="전라도" value="전라도">전라도</option>
-         <option id="충청도" value="충청도">충청도</option>
-         <option id="제주도" value="제주도">제주도</option>
-      </select>
-
-      <label for="rv_check" id="type_input" class="select_border rv_check">예약가능시간</label> <input type="checkbox" id="rv_check" style="display: none";>
-      
-      <select name="" id="field_size" class="select_border size">
-         <option id="null" value="null">크기</option>
-         <option id="5vs5" value="5vs5">5vs5</option>
-         <option id="6vs6" value="6vs6">6vs6</option>
-      </select>
-      
-  
-       <div id="listreset" class="select_border listreset">초기화</div>
-   
-   
-   </div>
-
    <div id="result">
     
    </div>
    
-<style>
-	.result_content {
-	    display: flex;
-	    color: black;
-	    text-decoration: none;
-	    padding: 10px 0;
-	    border-bottom: 1px solid #efefef;
-	    height: 80px;
-	    justify-content: space-around;
-	    flex-direction: column;
-	}
-	.title_area {
-		display: flex;
-    	width: 235px;
-    	justify-content: space-between;
-	}
-	나 오십분되면 칼같이 나갈구야
-	
 
-	.size_span {
-		font-size:13px;
-	}
-</style>
 <script type="text/javascript">
 <!--  처음 로딩시  -->
-	window.onload = function() {
 
-		document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
+	window.onload = function() {
+        document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
         document.getElementById("<%=today%>").style.color="rgb(36 36 36)";
         document.getElementById("<%=today%>").style.transform = "scale(1.5)";
+		
         
 		let day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
+		
+		let fieldCode = ${field.fieldCode};
 
 		today = day;
-         let data = {place:"null",type:"null",day:day};
+         let data = {day:day,code:fieldCode};
          
-         fetch("${pageContext.request.contextPath}/rental/rvList",{
+         fetch("${pageContext.request.contextPath}/rental/rvListSelect",{
             method : "POST",
             headers : {
                "Content-Type" : "application/json"},
@@ -489,16 +462,14 @@
             
             for (let data of list) {
 	            const content_area = document.createElement("div"); // 가장 바깥
-	            content_area.className = "result_content";
 	            const title_div = document.createElement("div"); // 구장명 표기
-	            title_div.className = "title_area";
 	            const h3 = document.createElement("h3");
 	            h3.className = "field_title";
+	            console.log("필드코드 : "+data.fieldCode);
 	            h3.addEventListener("click",function() {
 	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
 	            });
 	            const match_type = document.createElement("span");
-	            match_type.className = "size_span";
 	            h3.innerHTML = data.fieldName;
 	            match_type.innerHTML = "크기 "+data.gameMacth;
 	            
@@ -568,24 +539,10 @@
        
        let day = <%=year%> + "-" +<%=month%> +"-" + day_data;
        today = day;
+		let fieldCode = ${field.fieldCode};
+       let data = {day:day,code:fieldCode};
        
-
-       console.log("날짜 쪽 : "+today);
-       let local_select = document.getElementById("local").value;
-       let type_input = document.getElementById("type_input").checked;
-       let field_size = document.getElementById("field_size").value;
-       
-       if(local_select == "null"){
-          local_select = null;
-       }
-
-       if(field_size == "null"){
-          field_size = null;
-        }
-       
-       let data = {place:local_select,type:type_input,day:day,mver:field_size};
-       
-       fetch("${pageContext.request.contextPath}/rental/rvList",{
+       fetch("${pageContext.request.contextPath}/rental/rvListSelect",{
           method : "POST", // PUT, PATCH, DELETE
           headers : {
              "Content-Type" : "application/json"},
@@ -646,352 +603,6 @@
    });
       
    });
-
-   
-   <!-- 지역 설정  -->
-         var local_select = document.getElementById("local");
-
-         local_select.addEventListener("change",function(){
-   	      if(document.getElementById("local").value == "null"){
-   	    	document.getElementById("local").classList.remove("active");
-	      }else{
-	    	  document.getElementById("local").classList.add("active"); 
-	      }
-        	 
-      // 마감 여부 선택 돼있는지 체크가 돼있으면 트루 , 아니면 펄스
-         let type_input = document.getElementById("type_input").checked;
-         let field_size = document.getElementById("field_size").value;
-          
-         console.log("field_size : "+field_size);
-          
-         local_select = document.getElementById("local").value;
-          
-          if(local_select == "null"){
-             local_select = null;
-          }
-          if(field_size == "null"){
-             field_size = null;
-           }
-         
-
-      
-      let data = {place:local_select,type:type_input,day:today,mver:field_size};
-      
-      fetch("${pageContext.request.contextPath}/rental/selectRental",{
-         method : "POST", // PUT, PATCH, DELETE
-         headers : {
-            "Content-Type" : "application/json"},
-         body : JSON.stringify(data)
-      }).then(response => response.json()) 
-      
-      .then(list => {
-          const result = document.getElementById("result");
-          result.innerHTML = " ";
-       
-          for (let data of list) {
-	            const content_area = document.createElement("div"); // 가장 바깥
-	            const title_div = document.createElement("div"); // 구장명 표기
-	            const h3 = document.createElement("h3");
-	            h3.className = "field_title";
-	            console.log("필드코드 : "+data.fieldCode);
-	            h3.addEventListener("click",function() {
-	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
-	            });
-	            const match_type = document.createElement("span");
-	            h3.innerHTML = data.fieldName;
-	            match_type.innerHTML = "크기 "+data.gameMacth;
-	            
-	            title_div.append(h3);
-	            title_div.append(match_type);
-	            content_area.append(title_div);
-	            result.append(content_area);
-	
-	            const rental_area = document.createElement("div");
-	            rental_area.className = "rental_area";
-			
-				// 전체배열
-				var timeset = ["08","10","12","14","16","18","20","22"];
-				// db에서 불러온 배열
-				var game_time = (data.gameTime).split(',');
-
-				for(let i=0; i<timeset.length; i++){
-					// true 혹은 false 반환
-					let rental_div = document.createElement("a");
-					let time = parseInt(timeset[i]);
-					if(game_time.includes(timeset[i])){
-						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}else{
-						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}
-					rental_area.append(rental_div);
-				}
-       	content_area.append(rental_area);
-       }
-    }).catch(error => {
-       console.log("무슨에러냐면! : " + error);
-    });
-     
-      
-   });
-         
-   <!-- 마감  -->
-   
-   // 마감여부
-   let type_input = document.getElementById("type_input");
-   
-   type_input.addEventListener("click",function(){
-	  document.getElementById("type_input").classList.toggle("active");
-     
-      let local_select = document.getElementById("local").value;
-      if(local_select == "null"){
-         local_select = null;
-      }
-      var field_size = document.getElementById("field_size").value;
-      if(field_size == "null"){
-         field_size = null;
-       }
-
-      type_input = this.checked;
-      console.log(type_input);
-      
-      let data = {place:local_select,type:type_input,day:today,mver:field_size};
-      
-      fetch("${pageContext.request.contextPath}/rental/selectRental",{
-         method : "POST", // PUT, PATCH, DELETE
-         headers : {
-            "Content-Type" : "application/json"},
-         body : JSON.stringify(data)
-      }).then(response => response.json()) 
-      
-      .then(list => {
-          const result = document.getElementById("result");
-          result.innerHTML = " ";
-       
-       for (let data of list) {
-           const content_area = document.createElement("div"); // 가장 바깥
-           const title_div = document.createElement("div"); // 구장명 표기
-           const h3 = document.createElement("h3");
-           h3.className = "field_title";
-           
-           h3.addEventListener("click",function() {
-           	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
-           });
-           
-           const match_type = document.createElement("span");
-           h3.innerHTML = data.fieldName;
-           match_type.innerHTML = "크기 "+data.gameMacth;
-           
-           title_div.append(h3);
-           title_div.append(match_type);
-           content_area.append(title_div);
-           result.append(content_area);
-
-           const rental_area = document.createElement("div");
-           rental_area.className = "rental_area";
-		
-			// 전체배열
-			var timeset = ["08","10","12","14","16","18","20","22"];
-			// db에서 불러온 배열
-			var game_time = (data.gameTime).split(',');
-
-			for(let i=0; i<timeset.length; i++){
-				// true 혹은 false 반환
-				let time = parseInt(timeset[i]);
-				if(type_input == false && game_time.includes(timeset[i])){
-					let rental_div = document.createElement("div");
-					rental_div.className = "time rental_span_disable";
-					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
-					rental_area.append(rental_div);
-				}else if(type_input == true && game_time.includes(timeset[i])){
-					
-				}else{
-					let rental_div = document.createElement("div");
-					rental_div.className = "time rental_span_able";
-					rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					rental_area.append(rental_div);
-					
-				}
-			}
-       	content_area.append(rental_area);
-       }
-    }).catch(error => {
-       console.log("무슨에러냐면! : " + error);
-    });
-     
-      
-   });
-   </script>
-   
-  <!-- 크기 -->
-  <script type="text/javascript">
-  	 var field_size = document.getElementById("field_size");
-  
-  	 field_size.addEventListener("change",function(){
-
-  	      if(document.getElementById("field_size").value == "null"){
-  	    	document.getElementById("field_size").classList.remove("active");
-  	      }else{
-  	    	document.getElementById("field_size").classList.add("active"); 
-  	      }
-  		 
-  		 
-     var local_select = document.getElementById("local").value;
-     if(local_select == "null"){
-        local_select = null;
-      }
-     
-     field_size = document.getElementById("field_size").value;
-     if(field_size == "null"){
-        field_size = null;
-      }
-     // 마감여부
-     var type_input = document.getElementById("type_input").checked;
-     console.log("--------------------")
-     console.log(local_select);
-     console.log(type_input);
-     console.log(field_size);
-     let data = {place:local_select,type:type_input,day:today,mver:field_size};
-     
-     fetch("${pageContext.request.contextPath}/rental/selectRental",{
-        method : "POST", // PUT, PATCH, DELETE
-        headers : {
-           "Content-Type" : "application/json"},
-        body : JSON.stringify(data)
-     }).then(response => response.json()) 
-     
-     .then(list => {
-         const result = document.getElementById("result");
-         result.innerHTML = " ";
-      
-         for (let data of list) {
-	            const content_area = document.createElement("div"); // 가장 바깥
-	            const title_div = document.createElement("div"); // 구장명 표기
-	            const h3 = document.createElement("h3");
-	            h3.className = "field_title";
-	            console.log("필드코드 : "+data.fieldCode);
-	            h3.addEventListener("click",function() {
-	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
-	            });
-	            const match_type = document.createElement("span");
-	            h3.innerHTML = data.fieldName;
-	            match_type.innerHTML = "크기 "+data.gameMacth;
-	            
-	            title_div.append(h3);
-	            title_div.append(match_type);
-	            content_area.append(title_div);
-	            result.append(content_area);
-	
-	            const rental_area = document.createElement("div");
-	            rental_area.className = "rental_area";
-			
-				// 전체배열
-				var timeset = ["08","10","12","14","16","18","20","22"];
-				// db에서 불러온 배열
-				var game_time = (data.gameTime).split(',');
-
-				for(let i=0; i<timeset.length; i++){
-					// true 혹은 false 반환
-					let rental_div = document.createElement("a");
-					let time = parseInt(timeset[i]);
-					if(game_time.includes(timeset[i])){
-						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}else{
-						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}
-					rental_area.append(rental_div);
-				}
-      	content_area.append(rental_area);
-      }
-   }).catch(error => {
-      console.log("무슨에러냐면! : " + error);
-   });
-    
-  });
-  </script>
-
-   <!--  초기화  -->
-   <script type="text/javascript">
-   document.getElementById("listreset").addEventListener("click",function(){
- 	      document.getElementById("local").value = null;
- 	      document.getElementById("type_input").checked = false;
- 	      document.getElementById("field_size").value = null;
- 	      
-	      document.getElementById("local").classList.remove("active");
-	      document.getElementById("type_input").classList.remove("active");
-	      document.getElementById("field_size").classList.remove("active");
-
-	      var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
-	      
-
-	   
-	      let data = {day:today};
-         
-         fetch("${pageContext.request.contextPath}/rental/rvList",{
-            method : "POST", // PUT, PATCH, DELETE
-            headers : {
-               "Content-Type" : "application/json"},
-            body : JSON.stringify(data)
-         }).then(response => response.json()) 
-         
-         .then(list => {
-             const result = document.getElementById("result");
-             result.innerHTML = " ";
-          
-             for (let data of list) {
- 	            const content_area = document.createElement("div"); // 가장 바깥
- 	            const title_div = document.createElement("div"); // 구장명 표기
- 	            const h3 = document.createElement("h3");
- 	            h3.className = "field_title";
- 	            console.log("필드코드 : "+data.fieldCode);
- 	            h3.addEventListener("click",function() {
- 	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
- 	            });
- 	            const match_type = document.createElement("span");
- 	            h3.innerHTML = data.fieldName;
- 	            match_type.innerHTML = "크기 "+data.gameMacth;
- 	            
- 	            title_div.append(h3);
- 	            title_div.append(match_type);
- 	            content_area.append(title_div);
- 	            result.append(content_area);
- 	
- 	            const rental_area = document.createElement("div");
- 	            rental_area.className = "rental_area";
- 			
- 				// 전체배열
- 				var timeset = ["08","10","12","14","16","18","20","22"];
- 				// db에서 불러온 배열
- 				var game_time = (data.gameTime).split(',');
-
- 				for(let i=0; i<timeset.length; i++){
- 					// true 혹은 false 반환
- 					let time = parseInt(timeset[i]);
- 					let rental_div = document.createElement("a");
- 					if(game_time.includes(timeset[i])){
- 						rental_div.className = "time rental_span_disable";
- 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
- 					}else{
- 						rental_div.className = "time rental_span_able";
- 						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
- 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
- 					}
- 					rental_area.append(rental_div);
- 				}
-          	content_area.append(rental_area);
-          }
-       }).catch(error => {
-          console.log("무슨에러냐면! : " + error);
-       });
-        
-         
-      });
    </script>
   
   
