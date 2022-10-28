@@ -670,9 +670,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	             
 	              div_out.append(tdiv);
 	              middiv.append(ndiv);
-	              infodiv.append(gdiv);
 	              infodiv.append(mdiv);
 	              infodiv.append(ldiv);
+	              infodiv.append(gdiv);
 	              middiv.append(infodiv);
 	              div_out.append(middiv);
 	              div_out.append(bdiv);
@@ -808,7 +808,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             /* 경기시간 */
              tdiv.innerText = data[name].gameTime + ":00";
              /* 경기이름 */
-             ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+             ndiv.innerText = data[name].fieldName;
              /* 경기 성별 */
              gdiv.innerText = data[name].gameGender;
              /* 경기매치 */
@@ -843,9 +843,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -922,7 +922,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             /* 경기시간 */
              tdiv.innerText = data[name].gameTime + ":00";
              /* 경기이름 */
-             ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+             ndiv.innerText = data[name].fieldName;
              /* 경기 성별 */
              gdiv.innerText = data[name].gameGender;
              /* 경기매치 */
@@ -959,9 +959,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1043,7 +1043,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             /* 경기시간 */
              tdiv.innerText = data[name].gameTime + ":00";
              /* 경기이름 */
-             ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+             ndiv.innerText = data[name].fieldName;
              /* 경기 성별 */
              gdiv.innerText = data[name].gameGender;
              /* 경기매치 */
@@ -1080,9 +1080,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1160,7 +1160,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             /* 경기시간 */
              tdiv.innerText = data[name].gameTime + ":00";
              /* 경기이름 */
-             ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+             ndiv.innerText = data[name].fieldName;
              /* 경기 성별 */
              gdiv.innerText = data[name].gameGender;
              /* 경기매치 */
@@ -1196,9 +1196,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1283,7 +1283,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             /* 경기시간 */
              tdiv.innerText = data[name].gameTime + ":00";
              /* 경기이름 */
-             ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+             ndiv.innerText = data[name].fieldName;
              /* 경기 성별 */
              gdiv.innerText = data[name].gameGender;
              /* 경기매치 */
@@ -1321,9 +1321,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1407,7 +1407,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
            /* 경기시간 */
             tdiv.innerText = data[name].gameTime + ":00";
             /* 경기이름 */
-            ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+            ndiv.innerText = data[name].fieldName;
             /* 경기 성별 */
             gdiv.innerText = data[name].gameGender;
             /* 경기매치 */
@@ -1444,9 +1444,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
            
             div_out.append(tdiv);
             middiv.append(ndiv);
-            infodiv.append(gdiv);
             infodiv.append(mdiv);
             infodiv.append(ldiv);
+            infodiv.append(gdiv);
             middiv.append(infodiv);
             div_out.append(middiv);
             div_out.append(bdiv);
@@ -1515,7 +1515,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	             /* 경기시간 */
 	              tdiv.innerText = data[name].gameTime + ":00";
 	              /* 경기이름 */
-	              ndiv.innerText = <%=today%> + " - " + data[name].gameTime +  " - " + data[name].fieldName;
+	              ndiv.innerText = data[name].fieldName;
 	              /* 경기 성별 */
 	              gdiv.innerText = data[name].gameGender;
 	              /* 경기매치 */
@@ -1552,9 +1552,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	            
 	             div_out.append(tdiv);
 	             middiv.append(ndiv);
-	             infodiv.append(gdiv);
 	             infodiv.append(mdiv);
 	             infodiv.append(ldiv);
+	             infodiv.append(gdiv);
 	             middiv.append(infodiv);
 	             div_out.append(middiv);
 	             div_out.append(bdiv);

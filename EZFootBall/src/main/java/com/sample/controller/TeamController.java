@@ -81,9 +81,9 @@ public class TeamController {
 	        }else if (dvo.getYgender().equals("true")&&dvo.getXgender().equals("true")) {
 	        	gvo.setGameGender("혼성");
 	        }else if(dvo.getYgender().equals("false")&&dvo.getXgender().equals("true")) {
-	        	gvo.setGameGender("여");
+	        	gvo.setGameGender("여성");
 	        }else if(dvo.getYgender().equals("true")&&dvo.getXgender().equals("false")) {
-	        	gvo.setGameGender("남");
+	        	gvo.setGameGender("남성");
 	        }
 		
 	

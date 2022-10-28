@@ -539,9 +539,9 @@
 	             
 	              div_out.append(tdiv);
 	              middiv.append(ndiv);
-	              infodiv.append(gdiv);
 	              infodiv.append(mdiv);
 	              infodiv.append(ldiv);
+	              infodiv.append(gdiv);
 	              middiv.append(infodiv);
 	              div_out.append(middiv);
 	              div_out.append(bdiv);
@@ -680,9 +680,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	             
 	              div_out.append(tdiv);
 	              middiv.append(ndiv);
-	              infodiv.append(gdiv);
 	              infodiv.append(mdiv);
 	              infodiv.append(ldiv);
+	              infodiv.append(gdiv);
 	              middiv.append(infodiv);
 	              div_out.append(middiv);
 	              div_out.append(bdiv);
@@ -860,9 +860,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -984,9 +984,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1109,9 +1109,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1232,9 +1232,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
             
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1360,9 +1360,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
              
              div_out.append(tdiv);
              middiv.append(ndiv);
-             infodiv.append(gdiv);
              infodiv.append(mdiv);
              infodiv.append(ldiv);
+             infodiv.append(gdiv);
              middiv.append(infodiv);
              div_out.append(middiv);
              div_out.append(bdiv);
@@ -1489,9 +1489,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
            
             div_out.append(tdiv);
             middiv.append(ndiv);
-            infodiv.append(gdiv);
             infodiv.append(mdiv);
             infodiv.append(ldiv);
+            infodiv.append(gdiv);
             middiv.append(infodiv);
             div_out.append(middiv);
             div_out.append(bdiv);
@@ -1603,9 +1603,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	            
 	             div_out.append(tdiv);
 	             middiv.append(ndiv);
-	             infodiv.append(gdiv);
 	             infodiv.append(mdiv);
 	             infodiv.append(ldiv);
+	             infodiv.append(gdiv);
 	             middiv.append(infodiv);
 	             div_out.append(middiv);
 	             div_out.append(bdiv);
