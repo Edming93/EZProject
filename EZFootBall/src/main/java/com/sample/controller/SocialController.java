@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.GlistService;
+import com.sample.service.LoginService;
 import com.sample.vo.DataVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -29,10 +30,27 @@ import com.sample.vo.UserVO;
 public class SocialController {
 	
 	private GlistService service;
+	private LoginService lservice;
 	
-	public SocialController(GlistService service) {
+	public SocialController(GlistService service,LoginService lservice) {
 		super();
 		this.service = service;
+		this.lservice = lservice;
+	}
+	
+	@GetMapping("/login")
+	public String getLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
+		if (lservice.isUser(vo, session)) {
+		}
+		return "social/login";
+	}
+	
+	@PostMapping("/login")
+	public String postLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
+		System.out.println("로그인~~");
+		System.out.println(snum);
+		System.out.println(lservice.isUser(vo, session));
+		return (lservice.isUser(vo, session)) ? "redirect:/msocial/info?num="+snum : "social/login";
 	}
 
 	
@@ -138,7 +156,7 @@ public class SocialController {
 			service.setslist(dvo);
 			service.subgame(num);
 		}else {
-			return "loginPage/login";
+			return "redirect:/msocial/login?num="+num;
 		}
 		
 		return "redirect:/";
@@ -156,7 +174,7 @@ public class SocialController {
 			service.setslist(dvo);
 			service.maxgame(num);
 		}else {
-			return "loginPage/login";
+			return "redirect:/msocial/login?num="+num;
 		}
 		/* return "index"; */
 		return "redirect:/";

@@ -46,6 +46,22 @@ public class TeamController {
 	}
 	
 	
+	@GetMapping("/login")
+	public String getLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
+		if (Lservice.isUser(vo, session)) {
+		}
+		return "team/login";
+	}
+	
+	@PostMapping("/login")
+	public String postLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
+		System.out.println("로그인~~");
+		System.out.println(snum);
+		System.out.println(Lservice.isUser(vo, session));
+		return (Lservice.isUser(vo, session)) ? "redirect:/team/tinfo?num="+snum : "team/login";
+	}
+	
+	
 	@PostMapping("/tlist")
 	@ResponseBody
 	public List<TlistVO> tlist(@RequestBody DataVO dvo,TlistVO gvo,Model model){
@@ -156,7 +172,7 @@ public class TeamController {
 			service.setslist(dvo);
 			service.subgame(num);
 		}else {
-			return "loginPage/login";
+			return "redirect:/team/login?num="+num;
 		}
 		
 //		"team/teamMain"
@@ -177,7 +193,7 @@ public class TeamController {
 			service.setslist(dvo);
 			service.maxgame(num);
 		}else {
-			return "loginPage/login";
+			return "redirect:/team/login?num="+num;
 		}
 		
 		

@@ -264,12 +264,6 @@
 		 height: 30px;
 		 line-height: 30px;
       }
-      .menu_title2 {
-      	 color: #26a563;
-      	 text-decoration: none;
-      	 background: none;
-      	 border: none;
-      }
       
       .menu_title_area {
 			background-color: #26A653;
@@ -283,29 +277,7 @@
 		    align-items: center;
 		    padding: 20px 0px;
 		    
-      }
-      .menu_title_area2 {
-		    width: 110px;
-		    height: 35px;
-		    text-align: center;
-		    border-radius: 20px;
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    padding: 20px 0px;
-		    
-		    background-color: #d3f1e1;
-		    border: 1px solid #26a563;
-		    cursor: pointer;
-      }
-      .menu_title_area2:hover {
-      		background-color: #26A653;
-            color:white;
-      }
-      
-      .menu_title_area2:hover .menu_title2 {
-            color:white;
-      }
+      }    
       
       
       .content_container {
@@ -673,11 +645,6 @@
             		<a href="#" class="field_plant menu_title">시설</a>
             	</div>
             </div>
-            <div class="menu_name">
-                <div class="menu_title_area2">
-            		<button class="field_reservation menu_title2" id="etcsubbtn">신청 하기</button>
-            	</div>
-            </div>
          </div>
       </div>
       
@@ -726,7 +693,7 @@
      	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
      	 	</div>
      	 	<div class="etc">
-     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　20000 / 인당
+     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon><p id="rental"></p> / 인당
      	 		<!-- <script type="text/javascript">
      	 			if(${matchinfo.gameMacth} == '5vs5'){
      	 				document.getElementById("pay").innerText = "20000";
@@ -765,77 +732,6 @@
      	 
      </div>
      
-     <!-- 신청하기 -->
-     <script type="text/javascript">
-     if('${matchinfo.close}' == 'false') {
- 		document.getElementById("etcsubbtn").disabled = true;
- 		document.getElementById("etcsubbtn").innerText = "마감된경기";
- 		document.querySelector(".menu_title_area2").style.backgroundColor="rgb(190 191 193)";
- 		document.getElementById("etcsubbtn").style.color = "rgb(241 247 255)";
- 		document.querySelector(".menu_title_area2").style.borderColor = "rgb(190 191 193)";
- 		
- 	}
- 	
- 	var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
- 	var lev = '${matchinfo.level}';
- 	var level = lev.substring(0,lev.length-1);
- 	
- 	document.getElementById("etcsubbtn").addEventListener("click",function(){
- 		var cnt = 0;
- 		for(var i=0; i<list.length; i++){
- 			if(list[i] == '<%=id%>'){
- 				cnt++;
- 			}
- 		}
- 		
- 		if (cnt > 0) {
- 			alert("이미 신청한 경기 입니다");
- 		}else {
- 			if('<%=lv%>' == "null"){
- 				if(aa == 1) {
- 					if('${matchinfo.gameGender}' == '혼성'){
- 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
- 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
- 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
- 					}else{
- 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
- 					}
- 				}else{
- 					if('${matchinfo.gameGender}' == '혼성'){
- 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
- 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
- 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
- 					}else{
- 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
- 					}
- 					
- 				}
- 			}else if('<%=lv%>' == level){
- 				if(aa == 1) {
- 					if('${matchinfo.gameGender}' == '혼성'){
- 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
- 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
- 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
- 					}else{
- 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
- 					}
- 				}else{
- 					if('${matchinfo.gameGender}' == '혼성'){
- 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
- 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
- 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
- 					}else{
- 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
- 					}
- 					
- 				}
- 			}else {
- 				alert("레벨에 맞지 않아 신청 할 수 없습니다" + '<%=lv%>');
- 			}
- 		}
- 	});
-     </script>
-
       <!-- 신청자 목록 -->
       <div class="list_container">
       	<div class="content_count">
@@ -911,6 +807,14 @@
 	            	    	     bimg5.className = "banner_image img5";
 	            	    	     document.getElementById("picture_area").append(bimg5);
 	            	    	}
+	            	    	
+	            	    	if(data.fieldType = '5vs5'){
+	            	    		document.getElementById("rental").innerText = "　" + (data.fieldRentalfee / 5);
+	            	    	}else {
+	            	    		document.getElementById("rental").innerText = "　" +  (data.fieldRentalfee / 6);
+	            	    	}
+	            	    	
+	            	    	
 	            	    	
 	            	    	document.getElementById("content_field_info").innerText = data.fieldSize + " / " + data.fieldInOut + " / " + data.fieldGrass;
 	        	         
