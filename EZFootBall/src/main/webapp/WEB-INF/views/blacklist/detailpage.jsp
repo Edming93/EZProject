@@ -96,37 +96,82 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
 	
-	const commentMain = document.getElementById("comment");
+	const commentmain = document.getElementById("comment");
 
 	window.addEventListener('DOMContentLoaded', (e) => {
 		fetch("${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}")
 		  .then(response => response.json())
 		  .then(data => {
 			  
-			  for(obj of data) {    
-				  const mainDiv = document.createElement("div");
-				  mainDiv.style.border = "1px solid black";
-				  mainDiv.style.padding = "5px";
-				  const h4 = document.createElement("h4");
-				  h4.innerText = obj.userName;
-				  const p = document.createElement("p");
-				  p.innerText = obj.content;
-				  
-				  mainDiv.append(h4);
-				  mainDiv.append(p);
-				  
-				  commentMain.append(mainDiv);
-			  }
+			  console.log(data);
+				
+				let commentlist = [];
 			  
+			  for(const obj of data) {  
+				  //상위댓글이 아무것도 없을때
+				  if(obj.orderCode === 0){
+					  commentlist.push(obj);
+					  }else{
+						  //else문 상위댓글과 자신이 쓰는 댓글 아이디 비교
+						  for(const comp of data){
+							  //만약 비교한 댓글 아이디가 상위댓글 번호와 같고
+							  if(comp.commentCode == obj.orderCode){
+								  //비교댓글의 리스트가 비었을 경우
+								  if(comp.innerlist == null){
+									  //리스트를 담을 배열을 생성
+									  comp.innerlist = [];
+								  }
+								  	//그후 리스트 배열을 obj에 푸쉬
+								  	comp.innerlist.push(obj);
+								  	break;
+							  }
+						  }
+					  }
+				  } 
+				
+			  console.log(commentlist);
+				  
+			  //for obj commentlist 순환
+			  for(const obj of commentlist){
+				  makecommentlist(0,obj);
+			  }
 			  
 		  }).catch(err => {
 			  console.log(err);
 		  });
 	});
-	
-	
-	
-	
+				  
+			//위에서 실행할 makecommentlist 함수생성	  
+			function makecommentlist(num, item){
+				const maindiv = document.createElement("div");
+				maindiv.style.border = "1px solid black";
+				maindiv.style.padding = "5px";
+				
+				let lpad = (40*num) + 5;
+				maindiv.style.paddingLeft = lpad + "px"; 
+				
+				const h4 = document.createElement("h4");
+				h4.innerText = item.userName;
+				const p = document.createElement("p");
+				
+				let content = (num > 0)?"↳":"";
+				p.innerText = content + item.content;
+						
+				maindiv.append(h4);
+				maindiv.append(p);
+						
+				commentmain.append(maindiv);
+				
+				// 아이템의 innerlist가 비어있지 않다면
+				if(item.innerlist != null){
+					for(const inneritem of item.innerlist){
+						makecommentlist(num+1,inneritem);
+					}
+				}
+			}	  
+		
+			
+			
 	
 	document.getElementById("backbtn").addEventListener("click",function(){
 		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain";
@@ -134,6 +179,7 @@
 	
 	
 document.getElementById("inittext").addEventListener("click", function(){
+	
 
 	//로그인 여부
 	//로그인 컨트롤러에서 logincheck를 ajax로 불러옴
@@ -176,9 +222,13 @@ document.getElementById("inittext").addEventListener("click", function(){
 	
 });
 
+
+
 document.getElementById("editbtn").addEventListener("click",function(){
 	location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}";
 });
+
+
 
 document.getElementById("deletebtn").addEventListener("click",function(){
 	let isDelete = confirm("정말로 삭제하시겠습니까?");

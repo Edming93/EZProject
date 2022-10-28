@@ -1,15 +1,20 @@
 package com.sample.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -118,23 +123,37 @@ public class BlacklistController {
 
 	// 페이지 삭제
 	@GetMapping("/blacklistmain/deletebbs/{blacklistCode}")
-	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo, 
-			@PathVariable("blacklistCode") String blacklistCode) {
+	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo,
+			@ModelAttribute("BlacklistVO") BlacklistVO bvo, @PathVariable("blacklistCode") String blacklistCode) {
 		bvo.setUserCode(uvo.getUserCode());
-		if(service.deleteBlackList(bvo)) {
+		if (service.deleteBlackList(bvo)) {
 			return "redirect:/blacklist/blacklistmain";
-		}else{
-			return "redirect:/blacklist/blacklistmain/"+bvo.getBlacklistCode();
+		} else {
+			return "redirect:/blacklist/blacklistmain/" + bvo.getBlacklistCode();
 		}
 	}
-	
-	//댓글 view
+
+	// 댓글 view
 	@GetMapping("/comment/{blackCode}")
 	@ResponseBody
-	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode")int blackCode){
+	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode") int blackCode) {
 		return service.getCommentList(blackCode);
 	}
-	
-	
-	
+
+	// 댓글 작성
+	// 커멘트를 저장
+	@PostMapping("/comment")
+	@ResponseBody
+	public Map<String, String> setComments(HttpSession session, @RequestBody BlacklistCommentVO vo) {
+
+		Map<String, String> map = new HashMap<String, String>();
+
+		if (service.setBlacklistComment(vo) > 0) {
+			map.put("result", "성공적으로 전송되었습니다");
+		} else {
+			map.put("result", "전송되지 못했습니다");
+		}
+		return map;
+
+	}
 }

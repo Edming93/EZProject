@@ -199,8 +199,6 @@
 						ccontent.innerText = content;
 						const cdate = document.createElement("h3");
 						cdate.innerText = data.vo.createDate;
-						/* const cid = document.createElement("h4");
-						cid.innerText = data.vo.id; */
 						const btn1 = document.createElement("button");
 						btn1.innerText = "수정"
 						btn1.id = "btnedit";
@@ -209,7 +207,6 @@
 						
 						div.append(btn1);
 						div.append(btn2);
-					/* 	div.append(cid); */
 			 			div.append(cdate); 
 			 			div.append(cname);
 						div2.append(ccontent);

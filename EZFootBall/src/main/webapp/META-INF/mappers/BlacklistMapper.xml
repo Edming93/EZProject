@@ -46,4 +46,9 @@
 		where is_delete = 0
 		and black_code = #{blackCode}
 	</select>
+	
+	<insert id="insertBlackListComment" >
+		insert into user_comment (black_code, user_code, user_name, content, order_id)
+		values (#{blackCode},#{userCode},#{userName},#{content},#{orderId});
+	</insert>
 </mapper>
