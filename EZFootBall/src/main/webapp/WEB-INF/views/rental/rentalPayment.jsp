@@ -404,12 +404,27 @@
             <h3>
                <iconify-icon class="alarm_icon" icon="grommet-icons:alarm"></iconify-icon> 예약 정보
             </h3>
-            <h4>${day}</h4>
-            <h4>${time}:00 ~ ${time+2}:00 시</h4>
+            <c:if test="${match.gameType eq null }">
+	            <h4>${day}</h4>
+	            <h4>${time}:00 ~ ${time+2}:00 시</h4>
+           </c:if>
+           <c:if test="${match.gameType eq 'T' }">
+	           	<h4>${match.gameDay}</h4>
+<%-- 	           	<fmt:parseNumber value="${match.gameTime}" /> --%>
+	           	<h4><c:out value="${match.gameTime}"/>:00 ~ <c:out value="${match.gameTime+2}"/>:00</h4>
+	           	
+           </c:if>
          </div>
          <div class="rv_time">
-            <h3 class="field_name">${field.fieldName}</h3>
-            <h4>${field.fieldAddress}</h4>
+           <c:if test="${match.gameType eq null }">
+	        	<h3 class="field_name">${field.fieldName}</h3>
+	          	<h4>${field.fieldAddress}</h4>
+           </c:if>
+            <c:if test="${match.gameType eq 'T' }">
+	           	<h3 class="field_name">${match.fieldName}</h3>
+	          	<h4>${match.fieldAddress}</h4>
+           </c:if>
+           
          </div>
       </div>
 
@@ -420,7 +435,7 @@
                <div class="rv_info_content">
                   <div class="rv_result_area">
                      <span class="rv_name">매치종류</span>
-                     	<c:if test="${match.gameType} == T">
+                     	<c:if test="${match.gameType eq 'T' }">
                      <span class="rv_result">팀 <span class="result_match">매치</span></span>
                      </c:if>
                         <c:if test="${match.gameType eq null}">
@@ -429,7 +444,12 @@
                   </div>
                   <div class="rv_result_area">
                      <span class="rv_name">매치형태</span>
-                     <span class="rv_result">${field.fieldType} <span class="result_match">매치</span></span>
+                     <c:if test="${match.gameType eq null}">
+                      	<span class="rv_result">${field.fieldType} <span class="result_match">매치</span></span>
+                     </c:if>
+                     <c:if test="${match.gameType eq 'T'}">
+                      	<span class="rv_result">${match.gameMacth} <span class="result_match">매치</span></span>
+                     </c:if>
                   </div>
                   <c:if test="${match.gameType} == T">
                   	<div class="rv_result_area">
@@ -506,8 +526,15 @@
                   <div class="pay_area">
                      <span class="pay_title">이용금액</span>
                      <span class="pay">
-                     	<span class="rental_fee amount_fee pay_money">${field.fieldRentalfee}</span>
+                     <c:if test="${match.gameType eq null}">
+                      	<span class="rental_fee amount_fee pay_money">${field.fieldRentalfee}</span>
                      	<span class="pay_won">원</span>
+                     </c:if>
+                     <c:if test="${match.gameType eq 'T'}">
+                      	<span class="rental_fee amount_fee pay_money">${match.gamePay}</span>
+                     	<span class="pay_won">원</span>
+                     </c:if>
+                     	
                      </span>   
                   </div>
                   <div class="pay_area">
@@ -521,8 +548,15 @@
                   <div class="pay_area pay_total_area">
                      <span class="pay_title pay_total">총 금액</span>
                      <span class="pay pay_total">
-                     	<span class="rental_fee total_fee">${field.fieldRentalfee}</span>
+                     <c:if test="${match.gameType eq null}">
+                      	<span class="rental_fee total_fee">${field.fieldRentalfee}</span>
                      	<span class="pay_won">원</span>
+                     </c:if>
+                     <c:if test="${match.gameType eq 'T'}">
+                      	<span class="rental_fee total_fee">${match.gamePay}</span>
+                     	<span class="pay_won">원</span>
+                     </c:if>
+                     	
                      </span>
                   </div>
                   
@@ -530,11 +564,16 @@
                   window.onload = function() {
                   let amount_fee = document.querySelector(".amount_fee");
                   let total_fee = document.querySelector(".total_fee");
-                  
+               
 
-                  amount_fee.innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
-                  total_fee.innerHTML = Number(${field.fieldRentalfee - 0}).toLocaleString();
-                  }
+					if('${match.gameType}' === 'T'){
+	                  amount_fee.innerHTML = Number(${match.gamePay}).toLocaleString();
+	                  total_fee.innerHTML = Number(${match.gamePay - 0}).toLocaleString();
+					}else{
+						amount_fee.innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
+			            total_fee.innerHTML = Number(${field.fieldRentalfee - 0}).toLocaleString();
+					}   
+				}
                   </script>
                   
                   <div class="payment_container">
@@ -580,22 +619,27 @@
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
             	if(${match.gameType eq null}){ // 구장예약일 경우
-                  	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+${field.fieldCode}+"&fieldName="+${field.fieldName}+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+${field.fieldRentalfee}
-                  					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+${time};
+                  	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+'${field.fieldCode}'+"&fieldName="+'${field.fieldName}'+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+'${field.fieldRentalfee}'
+                  					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+'${time}';
             	}else { // 팀매치 예약일 경우
-            		location.href = "${pageContext.request.contextPath}/rental/resultTeam";
+            		location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode="+'${match.fieldCode}&fieldName='+'${match.fieldName}&fieldAddress='+'${match.fieldAddress}&fieldRentalfee='
+            		+'${match.gamePay}&fieldType='+'${match.gameMacth}&gameDay='+'${gameDay}&gameTime='+'${gameTime}&userPayment='+'${gamePay}';
             	}
             } else {
 				alert("결제에 실패하셨습니다!");
-	             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+${field.fieldCode};
+	             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+'${field.fieldCode}';
             }
          });
       }
       
       document.getElementById("ming").addEventListener("click",function(){
-        	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName='${field.fieldName}'&fieldAddress='${field.fieldAddress}'&fieldRentalfee=${field.fieldRentalfee}&fieldType='${field.fieldType}'&gameDay='${day}'&gameTime='${time}:00:00'&rvType='G'";
-    	  
+    	  if('${match.gameType}' === 'T'){
+    		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}";
+    	  }else{
+    		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName='${field.fieldName}'&fieldAddress='${field.fieldAddress}'&fieldRentalfee=${field.fieldRentalfee}&fieldType='${field.fieldType}'&gameDay='${day}'&gameTime='${time}:00:00'&rvType='G'";
+    	  }
       });
-   </script>
+   </script>
+
 
 </html>

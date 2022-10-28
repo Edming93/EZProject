@@ -173,5 +173,19 @@
 		where field_name = #{fieldName} and game_day=#{gameDay}
 	</select>
 	
+	<!-- rentalPayment 이동  -->
+	<select id="matchInfo" parameterType="GlistVO" resultType="GlistVO">
+	select game_code, game_type, game_day, date_format(game_time, '%H') as game_time, game_macth, level, field_address,
+	game_pay, field_name, field_code
+	from gamelist 
+	where field_code = #{fieldCode}
+	and game_day = #{gameDay} and game_time= #{gameTime} 
+	</select>
+	
+	<!-- 결제 버튼 누를시 reservation table insert -->
+	<insert id="insertFieldRVT" parameterType="FieldReservationVO">
+		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time)
+		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime})
+	</insert>
 	
 </mapper>

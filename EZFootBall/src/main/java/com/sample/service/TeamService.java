@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.TeamDAO;
 import com.sample.vo.DataVO;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
@@ -132,5 +133,28 @@ public class TeamService {
 			public List<GlistVO> checkTime(GlistVO gvo) {
 				return dao.checkTime(gvo);
 			}
+			
+			// rental payment 이동시
+						public void matchInfo(GlistVO vo, Model model) {
+							System.out.println("서비서비code : "+vo.getFieldCode());
+							System.out.println("서비서비오냐day : "+vo.getGameDay());
+							System.out.println("서비서비오냐time : "+vo.getGameTime());
+							System.out.println("서비서비오냐type : "+vo.getGameType());
+							System.out.println("dao:게임타입 : " + dao.matchInfo(vo).getGameType());
+							model.addAttribute("match",dao.matchInfo(vo));
+						}
+						
+						// Reservation table insert
+						public void insertFieldRVT(FieldReservationVO rvo) {
+							System.out.println("욱컨트롤러Fcode : "+rvo.getFieldCode());
+							System.out.println("윽컨트롤러UPay : "+rvo.getUserPayment());
+							System.out.println("ㅇ컨트롤러Fname : "+rvo.getFieldName());
+							System.out.println("ㅇ컨트롤러FType : "+rvo.getFieldType());
+							System.out.println("ㅇ컨트롤러GType : "+rvo.getRvType());
+							System.out.println("userPay : "+ rvo.getFieldRentalfee());
+							System.out.println("afklajlks :" + rvo.getGameDay());
+							System.out.println("alkfjalkf :" + rvo.getGameTime());
+							dao.insertFieldRVT(rvo);
+						}
 			//-----------------------------------------------------
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sample.vo.DataVO;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.MatchRegVO;
@@ -74,5 +75,11 @@ public interface TeamDAO {
 			// 시간 유효성 검사2
 			public List<GlistVO> checkTime(GlistVO vo);
 			
+			// rental payment 이동
+			public GlistVO matchInfo(GlistVO vo);
+			
+			// 결제버튼 누를시
+			public void insertFieldRVT(FieldReservationVO vo);
+
 		//-----------------------------------------------
 }
