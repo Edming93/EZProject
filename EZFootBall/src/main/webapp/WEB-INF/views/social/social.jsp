@@ -553,6 +553,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
     	this.style.backgroundColor="#e8f2ff";
     	this.style.color="rgb(36 36 36)";
 
+    	
 
         var yeardata = <%=year%>;
         var monthdata = <%=month%>;
