@@ -6,16 +6,18 @@
 <%@page import="com.sample.vo.GlistVO"%>
 <%
 	int td = -1;
+	String ugen = "무";
 	if( (UinVO)session.getAttribute("urabil") != null) {
 		UinVO vo = (UinVO)session.getAttribute("urabil");
 		td = vo.getTeamCode();
+		ugen = vo.getUserGender();
 		if(vo.getTeamCode() != 0){
 			td = vo.getTeamCode();
 		}else {
 			td = 0;
 		}
 	}
-	System.out.println(td);
+	System.out.println(ugen);
 %>
 <!DOCTYPE html>
 <html>
@@ -834,6 +836,8 @@
       <!--구장 사진 / 정보  / 신청자 목록 가져오기  -->
             <script type="text/javascript">
             	var list = [];
+            	let cntmem = 0;
+            	let genum = 0;
 	            window.onload = function(e) {
 	        	      let data = {fieldCode : ${matchinfo.fieldCode}};
 	        	      
@@ -982,6 +986,40 @@
 	        	         console.log("error");
 	        	      });
 	        	      
+	        	      /* 팀원수 */
+	        	      if(<%=td%> != -1) {
+	        	    	  let teamcode = {teamCode :<%=td%>};
+	        	    	  fetch("${pageContext.request.contextPath}/team/cntmebr",{
+	    	  	      	         method : "POST", // PUT, PATCH, DELETE
+	    	  	      	         headers : {
+	    	  	      	            "Content-Type" : "application/json"},
+	    	  	      	         body : JSON.stringify(teamcode)
+	    	  	      	      }).then(response => response.json()) 
+	    	  	      	      .then(teamcode => {  
+	    	  	      	    	cntmem = teamcode;
+	    	  	      	    	console.log(cntmem);
+	    	  	      	         
+	    	  	      	      }).catch(error => {
+	    	  	      	         console.log("error");
+	    	  	      	      });
+	        	    	  
+	        	      }
+	        	      
+	        	      /* 팀원 성별 */
+	        	      let teamcode2 = {teamCode :<%=td%>};
+        	    	  fetch("${pageContext.request.contextPath}/team/selectgen",{
+    	  	      	         method : "POST", // PUT, PATCH, DELETE
+    	  	      	         headers : {
+    	  	      	            "Content-Type" : "application/json"},
+    	  	      	         body : JSON.stringify(teamcode2)
+    	  	      	      }).then(response => response.json()) 
+    	  	      	      .then(teamcode2 => {  
+    	  	      	    	genum = teamcode2;
+    	  	      	    	console.log(genum);
+    	  	      	      }).catch(error => {
+    	  	      	         console.log("error");
+    	  	      	      });
+	        	      
 	            	
 	            }
            	</script>
@@ -1124,25 +1162,56 @@
       var lev = '${matchinfo.level}';
       var level = lev.substring(0,lev.length-1);
       
+      let gamema = '${matchinfo.gameMacth}';
+      var gamecnt = gamema.substr(0, 1);
+      
       rv_btn.addEventListener("click",function() {
-    	  var cnt = 0;
-	for(var i=0; i<list.length; i++){
-		if(list[i] == '<%=td%>'){
-			cnt++;
+    	var cnt = 0;
+		for(var i=0; i<list.length; i++){
+			if(list[i] == '<%=td%>'){
+				cnt++;
+			}
 		}
-	}
 	if('<%=td%>' == 0) {
 		alert("소속된 팀이 없으면 신청 할 수 없습니다.");
 	}else {
-		if(cnt > 0) {
-			alert("이미 신청한 경기 입니다.");
-		}else{
-			if(aa == 1) {
-				location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
-			}else{
-				location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
-			}
+		if('<%=ugen%>' == '무'){
+			location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
 		}
+		else if('<%=ugen%>' == '${matchinfo.gameGender}' && genum == 1){
+			console.log("일치");
+			if(cntmem != gamecnt){
+				alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
+			}else{
+				if(cnt > 0) {
+					alert("이미 신청한 경기 입니다.");
+				}else{
+					if(aa == 1) {
+						location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
+					}else{
+						location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+					}
+				}
+			}
+		}else if('${matchinfo.gameGender}' == '혼성' && genum == 2){
+			console.log("혼성");
+			if(cntmem != gamecnt){
+				alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
+			}else{
+				if(cnt > 0) {
+					alert("이미 신청한 경기 입니다.");
+				}else{
+					if(aa == 1) {
+						location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
+					}else{
+						location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+					}
+				}
+			}
+		}else{
+			alert("이 게임은" + '${matchinfo.gameGender}' + "매치 게임으로 신청 할 수 없습니다");
+		}
+		
 	}
       });
       </script>

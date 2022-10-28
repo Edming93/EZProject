@@ -88,6 +88,18 @@
 		where field_code = #{fieldcode} 
 	</select>
 	
+	<select id="cntmebr" resultType="int">
+		select count(*)
+		from user_abil
+		where team_code = #{teamCode}
+	</select>
+	
+	<select id="selectgen" resultType="int">
+		SELECT  COUNT(DISTINCT user_gender)
+		from user_abil
+		WHERE team_code = #{teamCode} AND ( user_gender = '여성' OR user_gender = '남성');
+	</select>
+	
 	<!-- 팀 등록시 지도 검색 -->
 	<select id="getGameMapWhere" resultType="GameFieldInfoVO">
 		select 

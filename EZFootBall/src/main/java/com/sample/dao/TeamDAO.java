@@ -34,6 +34,10 @@ public interface TeamDAO {
 	
 	public GameFieldInfoVO fieldinfo(int fieldcode);
 	
+	public int cntmebr (int teamCode);
+	
+	public int selectgen (int teamCode);
+	
 	//----------------------정욱 10.24-------------------------
 		//----------------------registeration page--------------------------------------------------
 			// 팀 멤버 등록 

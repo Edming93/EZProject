@@ -63,6 +63,16 @@ public class TeamService {
 		return dao.fieldinfo(fieldcode);
 	}
 	
+	public int cntmebr (int teamCode) {
+		return dao.cntmebr(teamCode);
+	}
+	
+	public int selectgen (int teamCode) {
+		System.out.println("서비스" + teamCode);
+		System.out.println(dao.cntmebr(teamCode));
+		return dao.selectgen(teamCode);
+	}
+	
 	//-----------------정욱 10.24---------------------------------------
 		//----------------------posting page--------------------------------------------------
 			

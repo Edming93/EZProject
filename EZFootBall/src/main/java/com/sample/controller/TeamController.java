@@ -207,9 +207,24 @@ public class TeamController {
 	@ResponseBody
 	public GameFieldInfoVO fieldInfo (@RequestBody GlistVO vo) {
 		int fieldcode = vo.getFieldCode();
-		System.out.println("fieldinfo");
-		System.out.println(service.fieldinfo(fieldcode).getFieldImg1());
 		return service.fieldinfo(fieldcode);
+	}
+	
+	@PostMapping("/cntmebr")
+	@ResponseBody
+	public int cntmebr (@RequestBody DataVO vo) {
+		int teamCode = vo.getTeamCode();
+		return service.cntmebr(teamCode);
+	}
+	
+	@PostMapping("/selectgen")
+	@ResponseBody
+	public int selectgen (@RequestBody DataVO vo) {
+		int teamCode = vo.getTeamCode();
+		System.out.println("cntmebr");
+		System.out.println(teamCode);
+		System.out.println(service.selectgen(teamCode));
+		return service.selectgen(teamCode);
 	}
 	
 ///--------------------정욱 10.24 ----------------------------------	
