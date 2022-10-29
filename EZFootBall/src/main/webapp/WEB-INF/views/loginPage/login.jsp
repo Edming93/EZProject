@@ -35,7 +35,7 @@
     <style>
         * {
             box-sizing: border-box;
-            margin:0 auto;
+            margin:0;
         }
         body {
             background-size:cover;
@@ -45,29 +45,38 @@
 			background-color: #fff;
         }
         
-        .container {
-            width:500px;
-            height:450px;
-			background-color: #fff;
-
-            margin: 0 auto;
-            position:relative;
-            margin-top:200px;
-        }
-
+        .inner_container {
+	        width: 100%;
+	        margin: 0 auto;
+	        display: flex;
+	        flex-direction: column;
+	        justify-content: center;
+    	}
+		
+	    .main_title {
+	    	display: flex;
+	    	flex-direction: column;
+	    	font-family: 'Happiness-Sans-Title';
+    		margin-bottom: 60px;
+	    }
+	    
+	    .title1 {
+	    	font-size:30px;
+	    	color:#2A2A2A;
+	    }
+	    .title2 {
+	    	font-size:35px;
+	    	color:#26A653;
+	    	font-weight: bold;
+	    }
+		
         .content {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            margin:auto;
-            top:0;
-            bottom:0;
-            left:0;
-            right:0;
-            position: absolute;
-            align-items: center;
-            justify-content: center;
+		    display: flex;
+		    flex-direction: column;
+		    height: 765px;
+		    margin: auto;
+		    padding-bottom: 60px;
+    		padding-top: 145px;
         }
         form {
             display: flex;
@@ -106,7 +115,7 @@
         #login {
             width: 350px;
 			height: 55px;
-			background-color: #2a2a2a;
+			background-color: #26A653;
 			border: 0;
 			border-radius: 3px;
 			color: white;
@@ -122,7 +131,7 @@
         .id_footer {
         	display:flex;
             width: 100%;
-        
+            justify-content: space-around;
         }
 
         .id_foot {
@@ -147,8 +156,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
+
+
+
+    <div class="inner_container">
         <div class="content">
+            <div class="main_title">
+        		<h3 class="title1">땀흘리고 싶을 땐</h3>
+        		<div class="title2">이지풋볼</div>
+    		</div>
             <form action="${pageContext.request.contextPath}/loginPage/login" method="post">
                 <input class="input" type="text" placeholder="ID" name="userId" id="id_input" value="<%=val%>">
                 <input class="input" type="password" placeholder="password" name="userPw">

@@ -24,7 +24,7 @@
 <%-- 							<circle data-v-454f7528="" cx="10.5" cy="10.5" r="6" stroke="#222836"></circle> --%>
 <!-- 							<path data-v-454f7528="" stroke="#222836" d="M14.354 14.646l4.949 4.95"></path> -->
 <!-- 						</svg> -->
-						<input type="text" name="search" id="search" placeholder="검색창" list="" />
+						<input type="text" name="search" id="search" placeholder="경기지역 검색" list="" />
 <!-- 						<button id="searchbtn" disabled="disabled">검색</button> -->
 					</div>
 				</form>

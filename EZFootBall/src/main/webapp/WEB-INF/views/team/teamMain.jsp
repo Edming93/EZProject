@@ -238,7 +238,8 @@
     .bottom_banner {
         width:100%;
         height:205px;
-        background-color: #cef8e8;
+        background-color: #26A653;
+        margin-top: 100px;
     }
     footer {
         width: 100%;

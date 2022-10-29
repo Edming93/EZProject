@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +9,16 @@
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
+	@font-face {
+	    font-family: 'Happiness-Sans-Title';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Title.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
     * {
         box-sizing: border-box;
         margin: 0px;
-        font-family: 'Noto Sans KR', sans-serif;
     }
     
     
@@ -22,6 +28,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+
     }
 
     .header_container {
@@ -53,6 +60,7 @@
          background-size: 95px 35px;
     	cursor: pointer;
     }
+    
     .ez_icon {
         width: 65px;
         height:35px;
@@ -102,6 +110,7 @@
 
     .big_menu_content {
         height: 100%;
+        display: flex;
         justify-content: flex-start;
         align-items: center;
     }
@@ -151,23 +160,25 @@
     }
 
 
-    .match_list_container {
+    .main {
 	    width: 100%;
 	    height: 100%;
 	    display: flex;
 	    justify-content: center;
     }
 
-    .match_menu_area {
+    .main_area {
         width: 1024px;
         max-width: 1024px;
         height:100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
     }
+   
 
-    .match_menu_content {
+    .main_content {
         width: 100%;
         height:100%;
 	    flex-direction: column;
@@ -181,8 +192,9 @@
         width:100%;
         height:205px;
         background-color: #26A653;
-    	margin-top: 100px;
+        margin-top: 100px;
     }
+    
     footer {
         width: 100%;
         height: 423px;
@@ -220,13 +232,12 @@
                </div>
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
-  		  			  <jsp:include page="./search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
+  		  			  <jsp:include page="../search/search.jsp"></jsp:include>
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
+
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -254,67 +265,29 @@
                   </div>
                </div>
             </div>
-
          </div>
       </div>
-    <div class="big_menu_container">
-        <div class="big_menu_area">
-            <div class="big_menu_content">
-                <div class="menu menu1"><a class="menu1_a" href="${pageContext.request.contextPath}/home">소셜 매치</a></div>
-                <div class="menu menu2"><a class="menu2_a" href="${pageContext.request.contextPath}/team/team">팀 매치</a></div>
-                <div class="menu menu3"><a class="menu3_a" href="${pageContext.request.contextPath}/rental/rental">구장 예약</a></div>
-                <div class="menu menu4"><a class="menu4_a" href="${pageContext.request.contextPath}/rank/rank">랭킹</a></div>
-                <div class="menu menu5"><a class="menu5_a" href="${pageContext.request.contextPath}/review/reviewmain">커뮤니티</a></div>
-                <div class="menu menu6"><a class="menu5_a" href="${pageContext.request.contextPath}/blacklist/blacklistmain">블랙리스트</a></div>
+
+
+    <div class="main">
+        <div class="main_area">
+            <div class="main_content">
+            	<c:if test="${page eq 'login'}">
+            		<jsp:include page="../loginPage/login.jsp"></jsp:include>
+            	</c:if>
+            	<c:if test="${page eq 'signup'}">
+            		<jsp:include page="../loginPage/signUp.jsp"></jsp:include>
+            	</c:if>
             </div>
         </div>
-
-    </div>
-    
-        <div class="banner_container">
-            <div class="banner_content_area">
-                <div class="banner_content">
-                    <img class="banner_image" src="image/banner-manner_pc.png" alt="">
-                </div>
-            </div>
-        </div>
-<!--     <div class="match_menu_container"> -->
-<!--         <div class="match_menu_area"> -->
-<!--             <div class="match_menu_content"> -->
-            
-<!--                 <div class="date_nav"> -->
-
-<!--                     <div class="date_container"> -->
-<!--                         <div class="swiper_tabs"> -->
-
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="select_filter"> -->
-<!--                         <div class="filter_content"> -->
-                            
-<!--                         </div> -->
-
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
-    <div class="match_list_container">
-        <div class="match_menu_area">
-            <div class="match_menu_content">
-				            
-            <jsp:include page="./social/social.jsp"></jsp:include>
-
-            </div>
-        </div>
-
-
     </div>
 
     <div class="bottom_banner">
-
+		
 
     </div>
+
+
     <footer>
         <div class="footer_left"></div>
         <div class="footer_right"></div>

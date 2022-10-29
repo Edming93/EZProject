@@ -35,8 +35,9 @@ public class LoginController {
 	}
 
 	@GetMapping("/login")
-	public String getLogin() {
-		return "loginPage/login";
+	public String getLogin(Model model) {
+		model.addAttribute("page","login");
+		return "loginPage/loginMain";
 	}
 
 	@PostMapping("/login")
@@ -72,7 +73,7 @@ public class LoginController {
 			}
 
 		}else {
-			url = "loginPage/login";
+			url = "loginPage/loginMain";
 		}
 		
 		
@@ -94,7 +95,8 @@ public class LoginController {
 	@GetMapping("/signUp")
 	public String getSignUp(UserVO vo, Model model) {
 		service.getUserIdList(model);
-		return "loginPage/signUp";
+		model.addAttribute("page","signup");
+		return "loginPage/loginMain";
 	}
 
 	@PostMapping("/signUp")

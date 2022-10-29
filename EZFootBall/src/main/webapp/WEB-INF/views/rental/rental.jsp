@@ -202,7 +202,7 @@
        	}
 		
 		.rental_span_able {
-          background-color: rgb(232, 242, 255);
+          background-color: rgb(212 247 225);
 		  cursor: pointer;
 		  text-decoration: none;
 		  color: black;
@@ -505,7 +505,6 @@
 <script type="text/javascript">
 <!--  처음 로딩시  -->
 	window.onload = function() {
-
 		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";

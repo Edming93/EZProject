@@ -31,8 +31,6 @@
        	width: 1024px;
        }
        #out * {
-            /* margin: 10px; */
-        	/* border: 1px solid black; */
             box-sizing: border-box;
         }
 
@@ -80,6 +78,7 @@
 		    border-radius: 71px;
 		    border: 1px solid #e1e1e1;
 		    color: #c7c7c7;
+		    cursor: pointer;
         }
         .idaydiv{
         }
@@ -88,9 +87,6 @@
         	font-size: 20px;
         	font-weight: bold;
         }
-        /* #day li > div {
-        	font-weight: bold;
-        } */
 
         #settingbutton{
 		    flex: 1;
@@ -101,6 +97,7 @@
 		    font-size: 12px;
 		    margin-bottom: 40px;
 		    margin-left: 20px;
+		    align-items: center;
     	}
     	
     	.local{
@@ -109,36 +106,21 @@
     		margin-right: 10px;
     	}
     	
-    	.closediv{
+    	.type_input {
+    		border-radius: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    background-color: white;
+		    width: 110px;
+    		height: 40px;
+    	}
+    	.size{
     		width: 100px;
     		border-radius: 30px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		border: 1px solid black;
-    		margin-right: 10px;
-    	}
-    	.gender{
-    		width: 42px;
-    		border-radius: 55px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		border: 1px solid black;
-    		margin-right: 10px;
-    	}
-    	#level{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
     	}
     	option {
     		text-align: center;
-    	}
-    	#mvar{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
     	}
     	.listreset{
     		width: 100px;
@@ -160,29 +142,23 @@
 		    align-items: center;
 		    justify-content: space-around;
     	}
-
+    	.game_time{
+		    font-size: 16px;
+		    display: flex;
+		    justify-content: center;
+		    font-weight: 700;
+    	}
+    	
+    	.gamename {
+    		font-size: 20px;
+    	}
     	.mid_div{
 		    display: flex;
 		    align-items: center;
 		    justify-content: space-between;
 		    width: 700px;
     	}
-    	.close{
-		    border-radius: 30px;
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		    background-color: white;
-		    border: 1px solid #26A653;
-		    width: 110px;
-    		height: 40px;
-		    font-size: small;
-		    color: #26A653;
-    		
-    	}
-    	.close > div {
-    		font-weight: bold;
-    	}
+
     	.info_div{
 		    display: flex;
 		    width: 200px;
@@ -190,7 +166,6 @@
 		    color: #848484;
     	}
 
-    	
     	#dpre, #dnext {
     	    display: flex;
     		justify-content: center;
@@ -199,6 +174,9 @@
     	.select_border {
    			border: 1px solid #A9A9A9;
    			font-size: 12px;
+   			height:100%;
+   			margin-right: 10px;
+   			cursor: pointer;
    		}
     	.active {
 		   background-color:#26A653;
@@ -209,6 +187,70 @@
 			width: 105px;
 	        height: 100px;
 	        margin: 15px;
+		}
+		
+		.rental_area {
+          display:flex;
+       	}
+       	.time {
+          display : inline-block;
+          width:140px;
+          height:50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+       	}
+		
+		.rental_span_able {
+          background-color: rgb(212 247 225);
+		  cursor: pointer;
+		  text-decoration: none;
+		  color: black;
+		  border-radius: 11px;
+		  border: 0px !important;
+       }
+       .rental_span_disable {
+          text-decoration: none;
+		  color: #A9A9A9;
+		  border-radius: 11px;
+		  border: 0px !important;
+       }
+       
+		#result {
+			display: flex;
+	    	flex-direction: column;
+		}
+		.result_content {
+			display: flex;
+		    color: black;
+		    text-decoration: none;
+		    padding: 25px 20px;
+		    border-bottom: 1px solid #efefef;
+		    justify-content: space-around;
+		    flex-direction: column;
+		}
+		.title_area {
+	
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: column;
+		}
+		
+	
+		.size_span {
+			font-size:13px;
+			margin-bottom: 20px;
+	    	display: flex;
+		}
+		
+		.field_title {
+			margin-bottom: 10px;
+	    	display: flex;
+	    	cursor: pointer;
+		}
+		
+		input:focus, select:focus, option:focus, textarea:focus, button:focus{
+		outline: none;
 		}
     </style>
 </head>
@@ -438,8 +480,9 @@
 <!--  처음 로딩시  -->
 
 	window.onload = function() {
-        document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
-        document.getElementById("<%=today%>").style.color="rgb(36 36 36)";
+		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
+        document.getElementById("<%=today%>").style.color="#fff";
+        document.getElementById("<%=today%>").style.border="1px solid #26A653";
         document.getElementById("<%=today%>").style.transform = "scale(1.5)";
 		
         
@@ -520,12 +563,14 @@
          today_li.forEach(function(e) {
             e.style.backgroundColor="#fff";
     		e.style.color='#C7C7C7';
+    		e.style.border="1px solid #A9A9A9";
     		e.style.transition = "all 0.2s linear";
             e.style.transform = "scale(1.0)";
          });
       
-         e.style.backgroundColor="#e8f2ff";
-     	 e.style.color="rgb(36 36 36)";
+         e.style.backgroundColor="#26A653";
+     	 e.style.color="#fff";
+     	 e.style.border="1px solid #26A653";
     	 e.style.transition = "all 0.2 linear";
          e.style.transform = "scale(1.5)";
 

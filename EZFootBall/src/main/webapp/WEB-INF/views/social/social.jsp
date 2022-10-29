@@ -447,12 +447,10 @@
         var monthdata = <%=month%>;
         var daydata = <%=today%>;
         
-        document.getElementById("<%=today%>").style.backgroundColor="#e8f2ff";
-        document.getElementById("<%=today%>").style.color="rgb(36 36 36)";
+		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
+        document.getElementById("<%=today%>").style.color="#fff";
+        document.getElementById("<%=today%>").style.border="1px solid #26A653";
         document.getElementById("<%=today%>").style.transform = "scale(1.5)";
-<%--         document.getElementById("<%=today%>").style.width="105px"; --%>
-<%--         document.getElementById("<%=today%>").style.height="100px"; --%>
-<%--         document.getElementById("<%=today%>").style.margin="15px"; --%>
 
         
         var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
@@ -562,11 +560,13 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
     	for(var j = 0; j < document.getElementById("day").childElementCount; j++){
     		document.getElementById("day").children[j].style.backgroundColor="#fff";
     		document.getElementById("day").children[j].style.color='#C7C7C7';
+    		document.getElementById("day").children[j].style.border="1px solid #A9A9A9";
     		document.getElementById("day").children[j].style.transition = "all 0.2s linear";
             document.getElementById("day").children[j].style.transform = "scale(1.0)";
     	};
-    	this.style.backgroundColor="#e8f2ff";
-    	this.style.color="rgb(36 36 36)";
+    	this.style.backgroundColor="#26A653";
+    	this.style.color="#fff";
+    	this.style.border="1px solid #26A653";
     	this.style.transition = "all 0.2 linear";
         this.style.transform = "scale(1.5)";
 

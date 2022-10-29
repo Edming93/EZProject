@@ -19,7 +19,7 @@
     <style>
         * {
             box-sizing: border-box;
-            margin:0 auto;
+            margin:0px;
         }
         body {
             background-size:cover;
@@ -28,6 +28,14 @@
             color: #F5F6F7;
             background-color:#fff;
         }
+        
+        .content {
+		    display: flex;
+		    flex-direction: column;
+		    margin: auto;
+		    padding-bottom: 260px;
+		    padding-top: 60px;
+		}
         .signin_layout {
             display:inline-block;
             text-align:left;
@@ -37,17 +45,17 @@
         .layout_title {
             width:100%;
 		    text-align: left;
-		    margin-top: 50px;
-		    margin-bottom: 40px;
+    		margin-bottom: 25px;
+		   	font-family: 'Happiness-Sans-Title';
         }
         .text{
             font-size: 38px;
-		    color: #000;
+		    color: #2A2A2A;
         }
         .sub_text {
             font-size: 28px;
 		    font-weight: bold;
-		    color: #000;
+    		color: #26A653;
         }
     
 
@@ -136,13 +144,13 @@
         
         .sign_up {
             border-radius: 8px;
-		    margin-top: 25px;
+    		margin-top: 40px;
 		    width: 100%;
 		    height: 50px;
-		    background-color: #2a2a2a;
+		    background-color: #26A653;
 		    color: white;
 		    font-size: 15px;
-		    box-shadow: inset -1px -3px 6px 0px #f5f6f72e;
+		    border:0;
             cursor: pointer;
         }
         
@@ -159,31 +167,13 @@
 </head>
 
 <body style="text-align: center;">
+<div class="content">
 <div class="signin_layout">
     <div class="layout_title">
-        <div class="text"> 풋살 짱이 될거야 </div>
+        <div class="text"> 풋살 짱이 될거야! </div>
         <div class="sub_text"> EZ한 이지풋볼</div>
     </div>
     <form name="form1" method="post" action="${pageContext.request.contextPath}/loginPage/signUp">
-    
-<!--    <div class="title"> 아이디</div> 
-        <span class="able able_id"></span>
-        <span class="id_check">이미 사용중인 아이디입니다.</span>
-        <div><input class="input"type="text" name="userId" method="post"></div>
-           <input type="button" value="중복확인" onclick="id_confirmation();"></div>
-        <div class="title"> 비밀번호 </div>
-        <div><input class="input password" type="password" name="userPw"></div>
-        <div class="title"> 비밀번호 확인 </div>
-        <div><input class="input password_ck" type="password"></div>
-
-        <div class="title"> 이름</div>
-        <div><input class="input" type="text" name="userName"></div>
-        <div class="title"> 휴대폰 번호</div>
-        <div><input class="input" type="text" name="userPhone"></div>
-        <div class="title"> 생년월일</div>
-        <div><input class="input user_birth_year" type="text" name="userBirthYear" placeholder="년(4자)">
-            <select name="userBirthMonth" class="user_birth_month">
-             -->
         <div class="title"> 아이디</div> 
         <div><input class="input" id="input_id" type="text" name="userId" method="post" autofocus required></div>
         <span class="able able_id"></span>
@@ -345,20 +335,20 @@
         <div class="title">상세 주소</div>
            <div><input type="text" class="input address_detail" name="userAddress2" /></div>
            
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-window.onload = function(){
-    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address").value = data.address; // 주소 넣기
-                document.querySelector("input[name=userAddress1]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
-</script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
+		window.onload = function(){
+		    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+		        //카카오 지도 발생
+		        new daum.Postcode({
+		            oncomplete: function(data) { //선택시 입력값 세팅
+		                document.getElementById("address").value = data.address; // 주소 넣기
+		                document.querySelector("input[name=userAddress1]").focus(); //상세입력 포커싱
+		            }
+		        }).open();
+		    });
+		}
+		</script>
 			<div class="form_group email_form">
 				<div class="title">이메일</div>
 				<div class="email_group">
@@ -434,6 +424,7 @@ window.onload = function(){
             <input class="sign_up" type="button" value="가입하기" name="sign_up">
       </div>
     </form>
+</div>
 </div>
 
 		<script>
@@ -597,7 +588,7 @@ window.onload = function(){
 			
 			
 			sign_up.addEventListener("click",function(){
-			console.log("가입하기 버늩 누늘면 :"+email);
+			console.log("가입하기 버튼 누늘면 :"+email);
 			console.log(form_ck.userEmail1.value.trim()+form_ck.userEmail2.value.trim());
 // 		    	var pattern_num = /[0-9]/;	// 숫자 
 		
@@ -647,14 +638,9 @@ window.onload = function(){
 				}else {
 					alert("가입에 성공하셨습니다!");
 					form_ck.submit();
-				}
-			
-		
-				
+				}			
 			});
 			
-		
-		
 		
 		</script>
 

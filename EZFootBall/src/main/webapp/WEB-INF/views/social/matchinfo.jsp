@@ -301,7 +301,7 @@
       
       .field_info_area {
          display: flex;
-         width:50%;
+         width:70%;
          flex-direction: column;
       }
 
@@ -313,10 +313,10 @@
       }
 
       .field_info {
-         width:50%;
+         width:70%;
       }
       .plant_info {
-         width:45%;
+         width:25%;
       }
 
       .field_image {
@@ -338,7 +338,7 @@
 
       .field_etc_area {
          display: flex;
-         width: 45%;
+         width: 25%;
          flex-direction: column;
          
       }
@@ -370,10 +370,10 @@
         
       }
       .match_left{
-      	width: 50%;
+      	width: 70%;
       }
       .match_right{
-      	width: 45%;
+      	width: 25%;
       }
       .list_container{
          grid-area: list;
