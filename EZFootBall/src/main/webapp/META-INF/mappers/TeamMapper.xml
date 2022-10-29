@@ -199,5 +199,27 @@
 		select * from user_abil where user_name = #{userName}
 	</select>
 	
+	<!-- 팀 등록시 update용 userAbil-->
+	<update id="updateUserAbil" parameterType="TeamMemberVO">
+		update user_abil set team_code =#{teamCode} , user_group=#{teamName}
+		where user_name =#{tmember1} or user_name =#{tmember2} or
+	user_name =#{tmember3} or user_name =#{tmember4} or
+		user_name =#{tmember5} or user_name=#{tmember6}
+	</update>
+	
+	<!-- 팀등록시 가장 최근 팀등록번호 가져오기 -->
+	<select id="getLastTeamC" resultType="int">
+		select team_code from team_member 
+		order by team_code desc limit 1
+	</select>
+	
+	<!-- 팀 등록시 update용 userAbil-->
+	<update id="updateUserInfo" parameterType="TeamMemberVO">
+		update user_info set team_code =#{teamCode}
+		where user_name =#{tmember1} or user_name =#{tmember2} or
+		user_name =#{tmember3} or user_name =#{tmember4} or
+		user_name =#{tmember5}  or user_name=#{tmember6}
+	</update>
+	
 	
 </mapper>

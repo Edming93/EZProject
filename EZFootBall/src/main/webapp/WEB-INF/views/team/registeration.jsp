@@ -26,12 +26,19 @@
         border: 1px solid white;
         justify-content: center;
     	align-items: center;
+/*     	background: url("${pageContext.request.contextPath}/image/backddd.jpg") no-repeat center; */
+		background: url("${pageContext.request.contextPath}/image/backddd.png") no-repeat ;
     
     }
+    
     
     .team_info{
         display: flex;
         flex-direction: column;
+            width: 30%;
+	    background-color: white;
+	    border-radius: 10px;
+	    padding: 30px;
     }
     .team_info .team_register{
         display: flex;
@@ -52,28 +59,66 @@
         width: 100%;
         float: left;
     }
-    .team_info .team_name p{
-      
-        font-weight: 700;
-        font-size: 20px;
+	.ques{
+	    display: flex;
+    	flex-direction: column;
+	}
+	.subtitle{
+		display: flex;
+	    justify-content: space-around;
+	}
+	.content {
+		display: flex;
+   		justify-content: space-between;
+	}
+	.content1{
+		flex : 1;
+	}
+	.content1 input{
+		border : 1px solid #26a563;
+		height : 20px;
+		border-radius : 7px;
+		padding-left : 5px;
+	}
+	.content2{
+		display: flex;
+	    flex-direction: column;
+	    width: 100%;
+	}
+	.content3{
+		flex : 2;
+	}
+	.content3 input{
+		border : 1px solid #26a563;
+		height : 20px;
+		border-radius : 7px;
+		padding-left : 5px;
+	}
+	.btn{
+	border: none;
+    background: white;
+    color: #26a563;
+    font-weight: 700;
+        margin-bottom: 3px;
     }
-    .team_info .team_name input{
-        width: 100%;
-        height: 40px;
-        padding-left : 5px;
+    .btn:hover{
+    	background-color : pink;
+    	cursor : pointer;
     }
-    .team_info table{
-        background-color: white;
-        width : 100%;
-        
+    .namename{
+    	width : 40%;
     }
-    .team_info table tr td input{
-        
-        width: 100%;
-        float: left;
-        padding-left: 5px;
+    
+	.tname{
+		font-weight : 700;
+	}
+	#teamName{
+	    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 5px;
+    border: 1px solid #26a563;
     }
-
     .submit_button{
     	margin-top: 20px;
         width: 100%;
@@ -291,52 +336,64 @@
             <div class="team_register">
                 <p>팀 등록하기</p><span class="add_info">※5명팀은 5명만 적어주세요</span>
             </div>
-            <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post">
-            <div class="team_name">
-                <p>팀 이름</p>
-                <input type="text" name="teamName" id="teamName" placeholder="매력있는 팀 이름 정하기">
-            </div>
+            <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post" onsubmit="jbSubmit();">
+            <div class="ques">
+	            <div class="team_name">
+	                <p class="tname">팀 이름</p>
+	                <input type="text" name="teamName" id="teamName" placeholder="매력있는 팀 이름 정하기">
+	            </div>
            
-            <table>
-                <tr>
-                    <th>이름</th>
-                    <th>회원코드</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="tmember1" class="tmem" placeholder="이름을 입력하세요" value="${user.userName}"></td>
-                    <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode1" class="userCode" placeholder="회원코드" value="${user.userCode}"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="tmember2" class="tmem" placeholder="이름을 입력하세요"></td>
-                    <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode2" class="userCode" placeholder="회원코드"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="tmember3" class="tmem" placeholder="이름을 입력하세요"></td>
-                    <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode3" class="userCode" placeholder="회원코드"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="tmember4" class="tmem" placeholder="이름을 입력하세요"></td>
-                    <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode4" class="userCode" placeholder="회원코드"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="tmember5" class="tmem" placeholder="이름을 입력하세요"></td>
-                    <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode5" class="userCode" placeholder="회원코드"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="tmember6" class="tmem" placeholder="이름을 입력하세요"></td>
-                    <td><button type="button" class="btn">확인</button></td>
-                    <td><input type="text" name="userCode6" class="userCode" placeholder="회원코드"></td>
-                </tr>
-            </table>
-            
+            	<div class="subtitle">
+                   <h4 class="namename">이름</h4>
+                   <h4>회원코드</h4>
+                </div>
+              </div>  
+                <div class="content">
+                	<div class="content1">
+	                    <input type="text" name="tmember1"  class="tmem" placeholder="이름을 입력하세요" value="${user.userName}">
+	                    <input type="text" name="tmember2" id="t2" class="tmem"  placeholder="이름을 입력하세요">
+	                    <input type="text" name="tmember3" id="t3"class="tmem" placeholder="이름을 입력하세요">
+	                    <input type="text" name="tmember4" id="t4" class="tmem"  placeholder="이름을 입력하세요">
+	                    <input type="text" name="tmember5" id="t5" class="tmem"  placeholder="이름을 입력하세요">
+	                    <input type="text" name="tmember6" class="tmem" onchange="inputValueChange()" placeholder="이름을 입력하세요">
+              		</div>
+              		
+              		<div class="content2">
+                     <button type="button" class="btn">코드확인-눌러주세요</button>
+                     <button type="button" class="btn">코드확인-눌러주세요</button>
+        				<button type="button" class="btn">코드확인-눌러주세요</button>
+		               <button type="button" class="btn">코드확인-눌러주세요</button>
+	                     <button type="button" class="btn">코드확인-눌러주세요</button>
+	                     <button type="button" class="btn">코드확인-눌러주세요</button>
+	                   </div>
+	                   
+               		<div class="content3">
+	                    <input type="text" name="userCode1" class="userCode" placeholder="회원코드" value="${user.userCode}">
+	                    <input type="text" name="userCode2" class="userCode" placeholder="회원코드">
+	                    <input type="text" name="userCode3" class="userCode" placeholder="회원코드">       		
+	                    <input type="text" name="userCode4" class="userCode" placeholder="회원코드">
+	                    <input type="text" name="userCode5" class="userCode" placeholder="회원코드">
+	                    <input type="text" name="userCode6" class="userCode" placeholder="회원코드">
+	                    
+                	</div>
+                	
+                    
+               		
+                    
+             </div>
+          
             <div class="submit_button">
             	<button id="writer_submit">팀 등록하기</button>
         	</div>
+	<script type="text/javascript">
+	
+		function inputValueChange(){
+			
+			var input5 = document.getElementById("t5").value;
+			console.log(input5);
+		}
+		   	</script>  
+  
         	 </form>
         </div>
     </div>
@@ -362,14 +419,17 @@
 				
 				console.log(data);
 				for(let comment of data){
-					if(comment.teamCode != null){
+					if(comment.teamCode == 'null' ||
+							comment.teamCode == 0 ||
+							comment.teamCode == null){
 					
-						alert("팀이 존재하여 추가할 수 없습니다.");
+						userCode.value = comment.userCode;
 						
 						
 					}
 					else{
-						userCode.value = comment.userCode;
+						
+						alert("팀이 존재하여 추가할 수 없습니다.");
 					}
 				}
 
@@ -384,12 +444,12 @@
 
     </script>
   	<script type="text/javascript">
-	let main_logo = document.querySelector(".main_logo");
-	
-	main_logo.addEventListener("click",function() {
-		location.href="${pageContext.request.contextPath}";
-	});
-</script>
+		let main_logo = document.querySelector(".main_logo");
+		
+		main_logo.addEventListener("click",function() {
+			location.href="${pageContext.request.contextPath}";
+		});
+	</script>
    	
 </body>
 </html>

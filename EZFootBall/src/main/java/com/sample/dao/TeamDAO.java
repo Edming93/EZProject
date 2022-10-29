@@ -87,6 +87,15 @@ public interface TeamDAO {
 			
 			// 정욱 팀 등록시 사용
 			public List<UinVO> getUserList(UinVO vo);
+			
+
+			// 팀등록시 user_abil에 업데이트
+			public void updateUserAbil(TeamMemberVO vo);
+			public void updateUserInfo(TeamMemberVO vo);
+			
+			
+			// 팀등록 마지막 코드 가져오기
+			public int getLastTeamC();
 
 		//-----------------------------------------------
 }

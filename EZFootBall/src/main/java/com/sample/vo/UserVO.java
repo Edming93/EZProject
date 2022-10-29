@@ -31,7 +31,15 @@ public class UserVO {
 	// 정욱 사용
 
 	private String tmember;
+	private int teamCode;
 	
+	public int getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(int teamCode) {
+		this.teamCode = teamCode;
+	}
 	public String getTmember() {
 		return tmember;
 	}

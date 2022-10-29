@@ -270,19 +270,13 @@ public class TeamController {
 		if(service.putTeamMatchGlist(vo)) {
 			int Gnum =	service.getTeamMatchGlist();
 			vo1.setGameCode(Gnum);
-			System.out.println("제발제발제발----- :"+vo.getmTeamName());
-			System.out.println("오냐오냐오냐 : "+vo.getFieldCode());
+			
 			int Tnum = service.getTeamNameT(vo);
 			vo1.setTeamCode(Tnum);
-			
-			System.out.println("컨트롤러---- :" + Gnum);
-			System.out.println("컨트롤러---- :" + Tnum);
+		
 			
 			service.gameTJoinList(vo1);
-			System.out.println("오냐오냐오냐code : "+vo.getFieldCode());
-			System.out.println("오냐오냐오냐day : "+vo.getGameDay());
-			System.out.println("오냐오냐오냐time : "+vo.getGameTime());
-			System.out.println("오냐오냐오냐type : "+vo.getGameType());
+			
 			service.matchInfo(vo,model);
 			return "rental/rentalPayment";
 		}else {
@@ -320,13 +314,15 @@ public class TeamController {
 	
 	@PostMapping("/teamUpdate")
 	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo) {
-		
+	
 		if(service.TeamMemberList(vo)) {
-			System.out.println(vo.getTmember3());
-			System.out.println("---컨트롤러---");
-			return "team/posting";
+			int LTC = service.getLastTeamC();
+			vo.setTeamCode(LTC);
+			service.updateUserAbil(vo);
+			service.updateUserInfo(vo);
+			return "team/teamMain";
 		}else {
-			return "team/main";
+			return "team/registeration";
 		}
 	}
 	

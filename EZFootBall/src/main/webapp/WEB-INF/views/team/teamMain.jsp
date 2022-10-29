@@ -10,6 +10,7 @@
  <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
@@ -302,12 +303,75 @@
     .mainpage-post .date ul li:hover{
        background-color: blue;
     }
-    .posting{
-    	position: fixed;
-	    left: 92%;
-	    top: 75%;
-	    width: 50px;
-    }
+     .postingdiv{
+	width: 100px;
+    height: 1100px;
+    margin-top: 464px;
+
+   }
+     .posting123{
+    	position: sticky;
+    
+    width: 50px;
+    top: 0
+	    }
+	    
+	  #pbtn:hover{
+	  	cursor : pointer;
+	    
+	  }  
+	    
+	 .hidemenu{
+            display: flex;
+            flex-direction: column;
+            display: none;
+            background-color : white;
+            position : absolute;
+        }
+     .active {
+     	    background-color: white;
+		    color: white;
+		    border: none;
+     }
+     .teamR{
+         display: flex;
+	   
+	    width: 150px;
+	    justify-content: center;
+	    align-items: center;
+	   }
+	   .teamR p{
+         color : black;
+         font-weight : 700;
+	   }
+     .matchR{
+      display: flex;
+	   
+	    width: 180px;
+	    justify-content: center;
+	    align-items: center;
+     }
+     .matchR p{
+      color : black;
+         font-weight : 700;
+     }
+     .teamR:hover{
+     	cursor:pointer;
+     	transition : all 0.2s linear;
+     	transform : scale(1.2);
+     	
+     }
+     .teamR p:hover{
+     	color : blue;
+     }
+      .matchR:hover{
+      	cursor:pointer;
+      	transition : all 0.2s linear;
+     	transform : scale(1.2);
+      }
+      .matchR p:hover{
+      	color : blue;
+      }
 
 </style>
 </head>
@@ -355,9 +419,7 @@
             </div>
         </div>
     </div>
- <div id="posting123">
-    	<span><img src="${pageContext.request.contextPath}/image/pecil.jpg" id="posting"/></span>
-    </div>    
+    
     
     
     
@@ -374,6 +436,19 @@
             	<jsp:include page="./team.jsp"></jsp:include>
             				
             </div>
+            <div class="postingdiv">
+				<div class="posting123">
+				  <span id="pbtn"><img src="${pageContext.request.contextPath}/image/pecil.jpg"><h4>글쓰기</h4></span>
+				    <div class="hidemenu">
+				       <div class="teamR">
+				        <span class="p1"><iconify-icon icon="fluent:people-team-add-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 등록하기</p>
+				        </div>
+				        <div class="matchR">
+				        <span id="posting"><iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 매치 작성하기</p>
+				        </div>
+				    </div>
+				</div>   
+			</div>
         </div> 
     </div>
 
@@ -394,7 +469,7 @@
 		});
 		
 		/* 글쓰기 아이콘 누를시 이동 */
-		document.getElementById("posting").addEventListener("click",function(){
+	document.querySelector(".matchR").addEventListener("click",function(){
 
 			$.ajax({
 	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
@@ -435,5 +510,65 @@
 	 		});
 		});
 		</script>
+		<script>
+        var hide = document.querySelector(".hidemenu");
+        var p1 = document.querySelector(".p1");
+        var p2 = document.querySelector(".p2");
+
+        document.getElementById("pbtn").addEventListener("click",function(){
+            hide.classList.toggle('active');
+            if(hide.classList.contains('active')){
+                hide.style.display = "block";
+                hide.style.backgroundColor = "transparent";
+                hide.style.border = "none";
+
+            }else{
+                hide.style.display = "none";
+            }
+        });
+        </script>
+        <script type="text/javascript">
+        document.querySelector(".teamR").addEventListener("click",function(){
+
+			$.ajax({
+	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
+	 			type : "GET",
+	 			contentType:"application/json; charset=utf-8",
+	 			dataType : "json",
+	 			data : JSON.stringify(),
+	 			success : function(data){
+	 
+	 				if(data==false){
+	 					Swal.fire({
+	 					   title: '글쓰기를 위해 로그인 해주세요!',
+	 					   text: '로그인 페이지로 이동하시겠습니까?',
+	 					   icon: 'warning',
+	 					   
+	 					   
+	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	 					   
+		 					   
+	 					   reverseButtons: false, // 버튼 순서 거꾸로
+	 					   
+	 					}).then(result => {
+	 					   // 만약 Promise리턴을 받으면,
+	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	 					   
+	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
+	 					   	  	
+	 					   }
+	 					});
+	 				} else {
+	 					location.href="${pageContext.request.contextPath}/team/register";
+	 				}
+				}
+	 		});
+		});
+        </script>
+		
 </body>
 </html>

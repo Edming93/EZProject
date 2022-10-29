@@ -140,13 +140,16 @@
 				      <div class="modal22_body22"><strong style="font-size : 30px">지도 검색하기</strong>
 				      
 				      	<div class="map_search">
+				      	
+				      		
 							<div class="search_area">
-								<input type="text" name="search" id="search" placeholder="주소를 정확히 입력하세요 서비스가 좋지않아 죄송합니다" />
+								<input type="text" name="search" id="search" onclick="return chk_form()" placeholder="구장주소의 지역이름을 정확히 입력해주세요(ex)전라도,경상도,서울)" />
 								
 							</div>
 							<div class="search_button">
-								<span id="searcha">검색</span>
+								<span id="searcha"  >검색</span>
 							</div>
+							
 							<div class="search_button">
 								<span  id="mapclose">닫기</span>
 							</div>
@@ -160,6 +163,8 @@
 				    <span class="btn-open-popup22">지도 검색</span>
 					</div>
                    <script type="text/javascript">
+                 
+                   
                     document.getElementById("searcha").addEventListener("click", function(){
                         			const address = document.getElementById("search").value;
                         			const fieldName = document.getElementById("fieldName");
@@ -168,6 +173,7 @@
                         			const gamePay = document.getElementById("gamePay");
                         			const gameMacth = document.getElementById("gameMacth");
                         			const comdiv = document.getElementById("mapcontent");
+                        	
                         		
                         			const simple_data = {address};
                         			
@@ -262,6 +268,8 @@
                         		});
              
                     </script>
+           			
+            </script>
                 </div>
             
         </div>
@@ -386,6 +394,7 @@
             			});
             		});
             </script>
+           
         </div>
         <div class="subt">
             <div class="matchadd">
@@ -468,7 +477,7 @@
                         					
                         					comdiv.innerHTML="";
                         					for(let comment of data){
-                        
+                        						console.log("팀팀팀팀티밈 : "+data);
                         						const div = document.createElement("div");
                         						div.setAttribute("id","teamSelect");
                         						div.style.border = "1px solid black";
@@ -562,10 +571,7 @@
         </div>
     </div>
    </div>
-   
-   
-   
-
+  
     <script type="text/javascript">
     /* 달력관련 script */
     $.datepicker.setDefaults({
@@ -694,6 +700,11 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
+	<script type="text/javascript">
+   	$("#subtn").on("click",function(){                                
+        $(this).attr("disabled",true);
+   });
+   	</script>
 </body>
 </html>
  

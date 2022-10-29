@@ -136,24 +136,13 @@ public class TeamService {
 			
 			// rental payment 이동시
 			public void matchInfo(GlistVO vo, Model model) {
-				System.out.println("서비서비code : "+vo.getFieldCode());
-				System.out.println("서비서비오냐day : "+vo.getGameDay());
-				System.out.println("서비서비오냐time : "+vo.getGameTime());
-				System.out.println("서비서비오냐type : "+vo.getGameType());
-				System.out.println("dao:게임타입 : " + dao.matchInfo(vo).getGameType());
+				
 				model.addAttribute("match",dao.matchInfo(vo));
 			}
 			
 			// Reservation table insert
 			public void insertFieldRVT(FieldReservationVO rvo) {
-				System.out.println("욱컨트롤러Fcode : "+rvo.getFieldCode());
-				System.out.println("윽컨트롤러UPay : "+rvo.getUserPayment());
-				System.out.println("ㅇ컨트롤러Fname : "+rvo.getFieldName());
-				System.out.println("ㅇ컨트롤러FType : "+rvo.getFieldType());
-				System.out.println("ㅇ컨트롤러GType : "+rvo.getRvType());
-				System.out.println("userPay : "+ rvo.getFieldRentalfee());
-				System.out.println("afklajlks :" + rvo.getGameDay());
-				System.out.println("alkfjalkf :" + rvo.getGameTime());
+				
 				dao.insertFieldRVT(rvo);
 			}
 			// 팀 등록시 로그인 한 유저정보 가져오는 것
@@ -166,6 +155,21 @@ public class TeamService {
 			public List<UinVO> getUserList(UinVO vo) {
 
 				return dao.getUserList(vo);
+			}
+			
+			//팀 등록시 user_abil update
+			public void updateUserAbil(TeamMemberVO vo) {
+			
+				dao.updateUserAbil(vo);
+			}
+			
+			public void updateUserInfo(TeamMemberVO vo) {
+				dao.updateUserInfo(vo);
+			}
+			
+			// 팀 등록시 마지막 팀code 가져오기
+			public int getLastTeamC() {
+				return dao.getLastTeamC();
 			}
 			//-----------------------------------------------------
 }
