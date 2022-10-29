@@ -143,7 +143,7 @@
 				      	
 				      		
 							<div class="search_area">
-								<input type="text" name="search" id="search" onclick="return chk_form()" placeholder="구장주소의 지역이름을 정확히 입력해주세요(ex)전라도,경상도,서울)" />
+								<input type="text" name="search" id="search" placeholder="구장주소의 지역이름을 정확히 입력해주세요(ex)전라도,경상도,서울)" />
 								
 							</div>
 							<div class="search_button">
@@ -700,11 +700,7 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
-	<script type="text/javascript">
-   	$("#subtn").on("click",function(){                                
-        $(this).attr("disabled",true);
-   });
-   	</script>
+
 </body>
 </html>
  

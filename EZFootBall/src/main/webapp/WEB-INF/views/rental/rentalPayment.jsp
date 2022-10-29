@@ -633,6 +633,7 @@
       }
       
       document.getElementById("ming").addEventListener("click",function(){
+    	 
     	  if('${match.gameType}' === 'T'){
     		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}";
     	  }else{
