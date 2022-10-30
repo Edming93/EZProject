@@ -61,5 +61,8 @@ public class GlistService {
 		return dao.fieldinfo(fieldcode);
 	}
 	
-	
+	public void newreser(GlistVO vo) {
+		System.out.println("예약 생성");
+		dao.newreser(vo);
+	}
 }

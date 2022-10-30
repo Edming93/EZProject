@@ -6,7 +6,6 @@ import org.apache.ibatis.type.Alias;
 public class TlistVO {
 	private int gameCode;
 	private String gameType;
-    private String gameName;
     private String gameDay;
     private String gameTime;
     private String level;
@@ -21,6 +20,7 @@ public class TlistVO {
     private String fieldName;
     private String fieldAddress;
     private String fieldCode;
+    private int gamePay;
     
 	public int getGameCode() {
 		return gameCode;
@@ -33,12 +33,6 @@ public class TlistVO {
 	}
 	public void setGameType(String gameType) {
 		this.gameType = gameType;
-	}
-	public String getGameName() {
-		return gameName;
-	}
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
 	}
 	public String getGameDay() {
 		return gameDay;
@@ -123,6 +117,12 @@ public class TlistVO {
 	}
 	public void setFieldCode(String fieldCode) {
 		this.fieldCode = fieldCode;
+	}
+	public int getGamePay() {
+		return gamePay;
+	}
+	public void setGamePay(int gamePay) {
+		this.gamePay = gamePay;
 	}
     
 	

@@ -30,4 +30,6 @@ public interface GlistDAO {
 	
 	public GameFieldInfoVO fieldinfo(int fieldcode);
 	
+	public int newreser(GlistVO vo);
+	
 }

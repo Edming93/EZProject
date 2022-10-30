@@ -13,12 +13,12 @@
 	int month = now.getMonthValue();
 	String we = now.getDayOfWeek().toString();
 	
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Calendar cal = Calendar.getInstance();
-    
-    int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
-    int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar cal = Calendar.getInstance();
 	
+	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
+	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -228,12 +228,21 @@
         <div id="datelist">
             <div id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </div>
                     <div id="div1">
-                        <ul id="day">
-                            <% for(int i=fday; i<=eday; i++) { %>
-                                <li class="<%=i%>" id="<%=i%>">
-                                   <div class="idaydiv"> <% out.print(i); %> </div>
+                       <ul id="day">
+                            <% for(int i= today ; i<=(today+30); i++) { 
+                            	
+                            	System.out.println(sdf.format(cal.getTime()));
+                            	if(i>eday){%>
+                            	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
+                                   <div class="idaydiv"> <% out.print(i-eday); %> </div>
                                 </li>
-                                <%} %>
+                            	<%}else{%>
+                            		<li class="<%=sdf.format(cal.getTime())%>" id="<%=i%>">
+                                   		<div class="idaydiv"> <% out.print(i); %> </div>
+                                	</li>
+                            	<%}%>
+                           <% cal.add(Calendar.DATE, 1); 
+                           } %>
                         </ul>
                     </div>
              <div id="dnext"> <img src="${pageContext.request.contextPath}/image/right_btn.svg"> </div>
@@ -267,159 +276,101 @@
 			}
             
             for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
-
-            	
-                if ((i + 1) % 7 == ct) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    newp.innerText = week[num];
-                    document.getElementById("day").children[i].prepend(newp);
-                } else if ((i + 1) % 7 == (ct + 1)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+1>=7){
-                    	newp.innerText = week[num + 1-7];
-                    }else{
-                    	newp.innerText = week[num + 1];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 2)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+2>=7){
-                    	newp.innerText = week[num + 2-7];
-                    }else{
-                    	newp.innerText = week[num + 2];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 3)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+3>=7){
-                    	newp.innerText = week[num + 3-7];
-                    }else{
-                    	newp.innerText = week[num + 3];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 4)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+4>=7){
-                    	newp.innerText = week[num + 4-7];
-                    }else{
-                    	newp.innerText = week[num + 4];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 5)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+5>=7){
-                    	newp.innerText = week[num + 5-7];
-                    }else{
-                    	newp.innerText = week[num + 5];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 6)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+6>=7){
-                    	newp.innerText = week[num + 6-7];
-                    }else{
-                    	newp.innerText = week[num + 6];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                } else if ((i + 1) % 7 == (ct - 6)) {
-                    if (num < 6) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 6 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 6];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 5)) {
-                    if (num < 5) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 5 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 5];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 4)) {
-                    if (num < 4) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 4 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 4];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 3)) {
-                    if (num < 3) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 3 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 3];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 2)) {
-                    if (num < 2) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 2 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 2];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-
-                }
-                else if ((i + 1) % 7 == (ct - 1)) {
-                    if (num < 1) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 1 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 1];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                
-                
-            }
+ 				if(i % 7 == 0) {
+ 					var newp = document.createElement("div");
+                     newp.className = "idate";
+                     newp.innerText = week[num];
+                     document.getElementById("day").children[i].prepend(newp);
+ 				}else if(i % 7 == 1){
+ 					if((num+1)>6){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+1-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+1];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 2){
+ 					if((num+2)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+2-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+2];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 3){
+ 					if((num+3)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+3-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+3];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 4){
+ 					if((num+4)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+4-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+4];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 5){
+ 					if((num+5)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+5-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+5];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 6){
+ 					if((num+6)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+6-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+6];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+             }
             
             
             var set = <%=today%>
 
-            document.querySelector("#div1 ul").scrollLeft = (set - 1) * 150;
+            document.querySelector("#div1 ul").scrollLeft = 0;
             document.getElementById("dpre").addEventListener("click", function () {
                 let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft - 983;
                 if (document.querySelector("#div1 ul").scrollLeft <= 0) {
@@ -571,14 +522,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
         this.style.transform = "scale(1.5)";
 
 
-        var yeardata = <%=year%>;
-        var monthdata = <%=month%>;
-        daydata = this.className;
-        if(daydata<10) {
-        	daydata = "0"+daydata;
-        }
-        
-        var day = <%=year%> + "-" +<%=month%> +"-" + daydata;
+        var day = this.className;
         dayday = day;
         var local = document.getElementById("local").value;
         var clo = document.getElementById("close").checked;

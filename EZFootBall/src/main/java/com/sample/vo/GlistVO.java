@@ -6,7 +6,6 @@ import org.apache.ibatis.type.Alias;
 public class GlistVO {
 	private int gameCode;
 	private String gameType;
-    private String gameName;
     private String gameDay;
     private String gameTime;
     private String level;
@@ -25,6 +24,8 @@ public class GlistVO {
     private String mTeamName;
     
     private int gamePay;
+    
+    private int userCode;
     
 	
   	public int getGamePay() {
@@ -56,12 +57,6 @@ public class GlistVO {
 	}
 	public void setGameType(String gameType) {
 		this.gameType = gameType;
-	}
-	public String getGameName() {
-		return gameName;
-	}
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
 	}
 	public String getGameDay() {
 		return gameDay;
@@ -140,6 +135,12 @@ public class GlistVO {
 	}
 	public void setFieldAddress(String fieldAddress) {
 		this.fieldAddress = fieldAddress;
+	}
+	public int getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(int userCode) {
+		this.userCode = userCode;
 	}
 
     

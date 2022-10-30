@@ -29,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.goodee.interceptor.LoginInterceptor;
 import com.goodee.interceptor.MainInterceptor;
 import com.goodee.interceptor.SocialInterceptor;
+import com.goodee.interceptor.TeamInterceptor;
 import com.goodee.interceptor.paymentInterceptor;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
@@ -121,11 +122,17 @@ public class ServletAppContext implements WebMvcConfigurer {
 		LoginInterceptor loginInter = new LoginInterceptor();
 		MainInterceptor mainInter = new MainInterceptor();
 		paymentInterceptor payInter = new paymentInterceptor();
-		//SocialInterceptor socialInter = new SocialInterceptor();
+		SocialInterceptor socialInter = new SocialInterceptor();
+		TeamInterceptor teamInter = new TeamInterceptor();
+		
+		
 		InterceptorRegistration loginReg = registry.addInterceptor(loginInter);
 		InterceptorRegistration mainReg = registry.addInterceptor(mainInter);
 		InterceptorRegistration payReg = registry.addInterceptor(payInter);
-		//InterceptorRegistration socialReg = registry.addInterceptor(socialInter);
+		InterceptorRegistration socialReg = registry.addInterceptor(socialInter);
+		InterceptorRegistration teamReg = registry.addInterceptor(teamInter);
+		
+		
 		
 		
 		// /* : /test1, /test2 만 탈수있고  /test/test1 이런식으로 하위폴더는 탈 수 없기때문에 /**사용
@@ -135,7 +142,10 @@ public class ServletAppContext implements WebMvcConfigurer {
 		mainReg.excludePathPatterns("/home");
 		loginReg.addPathPatterns("/loginPage/login");
 		payReg.addPathPatterns("/rentalPayment");
+		socialReg.addPathPatterns("/msocial/subgame");
+		teamReg.addPathPatterns("/team/tsubgame");
 
+		
 	}
 	
     @Bean

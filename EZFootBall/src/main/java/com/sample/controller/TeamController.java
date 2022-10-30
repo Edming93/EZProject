@@ -46,22 +46,6 @@ public class TeamController {
 	}
 	
 	
-	@GetMapping("/login")
-	public String getLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
-		if (Lservice.isUser(vo, session)) {
-		}
-		return "team/login";
-	}
-	
-	@PostMapping("/login")
-	public String postLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
-		System.out.println("로그인~~");
-		System.out.println(snum);
-		System.out.println(Lservice.isUser(vo, session));
-		return (Lservice.isUser(vo, session)) ? "redirect:/team/tinfo?num="+snum : "team/login";
-	}
-	
-	
 	@PostMapping("/tlist")
 	@ResponseBody
 	public List<TlistVO> tlist(@RequestBody DataVO dvo,TlistVO gvo,Model model){
@@ -146,7 +130,7 @@ public class TeamController {
 	public String info(Model model,@RequestParam("num") String snum,HttpSession session) {
 		
 		int num = Integer.parseInt(snum);
-		
+		session.setAttribute("tnum", snum);
 		service.info(num, model);
 		
 		if((UserVO)session.getAttribute("sessionVO") != null) {
@@ -160,44 +144,7 @@ public class TeamController {
 	@GetMapping("/tsubgame")
 	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);	
-		
-		if(session.getAttribute("sessionVO") != null) {
-			System.out.println(session.getAttribute("urabil"));
-			UinVO uvo = (UinVO)session.getAttribute("urabil");
-			System.out.println(uvo.getTeamCode());
-			int team_code = uvo.getTeamCode();
-			dvo.setGame_code(num);
-			dvo.setTeam_code(team_code);
-			System.out.println(dvo.getTeam_code());
-			service.setslist(dvo);
-			service.subgame(num);
-		}else {
-			return "redirect:/team/login?num="+num;
-		}
-		
-//		"team/teamMain"
-		return "redirect:/team/team";
-	}
-	
-	@GetMapping("/tmaxgame")
-	public String maxgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
-		int num = Integer.parseInt(snum);
-		
-		if(session.getAttribute("sessionVO") != null) {
-			UinVO uvo = (UinVO)session.getAttribute("urabil");
-			int team_code = uvo.getTeamCode();
-			System.out.println(team_code);
-			dvo.setGame_code(num);
-			dvo.setTeam_code(team_code);
-			System.out.println(dvo.getTeam_code());
-			service.setslist(dvo);
-			service.maxgame(num);
-		}else {
-			return "redirect:/team/login?num="+num;
-		}
-		
-		
-		return "redirect:/team/team";
+		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session)) ? "redirect:/msoical/socialpayment" : "loginPage/login";
 	}
 	
 	@PostMapping("/joinlist")
