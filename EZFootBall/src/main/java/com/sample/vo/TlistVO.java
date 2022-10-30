@@ -21,6 +21,7 @@ public class TlistVO {
     private String fieldAddress;
     private String fieldCode;
     private int gamePay;
+    private int userCode;
     
 	public int getGameCode() {
 		return gameCode;
@@ -123,6 +124,12 @@ public class TlistVO {
 	}
 	public void setGamePay(int gamePay) {
 		this.gamePay = gamePay;
+	}
+	public int getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(int userCode) {
+		this.userCode = userCode;
 	}
     
 	

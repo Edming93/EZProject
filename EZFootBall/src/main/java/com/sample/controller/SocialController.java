@@ -181,21 +181,38 @@ public class SocialController {
 				service.newreser(vo);
 			}
 		}else {
+			System.out.println("팀신청");
 			int num = Integer.parseInt((String)session.getAttribute("tnum"));
 			UinVO uvo = (UinVO)session.getAttribute("urabil");
-			System.out.println(uvo.getTeamCode());
 			int team_code = uvo.getTeamCode();
 			dvo.setGame_code(num);
 			dvo.setTeam_code(team_code);
-			System.out.println(dvo.getTeam_code());
 			tservice.info(num, model);
 			TlistVO vo = (TlistVO)model.getAttribute("matchinfo");
+			List<UinVO> tvo = tservice.joininfo(team_code);
 			if(vo.getGameMaxp() - vo.getGamePnum() == 1) {
 				tservice.setslist(dvo);
 				tservice.maxgame(num);
+				System.out.println("여긴오고");
+				for(int i=0; i<tvo.size(); i++) {
+					System.out.println("팀 업뎃해야지");
+					System.out.println(tvo.get(i).getUserCode());
+					tservice.info(num,model);
+					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+					vo1.setUserCode(tvo.get(i).getUserCode());
+					tservice.newreser(vo1);
+				}
 			}else {
 				tservice.setslist(dvo);
 				tservice.subgame(num);
+				for(int i=0; i<tvo.size(); i++) {
+					System.out.println("팀 업뎃해야지");
+					System.out.println(tvo.get(i).getUserCode());
+					tservice.info(num,model);
+					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+					vo1.setUserCode(tvo.get(i).getUserCode());
+					tservice.newreser(vo1);
+				}
 			}
 		}
 		

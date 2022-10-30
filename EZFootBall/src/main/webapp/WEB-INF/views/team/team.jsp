@@ -13,12 +13,12 @@
 	int month = now.getMonthValue();
 	String we = now.getDayOfWeek().toString();
 	
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Calendar cal = Calendar.getInstance();
-    
-    int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
-    int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar cal = Calendar.getInstance();
 	
+	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
+	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -228,11 +228,20 @@
             <button id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </button>
                     <div id="div1">
                         <ul id="day">
-                            <% for(int i=fday; i<=eday; i++) { %>
-                                <li class="<%=i%>" id="<%=i%>">
-                                    <% out.print(i); %>
+                            <% for(int i= today ; i<=(today+30); i++) { 
+                            	
+                            	System.out.println(sdf.format(cal.getTime()));
+                            	if(i>eday){%>
+                            	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
+                                   <div class="idaydiv"> <% out.print(i-eday); %> </div>
                                 </li>
-                                <%} %>
+                            	<%}else{%>
+                            		<li class="<%=sdf.format(cal.getTime())%>" id="<%=i%>">
+                                   		<div class="idaydiv"> <% out.print(i); %> </div>
+                                	</li>
+                            	<%}%>
+                           <% cal.add(Calendar.DATE, 1); 
+                           } %>
                         </ul>
                     </div>
              <button id="dnext"> <img src="${pageContext.request.contextPath}/image/right_btn.svg"> </button>
@@ -414,7 +423,7 @@
             
             var set = <%=today%>
 
-            document.querySelector("#div1 ul").scrollLeft = (set - 1) * 150;
+            document.querySelector("#div1 ul").scrollLeft = 0;
             document.getElementById("dpre").addEventListener("click", function () {
                 let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft - 983;
                 if (document.querySelector("#div1 ul").scrollLeft <= 0) {
@@ -576,12 +585,8 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
     	this.style.transition = "all 0.2 linear";
         this.style.transform = "scale(1.5)";
 
-        var yeardata = <%=year%>;
-        var monthdata = <%=month%>;
-        daydata = this.className;
-        if(daydata<10) {
-        	daydata = "0"+daydata;
-        }
+        var day = this.className;
+        dayday = day;
         
         var day = <%=year%> + "-" +<%=month%> +"-" + daydata;
         dayday = day;
