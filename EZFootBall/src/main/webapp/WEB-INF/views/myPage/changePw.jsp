@@ -82,20 +82,29 @@
         justify-content: center;
         align-items: center;
     }
+    
+    .main_title{
+		display: block;
+		width: 100%;
+		background: url("${pageContext.request.contextPath}/image/myPage3.png") no-repeat 10px;
+		background-size: contain;
+	 	padding: 8px 0;
+		text-indent: -9999px;
+	}
 
     #main_container{
     	width: 100%;
     	height: 100%;
     	display: flex;
     	justify-content: center;
-    	background-color: #ccc;
+/*     	background-color: #ccc; */
     }
     
     .main_area {
     	width: 1024px;
     	height: 300px;
-    	margin-top: 50px;
-    	background-color: #ffaaaa;
+/*     	margin-top: 50px; */
+/*     	background-color: #ffaaaa; */
     }
     
     .main_content {
@@ -187,8 +196,10 @@
 
     <div id="main_container">
     	<div class="main_area">
+    	<h1 class="main_title">비밀번호 변경</h1>
     		<div class="main_content">
-			<h1>${userVO.userId} 유저</h1>
+    		
+			<h5>${userVO.userId} 유저</h5>
 				<form action="${pageContext.request.contextPath}/myPage/changePw/result" id="change" method="post">
 					<label for="pw1">기존 비밀번호 <br /> <input type="password" name="pw1" id="pw1" /></label><br />
 					<hr />

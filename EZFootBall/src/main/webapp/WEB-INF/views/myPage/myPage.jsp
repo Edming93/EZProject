@@ -86,7 +86,10 @@
 .main_title{
 	display: block;
 	width: 100%;
-	margin: 10px 0; 
+	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat;
+	background-size: contain;
+	padding: 10px 0;
+	text-indent: -9999px;
 }
 
 #main_container {
@@ -105,7 +108,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid black;
+/*     border: 1px solid black; */
 }
 
 .main_content1 {
@@ -150,6 +153,7 @@
 	border: 5px solid #26a653;
 	border-top: none;
 	border-radius: 0 0 15px 15px;
+	font-size: 18px;
 /* 	background-color: #fffaec; */
 /* 	background-color: #fff; */
 }
@@ -160,6 +164,7 @@
 	padding: 15px;
 	border: 5px solid #26a653;
 	border-radius: 15px 15px 0 0;
+	font-size: 18px;
 /* 	background-color: #fffaec; */
 	
 }
@@ -171,6 +176,7 @@
 	border: 5px solid #26a653;
 	border-top: none;
 	border-radius: 0 0 15px 15px;
+	font-size: 18px;
 /* 	background-color: #fffaec; */
 	
 }
@@ -311,6 +317,7 @@ footer {
         <div id="main_container">
             <div class="main_area">
 			<h1 class="main_title">나의 EZ</h1>
+			
 				<div class="main_content1">
 					<section class="main_left1">
 						<div id="user_info">

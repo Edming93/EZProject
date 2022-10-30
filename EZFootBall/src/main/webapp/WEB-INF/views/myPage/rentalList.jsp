@@ -86,7 +86,10 @@
 .main_title{
 	display: block;
 	width: 100%;
-	margin: 10px 0; 
+	background: url("${pageContext.request.contextPath}/image/myPage2.png") no-repeat 10px;
+	background-size: contain;
+ 	padding: 8px 0;
+	text-indent: -9999px;
 }
 
 #main_container {
@@ -94,7 +97,7 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    background-color: #ccc;
+/*     background-color: #ccc; */
 }
 
 .main_area {
@@ -102,11 +105,11 @@
     width: 1024px;
 /*     height: 900px; */
     min-height: 900px;
-    background-color: #ffaaaa;
+/*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid black;
+/*     border: 1px solid black; */
 }
 
 .main_content1 {
@@ -131,7 +134,7 @@
 	display: block;
 	width: 100%;
 	height: 50%;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 }
 
 
@@ -139,16 +142,32 @@
 	width: 100%;
 	border-collapse: collapse;
 	font-size: 0.8rem;
+	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 #rantal_list th, td {
-	border: 1px solid black;
+	border-bottom: 1px solid black;
 	padding: 10px;
 	text-align: center;
 }
 
+#rantal_list th:first-child{
+	border-radius: 15px 0 0 0;
+}
+
+#rantal_list th:last-child{
+	border-radius: 0 15px 0 0;
+}
+
+#rantal_list th {
+	background-color: #26a653;
+	color: #fff;
+	border-bottom: 1px solid black;
+}
+
 .collapsible {
 	display: none;
+	background: #C9CCD3;
 }
 
 .rantal_content{
@@ -166,8 +185,18 @@
 .rantal_content > ul > li {
 	display: inline-block;
 	padding: 15px 5px;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 	margin-right: 20px;
+	background-color: #fff;
+	border-radius: 15px;
+}
+
+.rantal_item:nth-child(4n) {
+    background-color: #ddd;
+}
+
+.rantal_item td:last-child {
+	font-weight: 800;
 }
 
 

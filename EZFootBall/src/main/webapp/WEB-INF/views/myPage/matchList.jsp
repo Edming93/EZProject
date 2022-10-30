@@ -86,7 +86,10 @@
 .main_title{
 	display: block;
 	width: 100%;
-	margin: 10px 0; 
+	background: url("${pageContext.request.contextPath}/image/myPage1.png") no-repeat 5px;
+	background-size: contain;
+ 	padding: 5px 0;
+	text-indent: -9999px;
 }
 
 #main_container {
@@ -94,14 +97,14 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    background-color: #ccc;
+/*     background-color: #ccc; */
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
     height: 900px;
-    background-color: #ffaaaa;
+/*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
