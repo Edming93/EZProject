@@ -1,6 +1,7 @@
 package com.sample.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -96,6 +97,18 @@ public interface TeamDAO {
 			
 			// 팀등록 마지막 코드 가져오기
 			public int getLastTeamC();
+			
+			// myPage 팀 detail 필요 정보
+			public UinVO getAllAbil(int usercode);
+			public TeamMemberVO getAllTeamMem(int teamcode);
+			public UserVO getAllUserInfo(String id);
+			
+			//팀 전체 해제
+			public void updateTNoUserInfo(TeamMemberVO vo);
+			public void updateTNoUserAbil(TeamMemberVO vo);
+			public void deleteT(TeamMemberVO vo);
+			
+			public void updatePerson1(Map<String, Object> map);
 
 		//-----------------------------------------------
 }

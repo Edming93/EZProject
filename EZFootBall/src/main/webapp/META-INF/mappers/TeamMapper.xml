@@ -220,6 +220,45 @@
 		user_name =#{tmember3} or user_name =#{tmember4} or
 		user_name =#{tmember5}  or user_name=#{tmember6}
 	</update>
+	<!-- 마이페이지 팀 정보 수정이동시 필요한 정보 -->
+	<!-- 1. user_abil 정보 -->
+	<select id="getAllAbil" resultType="UinVO">
+		select user_code, team_code, user_name, user_gender,
+				user_vr, user_level, user_group
+		from user_abil
+		where user_code =#{userCode}
+	</select>
 	
+	<!-- 2. team_member list 정보 -->
+	<select id="getAllTeamMem" resultType="TeamMemberVO">
+		select team_code, team_name, tmember1, tmember2, tmember3,tmember4, tmember5, tmember6,
+			user_code1, user_code2, user_code3, user_code4, user_code5, user_code6
+			from team_member
+			where team_code=#{teamCode}
+	</select>
+	
+	<!-- 3. teamDatail 이동시 유저정보 불러오기 -->
+	<select id="getAllUserInfo" resultType="UserVO">
+		select user_name, user_code, user_local, user_email1,user_email2 from user_info
+		where user_id = #{userId}
+	</select>
+	
+	<!-- 4. 팀 전체 해체 -->
+	<update id="updateTNoUserInfo">
+		update user_info set team_code=0
+		where user_name =#{tmember1} or user_name =#{tmember2} or
+		user_name =#{tmember3} or user_name =#{tmember4} or
+		user_name =#{tmember5} or user_name=#{tmember6}
+	</update>
+	<update id="updateTNoUserAbil">
+		update user_abil set team_code=0, user_group=''
+		where user_name =#{tmember1} or user_name =#{tmember2} or
+		user_name =#{tmember3} or user_name =#{tmember4} or
+		user_name =#{tmember5} or user_name=#{tmember6}
+	</update>
+	<delete id="deleteT">
+		delete from team_member
+		where team_code=#{teamCode}
+	</delete>
 	
 </mapper>

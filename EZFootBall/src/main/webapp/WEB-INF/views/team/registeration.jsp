@@ -26,8 +26,9 @@
         border: 1px solid white;
         justify-content: center;
     	align-items: center;
+    	margin-top: 5%;
 /*     	background: url("${pageContext.request.contextPath}/image/backddd.jpg") no-repeat center; */
-		background: url("${pageContext.request.contextPath}/image/backddd.png") no-repeat ;
+/* 		background: url("${pageContext.request.contextPath}/image/backddd.png") no-repeat ; */
     
     }
     
@@ -35,10 +36,11 @@
     .team_info{
         display: flex;
         flex-direction: column;
-            width: 30%;
+            width: 51%;
 	    background-color: white;
 	    border-radius: 10px;
 	    padding: 30px;
+	        border: 2px solid #26a563;
     }
     .team_info .team_register{
         display: flex;
@@ -72,13 +74,15 @@
    		justify-content: space-between;
 	}
 	.content1{
-		flex : 1;
+		flex : 2;
+		line-height : 2.5;
 	}
 	.content1 input{
 		border : 1px solid #26a563;
-		height : 20px;
+		height : 30px;
 		border-radius : 7px;
 		padding-left : 5px;
+		width : 300px;
 	}
 	.content2{
 		display: flex;
@@ -87,20 +91,25 @@
 	}
 	.content3{
 		flex : 2;
+		line-height : 2.5;
 	}
 	.content3 input{
 		border : 1px solid #26a563;
-		height : 20px;
+		height : 30px;
+		border-radius : 7px;
 		border-radius : 7px;
 		padding-left : 5px;
+		width : 300px;
 	}
 	.btn{
 	border: none;
     background: white;
     color: #26a563;
     font-weight: 700;
-        margin-bottom: 3px;
+    height : 30px;
+    margin : 5px 0;
     }
+    
     .btn:hover{
     	background-color : pink;
     	cursor : pointer;
@@ -114,7 +123,7 @@
 	}
 	#teamName{
 	    width: 100%;
-    height: 30px;
+    height: 50px;
     border-radius: 10px;
     padding-left: 5px;
     border: 1px solid #26a563;
@@ -122,7 +131,7 @@
     .submit_button{
     	margin-top: 20px;
         width: 100%;
-        height: 40px;
+        height: 60px;
         background-color: #26a563;
         display: flex;
         justify-content: center;
@@ -131,7 +140,7 @@
     }
     #writer_submit{
         width: 100%;
-        height: 40px;
+        height: 60px;
         background-color:  #26a563;
         border: none;
         color: black;

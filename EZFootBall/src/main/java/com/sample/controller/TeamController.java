@@ -341,5 +341,56 @@ public class TeamController {
 		return service.checkTime(gvo);
 	}
 	
+	
+	@GetMapping("/teamDetailInfo")
+	public String teamDetailInfo(HttpSession session,Model model, UserVO userVO, UinVO uinVO, TeamMemberVO tmVO) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		System.out.println(uvo.getUserId());
+		userVO = service.getAllUserInfo(uvo.getUserId());
+		uinVO = service.getAllAbil(uvo.getUserCode());
+		tmVO = service.getAllTeamMem(uvo.getTeamCode());
+		System.out.println(uvo.getTeamCode());
+		System.out.println(tmVO.getTmember6());
+		System.out.println(tmVO.getTmember5());
+		model.addAttribute("user", userVO);
+		model.addAttribute("uinVO", uinVO);
+		model.addAttribute("tmVO", tmVO);
+		
+		return "myPage/teamDetailInfo";
+	}
+	
+	@GetMapping("/deleteT")
+		public String deleteTeam(@ModelAttribute TeamMemberVO vo) {
+		
+		System.out.println(vo.getTeamCode());
+		System.out.println(vo.getTmember3());
+		System.out.println(vo.getTeamName());
+		System.out.println(vo.getTmember5());
+		service.updateTNoUserAbil(vo);
+		System.out.println("실행되는거야?");
+		service.updateTNoUserInfo(vo);
+		System.out.println("실행되는거야?12");
+		service.deleteT(vo);
+		System.out.println("젭라베잘버레저라머램ㄹ머닒니ㅏㅓㅇㅁ니ㅏㅓㅇ");
+
+		return "redirect:/myPage/myPage";
+	}
+	
+//	@GetMapping("/person1")
+//	public String updatePerson1(HttpSession session) {
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		
+//		
+//		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+//		
+//		map.put("userName", uvo.getUserName());
+//		map.put("teamCode", uvo.getTeamCode());
+//		
+//		service.updatePerson1(map);
+//		
+//		
+//		return "team/ddd";
+//	}
+	
 	//------------------------------------------------------			
 }

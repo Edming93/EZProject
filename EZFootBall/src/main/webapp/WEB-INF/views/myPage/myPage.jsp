@@ -348,6 +348,7 @@ footer {
 							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
 							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
 							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
+							<li><span id="MTbtn">팀 정보 수정</span></li>
 						</ul>
 					</section>
 					<section class="main_right2">
@@ -379,8 +380,15 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
-        <script type="text/javascript">
-        
+         <script type="text/javascript">
+        document.getElementById("MTbtn").addEventListener("click",function(){
+        	if(${userVO.teamCode == 0}){
+        		alert("팀이 존재하지 않습니다");
+        		location.href = "${pageContext.request.contextPath}/myPage/myPage";
+        	}else{
+        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
+        	}
+        });
         </script>
 	</div>
 </body>

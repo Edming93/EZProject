@@ -1,6 +1,7 @@
 package com.sample.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import com.sample.vo.SearchVO;
 import com.sample.vo.TeamMemberVO;
 import com.sample.vo.TlistVO;
 import com.sample.vo.UinVO;
+import com.sample.vo.UserVO;
 
 @Service
 public class TeamService {
@@ -171,5 +173,35 @@ public class TeamService {
 			public int getLastTeamC() {
 				return dao.getLastTeamC();
 			}
+			//user abil, team, userinfo 정보 가져오기
+			public UinVO getAllAbil(int usercode) {
+				return dao.getAllAbil(usercode);
+			}
+			public TeamMemberVO getAllTeamMem(int teamcode) {
+				return dao.getAllTeamMem(teamcode);
+			}
+			public UserVO getAllUserInfo(String id) {
+				System.out.println("Dao : "+dao.getAllUserInfo(id));
+				
+				return dao.getAllUserInfo(id);
+			}
+			
+			public void updateTNoUserInfo(TeamMemberVO vo) {
+				dao.updateTNoUserInfo(vo);
+			}
+			
+			public void updateTNoUserAbil(TeamMemberVO vo) {
+				dao.updateTNoUserAbil(vo);
+			}
+			
+			public void deleteT(TeamMemberVO vo) {
+				
+				dao.deleteT(vo);	
+			}
+			
+			public void updatePerson1(Map<String, Object> map) {
+				dao.updatePerson1(map);
+			}
+			
 			//-----------------------------------------------------
 }
