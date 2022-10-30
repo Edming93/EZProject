@@ -5,19 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>이지풋볼</title>
-<link rel="icon" href="./image/ez_con.png">
-<script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
- <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
+<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
         margin: 0px;
     }
-    
-    
+
     .container {
         width: 100%;
         margin: 0 auto;
@@ -53,7 +48,7 @@
     .main_logo{
          background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
          background-size: 95px 35px;
-       cursor: pointer;
+    	cursor: pointer;
     }
     .ez_icon {
         width: 65px;
@@ -61,7 +56,7 @@
     }
     
       .search_input_area {
-          position: relative;
+      	 position: relative;
       }
 
       .search_input {
@@ -73,11 +68,11 @@
       }
       
       .glass {
-          font-size: 20px;
-        position: absolute;
-        right: 13px;
-        top: 8px;
-        color: #464a54;
+      	 font-size: 20px;
+	     position: absolute;
+	     right: 13px;
+	     top: 8px;
+	     color: #464a54;
       }
     .header_right {
         display: flex;
@@ -90,16 +85,16 @@
         height: 70px;
         display: flex;
         justify-content: center;
-       margin-bottom: 13px;
-       margin-top: 13px;
-       align-items: center;
+	    margin-bottom: 13px;
+	    margin-top: 13px;
+	    align-items: center;
         
     }
     .big_menu_area {
         max-width: 1024px;
         width: 1024px;
-       padding-top: 15px;
-       padding-bottom: 15px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
     }
 
     .big_menu_content {
@@ -193,7 +188,6 @@
         height:100%;
         display:flex;
         justify-content: center;
-        
     }
     
     .rental_list_area {
@@ -234,13 +228,11 @@
         height:100%;
     }
 
-    
-
     .bottom_banner {
         width:100%;
         height:205px;
-        background-color: #26A653;
-        margin-top: 100px;
+    	background-color: #26A653;
+    	margin-top: 100px;
     }
     footer {
         width: 100%;
@@ -303,75 +295,6 @@
     .mainpage-post .date ul li:hover{
        background-color: blue;
     }
-     .postingdiv{
-	width: 100px;
-    height: 1100px;
-    margin-top: 464px;
-
-   }
-     .posting123{
-    	position: sticky;
-    
-    width: 50px;
-    top: 0
-	    }
-	    
-	  #pbtn:hover{
-	  	cursor : pointer;
-	    
-	  }  
-	    
-	 .hidemenu{
-            display: flex;
-            flex-direction: column;
-            display: none;
-            background-color : white;
-            position : absolute;
-        }
-     .active {
-     	    background-color: white;
-		    color: white;
-		    border: none;
-     }
-     .teamR{
-         display: flex;
-	   
-	    width: 150px;
-	    justify-content: center;
-	    align-items: center;
-	   }
-	   .teamR p{
-         color : black;
-         font-weight : 700;
-	   }
-     .matchR{
-      display: flex;
-	   
-	    width: 180px;
-	    justify-content: center;
-	    align-items: center;
-     }
-     .matchR p{
-      color : black;
-         font-weight : 700;
-     }
-     .teamR:hover{
-     	cursor:pointer;
-     	transition : all 0.2s linear;
-     	transform : scale(1.2);
-     	
-     }
-     .teamR p:hover{
-     	color : blue;
-     }
-      .matchR:hover{
-      	cursor:pointer;
-      	transition : all 0.2s linear;
-     	transform : scale(1.2);
-      }
-      .matchR p:hover{
-      	color : blue;
-      }
 
 </style>
 </head>
@@ -380,33 +303,47 @@
     <div class="header_container">
         <div class="header_area">
             <div class="header_content">
-                <div class="header_left main_logo">
-<!-- 					<img class="ez_icon" src="/image/ez_logo.svg"> -->
-                </div>
-                <div class="header_right login_btn etc_btn">
-                    <input type="text" class="search_input">
-                    <div class="login_icon">
-                        <a href="${pageContext.request.contextPath}/loginPage/login">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z" fill="#464A54"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.5C7.5502 13.5 5.07689 15.0054 3.93312 16.0093C3.22723 16.6288 3 17.4996 3 18.2447C3 20.3187 4.68132 22 6.75534 22H17.2447C19.3187 22 21 20.3187 21 18.2447C21 17.4996 20.7728 16.6288 20.0669 16.0093C18.9231 15.0054 16.4498 13.5 12 13.5ZM5.25244 17.5124C6.03934 16.8217 8.04626 15.5 12 15.5C15.9537 15.5 17.9607 16.8217 18.7476 17.5124C18.8856 17.6335 19 17.8668 19 18.2447C19 19.2141 18.2141 20 17.2447 20H6.75534C5.78589 20 5 19.2141 5 18.2447C5 17.8668 5.11441 17.6335 5.25244 17.5124Z" fill="#464A54"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="etc_icon">
-                        <a href="${pageContext.request.contextPath}/etc/etc">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z" fill="#464A54"/>
-                                <path d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z" fill="#464A54"/>
-                                <path d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z" fill="#464A54"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+               <div class="header_left main_logo">
+
+               </div>
+               <div class="header_right login_btn etc_btn">
+                  <div class="search_input_area">
+	                  <input type="text" class="search_input">
+	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
+                  </div>
+                  <div class="login_icon">
+                     <a href="${pageContext.request.contextPath}/loginPage/login">
+<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
+                        <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
+                              fill="#464A54" />
+                           <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M12 13.5C7.5502 13.5 5.07689 15.0054 3.93312 16.0093C3.22723 16.6288 3 17.4996 3 18.2447C3 20.3187 4.68132 22 6.75534 22H17.2447C19.3187 22 21 20.3187 21 18.2447C21 17.4996 20.7728 16.6288 20.0669 16.0093C18.9231 15.0054 16.4498 13.5 12 13.5ZM5.25244 17.5124C6.03934 16.8217 8.04626 15.5 12 15.5C15.9537 15.5 17.9607 16.8217 18.7476 17.5124C18.8856 17.6335 19 17.8668 19 18.2447C19 19.2141 18.2141 20 17.2447 20H6.75534C5.78589 20 5 19.2141 5 18.2447C5 17.8668 5.11441 17.6335 5.25244 17.5124Z"
+                              fill="#464A54" />
+                        </svg>
+                     </a>
+                  </div>
+                  <div class="etc_icon">
+                     <a href="${pageContext.request.contextPath}/etc/etc">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
+                              fill="#464A54" />
+                        </svg>
+                     </a>
+                  </div>
+               </div>
             </div>
 
-        </div>
-    </div>
+         </div>
+      </div>
     <div class="big_menu_container">
         <div class="big_menu_area">
             <div class="big_menu_content">
@@ -419,9 +356,6 @@
             </div>
         </div>
     </div>
-    
-    
-    
     
         <div class="banner_container">
             <div class="banner_content_area">
@@ -436,19 +370,6 @@
             	<jsp:include page="./team.jsp"></jsp:include>
             				
             </div>
-            <div class="postingdiv">
-				<div class="posting123">
-				  <span id="pbtn"><img src="${pageContext.request.contextPath}/image/pecil.jpg"><h4>글쓰기</h4></span>
-				    <div class="hidemenu">
-				       <div class="teamR">
-				        <span class="p1"><iconify-icon icon="fluent:people-team-add-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 등록하기</p>
-				        </div>
-				        <div class="matchR">
-				        <span id="posting"><iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 매치 작성하기</p>
-				        </div>
-				    </div>
-				</div>   
-			</div>
         </div> 
     </div>
 
@@ -467,108 +388,6 @@
 		main_logo.addEventListener("click",function() {
 			location.href="${pageContext.request.contextPath}";
 		});
-		
-		/* 글쓰기 아이콘 누를시 이동 */
-	document.querySelector(".matchR").addEventListener("click",function(){
-
-			$.ajax({
-	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
-	 			type : "GET",
-	 			contentType:"application/json; charset=utf-8",
-	 			dataType : "json",
-	 			data : JSON.stringify(),
-	 			success : function(data){
-	 
-	 				if(data==false){
-	 					Swal.fire({
-	 					   title: '글쓰기를 위해 로그인 해주세요!',
-	 					   text: '로그인 페이지로 이동하시겠습니까?',
-	 					   icon: 'warning',
-	 					   
-	 					   
-	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
-	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
-	 					   
-		 					   
-	 					   reverseButtons: false, // 버튼 순서 거꾸로
-	 					   
-	 					}).then(result => {
-	 					   // 만약 Promise리턴을 받으면,
-	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-	 					   
-	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
-	 					   	  	
-	 					   }
-	 					});
-	 				} else {
-	 					location.href="${pageContext.request.contextPath}/team/posting";
-	 				}
-				}
-	 		});
-		});
-		</script>
-		<script>
-        var hide = document.querySelector(".hidemenu");
-        var p1 = document.querySelector(".p1");
-        var p2 = document.querySelector(".p2");
-
-        document.getElementById("pbtn").addEventListener("click",function(){
-            hide.classList.toggle('active');
-            if(hide.classList.contains('active')){
-                hide.style.display = "block";
-                hide.style.backgroundColor = "transparent";
-                hide.style.border = "none";
-
-            }else{
-                hide.style.display = "none";
-            }
-        });
-        </script>
-        <script type="text/javascript">
-        document.querySelector(".teamR").addEventListener("click",function(){
-
-			$.ajax({
-	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
-	 			type : "GET",
-	 			contentType:"application/json; charset=utf-8",
-	 			dataType : "json",
-	 			data : JSON.stringify(),
-	 			success : function(data){
-	 
-	 				if(data==false){
-	 					Swal.fire({
-	 					   title: '글쓰기를 위해 로그인 해주세요!',
-	 					   text: '로그인 페이지로 이동하시겠습니까?',
-	 					   icon: 'warning',
-	 					   
-	 					   
-	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
-	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
-	 					   
-		 					   
-	 					   reverseButtons: false, // 버튼 순서 거꾸로
-	 					   
-	 					}).then(result => {
-	 					   // 만약 Promise리턴을 받으면,
-	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-	 					   
-	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
-	 					   	  	
-	 					   }
-	 					});
-	 				} else {
-	 					location.href="${pageContext.request.contextPath}/team/register";
-	 				}
-				}
-	 		});
-		});
-        </script>
-		
+	</script>
 </body>
 </html>

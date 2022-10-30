@@ -34,10 +34,10 @@
 	
 	
 	<select id="info" resultType="TlistVO">
-		select game_code,game_day,game_gender,
-		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
+		select game_code,game_type,game_day,game_gender,
+		DATE_FORMAT(game_time, '%H') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp,field_code
+		field_address,game_minp,game_maxp,field_code,game_mag,game_pay
 		from gamelist
 		<where>
 			<if test="close != null">
@@ -99,6 +99,12 @@
 		from user_abil
 		WHERE team_code = #{teamCode} AND ( user_gender = '여성' OR user_gender = '남성');
 	</select>
+	
+	
+	<insert id="newreser" parameterType="TlistVO">
+		INSERT `field_reservation` (`rv_type`, `field_code`, `field_name`, `field_address`, `field_type`, `user_code`, `user_payment`, `game_day`, `game_time` , `game_code`) 
+		VALUES('T',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, 10000, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode});
+	</insert>
 	
 	<!-- 팀 등록시 지도 검색 -->
 	<select id="getGameMapWhere" resultType="GameFieldInfoVO">

@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.GlistDAO">
 	<select id="list" resultType="GlistVO" parameterType="GlistVO">
-		select game_code,game_day,game_gender,
+		select game_code,game_type,game_day,game_gender,
 		DATE_FORMAT(game_time, '%H') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp,field_code
+		field_address,game_minp,game_maxp,field_code,game_mag,game_pay
 		from gamelist
 		<where>
 			<if test="gameDay != null">
@@ -35,10 +35,10 @@
 	
 	
 	<select id="info" resultType="GlistVO">
-		select game_code,game_day,game_gender,
-		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
+		select game_code,game_type,game_day,game_gender,
+		DATE_FORMAT(game_time, '%H') AS game_time,level,
 		game_macth,game_place,close,game_pnum,game_mag,field_name,
-		field_address,game_minp,game_maxp,field_code
+		field_address,game_minp,game_maxp,field_code,game_mag,game_pay
 		from gamelist
 		<where>
 			<if test="num != null">
@@ -90,4 +90,10 @@
 		from gamefield_info
 		where field_code = #{fieldcode}
 	</select>
+	
+	<insert id="newreser" parameterType="GlistVO">
+		INSERT `field_reservation` (`rv_type`, `field_code`, `field_name`, `field_address`, `field_type`, `user_code`, `user_payment`, `game_day`, `game_time` , `game_code`) 
+		VALUES('S',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, 10000, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode});
+	</insert>
+	
 </mapper>

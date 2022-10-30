@@ -1044,7 +1044,6 @@
 	    	  rv_btn.style.color = "rgb(241 247 255)";
 	    	  rv_btn.style.borderColor = "rgb(190 191 193)";
 	  		}
-	      var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
 	      var lev = '${matchinfo.level}';
 	      var level = lev.substring(0,lev.length-1);
 	      
@@ -1060,45 +1059,24 @@
 	 			alert("이미 신청한 경기 입니다");
 	 		}else {
 	 			if('<%=lv%>' == "null"){
-	 				if(aa == 1) {
-	 					if('${matchinfo.gameGender}' == '혼성'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
-	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
-	 					}else{
-	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
-	 					}
-	 				}else{
-	 					if('${matchinfo.gameGender}' == '혼성'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
-	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
-	 					}else{
-	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
-	 					}
-	 					
-	 				}
+	 				if('${matchinfo.gameGender}' == '혼성'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else{
+ 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+ 					}	 					
 	 			}else if('<%=lv%>' == level){
-	 				if(aa == 1) {
-	 					if('${matchinfo.gameGender}' == '혼성'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
-	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/maxgame?num="+${matchinfo.gameCode}
-	 					}else{
-	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
-	 					}
-	 				}else{
-	 					if('${matchinfo.gameGender}' == '혼성'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
-	 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
-	 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
-	 					}else{
-	 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
-	 					}
+	 				if('${matchinfo.gameGender}' == '혼성'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else if('${matchinfo.gameGender}' == '<%=user_gender%>' || '<%=user_gender%>' == 'null'){
+ 						location.href = "${pageContext.request.contextPath}/msocial/subgame?num="+${matchinfo.gameCode}
+ 					}else{
+ 						alert("이 게임은 " + '${matchinfo.gameGender}' + "만 신청 가능 합니다");
+ 					}
 	 					
-	 				}
 	 			}else {
-	 				alert("레벨에 맞지 않아 신청 할 수 없습니다" + '<%=lv%>');
+	 				alert("레벨에 맞지 않아 신청 할 수 없습니다");
 	 			}
 	 		}
 	    	  

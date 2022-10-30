@@ -1120,10 +1120,7 @@
          });
       </script>
       
-      
-
-      
-      <!--플로트 신청하기 버튼  -->
+       <!--플로트 신청하기 버튼  -->
       <script type="text/javascript">
       let rv_btn = document.querySelector(".rv_btn");
       if('${matchinfo.close}' == 'false') {
@@ -1151,7 +1148,7 @@
 		alert("소속된 팀이 없으면 신청 할 수 없습니다.");
 	}else {
 		if('<%=ugen%>' == '무'){
-			location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
+			location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
 		}
 		else if('<%=ugen%>' == '${matchinfo.gameGender}' && genum == 1){
 			console.log("일치");
@@ -1161,11 +1158,7 @@
 				if(cnt > 0) {
 					alert("이미 신청한 경기 입니다.");
 				}else{
-					if(aa == 1) {
-						location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
-					}else{
-						location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
-					}
+					location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
 				}
 			}
 		}else if('${matchinfo.gameGender}' == '혼성' && genum == 2){
@@ -1176,11 +1169,7 @@
 				if(cnt > 0) {
 					alert("이미 신청한 경기 입니다.");
 				}else{
-					if(aa == 1) {
-						location.href = "${pageContext.request.contextPath}/team/tmaxgame?num="+${matchinfo.gameCode}
-					}else{
-						location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
-					}
+					location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
 				}
 			}
 		}else{
@@ -1190,6 +1179,9 @@
 	}
       });
       </script>
+
+      
+      
       
     <!--지도 보기  -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65331bb5f71196e87528297b0af9ceb4&libraries=services"></script>

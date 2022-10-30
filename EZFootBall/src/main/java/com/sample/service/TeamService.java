@@ -71,11 +71,12 @@ public class TeamService {
 	}
 	
 	public int selectgen (int teamCode) {
-		System.out.println("서비스" + teamCode);
-		System.out.println(dao.cntmebr(teamCode));
 		return dao.selectgen(teamCode);
 	}
 	
+	public void newreser(TlistVO vo) {
+		dao.newreser(vo);
+	}
 	//-----------------정욱 10.24---------------------------------------
 		//----------------------posting page--------------------------------------------------
 			

@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		if (session.getAttribute("sessionVO") == null) {
 			System.out.println("loginInterceptor : 세션없을때");
-			session.invalidate();
+			session.removeAttribute("sessionVO");
 			return true;
 
 		} else {

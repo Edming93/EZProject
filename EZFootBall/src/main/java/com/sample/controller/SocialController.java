@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.GlistService;
 import com.sample.service.LoginService;
+import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.SjoinVO;
+import com.sample.vo.TlistVO;
 import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 
@@ -31,29 +33,15 @@ public class SocialController {
 	
 	private GlistService service;
 	private LoginService lservice;
+	private TeamService tservice;
 	
-	public SocialController(GlistService service,LoginService lservice) {
+	public SocialController(GlistService service,LoginService lservice,TeamService tservice) {
 		super();
 		this.service = service;
 		this.lservice = lservice;
+		this.tservice = tservice;
 	}
-	
-	@GetMapping("/login")
-	public String getLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
-		if (lservice.isUser(vo, session)) {
-		}
-		return "social/login";
-	}
-	
-	@PostMapping("/login")
-	public String postLogin(UserVO vo, HttpSession session,@RequestParam("num") String snum) {
-		System.out.println("로그인~~");
-		System.out.println(snum);
-		System.out.println(lservice.isUser(vo, session));
-		return (lservice.isUser(vo, session)) ? "redirect:/msocial/info?num="+snum : "social/login";
-	}
-
-	
+		
 	@PostMapping("/slist")
 	@ResponseBody
 	public List<GlistVO> betest(@RequestBody DataVO dvo,GlistVO gvo,Model model){
@@ -131,53 +119,107 @@ public class SocialController {
 	
 	@GetMapping("/info")
 	public String info(Model model,@RequestParam("num") String snum,HttpSession session) {
-		
+		System.out.println("info");
 		int num = Integer.parseInt(snum);
-		
+		session.setAttribute("snum", snum);
 		service.info(num, model);
+		
 		if((UserVO)session.getAttribute("sessionVO") != null) {
 			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
 			UinVO abil = service.abil(lovi.getUserCode(),session);
 		}
 		
-	    
 	    return "social/matchinfo";
 	}
 	
 	@GetMapping("/subgame")
 	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
 		int num = Integer.parseInt(snum);
-		System.out.println("/subgame");
-		if(session.getAttribute("sessionVO") != null) {
-			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
-			int user_code = lovi.getUserCode();
-			dvo.setGame_code(num);
-			dvo.setUser_code(user_code);
-			service.setslist(dvo);
-			service.subgame(num);
-		}else {
-			return "redirect:/msocial/login?num="+num;
-		}
 		
-		return "redirect:/";
+		System.out.println("/subgame");
+		return (lservice.isUser((UserVO)session.getAttribute("sessionVO"), session)) ? "redirect:/msocial/socialpayment" : "loginPage/login";
 	}
 	
-	@GetMapping("/maxgame")
-	public String maxgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
-		int num = Integer.parseInt(snum);
-		System.out.println("/maxgame");
-		if(session.getAttribute("sessionVO") != null) {
-			UserVO lovi = (UserVO)session.getAttribute("sessionVO");
-			int user_code = lovi.getUserCode();
-			dvo.setGame_code(num);
-			dvo.setUser_code(user_code);
-			service.setslist(dvo);
-			service.maxgame(num);
+	@GetMapping("/socialpayment")
+	public String spayString (HttpSession session,Model model) {
+		System.out.println("지나갑니당");
+		int num =0;
+		if(session.getAttribute("snum") != null) {
+			System.out.println("소셜매치");
+			num = Integer.parseInt((String)session.getAttribute("snum"));
+			service.info(num, model);
 		}else {
-			return "redirect:/msocial/login?num="+num;
+			System.out.println("팀매치");
+			num = Integer.parseInt((String)session.getAttribute("tnum"));
+			tservice.info(num, model);
 		}
-		/* return "index"; */
-		return "redirect:/";
+		System.out.println(model.getAttribute("matchinfo"));
+		return "social/socialpay";
+	}
+	
+	
+	@GetMapping("paying")
+	public String paying(HttpSession session,DataVO dvo,Model model) {
+		
+		UserVO lovi = (UserVO)session.getAttribute("sessionVO");
+		int user_code = lovi.getUserCode();
+		
+		dvo.setUser_code(user_code);
+		if(session.getAttribute("snum") != null) {
+			int num = Integer.parseInt((String)session.getAttribute("snum"));
+			dvo.setGame_code(num);
+			service.info(num, model);
+			GlistVO vo = (GlistVO)model.getAttribute("matchinfo");
+			vo.setUserCode(user_code);
+			if(vo.getGameMaxp() - vo.getGamePnum() == 1) {
+				service.setslist(dvo);
+				service.maxgame(num);
+				service.newreser(vo);
+			}else {
+				service.setslist(dvo);
+				service.subgame(num);
+				service.newreser(vo);
+			}
+		}else {
+			System.out.println("팀신청");
+			int num = Integer.parseInt((String)session.getAttribute("tnum"));
+			UinVO uvo = (UinVO)session.getAttribute("urabil");
+			int team_code = uvo.getTeamCode();
+			dvo.setGame_code(num);
+			dvo.setTeam_code(team_code);
+			tservice.info(num, model);
+			TlistVO vo = (TlistVO)model.getAttribute("matchinfo");
+			List<UinVO> tvo = tservice.joininfo(team_code);
+			if(vo.getGameMaxp() - vo.getGamePnum() == 1) {
+				tservice.setslist(dvo);
+				tservice.maxgame(num);
+				System.out.println("여긴오고");
+				for(int i=0; i<tvo.size(); i++) {
+					System.out.println("팀 업뎃해야지");
+					System.out.println(tvo.get(i).getUserCode());
+					tservice.info(num,model);
+					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+					vo1.setUserCode(tvo.get(i).getUserCode());
+					tservice.newreser(vo1);
+				}
+			}else {
+				tservice.setslist(dvo);
+				tservice.subgame(num);
+				for(int i=0; i<tvo.size(); i++) {
+					System.out.println("팀 업뎃해야지");
+					System.out.println(tvo.get(i).getUserCode());
+					tservice.info(num,model);
+					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+					vo1.setUserCode(tvo.get(i).getUserCode());
+					tservice.newreser(vo1);
+				}
+			}
+		}
+		
+		session.removeAttribute("snum");
+		session.removeAttribute("tnum");
+		session.removeAttribute("urabil");
+		return "/index";
 	}
 	
 	@PostMapping("/joinlist")

@@ -41,7 +41,17 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String postLogin(UserVO vo, HttpServletRequest request, HttpServletResponse response) {
+	public String postLogin(UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		if(session.getAttribute("snum") != null) {
+			String snum =(String) session.getAttribute("snum");
+			return (service.isUser(vo, session)) ? "redirect:/msocial/info?num="+snum : "loginPage/login";
+		}
+		if(session.getAttribute("tnum") != null) {
+			String tnum =(String) session.getAttribute("tnum");
+			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num="+tnum : "loginPage/login";
+		}
+		
+		
 		String url = null;
 		
 		String id_ck = request.getParameter("id_remem");
@@ -49,7 +59,7 @@ public class LoginController {
 			id_ck = "n";
 		}
 
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		if(service.isUser(vo, session)) {
 			url = "redirect:/home";
 			

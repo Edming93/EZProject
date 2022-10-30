@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.sample.vo.UserVO;
 
-public class SocialInterceptor implements HandlerInterceptor{
+public class TeamInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -17,12 +17,12 @@ public class SocialInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 
 		if(session.getAttribute("sessionVO") == null) {
-			System.out.println("SocialInter : 세션없을때");
+			System.out.println("TeamInter : 세션없을때");
 			response.sendRedirect(request.getContextPath() + "/loginPage/login");
 			return true;
 
 		}else {
-			System.out.println("SocialInter : 세션있을때");
+			System.out.println("TeamInter : 세션있을때");
 			response.sendRedirect(request.getContextPath() + "/msocial/socialpayment");
 			return false;
 		}
