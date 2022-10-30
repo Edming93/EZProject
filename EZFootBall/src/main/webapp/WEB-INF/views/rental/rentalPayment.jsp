@@ -1,7 +1,7 @@
+<%@page import="com.sample.vo.FieldReservationVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -404,9 +404,9 @@
             <h3>
                <iconify-icon class="alarm_icon" icon="grommet-icons:alarm"></iconify-icon> 예약 정보
             </h3>
-            <c:if test="${match.gameType eq null }">
-	            <h4>${day}</h4>
-	            <h4>${time}:00 ~ ${time+2}:00 시</h4>
+            <c:if test="${match.gameType eq null}">
+	            <h4>${sessionScope.fieldData.gameDay}</h4>
+	            <h4>${sessionScope.fieldData.gameTime}:00 ~ ${(sessionScope.fieldData.gameTime)+2}:00 시</h4>
            </c:if>
            <c:if test="${match.gameType eq 'T' }">
 	           	<h4>${match.gameDay}</h4>
@@ -637,7 +637,7 @@
     	  if('${match.gameType}' === 'T'){
     		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}";
     	  }else{
-    		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName='${field.fieldName}'&fieldAddress='${field.fieldAddress}'&fieldRentalfee=${field.fieldRentalfee}&fieldType='${field.fieldType}'&gameDay='${day}'&gameTime='${time}:00:00'&rvType='G'";
+    		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G";
     	  }
       });
    </script>

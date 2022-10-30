@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.sample.service.LoginService;
 import com.sample.service.RentalService;
 import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
@@ -29,11 +30,14 @@ import com.sample.vo.UserVO;
 public class RentalController {
 	
 	private RentalService service;
+	private LoginService Lservice;
 	private TeamService Tservice;
 	
-	public RentalController(RentalService service, TeamService tservice) {
+
+	public RentalController(RentalService service, LoginService lservice, TeamService tservice) {
 		super();
 		this.service = service;
+		Lservice = lservice;
 		Tservice = tservice;
 	}
 
@@ -50,7 +54,6 @@ public class RentalController {
 		gvo.setGameDay(dvo.getDay());
 		System.out.println("날짜 : " +gvo.getGameDay());
 		// 지역 설정
-		//지역 설정
 		if(dvo.getPlace() == null) {
 			gvo.setGamePlace(null);
 			System.out.println("여기게?");
@@ -59,14 +62,6 @@ public class RentalController {
 			System.out.println("여기타게?");
 		}
 		System.out.println("장소 : " +gvo.getGamePlace());
-		
-		//마감 설정
-//		if(dvo.getType().equals("true")) {
-//			gvo.setGameType(null);
-//		}else {
-//			gvo.setGameType("S");
-//		}
-//		System.out.println("마감 : " +gvo.getGameType());
 		
 		//크기 설정
 		if(dvo.getMver() == null) {
@@ -122,33 +117,43 @@ public class RentalController {
 		return "rental/rentalDetail";
 	}
 	
-	@GetMapping("/rentalPayment")
-	public String rentalPaymentMove(@RequestParam("fieldCode") int fieldCode,Model model,
-									@RequestParam("day") String day,@RequestParam("time") int time) {
-		service.fieldInfo(fieldCode,model);
-		model.addAttribute("day",day);
-		model.addAttribute("time",time);
+	@GetMapping("/paymentInter")
+	public String paymentInter(FieldReservationVO fvo,HttpSession session,@RequestParam("pageurl") String pageurl) {
+
+		System.out.println(pageurl);
+		if(session.getAttribute("fieldData") != null || session.getAttribute("pageurl") != null) {
+		session.removeAttribute("fieldData");
+		session.removeAttribute("pageurl");
+		}
+		session.setAttribute("fieldData", fvo);
+		session.setAttribute("pageurl",pageurl);
 		
-		System.out.println("여기까지오나?");
+		System.out.println("나 타고가?");
+		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session))? "redirect:/rental/rentalPayment":"loginPage/login";
+	}
+	
+	@GetMapping("/rentalPayment")
+	public String rentalPaymentMove(Model model,@SessionAttribute("fieldData") FieldReservationVO fvo,
+									@SessionAttribute("sessionVO") UserVO uvo) {
+		
+		service.fieldInfo(fvo.getFieldCode(),model);
+
 		return "rental/rentalPayment";
 	}
 	
 	
 	@GetMapping("/resultField")
 	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,
-			HttpSession session) {
-		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+								@SessionAttribute("sessionVO") UserVO uvo, HttpSession session) {
+		
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
 		
 		gvo.setGameType(fvo.getRvType());
 		gvo.setGameMacth(fvo.getFieldType());
 		
-		System.out.println(gvo.getGameType()+"/"+gvo.getFieldCode()+"/"+gvo.getFieldName()+"/"+gvo.getFieldAddress()+"/"+gvo.getGameMacth()+"/"+gvo.getGameDay()+"/"+gvo.getGameTime());
-		
-		// 구장 예약테이블에 신청한 정보가 없으면
-		System.out.println("fvo 정보 : "+ fvo);
-		if(service.rvCheck(fvo) == null) {
+		// 유효성검사 필요 없지만 확실하게 적용
+		if(service.rvCheck(fvo)) {
 			service.insertFieldReservation(fvo);
 			service.insertRvInGameList(gvo);
 			return "rental/resultField";

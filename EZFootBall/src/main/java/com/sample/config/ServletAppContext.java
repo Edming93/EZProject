@@ -121,14 +121,14 @@ public class ServletAppContext implements WebMvcConfigurer {
 		
 		LoginInterceptor loginInter = new LoginInterceptor();
 		MainInterceptor mainInter = new MainInterceptor();
-		paymentInterceptor payInter = new paymentInterceptor();
+		//paymentInterceptor payInter = new paymentInterceptor();
 		SocialInterceptor socialInter = new SocialInterceptor();
 		TeamInterceptor teamInter = new TeamInterceptor();
 		
 		
 		InterceptorRegistration loginReg = registry.addInterceptor(loginInter);
 		InterceptorRegistration mainReg = registry.addInterceptor(mainInter);
-		InterceptorRegistration payReg = registry.addInterceptor(payInter);
+		//InterceptorRegistration payReg = registry.addInterceptor(payInter);
 		InterceptorRegistration socialReg = registry.addInterceptor(socialInter);
 		InterceptorRegistration teamReg = registry.addInterceptor(teamInter);
 		
@@ -140,8 +140,11 @@ public class ServletAppContext implements WebMvcConfigurer {
 
 		mainReg.addPathPatterns("/");
 		mainReg.excludePathPatterns("/home");
+		
 		loginReg.addPathPatterns("/loginPage/login");
-		payReg.addPathPatterns("/rentalPayment");
+		
+		//payReg.addPathPatterns("/rental/paymentInter");
+		
 		socialReg.addPathPatterns("/msocial/subgame");
 		teamReg.addPathPatterns("/team/tsubgame");
 

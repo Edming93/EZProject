@@ -563,8 +563,10 @@
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
+						//rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+						console.log(data.fieldCode+" + "+day+" + "+time);
+						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
 					}
 					rental_area.append(rental_div);
 				}
@@ -672,7 +674,7 @@
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -767,7 +769,7 @@
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -855,7 +857,7 @@
 				}else{
 					let rental_div = document.createElement("div");
 					rental_div.className = "time rental_span_able";
-					rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+					rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					rental_area.append(rental_div);
 					
@@ -949,7 +951,7 @@
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}
 					rental_area.append(rental_div);
@@ -1028,7 +1030,7 @@
  						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
  					}else{
  						rental_div.className = "time rental_span_able";
- 						rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
+ 						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
  						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
  					}
  					rental_area.append(rental_div);

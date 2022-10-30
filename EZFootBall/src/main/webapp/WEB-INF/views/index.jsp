@@ -1,6 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.InputStreamReader" %>
 
+  <%
+    String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
+    String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
+    String code = request.getParameter("code");
+    String state = request.getParameter("state");
+    String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
+    String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+        + "&client_id=" + clientId
+        + "&client_secret=" + clientSecret
+        + "&redirect_uri=" + redirectURI
+        + "&code=" + code
+        + "&state=" + state;
+    String accessToken = "";
+    String refresh_token = "";
+    
+    System.out.println(session.getAttribute("state"));
+    try {
+      URL url = new URL(apiURL);
+      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+      con.setRequestMethod("GET");
+      int responseCode = con.getResponseCode();
+      BufferedReader br;
+      if (responseCode == 200) { // 정상 호출
+        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+      } else {  // 에러 발생
+        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+      }
+      String inputLine;
+      StringBuilder res = new StringBuilder();
+      while ((inputLine = br.readLine()) != null) {
+        res.append(inputLine);
+      }
+      br.close();
+      if (responseCode == 200) {
+        out.println(res.toString());
+      }
+    } catch (Exception e) {
+      // Exception 로깅
+    }
+  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +53,10 @@
 <title>이지풋볼</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<script src="https://kit.fontawesome.com/3a7191171a.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
@@ -15,13 +64,13 @@
         font-family: 'Noto Sans KR', sans-serif;
     }
     
-    
     .container {
         width: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     .header_container {
@@ -129,25 +178,32 @@
     
 
     .banner_container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-/*         background-color: #fafafa; */
-    }
-    .banner_content_area {
         max-width: 1024px;
         width:1024px;
         display: flex;
         justify-content: center;
+/*         background-color: #fafafa; */
+        overflow: hidden;
+    }
+    .banner_content_area {
+        display: flex;
+        justify-content: center;
         align-items: center;
-        padding: 15px;
-    	margin-bottom: 30px;
+        white-space: nowrap;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s;
+    }
+    .banner_content {
+        width: 100%;
+        height: 100%;
+
     }
     .banner_image {
         width: 100%;
         height: 90%;
-        border-radius: 23px;
+        border-radius: 35px;
+        padding: 15px;
     }
 
 
@@ -207,6 +263,70 @@
     .etc_icon {
         margin-left:10px;
     }
+
+
+
+         .page_container {
+         position: relative;
+         display: grid;
+         height: 100%;
+         max-height: 100%;
+         cursor: default;
+         max-width: 1200px;
+         margin: 0 auto;
+         }
+
+         .pagination_controller {
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         justify-content: space-between;
+         padding: 0 1rem;
+         width: 135px;
+         height: 36px;
+         font-size: .875rem;
+         color: #fff;
+         border-radius: 20px;
+         background-color: rgba(0, 0, 0, .5);
+
+         }
+
+         .index_num {
+         margin-right: auto;
+         }
+
+         .control_wrapper {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         width: 50px;
+         }
+
+         .control_previous_button,
+         .control_play_pause_button,
+         .control_next_button {
+         padding: 0;
+         background: none;
+         border: 0;
+         color: #fff;
+         cursor: pointer;
+         }
+
+         .control_play_pause_button {
+         display: flex;
+         align-items: center;
+         max-height: 10px;
+
+         }
+
+         .fa-pause {
+         display: block;
+         font-size: 12px;
+         }
+
+         .fa-play {
+         display: none;
+         }
 
 </style>
 </head>
@@ -268,43 +388,61 @@
                 <div class="menu menu6"><a class="menu5_a" href="${pageContext.request.contextPath}/blacklist/blacklistmain">블랙리스트</a></div>
             </div>
         </div>
-
     </div>
-    
+
         <div class="banner_container">
             <div class="banner_content_area">
                 <div class="banner_content">
-                    <img class="banner_image" src="image/banner-manner_pc.png" alt="">
+                    <img class="banner_image" src="image/ez_banner1.png" alt="">
+                    <img class="banner_image" src="image/ez_banner2.png" alt="">
+                    <img class="banner_image" src="image/banner-starter_pc.png" alt="">
                 </div>
             </div>
         </div>
-<!--     <div class="match_menu_container"> -->
-<!--         <div class="match_menu_area"> -->
-<!--             <div class="match_menu_content"> -->
+
+        <div class="pagination-area">
+         <div class="page_container">
+             <div class="pagination_controller">
+                 <div class="index_num">
+                     <span class="current_index">1</span>
+                     
+                     <span class="total_count">/ 3</span>
+                 </div>
+                 <div class="control_wrapper">
+                     <button class="control_previous_button e_previous_banner">
+                         <i class="fa-solid fa-angle-left"></i>
+                     </button>
+   
+                     <button type="button" class="control_play_pause_button e_play_pause_swiper">
+                       <svg class="fa-pause" width="14px" height="14px" enable-background="new 0 0 155.3 159.3" viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path><path fill="#ffffff" d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg>
+                       <i class="fas fa-play"></i>
+                     </button>
+   
+                     <button type="button" class="control_next_button e_next_banner">
+                       <i class="fa-solid fa-angle-right">
+                     </i>
+                     </button>
+                 </div>
+             </div>
             
-<!--                 <div class="date_nav"> -->
+         </div>
+     </div>
+       
+   
+   
+     
 
-<!--                     <div class="date_container"> -->
-<!--                         <div class="swiper_tabs"> -->
 
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="select_filter"> -->
-<!--                         <div class="filter_content"> -->
-                            
-<!--                         </div> -->
 
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
+
+
+
+
+
     <div class="match_list_container">
         <div class="match_menu_area">
             <div class="match_menu_content">
-				            
             <jsp:include page="./social/social.jsp"></jsp:include>
-
             </div>
         </div>
 
@@ -313,13 +451,14 @@
 
     <div class="bottom_banner">
 
-
     </div>
     <footer>
         <div class="footer_left"></div>
         <div class="footer_right"></div>
         
     </footer>
+</div>
+
 
 <script type="text/javascript">
 	let main_logo = document.querySelector(".main_logo");
@@ -328,6 +467,121 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
-</div>
+
+<script>
+
+let button_flag = true;
+var time_out;
+
+let page_num = document.querySelector(".current_index");
+            
+let pause_btn = document.querySelector(".fa-pause");
+let play_btn = document.querySelector(".fa-play");
+
+  // translate 먹일곳
+  let top_banner = document.querySelector('.banner_content_area');
+  let top_btn_right = document.querySelector(".e_next_banner");
+  let top_btn_left = document.querySelector(".e_previous_banner");
+  let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
+
+  // 최상단 디브
+  let slider_area = document.querySelector(".banner_container");
+
+  var slider_width = slider_area.clientWidth; // container의 width
+  var slide_index = 0;
+
+  let top_pagination_btn = document.getElementsByClassName("swiper_pagination_bullet");
+  let more_pagination_btn = document.getElementsByClassName("pagination_bullet");
+
+
+  top_btn_right.addEventListener("click", function () {
+    clearTimeout(time_out);
+    console.log("right:"+slide_index);
+    if (slide_index > 0 && slide_index < slide_photo_cnt) {
+      top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
+
+
+      // slide_index++;
+    } else {
+      top_banner.style.transform = 'translateX(0vw)';
+      slide_index = 0;
+    }
+    show_slides();
+  })
+
+  top_btn_left.addEventListener("click", function () {
+    pause_btn.style.display = "none";
+    play_btn.style.display = "block";
+
+    button_flag = false;
+    clearTimeout(time_out);
+    console.log("left:"+slide_index);
+
+    if (slide_index > 1 && slide_index <= slide_photo_cnt) {
+      top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
+      slide_index--;
+
+      console.log("if");
+
+    } else {
+      top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
+
+      slide_index = slide_photo_cnt;
+      console.log("else");
+    }
+    
+    page_num.innerHTML = slide_index;
+    console.log(slide_index);
+
+   })
+
+
+              // Top banner pagination bar
+
+              pause_btn.addEventListener("click", function () {
+                pause_btn.style.display = "none";
+                play_btn.style.display = "block";
+
+                button_flag = false;
+                clearTimeout(time_out);
+              });
+
+              play_btn.addEventListener("click", function () {
+                pause_btn.style.display = "block";
+                play_btn.style.display = "none";
+
+                button_flag = true;
+                show_slides();
+              });
+
+
+              show_slides();
+
+
+              function show_slides() {
+                slide_index++;
+            
+                top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
+                console.log(slide_index);
+
+                page_num.innerHTML = slide_index;
+
+                if (slide_index === slide_photo_cnt) {  
+                slide_index = 0;
+
+                }
+
+                if (button_flag == true) {
+                  time_out = setTimeout(show_slides, 5000);
+                  
+                }
+
+              }
+   
+</script>
+
+
+  
+
 </body>
 </html>

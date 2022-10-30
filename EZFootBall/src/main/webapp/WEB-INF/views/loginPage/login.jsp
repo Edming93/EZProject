@@ -1,6 +1,21 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+
+  <%
+    String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+         + "&client_id=" + clientId
+         + "&redirect_uri=" + redirectURI
+         + "&state=" + state;
+    session.setAttribute("state", state);
+ %>
     <%
     	request.setCharacterEncoding("utf-8");
 
@@ -8,7 +23,7 @@
     	String val = "";
     	
     	Cookie[] cookies = request.getCookies();
-    	
+
         	for(Cookie cookie : cookies) {
         		if(cookie.getName().equals("userId")){
         			val = cookie.getValue();
@@ -21,10 +36,8 @@
         		}
         	}
 
-    	System.out.println("var값 : " + val);
-    	System.out.println("id_ck : " +id_ck);
-    	
     %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -165,7 +178,7 @@
         		<h3 class="title1">땀흘리고 싶을 땐</h3>
         		<div class="title2">이지풋볼</div>
     		</div>
-            <form action="${pageContext.request.contextPath}/loginPage/login" method="post">
+            <form action="${pageContext.request.contextPath}/loginPage/login?pageurl=redirect:/home" method="post">
                 <input class="input" type="text" placeholder="ID" name="userId" id="id_input" value="<%=val%>">
                 <input class="input" type="password" placeholder="password" name="userPw">
                 <label class="radio_label"> 
@@ -184,6 +197,30 @@
 	                </div>
 	           	</div>
             </form>
+            <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+            <a href="javascript:kakaoLogin()";> <img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style ="height:60px; width:auto;"/> </a> 
+		    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+		    <script>
+		
+		        window.Kakao.init("a6ef3628740d44bfe81144c1696044f9");
+		        function kakaoLogin() {
+		            // 로그인버튼 눌렀을 때 실행
+		            window.Kakao.Auth.login({
+		                scope:'profile_nickname, account_email, gender, age_range, birthday',
+		                success: function(authObj) {
+		                    console.log(authObj);
+		                    window.Kakao.API.request({
+		                        url:'/v2/user/me',
+		                        success: res => {
+		                            const Kakao_account = res.kakao_account;
+		                            console.log(Kakao_account);
+		
+		                        }
+		                    })
+		                }
+		            }) ;
+		        }
+		    </script>
         </div>
     </div>
 

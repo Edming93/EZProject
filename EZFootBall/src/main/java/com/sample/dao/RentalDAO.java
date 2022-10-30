@@ -29,7 +29,7 @@ public interface RentalDAO {
 	public List<FieldReservationVO> getFieldReservation(int userCode);
 	
 	// 예약테이블 등록시 유효성검사
-	public FieldReservationVO rvCheck(FieldReservationVO vo);
+	public int rvCheck(FieldReservationVO vo);
 	
 	public void insertRvInGameList(GlistVO vo);
 }

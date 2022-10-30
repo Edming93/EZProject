@@ -20,7 +20,6 @@ public class SocialInterceptor implements HandlerInterceptor{
 			System.out.println("SocialInter : 세션없을때");
 			response.sendRedirect(request.getContextPath() + "/loginPage/login");
 			return true;
-
 		}else {
 			System.out.println("SocialInter : 세션있을때");
 			response.sendRedirect(request.getContextPath() + "/msocial/socialpayment");

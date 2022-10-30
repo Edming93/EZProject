@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +67,7 @@
 
         #container {
             height: 100%;
+            width:100%;
         }
         .header {
             background-color: #2980b9;
@@ -200,6 +202,246 @@
             cursor: pointer;
         }
 
+        /* top-down방식 : 아래로 내려가면서 바뀜 1200px->1024px->800px 이하로 줄어들 경우 배경을 바꾸어라 */
+        /* @media screen and (max-width:1550px) {
+            .title1, .title3, .title5 {
+               top: 180px;
+               right: 90px;
+            }
+
+        } */
+        @media screen and (max-width:1300px) {
+            .title1, .title3, .title5 {
+               top: 120px;
+               right: -30px;
+            }
+            .title2, .title4, .title6 {
+               top: 150px;
+               left: 200px;
+            }
+            .title {
+               font-size: 50px;
+
+            }
+            .title5 {
+               font-size:40px;
+            }
+            .content {
+               margin-top: 18px;
+               font-size: 14px;
+            }
+
+            .btn {
+               width: 225px;
+               height: 26px;
+               font-size: 14px;
+               background: #fff;
+               border-radius: 34px;
+               font-weight: 700;
+               font-family: 'sans-serif';
+               text-align: center;
+            }
+            .social_btn {
+               color: #fff;
+               border: 1px solid #fff;
+               background-color: #8bdefb;
+            }
+
+        }
+        @media screen and (max-width:1024px) {
+               .title1, .title3, .title5 {
+                  top: 85px;
+                  right: -75px;
+               }
+               .title2, .title4, .title6 {
+                  top: 95px;
+                  left: 168px;
+               }
+               .title {
+                  font-size: 45px;
+
+               }
+               .title5 {
+                  font-size:30px;
+               }
+
+               .content {
+                  margin-top: 15px;
+                  font-size: 13px;
+               }
+
+               .btn {
+                  width: 210px;
+                  height: 24px;
+                  font-size: 13px;
+                  background: #fff;
+                  border-radius: 34px;
+                  font-weight: 700;
+                  font-family: 'sans-serif';
+                  text-align: center;
+               }
+               .social_btn {
+                  color: #fff;
+                  border: 1px solid #fff;
+                  background-color: #8bdefb;
+               }
+        }
+        @media screen and (max-width:850px) {
+               .title1, .title3, .title5 {
+                  top: 70px;
+                  right: -150px;
+               }
+               .title2, .title4, .title6 {
+                  top: 80px;
+                  left: 100px;
+               }
+               .title {
+                  font-size: 37px;
+
+               }
+               .title5 {
+                  font-size:26px;
+               }
+               .content {
+                  margin-top: 14px;
+                  font-size: 12px;
+               }
+
+               .btn {
+                  width: 210px;
+                  height: 24px;
+                  font-size: 12px;
+                  background: #fff;
+                  border-radius: 34px;
+                  font-weight: 700;
+                  font-family: 'sans-serif';
+                  text-align: center;
+               }
+               .social_btn {
+                  color: #fff;
+                  border: 1px solid #fff;
+                  background-color: #8bdefb;
+               }
+
+        }
+
+        @media screen and (max-width:710px) {
+               .title1, .title3, .title5 {
+                  top: 70px;
+                  right: -215px;
+               }
+               .title2, .title4, .title6 {
+                  top: 75px;
+                  left: 100px;
+               }
+               .title {
+                  font-size: 30px;
+
+               }
+               .title5 {
+                  font-size:20px;
+               }
+
+               .content {
+                  margin-top: 14px;
+                  font-size: 10px;
+               }
+
+               .btn {
+                  width: 180px;
+                  height: 20px;
+                  font-size: 11px;
+                  background: #fff;
+                  border-radius: 34px;
+                  font-weight: 700;
+                  font-family: 'sans-serif';
+                  text-align: center;
+               }
+               .social_btn {
+                  color: #fff;
+                  border: 1px solid #fff;
+                  background-color: #8bdefb;
+               }
+        }
+
+        @media screen and (max-width:500px) {
+               .title1, .title3, .title5 {
+                  top: 54px;
+                  right: -280px;
+               }
+               .title2, .title4, .title6 {
+                  top: 53px;
+                  left: 60px;
+               }
+               .title {
+                  font-size: 20px;
+
+               }
+               .title5 {
+                  font-size:15px;
+               }
+
+               .content {
+                  margin-top: 10px;
+                  font-size: 8px;
+                  width: 212px;
+               }
+
+               .btn {
+                  width: 150px;
+                  height: 17px;
+                  font-size: 9px;
+                  background: #fff;
+                  border-radius: 34px;
+                  font-weight: 700;
+                  font-family: 'sans-serif';
+                  text-align: center;
+               }
+               .social_btn {
+                  color: #fff;
+                  border: 1px solid #fff;
+                  background-color: #8bdefb;
+               }
+        }
+
+        @media screen and (max-width:375px) {
+               .title1, .title3, .title5 {
+                  top: 45px;
+                  right: -350px;
+               }
+               .title2, .title4, .title6 {
+                  top: 35px;
+                  left: 38px;
+               }
+               .title {
+                  font-size: 15px;
+
+               }
+               .title5 {
+                  font-size:10px;
+               }
+
+               .content {
+                  margin-top: 10px;
+                  font-size: 7px;
+               }
+
+               .btn {
+                  width: 130px;
+                  height: 15px;
+                  font-size: 11px;
+                  background: #fff;
+                  border-radius: 34px;
+                  font-weight: 700;
+                  font-family: 'sans-serif';
+                  text-align: center;
+               }
+               .social_btn {
+                  color: #fff;
+                  border: 1px solid #fff;
+                  background-color: #8bdefb;
+               }
+        }
         
     </style>
 </head>

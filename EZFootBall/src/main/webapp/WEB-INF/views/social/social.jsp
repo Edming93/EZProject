@@ -18,7 +18,6 @@
 	
 	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
 	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
 %>
 <!DOCTYPE html>
 <html>
@@ -231,7 +230,7 @@
                        <ul id="day">
                             <% for(int i= today ; i<=(today+30); i++) { 
                             	
-                            	System.out.println(sdf.format(cal.getTime()));
+//                             	System.out.println(sdf.format(cal.getTime()));
                             	if(i>eday){%>
                             	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
                                    <div class="idaydiv"> <% out.print(i-eday); %> </div>

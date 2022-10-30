@@ -32,8 +32,7 @@
    String clo = String.valueOf(cloObject);
    String gender = String.valueOf(genderObject);
    String day = String.valueOf(dayObject);
-   
-   System.out.println("세션"+day);
+
    
 %>
 <!DOCTYPE html>

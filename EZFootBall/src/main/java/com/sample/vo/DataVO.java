@@ -13,6 +13,7 @@ public class DataVO {
 	private String mver;
 	private String type;
 	private int code;
+	private String time;
 	private int game_code;
 	private int user_code;
 	private int team_code;
@@ -22,6 +23,12 @@ public class DataVO {
 
 	
 	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	public int getCode() {
 		return code;
 	}

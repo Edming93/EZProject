@@ -20,21 +20,15 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-	      System.out.println("home1111");
-
 	      return "index";
 	}
 
 	@GetMapping("/home")
 	public String firstHome() {
-		System.out.println("여기좀 와주세요 ㅠ..");
-		
-		System.out.println("살려주세요");
-		System.out.println("여기 사람있어요");
+	
 		return "index";
 	}
-	
-	
+
 
 }
 

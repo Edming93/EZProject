@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.service.FindService;
 import com.sample.service.LoginService;
@@ -51,6 +52,11 @@ public class LoginController {
 			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num="+tnum : "loginPage/login";
 		}
 		
+		String pageurl = (String)session.getAttribute("pageurl");
+		if(pageurl == null) {
+			pageurl = "redirect:/home";
+		}
+		
 		
 		String url = null;
 		
@@ -61,10 +67,7 @@ public class LoginController {
 
 		session = request.getSession();
 		if(service.isUser(vo, session)) {
-			url = "redirect:/home";
-			
-			session.setAttribute("userId", vo.getUserId());
-			session.setMaxInactiveInterval(300);
+			url = pageurl;
 			
 			if(id_ck.equals("checked")) {
 				Cookie cookie1 = new Cookie("userId", vo.getUserId());
@@ -83,7 +86,8 @@ public class LoginController {
 			}
 
 		}else {
-			url = "loginPage/loginMain";
+			request.setAttribute("page", "login");
+			url = "redirect:/loginPage/login?pageurl="+pageurl;
 		}
 		
 		
@@ -92,7 +96,9 @@ public class LoginController {
 
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) {
-		session.invalidate();
+		session.removeAttribute("sessionVO");
+		session.removeAttribute("fieldData");
+		session.removeAttribute("pageurl");
 		return "redirect:/loginPage/login";
 	}
 

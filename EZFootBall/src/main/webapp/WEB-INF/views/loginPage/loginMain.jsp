@@ -8,6 +8,8 @@
 <title>이지풋볼</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
 <style>
 	@font-face {
 	    font-family: 'Happiness-Sans-Title';
@@ -228,7 +230,7 @@
         <div class="header_area">
             <div class="header_content">
                <div class="header_left main_logo">
-
+               
                </div>
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
@@ -281,7 +283,7 @@
             </div>
         </div>
     </div>
-
+  
     <div class="bottom_banner">
 		
 
@@ -293,6 +295,13 @@
         <div class="footer_right"></div>
         
     </footer>
+    
+
+
+<script type="text/javascript">
+
+  // https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=poD0EBSOvA7nhaA84Yi5&client_secret=16R_UFfDgk&access_token=AAAAOb-zkWyoUCWOa6LRGc_b3_BZbReFB3ewgdmp9xCjsrRmo3HmRIMzyhUFCYw7bWC3NYATgZ85Em1eNLd-Kw5CSuE&service_provider=NAVER
+</script>
 
 <script type="text/javascript">
 	let main_logo = document.querySelector(".main_logo");

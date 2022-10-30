@@ -50,10 +50,11 @@ public class RentalService {
 	}
 	
 	// 예약테이블 등록시 유효성검사
-	public FieldReservationVO rvCheck(FieldReservationVO vo) {
-		return dao.rvCheck(vo); 
+	public boolean rvCheck(FieldReservationVO vo) {
+		System.out.println(dao.rvCheck(vo));
+		return (dao.rvCheck(vo) == 0)? true:false; 
 	}
-	
+	// 예약테이블 등록 및 gamelist 정보추가
 	public void insertRvInGameList(GlistVO gvo) {
 		dao.insertRvInGameList(gvo);
 	}
