@@ -160,7 +160,7 @@
 
 .main_right1 {
 	width: 100%;
-	height: 50%;
+	height: 55%;
 	padding: 15px;
 	border: 5px solid #26a653;
 	border-radius: 15px 15px 0 0;
@@ -171,7 +171,7 @@
 
 .main_right2 {
 	width: 100%;
-	height: 50%;
+	height: 45%;
 	padding: 15px;
 	border: 5px solid #26a653;
 	border-top: none;
@@ -262,6 +262,17 @@ footer {
 
 .etc_icon {
 	margin-left: 10px;
+}
+#MTbtn{
+	display: inline-block;
+    text-decoration: none;
+    border-radius: 20px;
+    color: #000;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+    background-color: #fffaec;
 }
 </style>
 </head>

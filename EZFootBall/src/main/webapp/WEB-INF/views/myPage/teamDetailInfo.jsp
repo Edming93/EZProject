@@ -105,7 +105,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid black;
+    
 }
 
 .main_content1 {
@@ -256,6 +256,19 @@ footer {
 .etc_icon {
 	margin-left: 10px;
 }
+
+.teamlist{
+	border: 2px solid #26a563;
+    border-radius: 10px;
+    line-height: 2.5;
+    width: 40%;
+}
+.teamInfo h4{
+	line-height : 55px;
+}
+.main_right1 h3{
+	line-height : 50px;
+} 
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
