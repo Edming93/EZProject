@@ -21,4 +21,8 @@
 		from review
 		where review_code = #{reviewCode}
 	</select>
+	
+	<select id="countComment" resultType="int">
+		select count(review_code) from review	
+	</select>
 </mapper>
