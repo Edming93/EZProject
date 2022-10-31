@@ -6,7 +6,11 @@
 <meta charset="UTF-8">
 <title>이지풋볼</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
-<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+	<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
@@ -471,7 +475,48 @@
 		main_logo.addEventListener("click",function() {
 			location.href="${pageContext.request.contextPath}";
 		});
-	</script>
+		/* 글쓰기 아이콘 누를시 이동 */
+		document.querySelector(".matchR").addEventListener("click",function(){
+
+			$.ajax({
+	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
+	 			type : "GET",
+	 			contentType:"application/json; charset=utf-8",
+	 			dataType : "json",
+	 			data : JSON.stringify(),
+	 			success : function(data){
+	 
+	 				if(data==false){
+	 					Swal.fire({
+	 					   title: '글쓰기를 위해 로그인 해주세요!',
+	 					   text: '로그인 페이지로 이동하시겠습니까?',
+	 					   icon: 'warning',
+	 					   
+	 					   
+	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	 					   
+		 					   
+	 					   reverseButtons: false, // 버튼 순서 거꾸로
+	 					   
+	 					}).then(result => {
+	 					   // 만약 Promise리턴을 받으면,
+	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	 					   
+	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
+	 					   	  	
+	 					   }
+	 					});
+	 				} else {
+	 					location.href="${pageContext.request.contextPath}/team/posting";
+	 				}
+				}
+	 		});
+		});
+		</script>
 		<script>
         var hide = document.querySelector(".hidemenu");
         var p1 = document.querySelector(".p1");
