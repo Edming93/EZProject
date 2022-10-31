@@ -304,8 +304,9 @@
     .postingdiv{
 	width: 100px;
     height: 1100px;
-    margin-top: 464px;
-
+      margin-top: 16%;
+    position: absolute;
+    left: 75%;
    }
      .posting123{
     	position: sticky;
