@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.sample.vo.BlacklistVO;
+import com.sample.vo.Criteria;
 import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistPageVO;
 
@@ -19,6 +20,9 @@ public interface BlacklistDAO {
 	
 	//상세 페이지 view
 	public BlacklistVO selectBlackListdetail(String blacklistCode);
+	
+	//게시판 view(페이징)
+	 public List<BlacklistVO> getListPaging(Criteria cri);
 	
 	//게시판 insert
 	public int insertBlackList(BlacklistVO vo);
