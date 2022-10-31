@@ -38,6 +38,7 @@
 		background: #fff;
 		overflow: auto;
 		display: none;
+		z-index: 1;
 	}
 	#keyword{
 		padding: 15px;
@@ -204,6 +205,8 @@
 		background: #fff;
 		overflow: auto;
 		display: none;
+		z-index: 1;
+		
 	}
 	
 	#search_result_box_inner {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.FindService;
+import com.sample.service.GlistService;
 import com.sample.service.LoginService;
 import com.sample.service.RentalService;
 import com.sample.service.UinService;
@@ -30,14 +31,16 @@ public class MyPageController {
 	private UinService uinService;
 	private FindService findService;
 	private RentalService rentalService;
+	private GlistService glistService;
 
 	public MyPageController(LoginService loginService, UinService uinService, FindService findService,
-			RentalService rentalService) {
+			RentalService rentalService, GlistService glistService) {
 		super();
 		this.loginService = loginService;
 		this.uinService = uinService;
 		this.findService = findService;
 		this.rentalService = rentalService;
+		this.glistService = glistService;
 	}
 
 	@GetMapping("myPage")
@@ -99,6 +102,17 @@ public class MyPageController {
 	public String matchList() {
 
 		return "/myPage/matchList";
+	}
+
+	@GetMapping("/getMatchList")
+	@ResponseBody
+	public Map<String, Object> getMatchList(UserVO userVO, HttpSession session) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		Map<String, Object> map = new HashMap<>();
+		List<FieldReservationVO> list = glistService.getMatchList(userVO.getUserCode());
+		map.put("userName", userVO.getUserName());
+		map.put("list", list);
+		return map;
 	}
 
 	// 구장예약 내역

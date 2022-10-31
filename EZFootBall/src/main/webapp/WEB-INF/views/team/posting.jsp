@@ -32,7 +32,7 @@
                </div>
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
-	                  <input type="text" class="search_input">
+	                  <jsp:include page="../search/search.jsp"></jsp:include>
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="login_icon">

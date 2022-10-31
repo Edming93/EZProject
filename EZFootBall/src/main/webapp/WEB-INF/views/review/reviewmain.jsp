@@ -20,6 +20,11 @@
 		no-repeat center;
 	background-size: 65px 35px;
 	cursor: pointer;
+
+	div1 {
+		font-size: 20px;
+		
+	}
 }
 </style>
 </head>
@@ -32,7 +37,7 @@
 						<!-- 					<img class="ez_icon" src="/image/ez_logo.svg"> -->
 					</div>
 					<div class="header_right login_btn etc_btn">
-						<input type="text" class="search_input">
+						
 						<div class="login_icon">
 							<a href="${pageContext.request.contextPath}/loginPage/login">
 								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -105,7 +110,9 @@
 					</div>
 				</div>
 			</div>
+			</div>
 			<hr>
+			<div class ="div1">
 			<div class="reviewcome">
 				<h1>이지 풋볼에 게임 후기를 남겨주세요!</h1>
 			</div>

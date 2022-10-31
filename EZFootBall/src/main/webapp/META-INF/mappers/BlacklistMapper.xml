@@ -4,8 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.BlacklistDAO">
 	<select id="selectBBSCount" resultType="int">
-		select count(*) from blacklist;
+		select count(*) from blacklist limit 10;
 	</select>
+	
+	 <select id="getListPaging" resultType="BlacklistVO">
+    
+        select * from (
+                select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
+                from blacklist order by blacklist_code desc) as T1 
+        <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
+        limit #{skip},#{amount}
+    
+    </select>
+	
 	
 	<select id="selectBlackList" resultType="BlacklistVO">
 		select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,

@@ -102,62 +102,18 @@
     
     .main_area {
     	width: 1024px;
-    	min-height: 900px;
+    	height: 300px;
 /*     	margin-top: 50px; */
 /*     	background-color: #ffaaaa; */
     }
     
     .main_content {
-    	width: 40%;
-    	height: 50%;
+    	width: 70%;
+    	height: 100%;
     	margin: 0 auto;
-    	margin-top: 20%;
     	padding: 20px;
     	background-color: #fff;
     }
-    
-    #btnbox{
-	display: flex;
-	justify-content: space-evenly;
-}
-    
-    .main_content button {
-	display: inline-block;
-	width: 40%;
-	padding: 15px 0;
-	text-decoration: none;
-	margin: 20px 0;
-	color: #fff;
-	font-weight:bold;
-	font-size:18px;
-	border: 1px solid #26a653;
-	text-align: center;
-	background-color: #26a653;
-	border-radius: 20px;
-}
-
-.main_content button:hover {
-	opacity: 0.8;
-}
-    
-    .input{
-			border: 1px solid #2a2a2a;
-		    background-color: #fff;
-		    padding: 8px;
-		    width: 100%;
-            height: 50px;
-		    border-radius: 7px;
-		    color: #000000;
-            padding-left: 20px;
-        }
-        
-       .title {
-    font-weight: bold;
-    font-size: 12px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    color: #000;
-}
     
     
 
@@ -243,32 +199,25 @@
     	<h1 class="main_title">비밀번호 변경</h1>
     		<div class="main_content">
     		
-			<h4>${userVO.userName}님</h4>
+			<h5>${userVO.userId} 유저</h5>
 				<form action="${pageContext.request.contextPath}/myPage/changePw/result" id="change" method="post">
-					<div class="title">기존 비밀번호</div>
-					<input type="password" class="input" name="pw1" id="pw1" />
+					<label for="pw1">기존 비밀번호 <br /> <input type="password" name="pw1" id="pw1" /></label><br />
 					<hr />
-					<div class="title">새 비밀번호</div> 
-					<input type="password" class="input" name="new_pw1" id="new_pw1" />
-					<div class="title">새 비밀번호 확인</div> 
-					<input type="password" class="input" name="new_pw2" id="new_pw2" />
+					<label for="new_pw1">새 비밀번호 <br /> <input type="password" name="new_pw1" id="new_pw1" /></label><br />
+					<label for="new_pw2">새 비밀번호 확인 <br /> <input type="password" name="new_pw2" id="new_pw2" /></label><br />
 					<p>비밀번호는 8자이상, 16자 이하여야 합니다.</p>
 					<p>비밀번호는 숫자와 영문만 사용하여야 합니다.</p>
 				</form>
-				<div id="btnbox">
 					<button id="btn" type="submit">변경하기</button>
 					<button id="return" type="submit">취소</button>
-				</div>
 			</div>
 		</div>
 	</div>
 
-		<div class="bottom_banner"></div>
-		<footer>
-			<div class="footer_left"></div>
-			<div class="footer_right"></div>
-
-		</footer>
+<!-- 	<footer>
+        <div class="footer_left"></div>
+        <div class="footer_right"></div>
+    </footer> -->
     </div>
 
 	

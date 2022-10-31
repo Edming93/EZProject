@@ -498,7 +498,7 @@ let play_btn = document.querySelector(".fa-play");
     clearTimeout(time_out);
     console.log("right:"+slide_index);
     if (slide_index > 0 && slide_index < slide_photo_cnt) {
-      top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
+      top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px)';
 
 
       // slide_index++;
