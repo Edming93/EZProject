@@ -119,7 +119,10 @@ public class SocialController {
 	
 	@GetMapping("/info")
 	public String info(Model model,@RequestParam("num") String snum,HttpSession session) {
-		System.out.println("info");
+		//이전에 봤던 상세 정보 모두 지워줌
+		session.removeAttribute("snum");
+		session.removeAttribute("tnum");
+		
 		int num = Integer.parseInt(snum);
 		session.setAttribute("snum", snum);
 		service.info(num, model);
@@ -133,27 +136,20 @@ public class SocialController {
 	}
 	
 	@GetMapping("/subgame")
-	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
-		int num = Integer.parseInt(snum);
-		
-		System.out.println("/subgame");
+	public String subgame(HttpSession session) {
 		return (lservice.isUser((UserVO)session.getAttribute("sessionVO"), session)) ? "redirect:/msocial/socialpayment" : "loginPage/login";
 	}
 	
 	@GetMapping("/socialpayment")
 	public String spayString (HttpSession session,Model model) {
-		System.out.println("지나갑니당");
 		int num =0;
 		if(session.getAttribute("snum") != null) {
-			System.out.println("소셜매치");
 			num = Integer.parseInt((String)session.getAttribute("snum"));
 			service.info(num, model);
 		}else {
-			System.out.println("팀매치");
 			num = Integer.parseInt((String)session.getAttribute("tnum"));
 			tservice.info(num, model);
 		}
-		System.out.println(model.getAttribute("matchinfo"));
 		return "social/socialpay";
 	}
 	
@@ -181,7 +177,6 @@ public class SocialController {
 				service.newreser(vo);
 			}
 		}else {
-			System.out.println("팀신청");
 			int num = Integer.parseInt((String)session.getAttribute("tnum"));
 			UinVO uvo = (UinVO)session.getAttribute("urabil");
 			int team_code = uvo.getTeamCode();
@@ -193,10 +188,7 @@ public class SocialController {
 			if(vo.getGameMaxp() - vo.getGamePnum() == 1) {
 				tservice.setslist(dvo);
 				tservice.maxgame(num);
-				System.out.println("여긴오고");
 				for(int i=0; i<tvo.size(); i++) {
-					System.out.println("팀 업뎃해야지");
-					System.out.println(tvo.get(i).getUserCode());
 					tservice.info(num,model);
 					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 					vo1.setUserCode(tvo.get(i).getUserCode());
@@ -206,8 +198,6 @@ public class SocialController {
 				tservice.setslist(dvo);
 				tservice.subgame(num);
 				for(int i=0; i<tvo.size(); i++) {
-					System.out.println("팀 업뎃해야지");
-					System.out.println(tvo.get(i).getUserCode());
 					tservice.info(num,model);
 					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 					vo1.setUserCode(tvo.get(i).getUserCode());
@@ -216,6 +206,7 @@ public class SocialController {
 			}
 		}
 		
+		//결제 완료 후 해당 세션 모두 지워주기
 		session.removeAttribute("snum");
 		session.removeAttribute("tnum");
 		session.removeAttribute("urabil");
@@ -225,7 +216,6 @@ public class SocialController {
 	@PostMapping("/joinlist")
 	@ResponseBody
 	public List<SjoinVO> joinlist (@RequestBody DataVO dvo,HttpSession session){
-		System.out.println("joinlist");
 		int num = dvo.getGame_code();
 		return service.joinlist(num);
 	}
@@ -233,7 +223,6 @@ public class SocialController {
 	@PostMapping("/joininfo")
 	@ResponseBody
 	public List<UinVO> joininfo (@RequestBody DataVO dvo,HttpSession session){
-		System.out.println("joininfo");
 		int id = dvo.getUser_code();
 		return service.joininfo(id);
 	}
@@ -242,8 +231,6 @@ public class SocialController {
 	@ResponseBody
 	public GameFieldInfoVO fieldInfo (@RequestBody GlistVO vo) {
 		int fieldcode = vo.getFieldCode();
-		System.out.println("fieldinfo");
-		System.out.println(service.fieldinfo(fieldcode).getFieldImg1());
 		return service.fieldinfo(fieldcode);
 	}
 	

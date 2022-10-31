@@ -11,6 +11,7 @@
 	int year = now.getYear();
 	int today = now.getDayOfMonth();
 	int month = now.getMonthValue();
+	
 	String we = now.getDayOfWeek().toString();
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -18,6 +19,8 @@
 	
 	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
 	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -504,21 +507,38 @@
 var dayday = null;
 var daydata = <%=today%>;
 for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
-	
-	
-    document.getElementById("day").children[i].addEventListener("click", function (e) {
+	document.getElementById("day").children[i].addEventListener("click", function (e) {
+
+		let tnum =0;
     	for(var j = 0; j < document.getElementById("day").childElementCount; j++){
     		document.getElementById("day").children[j].style.backgroundColor="#fff";
     		document.getElementById("day").children[j].style.color='#C7C7C7';
     		document.getElementById("day").children[j].style.border="1px solid #A9A9A9";
     		document.getElementById("day").children[j].style.transition = "all 0.2s linear";
             document.getElementById("day").children[j].style.transform = "scale(1.0)";
+            if(document.getElementById("day").children[j].id == this.id) {
+            	tnum = j;
+            }
     	};
+    	
+    	if(tnum<=3){
+    		document.querySelector("#div1 ul").scrollLeft = 0;
+    		
+    	}else {
+    		if((tnum-3) *150 > 4050){
+    			document.querySelector("#div1 ul").scrollLeft = 4050;
+    			
+    		}else{
+    			document.querySelector("#div1 ul").scrollLeft = (tnum-3) *140;
+    			
+    		}
+    	}
+    	
     	this.style.backgroundColor="#26A653";
     	this.style.color="#fff";
     	this.style.border="1px solid #26A653";
     	this.style.transition = "all 0.2 linear";
-        this.style.transform = "scale(1.5)";
+        this.style.transform = "scale(1.3)";
 
 
         var day = this.className;

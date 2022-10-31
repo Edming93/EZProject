@@ -25,6 +25,8 @@ public class UserVO {
 	private String userAddress2;
 	
 	private int userScore;
+	private int userWin;
+	private int userLose;
 
 	public static final long serialKey = 1231254653L;
 	
@@ -246,6 +248,23 @@ public class UserVO {
 	public void setUserScore(int userScore) {
 		this.userScore = userScore;
 	}
+
+	public int getUserWin() {
+		return userWin;
+	}
+
+	public void setUserWin(int userWin) {
+		this.userWin = userWin;
+	}
+
+	public int getUserLose() {
+		return userLose;
+	}
+
+	public void setUserLose(int userLose) {
+		this.userLose = userLose;
+	}
+	
 	
 	
 

@@ -26,7 +26,6 @@ public class GlistService {
 	
 	public List<GlistVO> list(Model model,GlistVO vo) {
 		return dao.list(vo);
-		//model.addAttribute("list", vo);
 	}
 	
 	public void info(int num,Model model) {
@@ -37,7 +36,6 @@ public class GlistService {
 		dao.subgame(num);
 	}
 	public void maxgame(int num) {
-		System.out.println("ser");
 		dao.maxgame(num);
 	}
 	
@@ -62,7 +60,6 @@ public class GlistService {
 	}
 	
 	public void newreser(GlistVO vo) {
-		System.out.println("예약 생성");
 		dao.newreser(vo);
 	}
 }

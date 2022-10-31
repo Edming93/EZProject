@@ -229,8 +229,6 @@
                     <div id="div1">
                         <ul id="day">
                             <% for(int i= today ; i<=(today+30); i++) { 
-                            	
-                            	System.out.println(sdf.format(cal.getTime()));
                             	if(i>eday){%>
                             	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
                                    <div class="idaydiv"> <% out.print(i-eday); %> </div>
@@ -569,26 +567,38 @@
 var dayday = null;
 var daydata = <%=today%>;
 for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
-	
-	
-    document.getElementById("day").children[i].addEventListener("click", function (e) {
+	document.getElementById("day").children[i].addEventListener("click", function (e) {
+		let tnum =0;
     	for(var j = 0; j < document.getElementById("day").childElementCount; j++){
     		document.getElementById("day").children[j].style.backgroundColor="#fff";
     		document.getElementById("day").children[j].style.color='#C7C7C7';
     		document.getElementById("day").children[j].style.border="1px solid #A9A9A9";
     		document.getElementById("day").children[j].style.transition = "all 0.2s linear";
             document.getElementById("day").children[j].style.transform = "scale(1.0)";
+            if(document.getElementById("day").children[j].id == this.id) {
+            	tnum = j;
+            }
     	};
+    	
+    	if(tnum<=3){
+    		document.querySelector("#div1 ul").scrollLeft = 0;
+    		console.log("3보다 작을때")
+    	}else {
+    		if((tnum-3) *150 > 4050){
+    			document.querySelector("#div1 ul").scrollLeft = 4050;
+    			console.log("맨끝")
+    		}else{
+    			document.querySelector("#div1 ul").scrollLeft = (tnum-3) *140;
+    			console.log("중간")
+    		}
+    	}
     	this.style.backgroundColor="#26A653";
     	this.style.color="#fff";
     	this.style.border="1px solid #26A653";
     	this.style.transition = "all 0.2 linear";
-        this.style.transform = "scale(1.5)";
+        this.style.transform = "scale(1.3)";
 
         var day = this.className;
-        dayday = day;
-        
-        var day = <%=year%> + "-" +<%=month%> +"-" + daydata;
         dayday = day;
         var local = document.getElementById("local").value;
         var clo = document.getElementById("close").checked;

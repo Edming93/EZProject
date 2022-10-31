@@ -49,9 +49,7 @@ public class TeamController {
 	@PostMapping("/tlist")
 	@ResponseBody
 	public List<TlistVO> tlist(@RequestBody DataVO dvo,TlistVO gvo,Model model){
-		
-		System.out.println("t컨트롤러");
-		
+			
 		//날짜 설정
 		gvo.setGameDay(dvo.getDay());
 		
@@ -116,9 +114,6 @@ public class TeamController {
 	@ResponseBody
 	public List<TlistVO> listall(@RequestBody DataVO dvo,TlistVO gvo,Model model){
 		 //최초 진입 시 실행
-		System.out.println("t컨트롤러2");
-		
-		System.out.println(dvo.getDay());
 		
 		gvo.setGameDay(dvo.getDay());
 		
@@ -128,7 +123,8 @@ public class TeamController {
 	
 	@GetMapping("/tinfo")
 	public String info(Model model,@RequestParam("num") String snum,HttpSession session) {
-		
+		session.removeAttribute("snum");
+		session.removeAttribute("tnum");
 		int num = Integer.parseInt(snum);
 		session.setAttribute("tnum", snum);
 		service.info(num, model);
@@ -142,26 +138,21 @@ public class TeamController {
 	}
 	
 	@GetMapping("/tsubgame")
-	public String subgame(@RequestParam("num") String snum,HttpSession session,DataVO dvo) {
-		int num = Integer.parseInt(snum);	
+	public String subgame(HttpSession session) {
 		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session)) ? "redirect:/msoical/socialpayment" : "loginPage/login";
 	}
 	
 	@PostMapping("/joinlist")
 	@ResponseBody
 	public List<Integer> joinlist (@RequestBody DataVO dvo,HttpSession session){
-		System.out.println("joinlist");
-		System.out.println(dvo.getGameCode());
+
 		int gameCode = dvo.getGameCode();
-		System.out.println(gameCode);
-		System.out.println(service.teamcode(gameCode).get(0));
 		return service.teamcode(gameCode);
 	}
 	
 	@PostMapping("/joininfo")
 	@ResponseBody
 	public List<UinVO> joininfo (@RequestBody DataVO dvo,HttpSession session){
-		System.out.println("joininfo");
 		int teamCode = dvo.getTeam_code();
 		return service.joininfo(teamCode);
 	}
@@ -184,9 +175,6 @@ public class TeamController {
 	@ResponseBody
 	public int selectgen (@RequestBody DataVO vo) {
 		int teamCode = vo.getTeamCode();
-		System.out.println("cntmebr");
-		System.out.println(teamCode);
-		System.out.println(service.selectgen(teamCode));
 		return service.selectgen(teamCode);
 	}
 	

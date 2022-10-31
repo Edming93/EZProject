@@ -4,6 +4,7 @@
 <%@page import="com.sample.vo.UinVO"%>
 <%@page import="com.sample.vo.UserVO"%>
 <%@page import="com.sample.vo.GlistVO"%>
+<%@page import ="java.time.LocalTime"%>
 <%
 	int td = -1;
 	String ugen = "무";
@@ -17,7 +18,8 @@
 			td = 0;
 		}
 	}
-	System.out.println(ugen);
+	LocalTime now = LocalTime.now();
+	int hour = now.getHour();
 %>
 <!DOCTYPE html>
 <html>
@@ -1130,53 +1132,65 @@
     	  rv_btn.style.color = "rgb(241 247 255)";
     	  rv_btn.style.borderColor = "rgb(190 191 193)";
   		}
-      var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
-      var lev = '${matchinfo.level}';
-      var level = lev.substring(0,lev.length-1);
-      
-      let gamema = '${matchinfo.gameMacth}';
-      var gamecnt = gamema.substr(0, 1);
-      
-      rv_btn.addEventListener("click",function() {
-    	var cnt = 0;
-		for(var i=0; i<list.length; i++){
-			if(list[i] == '<%=td%>'){
-				cnt++;
-			}
-		}
-	if('<%=td%>' == 0) {
-		alert("소속된 팀이 없으면 신청 할 수 없습니다.");
-	}else {
-		if('<%=ugen%>' == '무'){
-			location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
-		}
-		else if('<%=ugen%>' == '${matchinfo.gameGender}' && genum == 1){
-			console.log("일치");
-			if(cntmem != gamecnt){
-				alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
-			}else{
-				if(cnt > 0) {
-					alert("이미 신청한 경기 입니다.");
-				}else{
-					location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+	      var aa = ${matchinfo.gameMaxp} - ${matchinfo.gamePnum};
+	      var lev = '${matchinfo.level}';
+	      var level = lev.substring(0,lev.length-1);
+	      
+	      let gamema = '${matchinfo.gameMacth}';
+	      var gamecnt = gamema.substr(0, 1);
+	      
+	      rv_btn.addEventListener("click",function() {
+	    	var cnt = 0;
+			for(var i=0; i<list.length; i++){
+				if(list[i] == '<%=td%>'){
+					cnt++;
 				}
 			}
-		}else if('${matchinfo.gameGender}' == '혼성' && genum == 2){
-			console.log("혼성");
-			if(cntmem != gamecnt){
-				alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
-			}else{
-				if(cnt > 0) {
-					alert("이미 신청한 경기 입니다.");
-				}else{
-					location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+			
+			let gtime = ${matchinfo.gameTime};
+	  		let ntime = 0;
+	  		if('<%=hour%>' < 10 ){
+	  			ntime = "0" + <%=hour%>;
+	  		}else {
+	  			ntime = <%=hour%>;
+	  		}
+	  		
+	  		if( ntime >= gtime){
+	  			alert("지난 경기는 신청 할 수 없습니다");
+	  		}else{
+	  			if('<%=td%>' == 0) {
+					alert("소속된 팀이 없으면 신청 할 수 없습니다.");
+				}else {
+					if('<%=ugen%>' == '무'){
+						location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+					}
+					else if('<%=ugen%>' == '${matchinfo.gameGender}' && genum == 1){
+						if(cntmem != gamecnt){
+							alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
+						}else{
+							if(cnt > 0) {
+								alert("이미 신청한 경기 입니다.");
+							}else{
+								location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+							}
+						}
+					}else if('${matchinfo.gameGender}' == '혼성' && genum == 2){
+						if(cntmem != gamecnt){
+							alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
+						}else{
+							if(cnt > 0) {
+								alert("이미 신청한 경기 입니다.");
+							}else{
+								location.href = "${pageContext.request.contextPath}/team/tsubgame?num="+${matchinfo.gameCode}
+							}
+						}
+					}else{
+						alert("이 게임은" + '${matchinfo.gameGender}' + "매치 게임으로 신청 할 수 없습니다");
+					}
+					
 				}
-			}
-		}else{
-			alert("이 게임은" + '${matchinfo.gameGender}' + "매치 게임으로 신청 할 수 없습니다");
-		}
-		
-	}
+	  		}
+			
       });
       </script>
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.sample.dao.RankDAO;
+import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 
 @Service
@@ -20,6 +21,10 @@ public class RankService {
 	
 	public List<UserVO> rank(){
 		return dao.rank();
+	}
+	
+	public UinVO selevel(int userCode) {
+		return dao.selevel(userCode);
 	}
 	
 }

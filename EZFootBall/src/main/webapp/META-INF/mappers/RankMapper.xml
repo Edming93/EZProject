@@ -8,4 +8,10 @@
 		FROM user_info
 		ORDER BY user_score desc;
 	</select>
+	
+	<select id="selevel" resultType="UinVO">
+		SELECT *
+		FROM user_abil
+		WHERE user_code = #{userCode}
+	</select>
 </mapper>
