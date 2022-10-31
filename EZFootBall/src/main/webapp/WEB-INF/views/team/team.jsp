@@ -61,6 +61,7 @@
             width: 980px;
             display: flex;
     		align-items: center;
+    		overflow: hidden;
         }
 
         #day {
@@ -68,7 +69,7 @@
             margin: 0;
             padding: 0;
             white-space: nowrap;
-            overflow-x: scroll;
+            transition:all 0.5s;
 
         }
         #day::-webkit-scrollbar {
@@ -472,24 +473,26 @@
             
             var set = <%=today%>
 
-            document.querySelector("#div1 ul").scrollLeft = 0;
+            let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft;
             document.getElementById("dpre").addEventListener("click", function () {
-                let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft - 983;
-                if (document.querySelector("#div1 ul").scrollLeft <= 0) {
-                    document.querySelector("#div1 ul").scrollLeft = 0;
-                } else {
-                    document.querySelector("#div1 ul").scrollLeft = pscrollleft1;
-                }
+            	pscrollleft1 = pscrollleft1 - 983;
+                if (pscrollleft1 <=0 ) {
+               	 document.querySelector("#div1 ul").style.transform = 'translate(' + 0 + 'px)';
+               	pscrollleft1 =0;
+               } else {
+                   document.querySelector("#div1 ul").style.transform = 'translate(' + -(pscrollleft1) + 'px)';
+               }
 
             });
-            document.getElementById("dnext").addEventListener("click", function () {
-                let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft + 983;
-                if (document.querySelector("#div1 ul").scrollLeft > 4050) {
-                    document.querySelector("#div1 ul").scrollLeft = 4050;
-                } else {
-                    document.querySelector("#div1 ul").scrollLeft = pscrollleft1;
-                }
 
+            document.getElementById("dnext").addEventListener("click", function () {
+            	pscrollleft1 = pscrollleft1 + 983;
+                if (pscrollleft1 >= 2949) {
+                	 document.querySelector("#div1 ul").style.transform = 'translate(' + -(3360) + 'px)';
+                	 pscrollleft1 = 3360;
+                } else {
+                    document.querySelector("#div1 ul").style.transform = 'translate(' + -(pscrollleft1) + 'px)';
+                }
             });
 </script>
 
@@ -632,15 +635,17 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
     	};
     	
     	if(tnum<=3){
-    		document.querySelector("#div1 ul").scrollLeft = 0;
-    		console.log("3보다 작을때")
+    		document.querySelector("#div1 ul").style.transform = 'translate(' + 0 + 'px)';
+    		pscrollleft1 = 0;
+    		
     	}else {
-    		if((tnum-3) *150 > 4050){
-    			document.querySelector("#div1 ul").scrollLeft = 4050;
-    			console.log("맨끝")
+    		if((tnum-3) *140 >= 3360){
+    			document.querySelector("#div1 ul").style.transform = 'translate(' + -3360 + 'px)';
+    			pscrollleft1 = 3360;
+    			
     		}else{
-    			document.querySelector("#div1 ul").scrollLeft = (tnum-3) *140;
-    			console.log("중간")
+    			document.querySelector("#div1 ul").style.transform = 'translate(' + -(tnum-3) *140 + 'px)';
+    			pscrollleft1 = (tnum-3) *140;
     		}
     	}
     	this.style.backgroundColor="#26A653";
