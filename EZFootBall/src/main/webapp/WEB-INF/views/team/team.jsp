@@ -271,8 +271,13 @@
             <button id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </button>
                     <div id="div1">
                         <ul id="day">
-                            <% for(int i= today ; i<=(today+30); i++) { 
-                            	if(i>eday){%>
+                            <% for(int i= (today-3) ; i<=(today+27); i++) { 
+								if(i< today) {%>
+								<li class="<%=year%>-<%=month%>-<%=i %> disable" id="<%=i%>" >
+                                   <div class="idaydiv"> <% out.print(i); %> </div>
+                                </li>
+								<%}
+								else if(i>eday){%>
                             	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
                                    <div class="idaydiv"> <% out.print(i-eday); %> </div>
                                 </li>
