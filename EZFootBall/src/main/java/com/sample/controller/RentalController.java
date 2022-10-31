@@ -167,7 +167,7 @@ public class RentalController {
 	public String teamResultMove(FieldReservationVO rvo, HttpSession session) {
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
 		rvo.setUserCode(uvo.getUserCode());
-		rvo.setUserPayment(rvo.getFieldRentalfee());
+		rvo.setUserPayment(rvo.getFieldRentalfee()/2);
 		Tservice.insertFieldRVT(rvo);
 		return "rental/resultTeam";
 
