@@ -44,5 +44,14 @@ public class RankController {
 		return "rank/rankMain";
 	}
 	
+	@PostMapping("selevel")
+	@ResponseBody
+	public UinVO selevel(@RequestBody DataVO vo) {
+		System.out.println("컨트롤러");
+		System.out.println(vo.getUser_code());
+		int usercode = vo.getUser_code();
+		return service.selevel(usercode);
+	}
+	
 
 }
