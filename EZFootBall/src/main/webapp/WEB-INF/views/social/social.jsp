@@ -221,6 +221,9 @@
 	        height: 100px;
 	        margin: 15px;
 		}
+		.disable{
+			pointer-events : none;
+		}
 
     </style>
 </head>

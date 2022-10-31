@@ -262,6 +262,9 @@
       .matchR p:hover{
       	color : blue;
       }
+      .disable{
+			pointer-events : none;
+		}
     </style>
 </head>
 <body>
@@ -273,7 +276,7 @@
                         <ul id="day">
                             <% for(int i= (today-3) ; i<=(today+27); i++) { 
 								if(i< today) {%>
-								<li class="<%=year%>-<%=month%>-<%=i %> disable" id="<%=i%>" >
+								<li class="<%=year%>-<%=month%>-<%=i%> disable" id="<%=i%>" >
                                    <div class="idaydiv"> <% out.print(i); %> </div>
                                 </li>
 								<%}
