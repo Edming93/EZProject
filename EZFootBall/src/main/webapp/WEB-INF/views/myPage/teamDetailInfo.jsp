@@ -269,6 +269,34 @@ footer {
 .main_right1 h3{
 	line-height : 50px;
 } 
+
+#Dbtn{
+	    text-decoration: none;
+    color: red;
+    font-size: 25px;
+    background-color: yellow;
+    width: 25%;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+}
+.deleteT{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.deleteT .hh{
+	font-size : 15px;
+}
+.teamlistcon{
+	display: flex;
+    justify-content: space-between;
+}
+.teamlist input{
+	margin-left : 10px;
+}
+
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -360,10 +388,7 @@ footer {
 									<li>${tmVO.tmember3}</li>
 									<li>${tmVO.tmember4}</li>
 									<li>${tmVO.tmember5}</li>
-									<c:if test="${tmVO.tmember6 != '' or 
-									tmVO.tmember6 != null or
-									tmVO.tmember6 != 'null'
-									}">
+									<c:if test="${tmVO.tmember6 != null}">
 										<li>${tmVO.tmember6}</li>
 									</c:if>
 								</ol>
@@ -378,31 +403,30 @@ footer {
 								<h4>팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 : ${tmVO.teamCode})</span></h4>
 								<h3>당신은 주장 입니다</h3>
 							</div>
-							<div class="teamlist">
+							<div class=teamlistcon>
+								<div class="teamlist">
 		
-								
-								<ol>
-									
-									<li>${tmVO.tmember1}<input type="checkbox" name="tmember1" value="${tmVO.tmember1}"></li>
-									<li>${tmVO.tmember2}<input type="checkbox" name="tmember2" value="${tmVO.tmember2}"></li>
-									<li>${tmVO.tmember3}<input type="checkbox" name="tmember3" value="${tmVO.tmember3}"></li>
-									<li>${tmVO.tmember4}<input type="checkbox" name="tmember4" value="${tmVO.tmember4}"></li>
-									<li>${tmVO.tmember5}<input type="checkbox" name="tmember5" value="${tmVO.tmember5}"></li>
-									<c:if test="${tmVO.tmember6 != '' or 
-										tmVO.tmember6 != null or
-										tmVO.tmember6 != 'null' }">
-										<li>${tmVO.tmember6}<input type="checkbox" name="tmember6" value="${tmVO.tmember6}"></li>
-									</c:if>
-								</ol>
-							</div>
-<!-- 							<div class="deleteTM"> -->
-<!-- 								<h3>선택한 팀원을 추방하시겠습니까?</h3> -->
-<!-- 								<button id="DTbtn">팀원 추방</button> -->
-<!-- 							</div> -->
-							<div class="deleteT">
-								<h3>팀을 해체하시겠습니까?</h3>
-								<h3>해체하시면 팀원들도 소속된 팀이 없어집니다.</h3>
-								<a href="${pageContext.request.contextPath}/team/deleteT?teamCode=${tmVO.teamCode}&&teamName=${tmVO.teamName}&&tmember1=${tmVO.tmember1}&&tmember2=${tmVO.tmember2}&&tmember3=${tmVO.tmember3}&&tmember4=${tmVO.tmember4}&&tmember5=${tmVO.tmember5}&&tmember6=${tmVO.tmember6}" id="Dbtn"> 해체</a>
+									<ol>
+										
+										<li>${tmVO.tmember1}<input type="checkbox" name="tmember1" value="${tmVO.tmember1}"></li>
+										<li>${tmVO.tmember2}<input type="checkbox" name="tmember2" value="${tmVO.tmember2}"></li>
+										<li>${tmVO.tmember3}<input type="checkbox" name="tmember3" value="${tmVO.tmember3}"></li>
+										<li>${tmVO.tmember4}<input type="checkbox" name="tmember4" value="${tmVO.tmember4}"></li>
+										<li>${tmVO.tmember5}<input type="checkbox" name="tmember5" value="${tmVO.tmember5}"></li>
+										<c:if test="${tmVO.tmember6 != null}">
+											<li>${tmVO.tmember6}<input type="checkbox" name="tmember6" value="${tmVO.tmember6}"></li>
+										</c:if>
+									</ol>
+								</div>
+	<!-- 							<div class="deleteTM"> -->
+	<!-- 								<h3>선택한 팀원을 추방하시겠습니까?</h3> -->
+	<!-- 								<button id="DTbtn">팀원 추방</button> -->
+	<!-- 							</div> -->
+								<div class="deleteT">
+									<h3>팀을 해체하시겠습니까?</h3>
+									<h3 class="hh">해체하시면 팀원들도 소속된 팀이 없어집니다.</h3>
+									<a href="${pageContext.request.contextPath}/team/deleteT?teamCode=${tmVO.teamCode}&&teamName=${tmVO.teamName}&&tmember1=${tmVO.tmember1}&&tmember2=${tmVO.tmember2}&&tmember3=${tmVO.tmember3}&&tmember4=${tmVO.tmember4}&&tmember5=${tmVO.tmember5}&&tmember6=${tmVO.tmember6}" id="Dbtn"> 해체</a>
+								</div>
 							</div>
 						</c:if>
 					</section>
