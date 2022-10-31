@@ -25,6 +25,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
        #out{
        	margin: 0 auto;
@@ -219,6 +223,45 @@
 	        height: 100px;
 	        margin: 15px;
 		}
+		.teamR{
+         display: flex;
+	   
+	    width: 150px;
+	    justify-content: end;
+	    align-items: center;
+	   }
+	   .teamR p{
+         color : black;
+         font-weight : 700;
+	   }
+     .matchR{
+      display: flex;
+	   
+	    width: 180px;
+	    justify-content: end;
+	    align-items: center;
+     }
+     .matchR p{
+      color : black;
+         font-weight : 700;
+     }
+     .teamR:hover{
+     	cursor:pointer;
+     	transition : all 0.2s linear;
+     	transform : scale(1.2);
+     	
+     }
+     .teamR p:hover{
+     	color : blue;
+     }
+      .matchR:hover{
+      	cursor:pointer;
+      	transition : all 0.2s linear;
+     	transform : scale(1.2);
+      }
+      .matchR p:hover{
+      	color : blue;
+      }
     </style>
 </head>
 <body>
@@ -452,7 +495,7 @@
 		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
-        document.getElementById("<%=today%>").style.transform = "scale(1.5)";
+        document.getElementById("<%=today%>").style.transform = "scale(1.3)";
         
         
         
@@ -753,8 +796,103 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	   <div id="listreset" class="select_border listreset">
 	   		RESET
 	   </div>
+	   
+	   <div class="teamR">
+			<span class="p1"><iconify-icon icon="fluent:people-team-add-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 등록</p>
+	   </div>
+	   <div class="matchR">
+			<span id="posting"><iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 매치 등록</p>
+	   </div>
    
    </div>
+   
+   <!-- 팀매치 작성 -->
+   <script type="text/javascript">
+   document.querySelector(".matchR").addEventListener("click",function(){
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/loginPage/logincheck",
+			type : "GET",
+			contentType:"application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify(),
+			success : function(data){
+
+				if(data==false){
+					Swal.fire({
+					   title: '글쓰기를 위해 로그인 해주세요!',
+					   text: '로그인 페이지로 이동하시겠습니까?',
+					   icon: 'warning',
+					   
+					   
+					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+					   
+	 					   
+					   reverseButtons: false, // 버튼 순서 거꾸로
+					   
+					}).then(result => {
+					   // 만약 Promise리턴을 받으면,
+					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+					   
+						  location.href="${pageContext.request.contextPath}/loginPage/login";
+					   	  	
+					   }
+					});
+				} else {
+					location.href="${pageContext.request.contextPath}/team/posting";
+				}
+			}
+		});
+	});
+   </script>
+   
+   <!-- 팀등록 -->
+   <script type="text/javascript">
+        document.querySelector(".teamR").addEventListener("click",function(){
+
+			$.ajax({
+	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
+	 			type : "GET",
+	 			contentType:"application/json; charset=utf-8",
+	 			dataType : "json",
+	 			data : JSON.stringify(),
+	 			success : function(data){
+	 
+	 				if(data==false){
+	 					Swal.fire({
+	 					   title: '팀등록을 위해 로그인 해주세요!',
+	 					   text: '로그인 페이지로 이동하시겠습니까?',
+	 					   icon: 'warning',
+	 					   
+	 					   
+	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	 					   
+		 					   
+	 					   reverseButtons: false, // 버튼 순서 거꾸로
+	 					   
+	 					}).then(result => {
+	 					   // 만약 Promise리턴을 받으면,
+	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	 					   
+	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
+	 					   	  	
+	 					   }
+	 					});
+	 				} else {
+	 					location.href="${pageContext.request.contextPath}/team/register";
+	 				}
+				}
+	 		});
+		});
+        </script>
 
    <div id="result">
     

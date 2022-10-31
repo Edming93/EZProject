@@ -5,6 +5,7 @@
 <%@page import="com.sample.vo.UserVO"%>
 <%@page import="com.sample.vo.GlistVO"%>
 <%@page import ="java.time.LocalTime"%>
+<%@ page import="java.time.LocalDate"%>
 <%
 	String lv = "null";
 	String level = "null";
@@ -25,6 +26,8 @@
 	
 	LocalTime now = LocalTime.now();
 	int hour = now.getHour();
+	
+	LocalDate nday = LocalDate.now();
 	
 	
 %>
@@ -1065,7 +1068,7 @@
 	  			ntime = <%=hour%>;
 	  		}
 	  		
-	  		if( ntime >= gtime){
+	  		if('<%=nday%>' == '${matchinfo.gameDay}' && ntime >= gtime){
 	  			alert("지난 경기는 신청 할 수 없습니다");
 	  		}else{
 	  			if (cnt > 0) {

@@ -403,7 +403,7 @@
 		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
-        document.getElementById("<%=today%>").style.transform = "scale(1.5)";
+        document.getElementById("<%=today%>").style.transform = "scale(1.3)";
 
         
         var day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;

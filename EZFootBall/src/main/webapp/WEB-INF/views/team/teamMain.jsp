@@ -1,28 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.InputStreamReader" %>
+
+  <%
+    String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
+    String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
+    String code = request.getParameter("code");
+    String state = request.getParameter("state");
+    String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
+    String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+        + "&client_id=" + clientId
+        + "&client_secret=" + clientSecret
+        + "&redirect_uri=" + redirectURI
+        + "&code=" + code
+        + "&state=" + state;
+    String accessToken = "";
+    String refresh_token = "";
+    
+    System.out.println(session.getAttribute("state"));
+    try {
+      URL url = new URL(apiURL);
+      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+      con.setRequestMethod("GET");
+      int responseCode = con.getResponseCode();
+      BufferedReader br;
+      if (responseCode == 200) { // 정상 호출
+        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+      } else {  // 에러 발생
+        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+      }
+      String inputLine;
+      StringBuilder res = new StringBuilder();
+      while ((inputLine = br.readLine()) != null) {
+        res.append(inputLine);
+      }
+      br.close();
+      if (responseCode == 200) {
+        out.println(res.toString());
+      }
+    } catch (Exception e) {
+      // Exception 로깅
+    }
+  %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>이지풋볼</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
+<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<script src="https://kit.fontawesome.com/3a7191171a.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
-	<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
         margin: 0px;
+        font-family: 'Noto Sans KR', sans-serif;
     }
-
+    
     .container {
         width: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     .header_container {
@@ -127,97 +179,43 @@
         padding-bottom:5px;
         border-bottom: 3px solid #26A653;
     }
+    
 
     .banner_container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        background-color: #fafafa;
-    }
-    .banner_content_area {
         max-width: 1024px;
         width:1024px;
         display: flex;
         justify-content: center;
+/*         background-color: #fafafa; */
+        overflow: hidden;
+    }
+    .banner_content_area {
+        display: flex;
+        justify-content: center;
         align-items: center;
-        padding: 15px;
+        white-space: nowrap;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s;
+    }
+    .banner_content {
+        width: 100%;
+        height: 100%;
+
     }
     .banner_image {
         width: 100%;
         height: 90%;
-        border-radius: 23px;
+        border-radius: 35px;
+        padding: 15px;
     }
 
-    .match_menu_container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-   		 flex-direction: column;
-        border-top: 1px solid #eee;
-    }
-
-    .match_menu_area {
-        max-width: 1024px;
-        width:1024px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .match_menu_content {
-        width: 100%;
-        height:100%;
-        display:flex;
-        justify-content: center;
-    }
-
-    /* .date_container {
-        width: 100%;
-        height: 90px;
-    }
-    .date_nav {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-
-    }
-    .select_filter {
-        width: 100%;
-        height: 46px;
-    } */
-
-    .rental_list_container {
-        width:100%;
-        height:100%;
-        display:flex;
-        justify-content: center;
-    }
-    
-    .rental_list_area {
-        width: 1024px;
-        max-width: 1024px;
-        height:100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .rental_list_content {
-        width: 100%;
-        height:100%;
-        display:flex;
-        justify-content: center;
-        flex-direction: column;
-    }
 
     .match_list_container {
-        width: 100%;
-        height: 3700px;
-        display: flex;
-        justify-content: center;
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+	    justify-content: center;
     }
 
     .match_menu_area {
@@ -232,12 +230,17 @@
     .match_menu_content {
         width: 100%;
         height:100%;
+	    flex-direction: column;
+	    display: flex;
+	    align-items: center;
     }
+
+    
 
     .bottom_banner {
         width:100%;
         height:205px;
-    	background-color: #26A653;
+        background-color: #26A653;
     	margin-top: 100px;
     }
     footer {
@@ -265,112 +268,69 @@
         margin-left:10px;
     }
 
-/* ------------------------------ */
 
-.mainpage-post{
-        
-        width: 1024px;
-        display: flex;
-        flex-direction: column;
-    }
-    .mainpage-post .calender{
-        flex : 1;
-        display: flex;
-        width: 1024px;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .mainpage-post .settingbutton{
-        flex: 1;
-        display: flex;
-        width: 1024px;
-    }
-    .mainpage-post .date ul{
-       
-       list-style-type: none;
-    }
-    .mainpage-post .date ul li{
-        display: inline-block;
-        width: 100px;
-        height: 50px;
-        text-align: center;
-    }
-    .mainpage-post .date ul li a{
-        text-decoration: none;
-    }
-    .mainpage-post .date ul li:hover{
-       background-color: blue;
-    }
-    .postingdiv{
-	width: 100px;
-    height: 1100px;
-      margin-top: 16%;
-    position: absolute;
-    left: 75%;
-   }
-     .posting123{
-    	position: sticky;
-    
-    width: 50px;
-    top: 0
-	    }
-	    
-	  #pbtn:hover{
-	  	cursor : pointer;
-	    
-	  }  
-	    
-	 .hidemenu{
-            display: flex;
-            flex-direction: column;
-            display: none;
-            background-color : white;
-            position : absolute;
-        }
-     .active {
-     	    background-color: white;
-		    color: white;
-		    border: none;
-     }
-     .teamR{
+
+         .page_container {
+         position: relative;
+         display: grid;
+         height: 100%;
+         max-height: 100%;
+         cursor: default;
+         max-width: 1200px;
+         margin: 0 auto;
+         }
+
+         .pagination_controller {
          display: flex;
-	   
-	    width: 150px;
-	    justify-content: center;
-	    align-items: center;
-	   }
-	   .teamR p{
-         color : black;
-         font-weight : 700;
-	   }
-     .matchR{
-      display: flex;
-	   
-	    width: 180px;
-	    justify-content: center;
-	    align-items: center;
-     }
-     .matchR p{
-      color : black;
-         font-weight : 700;
-     }
-     .teamR:hover{
-     	cursor:pointer;
-     	transition : all 0.2s linear;
-     	transform : scale(1.2);
-     	
-     }
-     .teamR p:hover{
-     	color : blue;
-     }
-      .matchR:hover{
-      	cursor:pointer;
-      	transition : all 0.2s linear;
-     	transform : scale(1.2);
-      }
-      .matchR p:hover{
-      	color : blue;
-      }
+         flex-direction: row;
+         align-items: center;
+         justify-content: space-between;
+         padding: 0 1rem;
+         width: 135px;
+         height: 36px;
+         font-size: .875rem;
+         color: #fff;
+         border-radius: 20px;
+         background-color: rgba(0, 0, 0, .5);
+
+         }
+
+         .index_num {
+         margin-right: auto;
+         }
+
+         .control_wrapper {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         width: 50px;
+         }
+
+         .control_previous_button,
+         .control_play_pause_button,
+         .control_next_button {
+         padding: 0;
+         background: none;
+         border: 0;
+         color: #fff;
+         cursor: pointer;
+         }
+
+         .control_play_pause_button {
+         display: flex;
+         align-items: center;
+         max-height: 10px;
+
+         }
+
+         .fa-pause {
+         display: block;
+         font-size: 12px;
+         }
+
+         .fa-play {
+         display: none;
+         }
 
 </style>
 </head>
@@ -384,7 +344,8 @@
                </div>
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
-	                  <input type="text" class="search_input">
+  		  			  <jsp:include page="../search/search.jsp"></jsp:include>
+<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="login_icon">
@@ -432,37 +393,67 @@
             </div>
         </div>
     </div>
-    
+
         <div class="banner_container">
             <div class="banner_content_area">
                 <div class="banner_content">
-                    <img class="banner_image" src="../image/banner-new_stadium_pc_cnh_rental2.png" alt="">
+                    <img class="banner_image" src="${pageContext.request.contextPath}/image/ez_banner1.png" alt="">
+                    <img class="banner_image" src="${pageContext.request.contextPath}/image/ez_banner2.png" alt="">
+                    <img class="banner_image" src="${pageContext.request.contextPath}/image/banner-starter_pc.png" alt="">
                 </div>
             </div>
         </div>
-    <div class="match_menu_container">
+
+        <div class="pagination-area">
+         <div class="page_container">
+             <div class="pagination_controller">
+                 <div class="index_num">
+                     <span class="current_index">1</span>
+                     
+                     <span class="total_count">/ 3</span>
+                 </div>
+                 <div class="control_wrapper">
+                     <button class="control_previous_button e_previous_banner">
+                         <i class="fa-solid fa-angle-left"></i>
+                     </button>
+   
+                     <button type="button" class="control_play_pause_button e_play_pause_swiper">
+                       <svg class="fa-pause" width="14px" height="14px" enable-background="new 0 0 155.3 159.3" viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path><path fill="#ffffff" d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg>
+                       <i class="fas fa-play"></i>
+                     </button>
+   
+                     <button type="button" class="control_next_button e_next_banner">
+                       <i class="fa-solid fa-angle-right">
+                     </i>
+                     </button>
+                 </div>
+             </div>
+            
+         </div>
+     </div>
+       
+   
+   
+     
+
+
+
+
+
+
+
+
+    <div class="match_list_container">
         <div class="match_menu_area">
             <div class="match_menu_content">
-            	<jsp:include page="./team.jsp"></jsp:include>
-            				
+            <jsp:include page="./team.jsp"></jsp:include>
             </div>
-             <div class="postingdiv">
-				<div class="posting123">
-				  <span id="pbtn"><img src="${pageContext.request.contextPath}/image/pecil.jpg"><h4>글쓰기</h4></span>
-				    <div class="hidemenu">
-				       <div class="teamR">
-				        <span class="p1"><iconify-icon icon="fluent:people-team-add-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 등록하기</p>
-				        </div>
-				        <div class="matchR">
-				        <span id="posting"><iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 매치 작성하기</p>
-				        </div>
-				    </div>
-				</div>   
-        </div> 
+        </div>
+
+
     </div>
 
     <div class="bottom_banner">
-
 
     </div>
     <footer>
@@ -470,112 +461,131 @@
         <div class="footer_right"></div>
         
     </footer>
-	<script type="text/javascript">
-		let main_logo = document.querySelector(".main_logo");
-		
-		main_logo.addEventListener("click",function() {
-			location.href="${pageContext.request.contextPath}";
-		});
-		/* 글쓰기 아이콘 누를시 이동 */
-		document.querySelector(".matchR").addEventListener("click",function(){
+</div>
 
-			$.ajax({
-	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
-	 			type : "GET",
-	 			contentType:"application/json; charset=utf-8",
-	 			dataType : "json",
-	 			data : JSON.stringify(),
-	 			success : function(data){
-	 
-	 				if(data==false){
-	 					Swal.fire({
-	 					   title: '글쓰기를 위해 로그인 해주세요!',
-	 					   text: '로그인 페이지로 이동하시겠습니까?',
-	 					   icon: 'warning',
-	 					   
-	 					   
-	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
-	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
-	 					   
-		 					   
-	 					   reverseButtons: false, // 버튼 순서 거꾸로
-	 					   
-	 					}).then(result => {
-	 					   // 만약 Promise리턴을 받으면,
-	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-	 					   
-	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
-	 					   	  	
-	 					   }
-	 					});
-	 				} else {
-	 					location.href="${pageContext.request.contextPath}/team/posting";
-	 				}
-				}
-	 		});
-		});
-		</script>
-		<script>
-        var hide = document.querySelector(".hidemenu");
-        var p1 = document.querySelector(".p1");
-        var p2 = document.querySelector(".p2");
 
-        document.getElementById("pbtn").addEventListener("click",function(){
-            hide.classList.toggle('active');
-            if(hide.classList.contains('active')){
-                hide.style.display = "block";
-                hide.style.backgroundColor = "transparent";
-                hide.style.border = "none";
+<script type="text/javascript">
+	let main_logo = document.querySelector(".main_logo");
+	
+	main_logo.addEventListener("click",function() {
+		location.href="${pageContext.request.contextPath}";
+	});
+</script>
 
-            }else{
-                hide.style.display = "none";
-            }
-        });
-        </script>
-        <script type="text/javascript">
-        document.querySelector(".teamR").addEventListener("click",function(){
+<script>
 
-			$.ajax({
-	 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
-	 			type : "GET",
-	 			contentType:"application/json; charset=utf-8",
-	 			dataType : "json",
-	 			data : JSON.stringify(),
-	 			success : function(data){
-	 
-	 				if(data==false){
-	 					Swal.fire({
-	 					   title: '팀등록을 위해 로그인 해주세요!',
-	 					   text: '로그인 페이지로 이동하시겠습니까?',
-	 					   icon: 'warning',
-	 					   
-	 					   
-	 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-	 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-	 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-	 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
-	 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
-	 					   
-		 					   
-	 					   reverseButtons: false, // 버튼 순서 거꾸로
-	 					   
-	 					}).then(result => {
-	 					   // 만약 Promise리턴을 받으면,
-	 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-	 					   
-	 						  location.href="${pageContext.request.contextPath}/loginPage/login";
-	 					   	  	
-	 					   }
-	 					});
-	 				} else {
-	 					location.href="${pageContext.request.contextPath}/team/register";
-	 				}
-				}
-	 		});
-		});
-        </script>
+let button_flag = true;
+var time_out;
+
+let page_num = document.querySelector(".current_index");
+            
+let pause_btn = document.querySelector(".fa-pause");
+let play_btn = document.querySelector(".fa-play");
+
+  // translate 먹일곳
+  let top_banner = document.querySelector('.banner_content_area');
+  let top_btn_right = document.querySelector(".e_next_banner");
+  let top_btn_left = document.querySelector(".e_previous_banner");
+  let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
+
+  // 최상단 디브
+  let slider_area = document.querySelector(".banner_container");
+
+  var slider_width = slider_area.clientWidth; // container의 width
+  var slide_index = 0;
+
+  let top_pagination_btn = document.getElementsByClassName("swiper_pagination_bullet");
+  let more_pagination_btn = document.getElementsByClassName("pagination_bullet");
+
+
+  top_btn_right.addEventListener("click", function () {
+    clearTimeout(time_out);
+    console.log("right:"+slide_index);
+    if (slide_index > 0 && slide_index < slide_photo_cnt) {
+      top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
+
+
+      // slide_index++;
+    } else {
+      top_banner.style.transform = 'translateX(0vw)';
+      slide_index = 0;
+    }
+    show_slides();
+  })
+
+  top_btn_left.addEventListener("click", function () {
+    pause_btn.style.display = "none";
+    play_btn.style.display = "block";
+
+    button_flag = false;
+    clearTimeout(time_out);
+    console.log("left:"+slide_index);
+
+    if (slide_index > 1 && slide_index <= slide_photo_cnt) {
+      top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
+      slide_index--;
+
+      console.log("if");
+
+    } else {
+      top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
+
+      slide_index = slide_photo_cnt;
+      console.log("else");
+    }
+    
+    page_num.innerHTML = slide_index;
+    console.log(slide_index);
+
+   })
+
+
+              // Top banner pagination bar
+
+              pause_btn.addEventListener("click", function () {
+                pause_btn.style.display = "none";
+                play_btn.style.display = "block";
+
+                button_flag = false;
+                clearTimeout(time_out);
+              });
+
+              play_btn.addEventListener("click", function () {
+                pause_btn.style.display = "block";
+                play_btn.style.display = "none";
+
+                button_flag = true;
+                show_slides();
+              });
+
+
+              show_slides();
+
+
+              function show_slides() {
+                slide_index++;
+            
+                top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
+                console.log(slide_index);
+
+                page_num.innerHTML = slide_index;
+
+                if (slide_index === slide_photo_cnt) {  
+                slide_index = 0;
+
+                }
+
+                if (button_flag == true) {
+                  time_out = setTimeout(show_slides, 5000);
+                  
+                }
+
+              }
+   
+</script>
+
+
+  
+
 </body>
 </html>
