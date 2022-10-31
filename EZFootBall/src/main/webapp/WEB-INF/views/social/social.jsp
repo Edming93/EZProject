@@ -549,6 +549,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 
         var day = this.className;
         dayday = day;
+        
         var local = document.getElementById("local").value;
         var clo = document.getElementById("close").checked;
         var xgen = document.getElementById("xgender").checked;

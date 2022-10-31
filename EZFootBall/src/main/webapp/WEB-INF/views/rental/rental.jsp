@@ -11,10 +11,11 @@
    int year = now.getYear();
    int today = now.getDayOfMonth();
    int month = now.getMonthValue();
+   
    String we = now.getDayOfWeek().toString();
    
-   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Calendar cal = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar cal = Calendar.getInstance();
     
     int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
     int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -55,6 +56,7 @@
             width: 980px;
             display: flex;
     		align-items: center;
+          	overflow: hidden;
         }
 
         #day {
@@ -62,7 +64,9 @@
             margin: 0;
             padding: 0;
             white-space: nowrap;
-            overflow-x: scroll;
+
+            transition:all 0.5s;
+
 
         }
         #day::-webkit-scrollbar {
@@ -252,6 +256,10 @@
 		input:focus, select:focus, option:focus, textarea:focus, button:focus{
 		outline: none;
 		}
+		
+	 	.disable{
+			pointer-events : none;
+		}
 
     </style>
 </head>
@@ -261,12 +269,29 @@
         <div id="datelist">
             <button id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </button>
                     <div id="div1">
-                        <ul id="day">
-                            <% for(int i=fday; i<=eday; i++) { %>
-                                <li class="today <%=i%>" id="<%=i%>">
-                                    <% out.print(i); %>
+                       <ul id="day">
+                            <% for(int i= (today-3) ; i<=(today+27); i++) {
+//                             	i가 현재날짜보다 작을때 disabled 시키기
+								if(i< today) {%>
+								<li class="<%=year%>-<%=month%>-<%=i %> disable" id="<%=i%>" >
+                                   <div class="idaydiv"> <% out.print(i); %> </div>
                                 </li>
-                                <%} %>
+								<%}
+//								i가 마지막 날 보다 크면, 즉 32가되면 32-31(마지막날) = 1 해서 초기화
+								else if(i>eday){%>
+                            	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
+                                   <div class="idaydiv"> <% out.print(i-eday); %> </div>
+                                </li>
+ 
+                            	<%}else{%>
+<!--                            여느 평범한 날 -->
+                            		<li class="<%=sdf.format(cal.getTime())%>" id="<%=i%>">
+                                   		<div class="idaydiv"> <% out.print(i); %> </div>
+                                	</li>
+                            	<%}%>
+<!--                             	포문 돌때마다 1일씩 업데이트 -->
+                           <% cal.add(Calendar.DATE, 1);
+                           } %>
                         </ul>
                     </div>
              <button id="dnext"> <img src="${pageContext.request.contextPath}/image/right_btn.svg"> </button>
@@ -299,176 +324,122 @@
 			}
             
             for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
-
-            	
-                if ((i + 1) % 7 == ct) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    newp.innerText = week[num];
-                    document.getElementById("day").children[i].prepend(newp);
-                } else if ((i + 1) % 7 == (ct + 1)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+1>=7){
-                    	newp.innerText = week[num + 1-7];
-                    }else{
-                    	newp.innerText = week[num + 1];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 2)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+2>=7){
-                    	newp.innerText = week[num + 2-7];
-                    }else{
-                    	newp.innerText = week[num + 2];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 3)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+3>=7){
-                    	newp.innerText = week[num + 3-7];
-                    }else{
-                    	newp.innerText = week[num + 3];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 4)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+4>=7){
-                    	newp.innerText = week[num + 4-7];
-                    }else{
-                    	newp.innerText = week[num + 4];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 5)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+5>=7){
-                    	newp.innerText = week[num + 5-7];
-                    }else{
-                    	newp.innerText = week[num + 5];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                }
-                else if ((i + 1) % 7 == (ct + 6)) {
-                    var newp = document.createElement("div");
-                    newp.className = "idate";
-                    if(num+6>=7){
-                    	newp.innerText = week[num + 6-7];
-                    }else{
-                    	newp.innerText = week[num + 6];
-                    }
-                    document.getElementById("day").children[i].prepend(newp);
-                } else if ((i + 1) % 7 == (ct - 6)) {
-                    if (num < 6) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 6 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 6];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 5)) {
-                    if (num < 5) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 5 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 5];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 4)) {
-                    if (num < 4) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 4 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 4];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 3)) {
-                    if (num < 3) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 3 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 3];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                else if ((i + 1) % 7 == (ct - 2)) {
-                    if (num < 2) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 2 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 2];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-
-                }
-                else if ((i + 1) % 7 == (ct - 1)) {
-                    if (num < 1) {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 1 + 7];
-                        document.getElementById("day").children[i].prepend(newp);
-                    } else {
-                        var newp = document.createElement("div");
-                        newp.className = "idate";
-                        newp.innerText = week[num - 1];
-                        document.getElementById("day").children[i].prepend(newp);
-                    }
-                }
-                
-                
-            }
+ 				if(i % 7 == 0) {
+ 					var newp = document.createElement("div");
+                     newp.className = "idate";
+                     newp.innerText = week[num];
+                     document.getElementById("day").children[i].prepend(newp);
+ 				}else if(i % 7 == 1){
+ 					if((num+1)>6){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+1-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+1];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 2){
+ 					if((num+2)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+2-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+2];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 3){
+ 					if((num+3)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+3-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+3];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 4){
+ 					if((num+4)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+4-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+4];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 5){
+ 					if((num+5)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+5-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+5];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+ 				else if(i % 7 == 6){
+ 					if((num+6)>= 7){
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+6-7];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}else{
+ 						var newp = document.createElement("div");
+ 	                    newp.className = "idate";
+ 	                    newp.innerText = week[num+6];
+ 	                    document.getElementById("day").children[i].prepend(newp);
+ 					}
+ 					
+ 				}
+             }
             
             
             var set = <%=today%>
 
-            document.querySelector("#div1 ul").scrollLeft = (set - 1) * 150;
+            document.querySelector("#div1 ul").scrollLeft = 0;
+            let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft;
+            
             document.getElementById("dpre").addEventListener("click", function () {
-                let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft - 983;
-                if (document.querySelector("#div1 ul").scrollLeft <= 0) {
-                    document.querySelector("#div1 ul").scrollLeft = 0;
-                } else {
-                    document.querySelector("#div1 ul").scrollLeft = pscrollleft1;
-                }
+            	pscrollleft1 = pscrollleft1 - 983;
+                if (pscrollleft1 <=0 ) {
+               	 document.querySelector("#div1 ul").style.transform = 'translate(' + 0 + 'px)';
+               	pscrollleft1 =0;
+               } else {
+                   document.querySelector("#div1 ul").style.transform = 'translate(' + -(pscrollleft1) + 'px)';
+               }
 
             });
-            document.getElementById("dnext").addEventListener("click", function () {
-                let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft + 983;
-                if (document.querySelector("#div1 ul").scrollLeft > 4050) {
-                    document.querySelector("#div1 ul").scrollLeft = 4050;
-                } else {
-                    document.querySelector("#div1 ul").scrollLeft = pscrollleft1;
-                }
 
+            document.getElementById("dnext").addEventListener("click", function () {
+            	pscrollleft1 = pscrollleft1 + 983;
+                if (pscrollleft1 >= 2949) {
+                	 document.querySelector("#div1 ul").style.transform = 'translate(' + -(3360) + 'px)';
+                	 pscrollleft1 = 3360;
+                } else {
+                    document.querySelector("#div1 ul").style.transform = 'translate(' + -(pscrollleft1) + 'px)';
+                }
             });
 </script>
 
@@ -582,37 +553,49 @@
    let day_div = document.getElementById("day");
    let today_li = document.querySelectorAll(".today");
 
-      today_li.forEach(function(e) {
-         e.addEventListener("click", function () {
-
-         // 초기화 시키는 로직
-         today_li.forEach(function(e) {
-            e.style.backgroundColor="#fff";
-    		e.style.color='#C7C7C7';
-    		e.style.border="1px solid #A9A9A9";
-    		e.style.transition = "all 0.2s linear";
-            e.style.transform = "scale(1.0)";
-         });
+   
+   for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
+		document.getElementById("day").children[i].addEventListener("click", function (e) {
+			
+        	 	let tnum =0;
+        	 	// 초기화 시키는 로직
+        		for(var j = 0; j < document.getElementById("day").childElementCount; j++){
+        			document.getElementById("day").children[j].style.backgroundColor="#fff";
+            		document.getElementById("day").children[j].style.color='#C7C7C7';
+            		document.getElementById("day").children[j].style.border="1px solid #A9A9A9";
+            		document.getElementById("day").children[j].style.transition = "all 0.2s linear";
+                    document.getElementById("day").children[j].style.transform = "scale(1.0)";
+                    if(document.getElementById("day").children[j].id == this.id) {
+                    	tnum = j;
+                    }
+        		};
+        		
+            	if(tnum<=3){
+            		document.querySelector("#div1 ul").style.transform = 'translate(' + 0 + 'px)';
+            		pscrollleft1 = 0;
+            		
+            	}else {
+            		if((tnum-3) *140 >= 3360){
+            			document.querySelector("#div1 ul").style.transform = 'translate(' + -3360 + 'px)';
+            			pscrollleft1 = 3360;
+            			
+            		}else{
+            			document.querySelector("#div1 ul").style.transform = 'translate(' + -(tnum-3) *140 + 'px)';
+            			pscrollleft1 = (tnum-3) *140;
+            		}
+            	}
+        // 선택한 날짜 css 바꿔줌
+    	this.style.backgroundColor="#26A653";
+    	this.style.color="#fff";
+    	this.style.border="1px solid #26A653";
+    	this.style.transition = "all 0.2 linear";
+        this.style.transform = "scale(1.3)";
       
-         e.style.backgroundColor="#26A653";
-     	 e.style.color="#fff";
-     	 e.style.border="1px solid #26A653";
-    	 e.style.transition = "all 0.2 linear";
-         e.style.transform = "scale(1.5)";
 
-       let year_data = <%=year%>;
-       let month_data = <%=month%>;
-       let day_data = this.className.substring(6);
        
-       if(day_data<10) {
-          day_data = "0"+day_data;
-       }
-       
-       let day = <%=year%> + "-" +<%=month%> +"-" + day_data;
+       var day = this.className;
        today = day;
        
-
-       console.log("날짜 쪽 : "+today);
        let local_select = document.getElementById("local").value;
        let type_input = document.getElementById("type_input").checked;
        let field_size = document.getElementById("field_size").value;
@@ -689,7 +672,7 @@
       
    });
       
-   });
+   };
 
    
    <!-- 지역 설정  -->
