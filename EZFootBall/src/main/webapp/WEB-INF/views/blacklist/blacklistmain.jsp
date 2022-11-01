@@ -389,7 +389,7 @@ table th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #0335fc;
+	background-color: #565555;
 	color: white;
 }       	
          
