@@ -191,7 +191,7 @@
 	<!-- 결제 버튼 누를시 reservation table insert -->
 	<insert id="insertFieldRVT" parameterType="FieldReservationVO">
 		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time,game_code)
-		values(#{gameType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime},#{gameCode})
+		values('T',#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime},#{gameCode})
 	</insert>
 	
 	<!-- 팀등록시 로그인한 정보 가져오기 -->

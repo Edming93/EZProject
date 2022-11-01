@@ -20,6 +20,17 @@ public class FieldReservationVO {
 	// 시간 변환
 	private String gameTime1;
 	private String gameTime2;
+	private int gameCode;
+	
+	
+
+	public int getGameCode() {
+		return gameCode;
+	}
+
+	public void setGameCode(int gameCode) {
+		this.gameCode = gameCode;
+	}
 
 	public String getGameTime1() {
 		return gameTime1;
