@@ -129,13 +129,12 @@ public class RentalController {
 		session.setAttribute("pageurl",pageurl);
 		
 		System.out.println("나 타고가?");
-		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session))? "redirect:/rental/rentalPayment":"loginPage/login";
+		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session))? "redirect:/rental/rentalPayment":"redirect:/loginPage/login";
 	}
 	
 	@GetMapping("/rentalPayment")
 	public String rentalPaymentMove(Model model,@SessionAttribute("fieldData") FieldReservationVO fvo,
 									@SessionAttribute("sessionVO") UserVO uvo) {
-		
 		service.fieldInfo(fvo.getFieldCode(),model);
 
 		return "rental/rentalPayment";

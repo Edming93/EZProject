@@ -139,7 +139,8 @@ public class TeamService {
 			
 			// rental payment 이동시
 			public void matchInfo(GlistVO vo, Model model) {
-				
+				System.out.println(dao.matchInfo(vo).getGameType());
+				System.out.println("여기!!!!!!!!!!!!!");
 				model.addAttribute("match",dao.matchInfo(vo));
 			}
 			

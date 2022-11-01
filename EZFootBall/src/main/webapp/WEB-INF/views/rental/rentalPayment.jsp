@@ -427,7 +427,6 @@
            
          </div>
       </div>
-
       <div class="reservation_container">
          <div class="rv_info_area">
             <div class="rv_info_content_area">
@@ -531,7 +530,7 @@
                      	<span class="pay_won">원</span>
                      </c:if>
                      <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rental_fee amount_fee pay_money">${match.gamePay}</span>
+                      	<span class="rental_fee amount_fee pay_money">${match.gamePay/2}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	
@@ -553,7 +552,7 @@
                      	<span class="pay_won">원</span>
                      </c:if>
                      <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rental_fee total_fee">${match.gamePay}</span>
+                      	<span class="rental_fee total_fee">${match.gamePay/2}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	
@@ -567,8 +566,8 @@
                
 
 					if('${match.gameType}' === 'T'){
-	                  amount_fee.innerHTML = Number(${match.gamePay}).toLocaleString();
-	                  total_fee.innerHTML = Number(${match.gamePay - 0}).toLocaleString();
+	                  amount_fee.innerHTML = Number(${match.gamePay/2}).toLocaleString();
+	                  total_fee.innerHTML = Number(${match.gamePay/2 - 0}).toLocaleString();
 					}else{
 						amount_fee.innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
 			            total_fee.innerHTML = Number(${field.fieldRentalfee - 0}).toLocaleString();
@@ -633,15 +632,19 @@
       }
       
       document.getElementById("ming").addEventListener("click",function(){
-    	  var gamePayInt =parseInt(${match.gamePay});
-     	 	console.log(typeof(match));		
+    	 var gamePay = parseInt(${match.gamePay/2});
     	  
     	  if('${match.gameType}' === 'T'){
-    		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee="+gamePayInt+"&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=#{match.gameCode}";
+    		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee="+gamePay+"&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}";
     	  }else{
     		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G";
     	  }
+    	  
+//      	  if(${flag} == false){
+//      		  alert("이미 예약 된 구장입니다.");
+//      	  }
       });
+      
    </script>
 
 

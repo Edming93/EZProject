@@ -213,6 +213,7 @@ public class TeamController {
 			service.gameTJoinList(vo1);
 			
 			service.matchInfo(vo,model);
+			
 			return "rental/rentalPayment";
 		}else {
 			

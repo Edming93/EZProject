@@ -23,7 +23,7 @@
 	}else {
 		lv = "null";
 	}
-	
+
 	LocalTime now = LocalTime.now();
 	int hour = now.getHour();
 	

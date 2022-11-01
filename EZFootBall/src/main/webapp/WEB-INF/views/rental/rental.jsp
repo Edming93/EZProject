@@ -9,32 +9,31 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Calendar"%>
 <%
-	LocalDate now = LocalDate.now();
-	int year = now.getYear();
-	int today = now.getDayOfMonth();
-	int month = now.getMonthValue();
-	
-	String we = now.getDayOfWeek().toString();
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	Calendar cal = Calendar.getInstance();
-	
-	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
-	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-	
-	
-	cal.add(Calendar.DATE, -3); 
-	
-	List<String> week = new ArrayList<String>();
-	week.add(0, "시작");
-	week.add(1, "일");
-	week.add(2, "월");
-	week.add(3, "화");
-	week.add(4, "수");
-	week.add(5, "목");
-	week.add(6, "금");
-	week.add(7, "토");
-   
+LocalDate now = LocalDate.now();
+int year = now.getYear();
+int today = now.getDayOfMonth();
+int month = now.getMonthValue();
+
+String we = now.getDayOfWeek().toString();
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Calendar cal = Calendar.getInstance();
+
+int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
+int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+
+cal.add(Calendar.DATE, -3); 
+
+List<String> week = new ArrayList<String>();
+week.add(0, "시작");
+week.add(1, "일");
+week.add(2, "월");
+week.add(3, "화");
+week.add(4, "수");
+week.add(5, "목");
+week.add(6, "금");
+week.add(7, "토");
 %>
 <!DOCTYPE html>
 <html>
@@ -285,7 +284,7 @@
             <button id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </button>
                     <div id="div1">
                        <ul id="day">
-                            <% for(int i= (today-3) ; i<=(today+27); i++) { 
+                             <% for(int i= (today-3) ; i<=(today+27); i++) { 
                             	int tday = cal.get(Calendar.DATE); 
                             	int tdate = cal.get(Calendar.DAY_OF_WEEK);
                             	if(i<today) {%>
@@ -307,8 +306,10 @@
 </section>
 
 
-<!--날짜 움직이기 -->
+<!--날짜데이터 삽입  -->
 <script>
+         
+            
             var set = <%=today%>
 
             document.querySelector("#div1 ul").scrollLeft = 0;
@@ -372,17 +373,16 @@
 		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
-        document.getElementById("<%=today%>").style.transform = "scale(1.3)";
-		
+        document.getElementById("<%=today%>").style.transform = "scale(1.5)";
+
         if(<%=today%> < 10){
         	datdata = '0'+<%=today%>;
         }
-        let day = <%=year%> + "-" +<%=month%> +"-" +datdata;
+        var day = <%=year%> + "-" +<%=month%> +"-" +datdata;
         console.log(<%=today%>);
         console.log(datdata);
         console.log(day);
         today = day;
-       
          let data = {place:"null",type:"null",day:day};
          
          fetch("${pageContext.request.contextPath}/rental/rvList",{
@@ -926,7 +926,6 @@
          
       });
    </script>
-  
   
   
   

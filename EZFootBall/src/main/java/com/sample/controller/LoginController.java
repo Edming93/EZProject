@@ -51,8 +51,9 @@ public class LoginController {
 			String tnum =(String) session.getAttribute("tnum");
 			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num="+tnum : "loginPage/login";
 		}
-		
+	
 		String pageurl = (String)session.getAttribute("pageurl");
+		System.out.println("값모야?: "+pageurl);
 		if(pageurl == null) {
 			pageurl = "redirect:/home";
 		}
