@@ -1,4 +1,6 @@
 <%-- <%@page import="javax.websocket.Session"%> --%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,18 +9,31 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Calendar"%>
 <%
-   LocalDate now = LocalDate.now();
-   int year = now.getYear();
-   int today = now.getDayOfMonth();
-   int month = now.getMonthValue();
-   
-   String we = now.getDayOfWeek().toString();
-   
+	LocalDate now = LocalDate.now();
+	int year = now.getYear();
+	int today = now.getDayOfMonth();
+	int month = now.getMonthValue();
+	
+	String we = now.getDayOfWeek().toString();
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Calendar cal = Calendar.getInstance();
-    
-    int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
-    int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	
+	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
+	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	
+	
+	cal.add(Calendar.DATE, -3); 
+	
+	List<String> week = new ArrayList<String>();
+	week.add(0, "시작");
+	week.add(1, "일");
+	week.add(2, "월");
+	week.add(3, "화");
+	week.add(4, "수");
+	week.add(5, "목");
+	week.add(6, "금");
+	week.add(7, "토");
    
 %>
 <!DOCTYPE html>
@@ -270,28 +285,21 @@
             <button id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </button>
                     <div id="div1">
                        <ul id="day">
-                            <% for(int i= (today-3) ; i<=(today+27); i++) {
-//                             	i가 현재날짜보다 작을때 disabled 시키기
-								if(i< today) {%>
-								<li class="<%=year%>-<%=month%>-<%=i %> disable" id="<%=i%>" >
-                                   <div class="idaydiv"> <% out.print(i); %> </div>
+                            <% for(int i= (today-3) ; i<=(today+27); i++) { 
+                            	int tday = cal.get(Calendar.DATE); 
+                            	int tdate = cal.get(Calendar.DAY_OF_WEEK);
+                            	if(i<today) {%>
+                            	<li class="<%=sdf.format(cal.getTime())%> disable" id="<%=tday%>">
+                                   	<div class="idate"> <% out.print(week.get(tdate)); %> </div>
+                                   	<div class="idaydiv"> <% out.print(tday); %> </div>
                                 </li>
-								<%}
-//								i가 마지막 날 보다 크면, 즉 32가되면 32-31(마지막날) = 1 해서 초기화
-								else if(i>eday){%>
-                            	<li class="<%=sdf.format(cal.getTime())%>" id="<%=i-eday%>">
-                                   <div class="idaydiv"> <% out.print(i-eday); %> </div>
-                                </li>
- 
-                            	<%}else{%>
-<!--                            여느 평범한 날 -->
-                            		<li class="<%=sdf.format(cal.getTime())%>" id="<%=i%>">
-                                   		<div class="idaydiv"> <% out.print(i); %> </div>
-                                	</li>
-                            	<%}%>
-<!--                             	포문 돌때마다 1일씩 업데이트 -->
-                           <% cal.add(Calendar.DATE, 1);
-                           } %>
+                                <%} else{ %>
+                                <li class="<%=sdf.format(cal.getTime())%>" id="<%=tday%>">
+                                   	<div class="idate"> <% out.print(week.get(tdate)); %> </div>
+                                   	<div class="idaydiv"> <% out.print(tday); %> </div>
+                                </li>                            		
+	                           <%}cal.add(Calendar.DATE, 1); 
+	                           } %>
                         </ul>
                     </div>
              <button id="dnext"> <img src="${pageContext.request.contextPath}/image/right_btn.svg"> </button>
@@ -299,123 +307,8 @@
 </section>
 
 
-<!--날짜데이터 삽입  -->
+<!--날짜 움직이기 -->
 <script>
-            let week = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
-            let num = week.indexOf("<%=we%>");
-            let ct = <%=today%>% 7;
-
-            for (var i = 0; i < 7; i++) {
-            	if(week[i]=='MONDAY'){
-            		week[0]='월';
-            	}else if(week[i]=='TUESDAY'){
-            		week[1]='화';
-            	}else if(week[i]=='WEDNESDAY'){
-            		week[2]='수';
-            	}else if(week[i]=='THURSDAY'){
-            		week[3]='목';
-            	}else if(week[i]=='FRIDAY'){
-            		week[4]='금';
-            	}else if(week[i]=='SATURDAY'){
-            		week[5]='토';
-            	}else if(week[i]=='SUNDAY'){
-            		week[6]='일';
-            	};
-			}
-            
-            for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
- 				if(i % 7 == 0) {
- 					var newp = document.createElement("div");
-                     newp.className = "idate";
-                     newp.innerText = week[num];
-                     document.getElementById("day").children[i].prepend(newp);
- 				}else if(i % 7 == 1){
- 					if((num+1)>6){
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+1-7];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}else{
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+1];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}
- 					
- 				}
- 				else if(i % 7 == 2){
- 					if((num+2)>= 7){
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+2-7];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}else{
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+2];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}
- 					
- 				}
- 				else if(i % 7 == 3){
- 					if((num+3)>= 7){
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+3-7];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}else{
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+3];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}
- 					
- 				}
- 				else if(i % 7 == 4){
- 					if((num+4)>= 7){
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+4-7];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}else{
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+4];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}
- 					
- 				}
- 				else if(i % 7 == 5){
- 					if((num+5)>= 7){
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+5-7];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}else{
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+5];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}
- 					
- 				}
- 				else if(i % 7 == 6){
- 					if((num+6)>= 7){
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+6-7];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}else{
- 						var newp = document.createElement("div");
- 	                    newp.className = "idate";
- 	                    newp.innerText = week[num+6];
- 	                    document.getElementById("day").children[i].prepend(newp);
- 					}
- 					
- 				}
-             }
-            
-            
             var set = <%=today%>
 
             document.querySelector("#div1 ul").scrollLeft = 0;
@@ -479,11 +372,17 @@
 		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
-        document.getElementById("<%=today%>").style.transform = "scale(1.5)";
-
-		let day = <%=year%> + "-" +<%=month%> +"-" +<%=today%>;
-
-		today = day;
+        document.getElementById("<%=today%>").style.transform = "scale(1.3)";
+		
+        if(<%=today%> < 10){
+        	datdata = '0'+<%=today%>;
+        }
+        let day = <%=year%> + "-" +<%=month%> +"-" +datdata;
+        console.log(<%=today%>);
+        console.log(datdata);
+        console.log(day);
+        today = day;
+       
          let data = {place:"null",type:"null",day:day};
          
          fetch("${pageContext.request.contextPath}/rental/rvList",{
