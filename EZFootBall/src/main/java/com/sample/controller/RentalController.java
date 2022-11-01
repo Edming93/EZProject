@@ -136,13 +136,22 @@ public class RentalController {
 	public String rentalPaymentMove(Model model,@SessionAttribute("fieldData") FieldReservationVO fvo,
 									@SessionAttribute("sessionVO") UserVO uvo) {
 		service.fieldInfo(fvo.getFieldCode(),model);
-
+		fvo.setUserCode(uvo.getUserCode());
+		fvo.setUserPayment(fvo.getFieldRentalfee());
+		
+		System.out.println(fvo.getUserCode());
+		System.out.println(fvo.getFieldCode());
+		System.out.println(fvo.getGameDay());
+		System.out.println(fvo.getGameTime()+":00:00");
+		System.out.println("여기 컨트롤러 체크 : "+service.rvCheck(fvo));
+		model.addAttribute("flag",service.rvCheck(fvo));
+		
 		return "rental/rentalPayment";
 	}
 	
 	
 	@GetMapping("/resultField")
-	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,
+	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,Model model,
 								@SessionAttribute("sessionVO") UserVO uvo, HttpSession session) {
 		
 		fvo.setUserCode(uvo.getUserCode());
@@ -150,12 +159,14 @@ public class RentalController {
 		
 		gvo.setGameType(fvo.getRvType());
 		gvo.setGameMacth(fvo.getFieldType());
+		gvo.setGamePay(fvo.getFieldRentalfee());
 		
+
 		// 유효성검사 필요 없지만 확실하게 적용
 		if(service.rvCheck(fvo)) {
 			service.insertFieldReservation(fvo);
 			service.insertRvInGameList(gvo);
-			return "rental/resultField";
+			return "redirect:/myPage/rentalList";
 		}else {
 			System.out.println("이미 신청한 경기 표시하기");
 			return "redirect:/rental/rentalPayment";

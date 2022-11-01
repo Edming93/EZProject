@@ -85,7 +85,6 @@
 		and field_code = #{fieldCode}
 		and game_day = #{gameDay}
 		and game_time = #{gameTime}
-		and rv_type = #{rvType}
 	</select>
 	
 <!-- 	<select id="rvCheck" resultType="FieldReservationVO"> -->
@@ -111,8 +110,8 @@
 		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime})
 	</insert>
 	<insert id="insertRvInGameList" parameterType="GlistVO">
-		insert into gamelist (game_type,field_code,field_name,field_address,game_macth,game_day,game_time)
-		values(#{gameType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameMacth},#{gameDay},#{gameTime});
+		insert into gamelist (game_type,field_code,field_name,field_address,game_macth,game_day,game_time,game_pay)
+		values(#{gameType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameMacth},#{gameDay},#{gameTime},#{gamePay});
 	</insert>
 	
 	

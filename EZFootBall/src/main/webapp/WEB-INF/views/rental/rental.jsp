@@ -1,6 +1,7 @@
 <%-- <%@page import="javax.websocket.Session"%> --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import="java.time.LocalTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,31 +10,33 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Calendar"%>
 <%
-LocalDate now = LocalDate.now();
-int year = now.getYear();
-int today = now.getDayOfMonth();
-int month = now.getMonthValue();
+	LocalDate now = LocalDate.now();
+	int year = now.getYear();
+	int today = now.getDayOfMonth();
+	int month = now.getMonthValue();
+	
+	String we = now.getDayOfWeek().toString();
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar cal = Calendar.getInstance();
+	
+	int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
+	int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	LocalTime nowTime = LocalTime.now();
+	int hour = nowTime.getHour();
+	
+	cal.add(Calendar.DATE, -3); 
+	
+	List<String> week = new ArrayList<String>();
+	week.add(0, "시작");
+	week.add(1, "일");
+	week.add(2, "월");
+	week.add(3, "화");
+	week.add(4, "수");
+	week.add(5, "목");
+	week.add(6, "금");
+	week.add(7, "토");
 
-String we = now.getDayOfWeek().toString();
-
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-Calendar cal = Calendar.getInstance();
-
-int fday = cal.getMinimum(Calendar.DAY_OF_MONTH);
-int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-
-cal.add(Calendar.DATE, -3); 
-
-List<String> week = new ArrayList<String>();
-week.add(0, "시작");
-week.add(1, "일");
-week.add(2, "월");
-week.add(3, "화");
-week.add(4, "수");
-week.add(5, "목");
-week.add(6, "금");
-week.add(7, "토");
 %>
 <!DOCTYPE html>
 <html>
@@ -284,7 +287,7 @@ week.add(7, "토");
             <button id="dpre"> <img src="${pageContext.request.contextPath}/image/left_btn.svg"> </button>
                     <div id="div1">
                        <ul id="day">
-                             <% for(int i= (today-3) ; i<=(today+27); i++) { 
+                            <% for(int i= (today-3) ; i<=(today+27); i++) { 
                             	int tday = cal.get(Calendar.DATE); 
                             	int tdate = cal.get(Calendar.DAY_OF_WEEK);
                             	if(i<today) {%>
@@ -308,7 +311,7 @@ week.add(7, "토");
 
 <!--날짜데이터 삽입  -->
 <script>
-         
+           
             
             var set = <%=today%>
 
@@ -374,15 +377,14 @@ week.add(7, "토");
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
         document.getElementById("<%=today%>").style.transform = "scale(1.5)";
-
+		let date = 0;
         if(<%=today%> < 10){
-        	datdata = '0'+<%=today%>;
+        	date = "0"+<%=today%>;
         }
-        var day = <%=year%> + "-" +<%=month%> +"-" +datdata;
-        console.log(<%=today%>);
-        console.log(datdata);
-        console.log(day);
-        today = day;
+        
+		let day = <%=year%> + "-" +<%=month%> +"-" +date;
+		today = day;
+		console.log(today);
          let data = {place:"null",type:"null",day:day};
          
          fetch("${pageContext.request.contextPath}/rental/rvList",{
@@ -422,25 +424,33 @@ week.add(7, "토");
 				var timeset = ["08","10","12","14","16","18","20","22"];
 				// db에서 불러온 배열
 				var game_time = (data.gameTime).split(',');
+				console.log("값"+game_time.includes(timeset[5]) <= '<%=hour%>');
 
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
-
-					if(game_time.includes(timeset[i])){
+					
+					
+					if(game_time.includes(timeset[i]) ||timeset[i] <= '<%=hour%>' ){
+					<%-- if(game_time.includes(timeset[i]) >= '<%=hour%>'){ --%>
+						console.log("내꺼"+game_time);
+						console.log("가지고 있는거" +i+ timeset[i]);
+						console.log("시간"+<%=hour%>);
+						
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
 					}else{
 						rental_div.className = "time rental_span_able";
 						//rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-						console.log(data.fieldCode+" + "+day+" + "+time);
+						console.log(data.fieldCode+" + "+day+" + "+time+" + "+data.gamePay); 
 						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
 					}
 					rental_area.append(rental_div);
 				}
             	content_area.append(rental_area);
+            	console.log("끝");
             }
          }).catch(error => {
             console.log("무슨에러냐면! : " + error);
@@ -551,6 +561,8 @@ week.add(7, "토");
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
+
+					
 					if(game_time.includes(timeset[i])){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
@@ -558,6 +570,12 @@ week.add(7, "토");
 						rental_div.className = "time rental_span_able";
 						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+					}
+					
+					if(this.id == <%=today%>){
+						if(timeset[i] <= '<%=hour%>'){
+							rental_div.className = "time rental_span_disable";
+						}
 					}
 					rental_area.append(rental_div);
 				}
@@ -646,7 +664,7 @@ week.add(7, "토");
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
-					if(game_time.includes(timeset[i])){
+					if(game_time.includes(timeset[i]) || game_time.includes(timeset[i]) <= <%=hour%> ){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
@@ -729,7 +747,7 @@ week.add(7, "토");
 			for(let i=0; i<timeset.length; i++){
 				// true 혹은 false 반환
 				let time = parseInt(timeset[i]);
-				if(type_input == false && game_time.includes(timeset[i])){
+				if((type_input == false && game_time.includes(timeset[i])) || game_time.includes(timeset[i]) <= <%=hour%> ){
 					let rental_div = document.createElement("div");
 					rental_div.className = "time rental_span_disable";
 					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
@@ -828,7 +846,7 @@ week.add(7, "토");
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
-					if(game_time.includes(timeset[i])){
+					if(game_time.includes(timeset[i]) || game_time.includes(timeset[i]) <= <%=hour%>){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 					}else{
@@ -907,7 +925,7 @@ week.add(7, "토");
  					// true 혹은 false 반환
  					let time = parseInt(timeset[i]);
  					let rental_div = document.createElement("a");
- 					if(game_time.includes(timeset[i])){
+ 					if(game_time.includes(timeset[i]) || game_time.includes(timeset[i]) <= <%=hour%> ){
  						rental_div.className = "time rental_span_disable";
  						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
  					}else{
@@ -926,6 +944,7 @@ week.add(7, "토");
          
       });
    </script>
+  
   
   
   
