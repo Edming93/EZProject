@@ -60,7 +60,16 @@ textarea::placeholder {
 
 #div1 {
 	margin: 0 auto;
-	width: 1024px;
+	width: 40%;
+	
+}
+
+#submit{
+	background-color: rgb(38, 166, 83);
+	color : white;
+	border : white;
+	border-radius: 5px;
+	
 	
 }
 p{
@@ -601,7 +610,7 @@ let play_btn = document.querySelector(".fa-play");
               }
    
 </script>
-
+		
 		<div id="div1">
 			<div id="comment"></div>
 			<div id="input">
@@ -724,7 +733,7 @@ let play_btn = document.querySelector(".fa-play");
 						
 						//수정 버튼 클릭시 수정폼 생성
 						btn1.addEventListener("click", function(){
-							
+							document.getElementById("input").style.display = "none";
 						/* 	this.setAttribute("disabled", "disabled"); */
 							const updateform = document.createElement("div");
 							/* updateform.style.border = "1px solid black"; */
@@ -742,7 +751,7 @@ let play_btn = document.querySelector(".fa-play");
 							
 							//수정완료 버튼 클릭시 수정된 내용으로 수정
 							 updatebtn.addEventListener("click", function(){						 
-			
+								 document.getElementById("input").style.display = "block";
 							 	const target = document.getElementById('btnedit');
 							 	target.disabled = false;
 							 	document.getElementsByClassName("test2")[0].style.display = "flex";
@@ -852,35 +861,45 @@ let play_btn = document.querySelector(".fa-play");
 							const btn2 = document.createElement("button");
 							btn1.style.borderRadius = "5px";
 							btn2.style.borderRadius = "5px";
+							btn1.style.backgroundColor = "#26A653";
+							btn2.style.backgroundColor = "#26A653";
+							btn1.style.color = "white";
+							btn2.style.color = "white";
 							btn1.style.border = "1px solid white";
 							btn2.style.border = "1px solid white";
 							btn1.innerText = "수정"
 							btn2.innerText = "삭제"	
 								//수정 버튼 클릭시 수정폼 생성
 								btn1.addEventListener("click", function(){
+									document.getElementById("input").style.display = "none";
 									div2.classList.add('test3');
 									btn1.id = "btnedit2";
 									
 									this.setAttribute("disabled", "disabled");
 									
 									const updateform = document.createElement("div");
-									/* updateform.style.border = "1px solid black"; */
 									const updateinput = document.createElement("textarea");
 									updateinput.cols = "30";
 									updateinput.rows = "10";
 									updateinput.placeholder="수정할 내용을 입력하세요"
 									const updatebtn = document.createElement("button");
 									updatebtn.innerText = "수정완료";
-									
+									updatebtn.style.borderRadius = "5px";
+									updatebtn.style.backgroundColor = "#26A653";
+									updatebtn.style.color = "white";
+									updatebtn.style.border = "1px solid white";
 									document.getElementsByClassName("test3")[0].style.display = "none";
+									/* updateinput.append(updatebtn); */
 									updateform.append(updateinput);
-									updateform.append(updatebtn);
+									 updateform.append(updatebtn);
+									
 									div.append(updateform);
 							
 									//수정버튼 연속 클릭시 연속 생성 제한거는 함수 찾기
 									
 									//수정완료 버튼 클릭시 수정된 내용으로 수정
-									 updatebtn.addEventListener("click", function(){						 
+									 updatebtn.addEventListener("click", function(){		
+										 document.getElementById("input").style.display = "block";
 									 	const target = document.getElementById('btnedit2');
 									 	target.disabled = false; 
 									 	document.getElementsByClassName("test3")[0].style.display = "flex";
@@ -945,6 +964,7 @@ let play_btn = document.querySelector(".fa-play");
 						comdiv.append(div);
 						div.style.marginTop = "2%";
 						comdiv.style.marginTop = "3%";
+						comdiv.style.marginBottom = "3%";
 						
 
 						
