@@ -239,23 +239,62 @@
         background-color: #26A653;
     	margin-top: 100px;
     }
-    footer {
-        width: 100%;
-        height: 423px;
-        display: flex;
-        justify-content: space-evenly;   
-        padding: 30px;
-        background-color: #2a2a2a;
-    }
-    .footer_left {
-        width:40%;
+     .bottom_banner {
+        width:100%;
+        height:205px;
+        background-color: #26A653;
+       margin-top: 100px;
+        }
+        footer {
+            width: 100%;
+          
+            height: 423px;
+            display: flex;
+            justify-content: space-evenly;   
+            padding: 30px;
+            background-color: #2a2a2a;
+        }
+        .footer_subcon{
+            max-width: 1024px;
+        }
+        .footer_left {
+            width:100%;
+            
+        }
+        .footer_left .footer_nav{
+            display: flex;
 
-    }
+        }
+        .footer_nav ul {
+            list-style-type: none;
+            line-height: 200%;
+        }
+        .footer_nav ul h3 {
+            color : rgba(255, 255, 255, 0.649);
+        }
+        .footer_nav ul li{
+            color :rgba(255, 255, 255, 0.348)
+        }
+        .footer_right {
+            width:30%;
+            padding-top: 14px;
 
-    .footer_right {
-        width:40%;
-
-    }
+        }
+        .footer_com{
+            line-height: 150%;
+        }
+        .footer_com h2{
+            color : rgba(255, 255, 255, 0.649);
+            border-bottom: 3px solid #26A653;
+            width: 32%;
+        }
+        .footer_com p{
+            color :rgba(255, 255, 255, 0.348);
+        }
+        .managermove a{
+            color : white;
+            text-decoration: none;
+        }
 
     .login_icon {
         margin-left:15px;
@@ -327,6 +366,7 @@
          .fa-play {
          display: none;
          }
+         
 
 </style>
 </head>
@@ -390,7 +430,7 @@
         </div>
     </div>
 
-        <div class="banner_container">
+    <div class="banner_container">
             <div class="banner_content_area">
                 <div class="banner_content">
                     <img class="banner_image" src="image/ez_banner1.png" alt="">
@@ -400,7 +440,7 @@
             </div>
         </div>
 
-        <div class="pagination-area">
+    <div class="pagination-area">
          <div class="page_container">
              <div class="pagination_controller">
                  <div class="index_num">
@@ -428,16 +468,6 @@
          </div>
      </div>
        
-   
-   
-     
-
-
-
-
-
-
-
 
     <div class="match_list_container">
         <div class="match_menu_area">
@@ -452,9 +482,52 @@
     <div class="bottom_banner">
 
     </div>
-    <footer>
-        <div class="footer_left"></div>
-        <div class="footer_right"></div>
+     <footer>
+        <div class="footer_subcon">
+            <div class="footer_left">
+                <div class="footer_nav">
+                    <ul>
+                        <h3>매치 정보</h3>
+                        <li>소셜 매치</li>
+                        <li>팀 매치</li>
+                        <li>구장 예약</li>
+                    </ul>
+                    <ul>
+                        <h3>서비스 지역</h3>
+                        <li>서울</li>
+                        <li>인천</li>
+                        <li>경기</li>
+                        <li>전라도</li>
+                        <li>경상도</li>
+                        <li>충청도</li>
+                        <li>제주도</li>
+                    </ul>
+                    <ul>
+                        <h3>이지풋볼</h3>
+                        <li>이지풋볼 소개</li>
+                        <li>공지사항</li>
+                        <li>자주 묻는 질문</li>
+                        <li>구장 제휴</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer_right">
+            <div class="footer_com">
+                <h2>EZfootball.com</h2>
+                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
+                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
+                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
+                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
+                    국번없이 119
+                </p>
+                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
+                    통신판매업 신고 2022-서울강서-0000
+                </p>
+                <p>Copyright EZ ALL rights reserved</p>
+            </div>
+            <h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
+        </div>
         
     </footer>
 </div>
