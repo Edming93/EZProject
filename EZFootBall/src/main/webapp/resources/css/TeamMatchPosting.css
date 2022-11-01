@@ -254,8 +254,9 @@
 		display : flex;
 		justify-content : center;
 		align-items : center;
+		
 	}
-	.map_search .search_area #search{
+	.map_search .search_area #search1{
 		width : 100%;
 		height : 80%;
 		border-radius : 10px;
