@@ -44,7 +44,9 @@ public class ReviewCommentController {
 	// 모든 커멘트를 가져오는 개체
 	@PostMapping("/comment")
 	@ResponseBody
-	public List<ReviewCommentVO> getAllComment(){
+	public List<ReviewCommentVO> getAllComment(HttpSession session, Model model){
+		UserVO vo = (UserVO)session.getAttribute("sessionVO");
+		model.addAttribute("userdata", vo);
 		return service.getCommentAllList();
 	}
 	
@@ -63,8 +65,14 @@ public class ReviewCommentController {
 	// 커멘트를 수정
 	@PutMapping("/comment/edit")
 	@ResponseBody
-	public Map<String,String> editComment(@RequestBody ReviewCommentVO vo){
-	
+	public Map<String,String> editComment(HttpSession session, @RequestBody ReviewCommentVO vo){
+		UserVO vo2 = (UserVO)session.getAttribute("sessionVO");
+		System.out.println(vo.getUserName());
+		System.out.println(vo2.getUserName());
+		/*
+		 * if (vo.getUserName() == vo2.getUserName()) { return service.editComment(vo);
+		 * }
+		 */
 		return service.editComment(vo);
 	}
 
@@ -72,7 +80,7 @@ public class ReviewCommentController {
 
   @DeleteMapping("/comment/delete")
   @ResponseBody
-  public Map<String,String> deleteComment(@RequestBody ReviewCommentVO vo){
+  public Map<String,String> deleteComment(HttpSession session, @RequestBody ReviewCommentVO vo){
     return service.deleteComment(vo);
   }
 

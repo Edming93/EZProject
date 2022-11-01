@@ -73,6 +73,7 @@ public class ReviewCommentService {
 	  System.out.println(vo);
 	  
 	  try {
+		  
 		  reviewCommentDAO.updateComment(vo);
         map.put("state", "ok");        
       } catch (Exception e) {
