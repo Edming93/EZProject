@@ -103,7 +103,7 @@
 	
 	<insert id="newreser" parameterType="TlistVO">
 		INSERT `field_reservation` (`rv_type`, `field_code`, `field_name`, `field_address`, `field_type`, `user_code`, `user_payment`, `game_day`, `game_time` , `game_code`) 
-		VALUES('T',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, 10000, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode});
+		VALUES('TS',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, 10000, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode});
 	</insert>
 	
 	<!-- 팀 등록시 지도 검색 -->
