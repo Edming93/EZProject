@@ -1,6 +1,8 @@
 package com.sample.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +30,52 @@ public class AdminController {
 	}
 	
 	@GetMapping("/select")
-	public String mainselectString (@RequestParam("select") String select,Model model) {
-		model.addAttribute("select", select);
+	public String mainselect (@RequestParam("select") String select,HttpSession session) {
+		session.setAttribute("select", select);
 		return "userInfo/aminMain";
 	}
-		
+	
+	@GetMapping("/idselect")
+	public String idselect (@RequestParam("idselect") String idselect,Model model) {
+		model.addAttribute("idselect", idselect);
+		return "userInfo/aminMain";
+	}
+	
+	@GetMapping("/magselect")
+	public String magselect (@RequestParam("magselect") String magselect,Model model) {
+		model.addAttribute("magselect", magselect);
+		return "userInfo/aminMain";
+	}
+	
+	@GetMapping("/reserselect")
+	public String reserselect (@RequestParam("reserselect") String reserselect,Model model) {
+		model.addAttribute("reserselect", reserselect);
+		return "userInfo/aminMain";
+	}
 	
 	
+	@GetMapping("/subselect")
+	public String subselect (@RequestParam("subselect") String subselect,Model model) {
+		model.addAttribute("subselect", subselect);
+		return "userInfo/aminMain";
+	}
+	
+	@GetMapping("/fieldselect")
+	public String fieldselect (@RequestParam("fieldselect") String fieldselect,Model model) {
+		model.addAttribute("fieldselect", fieldselect);
+		return "userInfo/aminMain";
+	}
+	
+	@GetMapping("/comuselect")
+	public String comuselect (@RequestParam("comuselect") String comuselect,Model model) {
+		model.addAttribute("comuselect", comuselect);
+		return "userInfo/aminMain";
+	}
+	
+	@GetMapping("/payselect")
+	public String payselect (@RequestParam("payselect") String payselect,Model model) {
+		model.addAttribute("payselect", payselect);
+		return "userInfo/aminMain";
+	}
+			
 }

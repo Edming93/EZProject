@@ -1,12 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	String payselect = null;
+	if(request.getParameter("payselect") != null) {
+		payselect = (String)request.getParameter("payselect");
+	}else {
+		payselect = "결제";
+	}
+		
+%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #contain * {
+            /* border: 1px solid black; */
+        }
+        #contain{
+            display: flex;
+            flex-direction: column;
+            width: 98%;
+            margin: 0 auto;
+            height: 98vh;
+        }
+        #submenu{
+            display: flex;
+            align-items: center;
+            width: 20%;
+            min-width: 200px;
+            height: 50px;
+            list-style: none;
+            margin: 0;
+            padding:5px 0 0 0;
+            text-align: center;
+        }
+        .menu{
+            width: 50%;
+            height: 100%;
+            min-width: 100px;
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            display: flex;
+    		align-items: center;
+    		justify-content: center;
+        }
+        #maincontent{
+            width: 100%;
+            border: 1px solid black;
+        }
+    </style>
+    <title>Document</title>
 </head>
 <body>
-<h1>결제메인!!</h1>
+<div id="contain">
+    <div>
+        <ul id="submenu">
+            <a class="menu" href="${pageContext.request.contextPath}/admin/payselect?payselect=결제"><li>결제내역</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/payselect?payselect=취소"><li>취소내역</li></a>            
+        </ul>
+    </div>
+    <div id="maincontent">
+        <%
+        	if(payselect.equals("결제")){
+        		%>
+	    		  <jsp:include page="./paylist.jsp"></jsp:include>
+	    		<%
+        	}else if(payselect.equals("취소")){
+        		%>
+	    		  <jsp:include page="./refundlist.jsp"></jsp:include>
+	    		<%
+        	}
+        %>
+    </div>
+</div>
 </body>
 </html>

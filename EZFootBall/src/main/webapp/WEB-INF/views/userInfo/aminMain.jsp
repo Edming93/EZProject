@@ -4,12 +4,15 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String select = null;
-	if(request.getParameter("select") != null) {
-		select = (String)request.getParameter("select");
+	System.out.println(session.getAttribute("select"));
+	if(session.getAttribute("select") != null) {
+		select = (String)session.getAttribute("select");
+		System.out.println("if"+select);
 	}else {
 		select = "유저관리";
+		System.out.println("else"+select);
 	}
-		
+	
 %> 	
 <!DOCTYPE html>
 <html>
