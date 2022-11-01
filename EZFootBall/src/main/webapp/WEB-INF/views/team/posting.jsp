@@ -7,19 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>팀매치 게시글 등록</title>
-<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
-     <link rel="stylesheet" href="${pageContext.request.contextPath }/js/jquery-ui.css"/>
+	<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/js/jquery-ui.css"/>
     <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/jquery-ui.js"></script>
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/TeamMatchPosting.css">
  	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
-	<style type="text/css">
-		.main_logo{
-         background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
-         background-size: 95px 35px;
-    	cursor: pointer;
-    }	
-	</style>
+	
 
 </head>
 <body>
@@ -143,7 +137,7 @@
 				      	
 				      		
 							<div class="search_area">
-								<input type="text" name="search" id="search" placeholder="구장주소의 지역이름을 정확히 입력해주세요(ex)전라도,경상도,서울)" />
+								<input type="text" name="search" id="search1" placeholder="구장주소의 지역이름을 정확히 입력해주세요(ex)전라도,경상도,서울)" />
 								
 							</div>
 							<div class="search_button">
@@ -166,7 +160,7 @@
                  
                    
                     document.getElementById("searcha").addEventListener("click", function(){
-                        			const address = document.getElementById("search").value;
+                        			const address = document.getElementById("search1").value;
                         			const fieldName = document.getElementById("fieldName");
                         			const fieldAddress = document.getElementById("fieldAddress");
                         			const fieldCode = document.getElementById("fieldCode");
@@ -269,7 +263,7 @@
              
                     </script>
            			
-            </script>
+           
                 </div>
             
         </div>
@@ -701,7 +695,21 @@
 	});
 </script>
 
+
 </body>
+<style type="text/css">
+		*{
+			box-sizing : border-box;
+			margin : revert;
+		}
+	
+		.main_logo{
+         background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
+         background-size: 95px 35px;
+    	cursor: pointer;
+    }	
+	</style>
+
 </html>
  
 

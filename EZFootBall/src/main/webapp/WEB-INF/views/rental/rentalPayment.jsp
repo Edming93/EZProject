@@ -637,7 +637,7 @@
      	 	console.log(typeof(match));		
     	  
     	  if('${match.gameType}' === 'T'){
-    		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee="+gamePay+"&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}";
+    		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee="+gamePayInt+"&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=#{match.gameCode}";
     	  }else{
     		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G";
     	  }
