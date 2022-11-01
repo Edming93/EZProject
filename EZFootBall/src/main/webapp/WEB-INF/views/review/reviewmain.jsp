@@ -711,15 +711,18 @@ let play_btn = document.querySelector(".fa-play");
 						const cdate = document.createElement("p");
 						cdate.innerText = data.vo.createDate;
 						const btn1 = document.createElement("button");
-						btn1.innerText = "수정"
 						btn1.id = "btnedit";
 						const btn2 = document.createElement("button");
-						btn2.innerText = "삭제"
 						btn1.style.borderRadius = "5px";
 						btn2.style.borderRadius = "5px";
+						btn1.style.backgroundColor = "#26A653";
+						btn2.style.backgroundColor = "#26A653";
+						btn1.style.color = "white";
+						btn2.style.color = "white";
 						btn1.style.border = "1px solid white";
 						btn2.style.border = "1px solid white";
-						
+						btn1.innerText = "수정"
+						btn2.innerText = "삭제"	
 						
 						div3.append(btn1);
 						div3.append(btn2);
