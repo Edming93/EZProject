@@ -136,4 +136,9 @@ public class MyPageController {
 		return map;
 	}
 
+	@GetMapping("/guide1")
+	public String guide1() {
+
+		return "/myPage/guide1";
+	}
 }

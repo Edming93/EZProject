@@ -87,10 +87,8 @@
 .main_title{
 	display: block;
 	width: 100%;
-	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat;
-	background-size: contain;
 	padding: 10px 0;
-	text-indent: -9999px;
+	margin-bottom: 30px;
 }
 
 #main_container {
@@ -104,133 +102,57 @@
 .main_area {
 	display:flex;
     width: 1024px;
-    height: 900px;
+    min-height: 1700px;
 /*     background-color: #ffaaaa; */
-    justify-content: space-evenly;
-    align-items: center;
+/*     justify-content: space-evenly; */
+/*     align-items: center; */
     flex-wrap: wrap;
 /*     border: 1px solid black; */
 }
 
 .main_content1 {
-	display: flex;
-	flex-direction: column;
-	width: 36%;
+	width: 100%;
 	/* height: 98%; */
-	height:90%;
+	height:500px;
 /* 	background-color: #fff; */
+	background: url("${pageContext.request.contextPath}/image/guide1.png") no-repeat center;
+    background-size: contain;
 }
 
 .main_content2 {
-	width: 62%;
-	height:90%;
-	background-color: #fff;
-	padding: 0 30px;
-}
-
-.main_left1 {
+	display: flex;
 	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
+	/* height: 98%; */
+	height: 75%;
+/*  	background-color: #eee; */
+ 	padding: 20px;
+ 	flex-direction: column;
+    justify-content: space-between;
 }
 
-#user_info > ul {
+.item_box p {
+	padding-left: 20px;
+}
+
+.item_box ul {
+	padding-left:20px;
 	list-style-type: none;
-	padding: 0;
 }
 
-#user_info > ul > li{
-	padding: 10px 0;
+.item_box {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #26a653;
 }
 
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
+.item_box h3 {
+	padding-bottom: 15px;
 }
 
-.main_right1 {
-	width: 100%;
-	height: 55%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
+.item_box li {
+	padding: 5px 0;
 }
 
-.main_right2 {
-	width: 100%;
-	height: 45%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
 
-.name1 {
-	display: inline-block;
-}
-
-.main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_left2 > ul > li {
-	margin-bottom: 30px;
-}
-
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
-}
-
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
-}
-
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
-}
 
 
 .bottom_banner {
@@ -328,50 +250,56 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
-			
 				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% <span>(${userVO.userWin+userVO.userLose}전 ${userVO.userWin}승 ${userVO.userLose}패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">랭킹시스템 소개</a></li>
-							<li><a href="#">EZ풋볼 규칙설명</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/guide1">EZ문화 소셜 가이드</a></li>
-						</ul>
-					</section>
+					
 				</div>
 				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
+					<h1 class="main_title">EZ풋볼 소셜 문화 가이드</h1>
+					<div class="main_item1 item_box">
+						<h3>EZ풋볼 소셜 문화 함께 해요</h3>
+						<p>EZ풋볼 소셜 문화 가이드는 즐겁고 활기찬 문화를 위해 만들어졌어요. EZ풋볼은 함께하는 즐거움의 가치를 중요하게
+							생각해요. EZ풋볼 유저들과 함께 패스와 움직임을 통해 만든 플레이의 기쁨, 함께 나눈 환호를 기억하기 바라요. <br /><br />
+							
+							긍정 에너지가 넘치는 그라운드를 만들기 위해 계속해서 노력할게요. EZ풋볼 소셜 문화에 동참해 주세요!</p>
+					</div>
+					<div class="main_item2 item_box">
+						<h3>모두의 시간은 소중해요</h3>
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-							<li><span id="MTbtn">팀 정보 수정</span></li>
+							<li>- 매치가 정시에 시작할 수 있도록 10분 전 풋살장에 도착해요</li>
+							<li>- 늦을 때는 미리 매니저에게 알려요</li>
 						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
+					</div>
+					<div class="main_item3 item_box">
+						<h3>이타적인 플레이를 해요</h3>
 						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
+							<li>- 긴 드리블보다 패스를 주고받으며 플레이를 만들어요</li>
+							<li>- 모든 포지션에서 열심히 뛰어요</li>
 						</ul>
-					</section>
+					</div>
+					<div class="main_item4 item_box">
+						<h3>실력, 성별 상관없이 모두 즐거워요</h3>
+						<ul>
+							<li>- 실력에 상관없이 함께 플레이를 만들어요</li>
+							<li>- 혼자 오는 사람들이 소외되지 않도록 친분을 과도하게 드러내지 않아요</li>
+							<li>- 상대팀의 멋진 득점에 존중의 박수를 보내요</li>
+						</ul>
+					</div>
+					<div class="main_item5 item_box">
+						<h3>서로를 응원하고 존중해요</h3>
+						<ul>
+							<li>- 존댓말로 대화해요</li>
+							<li>- 힘을 불어넣는 긍정적인 콜을 해요</li>
+							<li>- 서로에게 지시하지 않아요</li>
+						</ul>
+					</div>
+					<div class="main_item6 item_box">
+						<h3>다치지 않고 건강하게 플레이해요</h3>
+						<ul>
+							<li>- 풋살화를 신어요</li>
+							<li>- 서로에게 위협을 가하는 플레이(백 태클, 사람을 향한 슈팅)는 자제해요</li>
+							<li>- 파울을 하면 잠시 경기를 멈춰요</li>
+						</ul>
+					</div>
 				</div>
             </div>
         </div>
@@ -392,16 +320,7 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
-         <script type="text/javascript">
-        document.getElementById("MTbtn").addEventListener("click",function(){
-        	if(${userVO.teamCode == 0}){
-        		alert("팀이 존재하지 않습니다");
-        		location.href = "${pageContext.request.contextPath}/myPage/myPage";
-        	}else{
-        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
-        	}
-        });
-        </script>
+
 	</div>
 </body>
 </html>

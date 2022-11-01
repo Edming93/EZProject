@@ -199,6 +199,11 @@
 	font-weight: 800;
 }
 
+#npc {
+	text-align: center;
+	font-size: 40px;
+}
+
 
 .bottom_banner {
 	width: 100%;
@@ -288,6 +293,7 @@ footer {
 				<div class="main_content1">
 					<section class="main_box1">
 						<div id="rantal_nav">
+							<h1 id="npc">예약 내역이 없습니다.</h1>
 							<table id="rantal_list">
 								<!-- <thead> -->
 									<tr>
@@ -298,6 +304,7 @@ footer {
 										<th>매치시간</th>
 										<th>상태</th>
 									</tr>
+									
 								<!-- </thead> -->
 								<!-- <tbody> -->
 <!-- 									<tr class="rantal_item"> -->
@@ -375,7 +382,8 @@ footer {
             });
         </script>
         <script type="text/javascript">
-        
+        	const table = document.getElementById("rantal_list");
+        	table.style.display = "none";
         	// 목록 받아오기
         	window.addEventListener("DOMContentLoaded", function(){
 					$.ajax({
@@ -384,11 +392,11 @@ footer {
 						contentType: "application/json; charset=utf-8",
 						dataType: "json",
 						async: false,
-						success: function(data){
-							const table = document.getElementById("rantal_list");
-						
+						success: function(data){				
 							console.log(data);
 							for (const list of data.list) {
+								$('#npc').hide();
+								table.style.display = "inline-table";
 								console.log(data.userName);
 								const tr1 = document.createElement("tr");
 								const tr2 = document.createElement("tr");
@@ -406,7 +414,7 @@ footer {
 									"<li>매치형태 : "+list.fieldType+"</li>"+
 									"<li>예약신청일 : "+list.rvDay+"</li>"+
 									"<li>예약자 : "+data.userName+"</li>"+
-									"<li>결제금액 : "+list.userPayment+"</li>"+
+									"<li>결제금액 : "+list.userPayment.toLocaleString()+"</li>"+
 									"</ul>";
 								td1.classList.add("rantal_content");
 								td1.style.height = "100px";

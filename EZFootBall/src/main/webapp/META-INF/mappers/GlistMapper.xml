@@ -98,11 +98,11 @@
 	
 	<!-- 마이페이지 경기내역 불러오기 -->
 	<select id="getMatchList" resultType="FieldReservationVO">
-	    SELECT rv_code, CASE rv_type WHEN 'S' THEN '소셜매치' WHEN 'T' THEN '팀매치' ELSE 'NULL' END rv_type,
+	    SELECT rv_code, CASE rv_type WHEN 'S' THEN '소셜매치' WHEN 'TS' THEN '팀매치' ELSE 'NULL' END rv_type,
         rv_day, field_code, field_name, field_address, field_type, field_rentalfee, user_code, user_payment,
         game_day, game_time, DATE_FORMAT(game_time, '%H:%i') game_time1, DATE_FORMAT(DATE_ADD(game_time, INTERVAL 2 HOUR), '%H:%i') game_time2 
         FROM field_reservation
-		WHERE (user_code = #{userCode}) AND (rv_type = 'S' OR rv_type = 'T')
+		WHERE (user_code = #{userCode}) AND (rv_type = 'S' OR rv_type = 'TS')
 		ORDER BY game_day, game_time
 	</select>
 	

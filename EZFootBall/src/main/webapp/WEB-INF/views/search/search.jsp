@@ -68,7 +68,7 @@
 					</section>
 				</div>
 				<div id="search_result_box">
-					<span class="closebtn"><img src="image/close1.jpg" /></span>
+					<span class="closebtn"><img src="${pageContext.request.contextPath}/image/close1.jpg" /></span>
 					<h5 id="search_result_box_inner"></h5>
 					<section class="sch">
 						<ul id="insert_target"></ul>

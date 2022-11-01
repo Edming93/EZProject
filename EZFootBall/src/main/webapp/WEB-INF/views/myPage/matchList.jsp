@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구장예약 내역</title>
+<title>경기내역</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -199,6 +200,11 @@
 	font-weight: 800;
 }
 
+#npc {
+	text-align: center;
+	font-size: 40px;
+}
+
 
 .bottom_banner {
 	width: 100%;
@@ -288,6 +294,7 @@ footer {
 				<div class="main_content1">
 					<section class="main_box1">
 						<div id="rantal_nav">
+							<h1 id="npc">경기 내역이 없습니다.</h1>
 							<table id="rantal_list">
 								<!-- <thead> -->
 									<tr>
@@ -359,7 +366,7 @@ footer {
 				</div>
             </div>
         </div>
-
+		
 		
         
         <div class="bottom_banner"></div>
@@ -377,7 +384,8 @@ footer {
             });
         </script>
         <script type="text/javascript">
-        
+	        const table = document.getElementById("rantal_list");
+	    	table.style.display = "none";
         	// 목록 받아오기
         	window.addEventListener("DOMContentLoaded", function(){
 					$.ajax({
@@ -387,15 +395,18 @@ footer {
 						dataType: "json",
 						async: false,
 						success: function(data){
-							const table = document.getElementById("rantal_list");
-						
+
+							
 							console.log(data);
 							for (const list of data.list) {
+								$('#npc').hide();
+								table.style.display = "inline-table";
 								console.log(data.userName);
+								
+								
 								const tr1 = document.createElement("tr");
 								const tr2 = document.createElement("tr");
 								const td1 = document.createElement("td");
-
 								tr1.innerHTML = 
 									"<td>"+list.rvCode+"</td>"+
 									"<td><a href='${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+ list.fieldCode+"'>"+list.fieldName+"</a></td>"+
@@ -408,7 +419,7 @@ footer {
 									"<li>매치형태 : "+list.fieldType+"</li>"+
 									"<li>예약신청일 : "+list.rvDay+"</li>"+
 									"<li>예약자 : "+data.userName+"</li>"+
-									"<li>결제금액 : "+list.userPayment+"</li>"+
+									"<li>결제금액 : "+list.userPayment.toLocaleString()+"</li>"+
 									"</ul>";
 								td1.classList.add("rantal_content");
 								td1.style.height = "100px";
