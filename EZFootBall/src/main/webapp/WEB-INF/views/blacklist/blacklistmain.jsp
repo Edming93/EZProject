@@ -44,10 +44,19 @@ font-family: 'Gowun Dodum', sans-serif;
   			display: flex;
             position: fixed;
             right: 100px;
-            width: 65px;
-            height: 65px;
-            bottom: 90px;
+            width: 120px;
+            height:120px;
+            bottom: 100px;
+            background: #FFFFFF;
+            border-radius: 60px;
+            justify-content: center;
+       		align-items: center;
 
+}
+a{
+	color : black;
+	text-decoration : none;
+	font-family: 'Gowun Dodum', sans-serif;
 }
     
     .container {
