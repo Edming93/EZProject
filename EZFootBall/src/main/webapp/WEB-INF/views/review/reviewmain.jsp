@@ -27,6 +27,9 @@
 	charset="utf-8"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
 * {
 	box-sizing: border-box;
@@ -45,6 +48,9 @@ textarea {
 	resize: both;
 }
 
+div{
+	font-family: 'Gowun Dodum', sans-serif;
+}
 textarea::placeholder {
   color: rgb(38, 166, 83);
   font-weight: bold;
@@ -55,11 +61,16 @@ textarea::placeholder {
 #div1 {
 	margin: 0 auto;
 	width: 1024px;
+	
+}
+p{
+font-family: 'Gowun Dodum', sans-serif;
 }
 
 #comment {
 	display: flex;
 	flex-direction: column;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 
 .container {
@@ -240,23 +251,56 @@ textarea::placeholder {
 	background-color: #26A653;
 	margin-top: 100px;
 }
+  footer {
+            width: 100%;
+          
+            height: 423px;
+            display: flex;
+            justify-content: space-evenly;   
+            padding: 30px;
+            background-color: #2a2a2a;
+        }
+        .footer_subcon{
+            max-width: 1024px;
+        }
+        .footer_left {
+            width:100%;
+            
+        }
+        .footer_left .footer_nav{
+            display: flex;
 
-footer {
-	width: 100%;
-	height: 423px;
-	display: flex;
-	justify-content: space-evenly;
-	padding: 30px;
-	background-color: #2a2a2a;
-}
+        }
+        .footer_nav ul {
+            list-style-type: none;
+            line-height: 200%;
+        }
+        .footer_nav ul h3 {
+            color : rgba(255, 255, 255, 0.649);
+        }
+        .footer_nav ul li{
+            color :rgba(255, 255, 255, 0.348)
+        }
+        .footer_right {
+            width:30%;
+            padding-top: 14px;
 
-.footer_left {
-	width: 40%;
-}
-
-.footer_right {
-	width: 40%;
-}
+        }
+        .footer_com{
+            line-height: 150%;
+        }
+        .footer_com h2{
+            color : rgba(255, 255, 255, 0.649);
+            border-bottom: 3px solid #26A653;
+            width: 32%;
+        }
+        .footer_com p{
+            color :rgba(255, 255, 255, 0.348);
+        }
+        .managermove a{
+            color : white;
+            text-decoration: none;
+        }
 
 .login_icon {
 	margin-left: 15px;
@@ -559,9 +603,7 @@ let play_btn = document.querySelector(".fa-play");
 </script>
 
 		<div id="div1">
-			<hr />
 			<div id="comment"></div>
-			<hr />
 			<div id="input">
 				<!-- 작성자 :
 			<textarea name="name" id="name" cols="10" rows="3"></textarea>
@@ -641,7 +683,7 @@ let play_btn = document.querySelector(".fa-play");
 						div.style.display = "flex";
 						div.style.flexDirection = "column";
 						div.classList.add('test');
-						div.style.borderBottom = "1px solid black";
+						div.style.borderTop = "1px solid black";
 						
 						const div2 = document.createElement("div");
 						div2.classList.add('test2');
@@ -652,13 +694,12 @@ let play_btn = document.querySelector(".fa-play");
                         
                         const div3 = document.createElement("div");
                         div3.style.flex = "1";
-                        div3.style.padding = "3%";
                         
-						const cname = document.createElement("h4");
-						cname.innerText = "작성자 :"+data.vo.userName;
+						const cname = document.createElement("p");
+						cname.innerText = data.vo.userName;
 						const ccontent = document.createElement("p");
 						ccontent.innerText = content;
-						const cdate = document.createElement("h3");
+						const cdate = document.createElement("p");
 						cdate.innerText = data.vo.createDate;
 						const btn1 = document.createElement("button");
 						btn1.innerText = "수정"
@@ -679,6 +720,7 @@ let play_btn = document.querySelector(".fa-play");
 						div.append(div2);
 						div.append(div3);
 						comdiv.append(div);
+						div.style.marginTop = "2%";
 						
 						//수정 버튼 클릭시 수정폼 생성
 						btn1.addEventListener("click", function(){
@@ -703,7 +745,7 @@ let play_btn = document.querySelector(".fa-play");
 			
 							 	const target = document.getElementById('btnedit');
 							 	target.disabled = false;
-							 	document.getElementsByClassName("test2")[0].style.display = "block";
+							 	document.getElementsByClassName("test2")[0].style.display = "flex";
 							 	const content = updateinput.value;
 							 	const reviewCode = data.vo.reviewCode;
 							 	const createDate = new Date();
@@ -783,7 +825,9 @@ let play_btn = document.querySelector(".fa-play");
 						const div = document.createElement("div");
 						div.style.display = "flex";
 						div.style.flexDirection = "column";
-						div.style.borderBottom = "1px solid black";
+						div.style.borderTop = "1px solid black";
+						div.style.fontFamily = "Gowun Dodum";
+						
 						
                         const div2 = document.createElement("div");
 
@@ -792,14 +836,14 @@ let play_btn = document.querySelector(".fa-play");
                         div2.style.fontSize = "25px";
                         const div3 = document.createElement("div");
                         div3.style.flex = "1";
-                        div3.style.padding = "3%";
+
                         
 						
-						const cname = document.createElement("h4");
-						cname.innerText = "작성자 : "+comment.userName;
+						const cname = document.createElement("p");
+						cname.innerText = comment.userName;
 						const ccontent = document.createElement("P");
 						ccontent.innerText = comment.content;
-						const cdate = document.createElement("h3");
+						const cdate = document.createElement("p");
 						cdate.innerText = comment.createDate;
 						/* const cid = document.createElement("h4");
 						cid.innerText = comment.id; */
@@ -893,13 +937,15 @@ let play_btn = document.querySelector(".fa-play");
 						
 						
 
-						/* div.append(cid); */
 						div.append(cdate);
 						div.append(cname);
 						div2.append(ccontent);
 						div.append(div2);
 						div.append(div3);
 						comdiv.append(div);
+						div.style.marginTop = "2%";
+						comdiv.style.marginTop = "3%";
+						
 
 						
 						
@@ -913,5 +959,58 @@ let play_btn = document.querySelector(".fa-play");
 	</script>
 		</div>
 	</div>
+	 <div class="bottom_banner">
+
+    </div>
+     <footer>
+        <div class="footer_subcon">
+            <div class="footer_left">
+                <div class="footer_nav">
+                    <ul>
+                        <h3>매치 정보</h3>
+                        <li>소셜 매치</li>
+                        <li>팀 매치</li>
+                        <li>구장 예약</li>
+                    </ul>
+                    <ul>
+                        <h3>서비스 지역</h3>
+                        <li>서울</li>
+                        <li>인천</li>
+                        <li>경기</li>
+                        <li>전라도</li>
+                        <li>경상도</li>
+                        <li>충청도</li>
+                        <li>제주도</li>
+                    </ul>
+                    <ul>
+                        <h3>이지풋볼</h3>
+                        <li>이지풋볼 소개</li>
+                        <li>공지사항</li>
+                        <li>자주 묻는 질문</li>
+                        <li>구장 제휴</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer_right">
+            <div class="footer_com">
+                <h2>EZfootball.com</h2>
+                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
+                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
+                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
+                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
+                    국번없이 119
+                </p>
+                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
+                    통신판매업 신고 2022-서울강서-0000
+                </p>
+                <p>Copyright EZ ALL rights reserved</p>
+            </div>
+            <h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
+        </div>
+        
+    </footer>
+</div>
+	
 </body>
 </html>
