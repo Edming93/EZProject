@@ -393,10 +393,11 @@ footer {
             });
         </script>
          <script type="text/javascript">
+         console.log(${userVO.teamCode});
         document.getElementById("MTbtn").addEventListener("click",function(){
         	if(${userVO.teamCode == 0}){
         		alert("팀이 존재하지 않습니다");
-        		location.href = "${pageContext.request.contextPath}/myPage/myPage";
+//         		location.href = "${pageContext.request.contextPath}/myPage/myPage";
         	}else{
         		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
         	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -359,7 +360,7 @@ footer {
 								<li>지역 : ${user.userLocal }</li>
 								<li>Email : ${user.userEmail1}${user.userEmail2 }</li>
 								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : ${uinVO.userVr*100}% <span>(00전 00승 00패)</span></li>
+								<li>승률 : <fmt:formatNumber value="${(user.userWin/(user.userWin+user.userLose))*100}" pattern=".0"/>% <span>(${user.userWin+user.userLose}전 ${user.userWin}승 ${user.userLose}패)</span></li>
 								<li>Team : ${uinVO.userGroup }</li>
 							</ul>
 						</div>
@@ -388,7 +389,7 @@ footer {
 									<li>${tmVO.tmember3}</li>
 									<li>${tmVO.tmember4}</li>
 									<li>${tmVO.tmember5}</li>
-									<c:if test="${tmVO.tmember6 != null}">
+									<c:if test="${tmVO.tmember6} != null">
 										<li>${tmVO.tmember6}</li>
 									</c:if>
 								</ol>
@@ -401,7 +402,7 @@ footer {
 						<c:if test="${user.userCode == tmVO.userCode1 }">
 							<div class="teamInfo">
 								<h4>팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 : ${tmVO.teamCode})</span></h4>
-								<h3>당신은 주장 입니다</h3>
+								<h3>당신은 주장 입니다${tmVO.tmember6}</h3>
 							</div>
 							<div class=teamlistcon>
 								<div class="teamlist">
@@ -413,7 +414,7 @@ footer {
 										<li>${tmVO.tmember3}<input type="checkbox" name="tmember3" value="${tmVO.tmember3}"></li>
 										<li>${tmVO.tmember4}<input type="checkbox" name="tmember4" value="${tmVO.tmember4}"></li>
 										<li>${tmVO.tmember5}<input type="checkbox" name="tmember5" value="${tmVO.tmember5}"></li>
-										<c:if test="${tmVO.tmember6 != null}">
+										<c:if test="${tmVO.tmember6} != null ">
 											<li>${tmVO.tmember6}<input type="checkbox" name="tmember6" value="${tmVO.tmember6}"></li>
 										</c:if>
 									</ol>
@@ -460,6 +461,7 @@ footer {
             });
         </script>
         <script type="text/javascript">
+        	console.log(${tmVO.tmember6});
         	document.getElementById("Dbtn").addEventListener("click", function(){
         		if(${tmVO.teamCode == null || tmVO == null}){
         			alert("팀이 없어 해당 페이지는 사용 불가합니다.");

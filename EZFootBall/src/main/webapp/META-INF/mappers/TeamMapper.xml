@@ -245,7 +245,7 @@
 	
 	<!-- 3. teamDatail 이동시 유저정보 불러오기 -->
 	<select id="getAllUserInfo" resultType="UserVO">
-		select user_name, user_code, user_local, user_email1,user_email2 from user_info
+		select user_name, user_code, user_local, team_code, user_email1,user_email2, user_win, user_lose, user_score from user_info
 		where user_id = #{userId}
 	</select>
 	

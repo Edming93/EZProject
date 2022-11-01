@@ -249,13 +249,17 @@ public class TeamController {
 	// 팀 등록시 완료 버튼 눌렀을 경우
 	
 	@PostMapping("/teamUpdate")
-	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo) {
+	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo, HttpSession session) {
 	
 		if(service.TeamMemberList(vo)) {
 			int LTC = service.getLastTeamC();
 			vo.setTeamCode(LTC);
+			UserVO uvo = (UserVO)session.getAttribute("sessionVO");
 			service.updateUserAbil(vo);
 			service.updateUserInfo(vo);
+			uvo.setTeamCode(LTC);
+			session.setAttribute("sessionVO", uvo );
+			
 			return "team/teamMain";
 		}else {
 			return "team/registeration";
@@ -279,16 +283,18 @@ public class TeamController {
 	
 	
 	@GetMapping("/teamDetailInfo")
-	public String teamDetailInfo(HttpSession session,Model model, UserVO userVO, UinVO uinVO, TeamMemberVO tmVO) {
+	public String teamDetailInfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-		System.out.println(uvo.getUserId());
-		userVO = service.getAllUserInfo(uvo.getUserId());
+//		System.out.println(uvo.getUserId());
+//		userVO = service.getAllUserInfo(uvo.getUserId());
+//		System.out.println(userVO.getTeamCode());
 		uinVO = service.getAllAbil(uvo.getUserCode());
 		tmVO = service.getAllTeamMem(uvo.getTeamCode());
+		System.out.println("커커커커커커커컼커ㅓ-----");
 		System.out.println(uvo.getTeamCode());
 		System.out.println(tmVO.getTmember6());
 		System.out.println(tmVO.getTmember5());
-		model.addAttribute("user", userVO);
+		model.addAttribute("user", uvo);
 		model.addAttribute("uinVO", uinVO);
 		model.addAttribute("tmVO", tmVO);
 		
@@ -296,8 +302,9 @@ public class TeamController {
 	}
 	
 	@GetMapping("/deleteT")
-		public String deleteTeam(@ModelAttribute TeamMemberVO vo) {
-		
+		public String deleteTeam(@ModelAttribute TeamMemberVO vo, HttpSession session) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		uvo.setTeamCode(0);
 		System.out.println(vo.getTeamCode());
 		System.out.println(vo.getTmember3());
 		System.out.println(vo.getTeamName());
@@ -308,7 +315,8 @@ public class TeamController {
 		System.out.println("실행되는거야?12");
 		service.deleteT(vo);
 		System.out.println("젭라베잘버레저라머램ㄹ머닒니ㅏㅓㅇㅁ니ㅏㅓㅇ");
-
+		session.setAttribute("sessionVO", uvo);
+		
 		return "redirect:/myPage/myPage";
 	}
 	
