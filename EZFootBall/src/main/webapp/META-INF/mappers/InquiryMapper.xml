@@ -6,8 +6,17 @@
 	
 	<select id="InquiryAll" resultType="inquiryVO">
 		SELECT * FROM inquiry
+	</select>
+	
+	<select id="InquiryList" resultType="inquiryVO">
+		SELECT * FROM inquiry
 		WHERE user_code = #{userCode}
 	</select>
 	
+	<!-- 문의 작성 -->
+	<insert id="InquiryAdd">
+		INSERT INTO inquiry (inquiry_title, inquiry_content, inquiry_state, create_date, userCode)
+		VALUES(#{inquiryTitle}, #{inquiryContent}, #{inquiryState}, #{createDate}, #{userCode})
+	</insert>
 	
 </mapper>

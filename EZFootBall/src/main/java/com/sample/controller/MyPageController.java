@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.FindService;
 import com.sample.service.GlistService;
+import com.sample.service.InquiryService;
 import com.sample.service.LoginService;
 import com.sample.service.RentalService;
 import com.sample.service.UinService;
@@ -33,15 +34,17 @@ public class MyPageController {
 	private FindService findService;
 	private RentalService rentalService;
 	private GlistService glistService;
+	private InquiryService inquiryService;
 
 	public MyPageController(LoginService loginService, UinService uinService, FindService findService,
-			RentalService rentalService, GlistService glistService) {
+			RentalService rentalService, GlistService glistService, InquiryService inquiryService) {
 		super();
 		this.loginService = loginService;
 		this.uinService = uinService;
 		this.findService = findService;
 		this.rentalService = rentalService;
 		this.glistService = glistService;
+		this.inquiryService = inquiryService;
 	}
 
 	@GetMapping("myPage")
@@ -161,10 +164,12 @@ public class MyPageController {
 		return "/myPage/inquiry";
 	}
 
+	@ResponseBody
 	@GetMapping("/inquiry_list")
-	public List<InquiryVO> inquiryList(HttpSession session) {
+	public List<InquiryVO> inquiryList(HttpSession session, InquiryVO inquiryVO) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-		List<InquiryVO> list = null;
+		inquiryVO.setUserCode(uvo.getUserCode());
+		List<InquiryVO> list = inquiryService.inquiryAll(inquiryVO);
 
 		return list;
 	}
