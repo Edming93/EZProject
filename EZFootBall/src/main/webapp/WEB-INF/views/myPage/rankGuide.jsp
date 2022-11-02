@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>이지풋볼 / 랭킹시스템 소개</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -87,10 +87,17 @@
 .main_title{
 	display: block;
 	width: 100%;
-	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat;
-	background-size: contain;
 	padding: 10px 0;
-	text-indent: -9999px;
+	margin-bottom: 15px;
+	opacity: 0.8;
+}
+
+.main_title2{
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+ 	margin: 30px 0;
+ 	opacity: 0.8;
 }
 
 #main_container {
@@ -104,134 +111,105 @@
 .main_area {
 	display:flex;
     width: 1024px;
-    height: 900px;
 /*     background-color: #ffaaaa; */
-    justify-content: space-evenly;
-    align-items: center;
+/*     justify-content: space-evenly; */
+/*     align-items: center; */
     flex-wrap: wrap;
 /*     border: 1px solid black; */
 }
 
 .main_content1 {
-	display: flex;
-	flex-direction: column;
-	width: 36%;
+	width: 100%;
 	/* height: 98%; */
-	height:90%;
+/* 	height:500px; */
 /* 	background-color: #fff; */
 }
 
 .main_content2 {
-	width: 62%;
-	height:90%;
-	background-color: #fff;
-	padding: 0 30px;
-}
-
-.main_left1 {
+/* 	display: flex; */
 	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
+	/* height: 98%; */
+/*  	background-color: #eee; */
+ 	padding: 20px;
+/*  	flex-direction: column; */
+/*     justify-content: space-between; */
 }
 
-#user_info > ul {
+.rank_box {
+	width: 15%;
+}
+
+.rank_box2 {
+	width: 70%;
+	padding-left: 10px;
+}
+
+.rank_box2 p {
+	width: 70%;
+	font-size: 14px;
+	font-weight:bold;
+	opacity: 0.8;
+}
+
+.item_box > p {
+	padding-left: 20px;
+}
+
+.item_box ul {
 	list-style-type: none;
+	width: 100%;
 	padding: 0;
 }
 
-#user_info > ul > li{
-	padding: 10px 0;
+.item_box {
+	display: flex;
+    align-items: center;
+/* 	border-bottom: 1px solid black; */
+	padding: 20px;
+	height: 150px;
 }
 
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
-}
-
-.main_right1 {
-	width: 100%;
-	height: 55%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.main_right2 {
-	width: 100%;
-	height: 45%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.name1 {
-	display: inline-block;
-}
-
-.main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_left2 > ul > li {
-	margin-bottom: 30px;
-}
-
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
+.item_box h3 {
+/* 	padding-left: 15px; */
 	text-align: center;
+}
+
+.main_item1{
 	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
+	font-weight: bold;
+	font-size: 14px;
+	opacity: 0.8;
 }
 
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
+.main_item1:last-child {
+	margin: 0 20px;
 }
 
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
+
+.main_item2 .rank_box h3, .main_item2 .rank_box span{
+	color: #008000;
 }
 
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
+.main_item3 .rank_box h3, .main_item3 .rank_box span {
+	color: #4b89dc;
+}
+
+.main_item4 .rank_box h3, .main_item4 .rank_box span {
+	color: #db4455;
+}
+
+.item_box li {
+	padding: 5px 0;
+}
+
+.rank_box span{
+/* 	padding-left: 15px; */
+	width:100%;
+	font-size: 14px;
+	font-weight: bold;
 	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
+	display: block;
 }
-
 
 .bottom_banner {
 	width: 100%;
@@ -249,6 +227,40 @@ footer {
 	background-color: #2a2a2a;
 }
 
+.icon_box span {
+	display: block;
+	margin: 3px 0;
+	width: 30px;
+	height: 30px;
+}
+
+.rookie {
+	padding: 3px 3.9px;
+	background-color: #008000;
+	border-radius: 45px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.amateur {
+	padding: 3px 3.9px;
+	background-color: #4b89dc;
+	border-radius: 45px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.semi_pro {
+	padding: 3px 3.9px;
+	background-color: #db4455;
+	border-radius: 45px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 18px;
+}
+
 .footer_left {
 	width: 40%;
 }
@@ -264,17 +276,7 @@ footer {
 .etc_icon {
 	margin-left: 10px;
 }
-#MTbtn{
-	display: inline-block;
-    text-decoration: none;
-    border-radius: 20px;
-    color: #000;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px 0;
-    background-color: #fffaec;
-}
+
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -328,49 +330,77 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
-			
-				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% <span>(${userVO.userWin+userVO.userLose}전 ${userVO.userWin}승 ${userVO.userLose}패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/notice">공지사항</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rankGuide">랭킹시스템 소개</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/guide1">EZ문화 소셜 가이드</a></li>
-						</ul>
-					</section>
-				</div>
+<!-- 				<div class="main_content1"> -->
+					
+<!-- 				</div> -->
 				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
+					<h1 class="main_title">랭킹시스템 소개</h1>
+					
+					<div class="main_item1 item_box">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-							<li><span id="MTbtn">팀 정보 수정</span></li>
+							<li>- EZ풋볼은 소셜매치를 통해 경기한 기록을 기준으로 레이팅점수가 매겨져요.</li>
+							<li>- 레이팅점수가 오르면 EZ풋볼의 랭킹도 올라가고, 플레이 수준에 따라 레벨시스템이 존재해요.</li>							
+							<li>- 레벨은 루키, 아마추어, 세미프로로 나뉘며 각각 3개의 단계로 이루어져 있어요.</li>
+							<li>- 나의 컨디션이나 참가자들의 성향, 경기 중 발생하는 불규칙성 등에 따라 언제든 레벨이 달라질 수 있어요.</li>
+							<li>- EZ풋볼은 정확한 레벨을 위해 여러 경기를 지켜보고 레벨을 부여해요. 매치에 자주 참여할수록 레벨은 정확해질거에요.</li>
+														
 						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
-						</ul>
-					</section>
+<!-- 						<ul><h4>ex)</h4> -->
+<!-- 							<li>승리시 10점, 패배시 -5점</li> -->
+<!-- 							<li>골 3점, 어시스트 1점</li> -->
+<!-- 							<li>반칙 -1점</li> -->
+<!-- 						</ul> -->
+					</div>
+					<h1 class="main_title2">레벨시스템</h1>
+					<div class="main_item2 item_box">
+<!-- 						<iconify-icon icon='emojione-monotone:letter-r' style='color: #008000;' width='30' height='30'></iconify-icon> -->
+						<div class="icon_box">
+							<span class="rookie">R1</span>
+							<span class="rookie">R2</span>
+							<span class="rookie">R3</span>
+						</div>
+						<div class="rank_box">
+							<h3>루키</h3>
+							<span>(Rookie)</span>
+<!-- 							<span>(루키1, 루키2, 루키3)</span> -->
+						</div>
+						<div class="rank_box2">
+							<p>루키는 풋살 경험이 적거나 볼 컨트롤, 패스, 드리블이 아직 투박하거나 체력이 부족해요! </p>
+						</div>
+					</div>
+					<div class="main_item3 item_box">
+<!-- 						<iconify-icon icon='emojione-monotone:letter-a' style='color: #4b89dc' width='30' height='30'></iconify-icon> -->
+						<div class="icon_box">
+							<span class="amateur">A1</span>
+							<span class="amateur">A2</span>
+							<span class="amateur">A3</span>
+						</div>
+						
+						<div class="rank_box">
+							<h3>아마추어</h3>
+							<span>(Amateur)</span>
+<!-- 							<span>(아마추어1, 아마추어2, 아마추어3)</span> -->
+						</div>
+						<div class="rank_box2">
+							<p>아마추어는 기본기를 가졌어요! 압박이 없는 상황에서 볼 컨트롤, 패스, 드리블이 안정적이에요.</p>
+						</div>
+					</div>
+					<div class="main_item4 item_box">
+<!-- 						<iconify-icon icon='emojione-monotone:letter-s' style='color: #db4455' width='30' height='30'></iconify-icon> -->
+						<div class="icon_box">
+							<span class="semi_pro">S1</span>
+							<span class="semi_pro">S2</span>
+							<span class="semi_pro">S3</span>
+						</div>
+						<div class="rank_box">
+							<h3>세미프로</h3>
+							<span>Semi_pro</span>
+<!-- 							<span>(세미프로1, 세미프로2, 세미프로3)</span> -->
+						</div>
+						<div class="rank_box2">
+							<p>세미프로는 쉽게 볼을 빼앗기지 않고 압박이 있는 상황에서도 패스와 드리블이 유연하고, 공격과 수비가 모두 안정적이에요.</p>
+						</div>
+					</div>
 				</div>
             </div>
         </div>
@@ -391,17 +421,7 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
-         <script type="text/javascript">
-         console.log(${userVO.teamCode});
-        document.getElementById("MTbtn").addEventListener("click",function(){
-        	if(${userVO.teamCode == 0}){
-        		alert("팀이 존재하지 않습니다");
-//         		location.href = "${pageContext.request.contextPath}/myPage/myPage";
-        	}else{
-        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
-        	}
-        });
-        </script>
+
 	</div>
 </body>
 </html>

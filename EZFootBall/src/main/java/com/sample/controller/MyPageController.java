@@ -147,4 +147,10 @@ public class MyPageController {
 
 		return "/myPage/notice";
 	}
+
+	@GetMapping("/rankGuide")
+	public String rankGuide() {
+
+		return "/myPage/rankGuide";
+	}
 }
