@@ -414,7 +414,7 @@
    		btns[i].addEventListener("click", function(){
    		let userName = document.getElementsByClassName("tmem")[i].value;
 		let userCode = document.getElementsByClassName("userCode")[i];
-		
+		let comdiv = document.querySelector(".confirm");
 		
 		const simple_data = {userName};
 		
@@ -426,29 +426,92 @@
  			data : JSON.stringify(simple_data),
 			success : function(data){
 				
-				console.log(data);
-				for(let comment of data){
-					if(comment.teamCode == 'null' ||
-							comment.teamCode == 0 ||
-							comment.teamCode == null){
-					
-						userCode.value = comment.userCode;
-						
-						
-					}
-					else{
-						
-						alert("팀이 존재하여 추가할 수 없습니다.");
-					}
-				}
+				console.log(data.length);
+				console.dir(data);
+				
+				let x = 0;
+				comdiv.innerHTML = "";
+					for(let comment of data){
+						if(data.length == 1){
+							if(comment.teamCode == null||
+									comment.teamCode == 0 ||
+									comment.teamCode == 'null' 
+								){
+								userCode.value = comment.userCode;
+								console.log(data[0].userCode);
+								console.log(data[0].teamCode);
+							}else{
+								alert("팀이 존재하여 추가할 수 없습니다.");
+							}
 
-			},
+
+						}else if(data.length != 1 && data.length >1){
+							
+							comdiv.classList.toggle('show');
+							if(comdiv.classList.contains('show')){
+								comdiv.style.display = "block";
+							}
+							console.log("ehsmsrj"+data.length);
+
+									console.log("시작");
+									console.log(data[x].userName);
+									console.log(data[x].userCode);
+									console.log(data[x].teamCode);
+								
+									const div1 = document.createElement("div");
+									
+									div1.setAttribute("class","Dcheck");
+									div1.style.border = "1px solid black";
+									div1.style.width = "100px";
+									
+									const p = document.createElement("p");
+									p.innerText = "유저이름 : "+data[x].userName;
+									const p1 = document.createElement("p");
+									p1.innerText = "회원코드 :"+data[x].userCode;
+									
+									
+									
+									div1.append(p);
+									div1.append(p1);
+									comdiv.append(div1);
+									console.log(comment.teamCode);
+									div1.addEventListener("click",function(){
+										
+										
+										
+										console.log("왜안나와요,.? :"+comment.teamCode);
+										
+										console.log("data : "+ comment.userCode);
+										if(comment.teamCode != 0){
+											
+											alert("팀이 존재하여 추가할 수 없습니다.222222222");
+											return;
+										}
+										else{
+											comdiv.classList.remove('show');
+											comdiv.style.display ="none";
+											userCode.value = comment.userCode;
+									
+						
+											}
+										
+										
+									});
+	
+					}
+					x++;
+				}
+	
+			
+				
+				},
 			error : function(e){
 				alert(e);
 			}
 		});
 		
 	});
+   		
   	}
 
     </script>
