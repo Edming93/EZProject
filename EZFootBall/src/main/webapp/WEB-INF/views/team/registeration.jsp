@@ -276,6 +276,18 @@
     .etc_icon {
         margin-left:10px;
     }
+    .confirm{
+    	display : none;
+    	flex-direction: row;
+    	flex-wrap : wrap;
+    	position : absolute;
+    	width: 298px;
+	    height: 250px;
+	    background-color: white;
+	    border: 4px solid #26a563;
+    	padding-left : 4%;
+    	padding-top : 1%;
+    }
     </style>
     
 </head>
@@ -386,11 +398,12 @@
 	                    
                 	</div>
                 	
-                    <div class="confirm"></div>
+                  
                		
                     
              </div>
-          
+            <div class="confirm">
+            </div>
             <div class="submit_button">
             	<button id="writer_submit">팀 등록하기</button>
         	</div>
@@ -479,17 +492,17 @@
 									
 									div1.setAttribute("class","Dcheck");
 									div1.style.border = "1px solid black";
-									div1.style.width = "100px";
-									
-									const p = document.createElement("p");
-									p.innerText = "유저이름 : "+data[x].userName;
+									div1.style.width = "160px";
+								
 									const p1 = document.createElement("p");
-									p1.innerText = "회원코드 :"+data[x].userCode;
+									p1.innerText = "유저이름 : "+data[x].userName;
+									const p2 = document.createElement("p");
+									p2.innerText = "회원코드 :"+data[x].userCode;
 									
 									
-									
-									div1.append(p);
+								
 									div1.append(p1);
+									div1.append(p2);
 									comdiv.append(div1);
 									console.log(comment.teamCode);
 									div1.addEventListener("click",function(){
