@@ -77,7 +77,7 @@ public class ReviewCommentController {
 	}
 
 	
-
+	//코멘트를 삭제
   @DeleteMapping("/comment/delete")
   @ResponseBody
   public Map<String,String> deleteComment(HttpSession session, @RequestBody ReviewCommentVO vo){
