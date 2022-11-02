@@ -159,31 +159,31 @@
         <%
         	if (select.equals("유저관리")){
 	    		%>
-	    		  <jsp:include page="../userInfo/userMain.jsp"></jsp:include>
+	    		  <jsp:include page="./userInfo/userMain.jsp"></jsp:include>
 	    		<%
     		}else if (select.equals("매니저관리")){
     			%>
-        		 <jsp:include page="../magInfo/magMain.jsp"></jsp:include>
+        		 <jsp:include page="./magInfo/magMain.jsp"></jsp:include>
         		<%
         	}else if (select.equals("예약관리")){
         		%>
-        		<jsp:include page="../reserInfo/reserMain.jsp"></jsp:include>
+        		<jsp:include page="./reserInfo/reserMain.jsp"></jsp:include>
         		<%
         	}else if (select.equals("신청관리")){
         		%>
-        		<jsp:include page="../subInfo/subMain.jsp"></jsp:include>
+        		<jsp:include page="./subInfo/subMain.jsp"></jsp:include>
         		<%
         	}else if (select.equals("구장관리")){
         		%>
-        		<jsp:include page="../fieldInfo/fieldMain.jsp"></jsp:include>
+        		<jsp:include page="./fieldInfo/fieldMain.jsp"></jsp:include>
         		<%
         	}else if (select.equals("커뮤니티관리")){
         		%>
-        		<jsp:include page="../comuInfo/comuMain.jsp"></jsp:include>
+        		<jsp:include page="./comuInfo/comuMain.jsp"></jsp:include>
         		<%
         	}else if (select.equals("결제관리")){
         		%>
-        		<jsp:include page="../payInfo/payMain.jsp"></jsp:include>
+        		<jsp:include page="./payInfo/payMain.jsp"></jsp:include>
         		<%
         	}
         %>
