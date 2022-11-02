@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>고객문의</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -86,11 +86,11 @@
 
 .main_title{
 	display: block;
-	width: 100%;
-	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat;
-	background-size: contain;
-	padding: 10px 0;
-	text-indent: -9999px;
+	width: 70%;
+/* 	background: url("${pageContext.request.contextPath}/image/myPage1.png") no-repeat 5px; */
+/* 	background-size: contain; */
+ 	padding: 5px 0;
+/* 	text-indent: -9999px; */
 }
 
 #main_container {
@@ -104,7 +104,8 @@
 .main_area {
 	display:flex;
     width: 1024px;
-    height: 900px;
+/*     height: 900px; */
+    min-height: 900px;
 /*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
@@ -115,129 +116,40 @@
 .main_content1 {
 	display: flex;
 	flex-direction: column;
-	width: 36%;
+	width: 70%;
 	/* height: 98%; */
 	height:90%;
-/* 	background-color: #fff; */
-}
-
-.main_content2 {
-	width: 62%;
-	height:90%;
 	background-color: #fff;
-	padding: 0 30px;
+	border: 1px solid black;
+	padding: 20px;
 }
 
-.main_left1 {
+#inquiry_list{
 	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
+	border-collapse: collapse;
+	font-size: 14px;
+	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+	margin: 20px 0;
 }
 
-#user_info > ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-#user_info > ul > li{
-	padding: 10px 0;
-}
-
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
-}
-
-.main_right1 {
-	width: 100%;
-	height: 55%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.main_right2 {
-	width: 100%;
-	height: 45%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.name1 {
-	display: inline-block;
-}
-
-.main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-}
-
-.main_left2 > ul > li {
-	margin-bottom: 30px;
-}
-
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
+#inquiry_list th, td {
+	border-bottom: 1px solid black;
+	padding: 10px;
 	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
 }
 
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-	height: 90%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+#inquiry_list th:first-child{
+	border-radius: 15px 0 0 0;
 }
 
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
+#inquiry_list th:last-child{
+	border-radius: 0 15px 0 0;
 }
 
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
+#inquiry_list th {
+	background-color: #26a653;
+	color: #fff;
+	border-bottom: 1px solid black;
 }
 
 
@@ -271,17 +183,6 @@ footer {
 
 .etc_icon {
 	margin-left: 10px;
-}
-#MTbtn{
-	display: inline-block;
-    text-decoration: none;
-    border-radius: 20px;
-    color: #000;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px 0;
-    background-color: #fffaec;
 }
 </style>
 </head>
@@ -336,52 +237,44 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
-			
+			<h1 class="main_title">고객문의</h1>
 				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% <span>(${userVO.userWin+userVO.userLose}전 ${userVO.userWin}승 ${userVO.userLose}패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/notice">공지사항</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rankGuide">랭킹시스템 소개</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/guide1">EZ문화 소셜 가이드</a></li>
-						</ul>
-					</section>
-				</div>
-				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-							<li><span id="MTbtn">팀 정보 수정</span></li>
-						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/inquiry">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-						</ul>
-					</section>
+					<h3>나의 문의내역</h3>
+					<div class="main_item1">
+						<table id="inquiry_list">
+							<tr>
+								<th>문의번호</th>
+								<th>문의제목</th>
+								<th>문의날짜</th>
+								<th>문의상태</th>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>민지 누나가 css로 괴롭혀요</td>
+								<td>2022-11-03</td>
+								<td>대기중</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>고객 문의를 왜쓰는거야</td>
+								<td>2022-11-04</td>
+								<td>대기중</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>살려주세요 사람있어요</td>
+								<td>2022-11-05</td>
+								<td>대기중</td>
+							</tr>
+						</table>
+					</div>
+					<div class="main_item2">
+						<button id="btn">문의하기</button>
+					</div>
 				</div>
             </div>
         </div>
-
+		
 		
         
         <div class="bottom_banner"></div>
@@ -398,17 +291,7 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
-         <script type="text/javascript">
-         console.log(${userVO.teamCode});
-        document.getElementById("MTbtn").addEventListener("click",function(){
-        	if(${userVO.teamCode == 0}){
-        		alert("팀이 존재하지 않습니다");
-//         		location.href = "${pageContext.request.contextPath}/myPage/myPage";
-        	}else{
-        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
-        	}
-        });
-        </script>
+        
 	</div>
 </body>
 </html>
