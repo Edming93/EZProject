@@ -15,5 +15,4 @@ public interface AdminDAO {
 
 	public List<FieldReservationVO> allgame();
 	public List<UserVO> alluser();
-
 }

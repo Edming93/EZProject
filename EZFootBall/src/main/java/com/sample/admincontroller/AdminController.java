@@ -35,7 +35,7 @@ public class AdminController {
 	
 	@GetMapping("/admin")
 	public String admin() {
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/select")
@@ -43,50 +43,50 @@ public class AdminController {
 		session.setAttribute("select", select);
 		session.setAttribute("gamelist", service.allgame());
 		session.setAttribute("userlist", service.alluser());
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/idselect")
 	public String idselect (@RequestParam("idselect") String idselect,Model model) {
 		model.addAttribute("idselect", idselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/magselect")
 	public String magselect (@RequestParam("magselect") String magselect,Model model) {
 		model.addAttribute("magselect", magselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/reserselect")
 	public String reserselect (@RequestParam("reserselect") String reserselect,Model model) {
 		model.addAttribute("reserselect", reserselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	
 	@GetMapping("/subselect")
 	public String subselect (@RequestParam("subselect") String subselect,Model model,HttpSession session) {
 		model.addAttribute("subselect", subselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/fieldselect")
 	public String fieldselect (@RequestParam("fieldselect") String fieldselect,Model model) {
 		model.addAttribute("fieldselect", fieldselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/comuselect")
 	public String comuselect (@RequestParam("comuselect") String comuselect,Model model) {
 		model.addAttribute("comuselect", comuselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/payselect")
 	public String payselect (@RequestParam("payselect") String payselect,Model model) {
 		model.addAttribute("payselect", payselect);
-		return "userInfo/adminMain";
+		return "adminPage/adminMain";
 	}
 			
 }
