@@ -41,7 +41,9 @@ public class TeamController {
 	}
 
 	@GetMapping("/team")
-	public String moveRental() {
+	public String moveRental(HttpSession session, Model model) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		model.addAttribute("userVO", uvo);
 		return "team/teamMain";
 	}
 	
@@ -249,7 +251,7 @@ public class TeamController {
 	// 팀 등록시 완료 버튼 눌렀을 경우
 	
 	@PostMapping("/teamUpdate")
-	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo, HttpSession session) {
+	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo, HttpSession session, Model model) {
 	
 		if(service.TeamMemberList(vo)) {
 			int LTC = service.getLastTeamC();
@@ -259,6 +261,7 @@ public class TeamController {
 			service.updateUserInfo(vo);
 			uvo.setTeamCode(LTC);
 			session.setAttribute("sessionVO", uvo );
+			model.addAttribute("userVO", uvo);
 			
 			return "team/teamMain";
 		}else {

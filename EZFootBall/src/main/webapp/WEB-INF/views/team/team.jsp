@@ -704,8 +704,14 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 					   }
 					});
 				} else {
+					if(${userVO.teamCode} != 0 || ${userVO.teamCode} != null){
+							alert("팀이 있습니다.");
+						return;
+					}else{
 					location.href="${pageContext.request.contextPath}/team/posting";
+					}
 				}
+					
 			}
 		});
 	});
@@ -748,7 +754,15 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	 					   }
 	 					});
 	 				} else {
-	 					location.href="${pageContext.request.contextPath}/team/register";
+	 					console.log(${userVO.teamCode});
+	 					if(${userVO.teamCode} == 0 ){
+	 						
+	 						location.href="${pageContext.request.contextPath}/team/register";
+	 					}else{
+	 						alert("가입한 팀이 있습니다.");
+	 						return;
+	 					}
+	 						
 	 				}
 				}
 	 		});
