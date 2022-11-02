@@ -18,6 +18,8 @@
 
 				<textarea name="content" id="content" placeholder="수정할 내용을 입력해 주세요"></textarea>
 				<button id="submit">전송</button>
+				
+				
 			</div>
 
 
