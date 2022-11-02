@@ -207,6 +207,10 @@ button{
 
 #ibtn{
 	display: flex;
+	margin-top: 3vh;
+    flex: 0.14;
+    justify-content: center;
+    align-items: center;
 }
 
 
