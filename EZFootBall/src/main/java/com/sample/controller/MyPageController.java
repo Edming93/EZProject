@@ -20,6 +20,7 @@ import com.sample.service.LoginService;
 import com.sample.service.RentalService;
 import com.sample.service.UinService;
 import com.sample.vo.FieldReservationVO;
+import com.sample.vo.InquiryVO;
 import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 
@@ -152,5 +153,19 @@ public class MyPageController {
 	public String rankGuide() {
 
 		return "/myPage/rankGuide";
+	}
+
+	@GetMapping("/inquiry")
+	public String inquiry() {
+
+		return "/myPage/inquiry";
+	}
+
+	@GetMapping("/inquiry_list")
+	public List<InquiryVO> inquiryList(HttpSession session) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		List<InquiryVO> list = null;
+
+		return list;
 	}
 }
