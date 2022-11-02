@@ -1,4 +1,4 @@
-package com.sample.service;
+package com.sample.adminservice;
 
 
 import java.util.List;
