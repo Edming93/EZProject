@@ -7,10 +7,10 @@
 	<select id="allgame" resultType="FieldReservationVO">
 		select *
 		from field_reservation
-		where rv_type = 'S' or re_type = 'TS';
+		where rv_type = 'S' or rv_type = 'TS';
 	</select>
 	
-	<select id="alluser">
+	<select id="alluser" resultType="UserVO">
 		select *
 		from user_info
 	</select>

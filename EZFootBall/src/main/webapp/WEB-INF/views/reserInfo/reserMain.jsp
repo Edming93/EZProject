@@ -68,7 +68,7 @@
         <%
         	if(reserselect.equals("팀매치")){
         		%>
-	    		  <jsp:include page="./temreserlist.jsp"></jsp:include>
+	    		  <jsp:include page="./teamreserlist.jsp"></jsp:include>
 	    		<%
         	}else if(reserselect.equals("구장예약")){
         		%>
