@@ -15,4 +15,35 @@
 		from user_info
 	</select>
 	
+	<!-- 팀 매치 예약 현황 -->
+	<select id="Tgame" resultType="FieldReservationVO">
+		select *
+		from field_reservation
+		where rv_type = 'T';
+	</select>
+	
+	<resultMap type="FieldReservationVO" id="fieldMap">
+		<id column="user_code" property="userCode"/>
+		<result column="rv_code" property="rvCode"/>
+		<result column="game_time" property="gameTime"/>
+		<result column="rv_day" property="rvDay"/>
+		<result column="game_day" property="gameDay"/>
+		<result column="field_name" property="fieldName"/>
+		<result column="field_type" property="fieldType"/>
+		<result column="game_code" property="gameCode"/>
+		
+		<collection javaType="userVO" property="userVO">
+			<id column="user_code" property="userCode"/>
+			<result column="user_name" property="userName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="joinList" parameterType="FieldReservationVO" resultMap="fieldMap">
+		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		LEFT JOIN user_info b ON a.user_code = b.user_code 
+		ORDER BY a.game_day DESC ;
+	</select>
+	
+	
 </mapper>

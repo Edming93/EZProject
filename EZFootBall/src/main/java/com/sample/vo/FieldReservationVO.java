@@ -22,7 +22,15 @@ public class FieldReservationVO {
 	private String gameTime2;
 	private int gameCode;
 	
+	private UserVO userVO;
 	
+	public UserVO getUserVO() {
+		return userVO;
+	}
+
+	public void setUserVO(UserVO userVO) {
+		this.userVO = userVO;
+	}
 
 	public int getGameCode() {
 		return gameCode;

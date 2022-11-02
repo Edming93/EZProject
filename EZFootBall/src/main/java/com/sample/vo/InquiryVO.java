@@ -4,13 +4,19 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("inquiryVO")
 public class InquiryVO {
-
+	// 문의코드
 	private int inquiryCode;
+	// 문의제목
 	private String inquiryTitle;
+	// 문의내용
 	private String inquiryContent;
+	// 문의상태
 	private String inquiryState;
+	// 문의작성일
 	private String createDate;
+	// 문의답변일
 	private String answerDate;
+	// 유저코드
 	private int userCode;
 
 	public int getInquiryCode() {

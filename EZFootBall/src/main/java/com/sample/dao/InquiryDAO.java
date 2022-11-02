@@ -10,4 +10,6 @@ import com.sample.vo.InquiryVO;
 public interface InquiryDAO {
 
 	public List<InquiryVO> InquiryAll(InquiryVO vo);
+
+	public void InquiryAdd(InquiryVO vo);
 }

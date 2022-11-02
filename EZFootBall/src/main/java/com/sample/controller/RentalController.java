@@ -139,12 +139,8 @@ public class RentalController {
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
 		
-		System.out.println(fvo.getUserCode());
-		System.out.println(fvo.getFieldCode());
-		System.out.println(fvo.getGameDay());
-		System.out.println(fvo.getGameTime()+":00:00");
-		System.out.println("여기 컨트롤러 체크 : "+service.rvCheck(fvo));
-		model.addAttribute("flag",service.rvCheck(fvo));
+	
+	
 		
 		return "rental/rentalPayment";
 	}

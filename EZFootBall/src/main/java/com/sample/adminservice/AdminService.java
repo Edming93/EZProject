@@ -26,4 +26,12 @@ public class AdminService {
 	public List<UserVO> alluser(){
 		return dao.alluser();
 	}
+	
+	public List<FieldReservationVO> Tgame(){
+		return dao.Tgame();
+	}
+	
+	public List<FieldReservationVO> joinList(){
+		return dao.joinList();
+	}
 }

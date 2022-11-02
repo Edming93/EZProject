@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -248,24 +248,28 @@ footer {
 								<th>문의날짜</th>
 								<th>문의상태</th>
 							</tr>
-							<tr>
+							
+							<c:forEach varStatus="Inquiry" var="list" items="${list}">
+								
+							</c:forEach>
+							<tr class="inquiry_item">
 								<td>1</td>
 								<td>민지 누나가 css로 괴롭혀요</td>
 								<td>2022-11-03</td>
 								<td>대기중</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>고객 문의를 왜쓰는거야</td>
-								<td>2022-11-04</td>
-								<td>대기중</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>살려주세요 사람있어요</td>
-								<td>2022-11-05</td>
-								<td>대기중</td>
-							</tr>
+<!-- 							<tr> -->
+<!-- 								<td>2</td> -->
+<!-- 								<td>고객 문의를 왜쓰는거야</td> -->
+<!-- 								<td>2022-11-04</td> -->
+<!-- 								<td>대기중</td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td>3</td> -->
+<!-- 								<td>살려주세요 사람있어요</td> -->
+<!-- 								<td>2022-11-05</td> -->
+<!-- 								<td>대기중</td> -->
+<!-- 							</tr> -->
 						</table>
 					</div>
 					<div class="main_item2">
@@ -293,7 +297,9 @@ footer {
         </script>
         
         <script type="text/javascript">
-        	
+        $('.inquiry_item').on("click",function(){
+			location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail";
+    	});
         </script>
         
 	</div>
