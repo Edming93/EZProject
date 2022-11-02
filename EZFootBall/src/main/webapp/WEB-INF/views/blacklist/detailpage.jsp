@@ -66,8 +66,8 @@ body{
 	font-family: 'Gowun Dodum', sans-serif;
     background-color: white;
     margin: 0 auto;
-    padding: 10px;
-    width: 45%;
+    padding: 30px;
+    width: 50%;
     margin-top: 3%;
     border-radius: 15px;
     border: 3px solid rgb(38, 166, 83);
@@ -133,6 +133,7 @@ textarea {
 	flex: 1;
 	width: 100%;
 	margin-top : 3vh;
+	margin-right : 1vh;
 	height: 10vh;
   	background-color: #f9f9f9;
   	border: 1px solid #e5e5e5;
