@@ -23,9 +23,6 @@
 	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script type="text/javascript"
-	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-	charset="utf-8"></script>
-<script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,6 +78,7 @@ font-family: 'Gowun Dodum', sans-serif;
 	flex-direction: column;
 	font-family: 'Gowun Dodum', sans-serif;
 }
+
 
 .container {
 	width: 100%;

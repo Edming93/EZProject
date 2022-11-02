@@ -7,6 +7,7 @@
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,7 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <script src="https://kit.fontawesome.com/3a7191171a.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,6 +38,12 @@
 	
 }
 
+.sideicon:hover{
+	  transform: scale(1.1);
+	  box-shadow: 0px 10px 48px -4px rgba(0,0,0,0.75);
+      transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
 th,td{
 font-family: 'Gowun Dodum', sans-serif;
 }
@@ -53,7 +61,7 @@ font-family: 'Gowun Dodum', sans-serif;
        		align-items: center;
 
 }
-a{
+td > a{
 	color : black;
 	text-decoration : none;
 	font-family: 'Gowun Dodum', sans-serif;
@@ -375,6 +383,9 @@ table {
 table td, table th {
 	border: 1px solid #ddd;
 	padding: 8px;
+	white-space: no-wrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 table tr:nth-child(even) {
@@ -476,7 +487,7 @@ table th {
 						<th>글 번호</th>
 						<th>글쓴이</th>
 						<th>제목</th>
-						<th>내용</th>
+					<!-- 	<th>내용</th>  -->
 						<th>지역</th>
 						<th>작성일/작성시간</th>
 					</tr>
@@ -490,7 +501,7 @@ table th {
 							<td>${vo.userName}</td>
 							<td><a
 								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistTitle}</a></td>
-							<td>${vo.blacklistContent}</td>
+					<!-- 	<td>${vo.blacklistContent}</td>  -->	
 							<td>${vo.blacklistLocal}</td>
 							<td>${vo.blacklistCreateDate}</td>
 						</tr>
