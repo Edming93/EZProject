@@ -276,6 +276,18 @@
     .etc_icon {
         margin-left:10px;
     }
+    .confirm{
+    	display : none;
+    	flex-direction: row;
+    	flex-wrap : wrap;
+    	position : absolute;
+    	width: 298px;
+	    height: 250px;
+	    background-color: white;
+	    border: 4px solid #26a563;
+    	padding-left : 4%;
+    	padding-top : 1%;
+    }
     </style>
     
 </head>
@@ -345,7 +357,7 @@
             <div class="team_register">
                 <p>팀 등록하기</p><span class="add_info">※5명팀은 5명만 적어주세요</span>
             </div>
-            <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post" onsubmit="jbSubmit();">
+            <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post" onsubmit="return jbSubmit();">
             <div class="ques">
 	            <div class="team_name">
 	                <p class="tname">팀 이름</p>
@@ -386,20 +398,38 @@
 	                    
                 	</div>
                 	
-                    
+                  
                		
                     
              </div>
-          
+            <div class="confirm">
+            </div>
             <div class="submit_button">
             	<button id="writer_submit">팀 등록하기</button>
         	</div>
 	<script type="text/javascript">
 	
-		function inputValueChange(){
+		function jbSubmit(){
 			
-			var input5 = document.getElementById("t5").value;
-			console.log(input5);
+		
+			
+			var t2 = document.getElementById("t2");
+			var t3 = document.getElementById("t3");
+			var t4 = document.getElementById("t4");
+			var t5 = document.getElementById("t5");
+			
+			console.log(t2.value);
+			console.log(t3.value);
+			console.log(t4.value);
+			
+			if(t2.value != '' && t3.value != '' && t4.value != '' && t5.value != '' ){
+				
+				alert ("팀이 등록 되었습니다.");
+				
+			}else{
+				alert ("팀등록은 5명 이상이여야 합니다.")
+				return false;
+			}
 		}
 		   	</script>  
   
@@ -462,17 +492,17 @@
 									
 									div1.setAttribute("class","Dcheck");
 									div1.style.border = "1px solid black";
-									div1.style.width = "100px";
-									
-									const p = document.createElement("p");
-									p.innerText = "유저이름 : "+data[x].userName;
+									div1.style.width = "160px";
+								
 									const p1 = document.createElement("p");
-									p1.innerText = "회원코드 :"+data[x].userCode;
+									p1.innerText = "유저이름 : "+data[x].userName;
+									const p2 = document.createElement("p");
+									p2.innerText = "회원코드 :"+data[x].userCode;
 									
 									
-									
-									div1.append(p);
+								
 									div1.append(p1);
+									div1.append(p2);
 									comdiv.append(div1);
 									console.log(comment.teamCode);
 									div1.addEventListener("click",function(){

@@ -68,7 +68,6 @@
 <body>
 
 
-
 	<div class="container">
 		<div class="header">
 			<h4>제목 :</h4>
@@ -89,7 +88,9 @@
 		<div class="comment" id="comment"></div>
 		<div class="insert" id="insert">
 			<textarea name="inittext" id="inittext"></textarea>
+			<%-- <c:if test="${BlacklistVO.userId eq requestScope.userdata.userId}"> --%>
 			<button id="ibtn">댓글달기</button>
+			<%-- </c:if> --%>
 		</div>
 	</div>
 	
@@ -98,7 +99,40 @@
 	
 	const commentmain = document.getElementById("comment");
 
+	document.getElementById("ibtn").addEventListener("click",function(){
+		
+		let str = document.getElementById("inittext").value;
+		
+		
+		const sendObj = {
+				blackCode : ${BlacklistVO.blacklistCode},
+				/* userCode : ${userdata.userCode},
+				userName : ${vo.userName},*/
+				content : str,
+				orderCode : 0
+		}
+		
+		fetch("${pageContext.request.contextPath}/blacklist/comment/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(sendObj)
+		})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			makecommentlist(0, data);
+			
+		})
+		.catch(err => {
+			console.log(err);
+		});
+		
+	});
+	
 	window.addEventListener('DOMContentLoaded', (e) => {
+		
 		fetch("${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}")
 		  .then(response => response.json())
 		  .then(data => {
@@ -169,9 +203,14 @@
 					}
 				}
 			}	  
-		
 			
 			
+
+			
+			
+			 
+			
+			 
 	
 	document.getElementById("backbtn").addEventListener("click",function(){
 		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain";
