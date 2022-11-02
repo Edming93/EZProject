@@ -16,8 +16,7 @@
 			<textarea name="name" id="name" cols="10" rows="3"></textarea>
 			<hr /> -->
 
-				<textarea name="content" id="content" placeholder="댓글을 입력해 주세요"><c:if
-						test="${empty requestScope.userdata}">로그인이 필요합니다.</c:if></textarea>
+				<textarea name="content" id="content" placeholder="수정할 내용을 입력해 주세요"></textarea>
 				<button id="submit">전송</button>
 			</div>
 
@@ -151,9 +150,7 @@ window.addEventListener("DOMContentLoaded", function(){
 										 error : function(e){
 											alert(e);
 										 }
-//		 								error : function(request, status, error) {
-//		 							        alert("status : " + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-//		 								}
+//		 							
 									});
 								});
 								div3.append(btn1);
