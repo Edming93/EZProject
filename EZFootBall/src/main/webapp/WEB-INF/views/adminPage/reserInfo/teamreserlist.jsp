@@ -26,7 +26,7 @@
 	}
 	.TCRsearchArea{
 		display: flex;
-	    width: 55%;
+	       width: 33%;
 	}
 	#Tsearch{
 		width: 100%;
@@ -38,7 +38,7 @@
 	    display: flex;
 	    align-items: center;
 	    background-color: black;
-	    width: 13%;
+	   	width: 28%;
 	    margin-left: 1%;
 	}
 	#TCRbtn{
@@ -49,31 +49,33 @@
 </head>
 <body>
 	<div class="TCRcontainer">
-		<div class="TCRHcon">
-			<div class="TCRselectMenu">
-				<select name="Tselect" id="Tselect">
-					<option value="">검색</option>
-					<option value="지역">지역</option>
-					<option value="구장이름">구장이름</option>
-					<option value="예약날짜">예약날짜</option>
-					<option value="매치날짜">매치날짜</option>
-					<option value="예약번호">예약번호</option>
-					<option value="매치형태">매치형태</option>
-					<option value="성별">성별</option>
-					<option value="신청자코드">신청자코드</option>
-					<option value="게임코드">게임코드</option>
-					<option value="신청자이름">신청자이름</option>
-				</select>
-			</div>
-			<div class=TCRsearchArea>
-				<div class="TCRsearch">
-					<input type="text" name="Tsearch" id="Tsearch" />
+		<form action="${pageContext.request.contextPath}/admin/reserselect1" method="post">
+			<div class="TCRHcon">
+				<div class="TCRselectMenu">
+					<select name="Tselect" id="Tselect">
+						<option value="">검색</option>
+						<option value="지역">지역</option>
+						<option value="구장이름">구장이름</option>
+						<option value="rvDay">예약날짜</option>
+						<option value="매치날짜">매치날짜</option>
+						<option value="rvCode">예약번호</option>
+						<option value="매치형태">매치형태</option>
+						<option value="성별">성별</option>
+						<option value="신청자코드">신청자코드</option>
+						<option value="게임코드">게임코드</option>
+						<option value="신청자이름">신청자이름</option>
+					</select>
 				</div>
-				<div class="TCRbutton">
-					<span id="TCRbtn">검색</span>
+				<div class=TCRsearchArea>
+					<div class="TCRsearch">
+						<input type="text" name="Tsearch" id="Tsearch" />
+					</div>
+					<div class="TCRbutton">
+						<button id="TCRbtn">검색</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 		
 		<div class="TcontentCon">
 			<table border="1">

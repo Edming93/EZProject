@@ -42,7 +42,41 @@
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		LEFT JOIN user_info b ON a.user_code = b.user_code 
-		ORDER BY a.game_day DESC ;
+		ORDER BY a.game_day DESC
+	</select>
+	
+	<select id="joinList1" parameterType="FieldReservationVO" resultMap="fieldMap">
+		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		LEFT JOIN user_info b ON a.user_code = b.user_code 
+		
+		<where>
+			<if test="rvCode != null">
+				and a.rv_code = #{rvCode}
+			</if>
+			<if test="rvDay != null">
+				and rv_day = #{rvDay}
+			</if>
+<!-- 			<if test=""> -->
+			
+<!-- 			</if> -->
+<!-- 			<if test=""> -->
+			
+<!-- 			</if> -->
+<!-- 			<if test=""> -->
+			
+<!-- 			</if> -->
+<!-- 			<if test=""> -->
+			
+<!-- 			</if> -->
+<!-- 			<if test=""> -->
+			
+<!-- 			</if> -->
+<!-- 			<if test=""> -->
+			
+<!-- 			</if> -->
+		</where>
+		ORDER BY a.game_day DESC
 	</select>
 	
 	

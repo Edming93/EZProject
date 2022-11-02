@@ -52,6 +52,8 @@
         #maincontent{
             width: 100%;
             border: 1px solid black;
+            display: flex;
+    		justify-content: center;
         }
     </style>
     <title>Document</title>
@@ -60,8 +62,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=팀매치"><li>팀 매치 예약 현황</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=구장예약"><li>구장 예약 현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=teamMatch"><li>팀 매치 예약 현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=rvField"><li>구장 예약 현황</li></a>
         </ul>
     </div>
     <div id="maincontent">

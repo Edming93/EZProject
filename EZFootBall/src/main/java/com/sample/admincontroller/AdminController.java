@@ -3,11 +3,14 @@ package com.sample.admincontroller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -76,7 +79,8 @@ public class AdminController {
 		model.addAttribute("reserselect", reserselect);
 		model.addAttribute("fieldList",fieldList);
 		
-
+		System.out.println("리스트한번출력");
+		
 		model.addAttribute("team", service.joinList());
 		
 //		model.addAttribute("user",service.alluser());
@@ -84,6 +88,22 @@ public class AdminController {
 		
 		return "adminPage/adminMain";
 	}
+	
+	@PostMapping("/reserselect1")
+	public String reserselect1 (Model model, FieldReservationVO vo,
+			HttpServletRequest request) {
+		
+		
+		System.out.println("조건달고 출력~");
+		System.out.println("이거는? :" + vo.getRvCode());
+		vo.setRvCode(Integer.parseInt(request.getParameter("Tsearch")));
+		System.out.println("이거는?? " + vo.getRvCode());
+		service.joinList1(vo, model);
+		
+
+		return "adminPage/adminMain";
+	}
+	
 	
 	
 	@GetMapping("/subselect")

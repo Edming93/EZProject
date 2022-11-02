@@ -4,6 +4,7 @@ package com.sample.adminservice;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.sample.dao.AdminDAO;
 import com.sample.vo.FieldReservationVO;
@@ -33,5 +34,10 @@ public class AdminService {
 	
 	public List<FieldReservationVO> joinList(){
 		return dao.joinList();
+	}
+
+	public void joinList1(FieldReservationVO vo,Model model) {
+		
+		model.addAttribute("team", dao.joinList1(vo));
 	}
 }

@@ -20,4 +20,6 @@ public interface AdminDAO {
 	public List<FieldReservationVO> Tgame();
 	
 	public List<FieldReservationVO> joinList();
+	
+	public List<FieldReservationVO> joinList1(FieldReservationVO vo);
 }
