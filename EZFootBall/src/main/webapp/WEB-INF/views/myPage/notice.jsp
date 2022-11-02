@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>이지풋볼 / 공지사항</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -14,6 +14,7 @@
         box-sizing: border-box;
         margin: 0px;
         font-family: 'Noto Sans KR', sans-serif;
+                
     }
     
     
@@ -87,10 +88,9 @@
 .main_title{
 	display: block;
 	width: 100%;
-	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat;
-	background-size: contain;
 	padding: 10px 0;
-	text-indent: -9999px;
+	margin: 70px 0 40px 0;
+	text-align: center;
 }
 
 #main_container {
@@ -99,138 +99,96 @@
     height: 100%;
     justify-content: center;
 /*     background-color: #ccc; */
+	font-family: NotoSansM, sans-serif;
+	
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
-    height: 900px;
+    min-height: 500px;
 /*     background-color: #ffaaaa; */
-    justify-content: space-evenly;
-    align-items: center;
+/*     justify-content: space-evenly; */
+/*     align-items: center; */
     flex-wrap: wrap;
 /*     border: 1px solid black; */
 }
 
 .main_content1 {
-	display: flex;
-	flex-direction: column;
-	width: 36%;
+	width: 100%;
 	/* height: 98%; */
-	height:90%;
+	height:100%;
 /* 	background-color: #fff; */
+/* 	background: url("${pageContext.request.contextPath}/image/guide1.png") no-repeat center; */
+/*     background-size: contain; */
 }
 
-.main_content2 {
-	width: 62%;
-	height:90%;
-	background-color: #fff;
-	padding: 0 30px;
-}
-
-.main_left1 {
-	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
-}
-
-#user_info > ul {
-	list-style-type: none;
+#notice_list {
 	padding: 0;
-}
-
-#user_info > ul > li{
-	padding: 10px 0;
-}
-
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
-}
-
-.main_right1 {
-	width: 100%;
-	height: 55%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.main_right2 {
-	width: 100%;
-	height: 45%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.name1 {
-	display: inline-block;
-}
-
-.main_left2 > ul{
 	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
+	border-top: 1px solid black;
+	width: 80%;
+	margin: 0 auto;
 }
 
-.main_left2 > ul > li {
-	margin-bottom: 30px;
+.notice_box {
+	border-bottom: 1px solid #ccc;
 }
 
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
+.notice_item{
+	display: none;
+	width: 100%;
+	min-height: 400px;
 /* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
+	padding: 30px 15px;
+	font-size: 15px;
+	opacity: 0.8;
 }
 
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
+.notice_title {
+	padding: 15px;
+	font-weight: bold;
+	font-size: 15px;
+	opacity: 0.8;
 }
 
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
+.up_down{
+	position: relative;
+	float: right;
+    margin: 0 20px 0 0;
 }
 
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
+.up_down:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(135deg);
 }
+
+.up_down2{
+	display:none;
+	position: relative;
+	float: right;
+    margin: 8px 20px 0 0;
+}
+
+.up_down2:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(315deg);
+}
+
 
 
 .bottom_banner {
@@ -328,50 +286,120 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
-			
 				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% <span>(${userVO.userWin+userVO.userLose}전 ${userVO.userWin}승 ${userVO.userLose}패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/notice">공지사항</a></li>
-							<li><a href="#">랭킹시스템 소개</a></li>
-							<li><a href="#">EZ풋볼 규칙설명</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/guide1">EZ문화 소셜 가이드</a></li>
-						</ul>
-					</section>
-				</div>
-				<div class="main_content2">
-					<section class="main_right1">
-						<h3>도구</h3>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-							<li><span id="MTbtn">팀 정보 수정</span></li>
-						</ul>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
-						</ul>
-					</section>
+					<h1 class="main_title">공지사항</h1>
+					<ul id="notice_list">
+						<li class="notice_box">
+							<p class="notice_title">[공지사항][수도권] EZ풋볼 공지사항
+								<i class="up_down"></i>
+								<i class="up_down2"></i>
+							</p>
+<!-- 							<i class="up_down"></i> -->
+<!-- 							<i class="up_down2"></i> -->
+							<div class="notice_item">
+							<pre>
+EZ풋볼에 오신걸 환영합니다! 
+
+							</pre>
+							</div>
+						</li>
+						<li class="notice_box">
+							<p class="notice_title">[공지사항] 강수로 인한 경기취소 기준
+								<i class="up_down"></i>
+								<i class="up_down2"></i>	
+							</p>
+							<div class="notice_item">
+								<pre>
+안녕하세요. EZ풋볼입니다.
+
+
+EZ풋볼 매치는 강수 예보에도 참여를 원하시는 참가자분들이 있다면 가능한 경기를 진행하고 있습니다.
+또한, 1mm 이상의 강수 예보가 있다면 <strong>[강수 안내] 알림톡(카카오톡 혹은 문자)</strong>을 발송합니다.
+알림톡을 받으신 경우, <strong>매치 시작 1시간 30분 전</strong>까지 취소하면 전액 환불합니다.
+당일 예보 변동이 심한 점을 고려해 실시간으로 예보를 확인하고 매치 시작 4시간 전까지는 알림톡을 발송해드립니다. 
+
+
+<strong>[유의사항]</strong>
+*구장으로 이미 출발한 다른 참가자를 위해 꼭 매치에 참여해 주세요.
+*매치 시작 1시간 30분 내에 취소하거나 무단 불참하면 이용이 제한될 수 있습니다.
+*취소자가 다수 발생하거나, 구장 상태 악화로 진행이 어렵다면 매치 시작 1시간 30분 이내라도 즉시 취소 안내를 드립니다.
+*경기 진행 중에도 폭우 또는 폭설로 안전 상의 문제가 있을 경우 현장에서 매치가 취소될 수 있습니다.
+*강한 비(눈)로 매치를 취소 또는 중단할 경우, 남은 시간 만큼 환불이 가능합니다.
+
+
+<strong>[취소방법]</strong>
+고객문의 -> 환불신청 선택
+
+
+<strong>[환불규정]</strong>
+매치 시작 1시간 30분 전까지 취소했을 경우
+
+
+<strong>[기준강수]</strong>
+기상청 날씨 누리 기준 해당 지역 1mm 이상 예보가 있는 경우								
+								</pre>
+							</div>
+						</li>
+						<li class="notice_box">
+							<p class="notice_title">[매니저모집] EZ풋볼에서 함께하실 매니저님을 모집합니다.
+								<i class="up_down"></i>
+								<i class="up_down2"></i>	
+							</p>
+							<div class="notice_item">
+								<pre>
+안녕하세요 EZ풋볼입니다.
+저희 EZ풋볼와 함께 매일 진행되는 소셜 경기를 진행해주실 매니저님을 찾습니다!
+
+ 
+<strong>EZ풋볼 매니저란?</strong>
+EZ풋볼 소셜경기의 경기 매니저로서 참가자들이 즐겁게 운동할 수 있도록 해당 경기 진행을 담당합니다.
+참가자들과 함께 운동을 즐기며, 수당도 받을 수 있습니다.
+
+ 
+<strong>[모집요강]</strong>
+* 부문 : EZ풋볼 소셜매치 매니저
+* 업무 : EZ풋볼 소셜매치 운영 및 장비관리(팀 조끼, 공 2개 등)
+* 자격 : 만 21세 이상의 축구/풋살을 사랑하는 남/녀, 최소 3개월 이상 매니저 활동 가능한 사람
+* 6개월 이상 가능자 우대
+
+
+<strong>[모집 지역]</strong>
+- 서울 전 지역
+- 인천
+- 수원
+- 부평
+- 의정부
+- 고양
+
+<strong>[근무 방식]</strong>
+* 최소 3개월 근무, 최소 월 4회 이상 매치 진행
+ 
+
+<strong>[급여]</strong>
+경기 1회당 35,000원(3.3% 사업공제 적용)
+ 
+
+<strong>[우대사항]</strong>
+* EZ풋볼 소셜매치 참가 경험이 많은 사람
+* 책임, 성실, 예의, 친절의 이미지에 적합한 사람
+* 경기 인원에 따라 언제든 해당 경기에 참가를 할 수 있는 사람
+
+
+<strong>[혜택]</strong>
+* 우수 매니저 인센티브 지급
+* EZ풋볼 소셜매치 무료 참가 기회
+
+ 
+<strong>[채용 과정]</strong>
+온라인 지원서 작성 > 현장 교육(1~2회) > 단독 실습 > 최종 평가
+
+
+<strong>[신청 방법]</strong>
+마이페이지 -> 매니저지원 탭에서 신청가능
+								</pre>
+							</div>
+						</li>
+					</ul>
 				</div>
             </div>
         </div>
@@ -392,17 +420,30 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
-         <script type="text/javascript">
-         console.log(${userVO.teamCode});
-        document.getElementById("MTbtn").addEventListener("click",function(){
-        	if(${userVO.teamCode == 0}){
-        		alert("팀이 존재하지 않습니다");
-//         		location.href = "${pageContext.request.contextPath}/myPage/myPage";
-        	}else{
-        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
-        	}
-        });
+        
+        <script type="text/javascript">
+	     	// list 누르면 아래 박스추가
+	    	$('.notice_title').on("click",function(){
+				$(this).parent().nextAll().children('.notice_item').hide();
+				$(this).parent().prevAll().children('.notice_item').hide();
+				$(this).next().children('.up_down').show();
+				$(this).prev().children('.up_down').show();
+				$(this).next().children('.up_down2').hide();
+				$(this).prev().children('.up_down2').hide();
+					console.log($(this).parent().next().children('.notice_item'));
+					console.log($(this).next('.notice_item').css('display'));
+				if($(this).next('.notice_item').css('display') == 'block'){
+					$(this).next('.notice_item').stop().slideUp(300);
+					$(this).children('.up_down').show();
+					$(this).children('.up_down2').hide();
+					return;
+				}
+	    		$(this).next('.notice_item').stop().slideDown(300);
+				$(this).children('.up_down').hide();
+	    		$(this).children('.up_down2').show();
+	    	});
         </script>
+
 	</div>
 </body>
 </html>

@@ -141,4 +141,10 @@ public class MyPageController {
 
 		return "/myPage/guide1";
 	}
+
+	@GetMapping("/notice")
+	public String notice() {
+
+		return "/myPage/notice";
+	}
 }
