@@ -6,7 +6,7 @@
 	if(request.getParameter("subselect") != null) {
 		subselect = (String)request.getParameter("subselect");
 	}else {
-		subselect = "¼Ò¼È¸ÅÄ¡";
+		subselect = "socialMatch";
 	}
 		
 %>
@@ -66,11 +66,11 @@
     </div>
     <div id="maincontent">
         <%
-        	if(subselect.equals("¼Ò¼È¸ÅÄ¡")){
+        	if(subselect.equals("socialMatch")){
         		%>
 	    		  <jsp:include page="./sociallist.jsp"></jsp:include>
 	    		<%
-        	}else if(subselect.equals("ÆÀ¸ÅÄ¡")){
+        	}else if(subselect.equals("teamMatch")){
         		%>
 	    		  <jsp:include page="./teamlist.jsp"></jsp:include>
 	    		<%

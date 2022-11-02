@@ -6,7 +6,7 @@
 	if(request.getParameter("magselect") != null) {
 		magselect = (String)request.getParameter("magselect");
 	}else {
-		magselect = "매니저리스트";
+		magselect = "magList";
 	}
 		
 %>
@@ -66,11 +66,11 @@
     </div>
     <div id="maincontent">
         <%
-        	if(magselect.equals("매니저리스트")){
+        	if(magselect.equals("magList")){
         		%>
 	    		  <jsp:include page="./maglist.jsp"></jsp:include>
 	    		<%
-        	}else if(magselect.equals("매니저신청리스트")){
+        	}else if(magselect.equals("magSignUpList")){
         		%>
 	    		  <jsp:include page="./magsublist.jsp"></jsp:include>
 	    		<%

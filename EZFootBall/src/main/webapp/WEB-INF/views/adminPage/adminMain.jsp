@@ -9,7 +9,7 @@
 		select = (String)session.getAttribute("select");
 		//System.out.println("if"+select);
 	}else {
-		select = "유저관리";
+		select = "userAdmin";
 		//System.out.println("else"+select);
 	}
 	
@@ -145,44 +145,44 @@
                     </div>
                     <div class="navmenu">
                         <ul>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=유저관리"><li>유저관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=매니저관리"><li>매니저관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=예약관리"><li>예약관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=신청관리"><li>신청관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=구장관리"><li>구장관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=커뮤니티관리"><li>커뮤니티관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=결제관리"><li>결제관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=userAdmin"><li>유저관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=magAdmin"><li>매니저관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=rvAdmin"><li>예약관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=signUpAdmin"><li>신청관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=fieldAdmin"><li>구장관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=comuAdmin"><li>커뮤니티관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=payAdmin"><li>결제관리</li></a>
                         </ul>
                     </div>
                 </div>
             </div>
             <div id="content">
         <%
-        	if (select.equals("유저관리")){
+        	if (select.equals("userAdmin")){
 	    		%>
 	    		  <jsp:include page="./userInfo/userMain.jsp"></jsp:include>
 	    		<%
-    		}else if (select.equals("매니저관리")){
+    		}else if (select.equals("magAdmin")){
     			%>
         		 <jsp:include page="./magInfo/magMain.jsp"></jsp:include>
         		<%
-        	}else if (select.equals("예약관리")){
+        	}else if (select.equals("rvAdmin")){
         		%>
         		<jsp:include page="./reserInfo/reserMain.jsp"></jsp:include>
         		<%
-        	}else if (select.equals("신청관리")){
+        	}else if (select.equals("signUpAdmin")){
         		%>
         		<jsp:include page="./subInfo/subMain.jsp"></jsp:include>
         		<%
-        	}else if (select.equals("구장관리")){
+        	}else if (select.equals("fieldAdmin")){
         		%>
         		<jsp:include page="./fieldInfo/fieldMain.jsp"></jsp:include>
         		<%
-        	}else if (select.equals("커뮤니티관리")){
+        	}else if (select.equals("comuAdmin")){
         		%>
         		<jsp:include page="./comuInfo/comuMain.jsp"></jsp:include>
         		<%
-        	}else if (select.equals("결제관리")){
+        	}else if (select.equals("payAdmin")){
         		%>
         		<jsp:include page="./payInfo/payMain.jsp"></jsp:include>
         		<%

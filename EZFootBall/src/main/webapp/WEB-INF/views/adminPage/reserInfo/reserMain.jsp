@@ -6,7 +6,7 @@
 	if(request.getParameter("reserselect") != null) {
 		reserselect = (String)request.getParameter("reserselect");
 	}else {
-		reserselect = "ÆÀ¸ÅÄ¡";
+		reserselect = "teamMatch";
 	}
 		
 %>
@@ -66,11 +66,11 @@
     </div>
     <div id="maincontent">
         <%
-        	if(reserselect.equals("ÆÀ¸ÅÄ¡")){
+        	if(reserselect.equals("teamMatch")){
         		%>
 	    		  <jsp:include page="./teamreserlist.jsp"></jsp:include>
 	    		<%
-        	}else if(reserselect.equals("±¸Àå¿¹¾à")){
+        	}else if(reserselect.equals("rvField")){
         		%>
 	    		  <jsp:include page="./fieldreserlist.jsp"></jsp:include>
 	    		<%

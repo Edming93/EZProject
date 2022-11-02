@@ -6,7 +6,7 @@
 	if(request.getParameter("idselect") != null) {
 		idselect = (String)request.getParameter("idselect");
 	}else {
-		idselect = "계정";
+		idselect = "user";
 	}
 		
 %>
@@ -60,17 +60,17 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=계정"><li>계정</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=블랙리스트"><li>블랙리스트</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=user"><li>계정</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=blackList"><li>블랙리스트</li></a>
         </ul>
     </div>
     <div id="maincontent">
         <%
-        	if(idselect.equals("계정")){
+        	if(idselect.equals("user")){
         		%>
 	    		  <jsp:include page="./idlist.jsp"></jsp:include>
 	    		<%
-        	}else if(idselect.equals("블랙리스트")){
+        	}else if(idselect.equals("blackList")){
         		%>
 	    		  <jsp:include page="./blacklist.jsp"></jsp:include>
 	    		<%

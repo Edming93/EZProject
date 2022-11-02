@@ -6,7 +6,7 @@
 	if(request.getParameter("payselect") != null) {
 		payselect = (String)request.getParameter("payselect");
 	}else {
-		payselect = "搬力";
+		payselect = "pay";
 	}
 		
 %>
@@ -60,17 +60,17 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/payselect?payselect=搬力"><li>搬力郴开</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/payselect?payselect=秒家"><li>秒家郴开</li></a>            
+            <a class="menu" href="${pageContext.request.contextPath}/admin/payselect?payselect=pay"><li>搬力郴开</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/payselect?payselect=cancel"><li>秒家郴开</li></a>            
         </ul>
     </div>
     <div id="maincontent">
         <%
-        	if(payselect.equals("搬力")){
+        	if(payselect.equals("pay")){
         		%>
 	    		  <jsp:include page="./paylist.jsp"></jsp:include>
 	    		<%
-        	}else if(payselect.equals("秒家")){
+        	}else if(payselect.equals("cancel")){
         		%>
 	    		  <jsp:include page="./refundlist.jsp"></jsp:include>
 	    		<%

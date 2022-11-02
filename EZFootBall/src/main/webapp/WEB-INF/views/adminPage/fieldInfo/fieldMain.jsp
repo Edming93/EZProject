@@ -6,7 +6,7 @@
 	if(request.getParameter("fieldselect") != null) {
 		fieldselect = (String)request.getParameter("fieldselect");
 	}else {
-		fieldselect = "备厘包府";
+		fieldselect = "fieldAdmin";
 	}
 		
 %>
@@ -57,17 +57,18 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=备厘包府"><li>备厘 包府</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=备厘眠啊"><li>备厘 眠啊</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=fieldAdmin"><li>备厘 包府</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=fieldAdd"><li>备厘 眠啊</li></a>
         </ul>
     </div>
     <div id="maincontent">
         <%
-        	if(fieldselect.equals("备厘包府")){
+        	if(fieldselect.equals("fieldAdmin")){
         		%>
 	    		  <jsp:include page="./fieldList.jsp"></jsp:include>
+
 	    		<%
-        	}else if(fieldselect.equals("备厘眠啊")){
+        	}else if(fieldselect.equals("fieldAdd")){
         		%>
 	    		  <jsp:include page="./addField.jsp"></jsp:include>
 	    		<%

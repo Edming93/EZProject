@@ -118,6 +118,22 @@
 		select * from gamefield_info
 	</select>
 	
+	<update id="modify_field">
+		update gamefield_info
+		<set>
+			<if test="fieldName != null">, field_name = #{fieldName}</if>
+			<if test="fieldAddress != null">, field_address = #{fieldAddress}</if>
+			<if test="fieldType != null">, field_type = #{fieldType}</if>
+			<if test="fieldAddress != null">, field_address = #{fieldAddress}</if>
+			<if test="fieldCall != null">, field_call = #{fieldCall}</if>
+			<if test="fieldGrass != null">, field_grass = #{fieldGrass}</if>
+		</set>
+	</update>
+	
+	<delete id="deleteSeleteField">
+		delete from gamefield_info where field_code = #{fieldCode}
+	</delete>
+
 	
 	
 	
