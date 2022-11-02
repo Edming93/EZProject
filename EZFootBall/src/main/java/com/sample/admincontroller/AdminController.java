@@ -1,6 +1,8 @@
 package com.sample.admincontroller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.adminservice.AdminService;
 import com.sample.adminservice.RentalAdminService;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 
 @Controller
@@ -72,6 +75,13 @@ public class AdminController {
 								@SessionAttribute("fieldList") GameFieldInfoVO fieldList) {
 		model.addAttribute("reserselect", reserselect);
 		model.addAttribute("fieldList",fieldList);
+		
+
+		model.addAttribute("team", service.joinList());
+		
+//		model.addAttribute("user",service.alluser());
+//		model.addAttribute("team", service.Tgame());
+		
 		return "adminPage/adminMain";
 	}
 	

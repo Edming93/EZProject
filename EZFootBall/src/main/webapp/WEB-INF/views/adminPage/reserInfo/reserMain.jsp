@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	String reserselect = null;
@@ -60,8 +60,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=ÆÀ¸ÅÄ¡"><li>ÆÀ ¸ÅÄ¡ ¿¹¾à ÇöÈ²</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=±¸Àå¿¹¾à"><li>±¸Àå ¿¹¾à ÇöÈ²</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=íŒ€ë§¤ì¹˜"><li>íŒ€ ë§¤ì¹˜ ì˜ˆì•½ í˜„í™©</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=êµ¬ìž¥ì˜ˆì•½"><li>êµ¬ìž¥ ì˜ˆì•½ í˜„í™©</li></a>
         </ul>
     </div>
     <div id="maincontent">

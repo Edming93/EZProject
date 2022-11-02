@@ -704,12 +704,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 					   }
 					});
 				} else {
-					if(${userVO.teamCode} != 0 || ${userVO.teamCode} != null){
-							alert("팀이 있습니다.");
-						return;
-					}else{
+					
 					location.href="${pageContext.request.contextPath}/team/posting";
-					}
+					
 				}
 					
 			}
