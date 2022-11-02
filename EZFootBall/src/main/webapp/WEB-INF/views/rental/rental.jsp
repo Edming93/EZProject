@@ -311,8 +311,6 @@
 
 <!--날짜데이터 삽입  -->
 <script>
-           
-            
             var set = <%=today%>
 
             document.querySelector("#div1 ul").scrollLeft = 0;
@@ -384,7 +382,7 @@
         
 		let day = <%=year%> + "-" +<%=month%> +"-" +date;
 		today = day;
-		console.log(today);
+
          let data = {place:"null",type:"null",day:day};
          
          fetch("${pageContext.request.contextPath}/rental/rvList",{
@@ -459,10 +457,7 @@
    
    <!-- 날짜 -->
    let today = null;
-   let day_div = document.getElementById("day");
-   let today_li = document.querySelectorAll(".today");
 
-   
    for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 		document.getElementById("day").children[i].addEventListener("click", function (e) {
 			

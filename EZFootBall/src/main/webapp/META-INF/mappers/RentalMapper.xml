@@ -114,6 +114,9 @@
 		values(#{gameType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameMacth},#{gameDay},#{gameTime},#{gamePay});
 	</insert>
 	
+	<select id="getFieldListAll" resultType="GameFieldInfoVO">
+		select * from gamefield_info
+	</select>
 	
 	
 	

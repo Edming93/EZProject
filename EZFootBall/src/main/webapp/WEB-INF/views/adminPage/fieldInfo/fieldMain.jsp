@@ -17,9 +17,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #contain * {
-            /* border: 1px solid black; */
-        }
         #contain{
             display: flex;
             flex-direction: column;
@@ -68,11 +65,11 @@
         <%
         	if(fieldselect.equals("备厘包府")){
         		%>
-	    		  <jsp:include page="./fieldlist.jsp"></jsp:include>
+	    		  <jsp:include page="./fieldList.jsp"></jsp:include>
 	    		<%
         	}else if(fieldselect.equals("备厘眠啊")){
         		%>
-	    		  <jsp:include page="./addfield.jsp"></jsp:include>
+	    		  <jsp:include page="./addField.jsp"></jsp:include>
 	    		<%
         	}
         %>

@@ -8,19 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.adminservice.AdminService;
+import com.sample.adminservice.RentalAdminService;
+import com.sample.vo.GameFieldInfoVO;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	
 	private AdminService service;
+	private RentalAdminService raService;
 	
-	public AdminController(AdminService service) {
-		super();
-		this.service = service;
-	}
+
 	
 	//private GlistService service;
 	//private LoginService lservice;
@@ -33,16 +34,24 @@ public class AdminController {
 //		this.tservice = tservice;
 //	}
 	
+	public AdminController(AdminService service, RentalAdminService raService) {
+		super();
+		this.service = service;
+		this.raService = raService;
+	}
+
 	@GetMapping("/admin")
 	public String admin() {
 		return "adminPage/adminMain";
 	}
 	
 	@GetMapping("/select")
-	public String mainselect (@RequestParam("select") String select,HttpSession session) {
+	public String mainselect (@RequestParam("select") String select,HttpSession session,Model model) {
 		session.setAttribute("select", select);
 		session.setAttribute("gamelist", service.allgame());
 		session.setAttribute("userlist", service.alluser());
+		session.setAttribute("fieldList", raService.getFieldListAll());
+		model.addAttribute("fieldList", raService.getFieldListAll());
 		return "adminPage/adminMain";
 	}
 	
@@ -59,8 +68,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("/reserselect")
-	public String reserselect (@RequestParam("reserselect") String reserselect,Model model) {
+	public String reserselect (@RequestParam("reserselect") String reserselect,Model model,
+								@SessionAttribute("fieldList") GameFieldInfoVO fieldList) {
 		model.addAttribute("reserselect", reserselect);
+		model.addAttribute("fieldList",fieldList);
 		return "adminPage/adminMain";
 	}
 	

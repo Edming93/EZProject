@@ -32,4 +32,7 @@ public interface RentalDAO {
 	public int rvCheck(FieldReservationVO vo);
 	
 	public void insertRvInGameList(GlistVO vo);
+	
+	// -------------------- 관리자 구장관리 ---------------------
+	public List<GameFieldInfoVO> getFieldListAll();
 }

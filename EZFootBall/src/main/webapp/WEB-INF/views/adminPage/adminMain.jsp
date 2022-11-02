@@ -4,13 +4,13 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String select = null;
-	System.out.println(session.getAttribute("select"));
+	//System.out.println(session.getAttribute("select"));
 	if(session.getAttribute("select") != null) {
 		select = (String)session.getAttribute("select");
-		System.out.println("if"+select);
+		//System.out.println("if"+select);
 	}else {
 		select = "유저관리";
-		System.out.println("else"+select);
+		//System.out.println("else"+select);
 	}
 	
 %> 	
@@ -121,6 +121,7 @@
      #content{
         flex:4;
         border: 1px solid black;
+        overflow:scroll;
      }
 </style>
 <body>
