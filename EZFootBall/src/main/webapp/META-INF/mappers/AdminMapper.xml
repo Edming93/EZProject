@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.dao.AdminDAO">
+	<!-- 신청 관리 -->
+	<select id="allgame" resultType="FieldReservationVO">
+		select *
+		from field_reservation
+		where rv_type = 'S' or re_type = 'TS';
+	</select>
+	
+	<select id="alluser">
+		select *
+		from user_info
+	</select>
+	
+</mapper>

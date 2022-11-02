@@ -9,9 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sample.service.AdminService;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	private AdminService service;
+	
+	public AdminController(AdminService service) {
+		super();
+		this.service = service;
+	}
 	
 	//private GlistService service;
 	//private LoginService lservice;
@@ -32,6 +41,8 @@ public class AdminController {
 	@GetMapping("/select")
 	public String mainselect (@RequestParam("select") String select,HttpSession session) {
 		session.setAttribute("select", select);
+		session.setAttribute("gamelist", service.allgame());
+		session.setAttribute("userlist", service.alluser());
 		return "userInfo/aminMain";
 	}
 	
@@ -55,7 +66,7 @@ public class AdminController {
 	
 	
 	@GetMapping("/subselect")
-	public String subselect (@RequestParam("subselect") String subselect,Model model) {
+	public String subselect (@RequestParam("subselect") String subselect,Model model,HttpSession session) {
 		model.addAttribute("subselect", subselect);
 		return "userInfo/aminMain";
 	}
