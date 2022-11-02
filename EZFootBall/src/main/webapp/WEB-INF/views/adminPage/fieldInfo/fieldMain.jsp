@@ -62,18 +62,17 @@
         </ul>
     </div>
     <div id="maincontent">
-        <%
+        	<%
         	if(fieldselect.equals("fieldAdmin")){
-        		%>
+        	%>
 	    		  <jsp:include page="./fieldList.jsp"></jsp:include>
-
-	    		<%
+	    	<%
         	}else if(fieldselect.equals("fieldAdd")){
-        		%>
+        	%>
 	    		  <jsp:include page="./addField.jsp"></jsp:include>
-	    		<%
+	    	<%
         	}
-        %>
+        	%>
     </div>
 </div>
 </body>

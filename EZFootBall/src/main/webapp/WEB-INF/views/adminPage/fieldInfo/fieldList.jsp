@@ -121,12 +121,13 @@
                     <option id="제주도" value="제주도">제주도</option>
                 </select>
             </div>
+            
             <div class="search_area">
                 <input type="text" name="input_content" id="input_content"><button id="search_btn">검색</button>
             </div>
         </div>
         <c:forEach var="field" items="${fieldList}">
-        <div class="content">
+        <div class="content ${field.fieldCode}">
             <div class="check_btn_area">
                 <input type="checkbox" name="check_btn" class="check_box check_btn" value="${field.fieldCode}">
             </div>
@@ -134,7 +135,6 @@
                 <img src="${field.fieldImg1}" class="field_image">
             </div>
             <div class="field_info">
-            
                 <div class="field_info_content">
                     <span class="field_name">구장명 : <b>${field.fieldName}</b></span>
                     <span class="field_address">구장주소 : <b>${field.fieldAddress}</b></span>
@@ -144,6 +144,27 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            var local = document.getElementById("search_local");
+
+            local.addEventListener("change",function() {
+                if(local.value == "null" || local.value == null) {
+                    document.querySelectorAll(".content").forEach(function(e) {
+                    	console.log("111111111");
+     					console.log(e);
+                    	e.style.display="flex";
+                    });
+                }else if(!'${field.fieldName}'.includes(local.value)){
+     				let field = document.querySelectorAll(".content");
+     					field.forEach(function(e) {
+     						e.style.display="none";
+     						console.log(e);
+     					});
+                }
+
+            });
+        </script>
         </c:forEach>
         
         <script>

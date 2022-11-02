@@ -422,7 +422,6 @@
 				var timeset = ["08","10","12","14","16","18","20","22"];
 				// db에서 불러온 배열
 				var game_time = (data.gameTime).split(',');
-				console.log("값"+game_time.includes(timeset[5]) <= '<%=hour%>');
 
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
