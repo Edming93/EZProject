@@ -51,8 +51,16 @@ public class AdminController {
 	@GetMapping("/select")
 	public String mainselect (@RequestParam("select") String select,HttpSession session,Model model) {
 		session.setAttribute("select", select);
+		//(모든경기)
 		session.setAttribute("gamelist", service.allgame());
+		//모든 유저 정보
 		session.setAttribute("userlist", service.alluser());
+		//st 신청정보
+		session.setAttribute("stgamelist", service.stgame());
+		//s 신청정보
+		session.setAttribute("sgamelist", service.sgame());
+		
+		
 		session.setAttribute("fieldList", raService.getFieldListAll());
 		model.addAttribute("fieldList", raService.getFieldListAll());
 		return "adminPage/adminMain";

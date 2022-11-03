@@ -4,15 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.AdminDAO">
 	<!-- 신청 관리 -->
-	<select id="allgame" resultType="FieldReservationVO">
+	<select id="allgame" resultType="GlistVO">
 		select *
-		from field_reservation
-		where rv_type = 'S' or rv_type = 'TS';
+		from gamelist
 	</select>
 	
 	<select id="alluser" resultType="UserVO">
 		select *
 		from user_info
+	</select>
+	
+	<select id="stgame" resultType="FieldReservationVO">
+		SELECT rv_code,rv_type,rv_day,rv_state,field_code,field_name,field_address,field_type,field_rentalfee,user_code, team_code,user_payment,game_day,game_time,game_code
+		FROM field_reservation
+		WHERE rv_type = 'TS' and rv_state = '예약완료'
+		GROUP BY team_code,game_code;
+	</select>
+	
+	<select id="sgame" resultType="FieldReservationVO">
+		select *
+		from field_reservation
+		where rv_type = 'S'
 	</select>
 	
 	<!-- 팀 매치 예약 현황 -->
