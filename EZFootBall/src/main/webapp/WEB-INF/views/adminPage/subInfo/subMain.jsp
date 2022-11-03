@@ -60,8 +60,9 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=소셜매치"><li>소셜매치 신청 현황</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=팀매치"><li>팀매치 신청 현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=socialMatch"><li>소셜매치 신청 현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=teamMatch"><li>팀매치 신청 현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=cancel"><li>취소 현황</li></a>
         </ul>
     </div>
     <div id="maincontent">
@@ -73,6 +74,11 @@
         	}else if(subselect.equals("teamMatch")){
         		%>
 	    		  <jsp:include page="./teamlist.jsp"></jsp:include>
+	    		<%
+        	}
+        	else if(subselect.equals("cancel")){
+        		%>
+	    		  <jsp:include page="./cancellist.jsp"></jsp:include>
 	    		<%
         	}
         %>

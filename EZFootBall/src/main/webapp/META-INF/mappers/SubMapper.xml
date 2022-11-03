@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.dao.SubDAO">
+	
+	<delete id="delete" parameterType="DataVO">
+		UPDATE field_reservation
+		SET rv_state = '신청취소'
+		WHERE game_code = #{gameCode} AND team_code = #{teamCode}
+	</delete>
+	
+	<delete id="rdelete">
+		UPDATE field_reservation
+		SET rv_state = '신청취소'
+		WHERE rv_code = #{rvCode}
+	</delete>
+	
+	<delete id="sdelete" parameterType="DataVO">
+		DELETE FROM game_sjoinlist
+		WHERE game_code = #{gameCode} AND user_code = #{userCode}
+	</delete>
+	
+	<delete id="tdelete" parameterType="DataVO">
+		DELETE FROM game_tjoinlist
+		WHERE game_code = #{gameCode} AND team_code = #{teamCode}
+	</delete>
+	
+</mapper>

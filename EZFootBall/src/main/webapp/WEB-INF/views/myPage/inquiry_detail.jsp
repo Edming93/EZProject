@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객문의</title>
+<title>문의내역</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -105,11 +106,11 @@
 	display:flex;
     width: 1024px;
 /*     height: 900px; */
-    min-height: 900px;
+/* 	   min-height: 900px; */
 /*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
 /*     border: 1px solid black; */
 }
 
@@ -117,40 +118,108 @@
 	display: flex;
 	flex-direction: column;
 	width: 70%;
-	/* height: 98%; */
 	height:90%;
 	background-color: #fff;
-	border: 1px solid black;
 	padding: 20px;
 }
 
-#inquiry_list{
+.main_item1, .main_item2 {
+	display: flex;
 	width: 100%;
-	border-collapse: collapse;
-	font-size: 14px;
-	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+	height: 40vh;
+	flex-direction: column;
+}
+
+.main_item1 p, .main_item2 p{
+	display: block;
+	font-size: 15px;
+	opacity: 0.9;
+}
+
+.main_item1 h5, .main_item2 h5 {
+	display: block;
+	font-size: 15px;
+	opacity: 0.9;
+	min-width: 100px;
+}
+
+
+.detail_header {
+	display:flex;
+	width: 100%;
+	padding: 20px 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.header_item1{
+	display:flex;
+	width: 49%;
+}
+
+.header_item2{
+	display:flex;
+	width: 49%;
+	justify-content: space-evenly;
+}
+
+
+.detail_title{
+    display: flex;
+    width: 100%;
+    padding: 20px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.title_item {
+	display: flex;
+	width: 100%;
+}
+
+.detail_content {
+	display:flex;
+	width: 100%;
+	min-height:60%;
+	padding: 30px 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.content_item {
+	display: flex;
+}
+
+.content_item h5{
+	align-self: center;
+}
+
+/* .title_item p { */
+/* 	width: 70%; */
+/* 	padding-left: 15%; */
+/* } */
+
+.btn_box{
+	display: flex;
+	justify-content: space-evenly;
+}
+    
+    .btn_box button {
+	display: inline-block;
+	width: 40%;
+	padding: 15px 0;
+	text-decoration: none;
 	margin: 20px 0;
-}
-
-#inquiry_list th, td {
-	border-bottom: 1px solid black;
-	padding: 10px;
-	text-align: center;
-}
-
-#inquiry_list th:first-child{
-	border-radius: 15px 0 0 0;
-}
-
-#inquiry_list th:last-child{
-	border-radius: 0 15px 0 0;
-}
-
-#inquiry_list th {
-	background-color: #26a653;
 	color: #fff;
-	border-bottom: 1px solid black;
+	font-weight:bold;
+	font-size:18px;
+	border: 1px solid #26a653;
+	text-align: center;
+	background-color: #26a653;
+	border-radius: 20px;
 }
+
+.btn_box button:hover {
+	opacity: 0.8;
+}
+
 
 
 .bottom_banner {
@@ -237,39 +306,46 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">고객문의</h1>
+			<h1 class="main_title">내 문의내역</h1>
 				<div class="main_content1">
-					<h3>나의 문의내역</h3>
 					<div class="main_item1">
-						<table id="inquiry_list">
-							<tr>
-								<th>문의번호</th>
-								<th>문의제목</th>
-								<th>문의날짜</th>
-								<th>문의상태</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>민지 누나가 css로 괴롭혀요</td>
-								<td>2022-11-03</td>
-								<td>대기중</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>고객 문의를 왜쓰는거야</td>
-								<td>2022-11-04</td>
-								<td>대기중</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>살려주세요 사람있어요</td>
-								<td>2022-11-05</td>
-								<td>대기중</td>
-							</tr>
-						</table>
+						<div class="detail_header">
+							<section class="header_item1">
+								<h5>등록일</h5><p>${inquiryVO.createDate}</p>
+							</section>
+							<section class="header_item2">
+								<h5>처리상태</h5><p>${inquiryVO.inquiryState}</p>
+							</section>
+						</div>
+						<div class="detail_title">
+							<section class="title_item">
+								<h5>제목</h5><p>${inquiryVO.inquiryTitle}</p>
+							</section>
+						</div>
+						<div class="detail_content">
+							<section class="content_item">
+								<h5>내용</h5><p>${inquiryVO.inquiryContent}</p>
+							</section>
+						</div>
 					</div>
+					<!-- 관리자 답변 들어갈곳 -->
+					<c:if test="${inquiryVO.inquiryState eq '답변완료'}">
 					<div class="main_item2">
-						<button id="btn">문의하기</button>
+						<div class="detail_header">
+							<section class="header_item1">
+								<h5>답변일</h5><p>${inquiryVO.answerDate}</p>
+							</section>
+						</div>
+						<div class="detail_content">
+							<section class="content_item">
+								<h5>답변</h5><p>${inquiryVO.answerContent}</p>
+							</section>
+						</div>
+					</div>
+					</c:if>
+					<div class="btn_box">
+						<button id="btn">뒤로가기</button>
+					</div>
 					</div>
 				</div>
             </div>
@@ -291,7 +367,11 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
-        
+        <script type="text/javascript">
+        	$('#btn').on("click", function(){
+        		location.href = "${pageContext.request.contextPath}/myPage/inquiry";
+        	});
+        </script>
 	</div>
 </body>
 </html>

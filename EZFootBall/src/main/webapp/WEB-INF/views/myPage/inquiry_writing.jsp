@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객문의</title>
+<title>문의작성하기</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -105,7 +105,7 @@
 	display:flex;
     width: 1024px;
 /*     height: 900px; */
-    min-height: 900px;
+/*     min-height: 900px; */
 /*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
@@ -124,44 +124,72 @@
 	padding: 20px;
 }
 
-#inquiry_list{
+.main_item1 {
+	display: flex;
 	width: 100%;
-	border-collapse: collapse;
-	font-size: 14px;
-	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-	margin: 20px 0;
+	height: 40vh;
+	flex-direction: column;
 }
 
-#inquiry_list th, td {
-	border-bottom: 1px solid black;
-	padding: 10px;
-	text-align: center;
+
+.main_item1 h5{
+	display: block;
+	font-size: 15px;
+	opacity: 0.9;
+	min-width: 100px;
 }
 
-#inquiry_list th:first-child{
-	border-radius: 15px 0 0 0;
+.write_title{
+    display: flex;
+    width: 100%;
+    padding: 20px 10px;
+    border-bottom: 1px solid #ccc;
 }
 
-#inquiry_list th:last-child{
-	border-radius: 0 15px 0 0;
+.title_item {
+	display: flex;
+	width: 100%;
 }
 
-#inquiry_list th {
-	background-color: #26a653;
-	color: #fff;
-	border-bottom: 1px solid black;
+.write_content {
+	display:flex;
+	width: 100%;
+	min-height:60%;
+	padding: 30px 10px;
+	border-bottom: 1px solid #ccc;
 }
 
-.item_box{
-	cursor: pointer;
+.content_item {
+	display: flex;
 }
+
+.content_item h5{
+	align-self: center;
+}
+
+#inquiry_title {
+	width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+#inquiry_content {
+	width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+textarea:focus { outline: none; }
+
 
 .btn_box{
 	display: flex;
 	justify-content: space-evenly;
 }
     
-.btn_box button {
+    .btn_box button {
 	display: inline-block;
 	width: 40%;
 	padding: 15px 0;
@@ -180,60 +208,7 @@
 	opacity: 0.8;
 }
 
-.select {
-	cursor: pointer;
-}
 
-.up_down{
-	position: relative;
-/* 	float: right; */
-/*     margin: 0 20px 0 0; */
-}
-
-.up_down:after {
-    position: absolute;
-    left: -70px;
-    top: 3px;
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-    transform: rotate(135deg);
-}
-
-.up_down2{
-	display:none;
-	position: relative;
-/* 	float: right; */
-    margin: 8px 0 0 0;
-}
-
-.up_down2:after {
-    position: absolute;
-    left: -70px;
-    top: 8px;
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-    transform: rotate(315deg);
-}
-
-.select_box {
-	position: absolute;
-	display:none;
-	right: 210px;
-	top: 240px;
-	color: #000;
-}
-
-.select_box1, .select_box2, .select_box3 {
-	padding: 10px;
-	background-color: #fff;
-	cursor: pointer;
-}
 
 .bottom_banner {
 	width: 100%;
@@ -319,60 +294,27 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">고객문의</h1>
+			<h1 class="main_title">문의작성하기</h1>
 				<div class="main_content1">
-					<h3>나의 문의내역</h3>
 					<div class="main_item1">
-						<table id="inquiry_list">
-							<tr>
-								<th>문의번호</th>
-								<th>문의제목</th>
-								<th>문의날짜</th>
-								<th class="select">문의상태
-									
-									<div class="select_box">
-										<div class="select_box1">전체보기</div>
-										<div class="select_box2">답변대기</div>
-										<div class="select_box3">답변완료</div>
-									</div>
-									<i class="up_down"></i>
-									<i class="up_down2"></i>
-								</th>
-								
-							</tr>
-							
-							<c:forEach var="list" items="${list}">
-								<tr class="inquiry_item${list.inquiryCode} item_box">
-									<td>${list.inquiryCode}</td>
-									<td>${list.inquiryTitle}</td>
-									<td>${list.createDate}</td>
-									<td>${list.inquiryState}</td>
-								</tr>	
-								<script type="text/javascript">
-									 $('.inquiry_item${list.inquiryCode}').on("click",function(){
-										location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail/${list.inquiryCode}";
-									 });
-								</script>
-							</c:forEach>
-							
-<!-- 							<tr> -->
-<!-- 								<td>2</td> -->
-<!-- 								<td>고객 문의를 왜쓰는거야</td> -->
-<!-- 								<td>2022-11-04</td> -->
-<!-- 								<td>대기중</td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>3</td> -->
-<!-- 								<td>살려주세요 사람있어요</td> -->
-<!-- 								<td>2022-11-05</td> -->
-<!-- 								<td>대기중</td> -->
-<!-- 							</tr> -->
-						</table>
+						<form action="${pageContext.request.contextPath}/myPage/inquiry_add" id="form1" method="post">
+							<div class="write_title">
+								<div class="title_item">
+									<h5>제목</h5><textarea rows="1" cols="100" name="inquiry_title" id="inquiry_title" maxlength="25" required ></textarea>
+								</div>
+							</div>
+							<div class="write_content">
+								<div class="content_item">
+									<h5>내용</h5><textarea rows="10" cols="100" name="inquiry_content" id="inquiry_content" maxlength="140" required ></textarea>
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="main_item2">
+						
 					</div>
 					<div class="btn_box">
-						<button id="inquiry">문의하기</button>
+						<button id="writing">작성하기</button>
 						<button id="btn">뒤로가기</button>
 					</div>
 				</div>
@@ -386,52 +328,50 @@ footer {
 			<div class="footer_left"></div>
 			<div class="footer_right"></div>
 
-		</footer>	
-	</div>
-	
-	<script type="text/javascript">
+		</footer>
+
+		<script type="text/javascript">
             let main_logo = document.querySelector(".main_logo");
             
             main_logo.addEventListener("click",function() {
                 location.href="${pageContext.request.contextPath}";
             });
-    </script>
-    
-    <script type="text/javascript">
-    	$('#inquiry').click(function(){
-    		location.href = "${pageContext.request.contextPath}/myPage/inquiry_writing";
-    	});
-    	
-    	$('#btn').click(function(){
-    		location.href = "${pageContext.request.contextPath}/myPage/myPage";
-    	});
-    	
-    	$('.select').on("click", function(){
-    		if($(this).children().css("display") == "block"){
-    			$(this).children().hide();
-    			$('.up_down').show();
-    			$('.up_down2').hide();
-    			return;
-    		}
-    			$(this).children().show();
-    			$('.up_down').hide();
-    			$('.up_down2').show();
-    		
-    	});
-    	
-    	$('.select_box1').on("click", function(){
-    		location.href = "${pageContext.request.contextPath}/myPage/inquiry";
-    	});
-    	
-    	$('.select_box2').on("click", function(){
-    		let state = 'TO';
-    		location.href = "${pageContext.request.contextPath}/myPage/inquiry/"+state;
-    	});
-    	
-    	$('.select_box3').on("click", function(){
-    		let state = 'RE';
-    		location.href = "${pageContext.request.contextPath}/myPage/inquiry/"+state;
-    	});
-    </script>
+        </script>
+        
+        <script type="text/javascript">
+        	
+        	$('#btn').on("click", function(){
+        		location.href="${pageContext.request.contextPath}/myPage/inquiry";
+        	});
+        	
+        	$('#writing').on("click", function(){
+        		console.log($.trim($('#inquiry_content').val()).length);
+        		console.log($('#inquiry_title').val() == "");
+        		if($.trim($('#inquiry_title').val()) == ""){
+        			alert("제목이 비었습니다.");
+        			return;
+        		}else if($.trim($('#inquiry_content').val()) == ""){
+        			alert("내용이 비었습니다");
+        			return;
+        		}else if($.trim($('#inquiry_title').val()).length < 8){
+        			alert("제목을 8자 이상 입력해주세요");
+        			return;
+	        	}else if($.trim($('#inquiry_content').val()).length < 20){
+	    			alert("내용을 20자 이상 입력해주세요");
+	    			return;
+	    		}
+        		$('#form1').submit();
+        	});
+        </script>
+        
+        <script type="text/javascript">
+        	// 제목 작성 엔터키 막기
+        	$('#inquiry_title').on("keypress", function(e){
+        		if(e.keyCode == 13){
+        			event.returnValue=false;
+        		}
+        	})
+        </script>
+	</div>
 </body>
 </html>

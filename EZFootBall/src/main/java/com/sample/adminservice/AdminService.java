@@ -21,12 +21,24 @@ public class AdminService {
 		this.dao = dao;
 	}
 
-	public List<FieldReservationVO> allgame(){
+	public List<GlistVO> allgame(){
 		return dao.allgame();
 	}
 	
 	public List<UserVO> alluser(){
 		return dao.alluser();
+	}
+	
+	public List<FieldReservationVO> stgame(){
+		return dao.stgame();
+	}
+	
+	public List<FieldReservationVO> sgame(){
+		return dao.sgame();
+	}
+	
+	public List<FieldReservationVO> cgame(){
+		return dao.cgame();
 	}
 	
 	public List<FieldReservationVO> Tgame(){

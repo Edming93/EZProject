@@ -11,5 +11,7 @@ public interface InquiryDAO {
 
 	public List<InquiryVO> InquiryAll(InquiryVO vo);
 
+	public InquiryVO InquiryDetail(InquiryVO vo);
+
 	public void InquiryAdd(InquiryVO vo);
 }

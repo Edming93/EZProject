@@ -17,8 +17,11 @@ import com.sample.vo.UserVO;
 @Mapper
 public interface AdminDAO {
 
-	public List<FieldReservationVO> allgame();
+	public List<GlistVO> allgame();
 	public List<UserVO> alluser();
+	public List<FieldReservationVO> stgame();
+	public List<FieldReservationVO> sgame();
+	public List<FieldReservationVO> cgame();
 	
 	public List<FieldReservationVO> Tgame();
 	
