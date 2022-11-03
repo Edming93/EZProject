@@ -75,6 +75,7 @@
 							<td><input type="checkbox" name="" id=""></td>
 							<td>경기번호</td>
 							<td>예약번호</td>
+							<td>경기형태</td>
 							<td>신청자</td>
 							<td>신청자코드</td>
 							<td>경기날짜</td>
@@ -96,6 +97,16 @@
 									</td>
 									<td class="rvCode">
 										<%out.print(cgamelist.get(i).getRvCode()); %>
+									</td>
+									<td class="rvType">
+										<%
+											if(cgamelist.get(i).getRvType().equals("S")){
+												out.print("소셜매치");
+											}else{
+												out.print("팀매치");
+											}
+										
+										 %>
 									</td>
 									<td class="userName">
 										<%
