@@ -4,13 +4,10 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String select = null;
-	//System.out.println(session.getAttribute("select"));
 	if(session.getAttribute("select") != null) {
 		select = (String)session.getAttribute("select");
-		//System.out.println("if"+select);
 	}else {
 		select = "userAdmin";
-		//System.out.println("else"+select);
 	}
 	
 %> 	
