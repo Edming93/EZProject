@@ -22,62 +22,66 @@
 		where rv_type = 'T';
 	</select>
 	
-	<resultMap type="FieldReservationVO" id="fieldMap">
-		<id column="user_code" property="userCode"/>
-		<result column="rv_code" property="rvCode"/>
-		<result column="game_time" property="gameTime"/>
-		<result column="rv_day" property="rvDay"/>
-		<result column="game_day" property="gameDay"/>
-		<result column="field_name" property="fieldName"/>
-		<result column="field_type" property="fieldType"/>
-		<result column="game_code" property="gameCode"/>
-		
-		<collection javaType="userVO" property="userVO">
-			<id column="user_code" property="userCode"/>
-			<result column="user_name" property="userName"/>
-		</collection>
-	</resultMap>
-	
-	<select id="joinList" parameterType="FieldReservationVO" resultMap="fieldMap">
+	<select id="joinList" resultType="FieldReservationVO">
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
-		LEFT JOIN user_info b ON a.user_code = b.user_code 
+		inner JOIN user_info b ON a.user_code = b.user_code 
 		ORDER BY a.game_day DESC
 	</select>
 	
-	<select id="joinList1" parameterType="FieldReservationVO" resultMap="fieldMap">
-		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+	<select id="joinList1" resultType="FieldReservationVO" parameterType="FieldReservationVO">
+		select a.rv_code rv_code, a.rv_day rv_day, a.field_name field_name, a.field_type field_type, a.game_day game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code game_code, a.user_code user_code, b.user_name user_name
 		FROM field_reservation a
-		LEFT JOIN user_info b ON a.user_code = b.user_code 
-		
+		inner JOIN user_info b ON a.user_code = b.user_code 
 		<where>
-			<if test="rvCode != null">
-				and a.rv_code = #{rvCode}
+			<if test="userName != null">
+				and b.user_name like concat('%',#{userName},'%')
+			</if>
+			<if test="srvCode != null">
+				and a.rv_code like concat('%',#{srvCode},'%')
 			</if>
 			<if test="rvDay != null">
-				and rv_day = #{rvDay}
+				and a.rv_day like concat('%',#{rvDay},'%')
 			</if>
-<!-- 			<if test=""> -->
-			
-<!-- 			</if> -->
-<!-- 			<if test=""> -->
-			
-<!-- 			</if> -->
-<!-- 			<if test=""> -->
-			
-<!-- 			</if> -->
-<!-- 			<if test=""> -->
-			
-<!-- 			</if> -->
-<!-- 			<if test=""> -->
-			
-<!-- 			</if> -->
-<!-- 			<if test=""> -->
-			
-<!-- 			</if> -->
+			<if test="fieldName != null">
+				and a.fieldName like concat('%',#{fieldName},'%')
+			</if>
+			<if test="gameDay != null">
+				and a.game_day like concat('%',#{gameDay},'%')
+			</if>
+			<if test="fieldType != null">
+				and a.field_type like concat('%',#{fieldType},'%')
+			</if>
+			<if test="suserCode != null">
+				and a.user_code like concat('%',#{suserCode},'%')
+			</if>
+			<if test="sgameCode != null">
+				and a.game_code like concat('%',#{sgameCode},'%')
+			</if>
 		</where>
 		ORDER BY a.game_day DESC
 	</select>
+	
+	<!-- 팀예약 삭제 mapper - gamelist, field_reservation 모두 삭제-->
+	<delete id="TdeleteG">
+		DELETE 
+		FROM field_reservation
+		WHERE game_code = #{gameCode}
+	</delete>
+	
+	<delete id="TdeleteF">
+		Delete
+		FROM gamelist
+		WHERE game_code = #{gameCode}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

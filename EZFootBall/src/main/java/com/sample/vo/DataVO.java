@@ -20,9 +20,22 @@ public class DataVO {
 	
 	private int gameCode;
 	private int teamCode;
+	
+	private String Tselect;
+	private String Tsearch;
 
-	
-	
+	public String getTselect() {
+		return Tselect;
+	}
+	public void setTselect(String tselect) {
+		Tselect = tselect;
+	}
+	public String getTsearch() {
+		return Tsearch;
+	}
+	public void setTsearch(String tsearch) {
+		Tsearch = tsearch;
+	}
 	public String getTime() {
 		return time;
 	}

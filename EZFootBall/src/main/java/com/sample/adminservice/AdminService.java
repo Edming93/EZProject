@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sample.dao.AdminDAO;
+import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.UserVO;
@@ -35,9 +36,21 @@ public class AdminService {
 	public List<FieldReservationVO> joinList(){
 		return dao.joinList();
 	}
-
-	public void joinList1(FieldReservationVO vo,Model model) {
+	
+	// 팀 예약현황 조건부 리스트 출력
+	public List<FieldReservationVO> joinList1(FieldReservationVO vo){
 		
-		model.addAttribute("team", dao.joinList1(vo));
+		List<FieldReservationVO> list = dao.joinList1(vo);
+
+		return list;
+	}
+	
+	// 팀 예약현황 삭제 로직
+	public void TdeleteG(FieldReservationVO vo) {
+		dao.TdeleteG(vo);
+	}
+	
+	public void TdeleteF(FieldReservationVO vo) {
+		dao.TdeleteF(vo);
 	}
 }

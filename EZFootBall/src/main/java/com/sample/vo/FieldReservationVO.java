@@ -1,5 +1,7 @@
 package com.sample.vo;
 
+import org.apache.ibatis.type.Alias;
+
 public class FieldReservationVO {
 	private int rvCode;
 	private String rvType;
@@ -22,14 +24,42 @@ public class FieldReservationVO {
 	private String gameTime2;
 	private int gameCode;
 	
-	private UserVO userVO;
+	private String userName;
 	
-	public UserVO getUserVO() {
-		return userVO;
+	private String srvCode;
+	private String suserCode;
+	private String sgameCode;
+	
+	public String getSgameCode() {
+		return sgameCode;
 	}
 
-	public void setUserVO(UserVO userVO) {
-		this.userVO = userVO;
+	public void setSgameCode(String sgameCode) {
+		this.sgameCode = sgameCode;
+	}
+
+	public String getSuserCode() {
+		return suserCode;
+	}
+
+	public void setSuserCode(String suserCode) {
+		this.suserCode = suserCode;
+	}
+
+	public String getSrvCode() {
+		return srvCode;
+	}
+
+	public void setSrvCode(String srvCode) {
+		this.srvCode = srvCode;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public int getGameCode() {

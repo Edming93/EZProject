@@ -11,14 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.adminservice.AdminService;
 import com.sample.adminservice.RentalAdminService;
+import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
+import com.sample.vo.UserVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -89,22 +93,66 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
+	// 팀 예약현황 - 조건에 따른 리스트 출력
 	@PostMapping("/reserselect1")
 	public String reserselect1 (Model model, FieldReservationVO vo,
-			HttpServletRequest request) {
+			@RequestParam("Tselect") String Tselect,
+			@RequestParam("Tsearch") String Tsearch) {
 		
+			if(Tselect.equals("rvCode")) {
+				vo.setSrvCode(Tsearch);
+			}else if(Tselect.equals("rvDay")){
+				vo.setRvDay(Tsearch);
+			}else if(Tselect.equals("userName")) {
+				vo.setUserName(Tsearch);
+			}else if(Tselect.equals("fieldName")) {
+				vo.setFieldName(Tsearch);
+			}else if(Tselect.equals("gameDay")) {
+				vo.setGameDay(Tsearch);
+			}else if(Tselect.equals("fieldType")) {
+				vo.setFieldType(Tsearch);
+			}else if(Tselect.equals("userCode")) {
+				vo.setSuserCode(Tsearch);
+			}else if(Tselect.equals("gameCode")) {
+				vo.setSgameCode(Tsearch);
+			}
 		
-		System.out.println("조건달고 출력~");
-		System.out.println("이거는? :" + vo.getRvCode());
-		vo.setRvCode(Integer.parseInt(request.getParameter("Tsearch")));
-		System.out.println("이거는?? " + vo.getRvCode());
-		service.joinList1(vo, model);
+			model.addAttribute("team", service.joinList1(vo));
 		
 
 		return "adminPage/adminMain";
 	}
 	
-	
+	@PostMapping("/TdeleteList")
+	@ResponseBody
+	public int TdeleteList(HttpSession session, 
+			@RequestParam(value="chbox[]") List<String> chArr,FieldReservationVO vo) {
+		System.out.println("오긴하나1111111??");
+		
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();
+		
+		int result = 0;
+		int gameCode = 0;
+		
+		
+		if(uvo != null) {
+			System.out.println("제발~~~");
+		
+			for(String i : chArr) {
+				gameCode = Integer.parseInt(i);
+				vo.setGameCode(gameCode);
+				System.out.println("오긴하나222222??");
+				System.out.println(gameCode);
+				service.TdeleteF(vo);
+				service.TdeleteG(vo);
+			}
+			result = 1;
+		}
+		
+
+		return result;
+	}
 	
 	@GetMapping("/subselect")
 	public String subselect (@RequestParam("subselect") String subselect,Model model,HttpSession session) {
