@@ -61,7 +61,9 @@ body{
 	". comment .";
 	height: 80vh;	
 }
-
+  
+  
+  
   #div1 {
 	font-family: 'Gowun Dodum', sans-serif;
     background-color: white;
@@ -111,6 +113,21 @@ body{
 	grid-area: comment;
 	display: flex;
 	flex-direction: column;
+	
+}
+
+.comment > div{
+	 border-radius: 3px;
+	 font-family: 'Gowun Dodum', sans-serif;
+	 margin-top: 3px;
+}
+
+.comment > div > p{
+	 font-family: 'Gowun Dodum', sans-serif;
+}
+
+.comment > div > h4{
+	 font-family: 'Gowun Dodum', sans-serif;
 }
 
 .insert {
@@ -190,6 +207,10 @@ button{
 
 #ibtn{
 	display: flex;
+	margin-top: 3vh;
+    flex: 0.14;
+    justify-content: center;
+    align-items: center;
 }
 
 
