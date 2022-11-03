@@ -59,6 +59,7 @@
      }
      .proflie{
         display: flex;
+     
      }
      .pleft {
         flex : 0.7;
@@ -78,6 +79,7 @@
         flex : 3;
         width: 90%;
         border: 1px solid black;
+        background : url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtR1s7QOKUU_L-3QWFgPsz9xXRl2Q-4FtL1Q&usqp=CAU") no-repeat center;
      }
      .pright{
         flex: 1;
@@ -132,10 +134,10 @@
                     <div class="profile">
                         <div class="pleft">
                             <div class="pleft_title">
-                                <p>로고</p>
+                               <a href=""><img src="${pageContext.request.contextPath}/image/ez_logo1.svg" /></a>
                             </div>
                             <div class="pleft_img">
-                                이미지
+                      
                             </div>
                         </div>
                         <div class="pright">
