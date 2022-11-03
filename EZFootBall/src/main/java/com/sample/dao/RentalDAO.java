@@ -36,5 +36,9 @@ public interface RentalDAO {
 	// -------------------- 관리자 구장관리 ---------------------
 	public List<GameFieldInfoVO> getFieldListAll();
 	
+	public GameFieldInfoVO selectFieldData(String fieldCode);
+	
 	public void deleteSeleteField(String fieldCode);
+	
+	public String selectFieldImage(String fieldCode);
 }

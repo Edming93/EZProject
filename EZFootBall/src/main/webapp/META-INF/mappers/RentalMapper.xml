@@ -133,6 +133,14 @@
 	<delete id="deleteSeleteField">
 		delete from gamefield_info where field_code = #{fieldCode}
 	</delete>
+	
+	<select id="selectFieldData" resultType="gameFieldInfoVO">
+		select * from gamefield_info where field_code = #{fieldCode}
+	</select>
+	
+	<select id="selectFieldImage" resultType="String">
+		select field_img1 from gamefield_info where field_code = #{fieldCode}
+	</select>
 
 	
 	

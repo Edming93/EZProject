@@ -71,6 +71,10 @@
         	%>
 	    		  <jsp:include page="./addField.jsp"></jsp:include>
 	    	<%
+        	}else if(fieldselect.equals("fieldModify")){
+        	%>
+        		  <jsp:include page="./fieldModify.jsp"></jsp:include>
+        	<%
         	}
         	%>
     </div>

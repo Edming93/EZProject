@@ -1,6 +1,6 @@
 package com.sample.admincontroller;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.adminservice.AdminService;
-import com.sample.adminservice.RentalAdminService;
+import com.sample.adminservice.FieldAdminService;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
@@ -29,31 +29,20 @@ import com.sample.vo.UserVO;
 public class AdminController {
 	
 	private AdminService service;
-	private RentalAdminService raService;
+	private FieldAdminService fdService;
 	
-
-	
-	//private GlistService service;
-	//private LoginService lservice;
-	//private TeamService tservice;
-	
-//	public AdminController(GlistService service,LoginService lservice,TeamService tservice) {
-//		super();
-//		this.service = service;
-//		this.lservice = lservice;
-//		this.tservice = tservice;
-//	}
-	
-	public AdminController(AdminService service, RentalAdminService raService) {
-		super();
-		this.service = service;
-		this.raService = raService;
-	}
 
 	@GetMapping("/admin")
 	public String admin() {
 		return "adminPage/adminMain";
 	}
+	
+	public AdminController(AdminService service,FieldAdminService fdService) {
+		super();
+		this.service = service;
+		this.fdService = fdService;
+	}
+
 	
 	@GetMapping("/select")
 	public String mainselect (@RequestParam("select") String select,HttpSession session,Model model) {
@@ -70,8 +59,8 @@ public class AdminController {
 		session.setAttribute("cgamelist", service.cgame());
 		
 		
-		session.setAttribute("fieldList", raService.getFieldListAll());
-		model.addAttribute("fieldList", raService.getFieldListAll());
+		session.setAttribute("fieldList", fdService.getFieldListAll());
+		model.addAttribute("fieldList", fdService.getFieldListAll());
 		return "adminPage/adminMain";
 	}
 	
@@ -171,7 +160,39 @@ public class AdminController {
 	}
 	
 	@GetMapping("/fieldselect")
-	public String fieldselect (@RequestParam("fieldselect") String fieldselect,Model model) {
+	public String fieldselect (Model model,HttpServletRequest request,HttpSession session) {
+		
+		// 경로 이동 페이지 값
+		String fieldselect = request.getParameter("fieldselect");
+
+		// 수정 or 삭제버튼 클릭 여부
+		String fieldChange = request.getParameter("fieldChange");
+		// 선택한 check버튼
+		String check_btn[] = request.getParameterValues("check_btn");
+		
+		// 삭제 버튼 클릭했을 때
+		if(fieldChange != null) {
+			if(fieldChange.equals("delete")) {
+				for(int i=0; i<check_btn.length; i++) {
+				fdService.deleteSeleteField(check_btn[i]);
+				}
+				return "redirect:/admin/select?select=fieldAdmin";
+			// 수정버튼 클릭했을 때
+			}else {
+				List<String> list = new ArrayList<String>(); 
+				
+				if(check_btn != null) {
+					for(int i=0; i<check_btn.length; i++) {
+						fdService.selectFieldData(check_btn[i],model);
+						model.addAttribute("gameFieldInfoVO"+i,fdService.selectFieldData(check_btn[i],model));
+//						model.addAttribute("field",fdService.selectFieldData(check_btn[i],model));
+						list.add("gameFieldInfoVO"+i);
+					}
+				}
+				model.addAttribute("list", list);
+			return "adminPage/adminMain";
+			}
+		}
 		model.addAttribute("fieldselect", fieldselect);
 		return "adminPage/adminMain";
 	}
