@@ -14,15 +14,21 @@ public class DataVO {
 	private String type;
 	private int code;
 	private String time;
+	
+	//아래 세개 나중에 정리하기
 	private int game_code;
 	private int user_code;
 	private int team_code;
 	
 	private int gameCode;
 	private int teamCode;
+
 	
 	private String Tselect;
 	private String Tsearch;
+
+	private int userCode;
+
 
 	public String getTselect() {
 		return Tselect;
@@ -125,6 +131,12 @@ public class DataVO {
 	}
 	public void setTeamCode(int teamCode) {
 		this.teamCode = teamCode;
+	}
+	public int getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(int userCode) {
+		this.userCode = userCode;
 	}
 
 	

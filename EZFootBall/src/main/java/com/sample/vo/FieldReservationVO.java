@@ -22,16 +22,28 @@ public class FieldReservationVO {
 	// 시간 변환
 	private String gameTime1;
 	private String gameTime2;
+
 	private int gameCode;
+	private int teamCode;
 	
 	private String userName;
 	
+
 	private String srvCode;
 	private String suserCode;
 	private String sgameCode;
 	
 	public String getSgameCode() {
 		return sgameCode;
+	}
+	
+	
+	public int getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(int teamCode) {
+		this.teamCode = teamCode;
 	}
 
 	public void setSgameCode(String sgameCode) {
