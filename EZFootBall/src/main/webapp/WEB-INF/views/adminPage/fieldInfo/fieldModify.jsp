@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fieldInfo.css" />
 </head>
 <body>
-	<div class="content_area">
+	<div class="modify_content_area">
+	<h1>구장 수정</h1>
 			<c:forEach var="item" items="${list}">
-	        <form:form modelAttribute="${item}" action="${pageContext.request.contextPath}/admin/select?select=fieldAdmin" method="post">
+	        <form:form modelAttribute="${item}" action="${pageContext.request.contextPath}/admin/fieldModify?select=fieldAdmin" method="post">
 	        	<div class="content">
 	        		
 					<div class="field_info">

@@ -41,4 +41,6 @@ public interface RentalDAO {
 	public void deleteSeleteField(String fieldCode);
 	
 	public String selectFieldImage(String fieldCode);
+	
+	public void modify_field(GameFieldInfoVO gfvo);
 }

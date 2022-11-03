@@ -120,7 +120,7 @@
      #content{
         flex:4;
         border: 1px solid black;
-        overflow:scroll;
+    	overflow-y: scroll;
      }
 </style>
 <body>

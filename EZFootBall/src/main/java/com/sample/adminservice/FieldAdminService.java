@@ -35,9 +35,13 @@ public class FieldAdminService {
 		dao.deleteSeleteField(fieldCode);
 	}
 	
-	// 이미지 출력
+	// 이미지 내보내기
 	public String selectFieldImage(String fieldCode,Model model) {
 		return dao.selectFieldImage(fieldCode) ;
+	}
+	
+	public void modifyUpdate(GameFieldInfoVO gfvo) {
+		dao.modify_field(gfvo); 
 	}
 	
 }

@@ -159,12 +159,11 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
+	// 구장 관리 리스트
 	@GetMapping("/fieldselect")
 	public String fieldselect (Model model,HttpServletRequest request,HttpSession session) {
-		
 		// 경로 이동 페이지 값
 		String fieldselect = request.getParameter("fieldselect");
-
 		// 수정 or 삭제버튼 클릭 여부
 		String fieldChange = request.getParameter("fieldChange");
 		// 선택한 check버튼
@@ -196,6 +195,16 @@ public class AdminController {
 		model.addAttribute("fieldselect", fieldselect);
 		return "adminPage/adminMain";
 	}
+	
+	// 구장 수정
+	@PostMapping("/fieldModify")
+	public String modifyField(Model model,GameFieldInfoVO gfVO,@RequestParam("select") String select) {
+		model.addAttribute("select",select);
+		fdService.modifyUpdate(gfVO);
+		model.addAttribute("gfVO",gfVO);
+		return "redirect:/admin/select";
+	}
+	
 	
 	@GetMapping("/comuselect")
 	public String comuselect (@RequestParam("comuselect") String comuselect,Model model) {

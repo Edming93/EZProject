@@ -63,6 +63,25 @@
 	        </div>
 	        </c:forEach>
 	     </div>
+	     	<script type="text/javascript">
+	     		let field_modify = document.querySelector(".field_modify");
+	     		let check_boxes = document.querySelectorAll(".check_box");
+	     		let cnt = 0;
+	     		field_modify.addEventListener("click",function() {
+	     			check_boxes.forEach(function(e){
+	     				if(e.checked == false){
+	     					cnt++;
+	     				}else{
+	     					field_modify.type="submit";
+	     				}
+	     			});
+	     			if(check_boxes.length == cnt){
+	     				field_modify.type="button";
+	     				alert("수정할 정보가 없습니다!");
+	     				cnt=0;
+	     			}
+	     		});
+	     	</script>
 	     
         	<script type="text/javascript">
 	            var local = document.getElementById("search_local");
