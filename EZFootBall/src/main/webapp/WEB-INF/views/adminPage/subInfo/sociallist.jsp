@@ -26,9 +26,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#out * {
-		border: 1px solid black;
-	}
+/* 	#out * { */
+/* 		border: 1px solid black; */
+/* 	} */
 	
 	#searchbox {
 		display: flex;
@@ -36,12 +36,87 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 30px;
+
 	}
 	
 	#upside{
 		display: flex;
 		justify-content: space-between;
+    	padding: 0 15px;
+    	
 	}
+	
+	 #select{
+        	width: 10%;
+    		height: 30px;
+    		border: 2px solid #26a563;
+   			border-radius: 10px;
+        }
+        #saerch{
+        	width: 50%;
+    		height: 30px;
+        }
+        #inputbox{
+        	width : 85%;
+        	height : 30px;
+        }
+        #sbtn{
+        	width: 13%;
+		    height: 30px;
+		    border: 2px solid #26a563;
+		    border-radius: 10px;
+		    background-color: #26a563;
+		    color: white;
+		    font-weight: 700;
+        }
+        #sbtn:hover {
+        	cursor : pointer;
+        	background-color : red;
+        }
+        #add{
+        	border: 1px solid #26a563;
+    		background: #26a563;
+    		color: white;
+    		border-radius: 5px;
+        }
+        #del{
+        	border: 1px solid #26a563;
+    		background: #26a563;
+    		color: white;
+    		border-radius: 5px;
+        }
+        #list{
+    		display: flex;
+    		justify-content: center;
+        }
+        table thead tr{
+        	background-color : #D2D79F;
+        }
+       table tr th{
+       		height : 40px;
+       		width : 110px;
+       		
+       }
+       table tr th:first-child{
+       		width : 50px;
+       }
+       table tr td{
+       		height : 30px;
+       		border-bottom : 1px dotted #F8EDE3;
+       		text-align : center;
+       }
+       #Cbox{
+       		width : 18px;
+       		height : 18px;
+       }
+       .checkbox{
+       		width : 18px;
+       		height : 18px;
+       }
+       #nev{
+           display: flex;
+    		justify-content: center;
+    	}
 </style>
 </head>
 <body>
@@ -77,17 +152,17 @@
 				<table>
 					<thead>
 						<tr>
-							<td><input type="checkbox" name="" id=""></td>
-							<td>경기번호</td>
-							<td>예약번호</td>
-							<td>신청자</td>
-							<td>신청자코드</td>
-							<td>경기날짜</td>
-							<td>경기장</td>
-							<td>매치형태</td>
-							<td>경기성별</td>
-							<td>참여인원</td>
-							<td>매니저</td>
+							<th><input type="checkbox" name="" id="Cbox"></th>
+							<th>경기번호</th>
+							<th>예약번호</th>
+							<th>신청자</th>
+							<th>신청자코드</th>
+							<th>경기날짜</th>
+							<th>경기장</th>
+							<th>매치형태</th>
+							<th>경기성별</th>
+							<th>참여인원</th>
+							<th>매니저</th>
 						</tr>
 					</thead>
 					<tbody  id="tablelist">

@@ -53,7 +53,7 @@
 	</select>
 	
 	<select id="joinList1" resultType="FieldReservationVO" parameterType="FieldReservationVO">
-		select a.rv_code rv_code, a.rv_day rv_day, a.field_name field_name, a.field_type field_type, a.game_day game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code game_code, a.user_code user_code, b.user_name user_name
+		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code 
 		<where>
@@ -67,7 +67,7 @@
 				and a.rv_day like concat('%',#{rvDay},'%')
 			</if>
 			<if test="fieldName != null">
-				and a.fieldName like concat('%',#{fieldName},'%')
+				and a.field_name like concat('%',#{fieldName},'%')
 			</if>
 			<if test="gameDay != null">
 				and a.game_day like concat('%',#{gameDay},'%')
