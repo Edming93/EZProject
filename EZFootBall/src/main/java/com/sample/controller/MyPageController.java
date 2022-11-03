@@ -168,6 +168,18 @@ public class MyPageController {
 		return "/myPage/inquiry";
 	}
 
+	@GetMapping("/inquiry/{state}")
+	public String inquiry(@PathVariable("state") String state, HttpSession session, InquiryVO inquiryVO, Model model) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		inquiryVO.setUserCode(uvo.getUserCode());
+		if (state != null) {
+			inquiryVO.setInquiryState(state);
+		}
+		List<InquiryVO> list = inquiryService.inquiryAll(inquiryVO);
+		model.addAttribute("list", list);
+		return "/myPage/inquiry";
+	}
+
 	@GetMapping("/inquiry_detail/{inquiryCode}")
 	public String inquiryDetail(@PathVariable("inquiryCode") String inquiryCode, InquiryVO inquiryVO, Model model) {
 		System.out.println("dkdkdkkd" + inquiryCode);

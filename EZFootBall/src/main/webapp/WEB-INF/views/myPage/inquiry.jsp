@@ -180,6 +180,60 @@
 	opacity: 0.8;
 }
 
+.select {
+	cursor: pointer;
+}
+
+.up_down{
+	position: relative;
+/* 	float: right; */
+/*     margin: 0 20px 0 0; */
+}
+
+.up_down:after {
+    position: absolute;
+    left: -70px;
+    top: 3px;
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(135deg);
+}
+
+.up_down2{
+	display:none;
+	position: relative;
+/* 	float: right; */
+    margin: 8px 0 0 0;
+}
+
+.up_down2:after {
+    position: absolute;
+    left: -70px;
+    top: 8px;
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(315deg);
+}
+
+.select_box {
+	position: absolute;
+	display:none;
+	right: 210px;
+	top: 240px;
+	color: #000;
+}
+
+.select_box1, .select_box2, .select_box3 {
+	padding: 10px;
+	background-color: #fff;
+	cursor: pointer;
+}
 
 .bottom_banner {
 	width: 100%;
@@ -274,7 +328,17 @@ footer {
 								<th>문의번호</th>
 								<th>문의제목</th>
 								<th>문의날짜</th>
-								<th>문의상태</th>
+								<th class="select">문의상태
+									
+									<div class="select_box">
+										<div class="select_box1">전체보기</div>
+										<div class="select_box2">답변대기</div>
+										<div class="select_box3">답변완료</div>
+									</div>
+									<i class="up_down"></i>
+									<i class="up_down2"></i>
+								</th>
+								
 							</tr>
 							
 							<c:forEach var="list" items="${list}">
@@ -308,7 +372,8 @@ footer {
 					<div class="main_item2">
 					</div>
 					<div class="btn_box">
-						<button id="btn">문의하기</button>
+						<button id="inquiry">문의하기</button>
+						<button id="btn">뒤로가기</button>
 					</div>
 				</div>
             </div>
@@ -333,8 +398,39 @@ footer {
     </script>
     
     <script type="text/javascript">
-    	$('#btn').click(function(){
+    	$('#inquiry').click(function(){
     		location.href = "${pageContext.request.contextPath}/myPage/inquiry_writing";
+    	});
+    	
+    	$('#btn').click(function(){
+    		location.href = "${pageContext.request.contextPath}/myPage/myPage";
+    	});
+    	
+    	$('.select').on("click", function(){
+    		if($(this).children().css("display") == "block"){
+    			$(this).children().hide();
+    			$('.up_down').show();
+    			$('.up_down2').hide();
+    			return;
+    		}
+    			$(this).children().show();
+    			$('.up_down').hide();
+    			$('.up_down2').show();
+    		
+    	});
+    	
+    	$('.select_box1').on("click", function(){
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry";
+    	});
+    	
+    	$('.select_box2').on("click", function(){
+    		let state = 'TO';
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry/"+state;
+    	});
+    	
+    	$('.select_box3').on("click", function(){
+    		let state = 'RE';
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry/"+state;
     	});
     </script>
 </body>
