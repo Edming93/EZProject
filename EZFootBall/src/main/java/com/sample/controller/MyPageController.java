@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -159,18 +160,46 @@ public class MyPageController {
 	}
 
 	@GetMapping("/inquiry")
-	public String inquiry() {
-
-		return "/myPage/inquiry";
-	}
-
-	@ResponseBody
-	@GetMapping("/inquiry_list")
-	public List<InquiryVO> inquiryList(HttpSession session, InquiryVO inquiryVO) {
+	public String inquiry(HttpSession session, InquiryVO inquiryVO, Model model) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		inquiryVO.setUserCode(uvo.getUserCode());
 		List<InquiryVO> list = inquiryService.inquiryAll(inquiryVO);
-
-		return list;
+		model.addAttribute("list", list);
+		return "/myPage/inquiry";
 	}
+
+	@GetMapping("/inquiry_detail/{inquiryCode}")
+	public String inquiryDetail(@PathVariable("inquiryCode") String inquiryCode, InquiryVO inquiryVO, Model model) {
+		System.out.println("dkdkdkkd" + inquiryCode);
+		inquiryVO.setInquiryCode(Integer.parseInt(inquiryCode));
+		model.addAttribute("inquiryVO", inquiryService.inquiryDetail(inquiryVO));
+		return "/myPage/inquiry_detail";
+	}
+
+	@GetMapping("/inquiry_writing")
+	public String inquiryWriting() {
+
+		return "/myPage/inquiry_writing";
+	}
+
+	@PostMapping("/inquiry_add")
+	public String inquiryAdd(@RequestParam("inquiry_title") String inquiryTitle,
+			@RequestParam("inquiry_content") String inquiryContent, InquiryVO inquiryVO, HttpSession session) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		inquiryVO.setInquiryTitle(inquiryTitle);
+		inquiryVO.setInquiryContent(inquiryContent);
+		inquiryVO.setUserCode(uvo.getUserCode());
+		inquiryService.InquiryAdd(inquiryVO);
+		return "redirect:/myPage/inquiry";
+	}
+
+//	@ResponseBody
+//	@GetMapping("/inquiry_list")
+//	public List<InquiryVO> inquiryList(HttpSession session, InquiryVO inquiryVO) {
+//		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+//		inquiryVO.setUserCode(uvo.getUserCode());
+//		List<InquiryVO> list = inquiryService.inquiryAll(inquiryVO);
+//
+//		return list;
+//	}
 }

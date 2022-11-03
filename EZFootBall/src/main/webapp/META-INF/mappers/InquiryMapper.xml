@@ -5,18 +5,30 @@
 <mapper namespace="com.sample.dao.InquiryDAO">
 	
 	<select id="InquiryAll" resultType="inquiryVO">
-		SELECT * FROM inquiry
-	</select>
-	
-	<select id="InquiryList" resultType="inquiryVO">
-		SELECT * FROM inquiry
+		SELECT inquiry_code, inquiry_title, inquiry_content, CASE inquiry_state WHEN 'TO' THEN '답변대기' WHEN 'RE' THEN '답변완료' ELSE 'NULL' END inquiry_state, create_date, answer_date, answer_content, user_code
+		FROM inquiry
 		WHERE user_code = #{userCode}
 	</select>
 	
+	<select id="InquiryDetail" resultType="inquiryVO">
+		SELECT inquiry_code, inquiry_title, inquiry_content, CASE inquiry_state WHEN 'TO' THEN '답변대기' WHEN 'RE' THEN '답변완료' ELSE 'NULL' END inquiry_state, create_date, answer_date, answer_content, user_code 
+		FROM inquiry
+		WHERE inquiry_code = #{inquiryCode}
+	</select>
+	
+	<!-- 관리자페이지에서 조회 -->
+	<select id="InquiryListAdmin" resultType="inquiryVO">
+		SELECT inquiry_code, inquiry_title, inquiry_content, inquiry_state, create_date, answer_date, answer_content, i.user_code, u.user_name
+		FROM inquiry AS i INNER JOIN user_info AS u
+		ON i.user_code = u.user_code
+	</select>
+	
+	
+	
 	<!-- 문의 작성 -->
-	<insert id="InquiryAdd">
-		INSERT INTO inquiry (inquiry_title, inquiry_content, inquiry_state, create_date, userCode)
-		VALUES(#{inquiryTitle}, #{inquiryContent}, #{inquiryState}, #{createDate}, #{userCode})
+	<insert id="InquiryAdd" parameterType="inquiryVO">
+		INSERT INTO inquiry (inquiry_title, inquiry_content, inquiry_state, user_code)
+		VALUES(#{inquiryTitle}, #{inquiryContent}, 'TO', #{userCode})
 	</insert>
 	
 </mapper>

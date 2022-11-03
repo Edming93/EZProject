@@ -21,4 +21,11 @@ public class InquiryService {
 		return inquiryDAO.InquiryAll(inquiryVO);
 	}
 
+	public InquiryVO inquiryDetail(InquiryVO inquiryVO) {
+		return inquiryDAO.InquiryDetail(inquiryVO);
+	}
+
+	public void InquiryAdd(InquiryVO inquiryVO) {
+		inquiryDAO.InquiryAdd(inquiryVO);
+	}
 }

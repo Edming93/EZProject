@@ -16,8 +16,12 @@ public class InquiryVO {
 	private String createDate;
 	// 문의답변일
 	private String answerDate;
+	// 문의답변내용
+	private String answerContent;
 	// 유저코드
 	private int userCode;
+	// 유저이름
+	private String userName;
 
 	public int getInquiryCode() {
 		return inquiryCode;
@@ -73,6 +77,22 @@ public class InquiryVO {
 
 	public void setUserCode(int userCode) {
 		this.userCode = userCode;
+	}
+
+	public String getAnswerContent() {
+		return answerContent;
+	}
+
+	public void setAnswerContent(String answerContent) {
+		this.answerContent = answerContent;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

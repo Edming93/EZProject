@@ -120,7 +120,7 @@
 	/* height: 98%; */
 	height:90%;
 	background-color: #fff;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 	padding: 20px;
 }
 
@@ -150,6 +150,34 @@
 	background-color: #26a653;
 	color: #fff;
 	border-bottom: 1px solid black;
+}
+
+.item_box{
+	cursor: pointer;
+}
+
+.btn_box{
+	display: flex;
+	justify-content: space-evenly;
+}
+    
+.btn_box button {
+	display: inline-block;
+	width: 40%;
+	padding: 15px 0;
+	text-decoration: none;
+	margin: 20px 0;
+	color: #fff;
+	font-weight:bold;
+	font-size:18px;
+	border: 1px solid #26a653;
+	text-align: center;
+	background-color: #26a653;
+	border-radius: 20px;
+}
+
+.btn_box button:hover {
+	opacity: 0.8;
 }
 
 
@@ -249,15 +277,20 @@ footer {
 								<th>문의상태</th>
 							</tr>
 							
-							<c:forEach varStatus="Inquiry" var="list" items="${list}">
-								
+							<c:forEach var="list" items="${list}">
+								<tr class="inquiry_item${list.inquiryCode} item_box">
+									<td>${list.inquiryCode}</td>
+									<td>${list.inquiryTitle}</td>
+									<td>${list.createDate}</td>
+									<td>${list.inquiryState}</td>
+								</tr>	
+								<script type="text/javascript">
+									 $('.inquiry_item${list.inquiryCode}').on("click",function(){
+										location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail/${list.inquiryCode}";
+									 });
+								</script>
 							</c:forEach>
-							<tr class="inquiry_item">
-								<td>1</td>
-								<td>민지 누나가 css로 괴롭혀요</td>
-								<td>2022-11-03</td>
-								<td>대기중</td>
-							</tr>
+							
 <!-- 							<tr> -->
 <!-- 								<td>2</td> -->
 <!-- 								<td>고객 문의를 왜쓰는거야</td> -->
@@ -273,6 +306,8 @@ footer {
 						</table>
 					</div>
 					<div class="main_item2">
+					</div>
+					<div class="btn_box">
 						<button id="btn">문의하기</button>
 					</div>
 				</div>
@@ -286,22 +321,21 @@ footer {
 			<div class="footer_left"></div>
 			<div class="footer_right"></div>
 
-		</footer>
-
-		<script type="text/javascript">
+		</footer>	
+	</div>
+	
+	<script type="text/javascript">
             let main_logo = document.querySelector(".main_logo");
             
             main_logo.addEventListener("click",function() {
                 location.href="${pageContext.request.contextPath}";
             });
-        </script>
-        
-        <script type="text/javascript">
-        $('.inquiry_item').on("click",function(){
-			location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail";
+    </script>
+    
+    <script type="text/javascript">
+    	$('#btn').click(function(){
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry_writing";
     	});
-        </script>
-        
-	</div>
+    </script>
 </body>
 </html>

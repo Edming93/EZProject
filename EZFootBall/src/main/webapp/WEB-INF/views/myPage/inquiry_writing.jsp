@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의내역</title>
+<title>문의작성하기</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <style>
@@ -106,11 +105,11 @@
 	display:flex;
     width: 1024px;
 /*     height: 900px; */
-/* 	   min-height: 900px; */
+/*     min-height: 900px; */
 /*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
-    flex-direction: column;
+    flex-wrap: wrap;
 /*     border: 1px solid black; */
 }
 
@@ -118,52 +117,29 @@
 	display: flex;
 	flex-direction: column;
 	width: 70%;
+	/* height: 98%; */
 	height:90%;
 	background-color: #fff;
+/* 	border: 1px solid black; */
 	padding: 20px;
 }
 
-.main_item1, .main_item2 {
+.main_item1 {
 	display: flex;
 	width: 100%;
 	height: 40vh;
 	flex-direction: column;
 }
 
-.main_item1 p, .main_item2 p{
-	display: block;
-	font-size: 15px;
-	opacity: 0.9;
-}
 
-.main_item1 h5, .main_item2 h5 {
+.main_item1 h5{
 	display: block;
 	font-size: 15px;
 	opacity: 0.9;
 	min-width: 100px;
 }
 
-
-.detail_header {
-	display:flex;
-	width: 100%;
-	padding: 20px 10px;
-	border-bottom: 1px solid #ccc;
-}
-
-.header_item1{
-	display:flex;
-	width: 49%;
-}
-
-.header_item2{
-	display:flex;
-	width: 49%;
-	justify-content: space-evenly;
-}
-
-
-.detail_title{
+.write_title{
     display: flex;
     width: 100%;
     padding: 20px 10px;
@@ -175,7 +151,7 @@
 	width: 100%;
 }
 
-.detail_content {
+.write_content {
 	display:flex;
 	width: 100%;
 	min-height:60%;
@@ -191,10 +167,22 @@
 	align-self: center;
 }
 
-/* .title_item p { */
-/* 	width: 70%; */
-/* 	padding-left: 15%; */
-/* } */
+#inquiry_title {
+	width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+#inquiry_content {
+	width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+textarea:focus { outline: none; }
+
 
 .btn_box{
 	display: flex;
@@ -306,46 +294,28 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">내 문의내역</h1>
+			<h1 class="main_title">문의작성하기</h1>
 				<div class="main_content1">
 					<div class="main_item1">
-						<div class="detail_header">
-							<section class="header_item1">
-								<h5>등록일</h5><p>${inquiryVO.createDate}</p>
-							</section>
-							<section class="header_item2">
-								<h5>처리상태</h5><p>${inquiryVO.inquiryState}</p>
-							</section>
-						</div>
-						<div class="detail_title">
-							<section class="title_item">
-								<h5>제목</h5><p>${inquiryVO.inquiryTitle}</p>
-							</section>
-						</div>
-						<div class="detail_content">
-							<section class="content_item">
-								<h5>내용</h5><p>${inquiryVO.inquiryContent}</p>
-							</section>
-						</div>
+						<form action="${pageContext.request.contextPath}/myPage/inquiry_add" id="form1" method="post">
+							<div class="write_title">
+								<div class="title_item">
+									<h5>제목</h5><textarea rows="1" cols="100" name="inquiry_title" id="inquiry_title" maxlength="25" required ></textarea>
+								</div>
+							</div>
+							<div class="write_content">
+								<div class="content_item">
+									<h5>내용</h5><textarea rows="10" cols="100" name="inquiry_content" id="inquiry_content" maxlength="140" required ></textarea>
+								</div>
+							</div>
+						</form>
 					</div>
-					<!-- 관리자 답변 들어갈곳 -->
-					<c:if test="${inquiryVO.inquiryState eq '답변완료'}">
 					<div class="main_item2">
-						<div class="detail_header">
-							<section class="header_item1">
-								<h5>답변일</h5><p>${inquiryVO.answerDate}</p>
-							</section>
-						</div>
-						<div class="detail_content">
-							<section class="content_item">
-								<h5>답변</h5><p>${inquiryVO.answerContent}</p>
-							</section>
-						</div>
+						
 					</div>
-					</c:if>
 					<div class="btn_box">
+						<button id="writing">작성하기</button>
 						<button id="btn">뒤로가기</button>
-					</div>
 					</div>
 				</div>
             </div>
@@ -367,10 +337,40 @@ footer {
                 location.href="${pageContext.request.contextPath}";
             });
         </script>
+        
         <script type="text/javascript">
+        	
         	$('#btn').on("click", function(){
-        		location.href = "${pageContext.request.contextPath}/myPage/inquiry";
+        		location.href="${pageContext.request.contextPath}/myPage/inquiry";
         	});
+        	
+        	$('#writing').on("click", function(){
+        		console.log($.trim($('#inquiry_content').val()).length);
+        		console.log($('#inquiry_title').val() == "");
+        		if($.trim($('#inquiry_title').val()) == ""){
+        			alert("제목이 비었습니다.");
+        			return;
+        		}else if($.trim($('#inquiry_content').val()) == ""){
+        			alert("내용이 비었습니다");
+        			return;
+        		}else if($.trim($('#inquiry_title').val()).length < 8){
+        			alert("제목을 8자 이상 입력해주세요");
+        			return;
+	        	}else if($.trim($('#inquiry_content').val()).length < 20){
+	    			alert("내용을 20자 이상 입력해주세요");
+	    			return;
+	    		}
+        		$('#form1').submit();
+        	});
+        </script>
+        
+        <script type="text/javascript">
+        	// 제목 작성 엔터키 막기
+        	$('#inquiry_title').on("keypress", function(e){
+        		if(e.keyCode == 13){
+        			event.returnValue=false;
+        		}
+        	})
         </script>
 	</div>
 </body>
