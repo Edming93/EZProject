@@ -185,13 +185,12 @@
 	    	document.getElementById("tablelist").children[k].style.display = "";
 	    }
 	}
-	
 		
 	</script>
 	
 	<!-- 리스트 바꾸기 -->
 	<script type="text/javascript">
-		for(let i=0; i<(<%=cgamelist.size()/15%>+1); i++){
+		for(let i=0; i<document.getElementById("nev").children.length; i++){
 			let j = i*15;
 			
 			document.getElementById("nev").children[i].addEventListener("click",function(){
@@ -214,22 +213,40 @@
 	        });
 		}
 	</script>
-
+	
 	<!-- 검색 -->
-		<script type="text/javascript">
+	<script type="text/javascript">
 	document.getElementById("sbtn").addEventListener("click",function(){
-		console.log("dididididi");
+		console.log("으악");
+		/* 카테고리 */
+		if(document.getElementById("select").value == "null"){
+			
+			let cnt = 0;
+			for(let i=0; i<(<%=cgamelist.size()%>); i++){
+				document.getElementById("tablelist").children[i].style.display = "";
+				cnt++;
+			}
+			
+			let num = Math.round((cnt / 15))+1;
+			console.log(num);
+			for(let i=num; i<<%=cgamelist.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].style.display = "none";
+			}
+		}
+		
+		
 		
 		/* 신청자 검색 */
 		if(document.getElementById("select").value == "subname"){
+			
 			let cnt = 0;
 			for(let i=0; i<(<%=cgamelist.size()%>); i++){
-				if(document.getElementsByClassName("userName")[i].innerText == document.getElementById("inputbox").value) {
+				var text = document.getElementsByClassName("userName")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value)!= -1){
 					document.getElementById("tablelist").children[i].style.display = "";
 					cnt++;
 				}else{
 					document.getElementById("tablelist").children[i].style.display = "none";
-					console.log("지워"+document.getElementById("tablelist").children[i].id);
 				}
 			}
 			
@@ -246,12 +263,12 @@
 		if(document.getElementById("select").value == "gamecode"){
 			let cnt = 0;
 			for(let i=0; i<(<%=cgamelist.size()%>); i++){
-				if(document.getElementsByClassName("gameCode")[i].innerText == document.getElementById("inputbox").value) {
+				var text = document.getElementsByClassName("gameCode")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tablelist").children[i].style.display = "";
 					cnt++;
 				}else{
 					document.getElementById("tablelist").children[i].style.display = "none";
-					console.log("지워"+document.getElementById("tablelist").children[i].id);
 				}
 			}
 			
@@ -267,7 +284,8 @@
 		if(document.getElementById("select").value == "gday"){
 			let cnt = 0;
 			for(let i=0; i<(<%=cgamelist.size()%>); i++){
-				if(document.getElementsByClassName("GameDay")[i].innerText == document.getElementById("inputbox").value) {
+				var text = document.getElementsByClassName("GameDay")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tablelist").children[i].style.display = "";
 					cnt++;
 				}else{
@@ -286,7 +304,8 @@
 		if(document.getElementById("select").value == "fieldname"){
 			let cnt = 0;
 			for(let i=0; i<(<%=cgamelist.size()%>); i++){
-				if(document.getElementsByClassName("fieldName")[i].innerText == document.getElementById("inputbox").value) {
+				var text = document.getElementsByClassName("fieldName")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tablelist").children[i].style.display = "";
 					cnt++;
 				}else{
@@ -301,11 +320,34 @@
 		}
 		
 		
+		/* 매치형태 검색 */
+		if(document.getElementById("select").value == "fieldtype"){
+			let cnt = 0;
+			for(let i=0; i<(<%=cgamelist.size()%>); i++){
+				var text = document.getElementsByClassName("fieldType")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
+					document.getElementById("tablelist").children[i].style.display = "";
+					cnt++;
+				}else{
+					document.getElementById("tablelist").children[i].style.display = "none";
+				}
+			}
+			
+			let num = Math.round((cnt / 15))+1;
+			for(let i=num; i<<%=cgamelist.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].style.display = "none";
+			}
+		}
+		
+		
+		
+		
 		/* 매니저 검색 */
 		if(document.getElementById("select").value == "mag"){
 			let cnt = 0;
 			for(let i=0; i<(<%=cgamelist.size()%>); i++){
-				if(document.getElementsByClassName("GameMag")[i].innerText == document.getElementById("inputbox").value) {
+				var text = document.getElementsByClassName("GameMag")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value)!= -1) {
 					document.getElementById("tablelist").children[i].style.display = "";
 					cnt++;
 				}else{
@@ -325,7 +367,8 @@
 		if(document.getElementById("select").value == "gender"){
 			let cnt = 0;
 			for(let i=0; i<(<%=cgamelist.size()%>); i++){
-				if(document.getElementsByClassName("GameGender")[i].innerText == document.getElementById("inputbox").value) {
+				var text = document.getElementsByClassName("GameGender")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tablelist").children[i].style.display = "";
 					cnt++;
 				}else{
@@ -341,6 +384,17 @@
 		
 		
 	});
+	</script>
+
+	<!-- 엔터키 검색 -->
+	<script type="text/javascript">
+	 var input = document.getElementById("inputbox");
+	 input.addEventListener("keyup", function (event) {
+         if (event.keyCode === 13) {
+           event.preventDefault();
+           document.getElementById("sbtn").click();
+         }
+       });
 	</script>
 
 
