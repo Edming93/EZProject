@@ -7,6 +7,12 @@
 		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date
 		from review
 	</select>
+	
+	<select id="CommentList" resultType="commentVO">
+		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date
+		from review
+	</select>
+
 	<insert id="insertComment" keyProperty="reviewCode">
 		insert into review(user_name, content) values(#{userName}, #{content})
 	</insert>

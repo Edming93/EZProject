@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	String comuselect = null;
 	if(request.getParameter("comuselect") != null) {
 		comuselect = (String)request.getParameter("comuselect");
 	}else {
-		comuselect = "ÈÄ±â";
+		comuselect = "í›„ê¸°";
 	}
 		
 %>
@@ -60,9 +60,9 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=review"><li>ÈÄ±â</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=black"><li>ºí·¢</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=signUp"><li>½Å°í</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=review"><li>í›„ê¸°</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=black"><li>ë¸”ëž™</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=signUp"><li>ì‹ ê³ </li></a>
         </ul>
     </div>
     <div id="maincontent">

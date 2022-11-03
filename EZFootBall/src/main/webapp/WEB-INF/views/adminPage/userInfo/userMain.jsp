@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	String idselect = null;
@@ -60,8 +60,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=user"><li>°èÁ¤</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=blackList"><li>ºí·¢¸®½ºÆ®</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=user"><li>ê³„ì •</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=blackList"><li>ë¸”ëž™ë¦¬ìŠ¤íŠ¸</li></a>
         </ul>
     </div>
     <div id="maincontent">
