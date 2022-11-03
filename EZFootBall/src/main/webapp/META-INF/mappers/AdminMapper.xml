@@ -24,8 +24,19 @@
 	<select id="sgame" resultType="FieldReservationVO">
 		select *
 		from field_reservation
-		where rv_type = 'S'
+		where rv_type = 'S' and rv_state = '예약완료'
 	</select>
+	
+	<select id="cgame" resultType="FieldReservationVO">
+		select *
+		from field_reservation
+		where (rv_type = 'S' or rv_type = 'TS') and rv_state = '신청취소'
+	</select>
+	
+	
+	
+	
+	
 	
 	<!-- 팀 매치 예약 현황 -->
 	<select id="Tgame" resultType="FieldReservationVO">

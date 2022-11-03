@@ -47,7 +47,7 @@ public class SubController {
 	}*/
 	
 	@GetMapping("tdel")
-	public String delete(@RequestParam("rvCode") int[] rvCode,@RequestParam("teamCode") int[] teamCode,
+	public String tdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("teamCode") int[] teamCode,
 						@RequestParam("gameCode") int[] gameCode,HttpSession session) {
 		System.out.println("삭제");
 		for(int i=0; i<teamCode.length; i++) {
@@ -70,6 +70,26 @@ public class SubController {
 		session.setAttribute("sgamelist", aservice.sgame());
 		
 		return "redirect:/admin/admin";
+	}
+	
+	@GetMapping("sdel")
+	public String sdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("userCode") int[] userCode,
+			@RequestParam("gameCode") int[] gameCode,HttpSession session) {
+		System.out.println("삭제");
+		for(int i=0; i<rvCode.length; i++) {
+			System.out.println(rvCode[i]);
+			service.rdelete(rvCode[i]);
+		}
+		for(int i=0; i<userCode.length; i++) {
+			System.out.println("여긴");
+			DataVO vo = new DataVO();
+			
+			vo.setUserCode(userCode[i]);
+			vo.setGameCode(gameCode[i]);
+			service.sdelete(vo);
+		}
+		
+		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 
 }

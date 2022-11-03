@@ -35,6 +35,10 @@ public class AdminService {
 		return dao.sgame();
 	}
 	
+	public List<FieldReservationVO> cgame(){
+		return dao.cgame();
+	}
+	
 	public List<FieldReservationVO> Tgame(){
 		return dao.Tgame();
 	}

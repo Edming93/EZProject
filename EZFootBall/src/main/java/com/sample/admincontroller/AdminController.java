@@ -59,6 +59,8 @@ public class AdminController {
 		session.setAttribute("stgamelist", service.stgame());
 		//s 신청정보
 		session.setAttribute("sgamelist", service.sgame());
+		//취소된 신청
+		session.setAttribute("cgamelist", service.cgame());
 		
 		
 		session.setAttribute("fieldList", raService.getFieldListAll());

@@ -18,15 +18,15 @@ public class SubService {
 	public void delete(DataVO vo) {
 		dao.delete(vo);
 	}
+	public void rdelete(int rvCode) {
+		dao.rdelete(rvCode);
+	}
 	
 	public void sdelete(DataVO vo) {
 		dao.sdelete(vo);
 	}
 	
 	public void tdelete(DataVO vo) {
-		System.out.println("서비스");
-		System.out.println(vo.getGameCode());
-		System.out.println(vo.getTeamCode());
 		dao.tdelete(vo);
 	}
 

@@ -10,6 +10,12 @@
 		WHERE game_code = #{gameCode} AND team_code = #{teamCode}
 	</delete>
 	
+	<delete id="rdelete">
+		UPDATE field_reservation
+		SET rv_state = '신청취소'
+		WHERE rv_code = #{rvCode}
+	</delete>
+	
 	<delete id="sdelete" parameterType="DataVO">
 		DELETE FROM game_sjoinlist
 		WHERE game_code = #{gameCode} AND user_code = #{userCode}

@@ -9,6 +9,8 @@ public interface SubDAO {
 
 	public int delete(DataVO vo);
 	
+	public int rdelete(int rvCode);
+	
 	public int sdelete(DataVO vo);
 
 	public int tdelete(DataVO vo);
