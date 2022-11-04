@@ -139,7 +139,6 @@ public class RentalController {
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
 
-		
 		return "rental/rentalPayment";
 	}
 	
