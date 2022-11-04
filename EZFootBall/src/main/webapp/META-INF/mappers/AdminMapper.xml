@@ -55,6 +55,7 @@
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code 
+		
 		ORDER BY a.game_day DESC
 	</select>
 	
