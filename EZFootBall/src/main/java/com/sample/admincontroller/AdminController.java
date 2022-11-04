@@ -22,6 +22,7 @@ import com.sample.adminservice.FieldAdminService;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
+import com.sample.vo.GlistVO;
 import com.sample.vo.UserVO;
 
 @Controller
@@ -182,7 +183,7 @@ public class AdminController {
 				
 				if(check_btn != null) {
 					for(int i=0; i<check_btn.length; i++) {
-						fdService.selectFieldData(check_btn[i],model);
+						//fdService.selectFieldData(check_btn[i],model);
 						model.addAttribute("gameFieldInfoVO"+i,fdService.selectFieldData(check_btn[i],model));
 //						model.addAttribute("field",fdService.selectFieldData(check_btn[i],model));
 						list.add("gameFieldInfoVO"+i);
@@ -198,10 +199,17 @@ public class AdminController {
 	
 	// 구장 수정
 	@PostMapping("/fieldModify")
-	public String modifyField(Model model,GameFieldInfoVO gfVO,@RequestParam("select") String select) {
+	public String modifyField(Model model,GameFieldInfoVO gfvo,@RequestParam("select") String select,
+							FieldReservationVO fvo,GlistVO gvo) {
 		model.addAttribute("select",select);
-		fdService.modifyUpdate(gfVO);
-		model.addAttribute("gfVO",gfVO);
+
+		fdService.modifyFieldUpdate(gfvo);
+		
+		gvo.setGameMacth(gfvo.getFieldType());
+		fdService.modifyGameListUpdate(gvo);
+		
+		fdService.modifyFieldReservationUpdate(fvo);
+		model.addAttribute("gfVO",gfvo);
 		return "redirect:/admin/select";
 	}
 	

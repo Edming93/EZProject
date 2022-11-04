@@ -118,7 +118,7 @@
 		select * from gamefield_info
 	</select>
 	
-	<update id="modify_field" parameterType="GameFieldInfoVO">
+	<update id="modifyField" parameterType="GameFieldInfoVO">
 		update gamefield_info
 		<set>
 			<if test="fieldName != null">
@@ -130,11 +130,11 @@
 			<if test="fieldType != null">
 				,field_type = #{fieldType}
 			</if>
-			<if test="fieldAddress != null">
-				,field_address = #{fieldAddress}
-			</if>
 			<if test="fieldCall != null">
 				,field_call = #{fieldCall}
+			</if>
+			<if test="fieldRentalfee != null">
+				,field_rentalfee = #{fieldRentalfee}
 			</if>
 			<if test="fieldGrass != null">
 				,field_grass = #{fieldGrass}
@@ -161,16 +161,44 @@
 		where field_code = #{fieldCode}
 	</update>
 	
+	<update id="modifyGamelist" parameterType="GlistVO">
+		update gamelist
+		<set>
+			<if test="fieldName != null">field_name = #{fieldName}</if>
+			<if test="fieldAddress != null">,field_address = #{fieldAddress}</if>
+			<if test="gameMacth != null">,game_macth = #{gameMacth}</if>
+		</set>
+		where field_code = #{fieldCode}
+	</update>
+	<update id="modifyReservation" parameterType="FieldReservationVO">
+		update field_reservation
+		<set>
+			<if test="fieldName != null">field_name = #{fieldName}</if>
+			<if test="fieldAddress != null">,field_address = #{fieldAddress}</if>
+			<if test="fieldType != null">,field_type = #{fieldType}</if>
+		</set>
+		where field_code = #{fieldCode}
+	</update>
+	
 	<delete id="deleteSeleteField">
 		delete from gamefield_info where field_code = #{fieldCode}
 	</delete>
 	
 	<select id="selectFieldData" resultType="gameFieldInfoVO">
 		select * from gamefield_info where field_code = #{fieldCode}
+		<!--
+		select * from gamefield_info where field_code in
+		 <foreach> 
+		#{fieldCode}
+		</foreach> -->
 	</select>
 	
 	<select id="selectFieldImage" resultType="String">
 		select field_img1,field_img2,field_img3,field_img4,field_img5 from gamefield_info where field_code = #{fieldCode}
+	</select>
+	
+	<select id="GFieldReservationList" resultType="FieldReservationVO">
+		select * from field_reservation where rv_type = G
 	</select>
 
 	

@@ -42,5 +42,11 @@ public interface RentalDAO {
 	
 	public String selectFieldImage(String fieldCode);
 	
-	public void modify_field(GameFieldInfoVO gfvo);
+	public void modifyField(GameFieldInfoVO gfvo);
+	
+	public void modifyGamelist(GlistVO gvo);
+	
+	public void modifyReservation(FieldReservationVO fvo);
+	
+	public FieldReservationVO GFieldReservationList();
 }

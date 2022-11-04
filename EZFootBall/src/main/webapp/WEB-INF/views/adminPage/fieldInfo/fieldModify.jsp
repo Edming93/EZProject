@@ -31,6 +31,9 @@
 							<label for="fieldCall">구장연락처 : </label>
 							<form:input path="fieldCall" class="form_input"/>
 							<br />
+							<label for="fieldRentalfee">구장비용 : </label>
+							<form:input path="fieldRentalfee" class="form_input"/>
+							<br />							
 							<label for="fieldGrass">특이사항1 : </label>
 							<form:input path="fieldGrass" class="form_input"/>
 							<br />

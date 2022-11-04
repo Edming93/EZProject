@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sample.dao.RentalDAO;
+import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
+import com.sample.vo.GlistVO;
 
 @Service
 public class FieldAdminService {
@@ -40,8 +42,20 @@ public class FieldAdminService {
 		return dao.selectFieldImage(fieldCode) ;
 	}
 	
-	public void modifyUpdate(GameFieldInfoVO gfvo) {
-		dao.modify_field(gfvo); 
+	// 구장정보 수정
+	public void modifyFieldUpdate(GameFieldInfoVO gfvo) {
+		dao.modifyField(gfvo); 
 	}
-	
+	// 구장정보가 수정될 때 게임신청테이블 같이 수정
+	public void modifyGameListUpdate(GlistVO gvo) {
+		dao.modifyGamelist(gvo); 
+	}
+	// 구장정보가 수정될 때 에약테이블 같이 수정
+	public void modifyFieldReservationUpdate(FieldReservationVO fvo) {
+		dao.modifyReservation(fvo); 
+	}
+	// 
+	public void GFieldReservationList() {
+		dao.GFieldReservationList();
+	}
 }
