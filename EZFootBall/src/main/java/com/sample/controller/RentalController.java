@@ -173,11 +173,25 @@ public class RentalController {
 	public String teamResultMove(FieldReservationVO rvo, HttpSession session) {
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
 		rvo.setUserCode(uvo.getUserCode());
-		rvo.setUserPayment(rvo.getFieldRentalfee()/2);
+		
 		Tservice.insertFieldRVT(rvo);
 		return "rental/resultTeam";
 
 	}
+	
+	
+	// 결제코드 확인중 .. 지우지말 것
+//	@GetMapping("/resultTeam")
+//	public String teamResultMove(FieldReservationVO rvo, HttpSession session, @RequestParam("merchant") String merchant) {
+//		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
+//		System.out.println("컨트롤러 :"+merchant);
+//		rvo.setPayCode(merchant);
+//		rvo.setUserCode(uvo.getUserCode());
+//		rvo.setUserPayment(rvo.getFieldRentalfee()/2);
+//		Tservice.insertFieldRVT(rvo);
+//		return "rental/resultTeam";
+//
+//	}
 		
 	
 }

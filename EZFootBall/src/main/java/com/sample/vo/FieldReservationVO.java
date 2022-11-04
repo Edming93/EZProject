@@ -33,6 +33,30 @@ public class FieldReservationVO {
 	private String suserCode;
 	private String sgameCode;
 	
+	private String payCode;
+	private int uteamPay;
+	
+
+	public int getUteamPay() {
+		return uteamPay;
+	}
+
+
+	public void setUteamPay(int uteamPay) {
+		this.uteamPay = uteamPay;
+	}
+
+
+	public String getPayCode() {
+		return payCode;
+	}
+
+
+	public void setPayCode(String payCode) {
+		this.payCode = payCode;
+	}
+
+
 	public String getSgameCode() {
 		return sgameCode;
 	}

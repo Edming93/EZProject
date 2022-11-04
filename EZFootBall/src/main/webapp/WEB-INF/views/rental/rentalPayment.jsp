@@ -398,7 +398,8 @@
 
          </div>
       </div>
-	<h1>${match.gamePay }</h1>
+
+		<h1>${match.uteamPay }</h1>
       <div class="rv_info_container">
          <div class="rv_day">
             <h3>
@@ -530,7 +531,7 @@
                      	<span class="pay_won">원</span>
                      </c:if>
                      <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rental_fee amount_fee pay_money">${match.gamePay/2}</span>
+                      	<span class="rental_fee amount_fee pay_money">${match.uteamPay}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	
@@ -552,7 +553,7 @@
                      	<span class="pay_won">원</span>
                      </c:if>
                      <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rental_fee total_fee">${match.gamePay/2}</span>
+                      	<span class="rental_fee total_fee">${match.uteamPay}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	
@@ -566,18 +567,19 @@
                
 
 					if('${match.gameType}' === 'T'){
-	                  amount_fee.innerHTML = Number(${match.gamePay/2}).toLocaleString();
-	                  total_fee.innerHTML = Number(${match.gamePay/2 - 0}).toLocaleString();
+	                  amount_fee.innerHTML = Number(${match.uteamPay}).toLocaleString();
+	                  total_fee.innerHTML = Number(${match.uteamPay - 0}).toLocaleString();
 					}else{
 						amount_fee.innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
 			            total_fee.innerHTML = Number(${field.fieldRentalfee - 0}).toLocaleString();
 					}   
 				}
                   </script>
-                  
+<!--                   <input type="text" name="merchant" id="merchant" onchange="plz()" /> -->
                   <div class="payment_container">
                      <button id="payment_btn" onclick="requestPay()">결제하기</button>
                   </div>
+                  
                </div>
             </div>
          </div>
@@ -597,15 +599,21 @@
 
 
    <script>
+  		function plz(){
+  			var merchant = document.getElementById("merchant");
+  			console.log("여기는오겠지 :"+merchant.value);
+  		}
+      
       var IMP = window.IMP; // 생략가능
       IMP.init('imp44418126'); // <-- 본인 가맹점 식별코드 삽입
       function requestPay() {
+    	  console.log("과연?? : "+merchant.value);
          IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
          IMP.request_pay({
             pg: "inicis",
             pay_method: "card",
-            merchant_uid: 'merchant_' + new Date().getTime(),
-            name: '${field.fieldName}',
+            merchant_uid: merchant.value,
+            name: '${match.fieldName}',
             amount: '100',
             buyer_email: 'iamport@siot.do',
             buyer_name: '구매자',
@@ -620,9 +628,8 @@
             	if(${match.gameType eq null}){ // 구장예약일 경우
                   	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+'${field.fieldCode}'+"&fieldName="+'${field.fieldName}'+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+'${field.fieldRentalfee}'
                   					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+'${time}';
-            	}else { // 팀매치 예약일 경우
-            		location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode="+'${match.fieldCode}&fieldName='+'${match.fieldName}&fieldAddress='+'${match.fieldAddress}&fieldRentalfee='
-            		+'${match.gamePay}&fieldType='+'${match.gameMacth}&gameDay='+'${gameDay}&gameTime='+'${gameTime}&userPayment='+'${gamePay}';
+            	}else if(${match.gameType eq 'T'}) { // 팀매치 예약일 경우
+            		location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
             	}
             } else {
 				alert("결제에 실패하셨습니다!");
@@ -635,7 +642,7 @@
 
      	 
          	  if('${match.gameType}' === 'T'){
-        		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}";
+        		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
         	  }else{
         		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G";
         	  }

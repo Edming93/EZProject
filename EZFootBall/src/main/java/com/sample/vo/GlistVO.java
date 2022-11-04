@@ -28,8 +28,18 @@ public class GlistVO {
     private int userCode;
     private int teamCode;
     
+    private int uteamPay;
+    
+    
+    
 	
-  	public int getTeamCode() {
+  	public int getUteamPay() {
+		return uteamPay;
+	}
+	public void setUteamPay(int uteamPay) {
+		this.uteamPay = uteamPay;
+	}
+	public int getTeamCode() {
 		return teamCode;
 	}
 	public void setTeamCode(int teamCode) {

@@ -141,6 +141,8 @@ public class TeamService {
 			public void matchInfo(GlistVO vo, Model model) {
 				System.out.println(dao.matchInfo(vo).getGameType());
 				System.out.println("여기!!!!!!!!!!!!!");
+				System.out.println(vo.getUteamPay());
+				
 				model.addAttribute("match",dao.matchInfo(vo));
 			}
 			

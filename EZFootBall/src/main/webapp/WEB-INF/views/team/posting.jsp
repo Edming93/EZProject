@@ -417,7 +417,7 @@
 	       </div>
 	       <div class="innersubt1">
 	            <div class="matchpay">
-	                <p>참가비</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	                <p>구장대여료</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
 	            </div>
 	            <div class="payinput">
 	                <input type="text" name="gamePay" id="gamePay" placeholder="경기장 선택시 자동입력됩니다."/>
@@ -425,6 +425,15 @@
             </div> 
            
         </div>
+     
+        <div class="subt">
+            <div class="date">
+                <p>팀이 지불할 참가비</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+            </div>
+            <div class="dinput">
+            	 <input type="text" name="UteamPay" id="UteamPay" placeholder="팀이 지불할 금액을 입력하세요"/>
+            </div>
+      	</div>
         <div class="subt">
            
                 <div class="team">

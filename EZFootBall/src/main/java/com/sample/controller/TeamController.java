@@ -210,8 +210,9 @@ public class TeamController {
 			
 			int Tnum = service.getTeamNameT(vo);
 			vo1.setTeamCode(Tnum);
-		
 			
+			System.out.println(vo.getGamePay());
+			System.out.println("넘어오나?? :"+vo.getUteamPay());
 			service.gameTJoinList(vo1);
 			
 			service.matchInfo(vo,model);
