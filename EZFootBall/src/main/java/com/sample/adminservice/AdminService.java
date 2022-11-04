@@ -10,6 +10,7 @@ import com.sample.dao.AdminDAO;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
 @Service
 public class AdminService {
@@ -64,5 +65,10 @@ public class AdminService {
 	
 	public void TdeleteF(FieldReservationVO vo) {
 		dao.TdeleteF(vo);
+	}
+	
+	
+	public List<ReviewCommentVO> reviewCommentList(){
+		return dao.reviewCommentList();
 	}
 }

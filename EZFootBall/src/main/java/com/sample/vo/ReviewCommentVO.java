@@ -10,8 +10,20 @@ public class ReviewCommentVO {
   private String userName;
   private String content;
   private String createDate;
+  private int userCode;
 
-  public String getCreateDate() {
+  
+  
+  
+  public int getUserCode() {
+	return userCode;
+}
+
+public void setUserCode(int userCode) {
+	this.userCode = userCode;
+}
+
+public String getCreateDate() {
     return createDate;
   }
 
@@ -47,8 +59,10 @@ public void setReviewCode(int reviewCode) {
 @Override
 public String toString() {
 	return "ReviewCommentVO [reviewCode=" + reviewCode + ", userName=" + userName + ", content=" + content
-			+ ", createDate=" + createDate + "]";
+			+ ", createDate=" + createDate + ", userCode=" + userCode + "]";
 }
+
+
 
   
   

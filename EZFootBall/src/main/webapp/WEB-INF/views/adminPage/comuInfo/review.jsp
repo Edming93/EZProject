@@ -12,67 +12,35 @@
 
 </head>
 <body>
-	<div class="container">
-		<div id="div1">
-			<div id="comment"></div>
-			<div id="input">			
 
-			</div>
+<div class="container">
+			<table>
+				<thead>
+					<tr>
+						<th><input type="checkbox" name="allCheck" id="allCheck" /></th>
+						<th>리뷰 번호</th>
+						<th>유저 이름</th>
+						<th>콘텐츠내용</th>
+						<th>리뷰 날짜</th>
+						<th>유저 코드</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="vo" items="${review}">
+						<tr>
+							<td><input type="checkbox" name="chBox" class="chBox"/></td>
+							<td>${vo.reviewCode}</td>
+							<td>${vo.userName}</td>
+							<td>${vo.content}</td>
+							<td>${vo.createDate}</td>
+							<td>${vo.userCode}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
+		
+		</form>
 	</div>
-
-<script type="text/javascript">
-
-window.addEventListener("DOMContentLoaded", function(){
-
-	$.ajax({
-		url : "${pageContext.request.contextPath}/comuAdmin/review",
-		type : "POST",
-		contentType:"application/json; charset=utf-8",
-		dataType : "json",
-		success : function(data){
-			const comdiv = document.getElementById("comment");
-			
-			for(let comment of data){
-				console.log(comment);	
-			
-				const div = document.createElement("div");
-				div.style.borderTop = "1px solid black";
-				div.style.fontFamily = "Gowun Dodum";				
-				
-                const div2 = document.createElement("div");
-                const div3 = document.createElement("div");
-
-
-				const cname = document.createElement("p");
-				cname.innerText = comment.userName;
-				const ccontent = document.createElement("P");
-				ccontent.innerText = comment.content;
-				const cdate = document.createElement("p");
-				cdate.innerText = comment.createDate;
-				
-				const checkbox = document.getElementById("mycheckbox");
-				const inputcheckbox = document.createElement("INPUT");
-				inputcheckbox.setAttribute("type", "checkbox");
-				
-				div.append(cdate);
-				div.append(cname);
-				div2.append(ccontent);
-				div3.append(inputcheckbox)
-				div.append(div2);
-				div.append(div3);
-				comdiv.append(div);
-
-
-			}
-		},
-		error : function(e){
-			alert(e);
-		}
-	});		
-});
-</script>
-
-
 </body>
 </html>

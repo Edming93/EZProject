@@ -98,11 +98,14 @@
 		WHERE game_code = #{gameCode}
 	</delete>
 	
+
 	
+	<select id="reviewCommentList" resultType="commentVO">
+		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
+		from review
+	</select>
 	
-	
-	
-	
+
 	
 	
 	

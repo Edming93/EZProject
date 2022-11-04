@@ -207,7 +207,8 @@ public class AdminController {
 	
 	
 	@GetMapping("/comuselect")
-	public String comuselect (@RequestParam("comuselect") String comuselect,Model model) {
+	public String comuselect (@RequestParam("comuselect") String comuselect, Model model) {		
+		model.addAttribute("review", service.reviewCommentList());
 		model.addAttribute("comuselect", comuselect);
 		return "adminPage/adminMain";
 	}
