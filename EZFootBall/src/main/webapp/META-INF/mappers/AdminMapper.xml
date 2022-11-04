@@ -109,6 +109,16 @@
 	<select id="reviewCommentList" resultType="commentVO">
 		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
 		from review
+		<where>
+			<if test="userName != null">
+				user_name = #{userName}
+			</if>
+		</where>
+	</select>
+	
+	<select id="reviewselect" resultType="commentVO" parameterType="commentVO">
+		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
+		from review WHERE user_name = #{userName}
 	</select>
 	
 

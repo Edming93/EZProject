@@ -40,4 +40,7 @@ public interface AdminDAO {
 	
 	//리뷰
 	public List<ReviewCommentVO> reviewCommentList();
+	
+	//
+	public List<ReviewCommentVO> reviewselect(ReviewCommentVO vo);
 }

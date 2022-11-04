@@ -23,6 +23,7 @@ import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
 
 @Controller
@@ -220,6 +221,15 @@ public class AdminController {
 	public String comuselect (@RequestParam("comuselect") String comuselect, Model model) {		
 		model.addAttribute("review", service.reviewCommentList());
 		model.addAttribute("comuselect", comuselect);
+		return "adminPage/adminMain";
+	}
+	
+	@PostMapping("/reviewselect")
+	public String reviewselect (@RequestParam("reviewsel") String reviewsel, Model model, ReviewCommentVO vo) {		
+		vo.setUserName(reviewsel);
+		List<ReviewCommentVO> list = service.selectCommentList(vo);
+		model.addAttribute("review", list);
+		System.out.println(list.get(0));
 		return "adminPage/adminMain";
 	}
 	

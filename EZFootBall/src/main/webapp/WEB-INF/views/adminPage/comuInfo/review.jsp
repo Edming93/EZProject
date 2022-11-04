@@ -9,11 +9,22 @@
 <title>리뷰 관리</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
 
 </head>
 <body>
 
 <div class="container">
+
+<form action="${pageContext.request.contextPath}/admin/reviewselect?comuselect=review" id="form1" method="post">
+	
+					<div class="search">
+						<input type="text" name="reviewsel" id="reviewsel" placeholder="단어를 검색하세요" />
+					</div>
+					<div class="button">
+						<button id="btn">검색</button>
+					</div>
+</form>
 			<table>
 				<thead>
 					<tr>
@@ -40,7 +51,12 @@
 			</table>
 		</div>
 		
-		</form>
+		
 	</div>
+	<script type="text/javascript">
+		$('#btn').on(click, function(){
+			
+		});
+	</script>
 </body>
 </html>
