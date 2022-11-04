@@ -9,6 +9,7 @@
 	List<FieldReservationVO> stgamelist = null;
 	List<UserVO>userlist = null;
 	List<GlistVO> gamelist = null;
+	List<Integer> tcodelist = null;
 	
 	if(session.getAttribute("stgamelist") != null){
 		stgamelist = (List<FieldReservationVO>)session.getAttribute("stgamelist");
@@ -18,6 +19,9 @@
 	}
 	if(session.getAttribute("gamelist") !=null) {
 		gamelist = (List<GlistVO>)session.getAttribute("gamelist");
+	}
+	if(session.getAttribute("tcodelist") != null) {
+		tcodelist = (List<Integer>)session.getAttribute("tcodelist");
 	}
 %>	
 <!DOCTYPE html>
@@ -112,9 +116,228 @@
            display: flex;
     		justify-content: center;
     	}
+	
+	
+	/* 모달 */
+	
+	
+	 #modal {
+            display: none;
+            position: absolute;
+            top: 30%;
+            left: 36%;
+            width: 400px;
+            height: 300px;
+            background-color: #b7e1c6;
+            padding: 10px;
+
+        }
+
+        #modalout {
+            position: absolute;
+            width: 64%;
+    		height: 77%;
+            background-color: gray;
+            display: none;
+        }
+
+        #modal * {
+            /* border: 1px solid black; */
+        }
+
+        #flist {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #flist>li {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        #flist>li>p {
+            width: 120px;
+            font-size: 20px;
+            height: 30px;
+        }
+        .listbox{
+        	list-style: none;
+            margin: 0;
+            padding: 0;
+            /* background-color: white; */
+            width: 170px;
+            height: 100px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            visibility: hidden;
+           
+        }
+        .gnumlist{
+        	display: none;
+        }
+        .cnumlist{
+        	display: none;
+        }
+        .inbox{
+        	height: 30px;
+        	width: 170px;
+        }
 </style>
 </head>
 <body>
+<div id="modalout"></div>
+    <div id="modal">
+        <h3>신청자 추가</h3>
+             <ul id="flist">
+                <li><p>경기번호 : </p> <input type="text" name="" id="ingameCode" class="inbox"></li>
+                <li><p></p><ul id="gclist" class="listbox">
+                    	<%
+                    		for(int i=0; i<gamelist.size(); i++) {
+                    			if(gamelist.get(i).getClose().equals("true")){
+                    				if(gamelist.get(i).getGameType().equals("T")){
+                    					%>
+                            			<li id="gnum<%=i %>" class="gnumlist"><%out.println(gamelist.get(i).getGameCode());%></li>
+                            			<%
+                    				}else{
+                    					%>
+                            			<li id="gnum<%=i %>" class="gnumlist"><%out.println(gamelist.get(i).getGameCode());%>s</li>
+                            			<%
+                    				}
+                    				
+                    			}else{
+                    				%>
+                        			<li id="gnum<%=i %>" class="gnumlist"><%out.println(gamelist.get(i).getGameCode());%>x</li>
+                        			<%
+                    			}
+                    			
+                    		}
+                    	%>
+                    </ul>
+                    </li>
+                    
+                <li><p>팀코드 : </p> <input type="text" name="" id="inuserCode" class="inbox"></li>
+                <li><p></p><ul id="uclist" class="listbox">
+                    	<%
+                    	for(int i=0; i<tcodelist.size(); i++) {
+                			%>
+                			<li id="cnum<%=i %>" class="cnumlist"><%out.println(tcodelist.get(i));%></li>
+                			<%
+                		}
+                    	%>
+                    </ul>
+                    </li>
+                    
+                
+            </ul>
+            <button id="addbtn">등록</button>
+            <button id="close">닫기</button>
+
+    </div>
+    
+    
+    <!-- 게임 코드 숫자 검색 -->
+	<script type="text/javascript">
+	 var ing = document.getElementById("ingameCode");
+	 let lcnt =0;
+	 ing.addEventListener("keyup", function (event) {
+		 document.getElementById("gclist").style.visibility = "visible";
+		 for(let i =0; i< <%=gamelist.size()%>; i++){document.getElementById("gnum"+i).style.display = "none";}
+		 
+		 for(let i =0; i< <%=gamelist.size()%>; i++){
+			 let intext = document.getElementById("ingameCode").value.trim();
+			 let ortext = document.getElementsByClassName("gnumlist")[i].innerText.trim();
+			 if(intext.length >= 3 ){
+				 if(ortext.indexOf(intext) != -1 && ortext.indexOf("x") == -1 && ortext.indexOf("s") == -1){
+					 document.getElementById("gnum"+i).style.display = "block";
+					 document.getElementById("gnum"+i).style.backgroundColor = "#fff";
+				}
+				 if(intext == ortext){
+					 lcnt++;
+				 }
+			 }
+			 
+		 }
+       });
+	</script>
+	
+	
+	<!-- 유저 코드 숫자 검색 -->
+	<script type="text/javascript">
+	 var ing = document.getElementById("inuserCode");
+	 let ccnt =0;
+	 ing.addEventListener("keyup", function (event) {
+		 document.getElementById("uclist").style.visibility = "visible";
+		for(let i =0; i< <%=tcodelist.size()%>; i++){document.getElementById("cnum"+i).style.display = "none";}
+		 
+		 
+		 for(let i =0; i< <%=tcodelist.size()%>; i++){
+			 let intext = document.getElementById("inuserCode").value.trim();
+			 let ortext = document.getElementsByClassName("cnumlist")[i].innerText.trim();
+			 if(intext.length >= 2 ){
+				 if(ortext.indexOf(intext) != -1){
+					 document.getElementById("cnum"+i).style.display = "block";
+					 document.getElementById("cnum"+i).style.backgroundColor = "#fff";
+				 }
+				 if(intext == ortext){
+					 ccnt++;
+				 }
+			 }
+			 
+		 }
+       });
+	</script>
+    
+    
+    <!-- 추가 -->
+    <script type="text/javascript">
+    document.getElementById("addbtn").addEventListener("click",function(){
+    	let ingameCode = document.getElementById("ingameCode").value;
+    	let inuserCode = document.getElementById("inuserCode").value;
+    	console.log(document.getElementsByClassName("userCode").length);
+    	let cnt =0;
+    	
+    	var listnum = new Array();
+    	
+    	for(let i=0; i< <%=gamelist.size()%>; i++){
+    		listnum.push()
+    	} 
+    	
+    	if(lcnt > 0 && ccnt >0 ){
+    		for(let i=0; i<   document.getElementsByClassName("userCode").length; i++){
+        		
+        		if(ingameCode == document.getElementsByClassName("gameCode")[i].innerText && inuserCode == document.getElementsByClassName("userCode")[i].innerText){
+        			alert("이미 존재하는 신청팀 입니다");
+        			cnt++;
+        			break;
+        		}
+        	} 
+        	
+        	if(cnt == 0) {
+        		location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
+    			
+        	}
+		}else {
+			alert("게임코드와 신청자코드를 확인해주세요");
+		}
+    	
+    });
+    
+    </script>
+    
+    
+    
+    
+    <!-- 모달 닫기 -->
+    <script type="text/javascript">
+    document.getElementById("close").addEventListener("click", function () {
+        document.getElementById("modalout").style.display = "none";
+        var modal =  document.getElementById("modal");
+        modal.style.display = "none";
+    });
+    </script>
+    
 	<div id="out">
 		<div id="searchbox">
 			<select name="" id="select">
@@ -487,11 +710,6 @@
        });
 	</script>
 	
-	
-	<!-- 추가 -->
-	<script type="text/javascript">
-		
-	</script>
 
 	<!-- 삭제 -->
 	<script type="text/javascript">
@@ -521,6 +739,18 @@
 		 
      });
 	</script>
+	
+	
+	<!-- 추가 모달창 -->
+	<script>
+        document.getElementById("add").addEventListener("click", function () {
+            document.getElementById("modalout").style.display="block";
+            document.getElementById("modalout").style.opacity="0.1";
+            var modal =  document.getElementById("modal");
+            modal.style.display = "block";
+           
+        });
+    </script>
 
 
 </body>
