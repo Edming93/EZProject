@@ -72,4 +72,11 @@ public class AdminService {
 	public List<ReviewCommentVO> reviewCommentList(){
 		return dao.reviewCommentList();
 	}
+	
+	public List<ReviewCommentVO> selectCommentList(ReviewCommentVO vo){
+		
+		List<ReviewCommentVO> list = dao.reviewselect(vo);
+
+		return list;
+	}
 }
