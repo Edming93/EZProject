@@ -15,18 +15,20 @@
 <body>
 
 <div class="container">
-
 <form action="${pageContext.request.contextPath}/admin/reviewselect?comuselect=review" id="form1" method="post">
-					<div class="search">
+					<div class="search1">
 						<input type="text" name="reviewcode" id="reviewcode" placeholder="찾으시는 유저코드를 입력하세요" />
 					</div>
-					<div class="search">
+					
+					<div class="search2">
 						<input type="text" name="reviewsel" id="reviewsel" placeholder="찾으시는 유저네임을 입력하세요" />
 					</div>
 					<div class="button">
 						<button id="btn">검색</button>
 					</div>
+
 </form>
+
 			<table>
 				<thead>
 					<tr>
