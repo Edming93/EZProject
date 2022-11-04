@@ -131,7 +131,7 @@
                     <div class="profile">
                         <div class="pleft">
                             <div class="pleft_title">
-                               <a href=""><img src="${pageContext.request.contextPath}/image/ez_logo1.svg" /></a>
+                               <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/image/ez_logo1.svg" /></a>
                             </div>
                             <div class="pleft_img">
                       

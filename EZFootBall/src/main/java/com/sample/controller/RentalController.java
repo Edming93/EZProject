@@ -138,9 +138,7 @@ public class RentalController {
 		service.fieldInfo(fvo.getFieldCode(),model);
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
-		
-	
-	
+
 		
 		return "rental/rentalPayment";
 	}
@@ -175,6 +173,7 @@ public class RentalController {
 		rvo.setUserCode(uvo.getUserCode());
 		
 		Tservice.insertFieldRVT(rvo);
+		
 		return "rental/resultTeam";
 
 	}
