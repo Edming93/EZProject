@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.dao.ManagerDAO">
+	
+	<select id="isManager" resultType="managerVO">
+		SELECT mgr_code, prefer_area, mgr_content, mgr_date, CASE mgr_state WHEN 'TO' THEN '신청완료' WHEN 'RE' THEN '검토중' WHEN 'PASS' THEN '합격' WHEN 'FAIL' THEN '불합격' END mgr_state, user_code
+		FROM manager_history
+		WHERE user_code = #{userCode}
+	</select>
+	
+	<insert id="insertManager">
+		INSERT INTO manager_history (prefer_area, mgr_content, mgr_date, mgr_state, user_code)
+		VALUES (#{preferArea}, #{mgrContent}, now(), 'TO', #{userCode})
+	</insert>
+	
+	
+	
+	
+
+</mapper>
+

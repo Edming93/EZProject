@@ -161,7 +161,7 @@
 
 .main_right1 {
 	width: 100%;
-	height: 55%;
+	height: 62%;
 	padding: 15px;
 	border: 5px solid #26a653;
 	border-radius: 15px 15px 0 0;
@@ -172,7 +172,7 @@
 
 .main_right2 {
 	width: 100%;
-	height: 45%;
+	height: 38%;
 	padding: 15px;
 	border: 5px solid #26a653;
 	border-top: none;
@@ -374,8 +374,8 @@ footer {
 						<h3>더보기</h3>
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myPage/inquiry">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
+							<li><a href="#" class="qna">자주 묻는 질문 (Q&A)</a></li>
+							<li><a href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></li>
 						</ul>
 					</section>
 				</div>
@@ -407,6 +407,13 @@ footer {
         	}else{
         		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
         	}
+        });
+        </script>
+        
+        <script type="text/javascript">
+        $('.qna').click(function(e){
+        	e.preventDefault();
+        	alert("준비중입니다.");
         });
         </script>
 	</div>

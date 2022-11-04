@@ -30,9 +30,12 @@
 		SELECT inquiry_code, inquiry_title, inquiry_content, inquiry_state, create_date, answer_date, answer_content, i.user_code, u.user_name
 		FROM inquiry AS i INNER JOIN user_info AS u
 		ON i.user_code = u.user_code
+		<where>
+			<if test="inquiryState != null">
+				inquiry_state = #{inquiryState}
+			</if>
+		</where>
 	</select>
-	
-	
 	
 	<!-- 문의 작성 -->
 	<insert id="InquiryAdd" parameterType="inquiryVO">

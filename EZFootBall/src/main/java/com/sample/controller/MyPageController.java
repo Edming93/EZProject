@@ -19,10 +19,12 @@ import com.sample.service.FindService;
 import com.sample.service.GlistService;
 import com.sample.service.InquiryService;
 import com.sample.service.LoginService;
+import com.sample.service.ManagerService;
 import com.sample.service.RentalService;
 import com.sample.service.UinService;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.InquiryVO;
+import com.sample.vo.ManagerVO;
 import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 
@@ -36,9 +38,11 @@ public class MyPageController {
 	private RentalService rentalService;
 	private GlistService glistService;
 	private InquiryService inquiryService;
+	private ManagerService managerService;
 
 	public MyPageController(LoginService loginService, UinService uinService, FindService findService,
-			RentalService rentalService, GlistService glistService, InquiryService inquiryService) {
+			RentalService rentalService, GlistService glistService, InquiryService inquiryService,
+			ManagerService managerService) {
 		super();
 		this.loginService = loginService;
 		this.uinService = uinService;
@@ -46,6 +50,7 @@ public class MyPageController {
 		this.rentalService = rentalService;
 		this.glistService = glistService;
 		this.inquiryService = inquiryService;
+		this.managerService = managerService;
 	}
 
 	@GetMapping("myPage")
@@ -214,4 +219,30 @@ public class MyPageController {
 //
 //		return list;
 //	}
+
+	@GetMapping("/manager")
+	public String manager(HttpSession session, Model model, ManagerVO managerVO) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		int UserCode = uvo.getUserCode();
+		managerVO = managerService.isManager(UserCode);
+		System.out.println("manager :::" + managerVO);
+		if (managerVO != null) {
+			model.addAttribute("managerVO", managerVO);
+		}
+		model.addAttribute("userVO", uvo);
+		return "/myPage/manager";
+	}
+
+	@PostMapping("/manager_app")
+	public String managerApp(@RequestParam("area") String area, @RequestParam("manager_content") String content,
+			HttpSession session, ManagerVO managerVO) {
+		System.out.println("content : " + content);
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		managerVO.setUserCode(uvo.getUserCode());
+		managerVO.setPreferArea(area);
+		managerVO.setMgrContent(content);
+		managerService.insertManager(managerVO);
+		return "redirect:/myPage/manager";
+	}
+
 }

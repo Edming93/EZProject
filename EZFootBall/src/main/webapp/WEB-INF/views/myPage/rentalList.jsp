@@ -104,7 +104,7 @@
 	display:flex;
     width: 1024px;
 /*     height: 900px; */
-    min-height: 900px;
+    min-height: 500px;
 /*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
@@ -203,6 +203,32 @@
 	text-align: center;
 	font-size: 40px;
 }
+
+   .btn_box{
+	display: flex;
+	justify-content: space-evenly;
+}
+    
+    .main_content1 button {
+	display: inline-block;
+	width: 40%;
+	padding: 15px 0;
+	text-decoration: none;
+	margin: 20px 0;
+	color: #fff;
+	font-weight:bold;
+	font-size:18px;
+	border: 1px solid #26a653;
+	text-align: center;
+	background-color: #26a653;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.btn_box button:hover {
+	opacity: 0.8;
+}
+
 
 
 .bottom_banner {
@@ -360,6 +386,9 @@ footer {
 <!-- 										<li>매치시간 : 09:00:00</li> -->
 <!-- 										<li>상태 : 예약완료</li> -->
 							
+					<div class="btn_box">
+						<button id="btn">뒤로가기</button>
+					</div>
 					</section>
 				</div>
             </div>
@@ -380,6 +409,11 @@ footer {
             main_logo.addEventListener("click",function() {
                 location.href="${pageContext.request.contextPath}";
             });
+        </script>
+         <script type="text/javascript">
+	        $('#btn').click(function(){
+				$(location).attr("href","${pageContext.request.contextPath}/myPage/myPage");
+			});
         </script>
         <script type="text/javascript">
         	const table = document.getElementById("rantal_list");

@@ -102,7 +102,7 @@
     
     .main_area {
     	width: 1024px;
-    	min-height: 900px;
+/*     	min-height: 900px; */
 /*     	margin-top: 50px; */
 /*     	background-color: #ffaaaa; */
     }
@@ -111,7 +111,7 @@
     	width: 40%;
     	height: 50%;
     	margin: 0 auto;
-    	margin-top: 20%;
+    	margin-top: 5%;
     	padding: 20px;
     	background-color: #fff;
     }
