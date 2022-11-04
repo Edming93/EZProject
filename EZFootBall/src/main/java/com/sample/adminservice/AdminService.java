@@ -21,26 +21,27 @@ public class AdminService {
 		super();
 		this.dao = dao;
 	}
-
+	//신청관리
 	public List<GlistVO> allgame(){
 		return dao.allgame();
 	}
-	
 	public List<UserVO> alluser(){
 		return dao.alluser();
 	}
-	
 	public List<FieldReservationVO> stgame(){
 		return dao.stgame();
 	}
-	
 	public List<FieldReservationVO> sgame(){
 		return dao.sgame();
 	}
-	
 	public List<FieldReservationVO> cgame(){
 		return dao.cgame();
 	}
+	public List<Integer> teamcode(){
+		return dao.teamcode();
+	}
+	
+	
 	
 	public List<FieldReservationVO> Tgame(){
 		return dao.Tgame();

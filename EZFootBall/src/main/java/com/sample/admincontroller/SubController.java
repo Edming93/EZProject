@@ -1,5 +1,6 @@
 package com.sample.admincontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,6 +90,40 @@ public class SubController {
 			service.sdelete(vo);
 		}
 		
+		return "redirect:/admin/select?select="+session.getAttribute("select");
+	}
+	
+	@GetMapping("/sadd")
+	public String add(HttpSession session,@RequestParam("userCode") int userCode, @RequestParam("gameCode") int gameCode) {
+		System.out.println("추가컨트롤러");
+		GlistVO vo = new GlistVO();
+		vo = service.all(gameCode);
+		vo.setUserCode(userCode);
+		service.add(vo);
+		service.slistadd(vo);
+		service.supdate(gameCode);
+		return "redirect:/admin/select?select="+session.getAttribute("select");
+	}
+	
+	
+	@GetMapping("/tadd")
+	public String tadd(HttpSession session,@RequestParam("teamCode") int teamCode, @RequestParam("gameCode") int gameCode) {
+		System.out.println("추가컨트롤러");
+		List<Integer> ucList = new ArrayList<Integer>();
+		ucList = service.usercode(teamCode);
+		for(int i=0; i<ucList.size(); i++) {
+			GlistVO vo = new GlistVO();
+			vo = service.all(gameCode);
+			vo.setTeamCode(teamCode);
+			vo.setUserCode(ucList.get(i));
+			service.tadd(vo);
+		}
+		
+		GlistVO vo = new GlistVO();
+		vo.setGameCode(gameCode);
+		vo.setTeamCode(teamCode);
+		service.tlistadd(vo);
+		service.tupdate(gameCode);
 		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 

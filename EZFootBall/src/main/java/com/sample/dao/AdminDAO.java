@@ -18,11 +18,13 @@ import com.sample.vo.UserVO;
 @Mapper
 public interface AdminDAO {
 
+	//신청관리
 	public List<GlistVO> allgame();
 	public List<UserVO> alluser();
 	public List<FieldReservationVO> stgame();
 	public List<FieldReservationVO> sgame();
 	public List<FieldReservationVO> cgame();
+	public List<Integer> teamcode();
 	
 	public List<FieldReservationVO> Tgame();
 	

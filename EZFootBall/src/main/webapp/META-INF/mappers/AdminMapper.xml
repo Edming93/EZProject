@@ -33,6 +33,12 @@
 		where (rv_type = 'S' or rv_type = 'TS') and rv_state = '신청취소'
 	</select>
 	
+	<select id="teamcode" resultType="int">
+		SELECT DISTINCT team_code
+		FROM user_info
+		WHERE team_code is NOT NULL
+	</select>
+	
 	
 	
 	
