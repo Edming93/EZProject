@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
@@ -43,4 +44,22 @@ public interface AdminDAO {
 	
 	//리뷰 검색
 	public List<ReviewCommentVO> reviewselect(ReviewCommentVO vo);
+	
+	// -------------------- 관리자 구장관리 ---------------------
+	public List<GameFieldInfoVO> getFieldListAll();
+	
+	public GameFieldInfoVO selectFieldData(String fieldCode);
+	
+	public void deleteSeleteField(String fieldCode);
+	
+	public String selectFieldImage(String fieldCode);
+	
+	public void modifyField(GameFieldInfoVO gfvo);
+	
+	public void modifyGamelist(GlistVO gvo);
+	
+	public void modifyReservation(FieldReservationVO fvo);
+	
+	// -------------------- 관리자 예약관리 --------------------
+	public List<FieldReservationVO> GFieldReservationList();
 }

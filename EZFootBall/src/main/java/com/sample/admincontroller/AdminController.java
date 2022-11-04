@@ -81,18 +81,15 @@ public class AdminController {
 	}
 	
 	@GetMapping("/reserselect")
-	public String reserselect (@RequestParam("reserselect") String reserselect,Model model,
-								@SessionAttribute("fieldList") GameFieldInfoVO fieldList) {
-		model.addAttribute("reserselect", reserselect);
-		model.addAttribute("fieldList",fieldList);
-		
-		System.out.println("리스트한번출력");
-		
+	public String reserselect (@RequestParam("reserselect") String reserselect,Model model) {
+
+		if(reserselect.equals("teamMatch") ) {
 		model.addAttribute("team", service.joinList());
+		}else if(reserselect.equals("rvField")){
+		model.addAttribute("fieldRV",fdService.GFieldReservationList());
+		}
 		
-//		model.addAttribute("user",service.alluser());
-//		model.addAttribute("team", service.Tgame());
-		
+		model.addAttribute("reserselect", reserselect);
 		return "adminPage/adminMain";
 	}
 	

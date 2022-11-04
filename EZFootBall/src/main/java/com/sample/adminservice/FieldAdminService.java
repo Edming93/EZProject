@@ -2,12 +2,10 @@ package com.sample.adminservice;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.sample.dao.RentalDAO;
+import com.sample.dao.AdminDAO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -15,9 +13,9 @@ import com.sample.vo.GlistVO;
 @Service
 public class FieldAdminService {
 	
-	private RentalDAO dao;
+	private AdminDAO dao;
 
-	public FieldAdminService(RentalDAO dao) {
+	public FieldAdminService(AdminDAO dao) {
 		super();
 		this.dao = dao;
 	}
@@ -54,8 +52,11 @@ public class FieldAdminService {
 	public void modifyFieldReservationUpdate(FieldReservationVO fvo) {
 		dao.modifyReservation(fvo); 
 	}
+	
+	
+	// ----------------------- 구장 예약 관리 --------------------
 	// 
-	public void GFieldReservationList() {
-		dao.GFieldReservationList();
+	public List<FieldReservationVO> GFieldReservationList() {
+		return dao.GFieldReservationList();
 	}
 }

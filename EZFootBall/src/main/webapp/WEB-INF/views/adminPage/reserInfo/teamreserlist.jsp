@@ -16,6 +16,8 @@
 	    height: 30px;
 	    justify-content: space-between;
 	    margin-bottom: 1%;
+	    padding: 10px 0px;
+    	box-sizing: content-box;
 	}
 	.TCRselectMenu{
 		width: 30%;
@@ -23,10 +25,10 @@
 	}
 	#Tselect{
 		width: 60%;
-		border: 3px solid #42855B;
+    	border: 1px solid #000;
 	}
 	.TCRsearch{
-		width: 100%;
+    	width: 50%;
 	}
 	.TCRsearchArea{
 		display: flex;
@@ -35,31 +37,8 @@
 	#Tsearch{
 		width: 100%;
     	height: 30px;
-    	border: 2px solid black;
-    	padding-left : 5px;
-	}
-	.TCRbutton{
-		height: 30px;
-	    justify-content: center;
-	    display: flex;
-	    align-items: center;
-	   	width: 15%;
-	    margin-left: 1%;
-	}
-	#TCRbtn{
-		font-size: 15px;
-    	color: white;
-    	height: 30px;
-	    background-color: #42855B;
-	    border: none;
-	    border-radius: 10px;
-	    width: 100%;
-	}
-	#TCRbtn:hover{
-		cursor : pointer;
-		background-color : red;
-		font-weight : 700;
-		font-size : 20px;
+    	border: 1px solid black;
+    	padding-left : 15px;
 	}
 
 	table {
@@ -77,6 +56,18 @@
 		text-align : center;
 		border-bottom : 2px dotted #D2D79F;
 	}
+	
+	table tr th:nth-child(1){
+		width:40px;
+	}
+	table tr th:nth-child(2){
+		width:95px;
+	}
+	table tr th:nth-child(5){
+		width:220px;
+	}
+	
+		
 	#allCheck{
 		width: 20px;
    		height: 30px;
@@ -85,17 +76,47 @@
 		width: 20px;
     	height: 30px;
 	}
+		
+	.buttons {
+		width: 10%;
+	}
+	
+	.TCRbutton{
+		height: 30px;
+	    justify-content: center;
+	    display: flex;
+	    align-items: center;
+	   	width: 10%;
+	    margin-left: 1%;
+	}
+	#TCRbtn{
+    	color: black;
+    	height: 30px;
+	    background-color: #BDD2B6;
+	    border: none;
+	    border-radius: 10px;
+	    width: 100%;
+	}
+	#TCRbtn:hover{
+		cursor : pointer;
+		background-color : #42855B;
+		font-weight : 700;
+		color:white;
+	}
+	
 	.Tdeletebtn{
 	    background-color: #BDD2B6;
-    	border: 0.5px solid black;
+    	border: 0px;
     	border-radius: 10px;
     	margin-bottom: 1%;
-    	width: 10%;
+    	width: 100%;
+    	height: 100%;
 	}
 	.Tdeletebtn:hover {
 		font-weight : 700;
-		background-color : red;
+		background-color : #42855B;
 		cursor : pointer;
+		color:white;
 	}
 </style>
 </head>
@@ -123,26 +144,26 @@
 					<div class="TCRbutton">
 						<button id="TCRbtn">검색</button>
 					</div>
-				
+					<div class="buttons">
+						<button class="Tdeletebtn">선택삭제</button>
+					</div>					
 			</div>
 		
-		<div class="buttons">
-				<button class="Tdeletebtn">선택삭제</button>
-		</div>
+
 		<div class="TcontentCon">
 			<table>
 				<thead>
 					<tr>
 						<th><input type="checkbox" name="allCheck" id="allCheck" /></th>
 						<th>예약 번호</th>
-						<th>예약 시간</th>
-						<th>예약 날짜</th>
 						<th>매치 날짜</th>
+						<th>매치 시간</th>
 						<th>구장 이름</th>
 						<th>매치 형태</th>
+						<th>게임 코드</th>						
 						<th>신청자 코드</th>
 						<th>신청자 이름</th>
-						<th>게임 코드</th>
+						<th>예약 날짜</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -150,14 +171,14 @@
 						<tr>
 							<td><input type="checkbox" name="chBox" class="chBox" data-gameCode="${i.gameCode}" /></td>
 							<td>${i.rvCode}</td>
+							<td>${i.gameDay }</td>							
 							<td>${i.gameTime}</td>
-							<td>${i.rvDay }</td>
-							<td>${i.gameDay }</td>
-							<td>${i.fieldName }</td>
-							<td>${i.fieldType }</td>
+							<td>${i.fieldName }</td>	
+							<td>${i.fieldType }</td>	
+							<td>${i.gameCode}</td>																			
 							<td>${i.userCode }</td>
 							<td>${i.userName }</td>
-							<td>${i.gameCode}</td>
+							<td>${i.rvDay }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -184,10 +205,8 @@
 	<script type="text/javascript">
 	/* 개별 선택 버튼 */
 	 $(".chBox").click(function(){
-		
 		  $("#allCheck").prop("checked", false);
 		 });
-	
 	</script>
 	
 	<script type="text/javascript">

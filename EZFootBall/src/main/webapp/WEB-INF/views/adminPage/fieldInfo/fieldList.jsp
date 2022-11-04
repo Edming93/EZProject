@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,9 @@
 	                    <span class="field_address">구장주소 : <b class="address">${field.fieldAddress}</b></span>
 	                    <span class="field_type">구장형태 : <b>${field.fieldType}</b></span>
 	                    <span class="phone">구장연락처 : <b>${field.fieldCall}</b></span>
-	                    <span class="phone">구장비용 : <b>${field.fieldRentalfee}원</b></span>
+	                                          	
+             
+	                    <span class="phone">구장비용 : <b><fmt:formatNumber value="${field.fieldRentalfee}" pattern="#,###"/>원</b></span>
 	                    <span class="etc_info">특이사항 : <b>${field.fieldGrass},${field.fieldInOut}</b></span>
 	                </div>
 	            </div>
@@ -123,7 +126,6 @@
  						if(local.value == "null" && input.value == "") {
  								content[i].style.display ="";
  						}else{
- 								
  								let name = field_name[i].innerText;
  								console.log(name.indexOf(input.value));
  								// name에 있는 문장에 local.value값이 포함됐을 때 시작지점이 몇번째인지 반환, -1은 값이 없을때
@@ -151,7 +153,14 @@
                     }
                 });
             });
+            
+            select_check_btn.forEach(function(event){
+            	event.addEventListener("click",function() {
+    	        	select_all_btn.checked = false;
+    	        });
+            });
 
+            
         </script>
     </div>
     </form>

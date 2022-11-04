@@ -33,20 +33,4 @@ public interface RentalDAO {
 	
 	public void insertRvInGameList(GlistVO vo);
 	
-	// -------------------- 관리자 구장관리 ---------------------
-	public List<GameFieldInfoVO> getFieldListAll();
-	
-	public GameFieldInfoVO selectFieldData(String fieldCode);
-	
-	public void deleteSeleteField(String fieldCode);
-	
-	public String selectFieldImage(String fieldCode);
-	
-	public void modifyField(GameFieldInfoVO gfvo);
-	
-	public void modifyGamelist(GlistVO gvo);
-	
-	public void modifyReservation(FieldReservationVO fvo);
-	
-	public FieldReservationVO GFieldReservationList();
 }
