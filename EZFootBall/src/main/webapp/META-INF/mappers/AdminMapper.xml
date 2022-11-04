@@ -118,7 +118,7 @@
 	
 	<select id="reviewselect" resultType="commentVO" parameterType="commentVO">
 		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
-		from review WHERE user_name = #{userName}
+		from review WHERE user_name = #{userName} or user_code = #{userCode}
 	</select>
 	
 

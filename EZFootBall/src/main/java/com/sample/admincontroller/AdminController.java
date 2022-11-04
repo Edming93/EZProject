@@ -224,19 +224,35 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
+	/*
+	
 	@PostMapping("/reviewselect")
 	public String reviewselect (@RequestParam("reviewsel") String reviewsel, Model model, ReviewCommentVO vo) {		
 		vo.setUserName(reviewsel);
+		
+		List<ReviewCommentVO> list = service.selectCommentList(vo);
+		model.addAttribute("review", list);
+		System.out.println(list.get(0));
+		return "adminPage/adminMain";
+	}
+	*/
+	
+	@PostMapping("/reviewselect")
+	public String reviewselect (@RequestParam("reviewsel") String reviewsel, @RequestParam("reviewcode") int reviewcode, Model model, ReviewCommentVO vo) {		
+		vo.setUserName(reviewsel);
+		vo.setUserCode(reviewcode);
 		List<ReviewCommentVO> list = service.selectCommentList(vo);
 		model.addAttribute("review", list);
 		System.out.println(list.get(0));
 		return "adminPage/adminMain";
 	}
 	
+	
 	@GetMapping("/payselect")
 	public String payselect (@RequestParam("payselect") String payselect,Model model) {
 		model.addAttribute("payselect", payselect);
 		return "adminPage/adminMain";
 	}
-			
+	
+	
 }
