@@ -150,15 +150,55 @@ public class RentalController {
 	}
 	
 	@GetMapping("/resultTeam")
-	public String teamResultMove(FieldReservationVO rvo, HttpSession session) {
+	public String teamResultMove(FieldReservationVO rvo, HttpSession session, DataVO vo1) {
+		
+		session.setAttribute("FRVO", rvo);
+		GlistVO gvo = (GlistVO)session.getAttribute("GlistVO");
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
-		rvo.setUserCode(uvo.getUserCode());
-		Tservice.insertFieldRVT(rvo);
+		
+		
+		if(Tservice.putTeamMatchGlist(gvo)) {
+			int Gnum =	Tservice.getTeamMatchGlist();
+			vo1.setGameCode(Gnum);
+			
+			System.out.println("컨트롤러--포스팅 : "+Gnum);
+		
+			int Tnum = Tservice.getTeamNameT(gvo);
+			vo1.setTeamCode(Tnum);
+		
+			Tservice.gameTJoinList(vo1);
+			
+			Tservice.matchInfo(gvo);
+		session.setAttribute("GlistVO", gvo);
+		
+			
+		FieldReservationVO rvo1 = (FieldReservationVO)session.getAttribute("FRVO");
+		
+		rvo1.setUserCode(uvo.getUserCode());
+		rvo1.setFieldCode(gvo.getFieldCode());
+		rvo1.setFieldName(gvo.getFieldName());
+		rvo1.setFieldAddress(gvo.getFieldAddress());
+		rvo1.setFieldRentalfee(gvo.getGamePay());
+		rvo1.setFieldType(gvo.getGameMacth());
+		rvo1.setGameDay(gvo.getGameDay());
+		rvo1.setGameTime(gvo.getGameTime());
+		rvo1.setRvType(gvo.getGameType());
+		rvo1.setGameCode(Gnum);
+		rvo1.setUserPayment(gvo.getUteamPay());
+		rvo1.setTeamCode(uvo.getTeamCode());
+		System.out.println("제발제발 : "+Tnum);
+		
+		Tservice.insertFieldRVT(rvo1);
+		
+		session.removeAttribute("GlistVO");
+		session.removeAttribute("Gnum");
+		session.removeAttribute("Gnum");
+		session.removeAttribute("FRVO");
 		
 		return "rental/resultTeam";
-
+		}
+		return "rental/rentalPayment";
 	}
-	
 	// 결제코드 확인중 .. 지우지말 것
 //	@GetMapping("/resultTeam")
 //	public String teamResultMove(FieldReservationVO rvo, HttpSession session, @RequestParam("merchant") String merchant) {

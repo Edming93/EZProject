@@ -138,18 +138,28 @@ public class TeamService {
 			}
 			
 			// rental payment 이동시
-			public void matchInfo(GlistVO vo, Model model) {
-				System.out.println(dao.matchInfo(vo).getGameType());
+			public void matchInfo(GlistVO vo) {
+				
 				System.out.println("여기!!!!!!!!!!!!!");
 				System.out.println(vo.getUteamPay());
+				System.out.println(vo.getGameType());
+				System.out.println(vo.getFieldName());
+				System.out.println(vo.getGameTime());
+				System.out.println(vo.getGameDay());
+				System.out.println(vo.getGameType().getClass().getName());
+				System.out.println(vo.getGameTime().getClass().getName());
+				System.out.println(vo.getGameDay().getClass().getName());
+		
+//				System.out.println(dao.matchInfo(vo).getGameDay());
+//				System.out.println(dao.matchInfo(vo).getFieldName());
 				
-				model.addAttribute("match",dao.matchInfo(vo));
+				
 			}
 			
 			// Reservation table insert
-			public void insertFieldRVT(FieldReservationVO rvo) {
+			public void insertFieldRVT(FieldReservationVO rvo1) {
 				
-				dao.insertFieldRVT(rvo);
+				dao.insertFieldRVT(rvo1);
 			}
 			// 팀 등록시 로그인 한 유저정보 가져오는 것
 			public void getUserInfo(String str,Model model) {

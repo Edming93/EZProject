@@ -431,7 +431,7 @@
                 <p>팀이 지불할 참가비</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
             </div>
             <div class="dinput">
-            	 <input type="text" name="UteamPay" id="UteamPay" placeholder="팀이 지불할 금액을 입력하세요"/>
+            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="팀이 지불할 금액을 입력하세요"/>
             </div>
       	</div>
         <div class="subt">

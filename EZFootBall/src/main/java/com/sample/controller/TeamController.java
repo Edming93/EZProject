@@ -202,26 +202,45 @@ public class TeamController {
 	
 	// 팀 매치 작성 완료 버튼시 이동하는 로직
 	@PostMapping("/postingFinish")
-	public String putTeamMatchGlist(@ModelAttribute("GlistVO") GlistVO vo, DataVO vo1, Model model) {
+	public String putTeamMatchGlist(HttpSession session,@ModelAttribute("GlistVO") GlistVO vo, DataVO vo1, Model model) {
 		
-		if(service.putTeamMatchGlist(vo)) {
+		//if(service.putTeamMatchGlist(vo)) {
 			int Gnum =	service.getTeamMatchGlist();
+			session.setAttribute("Gnum", Gnum);
 			vo1.setGameCode(Gnum);
+			int two = 2;
+			int one = 1;
+			String T= "T";
+			String fact = "true";
 			
 			int Tnum = service.getTeamNameT(vo);
+			session.setAttribute("Tnum", Tnum);
 			vo1.setTeamCode(Tnum);
 			
+			vo.setClose(fact);
+			vo.setGameType(T);
+			vo.setGameMinp(two);
+			vo.setGameMaxp(two);
+			vo.setGamePnum(one);
+			session.setAttribute("GlistVO", vo);
 			System.out.println(vo.getGamePay());
 			System.out.println("넘어오나?? :"+vo.getUteamPay());
-			service.gameTJoinList(vo1);
+			System.out.println(vo.getGameType());
+			System.out.println(vo.getGameMinp());
+			System.out.println("이거없을?:"+vo.getFieldCode());
+			System.out.println("이거는? :"+vo.getGameMacth());
 			
-			service.matchInfo(vo,model);
+			
+			
+		//	service.gameTJoinList(vo1);
+			
+		//	service.matchInfo(vo,model);
 			
 			return "rental/rentalPayment";
-		}else {
+		//}else {
 			
-			return "team/posting";
-		}
+		//	return "team/posting";
+		//}
 	}
 	
 	// 지도에서 주소 입력후 검색 눌렀을때

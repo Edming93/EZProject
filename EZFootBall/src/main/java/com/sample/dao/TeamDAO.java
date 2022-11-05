@@ -83,7 +83,7 @@ public interface TeamDAO {
 			public GlistVO matchInfo(GlistVO vo);
 			
 			// 결제버튼 누를시
-			public void insertFieldRVT(FieldReservationVO vo);
+			public void insertFieldRVT(FieldReservationVO rvo1);
 			
 			// 팀 등록시 필요한 유저정보 가져오는 것
 			public UserVO getUserInfo(String str);

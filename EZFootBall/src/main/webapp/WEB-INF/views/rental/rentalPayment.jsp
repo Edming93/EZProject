@@ -398,32 +398,32 @@
 
          </div>
       </div>
-
-		<h1>${match.uteamPay }</h1>
+		<h1>${sessionScope.GlistVO.fieldCode}</h1>
+		<h1>${sessionScope.GlistVO.uteamPay }</h1>
       <div class="rv_info_container">
          <div class="rv_day">
             <h3>
                <iconify-icon class="alarm_icon" icon="grommet-icons:alarm"></iconify-icon> 예약 정보
             </h3>
-            <c:if test="${match.gameType eq null}">
+            <c:if test="${sessionScope.GlistVO.gameType eq null}">
 	            <h4>${sessionScope.fieldData.gameDay}</h4>
 	            <h4>${sessionScope.fieldData.gameTime}:00 ~ ${(sessionScope.fieldData.gameTime)+2}:00 시</h4>
            </c:if>
-           <c:if test="${match.gameType eq 'T' }">
-	           	<h4>${match.gameDay}</h4>
-<%-- 	           	<fmt:parseNumber value="${match.gameTime}" /> --%>
-	           	<h4><c:out value="${match.gameTime}"/>:00 ~ <c:out value="${match.gameTime+2}"/>:00</h4>
+           <c:if test="${sessionScope.GlistVO.gameType eq 'T' }">
+	           	<h4>${sessionScope.GlistVO.gameDay}</h4>
+	           	<fmt:parseNumber var="i" integerOnly="true" type="number" value="${sessionScope.GlistVO.gameTime}" />
+	           	<h4><c:out value="${i}"/>:00 ~ <c:out value="${i+2}"/>:00</h4>
 	           	
            </c:if>
          </div>
          <div class="rv_time">
-           <c:if test="${match.gameType eq null }">
+           <c:if test="${sessionScope.GlistVO.gameType eq null }">
 	        	<h3 class="field_name">${field.fieldName}</h3>
 	          	<h4>${field.fieldAddress}</h4>
            </c:if>
-            <c:if test="${match.gameType eq 'T' }">
-	           	<h3 class="field_name">${match.fieldName}</h3>
-	          	<h4>${match.fieldAddress}</h4>
+            <c:if test="${sessionScope.GlistVO.gameType eq 'T' }">
+	           	<h3 class="field_name">${sessionScope.GlistVO.fieldName}</h3>
+	          	<h4>${sessionScope.GlistVO.fieldAddress}</h4>
            </c:if>
            
          </div>
@@ -435,23 +435,23 @@
                <div class="rv_info_content">
                   <div class="rv_result_area">
                      <span class="rv_name">매치종류</span>
-                     	<c:if test="${match.gameType eq 'T' }">
+                     	<c:if test="${sessionScope.GlistVO.gameType eq 'T' }">
                      <span class="rv_result">팀 <span class="result_match">매치</span></span>
                      </c:if>
-                        <c:if test="${match.gameType eq null}">
+                        <c:if test="${sessionScope.GlistVO.gameType eq null}">
                      <span class="rv_result">구장 <span class="result_match">예약</span></span>
                      	</c:if>
                   </div>
                   <div class="rv_result_area">
                      <span class="rv_name">매치형태</span>
-                     <c:if test="${match.gameType eq null}">
+                     <c:if test="${sessionScope.GlistVO.gameType eq null}">
                       	<span class="rv_result">${field.fieldType} <span class="result_match">매치</span></span>
                      </c:if>
-                     <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rv_result">${match.gameMacth} <span class="result_match">매치</span></span>
+                     <c:if test="${sessionScope.GlistVO.gameType eq 'T'}">
+                      	<span class="rv_result">${sessionScope.GlistVO.gameMacth} <span class="result_match">매치</span></span>
                      </c:if>
                   </div>
-                  <c:if test="${match.gameType} == T">
+                  <c:if test="${sessionScope.GlistVO.gameType eq 'T'}">
                   	<div class="rv_result_area">
                      	<span class="rv_result">레벨 </span>
                     </div>
@@ -526,12 +526,12 @@
                   <div class="pay_area">
                      <span class="pay_title">이용금액</span>
                      <span class="pay">
-                     <c:if test="${match.gameType eq null}">
+                     <c:if test="${sessionScope.GlistVO.gameType eq null}">
                       	<span class="rental_fee amount_fee pay_money">${field.fieldRentalfee}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
-                     <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rental_fee amount_fee pay_money">${match.uteamPay}</span>
+                     <c:if test="${sessionScope.GlistVO.gameType eq 'T'}">
+                      	<span class="rental_fee amount_fee pay_money">${sessionScope.GlistVO.uteamPay}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	
@@ -548,12 +548,12 @@
                   <div class="pay_area pay_total_area">
                      <span class="pay_title pay_total">총 금액</span>
                      <span class="pay pay_total">
-                     <c:if test="${match.gameType eq null}">
+                     <c:if test="${sessionScope.GlistVO.gameType eq null}">
                       	<span class="rental_fee total_fee">${field.fieldRentalfee}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
-                     <c:if test="${match.gameType eq 'T'}">
-                      	<span class="rental_fee total_fee">${match.uteamPay}</span>
+                     <c:if test="${sessionScope.GlistVO.gameType eq 'T'}">
+                      	<span class="rental_fee total_fee">${sessionScope.GlistVO.uteamPay}</span>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	
@@ -564,12 +564,15 @@
                   window.onload = function() {
                   let amount_fee = document.querySelector(".amount_fee");
                   let total_fee = document.querySelector(".total_fee");
-               
+               			console.dir(${sessionScope.GlistVO.uteamPay});
+                		console.dir(${sessionScope.GlistVO.uteamPay}.tolocaleString());
+                		console.log(${seesionSCopr.GlistVO.gameType})
 
-					if('${match.gameType}' === 'T'){
-	                  amount_fee.innerHTML = Number(${match.uteamPay}).toLocaleString();
-	                  total_fee.innerHTML = Number(${match.uteamPay - 0}).toLocaleString();
-					}else{
+ 					if('${sessionScope.GlistVO.gameType}' == 'T'){
+ 	                  amount_fee.innerHTML = Number(${sessionScope.GlistVO.uteamPay}).toLocaleString("ko-KR");
+ 	                  total_fee.innerHTML = Number(${sessionScope.GlistVO.uteamPay - 0}).toLocaleString("ko-KR");
+					}
+					else{
 						amount_fee.innerHTML = Number(${field.fieldRentalfee}).toLocaleString();
 			            total_fee.innerHTML = Number(${field.fieldRentalfee - 0}).toLocaleString();
 					}   
@@ -592,13 +595,14 @@
       					border:1px solid black;
       				}
       			</style>
-                     <button id="ming">ming~</button>
+                     <a href="#" id="ming">ming~</a>
+                     <button id="plz">why</button>
 
    
    </div>
 
 
-   <script>
+<%--   <script type="text/javascript">
   		function plz(){
   			var merchant = document.getElementById("merchant");
   			console.log("여기는오겠지 :"+merchant.value);
@@ -625,10 +629,10 @@
             	alert("결제에 성공하셨습니다!");
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
-            	if(${match.gameType eq null}){ // 구장예약일 경우
+            	if('${sessionScope.GlistVO.gameType}' == null){ // 구장예약일 경우
                   	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+'${field.fieldCode}'+"&fieldName="+'${field.fieldName}'+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+'${field.fieldRentalfee}'
                   					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+'${time}';
-            	}else if(${match.gameType eq 'T'}) { // 팀매치 예약일 경우
+            	}else if('${sessionScope.GlistVO.gameType}' == 'T') { // 팀매치 예약일 경우
             		location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
             	}
             } else {
@@ -637,24 +641,29 @@
             }
          });
       }
+	  </script> --%>
 	  
-      document.getElementById("ming").addEventListener("click",function(){
+	  <script type="text/javascript">
+      document.getElementById("ming").addEventListener("click",function(e){
+  	  	e.preventDefault();
+			
+//    	 	location.href = "${pageContext.request.contextPath}/rental/resultTeam";
+       	  if(${sessionScope.GlistVO.gameType eq 'T'}){
+      		 // location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
+      		  location.href = "${pageContext.request.contextPath}/rental/resultTeam";
+      	  }else{
+      		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G";
+      	  }
 
-     	 
-         	  if('${match.gameType}' === 'T'){
-        		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
-        	  }else{
-        		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G";
-        	  }
-     		  
-     	    	  
-     	  
-     	  
-
- 
-      });
-      
-   </script>
-
-
+    });
+    
+	  </script>
+	  
+	<script type="text/javascript">
+	document.getElementById("plz").addEventListener("click",function(){
+	 	console.log("왜?");
+ }); 
+ 	  
+	</script>
+</body>
 </html>

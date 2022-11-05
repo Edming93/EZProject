@@ -2,6 +2,7 @@ package com.sample.vo;
 
 import org.apache.ibatis.type.Alias;
 
+@Alias("FieldReservationVO")
 public class FieldReservationVO {
 	private int rvCode;
 	private String rvType;

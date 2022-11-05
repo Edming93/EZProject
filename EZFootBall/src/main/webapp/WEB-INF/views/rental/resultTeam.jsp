@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>결제에 성공했습니다.</h1>
+	<h1>결제에 성공했습니다.teamteam</h1>
 </body>
 </html>
