@@ -35,10 +35,12 @@ public interface AdminDAO {
 	public List<FieldReservationVO> joinList1(FieldReservationVO vo);
 	
 	// 팀 예약현황 삭제
-	public int TdeleteG(FieldReservationVO vo);
+	public int TdeleteG(int gameCode);
 	public int TdeleteF(FieldReservationVO vo);
-	
-	
+	public int TupdateF(int gameCode);
+	// 팀 예약취소현황 출력
+	public List<FieldReservationVO> joinList2();
+	public List<FieldReservationVO> joinList3(FieldReservationVO vo);
 	//리뷰
 	public List<ReviewCommentVO> reviewCommentList();
 	

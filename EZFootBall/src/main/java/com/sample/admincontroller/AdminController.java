@@ -100,6 +100,10 @@ public class AdminController {
 			}
 			// 다시 구장예약 현황 경로 넣어주기
 			return "redirect:/admin/reserselect?reserselect=rvField";
+		}else if(reserselect.equals("Tcancel")) {
+			//팀매치 취소 현황
+			model.addAttribute("team1", service.joinList2());
+
 		}
 		
 			System.out.println(reserselect);
@@ -159,8 +163,9 @@ public class AdminController {
 				vo.setGameCode(gameCode);
 				System.out.println("오긴하나222222??");
 				System.out.println(gameCode);
-				service.TdeleteF(vo);
-				service.TdeleteG(vo);
+				System.out.println("왜다지워짐? : " +gameCode);
+				service.TdeleteG(gameCode);
+				service.TupdateF(gameCode);
 			}
 			result = 1;
 		}
@@ -169,12 +174,35 @@ public class AdminController {
 		return result;
 	}
 	
-	@GetMapping("/subselect")
-	public String subselect (@RequestParam("subselect") String subselect,Model model,HttpSession session) {
-		model.addAttribute("subselect", subselect);
+	@PostMapping("/reserselect2")
+	public String reserselect2 (Model model, FieldReservationVO vo,
+			@RequestParam("Tselect") String Tselect,
+			@RequestParam("Tsearch") String Tsearch) {
+		
+			if(Tselect.equals("rvCode")) {
+				vo.setSrvCode(Tsearch);
+			}else if(Tselect.equals("rvDay")){
+				vo.setRvDay(Tsearch);
+			}else if(Tselect.equals("userName")) {
+				vo.setUserName(Tsearch);
+			}else if(Tselect.equals("fieldName")) {
+				vo.setFieldName(Tsearch);
+			}else if(Tselect.equals("gameDay")) {
+				vo.setGameDay(Tsearch);
+			}else if(Tselect.equals("fieldType")) {
+				vo.setFieldType(Tsearch);
+			}else if(Tselect.equals("userCode")) {
+				vo.setSuserCode(Tsearch);
+			}else if(Tselect.equals("gameCode")) {
+				vo.setSgameCode(Tsearch);
+			}
+		
+			model.addAttribute("team", service.joinList3(vo));
+		
+
 		return "adminPage/adminMain";
 	}
-	
+
 	// 구장 관리 리스트
 	@GetMapping("/fieldselect")
 	public String fieldselect (Model model,HttpServletRequest request,HttpSession session) {

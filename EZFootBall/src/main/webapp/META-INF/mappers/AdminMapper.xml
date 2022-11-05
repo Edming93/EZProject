@@ -55,7 +55,7 @@
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code 
-		where a.rv_type = 'T'
+		where a.rv_type = 'T' and a.rv_state = '예약완료'
 		ORDER BY a.rv_code DESC
 	</select>
 	
@@ -63,7 +63,7 @@
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code 
-		where a.rv_type = 'T'
+		where a.rv_type = 'T' and a.rv_state = '예약완료'
 
 			<if test="userName != null">
 				and b.user_name like concat('%',#{userName},'%')
@@ -94,19 +94,66 @@
 	</select>
 	
 	<!-- 팀예약 삭제 mapper - gamelist, field_reservation 모두 삭제-->
-	<delete id="TdeleteG">
+	<delete id="TdeleteG" parameterType="int">
 		DELETE 
-		FROM field_reservation
+		FROM gamelist
 		WHERE game_code = #{gameCode}
 	</delete>
 	
 	<delete id="TdeleteF">
 		Delete
-		FROM gamelist
+		FROM field_reservation
 		WHERE game_code = #{gameCode}
 	</delete>
 	
+	<update id="TupdateF" parameterType="int">
+		update field_reservation
+		set rv_state = '예약취소'
+		WHERE game_code = #{gameCode}
+	</update>
+	
+	<!-- 팀예약 삭제시 출력 리스트 -->
+	<select id="joinList2" resultType="FieldReservationVO">
+		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code 
+		where a.rv_type = 'T' and a.rv_state = '예약취소'
+		ORDER BY a.rv_code DESC
+	</select>
+	
+	<select id="joinList3" resultType="FieldReservationVO" parameterType="FieldReservationVO">
+		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code 
+		where a.rv_type = 'T' and a.rv_state = '예약취소'
 
+			<if test="userName != null">
+				and b.user_name like concat('%',#{userName},'%')
+			</if>
+			<if test="srvCode != null">
+				and a.rv_code like concat('%',#{srvCode},'%')
+			</if>
+			<if test="rvDay != null">
+				and a.rv_day like concat('%',#{rvDay},'%')
+			</if>
+			<if test="fieldName != null">
+				and a.field_name like concat('%',#{fieldName},'%')
+			</if>
+			<if test="gameDay != null">
+				and a.game_day like concat('%',#{gameDay},'%')
+			</if>
+			<if test="fieldType != null">
+				and a.field_type like concat('%',#{fieldType},'%')
+			</if>
+			<if test="suserCode != null">
+				and a.user_code like concat('%',#{suserCode},'%')
+			</if>
+			<if test="sgameCode != null">
+				and a.game_code like concat('%',#{sgameCode},'%')
+			</if>
+
+		ORDER BY a.rv_code DESC
+	</select>
 	
 	<select id="reviewCommentList" resultType="commentVO">
 		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
@@ -124,7 +171,115 @@
 	</select>
 	
 	
+	<!-- 구장관리 (수정,삭제) -->
+	<select id="getFieldListAll" resultType="GameFieldInfoVO">
+		select * from gamefield_info
+	</select>
+	
+	<update id="modifyField" parameterType="GameFieldInfoVO">
+		update gamefield_info
+		<set>
+			<if test="fieldName != null">
+				 field_name = #{fieldName}
+			</if>
+			<if test="fieldAddress != null">
+				,field_address = #{fieldAddress}
+			</if>
+			<if test="fieldType != null">
+				,field_type = #{fieldType}
+			</if>
+			<if test="fieldCall != null">
+				,field_call = #{fieldCall}
+			</if>
+			<if test="fieldRentalfee != null">
+				,field_rentalfee = #{fieldRentalfee}
+			</if>
+			<if test="fieldGrass != null">
+				,field_grass = #{fieldGrass}
+			</if>
+			<if test="fieldInOut != null">
+				,field_in_out = #{fieldInOut}
+			</if>
+			<if test="fieldImg1 != null">
+				,field_img1 = #{fieldImg1}
+			</if>
+			<if test="fieldImg2 != null">
+				,field_img2 = #{fieldImg2}
+			</if>
+			<if test="fieldImg1 != null">
+				,field_img3 = #{fieldImg3}
+			</if>
+			<if test="fieldImg1 != null">
+				,field_img4 = #{fieldImg4}
+			</if>
+			<if test="fieldImg1 != null">
+				,field_img5 = #{fieldImg5}
+			</if>
+		</set>
+		where field_code = #{fieldCode}
+	</update>
+	
+	<update id="modifyGamelist" parameterType="GlistVO">
+		update gamelist
+		<set>
+			<if test="fieldName != null">field_name = #{fieldName}</if>
+			<if test="fieldAddress != null">,field_address = #{fieldAddress}</if>
+			<if test="gameMacth != null">,game_macth = #{gameMacth}</if>
+		</set>
+		where field_code = #{fieldCode}
+	</update>
+	<update id="modifyReservation" parameterType="FieldReservationVO">
+		update field_reservation
+		<set>
+			<if test="fieldName != null">field_name = #{fieldName}</if>
+			<if test="fieldAddress != null">,field_address = #{fieldAddress}</if>
+			<if test="fieldType != null">,field_type = #{fieldType}</if>
+		</set>
+		where field_code = #{fieldCode}
+	</update>
+	
+	<delete id="deleteSelectField">
+		delete from gamefield_info where field_code = #{fieldCode}
+	</delete>
+	<delete id="deleteSelectFieldInGamelist">
+		delete from gamelist where field_code = #{fieldCode}
+	</delete>
+	
+	<select id="selectFieldData" resultType="gameFieldInfoVO">
+		select * from gamefield_info where field_code = #{fieldCode}
+		<!--
+		select * from gamefield_info where field_code in
+		 <foreach> 
+		#{fieldCode}
+		</foreach> -->
+	</select>
+	
+	<select id="selectFieldImage" resultType="String">
+		select field_img1,field_img2,field_img3,field_img4,field_img5 from gamefield_info where field_code = #{fieldCode}
+	</select>
+	
+	<select id="GFieldReservationList" resultType="FieldReservationVO">
+		select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code
+		where a.rv_type = 'G'
+		ORDER BY a.rv_code DESC
+		
 
+<!-- 	select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code
+		where a.rv_type = 'T'
+		ORDER BY a.rv_code DESC
+ -->	
+	</select>
+	
+	<delete id="deleteFieldReservation">
+		delete from field_reservation where rv_code = #{rvCode}
+	</delete>
+	<delete id="deleteFieldGamelist">
+		delete from gamelist where rv_code = #{rvCode}
+	</delete>
 	
 	
 	
