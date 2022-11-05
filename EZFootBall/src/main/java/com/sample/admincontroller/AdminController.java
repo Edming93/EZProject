@@ -263,5 +263,11 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
+	@GetMapping("/adminselect")
+	public String adminselect (@RequestParam("adminselect") String adminselect,Model model) {
+		model.addAttribute("adminselect", adminselect);
+		return "adminPage/adminMain";
+	}
+	
 	
 }
