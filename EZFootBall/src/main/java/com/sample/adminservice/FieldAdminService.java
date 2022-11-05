@@ -59,15 +59,17 @@ public class FieldAdminService {
 	
 	
 	// ----------------------- 구장 예약 관리 --------------------
-	// 구장예약현황 리스트 출력
+	// 구장예약현황 type 이 G이고, state가 '예약완료'인 list출력)
 	public List<FieldReservationVO> GFieldReservationList() {
 		return dao.GFieldReservationList();
 	}
 	
-	// 구장예약된 내용 삭제
-	public void deleteFieldReservation(String rvCode) {
-		dao.deleteFieldReservation(rvCode);
+	// 구장예약 취소 예약완료->예약취소로 바꾸기
+	public void updateFieldReservation(String gameCode) {
+		dao.updateFieldReservation(gameCode);
 	}
 	
-//	public void deleteFieldGamelist()
+	public void deleteFieldGamelist(String gameCode) {
+		dao.deleteFieldGamelist(gameCode);
+	}
 }

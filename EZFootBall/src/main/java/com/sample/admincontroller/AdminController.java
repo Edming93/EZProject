@@ -91,10 +91,12 @@ public class AdminController {
 		if(reserselect.equals("teamMatch") ) {
 			model.addAttribute("team", service.joinList());
 		}else if(reserselect.equals("rvField")){
+			// type 이 G이고, state가 '예약완료'인 list출력
 			model.addAttribute("fieldRV",fdService.GFieldReservationList());
 		}else if(reserselect.equals("delete")) {
 			for(int i=0; i<chBox.length; i++) {
-				fdService.deleteFieldReservation(chBox[i]);
+				fdService.updateFieldReservation(chBox[i]);
+				fdService.deleteFieldGamelist(chBox[i]);
 			}
 			// 다시 구장예약 현황 경로 넣어주기
 			return "redirect:/admin/reserselect?reserselect=rvField";

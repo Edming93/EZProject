@@ -595,14 +595,13 @@
       					border:1px solid black;
       				}
       			</style>
-                     <a href="#" id="ming">ming~</a>
-                     <button id="plz">why</button>
+                     <button id="ming">ming~</button>
 
    
    </div>
 
 
-<%--   <script type="text/javascript">
+	<script type="text/javascript">
   		function plz(){
   			var merchant = document.getElementById("merchant");
   			console.log("여기는오겠지 :"+merchant.value);
@@ -641,7 +640,7 @@
             }
          });
       }
-	  </script> --%>
+	  </script>
 	  
 	  <script type="text/javascript">
       document.getElementById("ming").addEventListener("click",function(e){
@@ -659,11 +658,5 @@
     
 	  </script>
 	  
-	<script type="text/javascript">
-	document.getElementById("plz").addEventListener("click",function(){
-	 	console.log("왜?");
- }); 
- 	  
-	</script>
 </body>
 </html>

@@ -430,13 +430,9 @@
 					
 					
 					if(game_time.includes(timeset[i]) ||timeset[i] <= '<%=hour%>' ){
-					<%-- if(game_time.includes(timeset[i]) >= '<%=hour%>'){ --%>
-						console.log("내꺼"+game_time);
-						console.log("가지고 있는거" +i+ timeset[i]);
-						console.log("시간"+<%=hour%>);
-						
+
 						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = time+":00 - "+(time+2)+":00"; 
+						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
 					}else{
 						rental_div.className = "time rental_span_able";
 						//rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;

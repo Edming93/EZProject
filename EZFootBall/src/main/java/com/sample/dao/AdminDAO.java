@@ -56,6 +56,8 @@ public interface AdminDAO {
 	public void modifyReservation(FieldReservationVO fvo);
 	
 	// -------------------- 관리자 예약관리 --------------------
+	// type 이 G이고, state가 '예약완료'인 list출력
 	public List<FieldReservationVO> GFieldReservationList();
-	public void deleteFieldReservation(String rvCode);
+	public void updateFieldReservation(String gameCode);
+	public void deleteFieldGamelist(String gameCode);
 }

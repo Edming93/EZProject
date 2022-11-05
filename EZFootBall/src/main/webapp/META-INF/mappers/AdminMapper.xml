@@ -215,7 +215,7 @@
 		select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code
-		where a.rv_type = 'G'
+		where a.rv_type = 'G' and a.rv_state='예약완료'
 		ORDER BY a.rv_code DESC
 		
 
@@ -227,11 +227,11 @@
  -->	
 	</select>
 	
-	<delete id="deleteFieldReservation">
-		delete from field_reservation where rv_code = #{rvCode}
-	</delete>
+	<update id="updateFieldReservation" parameterType="String">
+		update field_reservation set rv_state='예약취소' where game_code = #{gameCode}
+	</update>
 	<delete id="deleteFieldGamelist">
-		delete from gamelist where rv_code = #{rvCode}
+		delete from gamelist where game_code = #{gameCode}
 	</delete>
 	
 	

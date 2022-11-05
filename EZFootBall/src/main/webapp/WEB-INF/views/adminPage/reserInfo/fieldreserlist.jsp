@@ -168,7 +168,7 @@
 				<tbody>
 					<c:forEach var="item" items="${fieldRV}">
 						<tr class="content">
-							<td><input type="checkbox" name="chBox" class="chBox" value="${item.rvCode}" /></td>
+							<td><input type="checkbox" name="chBox" class="chBox" value="${item.gameCode}" /></td>
 							<td class="rvCode">${item.rvCode}</td>
 							<td class="gameDay">${item.gameDay}</td>
 							<td class="gameTime">${item.gameTime}</td>
@@ -224,16 +224,10 @@
 	        if(select_cnt < 1){
 	        	alert("선택 된 예약이 없습니다.");
 	        	select_cnt = 0;
-	        }
-
-
-	        	
-	       	
+	        }   	
 			this.type ="submit";
 	    });
 
-			
-        
 		let content = document.querySelectorAll(".content");
 		var input = document.getElementById("Gsearch");
 		let search_btn = document.getElementById("Gbtn");
@@ -254,19 +248,15 @@
 			// 검색 로직
 			for(let j=0; j<select_box.length; j++){
 				if(select.value == select_box[j]){
-					
 					for(let i=0; i<content.length; i++){
 						let selectItem = "."+select_box[j];
-						
 						text = document.querySelectorAll(selectItem)[i].innerText;
-						
 						if(text.indexOf(input.value) != -1) {
 							content[i].style.display="";
 						}else {
 							content[i].style.display="none";
 						}
 					}
-	
 				}
 			}
 		});

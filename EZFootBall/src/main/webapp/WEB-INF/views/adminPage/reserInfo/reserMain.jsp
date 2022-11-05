@@ -31,7 +31,7 @@
         #submenu{
             display: flex;
             align-items: center;
-            width: 20%;
+            width: 45%;
             min-width: 200px;
             height: 50px;
             list-style: none;
@@ -63,8 +63,10 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=teamMatch"><li>팀 매치 예약 현황</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=rvField"><li>구장 예약 현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=teamMatch"><li>팀매치 예약현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=Tcancel"><li>팀매치 예약취소</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=rvField"><li>구장 예약현황</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=Gcancel"><li>구장 예약취소</li></a>
         </ul>
     </div>
     <div id="maincontent">
@@ -73,9 +75,17 @@
         		%>
 	    		  <jsp:include page="./teamreserlist.jsp"></jsp:include>
 	    		<%
+        	}else if(reserselect.equals("Tcancel")){
+        		%>
+	    		  <jsp:include page="./Tcancel.jsp"></jsp:include>
+	    		<%
         	}else if(reserselect.equals("rvField")){
         		%>
 	    		  <jsp:include page="./fieldreserlist.jsp"></jsp:include>
+	    		<%
+        	}else if(reserselect.equals("Gcancel")){
+        		%>
+	    		  <jsp:include page="./Gcancel.jsp"></jsp:include>
 	    		<%
         	}
         %>
