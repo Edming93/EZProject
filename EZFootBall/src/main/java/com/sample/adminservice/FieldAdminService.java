@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sample.dao.AdminDAO;
+import com.sample.dao.RentalDAO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -13,9 +14,9 @@ import com.sample.vo.GlistVO;
 @Service
 public class FieldAdminService {
 	
-	private AdminDAO dao;
+	private RentalDAO dao;
 
-	public FieldAdminService(AdminDAO dao) {
+	public FieldAdminService(RentalDAO dao) {
 		super();
 		this.dao = dao;
 	}
