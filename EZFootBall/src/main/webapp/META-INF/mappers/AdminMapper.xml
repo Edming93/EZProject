@@ -55,14 +55,16 @@
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code 
-		ORDER BY a.game_day DESC
+		where a.rv_type = 'T'
+		ORDER BY a.rv_code DESC
 	</select>
 	
 	<select id="joinList1" resultType="FieldReservationVO" parameterType="FieldReservationVO">
 		select a.rv_code, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code 
-		<where>
+		where a.rv_type = 'T'
+
 			<if test="userName != null">
 				and b.user_name like concat('%',#{userName},'%')
 			</if>
@@ -87,8 +89,8 @@
 			<if test="sgameCode != null">
 				and a.game_code like concat('%',#{sgameCode},'%')
 			</if>
-		</where>
-		ORDER BY a.game_day DESC
+
+		ORDER BY a.rv_code DESC
 	</select>
 	
 	<!-- 팀예약 삭제 mapper - gamelist, field_reservation 모두 삭제-->
