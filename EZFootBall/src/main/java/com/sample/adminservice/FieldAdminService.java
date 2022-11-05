@@ -31,8 +31,12 @@ public class FieldAdminService {
 	}
 	
 	// 구장 삭제
-	public void deleteSeleteField(String fieldCode) {
-		dao.deleteSeleteField(fieldCode);
+	public void deleteSelectField(String fieldCode) {
+		dao.deleteSelectField(fieldCode);
+	}
+	// 구장이 삭제될 때 게임 리스트테이블에서도 삭제
+	public void deleteSelectFieldInGamelist(String fieldCode) {
+		dao.deleteSelectFieldInGamelist(fieldCode);
 	}
 	
 	// 이미지 내보내기
@@ -55,8 +59,15 @@ public class FieldAdminService {
 	
 	
 	// ----------------------- 구장 예약 관리 --------------------
-	// 
+	// 구장예약현황 리스트 출력
 	public List<FieldReservationVO> GFieldReservationList() {
 		return dao.GFieldReservationList();
 	}
+	
+	// 구장예약된 내용 삭제
+	public void deleteFieldReservation(String rvCode) {
+		dao.deleteFieldReservation(rvCode);
+	}
+	
+//	public void deleteFieldGamelist()
 }

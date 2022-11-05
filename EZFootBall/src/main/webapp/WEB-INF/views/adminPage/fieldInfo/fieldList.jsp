@@ -69,6 +69,7 @@
 	     </div>
 	     	<script type="text/javascript">
 	     		let field_modify = document.querySelector(".field_modify");
+	     		let field_delete = document.querySelector(".field_delete");
 	     		let check_boxes = document.querySelectorAll(".check_box");
 	     		let f_cnt = 0;
 	     		let t_cnt = 0;
@@ -82,14 +83,35 @@
 	     					field_modify.type="submit";
 	     				}
 	     			});
-	     			if(t_cnt > 1){
-	     				field_modify.type="button";
-						alert("하나의 정보만 수정해주세요.");
-						t_cnt=0;
-	     			}else if(check_boxes.length == f_cnt){
-	     				field_modify.type="button";
-	     				alert("수정할 정보가 없습니다!");
+		     			if(t_cnt > 1){
+		     				field_modify.type="button";
+							alert("하나의 정보만 수정해주세요.");
+							t_cnt=0;
+		     			}else if(check_boxes.length == f_cnt){
+		     				field_modify.type="button";
+		     				alert("수정할 정보가 없습니다!");
+		     				f_cnt=0;
+		     			}
+	     		});
+	     		
+	     		field_delete.addEventListener("click",function() {
+	     			check_boxes.forEach(function(e){
+	     				if(e.checked == false){
+	     					f_cnt++;
+	     				}
+	     			});
+				if(check_boxes.length == f_cnt){
+						field_delete.type="button";
+	     				alert("삭제할 정보가 없습니다!");
 	     				f_cnt=0;
+	     			}else {
+	     				if(confirm("정말 삭제하시겠습니까? 메인 게임리스트,구장예약에서도 모든 정보가 삭제됩니다.")){
+	     					alert("선택 구장에 관련된 모든 정보가 삭제됩니다.");
+	     					field_delete.type="submit";
+	     				}else {
+	     					field_delete.type="button";
+	     				}
+	     				
 	     			}
 	     		});
 	     	</script>

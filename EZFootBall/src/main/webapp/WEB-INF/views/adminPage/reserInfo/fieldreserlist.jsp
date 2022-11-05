@@ -119,7 +119,7 @@
 </head>
 <body>
 	<div class="Gcontainer">
-<%-- 		<form action="${pageContext.request.contextPath}/admin/reserselect1" method="post"> --%>
+		<form name="form1" action="${pageContext.request.contextPath}/admin/reserselect" method="get">
 			<div class="Gheader_area">
 				<div class="Gselect_option">
 					<select name="Gselect" id="Gselect">
@@ -138,14 +138,16 @@
 				
 				<div class="GRsearch">
 					<input type="text" name="Gsearch" id="Gsearch" placeholder="카테고리에 맞게 단어를 검색하세요" />
+					<input type="text" style='display:none;' />
 				</div>
 				<div class="Gbutton">
-					<button id="Gbtn">검색</button>
+					<button type="button" id="Gbtn">검색</button>
 				</div>	
 				<div class="buttons">
-					<button class="Gdelete_btn">선택삭제</button>
+					<button type="button" class="Gdelete_btn" name="reserselect" value="delete">선택삭제</button>
 				</div>				
 			</div>
+
 
 		<div class="rv_table_area">
 			<table>
@@ -166,7 +168,7 @@
 				<tbody>
 					<c:forEach var="item" items="${fieldRV}">
 						<tr class="content">
-							<td><input type="checkbox" name="chBox" class="chBox" data-gameCode="${i.gameCode}" /></td>
+							<td><input type="checkbox" name="chBox" class="chBox" value="${item.rvCode}" /></td>
 							<td class="rvCode">${item.rvCode}</td>
 							<td class="gameDay">${item.gameDay}</td>
 							<td class="gameTime">${item.gameTime}</td>
@@ -181,7 +183,7 @@
 				</tbody>
 			</table>
 		</div>
-<!-- 		</form> -->
+		</form>
 	</div>
 	
     <script>
@@ -201,26 +203,42 @@
             
         });
         
-        select_check_btn.forEach(function(event){
-        	event.addEventListener("click",function() {
+        // 단일 선택 버튼
+        select_check_btn.forEach(function(e){
+        	e.addEventListener("click",function() {
 	        	select_all_btn.checked = false;
 	        });
         });
+
+        // 삭제 버튼 클릭시
+	    let delete_btn = document.querySelector(".Gdelete_btn");
+		let select_cnt = 0;
+	    delete_btn.addEventListener("click",function() {
+	    	
+	        select_check_btn.forEach(function(e){
+		        if(e.checked == true){
+		        	select_cnt++;
+		        }
+	        });
+	        
+	        if(select_cnt < 1){
+	        	alert("선택 된 예약이 없습니다.");
+	        	select_cnt = 0;
+	        }
+
+
+	        	
+	       	
+			this.type ="submit";
+	    });
+
+			
         
-        let delete_btn = document.querySelector(".Gdelete_btn");
-        
-        delete_btn.addEventListener("click",function() {
-        	
-        });
-        
-        
-    
 		let content = document.querySelectorAll(".content");
 		var input = document.getElementById("Gsearch");
 		let search_btn = document.getElementById("Gbtn");
-		
-		console.log("몇개? : "+content.length);
 
+		// 검색 버튼 클릭시 이벤트
 		search_btn.addEventListener("click",function() {
 		    let select = document.getElementById("Gselect");
 			// select 선택값 없을때
@@ -233,9 +251,7 @@
 			}
 			
 			let select_box = ["rvCode","gameDay","gameTime","fieldName","fieldType","fieldRentalfee","userCode","userName","rvDay"];
-			// 예약번호 검색
-			console.log("select.value : "+select.value);
-
+			// 검색 로직
 			for(let j=0; j<select_box.length; j++){
 				if(select.value == select_box[j]){
 					
@@ -256,25 +272,13 @@
 		});
 		
 		// 엔터키 활성화
-		input.addEventListener("keyup", function (event) {
-	        if (event.keyCode === 13) {
-	           event.preventDefault();
+		input.addEventListener("keyup", function (e) {
+	        if (e.keyCode === 13) {
+	           e.preventDefault();
 	           search_btn.click();
 	        }
 	    });
 		
-
-		
-// 		<option value="null">선택</option>
-// 		<option value="rvCode">예약번호</option>	
-// 		<option value="gameDay">매치날짜</option>
-// 		<option value="gameTime">매치시간</option>
-// 		<option value="fieldName">구장이름</option>
-// 		<option value="fieldType">구장크기</option>
-// 		<option value="fieldRentalfee">구장대여비</option>
-// 		<option value="userCode">신청자코드</option>
-// 		<option value="userName">신청자이름</option>
-// 		<option value="rvDay">예약날짜</option>	
     </script>
 
 </body>

@@ -80,16 +80,29 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
+	// 팀매치 리스트 출력
+	// 구장 예약 현황 리스트 출력 및 추가 수정 삭제
 	@GetMapping("/reserselect")
-	public String reserselect (@RequestParam("reserselect") String reserselect,Model model) {
+	public String reserselect (@RequestParam("reserselect") String reserselect,Model model,
+								HttpServletRequest request) {
 
+		String[] chBox = request.getParameterValues("chBox");
+		
 		if(reserselect.equals("teamMatch") ) {
-		model.addAttribute("team", service.joinList());
+			model.addAttribute("team", service.joinList());
 		}else if(reserselect.equals("rvField")){
-		model.addAttribute("fieldRV",fdService.GFieldReservationList());
+			model.addAttribute("fieldRV",fdService.GFieldReservationList());
+		}else if(reserselect.equals("delete")) {
+			for(int i=0; i<chBox.length; i++) {
+				fdService.deleteFieldReservation(chBox[i]);
+			}
+			// 다시 구장예약 현황 경로 넣어주기
+			return "redirect:/admin/reserselect?reserselect=rvField";
 		}
 		
-		model.addAttribute("reserselect", reserselect);
+			System.out.println(reserselect);
+			model.addAttribute("reserselect", reserselect);
+			
 		return "adminPage/adminMain";
 	}
 	
@@ -174,7 +187,8 @@ public class AdminController {
 		if(fieldChange != null) {
 			if(fieldChange.equals("delete")) {
 				for(int i=0; i<check_btn.length; i++) {
-				fdService.deleteSeleteField(check_btn[i]);
+				fdService.deleteSelectField(check_btn[i]);
+				fdService.deleteSelectFieldInGamelist(check_btn[i]);
 				}
 				return "redirect:/admin/select?select=fieldAdmin";
 			// 수정버튼 클릭했을 때
@@ -183,9 +197,7 @@ public class AdminController {
 				
 				if(check_btn != null) {
 					for(int i=0; i<check_btn.length; i++) {
-						//fdService.selectFieldData(check_btn[i],model);
 						model.addAttribute("gameFieldInfoVO"+i,fdService.selectFieldData(check_btn[i],model));
-//						model.addAttribute("field",fdService.selectFieldData(check_btn[i],model));
 						list.add("gameFieldInfoVO"+i);
 					}
 				}

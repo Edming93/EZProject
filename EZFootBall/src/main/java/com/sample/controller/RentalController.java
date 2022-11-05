@@ -49,20 +49,14 @@ public class RentalController {
 	@PostMapping("selectRental")
 	@ResponseBody
 	public List<GlistVO> selectRental(@RequestBody DataVO dvo, GlistVO gvo){
-		System.out.println("selectRental 컨트롤러");
 		// 날짜 설정
 		gvo.setGameDay(dvo.getDay());
-		System.out.println("날짜 : " +gvo.getGameDay());
 		// 지역 설정
 		if(dvo.getPlace() == null) {
 			gvo.setGamePlace(null);
-			System.out.println("여기게?");
 		}else {
 			gvo.setGamePlace(dvo.getPlace());
-			System.out.println("여기타게?");
 		}
-		System.out.println("장소 : " +gvo.getGamePlace());
-		
 		//크기 설정
 		if(dvo.getMver() == null) {
 			 gvo.setGameMacth(null);
@@ -70,10 +64,7 @@ public class RentalController {
 		 else{
 			 gvo.setGameMacth(dvo.getMver());
 		 }
-		System.out.println("크기 : " + gvo.getGameMacth());
-		 
 		return service.rvlistALL(gvo);
-		
 	}
 	
 	
@@ -82,7 +73,6 @@ public class RentalController {
 	public List<GlistVO> rvListAll(@RequestBody DataVO dvo,GlistVO gvo){
 		// 구장예약 클릭 시 처음 실행되는 컨트롤러
 		gvo.setGameDay(dvo.getDay());
-		
 		return service.rvlistALL(gvo);
 	}
 
@@ -90,7 +80,6 @@ public class RentalController {
 	@PostMapping("/timeList")
 	@ResponseBody
 	public List<GlistVO> timeList(@RequestBody GlistVO gvo){
-		
 		return service.timeList(gvo);
 	}
 	
@@ -119,16 +108,13 @@ public class RentalController {
 	
 	@GetMapping("/paymentInter")
 	public String paymentInter(FieldReservationVO fvo,HttpSession session,@RequestParam("pageurl") String pageurl) {
-
-		System.out.println(pageurl);
 		if(session.getAttribute("fieldData") != null || session.getAttribute("pageurl") != null) {
-		session.removeAttribute("fieldData");
-		session.removeAttribute("pageurl");
+			session.removeAttribute("fieldData");
+			session.removeAttribute("pageurl");
 		}
-		session.setAttribute("fieldData", fvo);
-		session.setAttribute("pageurl",pageurl);
-		
-		System.out.println("나 타고가?");
+			session.setAttribute("fieldData", fvo);
+			session.setAttribute("pageurl",pageurl);
+
 		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session))? "redirect:/rental/rentalPayment":"redirect:/loginPage/login";
 	}
 	
@@ -146,22 +132,19 @@ public class RentalController {
 	@GetMapping("/resultField")
 	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,Model model,
 								@SessionAttribute("sessionVO") UserVO uvo, HttpSession session) {
-		
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
 		
-		gvo.setGameType(fvo.getRvType());
-		gvo.setGameMacth(fvo.getFieldType());
-		gvo.setGamePay(fvo.getFieldRentalfee());
-		
+//		gvo.setGameType(fvo.getRvType());
+//		gvo.setGameMacth(fvo.getFieldType());
+//		gvo.setGamePay(fvo.getFieldRentalfee());
 
 		// 유효성검사 필요 없지만 확실하게 적용
 		if(service.rvCheck(fvo)) {
+			service.insertRvInGameList(fvo);
 			service.insertFieldReservation(fvo);
-			service.insertRvInGameList(gvo);
 			return "redirect:/myPage/rentalList";
 		}else {
-			System.out.println("이미 신청한 경기 표시하기");
 			return "redirect:/rental/rentalPayment";
 		}
 	}
@@ -170,13 +153,11 @@ public class RentalController {
 	public String teamResultMove(FieldReservationVO rvo, HttpSession session) {
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
 		rvo.setUserCode(uvo.getUserCode());
-		
 		Tservice.insertFieldRVT(rvo);
 		
 		return "rental/resultTeam";
 
 	}
-	
 	
 	// 결제코드 확인중 .. 지우지말 것
 //	@GetMapping("/resultTeam")

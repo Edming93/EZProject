@@ -189,8 +189,11 @@
 		where field_code = #{fieldCode}
 	</update>
 	
-	<delete id="deleteSeleteField">
+	<delete id="deleteSelectField">
 		delete from gamefield_info where field_code = #{fieldCode}
+	</delete>
+	<delete id="deleteSelectFieldInGamelist">
+		delete from gamelist where field_code = #{fieldCode}
 	</delete>
 	
 	<select id="selectFieldData" resultType="gameFieldInfoVO">
@@ -222,6 +225,12 @@
  -->	
 	</select>
 	
+	<delete id="deleteFieldReservation">
+		delete from field_reservation where rv_code = #{rvCode}
+	</delete>
+	<delete id="deleteFieldGamelist">
+		delete from gamelist where rv_code = #{rvCode}
+	</delete>
 	
 	
 	

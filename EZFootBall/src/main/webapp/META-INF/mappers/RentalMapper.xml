@@ -85,36 +85,24 @@
 		and field_code = #{fieldCode}
 		and game_day = #{gameDay}
 		and game_time = #{gameTime}
+		and rv_state = '예약완료'
 	</select>
-	
-<!-- 	<select id="rvCheck" resultType="FieldReservationVO"> -->
+<!-- 	<select id="rvCheck" resultType="int"> -->
 <!-- 		select count(*) from field_reservation -->
-<!-- 		<where>  -->
-<!-- 		<if test="userCode != null"> -->
-<!-- 			and user_code = #{userCode} -->
-<!-- 		</if> -->
-<!-- 		<if test="gameDay != null"> -->
+<!-- 		where user_code = #{userCode} -->
+<!-- 		and field_code = #{fieldCode} -->
 <!-- 		and game_day = #{gameDay} -->
-<!-- 		</if> -->
-<!-- 		<if test="gameTime != null"> -->
 <!-- 		and game_time = #{gameTime} -->
-<!-- 		</if> -->
-<!-- 		<if test="rvType != null"> -->
-<!-- 		and rv_type = #{rvType} -->
-<!-- 		</if> -->
-<!-- 		</where> -->
 <!-- 	</select> -->
 
-	<insert id="insertFieldReservation" parameterType="FieldReservationVO">
-		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time)
-		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime})
+	<insert id="insertFieldReservation">
+		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time,game_code)
+		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime},#{gameCode})
 	</insert>
-	<insert id="insertRvInGameList" parameterType="GlistVO">
-		insert into gamelist (game_type,field_code,field_name,field_address,game_macth,game_day,game_time,game_pay)
-		values(#{gameType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameMacth},#{gameDay},#{gameTime},#{gamePay});
+	<insert id="insertRvInGameList" keyProperty="gameCode">
+		insert into gamelist (game_type,field_code,field_name,field_address,game_day,game_time)
+		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameDay},#{gameTime});
 	</insert>
-	
-	
 	
 	
 	

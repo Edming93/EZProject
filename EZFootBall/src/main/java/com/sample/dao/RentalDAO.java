@@ -31,6 +31,6 @@ public interface RentalDAO {
 	// 예약테이블 등록시 유효성검사
 	public int rvCheck(FieldReservationVO vo);
 	
-	public void insertRvInGameList(GlistVO vo);
+	public void insertRvInGameList(FieldReservationVO vo);
 	
 }
