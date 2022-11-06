@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	String subselect = null;
@@ -61,9 +61,9 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=socialMatch"><li>家既概摹 脚没 泅炔</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=teamMatch"><li>评概摹 脚没 泅炔</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=cancel"><li>秒家 泅炔</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=socialMatch"><li>靻岇厹毵れ箻 鞁犾箔 順勴櫓</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=teamMatch"><li>韺�毵れ箻 鞁犾箔 順勴櫓</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/subselect?subselect=cancel"><li>旆唽 順勴櫓</li></a>
         </ul>
     </div>
     <div id="maincontent">

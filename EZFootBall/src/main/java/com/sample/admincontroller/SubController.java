@@ -33,7 +33,6 @@ import com.sample.vo.UserVO;
 @RequestMapping("/sub")
 public class SubController {
 	
-	//private RankService service;
 	private SubService service;
 	private AdminService aservice;
 	

@@ -275,7 +275,7 @@
 		 for(let i =0; i< <%=tcodelist.size()%>; i++){
 			 let intext = document.getElementById("inuserCode").value.trim();
 			 let ortext = document.getElementsByClassName("cnumlist")[i].innerText.trim();
-			 if(intext.length >= 2 ){
+			 if(intext.length >= 1 ){
 				 if(ortext.indexOf(intext) != -1){
 					 document.getElementById("cnum"+i).style.display = "block";
 					 document.getElementById("cnum"+i).style.backgroundColor = "#fff";

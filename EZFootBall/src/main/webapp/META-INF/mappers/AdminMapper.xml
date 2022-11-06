@@ -5,8 +5,12 @@
 <mapper namespace="com.sample.dao.AdminDAO">
 	<!-- 신청 관리 -->
 	<select id="allgame" resultType="GlistVO">
-		select *
+		select game_code,game_type,game_day,game_gender,
+		DATE_FORMAT(game_time, '%H') AS game_time,level,
+		game_macth,game_place,close,game_pnum,game_mag,field_name,
+		field_address,game_minp,game_maxp,field_code,game_mag,game_pay
 		from gamelist
+		where game_type ='S' OR game_type ='T'
 	</select>
 	
 	<select id="alluser" resultType="UserVO">
@@ -38,7 +42,6 @@
 		FROM user_info
 		WHERE team_code is NOT NULL
 	</select>
-	
 	
 	
 	
