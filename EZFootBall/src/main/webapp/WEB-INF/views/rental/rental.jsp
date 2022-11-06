@@ -360,7 +360,6 @@
   
        <div id="listreset" class="select_border listreset">초기화</div>
    
-   
    </div>
 
    <div id="result">

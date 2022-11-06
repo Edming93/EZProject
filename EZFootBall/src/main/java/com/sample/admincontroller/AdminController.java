@@ -93,6 +93,8 @@ public class AdminController {
 		}else if(reserselect.equals("rvField")){
 			// type 이 G이고, state가 '예약완료'인 list출력
 			model.addAttribute("fieldRV",fdService.GFieldReservationList());
+		}else if(reserselect.equals("Gcancel")) {
+			model.addAttribute("cancelRV",fdService.GCancelList());
 		}else if(reserselect.equals("delete")) {
 			for(int i=0; i<chBox.length; i++) {
 				fdService.updateFieldReservation(chBox[i]);

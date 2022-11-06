@@ -162,7 +162,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${calcelRV}">
+					<c:forEach var="item" items="${cancelRV}">
 						<tr class="content">
 							<td class="rvCode">${item.rvCode}</td>
 							<td class="gameDay">${item.gameDay}</td>
