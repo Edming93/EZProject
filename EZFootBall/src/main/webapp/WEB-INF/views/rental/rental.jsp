@@ -342,6 +342,7 @@
       <select name="" id="local" class="select_border local">
          <option id="null" value="null">지역</option>
          <option id="서울" value="서울">서울</option>
+         <option id="인천" value="인천">인천</option>
          <option id="경기도" value="경기도">경기도</option>
          <option id="강원도" value="강원도">강원도</option>
          <option id="경상도" value="경상도">경상도</option>
@@ -375,12 +376,13 @@
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
         document.getElementById("<%=today%>").style.transform = "scale(1.5)";
-		let date = 0;
+		var date = 0;
         if(<%=today%> < 10){
+        	// 값 비교를 위한 문자처리
         	date = "0"+<%=today%>;
         }
         
-		let day = <%=year%> + "-" +<%=month%> +"-" +date;
+		var day = <%=year%> + "-" +<%=month%> +"-" +date;
 		today = day;
 
          let data = {place:"null",type:"null",day:day};
@@ -427,23 +429,20 @@
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
-					
-					
-					if(game_time.includes(timeset[i]) ||timeset[i] <= '<%=hour%>' ){
+
+					if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
 
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
 					}else{
 						rental_div.className = "time rental_span_able";
-						//rental_div.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+data.fieldCode+"&day="+day+"&time="+time;
-						console.log(data.fieldCode+" + "+day+" + "+time+" + "+data.gamePay); 
+
 						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
 					}
 					rental_area.append(rental_div);
 				}
             	content_area.append(rental_area);
-            	console.log("끝");
             }
          }).catch(error => {
             console.log("무슨에러냐면! : " + error);
@@ -452,34 +451,35 @@
    
    <!-- 날짜 -->
    let today = null;
-
-   for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
-		document.getElementById("day").children[i].addEventListener("click", function (e) {
+   let day_div = document.getElementById("day");
+   let div1_ul = document.querySelector("#div1 ul");
+   for (var i = 0; i < day_div.childElementCount; i++) {
+	   day_div.children[i].addEventListener("click", function (e) {
 			
-        	 	let tnum =0;
+        	 	let tnum = 0;
         	 	// 초기화 시키는 로직
         		for(var j = 0; j < document.getElementById("day").childElementCount; j++){
-        			document.getElementById("day").children[j].style.backgroundColor="#fff";
-            		document.getElementById("day").children[j].style.color='#C7C7C7';
-            		document.getElementById("day").children[j].style.border="1px solid #A9A9A9";
-            		document.getElementById("day").children[j].style.transition = "all 0.2s linear";
-                    document.getElementById("day").children[j].style.transform = "scale(1.0)";
-                    if(document.getElementById("day").children[j].id == this.id) {
+        			day_div.children[j].style.backgroundColor="#fff";
+        			day_div.children[j].style.color='#C7C7C7';
+        			day_div.children[j].style.border="1px solid #A9A9A9";
+        			day_div.children[j].style.transition = "all 0.2s linear";
+        			day_div.children[j].style.transform = "scale(1.0)";
+                    if(day_div.children[j].id == this.id) {
                     	tnum = j;
                     }
         		};
         		
             	if(tnum<=3){
-            		document.querySelector("#div1 ul").style.transform = 'translate(' + 0 + 'px)';
+            		div1_ul.style.transform = 'translate(' + 0 + 'px)';
             		pscrollleft1 = 0;
             		
             	}else {
             		if((tnum-3) *140 >= 3360){
-            			document.querySelector("#div1 ul").style.transform = 'translate(' + -3360 + 'px)';
+            			div1_ul.style.transform = 'translate(' + -3360 + 'px)';
             			pscrollleft1 = 3360;
             			
             		}else{
-            			document.querySelector("#div1 ul").style.transform = 'translate(' + -(tnum-3) *140 + 'px)';
+            			div1_ul.style.transform = 'translate(' + -(tnum-3) *140 + 'px)';
             			pscrollleft1 = (tnum-3) *140;
             		}
             	}
@@ -495,9 +495,9 @@
        var day = this.className;
        today = day;
        
-       let local_select = document.getElementById("local").value;
-       let type_input = document.getElementById("type_input").checked;
-       let field_size = document.getElementById("field_size").value;
+       var local_select = document.getElementById("local").value;
+       var type_input = document.getElementById("type_input").checked;
+       var field_size = document.getElementById("field_size").value;
        
        if(local_select == "null"){
           local_select = null;
@@ -593,10 +593,8 @@
 	      }
         	 
       // 마감 여부 선택 돼있는지 체크가 돼있으면 트루 , 아니면 펄스
-         let type_input = document.getElementById("type_input").checked;
-         let field_size = document.getElementById("field_size").value;
-          
-         console.log("field_size : "+field_size);
+         var type_input = document.getElementById("type_input").checked;
+         var field_size = document.getElementById("field_size").value;
           
          local_select = document.getElementById("local").value;
           
@@ -607,8 +605,13 @@
              field_size = null;
            }
          
-
-      
+  		var date = 0;
+        if(<%=today%> < 10){
+        	// 값 비교를 위한 문자처리
+        	date = "0"+<%=today%>;
+        }
+		var day = <%=year%> + "-" +<%=month%> +"-" +date;
+		
       let data = {place:local_select,type:type_input,day:today,mver:field_size};
       
       fetch("${pageContext.request.contextPath}/rental/selectRental",{
@@ -649,18 +652,31 @@
 				var timeset = ["08","10","12","14","16","18","20","22"];
 				// db에서 불러온 배열
 				var game_time = (data.gameTime).split(',');
+				console.log(game_time);
 
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
-					if(game_time.includes(timeset[i]) || game_time.includes(timeset[i]) <= <%=hour%> ){
-						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}else{
-						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+					
+					if(day == today){
+						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}
+					}else {
+						if(game_time.includes(timeset[i])){
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}
 					}
 					rental_area.append(rental_div);
 				}
@@ -680,7 +696,7 @@
    
    type_input.addEventListener("click",function(){
 	  document.getElementById("rv_check").classList.toggle("active");
-     
+	  
       let local_select = document.getElementById("local").value;
       if(local_select == "null"){
          local_select = null;
@@ -689,10 +705,18 @@
       if(field_size == "null"){
          field_size = null;
        }
+      
+      
+	  
+	  var date = 0;
+      if(<%=today%> < 10){
+      	// 값 비교를 위한 문자처리
+      	date = "0"+<%=today%>;
+      }
+      
+	  var day = <%=year%> + "-" +<%=month%> +"-" +date;
 
       type_input = this.checked;
-      console.log(type_input);
-      
       let data = {place:local_select,type:type_input,day:today,mver:field_size};
       
       fetch("${pageContext.request.contextPath}/rental/selectRental",{
@@ -733,24 +757,69 @@
 			var timeset = ["08","10","12","14","16","18","20","22"];
 			// db에서 불러온 배열
 			var game_time = (data.gameTime).split(',');
-
+			
+			console.log(day == today);
+			
 			for(let i=0; i<timeset.length; i++){
 				// true 혹은 false 반환
 				let time = parseInt(timeset[i]);
-				if((type_input == false && game_time.includes(timeset[i])) || game_time.includes(timeset[i]) <= <%=hour%> ){
-					let rental_div = document.createElement("div");
-					rental_div.className = "time rental_span_disable";
-					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
-					rental_area.append(rental_div);
+				// 체크 해제되었을때 실행
+				if(type_input == false){
+					// 만약 오늘 날짜와 선택한 날짜가 같을 경우
+					if(day == today){
+						// 예약되어있는 시간이거나, 전체 배열안에 있는 값이 현재 시간보다 작은경우 예약 불가능한 시간 표시
+						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>'){
+							let rental_div = document.createElement("div");
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
+							rental_area.append(rental_div);
+						// 예약되어있는 시간이 아니거나, 현재 시간보다 값이 큰 경우
+						}else {
+								let rental_div = document.createElement("div");
+								rental_div.className = "time rental_span_able";
+								rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+								rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+								rental_area.append(rental_div);
+						}
+					// 오늘 날짜와 선택한 날짜가 다를 경우
+					}else {
+						// 예약되어있는 시간일 경우, 예약 불가능한 시간 표시
+						if(game_time.includes(timeset[i])){
+							let rental_div = document.createElement("div");
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
+							rental_area.append(rental_div);
+						// 예약되어있는 시간이 아닐경우
+						}else {
+								let rental_div = document.createElement("div");
+								rental_div.className = "time rental_span_able";
+								rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+								rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+								rental_area.append(rental_div);
+						}
+					}
+				// 체크 되어있고, 예약 되어있는 시간일 경우 아무것도 하지 않음
 				}else if(type_input == true && game_time.includes(timeset[i])){
-					
+				
+				// 체크 되어있고, 예약 되어있지 않은 시간일 경우
 				}else{
-					let rental_div = document.createElement("div");
-					rental_div.className = "time rental_span_able";
-					rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
-					rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					rental_area.append(rental_div);
-					
+					// 만약 오늘 날짜와 선택한 날짜가 같을 경우
+					if(day == today){
+						if(timeset[i] >= '<%=hour%>'){
+							let rental_div = document.createElement("div");
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+							rental_area.append(rental_div);
+						}
+					// 만약 오늘 날짜와 선택한 날짜가 다를 경우
+					}else {
+							let rental_div = document.createElement("div");
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+							rental_area.append(rental_div);
+					}
 				}
 			}
        	content_area.append(rental_area);
@@ -787,10 +856,7 @@
       }
      // 마감여부
      var type_input = document.getElementById("type_input").checked;
-     console.log("--------------------")
-     console.log(local_select);
-     console.log(type_input);
-     console.log(field_size);
+
      let data = {place:local_select,type:type_input,day:today,mver:field_size};
      
      fetch("${pageContext.request.contextPath}/rental/selectRental",{
@@ -836,13 +902,24 @@
 					// true 혹은 false 반환
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
-					if(game_time.includes(timeset[i]) || game_time.includes(timeset[i]) <= <%=hour%>){
-						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}else{
-						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+					if(day == today){
+						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}
+					}else {
+						if(game_time.includes(timeset[i])){
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}
 					}
 					rental_area.append(rental_div);
 				}
@@ -915,14 +992,25 @@
  					// true 혹은 false 반환
  					let time = parseInt(timeset[i]);
  					let rental_div = document.createElement("a");
- 					if(game_time.includes(timeset[i]) || game_time.includes(timeset[i]) <= <%=hour%> ){
- 						rental_div.className = "time rental_span_disable";
- 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
- 					}else{
- 						rental_div.className = "time rental_span_able";
- 						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
- 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
- 					}
+					if(day == today){
+						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}
+					}else {
+						if(game_time.includes(timeset[i])){
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}
+					}
  					rental_area.append(rental_div);
  				}
           	content_area.append(rental_area);

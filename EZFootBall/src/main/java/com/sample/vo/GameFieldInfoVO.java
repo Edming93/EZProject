@@ -7,6 +7,8 @@ public class GameFieldInfoVO {
 	
 	// 구장번호  
 	private int fieldCode;
+	// 경기 장소
+	private String gamePlace;
 	// 구장이름
 	private String fieldName;
 	// 구장주소
@@ -31,6 +33,14 @@ public class GameFieldInfoVO {
 	private String fieldInOut;
 	private String fieldGrass;
 	
+	
+	
+	public String getGamePlace() {
+		return gamePlace;
+	}
+	public void setGamePlace(String gamePlace) {
+		this.gamePlace = gamePlace;
+	}
 	public String getFieldSize() {
 		return fieldSize;
 	}

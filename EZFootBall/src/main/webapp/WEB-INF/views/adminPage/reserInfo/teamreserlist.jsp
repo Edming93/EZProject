@@ -20,19 +20,23 @@
     	box-sizing: content-box;
 	}
 	.TCRselectMenu{
-		width: 30%;
+		width: 10%;
 	    display: flex;
 	}
+	.TCRoption {
+		display: flex;
+		width:70%;
+	}
 	#Tselect{
-		width: 60%;
+		width: 100%;
     	border: 1px solid #000;
 	}
 	.TCRsearch{
-    	width: 50%;
+    	width: 100%;
 	}
 	.TCRsearchArea{
 		display: flex;
-	       width: 50%;
+	    width: 50%;
 	}
 	#Tsearch{
 		width: 100%;
@@ -77,16 +81,12 @@
     	height: 30px;
 	}
 		
-	.buttons {
-		width: 10%;
-	}
-	
 	.TCRbutton{
 		height: 30px;
 	    justify-content: center;
 	    display: flex;
 	    align-items: center;
-	   	width: 10%;
+	   	width: 125px;
 	    margin-left: 1%;
 	}
 	#TCRbtn{
@@ -137,16 +137,17 @@
 						<option value="userName">신청자이름</option>
 					</select>
 				</div>
-				
+				<div class="TCRoption">
 					<div class="TCRsearch">
 						<input type="text" name="Tsearch" id="Tsearch" placeholder="카테고리에 맞게 단어를 검색하세요" />
 					</div>
 					<div class="TCRbutton">
 						<button id="TCRbtn">검색</button>
 					</div>
-					<div class="buttons">
-						<button class="Tdeletebtn">선택삭제</button>
-					</div>					
+					<div class="TCRbutton">
+						<button class="Tdeletebtn">예약취소</button>
+					</div>				
+				</div>	
 			</div>
 		
 

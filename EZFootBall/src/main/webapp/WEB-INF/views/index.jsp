@@ -435,7 +435,7 @@
                 <div class="banner_content">
                     <img class="banner_image" src="image/ez_banner1.png" alt="">
                     <img class="banner_image" src="image/ez_banner2.png" alt="">
-                    <img class="banner_image" src="image/banner-starter_pc.png" alt="">
+                    <img class="banner_image" src="image/ez_banner3.png" alt="">
                 </div>
             </div>
         </div>

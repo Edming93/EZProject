@@ -73,4 +73,8 @@ public class FieldAdminService {
 	public void deleteFieldGamelist(String gameCode) {
 		dao.deleteFieldGamelist(gameCode);
 	}
+	
+	public List<FieldReservationVO> GCancelList() {
+		return dao.GCancelList();
+	}
 }

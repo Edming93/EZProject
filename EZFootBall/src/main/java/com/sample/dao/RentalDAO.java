@@ -50,5 +50,6 @@ public interface RentalDAO {
 	public List<FieldReservationVO> GFieldReservationList();
 	public void updateFieldReservation(String gameCode);
 	public void deleteFieldGamelist(String gameCode);
+	public List<FieldReservationVO> GCancelList();
 	
 }

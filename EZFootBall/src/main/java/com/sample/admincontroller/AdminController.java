@@ -105,8 +105,6 @@ public class AdminController {
 			model.addAttribute("team1", service.joinList2());
 
 		}
-		
-			System.out.println(reserselect);
 			model.addAttribute("reserselect", reserselect);
 			
 		return "adminPage/adminMain";

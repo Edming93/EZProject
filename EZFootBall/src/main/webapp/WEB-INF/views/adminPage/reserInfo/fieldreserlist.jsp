@@ -22,15 +22,19 @@
     	box-sizing: content-box;
 	}
 	.Gselect_option{
-		width: 30%;
+		width: 10%;
 	    display: flex;
 	}
+	.Goption {
+		display: flex;
+		width:70%;
+	}
 	#Gselect{
-	    width: 60%;
+	    width: 100%;
 	    border: 1px solid #000;
 	}
 	.GRsearch{
-    	width: 50%;
+    	width: 100%;
 	}
 
 	#Gsearch{
@@ -75,16 +79,13 @@
 		width: 20px;
     	height: 30px;
 	}
-	.buttons {
-		width: 10%;
-	}
 	
 	.Gbutton{
 		height: 30px;
 	    justify-content: center;
 	    display: flex;
 	    align-items: center;
-	   	width: 10%;
+	   	width: 125px;
 	    margin-left: 1%;
 	}
 	#Gbtn{
@@ -135,17 +136,18 @@
 						<option value="rvDay">예약날짜</option>						
 					</select>
 				</div>
-				
-				<div class="GRsearch">
-					<input type="text" name="Gsearch" id="Gsearch" placeholder="카테고리에 맞게 단어를 검색하세요" />
-					<input type="text" style='display:none;' />
-				</div>
-				<div class="Gbutton">
-					<button type="button" id="Gbtn">검색</button>
-				</div>	
-				<div class="buttons">
-					<button type="button" class="Gdelete_btn" name="reserselect" value="delete">선택삭제</button>
-				</div>				
+				<div class="Goption">
+					<div class="GRsearch">
+						<input type="text" name="Gsearch" id="Gsearch" placeholder="카테고리에 맞게 단어를 검색하세요" />
+						<input type="text" style='display:none;' />
+					</div>
+					<div class="Gbutton">
+						<button type="button" id="Gbtn">검색</button>
+					</div>	
+					<div class="Gbutton">
+						<button type="button" class="Gdelete_btn" name="reserselect" value="delete">예약취소</button>
+					</div>	
+				</div>			
 			</div>
 
 

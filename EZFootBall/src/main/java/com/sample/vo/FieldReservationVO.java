@@ -5,6 +5,8 @@ import org.apache.ibatis.type.Alias;
 @Alias("FieldReservationVO")
 public class FieldReservationVO {
 	private int rvCode;
+	// 경기 장소
+	private String gamePlace;
 	private String rvType;
 	private String rvDay;
 
@@ -37,6 +39,18 @@ public class FieldReservationVO {
 	private String payCode;
 	private int uteamPay;
 	
+	
+	
+
+	public String getGamePlace() {
+		return gamePlace;
+	}
+
+
+	public void setGamePlace(String gamePlace) {
+		this.gamePlace = gamePlace;
+	}
+
 
 	public int getUteamPay() {
 		return uteamPay;

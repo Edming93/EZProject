@@ -39,7 +39,7 @@
 <!-- 	</select> -->
 
 	<select id="fieldInfo" resultType="gameFieldInfoVO">
-		select field_code,field_name,field_address,field_rentalfee,field_type,
+		select field_code,game_place,field_name,field_address,field_rentalfee,field_type,
 		field_img1,field_img2,field_img3,field_img4,field_img5,field_size,
 		field_in_out,field_grass
 		from gamefield_info where field_code = #{fieldCode}
@@ -96,16 +96,16 @@
 <!-- 	</select> -->
 
 	<insert id="insertFieldReservation">
-		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time,game_code)
-		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime},#{gameCode})
+		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time,game_code,game_place)
+		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime},#{gameCode},#{gamePlace})
 	</insert>
 	<insert id="insertRvInGameList" keyProperty="gameCode">
-		insert into gamelist (game_type,field_code,field_name,field_address,game_day,game_time)
-		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameDay},#{gameTime});
+		insert into gamelist (game_type,field_code,field_name,field_address,game_day,game_time,game_macth,game_place)
+		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{gameDay},#{gameTime},#{fieldType},#{gamePlace});
 	</insert>
 	
 	
-		<!-- 구장관리 (수정,삭제) -->
+	<!--    구장관리 (수정,삭제)    -->
 	<select id="getFieldListAll" resultType="GameFieldInfoVO">
 		select * from gamefield_info
 	</select>
@@ -162,6 +162,7 @@
 		</set>
 		where field_code = #{fieldCode}
 	</update>
+	
 	<update id="modifyReservation" parameterType="FieldReservationVO">
 		update field_reservation
 		<set>
@@ -192,30 +193,31 @@
 		select field_img1,field_img2,field_img3,field_img4,field_img5 from gamefield_info where field_code = #{fieldCode}
 	</select>
 	
+	<!-- 구장 예약 현황 List -->
 	<select id="GFieldReservationList" resultType="FieldReservationVO">
 		select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code
 		where a.rv_type = 'G' and a.rv_state='예약완료'
 		ORDER BY a.rv_code DESC
-		
-
-<!-- 	select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
-		FROM field_reservation a
-		inner JOIN user_info b ON a.user_code = b.user_code
-		where a.rv_type = 'T'
-		ORDER BY a.rv_code DESC
- -->	
 	</select>
 	
+	<!-- 구장예약 취소시 예약롼료->예약취소로 수정 -->
 	<update id="updateFieldReservation" parameterType="String">
 		update field_reservation set rv_state='예약취소' where game_code = #{gameCode}
 	</update>
+	<!-- 구장예약 취소시 해당 gamelist 삭제 -->
 	<delete id="deleteFieldGamelist">
 		delete from gamelist where game_code = #{gameCode}
 	</delete>
-	
-	
+	<!-- 구장 취소 현황 리스트 -->
+	<select id="GCancelList" resultType="FieldReservationVO">
+		select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code
+		where a.rv_type = 'G' and a.rv_state='예약취소'
+		ORDER BY a.rv_code DESC
+	</select>
 	
 	
 	
