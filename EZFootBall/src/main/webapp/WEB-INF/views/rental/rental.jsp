@@ -309,11 +309,10 @@
 </section>
 
 
-<!--날짜데이터 삽입  -->
+<!--날짜 움직이기  -->
 <script>
             var set = <%=today%>
 
-            document.querySelector("#div1 ul").scrollLeft = 0;
             let pscrollleft1 = document.querySelector("#div1 ul").scrollLeft;
             
             document.getElementById("dpre").addEventListener("click", function () {
@@ -351,14 +350,13 @@
          <option id="제주도" value="제주도">제주도</option>
       </select>
 
-      <label for="type_input" id="rv_check" class="select_border type_input">예약가능시간</label> <input type="checkbox" id="type_input" style="display: none";>
-      
       <select name="" id="field_size" class="select_border size">
          <option id="null" value="null">크기</option>
          <option id="5vs5" value="5vs5">5vs5</option>
          <option id="6vs6" value="6vs6">6vs6</option>
       </select>
       
+      <label for="type_input" id="rv_check" class="select_border type_input">예약가능시간</label> <input type="checkbox" id="type_input" style="display: none";>
   
        <div id="listreset" class="select_border listreset">초기화</div>
    
@@ -375,7 +373,7 @@
 		document.getElementById("<%=today%>").style.backgroundColor="#26A653";
         document.getElementById("<%=today%>").style.color="#fff";
         document.getElementById("<%=today%>").style.border="1px solid #26A653";
-        document.getElementById("<%=today%>").style.transform = "scale(1.5)";
+        document.getElementById("<%=today%>").style.transform = "scale(1.3)";
 		var date = 0;
         if(<%=today%> < 10){
         	// 값 비교를 위한 문자처리
@@ -456,6 +454,17 @@
    for (var i = 0; i < day_div.childElementCount; i++) {
 	   day_div.children[i].addEventListener("click", function (e) {
 			
+	       // 예약가능시간 체크 (날짜 선택시 무조건 비활성화)
+	       var type_input = document.getElementById("type_input");
+	       var rv_check = document.getElementById("rv_check");
+	       // checkbox는 false로 만들고
+	       type_input.checked = false;
+	       // 라벨은 css 지워주기
+	       if(rv_check.classList.contains("active")){
+	    	   rv_check.classList.remove("active");
+	       }
+
+		   
         	 	let tnum = 0;
         	 	// 초기화 시키는 로직
         		for(var j = 0; j < document.getElementById("day").childElementCount; j++){
@@ -496,7 +505,6 @@
        today = day;
        
        var local_select = document.getElementById("local").value;
-       var type_input = document.getElementById("type_input").checked;
        var field_size = document.getElementById("field_size").value;
        
        if(local_select == "null"){
@@ -506,10 +514,10 @@
        if(field_size == "null"){
           field_size = null;
         }
+
+       let data = {place:local_select,day:day,mver:field_size};
        
-       let data = {place:local_select,type:type_input,day:day,mver:field_size};
-       
-       fetch("${pageContext.request.contextPath}/rental/rvList",{
+       fetch("${pageContext.request.contextPath}/rental/selectRental",{
           method : "POST", // PUT, PATCH, DELETE
           headers : {
              "Content-Type" : "application/json"},
@@ -552,7 +560,6 @@
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
 
-					
 					if(game_time.includes(timeset[i])){
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
@@ -592,8 +599,6 @@
 	    	  document.getElementById("local").classList.add("active"); 
 	      }
         	 
-      // 마감 여부 선택 돼있는지 체크가 돼있으면 트루 , 아니면 펄스
-         var type_input = document.getElementById("type_input").checked;
          var field_size = document.getElementById("field_size").value;
           
          local_select = document.getElementById("local").value;
@@ -612,7 +617,7 @@
         }
 		var day = <%=year%> + "-" +<%=month%> +"-" +date;
 		
-      let data = {place:local_select,type:type_input,day:today,mver:field_size};
+      let data = {place:local_select,day:today,mver:field_size};
       
       fetch("${pageContext.request.contextPath}/rental/selectRental",{
          method : "POST", // PUT, PATCH, DELETE
@@ -689,9 +694,9 @@
       
    });
          
-   <!-- 마감  -->
+   <!-- 예약 가능 여부  -->
    
-   // 마감여부
+   // 예약 가능 여부
    let type_input = document.getElementById("type_input");
    
    type_input.addEventListener("click",function(){
@@ -717,7 +722,7 @@
 	  var day = <%=year%> + "-" +<%=month%> +"-" +date;
 
       type_input = this.checked;
-      let data = {place:local_select,type:type_input,day:today,mver:field_size};
+      let data = {place:local_select,day:today,mver:field_size};
       
       fetch("${pageContext.request.contextPath}/rental/selectRental",{
          method : "POST", // PUT, PATCH, DELETE
@@ -854,10 +859,8 @@
      if(field_size == "null"){
         field_size = null;
       }
-     // 마감여부
-     var type_input = document.getElementById("type_input").checked;
 
-     let data = {place:local_select,type:type_input,day:today,mver:field_size};
+     let data = {place:local_select,day:today,mver:field_size};
      
      fetch("${pageContext.request.contextPath}/rental/selectRental",{
         method : "POST", // PUT, PATCH, DELETE
