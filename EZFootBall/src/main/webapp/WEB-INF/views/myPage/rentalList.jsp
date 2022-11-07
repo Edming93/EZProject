@@ -207,9 +207,11 @@
    .btn_box{
 	display: flex;
 	justify-content: space-evenly;
+	width: 100%;
+	margin-bottom: 5%;
 }
     
-    .main_content1 button {
+    .btn_box button {
 	display: inline-block;
 	width: 40%;
 	padding: 15px 0;
@@ -227,6 +229,11 @@
 
 .btn_box button:hover {
 	opacity: 0.8;
+}
+
+.select_box {
+	align-self: flex-end;
+	margin: 0 15px 10px 0;
 }
 
 
@@ -317,6 +324,18 @@ footer {
             <div class="main_area">
 			<h1 class="main_title">구장예약 내역</h1>
 				<div class="main_content1">
+					<section class="select_box">
+	                <select class="match_type">
+	                    <option value="전체경기">전체상태</option>
+	                    <option value="팀매치">팀매치</option>
+	                    <option value="구장예약">구장예약</option>
+	                </select>
+					<select class="state">
+	                    <option value="전체상태">전체상태</option>
+	                    <option value="예약완료">예약완료</option>
+	                    <option value="신청취소">신청취소</option>
+	                </select>
+	                </section>
 					<section class="main_box1">
 						<div id="rantal_nav">
 							<h1 id="npc">예약 내역이 없습니다.</h1>
@@ -325,7 +344,7 @@ footer {
 									<tr>
 										<th>예약번호</th>
 										<th>구장명</th>
-										<th>구장위치</th>
+										<th>예약타입</th>
 										<th>매치일자</th>
 										<th>매치시간</th>
 										<th>상태</th>
@@ -386,11 +405,11 @@ footer {
 <!-- 										<li>매치시간 : 09:00:00</li> -->
 <!-- 										<li>상태 : 예약완료</li> -->
 							
+					</section>
+				</div>
 					<div class="btn_box">
 						<button id="btn">뒤로가기</button>
 					</div>
-					</section>
-				</div>
             </div>
         </div>
 
@@ -439,12 +458,12 @@ footer {
 								tr1.innerHTML = 
 									"<td>"+list.rvCode+"</td>"+
 									"<td><a href='${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+ list.fieldCode+"'>"+list.fieldName+"</a></td>"+
-									"<td>"+list.fieldAddress+"</td>"+
+									"<td>"+list.rvType+"</td>"+
 									"<td>"+list.gameDay+"</td>"+
 									"<td>"+list.gameTime1+" ~ "+list.gameTime2+"</td>"+
-									"<td>"+"예약완료"+"</td>";
+									"<td>"+list.rvState+"</td>";
 									
-								td1.innerHTML = "<ul><li>매치종류 : "+list.rvType+"</li>"+
+								td1.innerHTML = "<ul><li>구장주소 : "+list.fieldAddress+"</li>"+
 									"<li>매치형태 : "+list.fieldType+"</li>"+
 									"<li>예약신청일 : "+list.rvDay+"</li>"+
 									"<li>예약자 : "+data.userName+"</li>"+
@@ -459,6 +478,38 @@ footer {
 								table.append(tr1);
 								table.append(tr2);
 								
+								// select 박스 예약상태 확인 
+								$('.state').on("change", function(){
+									tr1.style.display = "table-row";
+									$('.collapsible').hide();
+					        		if($('.state').val() == "예약완료"){
+					        			if(list.rvState == '신청취소'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else if($('.state').val() == "신청취소"){
+					        			if(list.rvState == '예약완료'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else{
+					        			tr1.style.display = "table-row";
+					        		}
+					        	});
+								
+								$('.match_type').on("change", function(){
+				        			tr1.style.display = "table-row";
+				        			$('.collapsible').hide();
+									if($('.match_type').val() == "팀매치"){
+					        			if(list.rvType == '구장예약'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else if($('.match_type').val() == "구장예약"){
+					        			if(list.rvType == '팀매치'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else{
+					        			tr1.style.display = "table-row";
+					        		}
+								});
 							}
 								// list 누르면 아래 박스추가
 					        	$('.rantal_item').on("click",function(){

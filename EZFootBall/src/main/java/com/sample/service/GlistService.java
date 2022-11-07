@@ -66,8 +66,8 @@ public class GlistService {
 		dao.newreser(vo);
 	}
 
-	public List<FieldReservationVO> getMatchList(int userCode) {
-		List<FieldReservationVO> list = dao.getMatchList(userCode);
+	public List<FieldReservationVO> getMatchList(FieldReservationVO fieldReservationVO) {
+		List<FieldReservationVO> list = dao.getMatchList(fieldReservationVO);
 		return list;
 	}
 }

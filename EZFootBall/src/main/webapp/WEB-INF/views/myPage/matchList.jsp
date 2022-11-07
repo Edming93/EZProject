@@ -200,6 +200,12 @@
 	font-weight: 800;
 }
 
+.select_box {
+	align-self: flex-end;
+	margin: 0 15px 10px 0;
+}
+
+
 #npc {
 	text-align: center;
 	font-size: 40px;
@@ -208,9 +214,11 @@
    .btn_box{
 	display: flex;
 	justify-content: space-evenly;
+	width: 100%;
+	margin-bottom: 5%;
 }
     
-    .main_content1 button {
+.btn_box button {
 	display: inline-block;
 	width: 40%;
 	padding: 15px 0;
@@ -237,6 +245,7 @@
 	background-color: #26A653;
 	margin-top: 100px;
 }
+
 
 footer {
 	width: 100%;
@@ -317,6 +326,18 @@ footer {
             <div class="main_area">
 			<h1 class="main_title">경기내역</h1>
 				<div class="main_content1">
+				<section class="select_box">
+                <select class="match_type">
+                    <option value="전체경기">전체상태</option>
+                    <option value="소셜매치">소셜매치</option>
+                    <option value="팀매치">팀매치</option>
+                </select>
+				<select class="state">
+                    <option value="전체상태">전체상태</option>
+                    <option value="예약완료">예약완료</option>
+                    <option value="신청취소">신청취소</option>
+                </select>
+                </section>
 					<section class="main_box1">
 						<div id="rantal_nav">
 							<h1 id="npc">경기 내역이 없습니다.</h1>
@@ -325,10 +346,10 @@ footer {
 									<tr>
 										<th>예약번호</th>
 										<th>구장명</th>
-										<th>구장위치</th>
+										<th>매치타입</th>
 										<th>매치일자</th>
 										<th>매치시간</th>
-										<th>상태</th>
+										<th>전체상태</th>
 									</tr>
 								<!-- </thead> -->
 								<!-- <tbody> -->
@@ -387,11 +408,11 @@ footer {
 <!-- 										<li>매치시간 : 09:00:00</li> -->
 <!-- 										<li>상태 : 예약완료</li> -->
 							
+					</section>
+				</div>
 					<div class="btn_box">
 						<button id="btn">뒤로가기</button>
 					</div>
-					</section>
-				</div>
             </div>
         </div>
 		
@@ -444,12 +465,13 @@ footer {
 								tr1.innerHTML = 
 									"<td>"+list.rvCode+"</td>"+
 									"<td><a href='${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+ list.fieldCode+"'>"+list.fieldName+"</a></td>"+
-									"<td>"+list.fieldAddress+"</td>"+
+									"<td>"+list.rvType+"</td>"+
 									"<td>"+list.gameDay+"</td>"+
 									"<td>"+list.gameTime1+" ~ "+list.gameTime2+"</td>"+
-									"<td>"+"예약완료"+"</td>";
+									"<td class='hid'>"+list.rvState+"</td>";
 									
-								td1.innerHTML = "<ul><li>매치종류 : "+list.rvType+"</li>"+
+								td1.innerHTML = "<ul>"+
+									"<li>구장주소 : "+list.fieldAddress+"</li>"+
 									"<li>매치형태 : "+list.fieldType+"</li>"+
 									"<li>예약신청일 : "+list.rvDay+"</li>"+
 									"<li>예약자 : "+data.userName+"</li>"+
@@ -464,6 +486,39 @@ footer {
 								table.append(tr1);
 								table.append(tr2);
 								
+								// select 박스 예약상태 확인 
+								$('.state').on("change", function(){
+									tr1.style.display = "table-row";
+									$('.collapsible').hide();
+					        		if($('.state').val() == "예약완료"){
+					        			if(list.rvState == '신청취소'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else if($('.state').val() == "신청취소"){
+					        			if(list.rvState == '예약완료'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else{
+					        			tr1.style.display = "table-row";
+					        		}
+					        	});
+								
+								$('.match_type').on("change", function(){
+				        			tr1.style.display = "table-row";
+				        			$('.collapsible').hide();
+									if($('.match_type').val() == "소셜매치"){
+					        			if(list.rvType == '팀매치'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else if($('.match_type').val() == "팀매치"){
+					        			if(list.rvType == '소셜매치'){
+					        				tr1.style.display = "none";
+					        			}
+					        		}else{
+					        			tr1.style.display = "table-row";
+					        		}
+								});
+								
 							}
 								// list 누르면 아래 박스추가
 					        	$('.rantal_item').on("click",function(){
@@ -476,6 +531,8 @@ footer {
 									}
 					        		$(this).next().show();
 					        	});
+								
+					        	
 							
 						},
 						error: function(e){
@@ -483,6 +540,86 @@ footer {
 						}
 					})
 				});
+        </script>
+        
+        <script type="text/javascript">
+//         	$('.state').on("click", function(){
+//         		if($(this).text() == '전체상태'){
+//         			$(this).text('예약완료'); 
+//         		}else if($(this).text() == '예약완료'){
+//         			$(this).text('신청취소');
+//         		}else if($(this).text() == '신청취소'){
+//         			$(this).text('전체상태');
+//         		}
+//         	});
+        	
+        	
+//         	$('.type-1').on("change", function(){
+        		
+//         		const state = $(this).val();
+        		
+//         		console.log("state : "+state );
+//         		$.ajax({
+// 					url: "${pageContext.request.contextPath}/myPage/getMatchList/"+state,
+// 					type: "GET",
+// 					contentType: "application/json; charset=utf-8",
+// 					dataType: "json",
+// 					async: false,
+// 					success: function(data){
+
+						
+// 						console.log(data);
+// 						for (const list of data.list) {
+// 							$('#npc').hide();
+// 							table.style.display = "inline-table";
+// 							console.log(data.userName);
+							
+							
+// 							const tr1 = document.createElement("tr");
+// 							const tr2 = document.createElement("tr");
+// 							const td1 = document.createElement("td");
+// 							tr1.innerHTML = 
+// 								"<td>"+list.rvCode+"</td>"+
+// 								"<td><a href='${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+ list.fieldCode+"'>"+list.fieldName+"</a></td>"+
+// 								"<td>"+list.fieldAddress+"</td>"+
+// 								"<td>"+list.gameDay+"</td>"+
+// 								"<td>"+list.gameTime1+" ~ "+list.gameTime2+"</td>"+
+// 								"<td>"+list.rvState+"</td>";
+								
+// 							td1.innerHTML = "<ul><li>매치종류 : "+list.rvType+"</li>"+
+// 								"<li>매치형태 : "+list.fieldType+"</li>"+
+// 								"<li>예약신청일 : "+list.rvDay+"</li>"+
+// 								"<li>예약자 : "+data.userName+"</li>"+
+// 								"<li>결제금액 : "+list.userPayment.toLocaleString()+"</li>"+
+// 								"</ul>";
+// 							td1.classList.add("rantal_content");
+// 							td1.style.height = "100px";
+// 							td1.colSpan = "10";
+// 							tr1.classList.add("rantal_item");
+// 							tr2.classList.add("collapsible");
+// 							tr2.append(td1);
+// 							table.append(tr1);
+// 							table.append(tr2);
+							
+// 						}
+// 							// list 누르면 아래 박스추가
+// 				        	$('.rantal_item').on("click",function(){
+// 								$(this).next().nextAll('.collapsible').hide();
+// 								$(this).next().prevAll('.collapsible').hide();
+// 									console.log($(this).next().css('display'));
+// 								if($(this).next().css('display') == "table-row"){
+// 									$(this).next().hide();
+// 									return;
+// 								}
+// 				        		$(this).next().show();
+// 				        	});
+						
+// 					},
+// 					error: function(e){
+// 						alert(e);
+// 					}
+// 				})
+//         	});
         </script>
 	</div>
 </body>

@@ -9,6 +9,7 @@ public class FieldReservationVO {
 	private String gamePlace;
 	private String rvType;
 	private String rvDay;
+	private String rvState;
 
 	private int fieldCode;
 	private String fieldName;
@@ -28,55 +29,44 @@ public class FieldReservationVO {
 
 	private int gameCode;
 	private int teamCode;
-	
+
 	private String userName;
-	
 
 	private String srvCode;
 	private String suserCode;
 	private String sgameCode;
-	
+
 	private String payCode;
 	private int uteamPay;
-	
-	
-	
 
 	public String getGamePlace() {
 		return gamePlace;
 	}
 
-
 	public void setGamePlace(String gamePlace) {
 		this.gamePlace = gamePlace;
 	}
-
 
 	public int getUteamPay() {
 		return uteamPay;
 	}
 
-
 	public void setUteamPay(int uteamPay) {
 		this.uteamPay = uteamPay;
 	}
-
 
 	public String getPayCode() {
 		return payCode;
 	}
 
-
 	public void setPayCode(String payCode) {
 		this.payCode = payCode;
 	}
 
-
 	public String getSgameCode() {
 		return sgameCode;
 	}
-	
-	
+
 	public int getTeamCode() {
 		return teamCode;
 	}
@@ -231,6 +221,14 @@ public class FieldReservationVO {
 
 	public void setGameTime(String gameTime) {
 		this.gameTime = gameTime;
+	}
+
+	public String getRvState() {
+		return rvState;
+	}
+
+	public void setRvState(String rvState) {
+		this.rvState = rvState;
 	}
 
 }

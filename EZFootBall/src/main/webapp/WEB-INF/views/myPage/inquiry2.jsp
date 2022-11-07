@@ -222,7 +222,12 @@
 }
 
 .select_box {
-	align-self: flex-end;
+	position: absolute;
+	display:none;
+/* 	right: 210px; */
+	margin-left:-10px;
+	top: 240px;
+	color: #000;
 }
 
 #hidden {
@@ -231,6 +236,11 @@
 	padding: 50px 0;
 }
 
+.select_box1, .select_box2, .select_box3 {
+	padding: 10px;
+	background-color: #fff;
+	cursor: pointer;
+}
 
 .bottom_banner {
 	width: 100%;
@@ -320,48 +330,37 @@ footer {
 				<div class="main_content1">
 <%-- 					<c:if test="${list[0] ne null}"> --%>
 					<h3>나의 문의내역</h3>
-					<section class="select_box">
-						<select class="state">
-		                    <option value="전체상태">전체상태</option>
-		                    <option value="답변대기">답변대기</option>
-		                    <option value="답변완료">답변완료</option>
-		                </select>
-	                </section>
 					<div class="main_item1">
 						<table id="inquiry_list">
 							<tr>
 								<th>문의번호</th>
 								<th>문의제목</th>
 								<th>문의날짜</th>
-								<th>문의상태</th>
+								<th class="select">문의상태
+									
+									<div class="select_box">
+										<div class="select_box1">전체보기</div>
+										<div class="select_box2">답변대기</div>
+										<div class="select_box3">답변완료</div>
+									</div>
+									<i class="up_down"></i>
+									<i class="up_down2"></i>
+								</th>
+								
 							</tr>
+							
 							<c:forEach var="list" items="${list}">
 								<tr class="inquiry_item${list.inquiryCode} item_box">
 									<td>${list.inquiryCode}</td>
 									<td>${list.inquiryTitle}</td>
 									<td>${list.createDate}</td>
-									<td class="state_val">${list.inquiryState}</td>
+									<td>${list.inquiryState}</td>
+									
 								</tr>	
-								
 								<script type="text/javascript">
 									 $('.inquiry_item${list.inquiryCode}').on("click",function(){
 										location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail/${list.inquiryCode}";
 									 });
-				
-									 $('.state').on("change", function(){
-										 $('.inquiry_item${list.inquiryCode}').show();
-							        		if($('.state').val() == "답변대기"){
-							        			if('${list.inquiryState}' == '답변완료'){
-							        				$('.inquiry_item${list.inquiryCode}').hide();
-							        			}
-							        		}else if($('.state').val() == "답변완료"){
-							        			if('${list.inquiryState}' == '답변대기'){
-							        				$('.inquiry_item${list.inquiryCode}').hide();
-							        			}
-							        		}else{
-							        			$('.inquiry_item${list.inquiryCode}').show();
-							        		}
-							        	});
 								</script>
 							</c:forEach>
 								<c:if test="${list[0] eq null }">
@@ -426,7 +425,32 @@ footer {
     		location.href = "${pageContext.request.contextPath}/myPage/myPage";
     	});
     	
-
+    	$('.select').on("click", function(){
+    		if($(this).children().css("display") == "block"){
+    			$(this).children().hide();
+    			$('.up_down').show();
+    			$('.up_down2').hide();
+    			return;
+    		}
+    			$(this).children().show();
+    			$('.up_down').hide();
+    			$('.up_down2').show();
+    		
+    	});
+    	
+    	$('.select_box1').on("click", function(){
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry";
+    	});
+    	
+    	$('.select_box2').on("click", function(){
+    		let state = 'TO';
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry/"+state;
+    	});
+    	
+    	$('.select_box3').on("click", function(){
+    		let state = 'RE';
+    		location.href = "${pageContext.request.contextPath}/myPage/inquiry/"+state;
+    	});
     </script>
 </body>
 </html>

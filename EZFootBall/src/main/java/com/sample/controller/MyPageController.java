@@ -116,10 +116,11 @@ public class MyPageController {
 
 	@GetMapping("/getMatchList")
 	@ResponseBody
-	public Map<String, Object> getMatchList(UserVO userVO, HttpSession session) {
+	public Map<String, Object> getMatchList(FieldReservationVO fieldReservationVO, UserVO userVO, HttpSession session) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
+		fieldReservationVO.setUserCode(userVO.getUserCode());
 		Map<String, Object> map = new HashMap<>();
-		List<FieldReservationVO> list = glistService.getMatchList(userVO.getUserCode());
+		List<FieldReservationVO> list = glistService.getMatchList(fieldReservationVO);
 		map.put("userName", userVO.getUserName());
 		map.put("list", list);
 		return map;
