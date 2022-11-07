@@ -38,4 +38,7 @@ public interface BlacklistDAO {
 	
 	//게시판 댓글 삽입
 	public int insertBlackListComment(BlacklistCommentVO vo);
+	
+	//게시판 댓글 보이기
+	public BlacklistCommentVO selectComment(BlacklistCommentVO vo);
 }

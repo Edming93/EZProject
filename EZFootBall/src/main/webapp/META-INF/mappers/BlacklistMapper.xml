@@ -60,7 +60,23 @@
 	</select>
 	
 	<insert id="insertBlackListComment" >
-		insert into user_comment (black_code, user_code, user_name, content, order_id)
-		values (#{blackCode},#{userCode},#{userName},#{content},#{orderId});
+		insert into blacklist_comment (black_code, user_code, user_name, content, order_code)
+		values (#{blackCode},#{userCode},#{userName},#{content},#{orderCode});
 	</insert>
+	
+	<select id="selectComment" resultType="BlacklistcommentVO">
+		select comment_code, user_name, content, user_code
+		from blacklist_comment
+		where comment_code = #{commentCode}
+	</select>
+	
+	<update id="updateBlackListComment">
+		update blacklist_comment set content = #{content}, bcoment_create_date = now()
+		where comment_code = #{commentCode} and user_code = #{userCode}
+	</update>
+	
+	<update id="deleteBlackListComment">
+		update blacklist_comment set is_delete = 1 
+		where comment_code = #{commentCode} and user_code = #{userCode}
+	</update>
 </mapper>

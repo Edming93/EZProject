@@ -141,19 +141,16 @@ public class BlacklistController {
 	}
 
 	// 댓글 작성
-	// 커멘트를 저장
-	@PostMapping("/comment")
-	@ResponseBody
-	public Map<String, String> setComments(HttpSession session, @RequestBody BlacklistCommentVO vo) {
+		// 커멘트를 저장
+		@PostMapping("/comment")
+		@ResponseBody
+		public BlacklistCommentVO setComments(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO bvo) {
+			
+			bvo.setUserCode(uvo.getUserCode());
+			bvo.setUserName(uvo.getUserName());
+			
+			return service.setBlacklistComment(bvo);
+			
 
-		Map<String, String> map = new HashMap<String, String>();
-
-		if (service.setBlacklistComment(vo) > 0) {
-			map.put("result", "성공적으로 전송되었습니다");
-		} else {
-			map.put("result", "전송되지 못했습니다");
 		}
-		return map;
-
-	}
 }

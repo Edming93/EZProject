@@ -624,6 +624,7 @@ button{
 				content : str,
 				orderCode : 0
 		}
+		console.log(str);
 		
 		fetch("${pageContext.request.contextPath}/blacklist/comment/", {
 			method: "POST",
