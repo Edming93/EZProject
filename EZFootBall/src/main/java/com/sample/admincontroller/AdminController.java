@@ -260,6 +260,13 @@ public class AdminController {
 		return "redirect:/admin/select";
 	}
 
+	@PostMapping("/addField")
+	public String addField(GameFieldInfoVO vo) {
+		System.out.println(vo.getGamePlace());
+		fdService.insertFieldInfo(vo);
+		return "adminPage/adminMain";
+	}
+	
 	@GetMapping("/comuselect")
 	public String comuselect(@RequestParam("comuselect") String comuselect, Model model) {
 		model.addAttribute("review", service.reviewCommentList());

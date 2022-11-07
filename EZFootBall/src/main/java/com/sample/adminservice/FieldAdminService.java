@@ -21,6 +21,8 @@ public class FieldAdminService {
 		this.dao = dao;
 	}
 	
+	// --------------------- 구장 목록 -------------------------
+	
 	// 구장 정보 모두 내보내기
 	public List<GameFieldInfoVO> getFieldListAll() {
 		return dao.getFieldListAll(); 
@@ -58,6 +60,11 @@ public class FieldAdminService {
 		dao.modifyReservation(fvo); 
 	}
 	
+	// --------------------- 구장 추가 -------------------------
+	
+	public void insertFieldInfo(GameFieldInfoVO vo) {
+		dao.insertFieldInfo(vo);
+	}
 	
 	// ----------------------- 구장 예약 관리 --------------------
 	// 구장예약현황 type 이 G이고, state가 '예약완료'인 list출력)

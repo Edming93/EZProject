@@ -45,6 +45,10 @@ public interface RentalDAO {
 	public void modifyGamelist(GlistVO gvo);
 	public void modifyReservation(FieldReservationVO fvo);
 	
+	
+	// --------------------- 관리자 구장추가 ----------------------
+	public void insertFieldInfo(GameFieldInfoVO vo);
+	
 	// -------------------- 관리자 예약관리 --------------------
 	// type 이 G이고, state가 '예약완료'인 list출력
 	public List<FieldReservationVO> GFieldReservationList();
