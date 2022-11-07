@@ -427,7 +427,7 @@
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
 
-					if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+					if(game_time.includes(timeset[i]) || timeset[i] <= <%=hour%> ){
 
 						rental_div.className = "time rental_span_disable";
 						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
@@ -569,7 +569,7 @@
 					}
 					
 					if(this.id == <%=today%>){
-						if(timeset[i] <= '<%=hour%>'){
+						if(timeset[i] <= <%=hour%>){
 							rental_div.className = "time rental_span_disable";
 						}
 					}
@@ -664,7 +664,7 @@
 					let time = parseInt(timeset[i]);
 					
 					if(day == today){
-						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+						if(game_time.includes(timeset[i]) || timeset[i] <= <%=hour%> ){
 							rental_div.className = "time rental_span_disable";
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 						}else{
@@ -772,7 +772,7 @@
 					// 만약 오늘 날짜와 선택한 날짜가 같을 경우
 					if(day == today){
 						// 예약되어있는 시간이거나, 전체 배열안에 있는 값이 현재 시간보다 작은경우 예약 불가능한 시간 표시
-						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>'){
+						if(game_time.includes(timeset[i]) || timeset[i] <= <%=hour%>){
 							let rental_div = document.createElement("div");
 							rental_div.className = "time rental_span_disable";
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
@@ -809,7 +809,7 @@
 				}else{
 					// 만약 오늘 날짜와 선택한 날짜가 같을 경우
 					if(day == today){
-						if(timeset[i] >= '<%=hour%>'){
+						if(timeset[i] >= <%=hour%>){
 							let rental_div = document.createElement("div");
 							rental_div.className = "time rental_span_able";
 							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
@@ -905,7 +905,7 @@
 					let rental_div = document.createElement("a");
 					let time = parseInt(timeset[i]);
 					if(day == today){
-						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+						if(game_time.includes(timeset[i]) || timeset[i] <= <%=hour%> ){
 							rental_div.className = "time rental_span_disable";
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 						}else{
@@ -995,7 +995,7 @@
  					let time = parseInt(timeset[i]);
  					let rental_div = document.createElement("a");
 					if(day == today){
-						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+						if(game_time.includes(timeset[i]) || timeset[i] <= <%=hour%> ){
 							rental_div.className = "time rental_span_disable";
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 						}else{

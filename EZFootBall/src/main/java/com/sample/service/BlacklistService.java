@@ -60,4 +60,13 @@ public class BlacklistService {
 		}
 		return vo;
 	}
+	
+	public boolean editBlackListComment(BlacklistCommentVO vo) {
+		return (blackDAO.updateBlackListComment(vo)>0)?true:false;
+		
+	}
+	
+	public BlacklistCommentVO deleteBlackListComment(BlacklistCommentVO vo) {
+		return blackDAO.deleteBlackListComment(vo);
+	}
 }

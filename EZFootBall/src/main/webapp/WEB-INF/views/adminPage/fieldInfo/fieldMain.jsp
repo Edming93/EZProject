@@ -57,8 +57,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=fieldAdmin"><li>备厘 包府</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=fieldAdd"><li>备厘 眠啊</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=fieldAdmin"><li>备厘 包府</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/fieldselect?fieldselect=fieldAdd"><li>备厘 眠啊</li></a>
         </ul>
     </div>
     <div id="maincontent">

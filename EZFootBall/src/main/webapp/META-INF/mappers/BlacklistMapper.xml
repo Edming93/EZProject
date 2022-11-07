@@ -65,7 +65,7 @@
 	</insert>
 	
 	<select id="selectComment" resultType="BlacklistcommentVO">
-		select comment_code, user_name, content, user_code
+		select comment_code, user_name, content, user_code, date_format(bcoment_create_date, '%Y-%m-%d %H:%i') bcoment_create_date,
 		from blacklist_comment
 		where comment_code = #{commentCode}
 	</select>

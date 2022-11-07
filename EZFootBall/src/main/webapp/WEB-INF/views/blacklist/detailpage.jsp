@@ -610,6 +610,7 @@ button{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
 	
+
 	const commentmain = document.getElementById("comment");
 
 	document.getElementById("ibtn").addEventListener("click",function(){
@@ -645,7 +646,12 @@ button{
 		
 	});
 	
+	
+	
+	
 	window.addEventListener('DOMContentLoaded', (e) => {
+		
+		
 		
 		fetch("${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}")
 		  .then(response => response.json())
@@ -691,24 +697,92 @@ button{
 				  
 			//위에서 실행할 makecommentlist 함수생성	  
 			function makecommentlist(num, item){
+			
+				let username = "${userdata.userName}";
+				console.log(username);
 				const maindiv = document.createElement("div");
+				maindiv.style.height = "8vh";
+				maindiv.style.display = "flex";
+				maindiv.style.justifyContent = "center";
+				maindiv.style.flexDirection = "column";
+				maindiv.style.fontFamily = "Gowun Dodum";
 				maindiv.style.border = "1px solid black";
-				maindiv.style.padding = "5px";
+/* 				maindiv.style.padding = "5px"; */
+				
+				const div = document.createElement("div");
+				div.style.display = "flex";
+				div.style.justifyContent = "space-between";
+				
+				const div2 = document.createElement("div");
+
+                div2.style.display = "flex";
+                div2.style.justifyContent = "center";
+                div2.style.fontSize = "15px";
 				
 				let lpad = (40*num) + 5;
-				maindiv.style.paddingLeft = lpad + "px"; 
+				maindiv.style.paddingLeft = lpad + "px";
 				
 				const h4 = document.createElement("h4");
 				h4.innerText = item.userName;
 				const p = document.createElement("p");
-				
 				let content = (num > 0)?"↳":"";
 				p.innerText = content + item.content;
-						
-				maindiv.append(h4);
-				maindiv.append(p);
+				const p2 = document.createElement("p");
+				p2.innerText = item.bcomentCreateDate;
+				
+				
+				
+				
+			 	const div3 = document.createElement("div");
+			  	div3.style.display = "flex";
+	            div3.style.justifyContent = "flex-end";
+			 	div2.append(p);
+				div.append(h4);
+				div.append(p2);
+				maindiv.append(div);
+				maindiv.append(div2);
+				maindiv.append(div3);
+				
+				
 						
 				commentmain.append(maindiv);
+				
+				  if (username == item.userName) {  
+					 
+						const btn1 = document.createElement("button");
+						btn1.id = "btnedit";
+						const btn2 = document.createElement("button");
+						btn1.innerText = "수정"
+						btn2.innerText = "삭제"	
+						btn1.style.width = "40px"
+						btn1.style.height = "20px"
+						btn2.style.width = "40px"
+						btn2.style.height = "20px"
+						div3.append(btn1);
+						div3.append(btn2);
+					 
+				btn1.addEventListener("click", function(){
+					div2.classList.add('test3');
+					const updateform = document.createElement("div");
+					const updateinput = document.createElement("textarea");
+					updateinput.cols = "30";
+					updateinput.rows = "10";
+					updateinput.placeholder="수정할 내용을 입력하세요"
+					const updatebtn = document.createElement("button");
+					updatebtn.innerText = "수정완료";
+					updatebtn.style.borderRadius = "5px";
+					updatebtn.style.backgroundColor = "#26A653";
+					updatebtn.style.color = "white";
+					updatebtn.style.border = "1px solid white";
+					document.getElementsByClassName("test3")[0].style.display = "none";
+					updateform.append(updateinput);
+					updateform.append(updatebtn);
+					
+					maindiv.append(updateform);
+					
+				});
+				
+				 } 
 				
 				// 아이템의 innerlist가 비어있지 않다면
 				if(item.innerlist != null){

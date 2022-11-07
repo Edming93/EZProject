@@ -52,6 +52,7 @@ public class BlacklistController {
 		System.out.println(bvo.getBlacklistCode());
 		UserVO vo = (UserVO) session.getAttribute("sessionVO");
 		model.addAttribute("userdata", vo);
+		
 		service.getBlackListContent(model, blacklistCode);
 		return "blacklist/detailpage";
 	}
@@ -141,7 +142,7 @@ public class BlacklistController {
 	}
 
 	// 댓글 작성
-		// 커멘트를 저장
+	// 커멘트를 저장
 		@PostMapping("/comment")
 		@ResponseBody
 		public BlacklistCommentVO setComments(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO bvo) {
@@ -153,4 +154,31 @@ public class BlacklistController {
 			
 
 		}
+		
+		
+		// 댓글 수정
+		@PostMapping("/comment/edit")
+		@ResponseBody
+		public String editblacklistComment(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO vo
+				,@ModelAttribute("BlacklistVO") BlacklistVO bvo){
+			
+			vo.setUserCode(uvo.getUserCode());
+			vo.setUserName(uvo.getUserName());
+			if (service.editBlackListComment(vo)) {
+				return "redirect:/blacklist/blacklistmain";
+			} else {
+				return "redirect:/blacklist/blacklistmain/" + bvo.getBlacklistCode();
+			}
+			
+		}
+
+			
+		  //댓글 삭제
+		  @PostMapping("/comment/delete")
+		  @ResponseBody
+		  public BlacklistCommentVO deleteblacklistComment(@RequestBody BlacklistCommentVO vo){
+		    return service.deleteBlackListComment(vo);
+		  }
+		
+		
 }
