@@ -1,5 +1,8 @@
 package com.sample.admincontroller;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.adminservice.AdminService;
 import com.sample.adminservice.FieldAdminService;
@@ -260,11 +264,22 @@ public class AdminController {
 		return "redirect:/admin/select";
 	}
 
+	// 구장 추가
 	@PostMapping("/addField")
-	public String addField(GameFieldInfoVO vo) {
-		System.out.println(vo.getGamePlace());
+	public String addField(GameFieldInfoVO vo,@RequestParam("fieldImg1") MultipartFile file1) 
+									throws IllegalStateException, IOException {
+		
+		// 데이터가 제대로 들어있다면
+				if(!file1.getOriginalFilename().isEmpty()) {
+					                               // 해당 파일의 이름을 첨부한 상태로 저장하겠다.
+					Path path = Paths.get("C:/Users/에드밍/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"+file1.getOriginalFilename());
+					file1.transferTo(path);
+					System.out.println("매우 잘 저장되었습니다.");
+				}else {
+					System.out.println("에러가 발생했습니다.");
+				}
 		fdService.insertFieldInfo(vo);
-		return "adminPage/adminMain";
+		return "redirect:/admin/reserselect?reserselect=fieldAdmin";
 	}
 	
 	@GetMapping("/comuselect")

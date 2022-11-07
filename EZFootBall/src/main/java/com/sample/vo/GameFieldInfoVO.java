@@ -2,7 +2,6 @@ package com.sample.vo;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("gameFieldInfoVO")
 public class GameFieldInfoVO {
 	
 	// 구장번호  

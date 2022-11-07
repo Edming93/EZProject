@@ -55,7 +55,7 @@
 	                <input type="checkbox" name="check_btn" class="check_box check_btn" value="${field.fieldCode}">
 	            </div>
 	            <div class="field_image_area">
-	                <img src="${field.fieldImg1}" class="field_image">
+	                <img src="${pageContext.request.contextPath}/image/ground/${field.fieldImg1}" class="field_image">
 	            </div>
 	            <div class="field_info">
 	                <div class="field_info_content">

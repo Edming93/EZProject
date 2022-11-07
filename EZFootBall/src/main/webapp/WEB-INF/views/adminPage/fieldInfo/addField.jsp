@@ -114,6 +114,7 @@
 </style>
 </head>
 <body>
+<!-- enctype="multipart/form-data" -->
 <form action="${pageContext.request.contextPath}/admin/addField" method="post" enctype="multipart/form-data">
     <div class="field_container">
         <div class="field_title">
@@ -142,8 +143,8 @@
                             파일선택
                         </label>
                         <input type="file" class="input_file" name="fieldImg1" id="input_file" style="display:none" accept="image/*">
-                        
                         <button type="button" class="add_btn buttons">+</button>
+                        
                     </div>
                 </div>
             </div>
@@ -153,12 +154,12 @@
                 	<option id="default" value="서울">지역 선택</option>
                     <option id="서울" value="서울">서울</option>
                     <option id="인천" value="인천">인천</option>
-                    <option id="경기도" value="경기">경기도</option>
-                    <option id="강원도" value="강원">강원도</option>
-                    <option id="경상도" value="경상">경상도</option>
-                    <option id="전라도" value="전라">전라도</option>
-                    <option id="충청도" value="충청">충청도</option>
-                    <option id="제주도" value="제주">제주도</option>
+                    <option id="경기도" value="경기도">경기도</option>
+                    <option id="강원도" value="강원도">강원도</option>
+                    <option id="경상도" value="경상도">경상도</option>
+                    <option id="전라도" value="전라도">전라도</option>
+                    <option id="충청도" value="충청도">충청도</option>
+                    <option id="제주도" value="제주도">제주도</option>
                 </select><br>
 
                 <label for="field_name">구장명 : </label>
@@ -166,7 +167,7 @@
                 <label for="field_address">구장주소 : </label>
                 <input type="text" class="input" id="field_address" name="fieldAddress" required="required"><br>
                 <label for="field_call">구장연락처 : </label>
-                <input type="text" class="input" id="field_call" name="fieldCall" pattern="010-[0-9]{4}-[0-9]{4}" required title="전화번호 형식에 맞게 입력해주세요."><br>
+                <input type="text" class="input" id="field_call" name="fieldCall" pattern="010-[0-9]{4}-[0-9]{4}" required title="전화번호 형식에 맞게 하이픈(-)을 입력해주세요."><br>
                 <label for="field_rentalfee">구장대여료 : </label>
                 <select name="fieldRentalfee" id="field_rentalfee" class="select" required="required">
                 	<option id="default" value="100000">대여료 선택</option>
@@ -266,6 +267,8 @@
 	        
 	            delete_btns.forEach(function(e) {
 	                e.addEventListener("click",function() {
+	                	num=num-1;
+	                	previewImage.src = "${pageContext.request.contextPath}/image/preview_image.png";
 	                    e.parentElement.remove();
 	                });
 	            });
