@@ -27,7 +27,7 @@
 	
 	<!-- 관리자페이지에서 조회 -->
 	<select id="InquiryListAdmin" resultType="inquiryVO">
-		SELECT inquiry_code, inquiry_title, inquiry_content, inquiry_state, create_date, answer_date, answer_content, i.user_code, u.user_name
+		SELECT inquiry_code, inquiry_title, inquiry_content, CASE inquiry_state WHEN 'TO' THEN '답변대기' WHEN 'RE' THEN '답변완료' ELSE 'NULL' END inquiry_state, create_date, answer_date, answer_content, i.user_code, u.user_name
 		FROM inquiry AS i INNER JOIN user_info AS u
 		ON i.user_code = u.user_code
 		<where>
@@ -39,8 +39,8 @@
 	
 	<!-- 문의 작성 -->
 	<insert id="InquiryAdd" parameterType="inquiryVO">
-		INSERT INTO inquiry (inquiry_title, inquiry_content, inquiry_state, user_code)
-		VALUES(#{inquiryTitle}, #{inquiryContent}, 'TO', #{userCode})
+		UPDATE inquiry SET answer_content = #{answerContent}, answer_date = now(), inquiry_state = 'RE'
+		WHERE inquiry_code = ${inquiryCode}
 	</insert>
 	
 </mapper>
