@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fieldInfo.css" />
+<style type="text/css">
+	.menu1 {
+		background-color: #f8ede3;
+	}
+</style>
 </head>
 <body>
 <div class="container">
