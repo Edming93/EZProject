@@ -41,4 +41,10 @@ public interface BlacklistDAO {
 	
 	//게시판 댓글 보이기
 	public BlacklistCommentVO selectComment(BlacklistCommentVO vo);
+	
+	//게시판 댓글 update
+	public int updateBlackListComment(BlacklistCommentVO vo);
+		
+	//게시판 댓글 delete
+	public BlacklistCommentVO deleteBlackListComment(BlacklistCommentVO vo);
 }
