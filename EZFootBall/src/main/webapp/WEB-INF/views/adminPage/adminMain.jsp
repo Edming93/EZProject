@@ -148,6 +148,7 @@
                             <a href="${pageContext.request.contextPath}/admin/select?select=magAdmin"><li>매니저관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=rvAdmin"><li>예약관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=signUpAdmin"><li>신청관리</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=gameAdmin"><li>경기관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=fieldAdmin"><li>구장관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=comuAdmin"><li>커뮤니티관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=payAdmin"><li>결제관리</li></a>
@@ -173,6 +174,10 @@
         	}else if (select.equals("signUpAdmin")){
         		%>
         		<jsp:include page="./subInfo/subMain.jsp"></jsp:include>
+        		<%
+        	}else if (select.equals("gameAdmin")){
+        		%>
+        		<jsp:include page="./gameInfo/gameMain.jsp"></jsp:include>
         		<%
         	}else if (select.equals("fieldAdmin")){
         		%>

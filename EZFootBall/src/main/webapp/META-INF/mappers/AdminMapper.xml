@@ -44,6 +44,18 @@
 	</select>
 	
 	
+	<!-- 경기관리 -->
+	<select id="allfield" resultType="gameFieldInfoVO">
+		select *
+		from gamefield_info
+	</select>
+	
+	<select id="result" resultType="GameResultVO">
+		select *
+		from game_result
+	</select>
+	
+	
 	
 	
 	

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
+import com.sample.vo.GameResultVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
@@ -26,6 +27,10 @@ public interface AdminDAO {
 	public List<FieldReservationVO> sgame();
 	public List<FieldReservationVO> cgame();
 	public List<Integer> teamcode();
+	
+	//경기관리
+	public List<GameFieldInfoVO> allfield();
+	public List<GameResultVO> result();
 	
 	public List<FieldReservationVO> Tgame();
 	

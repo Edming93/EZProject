@@ -56,15 +56,27 @@ public class AdminController {
 		session.setAttribute("stgamelist", service.stgame());
 		// s 신청정보
 		session.setAttribute("sgamelist", service.sgame());
-		// 취소된 신청
+		//취소된 신청
 		session.setAttribute("cgamelist", service.cgame());
-		// 모든 팀 코드
+		//모든 팀 코드
 		session.setAttribute("tcodelist", service.teamcode());
+		//모든 경기장 정보
+		session.setAttribute("allfield", service.allfield());
+		//경기결과 정보
+		session.setAttribute("result", service.result());
+		//모든 팀코드
+		session.setAttribute("teamlist", service.teamcode());
 
 		session.setAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		return "adminPage/adminMain";
+	}
+	
+	@GetMapping("/gameselect")
+	public String gameselect(@RequestParam("gameselect") String gameselect,Model model) {
+		model.addAttribute("gameselect", gameselect);
+		return "adminPage/adminMain";		
 	}
 
 	@GetMapping("/idselect")
