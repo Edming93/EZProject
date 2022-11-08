@@ -27,6 +27,12 @@ public class UserVO {
 	private int userScore;
 	private int userWin;
 	private int userLose;
+	
+	private String userBlack;
+	private String userReports;
+	
+
+	private String userAuthority;
 
 	public static final long serialKey = 1231254653L;
 	
@@ -50,7 +56,29 @@ public class UserVO {
 		this.tmember = tmember;
 	}
 	
-	
+	public String getUserBlack() {
+		return userBlack;
+	}
+
+	public void setUserBlack(String userBlack) {
+		this.userBlack = userBlack;
+	}
+
+	public String getUserReports() {
+		return userReports;
+	}
+
+	public void setUserReports(String userReports) {
+		this.userReports = userReports;
+	}
+
+	public String getUserAuthority() {
+		return userAuthority;
+	}
+
+	public void setUserAuthority(String userAuthority) {
+		this.userAuthority = userAuthority;
+	}
 	
 	public String getUserAddress1() {
 		return userAddress1;

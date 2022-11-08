@@ -101,4 +101,20 @@ public class AdminService {
 
       return list;
    }
+   
+   //유저관리 - 유저리스트 출력
+   public List<UserVO> UInfoList(){
+	   return dao.UInfoList();
+   }
+   
+   public List<UserVO> UInfoList1(UserVO vo){
+	   return dao.UInfoList1(vo);
+   }
+   
+   public List<UserVO> UInfoListB(){
+	   return dao.UInfoListB();
+   }
+   public void UUInfoList(int userCode) {
+	   dao.UUInfoList(userCode);
+   }
 }
