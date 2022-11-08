@@ -11,6 +11,8 @@ public class ManagerVO {
 	private String mgrState;
 	private int userCode;
 
+	private String userName;
+
 	public int getMgrCode() {
 		return mgrCode;
 	}
@@ -57,6 +59,14 @@ public class ManagerVO {
 
 	public void setUserCode(int userCode) {
 		this.userCode = userCode;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

@@ -22,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sample.adminservice.AdminService;
 import com.sample.adminservice.FieldAdminService;
 import com.sample.service.InquiryService;
+import com.sample.service.ManagerService;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.InquiryVO;
+import com.sample.vo.ManagerVO;
 import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
 
@@ -36,17 +38,20 @@ public class AdminController {
 	private AdminService service;
 	private FieldAdminService fdService;
 	private InquiryService inquiryService;
+	private ManagerService managerService;
 
 	@GetMapping("/admin")
 	public String admin() {
 		return "adminPage/adminMain";
 	}
 
-	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService) {
+	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
+			ManagerService managerService) {
 		super();
 		this.service = service;
 		this.fdService = fdService;
 		this.inquiryService = inquiryService;
+		this.managerService = managerService;
 	}
 
 	@GetMapping("/select")
@@ -60,27 +65,28 @@ public class AdminController {
 		session.setAttribute("stgamelist", service.stgame());
 		// s 신청정보
 		session.setAttribute("sgamelist", service.sgame());
-		//취소된 신청
+		// 취소된 신청
 		session.setAttribute("cgamelist", service.cgame());
-		//모든 팀 코드
+		// 모든 팀 코드
 		session.setAttribute("tcodelist", service.teamcode());
-		//모든 경기장 정보
+		// 모든 경기장 정보
 		session.setAttribute("allfield", service.allfield());
-		//경기결과 정보
+		// 경기결과 정보
 		session.setAttribute("result", service.result());
-		//모든 팀코드
+		// 모든 팀코드
 		session.setAttribute("teamlist", service.teamcode());
 
 		session.setAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
+		model.addAttribute("managerList", managerService.getManagerList());
 		return "adminPage/adminMain";
 	}
-	
+
 	@GetMapping("/gameselect")
-	public String gameselect(@RequestParam("gameselect") String gameselect,Model model) {
+	public String gameselect(@RequestParam("gameselect") String gameselect, Model model) {
 		model.addAttribute("gameselect", gameselect);
-		return "adminPage/adminMain";		
+		return "adminPage/adminMain";
 	}
 
 	@GetMapping("/idselect")
@@ -89,10 +95,47 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 
+	// 매니저 리스트 출력
 	@GetMapping("/magselect")
-	public String magselect(@RequestParam("magselect") String magselect, Model model) {
+	public String magselect(@RequestParam("magselect") String magselect, Model model, ManagerVO managerVO) {
+		if (magselect.equals("magList")) {
+			List<UserVO> list = managerService.getManagerList();
+			model.addAttribute("managerList", list);
+		}
+		if (magselect.equals("magSignUpList")) {
+			List<ManagerVO> list = managerService.managerHistoryList(managerVO);
+			model.addAttribute("managerVO", list);
+		}
 		model.addAttribute("magselect", magselect);
 		return "adminPage/adminMain";
+	}
+
+	// 매니저 등록
+	@PostMapping("/magPass")
+	@ResponseBody
+	public int magPass(@RequestParam("chbox[]") List<String> chArr, ManagerVO managerVO, HttpSession session) {
+
+		System.out.println(chArr);
+		int result = 0;
+		for (String mgrCode : chArr) {
+			managerService.managerAdd(Integer.parseInt(mgrCode));
+			result = 1;
+		}
+		return result;
+	}
+
+	// 매니저 탈락
+	@PostMapping("/magFail")
+	@ResponseBody
+	public int magFail(@RequestParam("chbox[]") List<String> chArr, ManagerVO managerVO, HttpSession session) {
+
+		System.out.println(chArr);
+		int result = 0;
+		for (String mgrCode : chArr) {
+			managerService.managerFail(Integer.parseInt(mgrCode));
+			result = 1;
+		}
+		return result;
 	}
 
 	// 팀매치 리스트 출력
@@ -266,22 +309,23 @@ public class AdminController {
 
 	// 구장 추가
 	@PostMapping("/addField")
-	public String addField(GameFieldInfoVO vo,@RequestParam("fieldImg1") MultipartFile file1) 
-									throws IllegalStateException, IOException {
-		
+	public String addField(GameFieldInfoVO vo, @RequestParam("fieldImg1") MultipartFile file1)
+			throws IllegalStateException, IOException {
+
 		// 데이터가 제대로 들어있다면
-				if(!file1.getOriginalFilename().isEmpty()) {
-					                               // 해당 파일의 이름을 첨부한 상태로 저장하겠다.
-					Path path = Paths.get("C:/Users/에드밍/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"+file1.getOriginalFilename());
-					file1.transferTo(path);
-					System.out.println("매우 잘 저장되었습니다.");
-				}else {
-					System.out.println("에러가 발생했습니다.");
-				}
+		if (!file1.getOriginalFilename().isEmpty()) {
+			// 해당 파일의 이름을 첨부한 상태로 저장하겠다.
+			Path path = Paths.get("C:/Users/에드밍/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
+					+ file1.getOriginalFilename());
+			file1.transferTo(path);
+			System.out.println("매우 잘 저장되었습니다.");
+		} else {
+			System.out.println("에러가 발생했습니다.");
+		}
 		fdService.insertFieldInfo(vo);
 		return "redirect:/admin/reserselect?reserselect=fieldAdmin";
 	}
-	
+
 	@GetMapping("/comuselect")
 	public String comuselect(@RequestParam("comuselect") String comuselect, Model model) {
 		model.addAttribute("review", service.reviewCommentList());

@@ -15,8 +15,34 @@
 		VALUES (#{preferArea}, #{mgrContent}, now(), 'TO', #{userCode})
 	</insert>
 	
+	<!-- 관리자 페이지에서 가져오기 -->
+	<select id="managerHistoryList" resultType="managerVO">
+		SELECT mgr_code, prefer_area, mgr_content, mgr_date, CASE mgr_state WHEN 'TO' THEN '신청완료' WHEN 'RE' THEN '검토중' WHEN 'PASS' THEN '합격' WHEN 'FAIL' THEN '불합격' END mgr_state, m.user_code, u.user_name
+		FROM manager_history AS m INNER JOIN user_info AS u
+		ON m.user_code = u.user_code
+		WHERE mgr_state = 'TO'
+	</select>
 	
+	<!-- 매니저 등록을하면 user_info에서도 매니저로 변경 -->
+	<update id="managerAdd">
+		UPDATE manager_history AS m INNER JOIN user_info AS u
+		ON m.user_code = u.user_code
+		SET m.mgr_state = 'PASS', u.user_authority = '매니저'
+		WHERE mgr_code = #{mgrCode}
+	</update>
+
+	<update id="managerFail">
+		UPDATE manager_history AS m INNER JOIN user_info AS u
+		ON m.user_code = u.user_code
+		SET m.mgr_state = 'FAIL', u.user_authority = '일반회원'
+		WHERE mgr_code = #{mgrCode}
+	</update>
 	
+	<!-- 관리자페이지 매니저 리스트 -->
+	<select id="getManagerList" resultType="UserVO">
+		SELECT * FROM user_info
+		WHERE user_authority = '매니저'
+	</select>
 	
 
 </mapper>

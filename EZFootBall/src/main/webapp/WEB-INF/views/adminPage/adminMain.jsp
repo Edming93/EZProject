@@ -152,7 +152,7 @@
                             <a href="${pageContext.request.contextPath}/admin/select?select=fieldAdmin"><li>구장관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=comuAdmin"><li>커뮤니티관리</li></a>
                             <a href="${pageContext.request.contextPath}/admin/select?select=payAdmin"><li>결제관리</li></a>
-                            <a href="${pageContext.request.contextPath}/admin/select?select=adminset"><li>관리자페이지</li></a>
+                            <a href="${pageContext.request.contextPath}/admin/select?select=adminset"><li>문의관리</li></a>
                         </ul>
                     </div>
                 </div>
