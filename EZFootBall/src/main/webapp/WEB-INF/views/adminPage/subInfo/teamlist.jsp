@@ -371,7 +371,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th><input type="checkbox" name="" id="Cbox"></td>
+							<th><input type="checkbox" name="" id="Cbox"></th>
 							<th>경기번호</th>
 							<th>예약번호</th>
 							<th>신청자</th>
@@ -751,6 +751,22 @@
            
         });
     </script>
+    
+    <!-- 전체 체크박스 -->
+	<script type="text/javascript">
+	document.getElementById("Cbox").addEventListener("click", function () {
+		if(this.checked == true){
+			for(var i=0; i< <%=stgamelist.size()%>; i++){
+				document.getElementsByClassName("checkbox")[i].checked = true;
+			}
+		}else {
+			for(var i=0; i< <%=stgamelist.size()%>; i++){
+				document.getElementsByClassName("checkbox")[i].checked = false;
+			}
+		}
+       
+    });
+	</script>
 
 
 </body>

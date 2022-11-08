@@ -143,7 +143,6 @@
 				<table>
 					<thead>
 						<tr>
-							<th><input type="checkbox" name="" id="Cbox"></td>
 							<th>경기번호</th>
 							<th>예약번호</th>
 							<th>경기형태</th>
@@ -162,7 +161,6 @@
 							for(int i=0; i< cgamelist.size(); i++){
 								%>
 								<tr class="gamelist" id="list<%=i %>">
-									<td><input type="checkbox" name="checkbox" class="checkbox"></td>
 									<td class="gameCode">
 										<%out.print(cgamelist.get(i).getGameCode()); %>
 									</td>
