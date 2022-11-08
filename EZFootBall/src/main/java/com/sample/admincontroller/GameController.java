@@ -120,28 +120,48 @@ public class GameController {
 		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
+//	@PostMapping("radd")
+//	public String radd(GameResultVO vo,HttpSession session) {
+//		System.out.println("추가");
+//		if(vo.getTeamCode()==0) {
+//			vo.setGameType("S");
+//		}else {
+//			vo.setGameType("T");
+//		}
+//		service.radd(vo);
+//		System.out.println(vo.getGameCode());
+//		return "redirect:/admin/select?select="+session.getAttribute("select");
+//	}
+	
+	
 	@PostMapping("radd")
-	public String radd(GameResultVO vo,HttpSession session) {
-		System.out.println("추가");
-		if(vo.getTeamCode()==0) {
-			vo.setGameType("S");
-		}else {
-			vo.setGameType("T");
-		}
-		service.radd(vo);
-		System.out.println(vo.getGameCode());
-		return "redirect:/admin/select?select="+session.getAttribute("select");
-	}
-	
-	
-	@PostMapping("rup")
-	public String rup(GameResultVO vo,HttpSession session) {
+	public String rup(GameResultVO vo,HttpSession session,String ty) {
 		System.out.println("업데이트");
-		if(vo.getTeamCode()==0) {
-			vo.setGameType("S");
-		}else {
+		if(vo.getUserCode()==0) {
 			vo.setGameType("T");
+			if(ty.equals("add")) {
+				System.out.println("추가");
+				List<Integer> mList = service.teamlist(vo.getTeamCode());
+				for(int i =0; i<mList.size(); i++) {
+					vo.setUserCode(mList.get(i));
+					service.radd(vo);
+				}
+				
+			}else {
+				System.out.println("업뎃");
+				service.rup(vo);
+			}
+		}else {
+			vo.setGameType("S");
+			if(ty.equals("add")) {
+				System.out.println("추가");
+				service.radd(vo);
+			}else {
+				System.out.println("업뎃");
+				service.rup(vo);
+			}
 		}
+		
 		//service.radd(vo);
 		System.out.println(vo.getGameCode());
 		return "redirect:/admin/select?select="+session.getAttribute("select");

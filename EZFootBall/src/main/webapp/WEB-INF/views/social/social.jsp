@@ -378,7 +378,7 @@
 	              
 	              var textdiv = document.createElement("div");
 	              
-	              if(pnum == maxp){
+	              if(data[name].close == 'false'){
 	            	  textdiv.innerText = " 마감 ";
 	            	  bdiv.append(textdiv);
 	            	  bdiv.style.border = "0px";
@@ -591,9 +591,9 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 		
 	   <select name="" id="level" class="select_border level">
 		   <option id="null" value="null">레벨</option>
-		   <option id="브론즈" value="브론즈">브론즈</option>
-		   <option id="실버" value="실버">실버</option>
-		   <option id="골드" value="골드">골드</option>
+		   <option id="Rookie" value="루키">루키</option>
+		   <option id="Amateur" value="아마추어">아마추어</option>
+		   <option id="Semi_pro" value="프로">프로</option>
 	   </select>
 		
 	  <label for="close" id="closediv" class="select_border closediv">마감 가리기</label> <input type="checkbox" name="close" id="close" style="display: none";>

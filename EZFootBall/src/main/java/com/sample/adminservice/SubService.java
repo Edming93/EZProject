@@ -66,4 +66,7 @@ public class SubService {
 		dao.tupdate(gameCode);
 	}
 
+	public void newresult (GlistVO vo) {
+		dao.newresult(vo);
+	}
 }

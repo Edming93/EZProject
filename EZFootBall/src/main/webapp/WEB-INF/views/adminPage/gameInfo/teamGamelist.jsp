@@ -1063,6 +1063,9 @@
 	<!-- 수정모달 닫기 -->
 	<script type="text/javascript">
 	document.getElementById("upcbtn").addEventListener("click", function () {
+		for(let i=0; i<document.getElementsByClassName("gameCode").length; i++){
+         	document.getElementsByClassName("checkbox")[i].checked = false;
+		 }
 		console.log("ddddd");
 		document.getElementById("updiv").style.display = "none";
 		document.getElementById("upmodal").style.display = "none";

@@ -96,6 +96,11 @@
 		VALUES('S',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, 10000, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode});
 	</insert>
 	
+	<insert id="newresult" parameterType="GlistVO">
+		INSERT 	game_result (`game_code`,`game_type`,`user_code`,`result`)
+		VALUES(#{gameCode},#{gameType},#{userCode},"경기전")
+	</insert>
+	
 	<!-- 마이페이지 경기내역 불러오기 -->
 	<select id="getMatchList" resultType="FieldReservationVO">
 	    SELECT rv_code, rv_state, CASE rv_type WHEN 'S' THEN '소셜매치' WHEN 'TS' THEN '팀매치' ELSE 'NULL' END rv_type,

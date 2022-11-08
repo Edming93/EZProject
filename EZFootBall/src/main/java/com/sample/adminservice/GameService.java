@@ -65,7 +65,11 @@ public class GameService {
 		dao.radd(vo);
 	}
 	
-	public List<Integer>teamlist(){
-		return dao.teamlist();
+	public void rup(GameResultVO vo) {
+		dao.rup(vo);
+	}
+	
+	public List<Integer> teamlist (int teamCode) {
+		return dao.teamlist(teamCode);
 	}
 }

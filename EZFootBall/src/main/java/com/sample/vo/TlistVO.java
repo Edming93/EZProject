@@ -22,6 +22,14 @@ public class TlistVO {
     private String fieldCode;
     private int gamePay;
     private int userCode;
+    private int teamCode;
+    
+	public int getTeamCode() {
+		return teamCode;
+	}
+	public void setTeamCode(int teamCode) {
+		this.teamCode = teamCode;
+	}
     
 	public int getGameCode() {
 		return gameCode;

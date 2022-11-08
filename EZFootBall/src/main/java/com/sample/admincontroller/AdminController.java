@@ -73,8 +73,7 @@ public class AdminController {
 		session.setAttribute("allfield", service.allfield());
 		// 경기결과 정보
 		session.setAttribute("result", service.result());
-		// 모든 팀코드
-		session.setAttribute("teamlist", service.teamcode());
+		
 
 		session.setAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("fieldList", fdService.getFieldListAll());

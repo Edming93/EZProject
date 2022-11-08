@@ -22,12 +22,13 @@ public class DataVO {
 	
 	private int gameCode;
 	private int teamCode;
+	private int userCode;
 
 	
 	private String Tselect;
 	private String Tsearch;
 
-	private int userCode;
+	
 
 
 	public String getTselect() {

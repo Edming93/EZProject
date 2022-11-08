@@ -36,4 +36,5 @@ public interface GlistDAO {
 
 	public List<FieldReservationVO> getMatchList(FieldReservationVO vo);
 
+	public int newresult(GlistVO vo);
 }

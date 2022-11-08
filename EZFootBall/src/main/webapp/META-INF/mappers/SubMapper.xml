@@ -71,4 +71,9 @@
 		WHERE game_code = #{gameCode}
 	</update>
 	
+	<insert id="newresult" parameterType="GlistVO">
+		INSERT INTO `game_result` (`game_code`, `game_type`, `user_code`, `team_code`, `result`, `score`, `assist`) 
+		VALUES (#{gameCode}, #{gameType},#{userCode}, #{teamCode}, 0, 0, 0)
+	</insert>
+	
 </mapper>

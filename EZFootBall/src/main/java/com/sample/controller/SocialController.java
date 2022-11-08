@@ -176,6 +176,7 @@ public class SocialController {
 				service.subgame(num);
 				service.newreser(vo);
 			}
+			service.newresult(vo);
 		}else {
 			int num = Integer.parseInt((String)session.getAttribute("tnum"));
 			UinVO uvo = (UinVO)session.getAttribute("urabil");
@@ -192,7 +193,9 @@ public class SocialController {
 					tservice.info(num,model);
 					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 					vo1.setUserCode(tvo.get(i).getUserCode());
+					vo1.setTeamCode(team_code);
 					tservice.newreser(vo1);
+					tservice.newresult(vo1);
 				}
 			}else {
 				tservice.setslist(dvo);
@@ -201,9 +204,12 @@ public class SocialController {
 					tservice.info(num,model);
 					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 					vo1.setUserCode(tvo.get(i).getUserCode());
+					vo1.setTeamCode(team_code);
 					tservice.newreser(vo1);
+					tservice.newresult(vo1);
 				}
 			}
+			
 		}
 		
 		//결제 완료 후 해당 세션 모두 지워주기

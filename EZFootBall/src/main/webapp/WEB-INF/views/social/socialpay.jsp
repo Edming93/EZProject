@@ -520,7 +520,7 @@
                      </c:if>
                      <c:if test="${matchinfo.gameType eq 'T'}">
                       	<span class="rental_fee amount_fee pay_money">
-                      	<fmt:formatNumber value="${matchinfo.gamePay/2}" pattern="#,###"/>
+                      	<fmt:formatNumber value="${matchinfo.gamePay}" pattern="#,###"/>
                       	</span>
                      	<span class="pay_won">원</span>
                      </c:if>
@@ -543,7 +543,7 @@
                      	<span class="pay_won">원</span>
                      </c:if>
                      <c:if test="${matchinfo.gameType eq 'T'}">
-                      	<fmt:formatNumber value="${matchinfo.gamePay/2}" pattern="#,###"/>
+                      	<fmt:formatNumber value="${matchinfo.gamePay}" pattern="#,###"/>
                      	<span class="pay_won">원</span>
                      </c:if>
                      	

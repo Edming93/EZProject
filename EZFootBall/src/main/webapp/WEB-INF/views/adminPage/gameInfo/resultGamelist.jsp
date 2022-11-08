@@ -20,8 +20,8 @@
 	if(session.getAttribute("gamelist") !=null) {
 		gamelist = (List<GlistVO>)session.getAttribute("gamelist");
 	}
-	if(session.getAttribute("teamlist") != null) {
-		teamlist = (List<Integer>)session.getAttribute("teamlist");
+	if(session.getAttribute("tcodelist") != null) {
+		teamlist = (List<Integer>)session.getAttribute("tcodelist");
 	}
 	
 %>
@@ -198,6 +198,8 @@
         <h3>경기 결과 추가</h3>
         <form action="${pageContext.request.contextPath}/game/radd" method="post">
         <input type="hidden" name="select" value="gameAdmin">
+        <input type="hidden" name="ty" value="add" id="ty">
+        <input type="hidden" name="resultCode" value="-1" id="rcode">
             <ul id="flist">
                 <li><p>경기번호 : </p> <input type="text" name="gameCode" id="ingameCode" class="inbox"></li>
                 <li><p id="pgbox" style="display: none;"></p><ul id="gclist" class="listbox" style="display: none;">
@@ -235,9 +237,9 @@
                     	%>
                     </ul>
                     </li>
-                <li><p>결과 : </p> <input type="text" class="inbox" name="result"> </li>
-                <li><p>득점 : </p> <input type="text" class="inbox" name="score"> </li>
-                <li><p>어시스트 : </p> <input type="text" class="inbox" name="asstst"> </li>
+                <li><p>결과 : </p> <input type="text" class="inbox" name="result" id="inresult"> </li>
+                <li><p>득점 : </p> <input type="text" class="inbox" name="score" id="inscore"> </li>
+                <li><p>어시스트 : </p> <input type="text" class="inbox" name="assitst" id="inassist"> </li>
                 
             </ul>
             <button id="addbtn">등록</button>
@@ -253,10 +255,8 @@
 				<option value="null">카테고리</option>
 				<option value="gameCode">경기번호</option>
 				<option value="gameType">경기타입</option>
-				<option value="gameTime">참가자코드</option>
-				<option value="level">참가자이름</option>
-				<option value="gameMacth">팀코드</option>
-				<option value="mag">매니저</option>
+				<option value="userCode">참가자코드</option>
+				<option value="teamCode">팀코드</option>
 			</select>
 
 
@@ -273,7 +273,6 @@
 					<button id="add">추가</button>
 					<button id="del">삭제</button>
 					<button id="upd">수정</button>
-					<button id="endup">마감</button>
 				</div>
 			</div>
 			<div id="list">
@@ -291,7 +290,7 @@
 							<th>어시스트</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 						<%
 							for(int i=0; i<result.size(); i++){
 								if(i>15){
@@ -403,27 +402,56 @@
 		for(let i=0; i< document.getElementsByClassName("listnum").length; i++) {
 			document.getElementsByClassName("listnum")[i].style.display = "none";
 		}
-		for(let i= listselect; i<listselect+15; i++){
-			document.getElementsByClassName("listnum")[i].style.display = "";
+		if(listselect+15 > document.getElementsByClassName("listnum").length){
+			for(let i= listselect; i<document.getElementsByClassName("listnum").length; i++){
+				document.getElementsByClassName("listnum")[i].style.display = "";
+			}
+		}else{
+			for(let i= listselect; i<listselect+15; i++){
+				document.getElementsByClassName("listnum")[i].style.display = "";
+			}
 		}
+		
 		
 	});
 	
 	/* 다음 버튼 */
 	document.getElementById("next").addEventListener("click",function(){
-		
-		if(listselect + 15 >=(end-15)){
+		if(listselect == 0){
+			listselect = 0;
+		}else if(listselect + 15 >=(end-15)){
 			listselect = end-15;
 		}else{
 			listselect = listselect + 15;
 		}
 		
+		
+		
 		for(let i=0; i< document.getElementsByClassName("listnum").length; i++) {
 			document.getElementsByClassName("listnum")[i].style.display = "none";
 		}
-		for(let i= listselect; i<listselect+15; i++){
-			document.getElementsByClassName("listnum")[i].style.display = "";
+		
+		if(listselect == 0){
+			if(listselect + 15 > end){
+				for(let i= 0; i<document.getElementsByClassName("listnum").length; i++){
+					document.getElementsByClassName("listnum")[i].style.display = "";
+				}
+			}else{
+				for(let i= 0; i<15; i++){
+					document.getElementsByClassName("listnum")[i].style.display = "";
+				}
+			}
+			
+		}else if(listselect+15 > end){
+			for(let i= listselect; i<document.getElementsByClassName("listnum").length; i++){
+				document.getElementsByClassName("listnum")[i].style.display = "";
+			}
+		}else{
+			for(let i= listselect; i<listselect+15; i++){
+				document.getElementsByClassName("listnum")[i].style.display = "";
+			}
 		}
+		
 		
 	});
 	
@@ -525,6 +553,50 @@
             document.getElementById("modalout").style.opacity="0.1";
             var modal =  document.getElementById("modal");
             modal.style.display = "block";
+            document.getElementById("ty").value = "add";
+           
+        });
+    </script>
+    
+    <!-- 수정 모달창 -->
+	<script>
+        document.getElementById("upd").addEventListener("click", function () {
+        	let upcnt = 0;
+            
+            for(let i=0; i<document.getElementsByClassName("gameCode").length; i++){
+            	if(document.getElementsByClassName("checkbox")[i].checked == true){
+            		upcnt++;
+            	}
+            	
+            }
+            if(upcnt < 1){
+            	alert("수정할 경기를 선택해 주세요");
+            }else{
+            	for(let i=0; i<document.getElementsByClassName("gameCode").length; i++){
+                	if(document.getElementsByClassName("checkbox")[i].checked == true){
+                		 document.getElementById("ingameCode").value = document.getElementsByClassName("gameCode")[i].innerText;
+                		 document.getElementById("inuserCode").value = document.getElementsByClassName("userCode")[i].innerText;
+                		 document.getElementById("inteamCode").value = document.getElementsByClassName("teamCode")[i].innerText;
+                		 document.getElementById("inresult").value = document.getElementsByClassName("result")[i].innerText;
+                		 document.getElementById("inscore").value = document.getElementsByClassName("score")[i].innerText;
+                		 document.getElementById("inassist").value = document.getElementsByClassName("assist")[i].innerText;
+                		 document.getElementById("rcode").value = document.getElementsByClassName("resultCode")[i].innerText;
+                		 document.getElementById("ty").value = "update";
+                		 if(document.getElementById("inteamCode").value > 0){
+                			 document.getElementById("inuserCode").readOnly = "true";
+                			
+                		 }else if(document.getElementById("inuserCode").value > 0){
+                			 document.getElementById("inteamCode").readOnly = "true";
+                			 document.getElementById("inteamCode").value = "0";
+                		 }
+                		 
+                	}
+                }
+            	document.getElementById("modalout").style.display="block";
+                document.getElementById("modalout").style.opacity="0.1";
+                var modal =  document.getElementById("modal");
+                modal.style.display = "block";
+            }
            
         });
     </script>
@@ -532,6 +604,17 @@
     <!-- 추가 모달 닫기 -->
     <script type="text/javascript">
     document.getElementById("close").addEventListener("click", function () {
+    	for(let i=0; i<document.getElementsByClassName("gameCode").length; i++){
+         	document.getElementsByClassName("checkbox")[i].checked = false;
+		 }
+    	
+    	 document.getElementById("ingameCode").value = "";
+		 document.getElementById("inuserCode").value = "";
+		 document.getElementById("inteamCode").value = "";
+		 document.getElementById("inresult").value = "";
+		 document.getElementById("inscore").value = "";
+		 document.getElementById("inassist").value = "";
+		 
         document.getElementById("modalout").style.display = "none";
         var modal =  document.getElementById("modal");
         modal.style.display = "none";
@@ -645,7 +728,7 @@
 		}
 		
 		
-		if(document.getElementById("inteamCode").value.trim().length >=1){
+		if(document.getElementById("inteamCode").value.trim().length >=1 && document.getElementById("inteamCode").value>1){
 			for(let i=0; i <<%=gamelist.size()%>; i++){
 				if(document.getElementsByClassName("gnumlist")[i].innerText.trim()==document.getElementById("ingameCode").value.trim()){
 					console.log("durl");
@@ -657,7 +740,7 @@
 			}
 		}
 		
-		if(document.getElementById("inuserCode").value.trim().length >=1){
+		if(document.getElementById("inuserCode").value.trim().length >=4 && && document.getElementById("inteamCode").value == 0){
 			for(let i=0; i <<%=gamelist.size()%>; i++){
 				if(document.getElementsByClassName("gnumlist")[i].innerText.trim()==document.getElementById("ingameCode").value.trim()){
 					console.log("durl");
@@ -678,5 +761,151 @@
 	
 	</script>
 
+	<!-- 검색 -->
+	<script type="text/javascript">
+	document.getElementById("sbtn").addEventListener("click",function(){
+		/* 경기번호 검색 */
+		if(document.getElementById("select").value == "gameCode"){
+			let cnt = 0;
+			for(let i=0; i<(<%=result.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
+				var text = document.getElementsByClassName("gameCode")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
+					document.getElementById("tbody").children[i].style.display = "";
+					document.getElementById("tbody").children[i].className = "gamelist crgamelist";
+					cnt++;
+					if(cnt>15){
+						document.getElementById("tbody").children[i].style.display = "none";
+					}
+				}else{
+					document.getElementById("tbody").children[i].style.display = "none";
+				}
+			}
+						
+			let num = Math.round((cnt / 15))+1;
+			for(let i=1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].className = "listnum";
+			}
+			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].style.display = "none";
+			}
+			for(let i=1; i<=num; i++){
+				document.getElementById("nev").children[i].className = "crlistnum";
+			}
+		}
+		
+		
+		
+		/* 경기타입 검색 */
+		if(document.getElementById("select").value == "gameType"){
+			let cnt = 0;
+			for(let i=0; i<(<%=result.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
+				var text = document.getElementsByClassName("gameType")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
+					document.getElementById("tbody").children[i].style.display = "";
+					document.getElementById("tbody").children[i].className = "gamelist trgamelist";
+					cnt++;
+					if(cnt>15){
+						document.getElementById("tbody").children[i].style.display = "none";
+					}
+				}else{
+					document.getElementById("tbody").children[i].style.display = "none";
+				}
+			}
+						
+			let num = Math.round((cnt / 15))+1;
+			console.log(num);
+			for(let i=1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].className = "listnum";
+			}
+			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].style.display = "none";
+			}
+			for(let i=1; i<=num; i++){
+				document.getElementById("nev").children[i].className = "crlistnum";
+			}
+		}
+		
+		
+		/* 참여자 검색 */
+		if(document.getElementById("select").value == "userCode"){
+			let cnt = 0;
+			for(let i=0; i<(<%=result.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
+				var text = document.getElementsByClassName("userCode")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
+					document.getElementById("tbody").children[i].style.display = "";
+					document.getElementById("tbody").children[i].className = "gamelist trgamelist";
+					cnt++;
+					if(cnt>15){
+						document.getElementById("tbody").children[i].style.display = "none";
+					}
+				}else{
+					document.getElementById("tbody").children[i].style.display = "none";
+				}
+			}
+						
+			let num = Math.round((cnt / 15))+1;
+			console.log(num);
+			for(let i=1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].className = "listnum";
+			}
+			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].style.display = "none";
+			}
+			for(let i=1; i<=num; i++){
+				document.getElementById("nev").children[i].className = "crlistnum";
+			}
+		}
+				
+		
+		/* 팀코드 검색 */
+		if(document.getElementById("select").value == "teamCode"){
+			let cnt = 0;
+			for(let i=0; i<(<%=result.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
+				var text = document.getElementsByClassName("teamCode")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
+					document.getElementById("tbody").children[i].style.display = "";
+					document.getElementById("tbody").children[i].className = "gamelist trgamelist";
+					cnt++;
+					if(cnt>15){
+						document.getElementById("tbody").children[i].style.display = "none";
+					}
+				}else{
+					document.getElementById("tbody").children[i].style.display = "none";
+				}
+			}
+						
+			let num = Math.round((cnt / 15))+1;
+			console.log(num);
+			for(let i=1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].className = "listnum";
+			}
+			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
+				document.getElementById("nev").children[i].style.display = "none";
+			}
+			for(let i=1; i<=num; i++){
+				document.getElementById("nev").children[i].className = "crlistnum";
+			}
+		}
+		
+		
+		
+		
+    });	
+	</script>
+	
+	<!-- 엔터키 검색 -->
+	<script type="text/javascript">
+	 var input = document.getElementById("inputbox");
+	 input.addEventListener("keyup", function (event) {
+         if (event.keyCode === 13) {
+           event.preventDefault();
+           document.getElementById("sbtn").click();
+         }
+       });
+	</script>
 </body>
 </html>

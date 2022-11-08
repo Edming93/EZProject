@@ -33,8 +33,10 @@ public interface GameDAO {
 	
 	public int rdel (int resultCode);
 	
+	public int rup (GameResultVO vo);
+	
 	public int radd(GameResultVO vo);
 	
-	public List<Integer>teamlist();
+	public List<Integer>teamlist(int teamCode);
 
 }

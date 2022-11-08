@@ -70,4 +70,9 @@ public class GlistService {
 		List<FieldReservationVO> list = dao.getMatchList(fieldReservationVO);
 		return list;
 	}
+	
+	public void newresult (GlistVO vo) {
+		System.out.println(vo.getGameCode());
+		dao.newresult(vo);
+	}
 }

@@ -60,16 +60,7 @@ public class SubController {
 			service.tdelete(vo);
 		}
 		
-		//(모든경기)
-		session.setAttribute("gamelist", aservice.allgame());
-		//모든 유저 정보
-		session.setAttribute("userlist", aservice.alluser());
-		//st 신청정보
-		session.setAttribute("stgamelist", aservice.stgame());
-		//s 신청정보
-		session.setAttribute("sgamelist", aservice.sgame());
-		
-		return "redirect:/admin/admin";
+		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
 	@GetMapping("sdel")
@@ -98,9 +89,11 @@ public class SubController {
 		GlistVO vo = new GlistVO();
 		vo = service.all(gameCode);
 		vo.setUserCode(userCode);
+		vo.setTeamCode(0);
 		service.add(vo);
 		service.slistadd(vo);
 		service.supdate(gameCode);
+		service.newresult(vo);
 		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
@@ -116,6 +109,7 @@ public class SubController {
 			vo.setTeamCode(teamCode);
 			vo.setUserCode(ucList.get(i));
 			service.tadd(vo);
+			service.newresult(vo);
 		}
 		
 		GlistVO vo = new GlistVO();

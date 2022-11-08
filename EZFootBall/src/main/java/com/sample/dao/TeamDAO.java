@@ -43,6 +43,8 @@ public interface TeamDAO {
 	
 	public int newreser(TlistVO vo);
 	
+	public int newresult(TlistVO vo);
+	
 	//----------------------정욱 10.24-------------------------
 		//----------------------registeration page--------------------------------------------------
 			// 팀 멤버 등록 

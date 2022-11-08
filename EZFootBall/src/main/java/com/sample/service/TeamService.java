@@ -77,6 +77,10 @@ public class TeamService {
 	public void newreser(TlistVO vo) {
 		dao.newreser(vo);
 	}
+	
+	public void newresult(TlistVO vo) {
+		dao.newresult(vo);
+	}
 	//-----------------정욱 10.24---------------------------------------
 		//----------------------posting page--------------------------------------------------
 			

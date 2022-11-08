@@ -33,5 +33,7 @@ public interface SubDAO {
 	public int tlistadd(GlistVO vo);
 	
 	public int tupdate(int gameCode);
+	
+	public int newresult(GlistVO vo);
 
 }
