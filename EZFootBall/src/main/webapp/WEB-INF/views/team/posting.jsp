@@ -1,5 +1,15 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	UserVO uvo = null;
+	
+	
+	if(session.getAttribute("sessionVO") != null){
+		uvo = (UserVO) session.getAttribute("sessionVO");
+	}
+%>
     <!DOCTYPE html>
 <html lang="en">
 <head>
