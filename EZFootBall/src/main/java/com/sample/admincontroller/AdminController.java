@@ -82,6 +82,12 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 
+	@GetMapping("/subselect")
+	public String subselect (@RequestParam("subselect") String subselect,Model model,HttpSession session) {
+		model.addAttribute("subselect", subselect);
+		return "adminPage/adminMain";
+	}
+	
 	@GetMapping("/gameselect")
 	public String gameselect(@RequestParam("gameselect") String gameselect, Model model) {
 		model.addAttribute("gameselect", gameselect);
