@@ -89,7 +89,7 @@
 		    height: 765px;
 		    margin: auto;
 		    padding-bottom: 60px;
-    		padding-top: 145px;
+    		padding-top: 185px;
         }
         form {
             display: flex;
@@ -197,29 +197,29 @@
 	                </div>
 	           	</div>
             </form>
-            <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-            <a href="javascript:kakaoLogin()";> <img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style ="height:60px; width:auto;"/> </a> 
+<%--             <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a> --%>
+<!--             <a href="javascript:kakaoLogin()";> <img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style ="height:60px; width:auto;"/> </a>  -->
 		    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 		    <script>
 		
-		        window.Kakao.init("a6ef3628740d44bfe81144c1696044f9");
-		        function kakaoLogin() {
-		            // 로그인버튼 눌렀을 때 실행
-		            window.Kakao.Auth.login({
-		                scope:'profile_nickname, account_email, gender, age_range, birthday',
-		                success: function(authObj) {
-		                    console.log(authObj);
-		                    window.Kakao.API.request({
-		                        url:'/v2/user/me',
-		                        success: res => {
-		                            const Kakao_account = res.kakao_account;
-		                            console.log(Kakao_account);
+// 		        window.Kakao.init("a6ef3628740d44bfe81144c1696044f9");
+// 		        function kakaoLogin() {
+// 		            // 로그인버튼 눌렀을 때 실행
+// 		            window.Kakao.Auth.login({
+// 		                scope:'profile_nickname, account_email, gender, age_range, birthday',
+// 		                success: function(authObj) {
+// 		                    console.log(authObj);
+// 		                    window.Kakao.API.request({
+// 		                        url:'/v2/user/me',
+// 		                        success: res => {
+// 		                            const Kakao_account = res.kakao_account;
+// 		                            console.log(Kakao_account);
 		
-		                        }
-		                    })
-		                }
-		            }) ;
-		        }
+// 		                        }
+// 		                    })
+// 		                }
+// 		            }) ;
+// 		        }
 		    </script>
         </div>
     </div>

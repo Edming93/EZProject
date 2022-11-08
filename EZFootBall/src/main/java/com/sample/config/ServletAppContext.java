@@ -19,6 +19,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -167,5 +169,22 @@ public class ServletAppContext implements WebMvcConfigurer {
 	       javaMailSender.setJavaMailProperties(mailProperties);
 	       return javaMailSender;
    }
+    
+	// 파일 업로드 세팅       1024 = 1키로바이트, 1024*1024 = 1메가바이트, 10*1024*1024 = 10메가바이트
+	private final int MAX_SIZE = 10 * 1024 * 1024;
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		
+		// 디폴트 인코딩 타입 설정
+		multipartResolver.setDefaultEncoding("UTF-8");
+		// 전체 올릴 수 있는 파일들의 총 용량 최대치
+		multipartResolver.setMaxUploadSize(MAX_SIZE*10); // 100MB로 하겠다.
+		// 파일 한개 당 올릴 수 있는 용량 최대치
+		multipartResolver.setMaxUploadSizePerFile(MAX_SIZE); // 하나의 파일은 10MB이하
+		
+		return multipartResolver;
+	}
     
 }

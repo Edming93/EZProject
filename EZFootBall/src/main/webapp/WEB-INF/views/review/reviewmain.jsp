@@ -465,37 +465,37 @@ font-family: 'Gowun Dodum', sans-serif;
 			</div>
 		</div>
 
-		<div class="pagination-area">
-			<div class="page_container">
-				<div class="pagination_controller">
-					<div class="index_num">
-						<span class="current_index">1</span> <span class="total_count">/
-							2</span>
-					</div>
-					<div class="control_wrapper">
-						<button class="control_previous_button e_previous_banner">
-							<i class="fa-solid fa-angle-left"></i>
-						</button>
+<!-- 		<div class="pagination-area"> -->
+<!-- 			<div class="page_container"> -->
+<!-- 				<div class="pagination_controller"> -->
+<!-- 					<div class="index_num"> -->
+<!-- 						<span class="current_index">1</span> <span class="total_count">/ -->
+<!-- 							2</span> -->
+<!-- 					</div> -->
+<!-- 					<div class="control_wrapper"> -->
+<!-- 						<button class="control_previous_button e_previous_banner"> -->
+<!-- 							<i class="fa-solid fa-angle-left"></i> -->
+<!-- 						</button> -->
 
-						<button type="button"
-							class="control_play_pause_button e_play_pause_swiper">
-							<svg class="fa-pause" width="14px" height="14px"
-								enable-background="new 0 0 155.3 159.3"
-								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg">
-								<path fill="#ffffff"
-									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path>
-								<path fill="#ffffff"
-									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg>
-							<i class="fas fa-play"></i>
-						</button>
+<!-- 						<button type="button" -->
+<!-- 							class="control_play_pause_button e_play_pause_swiper"> -->
+<!-- 							<svg class="fa-pause" width="14px" height="14px" -->
+<!-- 								enable-background="new 0 0 155.3 159.3" -->
+<!-- 								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"> -->
+<!-- 								<path fill="#ffffff" -->
+<!-- 									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path> -->
+<!-- 								<path fill="#ffffff" -->
+<!-- 									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg> -->
+<!-- 							<i class="fas fa-play"></i> -->
+<!-- 						</button> -->
 
-						<button type="button" class="control_next_button e_next_banner">
-							<i class="fa-solid fa-angle-right"> </i>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- 						<button type="button" class="control_next_button e_next_banner"> -->
+<!-- 							<i class="fa-solid fa-angle-right"> </i> -->
+<!-- 						</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 		<script>
 
@@ -984,52 +984,7 @@ let play_btn = document.querySelector(".fa-play");
 
     </div>
      <footer>
-        <div class="footer_subcon">
-            <div class="footer_left">
-                <div class="footer_nav">
-                    <ul>
-                        <h3>매치 정보</h3>
-                        <li>소셜 매치</li>
-                        <li>팀 매치</li>
-                        <li>구장 예약</li>
-                    </ul>
-                    <ul>
-                        <h3>서비스 지역</h3>
-                        <li>서울</li>
-                        <li>인천</li>
-                        <li>경기</li>
-                        <li>전라도</li>
-                        <li>경상도</li>
-                        <li>충청도</li>
-                        <li>제주도</li>
-                    </ul>
-                    <ul>
-                        <h3>이지풋볼</h3>
-                        <li>이지풋볼 소개</li>
-                        <li>공지사항</li>
-                        <li>자주 묻는 질문</li>
-                        <li>구장 제휴</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer_right">
-            <div class="footer_com">
-                <h2>EZfootball.com</h2>
-                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
-                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
-                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
-                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
-                    국번없이 119
-                </p>
-                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
-                    통신판매업 신고 2022-서울강서-0000
-                </p>
-                <p>Copyright EZ ALL rights reserved</p>
-            </div>
-            <h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
-        </div>
-        
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
 </div>
 	

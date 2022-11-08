@@ -378,9 +378,7 @@
 
     </div>
     <footer>
-        <div class="footer_left"></div>
-        <div class="footer_right"></div>
-        
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
 	<script type="text/javascript">
 		let main_logo = document.querySelector(".main_logo");

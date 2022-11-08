@@ -1,7 +1,5 @@
 package com.sample.vo;
 
-import org.apache.ibatis.type.Alias;
-
 public class GameFieldInfoVO {
 	
 	// 구장번호  
@@ -32,8 +30,17 @@ public class GameFieldInfoVO {
 	private String fieldInOut;
 	private String fieldGrass;
 	
+	//private MultipartFile[] mediaFile;
 	
 	
+	
+	
+//	public MultipartFile[] getMediaFile() {
+//		return mediaFile;
+//	}
+//	public void setMediaFile(MultipartFile[] mediaFile) {
+//		this.mediaFile = mediaFile;
+//	}
 	public String getGamePlace() {
 		return gamePlace;
 	}

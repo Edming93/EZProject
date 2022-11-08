@@ -393,11 +393,11 @@
 			   		<div id="map"></div>
 			   </div>
 			   <div class="picture_area">
-	               <img class="banner_image img1" src="${field.fieldImg1}" alt="">
-	               <img class="banner_image img2" src="${field.fieldImg2}" alt="">
-	               <img class="banner_image img3" src="${field.fieldImg3}" alt="">
-	               <img class="banner_image img4" src="${field.fieldImg4}" alt="">
-	               <img class="banner_image img5" src="${field.fieldImg5}" alt="">
+	               <img class="banner_image img1" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg1}" alt="">
+	               <img class="banner_image img2" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg2}" alt="">
+	               <img class="banner_image img3" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg3}" alt="">
+	               <img class="banner_image img4" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg4}" alt="">
+	               <img class="banner_image img5" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg5}" alt="">
 	           </div>
             </div>
          </div>

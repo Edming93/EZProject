@@ -44,6 +44,11 @@ public class AdminController {
 	public String admin() {
 		return "adminPage/adminMain";
 	}
+	
+	@GetMapping("/manager")
+	public String manager() {
+		return "adminPage/managerMain";
+	}
 
 	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
 			ManagerService managerService) {
@@ -427,21 +432,55 @@ public class AdminController {
 
 	// 구장 추가
 	@PostMapping("/addField")
-	public String addField(GameFieldInfoVO vo, @RequestParam("fieldImg1") MultipartFile file1)
-			throws IllegalStateException, IOException {
-
-		// 데이터가 제대로 들어있다면
-		if (!file1.getOriginalFilename().isEmpty()) {
-			// 해당 파일의 이름을 첨부한 상태로 저장하겠다.
-			Path path = Paths.get("C:/Users/에드밍/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
-					+ file1.getOriginalFilename());
-			file1.transferTo(path);
-			System.out.println("매우 잘 저장되었습니다.");
-		} else {
-			System.out.println("에러가 발생했습니다.");
+	public String addField(Model model,GameFieldInfoVO vo,@RequestParam("fieldImg") MultipartFile[] files,
+						@RequestParam("select") String select,HttpSession session) 
+									throws IllegalStateException, IOException {
+		int cnt = 0;
+		List<String> imglist = new ArrayList<String>();
+		
+		for(MultipartFile file : files) {
+			try {
+				if(!file.getOriginalFilename().isEmpty() || file.getOriginalFilename() != null ) {
+	                // 해당 파일의 이름을 첨부한 상태로 저장하겠다.
+					Path path = Paths.get("C:/Users/GDJ 52/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"+file.getOriginalFilename());
+					file.transferTo(path);
+					System.out.println(file.getOriginalFilename() + "저장 완료.");
+					imglist.add(file.getOriginalFilename());
+					cnt++;
+				}else {
+					System.out.println("에러가 발생했습니다.");
+				}
+			} catch (Exception e) {
+				System.out.println("여기가 문제");
+				System.out.println(cnt);
+			}
+			
+		}		
+		
+		if(imglist.size() == 1) {
+			vo.setFieldImg1(imglist.get(0));
+		}else if(imglist.size() == 2) {
+			vo.setFieldImg1(imglist.get(0));
+			vo.setFieldImg2(imglist.get(1));
+		}else if(imglist.size() == 3) {
+			vo.setFieldImg1(imglist.get(0));
+			vo.setFieldImg2(imglist.get(1));
+			vo.setFieldImg3(imglist.get(2));
+		}else if(imglist.size() == 4) {
+			vo.setFieldImg1(imglist.get(0));
+			vo.setFieldImg2(imglist.get(1));
+			vo.setFieldImg3(imglist.get(2));
+			vo.setFieldImg4(imglist.get(3));
+		}else if(imglist.size() == 5) {
+			vo.setFieldImg1(imglist.get(0));
+			vo.setFieldImg2(imglist.get(1));
+			vo.setFieldImg3(imglist.get(2));
+			vo.setFieldImg4(imglist.get(3));
+			vo.setFieldImg5(imglist.get(4));
 		}
+		
 		fdService.insertFieldInfo(vo);
-		return "redirect:/admin/reserselect?reserselect=fieldAdmin";
+		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 
 	@GetMapping("/comuselect")

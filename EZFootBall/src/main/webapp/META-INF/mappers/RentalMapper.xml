@@ -107,7 +107,7 @@
 	
 	<!--    구장관리 (수정,삭제)    -->
 	<select id="getFieldListAll" resultType="GameFieldInfoVO">
-		select * from gamefield_info
+		select * from gamefield_info ORDER BY field_code DESC
 	</select>
 	
 	<update id="modifyField" parameterType="GameFieldInfoVO">

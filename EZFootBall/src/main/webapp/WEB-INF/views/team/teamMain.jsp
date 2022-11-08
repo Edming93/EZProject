@@ -7,44 +7,44 @@
 <%@ page import="java.io.InputStreamReader" %>
 
   <%
-    String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
-    String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
-    String code = request.getParameter("code");
-    String state = request.getParameter("state");
-    String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
-    String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
-        + "&client_id=" + clientId
-        + "&client_secret=" + clientSecret
-        + "&redirect_uri=" + redirectURI
-        + "&code=" + code
-        + "&state=" + state;
-    String accessToken = "";
-    String refresh_token = "";
+//     String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
+//     String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
+//     String code = request.getParameter("code");
+//     String state = request.getParameter("state");
+//     String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
+//     String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+//         + "&client_id=" + clientId
+//         + "&client_secret=" + clientSecret
+//         + "&redirect_uri=" + redirectURI
+//         + "&code=" + code
+//         + "&state=" + state;
+//     String accessToken = "";
+//     String refresh_token = "";
     
-    System.out.println(session.getAttribute("state"));
-    try {
-      URL url = new URL(apiURL);
-      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-      con.setRequestMethod("GET");
-      int responseCode = con.getResponseCode();
-      BufferedReader br;
-      if (responseCode == 200) { // 정상 호출
-        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-      } else {  // 에러 발생
-        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-      }
-      String inputLine;
-      StringBuilder res = new StringBuilder();
-      while ((inputLine = br.readLine()) != null) {
-        res.append(inputLine);
-      }
-      br.close();
-      if (responseCode == 200) {
-        out.println(res.toString());
-      }
-    } catch (Exception e) {
-      // Exception 로깅
-    }
+//     System.out.println(session.getAttribute("state"));
+//     try {
+//       URL url = new URL(apiURL);
+//       HttpURLConnection con = (HttpURLConnection)url.openConnection();
+//       con.setRequestMethod("GET");
+//       int responseCode = con.getResponseCode();
+//       BufferedReader br;
+//       if (responseCode == 200) { // 정상 호출
+//         br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//       } else {  // 에러 발생
+//         br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+//       }
+//       String inputLine;
+//       StringBuilder res = new StringBuilder();
+//       while ((inputLine = br.readLine()) != null) {
+//         res.append(inputLine);
+//       }
+//       br.close();
+//       if (responseCode == 200) {
+//         out.println(res.toString());
+//       }
+//     } catch (Exception e) {
+//       // Exception 로깅
+//     }
   %>
 <!DOCTYPE html>
 <html>
@@ -394,43 +394,43 @@
         </div>
     </div>
 
-        <div class="banner_container">
-            <div class="banner_content_area">
-                <div class="banner_content">
-                    <img class="banner_image" src="${pageContext.request.contextPath}/image/ez_banner1.png" alt="">
-                    <img class="banner_image" src="${pageContext.request.contextPath}/image/ez_banner2.png" alt="">
-                    <img class="banner_image" src="${pageContext.request.contextPath}/image/banner-starter_pc.png" alt="">
-                </div>
-            </div>
-        </div>
+<!--         <div class="banner_container"> -->
+<!--             <div class="banner_content_area"> -->
+<!--                 <div class="banner_content"> -->
+<%--                     <img class="banner_image" src="${pageContext.request.contextPath}/image/ez_banner1.png" alt=""> --%>
+<%--                     <img class="banner_image" src="${pageContext.request.contextPath}/image/ez_banner2.png" alt=""> --%>
+<%--                     <img class="banner_image" src="${pageContext.request.contextPath}/image/banner-starter_pc.png" alt=""> --%>
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
 
-        <div class="pagination-area">
-         <div class="page_container">
-             <div class="pagination_controller">
-                 <div class="index_num">
-                     <span class="current_index">1</span>
+<!--         <div class="pagination-area"> -->
+<!--          <div class="page_container"> -->
+<!--              <div class="pagination_controller"> -->
+<!--                  <div class="index_num"> -->
+<!--                      <span class="current_index">1</span> -->
                      
-                     <span class="total_count">/ 3</span>
-                 </div>
-                 <div class="control_wrapper">
-                     <button class="control_previous_button e_previous_banner">
-                         <i class="fa-solid fa-angle-left"></i>
-                     </button>
+<!--                      <span class="total_count">/ 3</span> -->
+<!--                  </div> -->
+<!--                  <div class="control_wrapper"> -->
+<!--                      <button class="control_previous_button e_previous_banner"> -->
+<!--                          <i class="fa-solid fa-angle-left"></i> -->
+<!--                      </button> -->
    
-                     <button type="button" class="control_play_pause_button e_play_pause_swiper">
-                       <svg class="fa-pause" width="14px" height="14px" enable-background="new 0 0 155.3 159.3" viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path><path fill="#ffffff" d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg>
-                       <i class="fas fa-play"></i>
-                     </button>
+<!--                      <button type="button" class="control_play_pause_button e_play_pause_swiper"> -->
+<!--                        <svg class="fa-pause" width="14px" height="14px" enable-background="new 0 0 155.3 159.3" viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path><path fill="#ffffff" d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg> -->
+<!--                        <i class="fas fa-play"></i> -->
+<!--                      </button> -->
    
-                     <button type="button" class="control_next_button e_next_banner">
-                       <i class="fa-solid fa-angle-right">
-                     </i>
-                     </button>
-                 </div>
-             </div>
+<!--                      <button type="button" class="control_next_button e_next_banner"> -->
+<!--                        <i class="fa-solid fa-angle-right"> -->
+<!--                      </i> -->
+<!--                      </button> -->
+<!--                  </div> -->
+<!--              </div> -->
             
-         </div>
-     </div>
+<!--          </div> -->
+<!--      </div> -->
        
    
    
@@ -457,9 +457,7 @@
 
     </div>
     <footer>
-        <div class="footer_left"></div>
-        <div class="footer_right"></div>
-        
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
 </div>
 

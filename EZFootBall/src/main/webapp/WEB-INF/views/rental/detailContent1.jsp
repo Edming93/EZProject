@@ -132,19 +132,19 @@
             <div class="field_info_area">
                <div class="field_img_area">
                  <c:if test="${field.fieldImg1 != null}">
-                     <img class="field_image img1" src="${field.fieldImg1}" alt="">
+                     <img class="field_image img1" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg1}" alt="">
                  </c:if>
                  <c:if test="${field.fieldImg2 != null}">
-                     <img class="field_image img2" src="${field.fieldImg2}" alt="">
+                     <img class="field_image img2" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg2}" alt="">
                  </c:if>
                  <c:if test="${field.fieldImg3 != null}">
-                     <img class="field_image img3" src="${field.fieldImg3}" alt="">
+                     <img class="field_image img3" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg3}" alt="">
                  </c:if>
                  <c:if test="${field.fieldImg4 != null}">
-                     <img class="field_image img4" src="${field.fieldImg4}" alt="">
+                     <img class="field_image img4" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg4}" alt="">
                  </c:if>
                  <c:if test="${field.fieldImg5 != null}">
-                     <img class="field_image img5" src="${field.fieldImg5}" alt="">
+                     <img class="field_image img5" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg5}" alt="">
                  </c:if>
                </div>
                   <div class="content_field_name">A구장</div>

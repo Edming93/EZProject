@@ -38,8 +38,6 @@
 		where user_id = #{userId}
 	</update>
 	
-	
-	
 	<!-- 마이페이지 조회용 -->
 	<select id="getUserAbil" resultType="UinVO">
 		SELECT * FROM user_abil

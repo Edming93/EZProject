@@ -17,15 +17,14 @@ public class MainInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 
 		if(session.getAttribute("sessionVO") != null) {
-			System.out.println("mainInter 세션 있을 때");
 			UserVO vo = (UserVO)session.getAttribute("userVO");
 			session.removeAttribute("snum");
 			session.removeAttribute("tnum");
-			if(vo.getSerialkey() == 1231254653L) {				
-				System.out.println("세션있을때");
-			}else {
-				return false;
-			}
+//			if(vo.getSerialkey() == 1231254653L) {				
+//				System.out.println("MainInter 세션있고 시리얼키값 맞을때");
+//			}else {
+//				return false;
+//			}
 			return true;
 		}else {
 

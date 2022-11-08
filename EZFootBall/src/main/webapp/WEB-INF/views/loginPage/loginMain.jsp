@@ -291,9 +291,7 @@
 
 
     <footer>
-        <div class="footer_left"></div>
-        <div class="footer_right"></div>
-        
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
     
 

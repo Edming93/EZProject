@@ -1,50 +1,64 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
 
-  <%
-    String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
-    String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
-    String code = request.getParameter("code");
-    String state = request.getParameter("state");
-    String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
-    String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
-        + "&client_id=" + clientId
-        + "&client_secret=" + clientSecret
-        + "&redirect_uri=" + redirectURI
-        + "&code=" + code
-        + "&state=" + state;
-    String accessToken = "";
-    String refresh_token = "";
+<%
+	request.setCharacterEncoding("utf-8");
+
+	String authority = null;
+	if(session.getAttribute("sessionVO") != null) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		
+		authority = uvo.getUserAuthority();
+		System.out.println("권한"+uvo.getUserAuthority());	
+	}else {
+		authority = "일반회원";
+		
+	}
+//     String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
+//     String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
+//     String code = request.getParameter("code");
+//     String state = request.getParameter("state");
+//     String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
+//     String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+//         + "&client_id=" + clientId
+//         + "&client_secret=" + clientSecret
+//         + "&redirect_uri=" + redirectURI
+//         + "&code=" + code
+//         + "&state=" + state;
+//     String accessToken = "";
+//     String refresh_token = "";
     
-    System.out.println(session.getAttribute("state"));
-    try {
-      URL url = new URL(apiURL);
-      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-      con.setRequestMethod("GET");
-      int responseCode = con.getResponseCode();
-      BufferedReader br;
-      if (responseCode == 200) { // 정상 호출
-        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-      } else {  // 에러 발생
-        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-      }
-      String inputLine;
-      StringBuilder res = new StringBuilder();
-      while ((inputLine = br.readLine()) != null) {
-        res.append(inputLine);
-      }
-      br.close();
-      if (responseCode == 200) {
-        out.println(res.toString());
-      }
-    } catch (Exception e) {
-      // Exception 로깅
-    }
+//     System.out.println(session.getAttribute("state"));
+//     try {
+//       URL url = new URL(apiURL);
+//       HttpURLConnection con = (HttpURLConnection)url.openConnection();
+//       con.setRequestMethod("GET");
+//       int responseCode = con.getResponseCode();
+//       BufferedReader br;
+//       if (responseCode == 200) { // 정상 호출
+//         br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//       } else {  // 에러 발생
+//         br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+//       }
+//       String inputLine;
+//       StringBuilder res = new StringBuilder();
+//       while ((inputLine = br.readLine()) != null) {
+//         res.append(inputLine);
+//       }
+//       br.close();
+//       if (responseCode == 200) {
+//         out.println(res.toString());
+//       }
+//     } catch (Exception e) {
+//       // Exception 로깅
+//     }
   %>
 <!DOCTYPE html>
 <html>
@@ -244,133 +258,14 @@
         height:205px;
         background-color: #26A653;
        margin-top: 100px;
-        }
-        footer {
-            width: 100%;
-          
-            height: 423px;
-            display: flex;
-            justify-content: space-evenly;   
-            padding: 30px;
-            background-color: #2a2a2a;
-        }
-        .footer_subcon{
-            max-width: 1024px;
-        }
-        .footer_left {
-            width:100%;
-            
-        }
-        .footer_left .footer_nav{
-            display: flex;
-
-        }
-        .footer_nav ul {
-            list-style-type: none;
-            line-height: 200%;
-        }
-        .footer_nav ul h3 {
-            color : rgba(255, 255, 255, 0.649);
-        }
-        .footer_nav ul li{
-            color :rgba(255, 255, 255, 0.348)
-        }
-        .footer_right {
-            width:30%;
-            padding-top: 14px;
-
-        }
-        .footer_com{
-            line-height: 150%;
-        }
-        .footer_com h2{
-            color : rgba(255, 255, 255, 0.649);
-            border-bottom: 3px solid #26A653;
-            width: 32%;
-        }
-        .footer_com p{
-            color :rgba(255, 255, 255, 0.348);
-        }
-        .managermove a{
-            color : white;
-            text-decoration: none;
-        }
-
-    .login_icon {
-        margin-left:15px;
-    }
-    .etc_icon {
-        margin-left:10px;
     }
 
-
-
-         .page_container {
-	         position: relative;
-	         display: grid;
-	         height: 100%;
-	         max-height: 100%;
-	         cursor: default;
-	         max-width: 1200px;
-	         margin: 0 auto;
-         }
-         .pagination-area {
-         	position: absolute;
-    		bottom: 35px;
-         }
-
-         .pagination_controller {
-	         display: flex;
-	         flex-direction: row;
-	         align-items: center;
-	         justify-content: space-between;
-	         padding: 0 1rem;
-	         width: 135px;
-	         height: 36px;
-	         font-size: .875rem;
-	         color: #fff;
-	         border-radius: 20px;
-	         background-color: rgba(0, 0, 0, .5);
-
-         }
-
-         .index_num {
-         margin-right: auto;
-         }
-
-         .control_wrapper {
-         display: flex;
-         align-items: center;
-         justify-content: space-between;
-         width: 50px;
-         }
-
-         .control_previous_button,
-         .control_play_pause_button,
-         .control_next_button {
-         padding: 0;
-         background: none;
-         border: 0;
-         color: #fff;
-         cursor: pointer;
-         }
-
-         .control_play_pause_button {
-         display: flex;
-         align-items: center;
-         max-height: 10px;
-
-         }
-
-         .fa-pause {
-         display: block;
-         font-size: 12px;
-         }
-
-         .fa-play {
-         display: none;
-         }
-         
+    .admin_icon {
+	    text-decoration: none;
+	    color: #4e4e4e;
+	    font-size: 27px;
+	    margin-left: 15px;
+    }
 
 </style>
 </head>
@@ -387,6 +282,13 @@
   		  			  <jsp:include page="./search/search.jsp"></jsp:include>
 <!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
+                  </div>
+                  <div class="adminMove">
+                  	<% if(authority.equals("관리자")){ %>
+                  		<a class="admin_icon" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%}else if(authority.equals("매니저")){%>
+				  		<a class="admin_icon" href="${pageContext.request.contextPath}/admin/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%} %>
                   </div>
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
@@ -489,52 +391,54 @@
 
     </div>
      <footer>
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
         <div class="footer_subcon">
-            <div class="footer_left">
-                <div class="footer_nav">
-                    <ul>
-                        <h3>매치 정보</h3>
-                        <li>소셜 매치</li>
-                        <li>팀 매치</li>
-                        <li>구장 예약</li>
-                    </ul>
-                    <ul>
-                        <h3>서비스 지역</h3>
-                        <li>서울</li>
-                        <li>인천</li>
-                        <li>경기</li>
-                        <li>전라도</li>
-                        <li>경상도</li>
-                        <li>충청도</li>
-                        <li>제주도</li>
-                    </ul>
-                    <ul>
-                        <h3>이지풋볼</h3>
-                        <li>이지풋볼 소개</li>
-                        <li>공지사항</li>
-                        <li>자주 묻는 질문</li>
-                        <li>구장 제휴</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer_right">
-            <div class="footer_com">
-                <h2>EZfootball.com</h2>
-                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
-                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
-                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
-                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
-                    국번없이 119
-                </p>
-                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
-                    통신판매업 신고 2022-서울강서-0000
-                </p>
-                <p>Copyright EZ ALL rights reserved</p>
-            </div>
-            <h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
-        </div>
-        
+        	<div class="footer_subcon_area">
+	            <div class="footer_left">
+	                <div class="footer_nav">
+	                    <ul>
+	                        <h3>매치 정보</h3>
+	                        <li>소셜 매치</li>
+	                        <li>팀 매치</li>
+	                        <li>구장 예약</li>
+	                    </ul>
+	                    <ul>
+	                        <h3>서비스 지역</h3>
+	                        <li>서울</li>
+	                        <li>인천</li>
+	                        <li>경기</li>
+	                        <li>전라도</li>
+	                        <li>경상도</li>
+	                        <li>충청도</li>
+	                        <li>제주도</li>
+	                    </ul>
+	                    <ul>
+	                        <h3>이지풋볼</h3>
+	                        <li>이지풋볼 소개</li>
+	                        <li>공지사항</li>
+	                        <li>자주 묻는 질문</li>
+	                        <li>구장 제휴</li>
+	                    </ul>
+	                </div>
+	            </div>
+	        	<div class="footer_right">
+		            <div class="footer_com">
+		                <h2>EZfootball.com</h2>
+		                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
+		                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
+		                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
+		                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
+		                    국번없이 119
+		                </p>
+		                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
+		                    통신판매업 신고 2022-서울강서-0000
+		                </p>
+		                <p>Copyright EZ ALL rights reserved</p>
+		            </div>
+	            	<h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
+	        	</div>
+        	</div>
+    	</div>
     </footer>
 </div>
 
