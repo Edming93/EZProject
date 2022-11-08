@@ -129,6 +129,30 @@ public class AdminController {
 		model.addAttribute("userListB",service.UInfoListB());
 		return "adminPage/adminMain";
 	}
+	// 블랙리스트 조건부 출력
+			@PostMapping("/idselect1")
+			public String idselect1(HttpSession session, Model model, UserVO vo,
+									@RequestParam("Uselect") String Uselect, @RequestParam("Usearch") String Usearch) {
+				
+				if (Uselect.equals("userCode")) {
+					vo.setUserCode(Integer.parseInt(Usearch));
+				} else if (Uselect.equals("userName")) {	
+					vo.setUserName(Usearch);
+				} else if (Uselect.equals("userId")) {
+					vo.setUserId(Usearch);
+				} else if (Uselect.equals("userBirth")) {
+					vo.setUserBirth(Usearch);
+				} else if (Uselect.equals("userGender")) {
+					vo.setUserGender(Usearch);
+				} else if (Uselect.equals("userAuthority")) {
+					vo.setUserAuthority(Usearch);
+				} else if (Uselect.equals("userReports")) {
+					vo.setUserReports(Usearch);
+				} 
+				model.addAttribute("userList",service.UInfoListB1(vo));
+				return "adminPage/adminMain";
+			}
+	
 	// 블랙리스트로 추가해버리기~
 		@PostMapping("/UUInfoList")
 		@ResponseBody

@@ -122,7 +122,7 @@
 </head>
 <body>
 	<div class="TCRcontainer">
-		<form action="${pageContext.request.contextPath}/admin/select1" method="post">
+		<form action="${pageContext.request.contextPath}/admin/idselect1" method="post">
 			<div class="TCRHcon">
 				<div class="TCRselectMenu">
 					<select name="Uselect" id="Uselect">

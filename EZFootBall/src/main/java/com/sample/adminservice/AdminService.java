@@ -114,6 +114,9 @@ public class AdminService {
    public List<UserVO> UInfoListB(){
 	   return dao.UInfoListB();
    }
+   public List<UserVO> UInfoListB1(UserVO vo){
+	   return dao.UInfoListB1(vo);
+   }
    public void UUInfoList(int userCode) {
 	   dao.UUInfoList(userCode);
    }

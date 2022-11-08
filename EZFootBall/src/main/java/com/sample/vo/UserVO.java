@@ -33,6 +33,8 @@ public class UserVO {
 	
 
 	private String userAuthority;
+	
+	private String userStatus;
 
 	public static final long serialKey = 1231254653L;
 	
@@ -41,6 +43,13 @@ public class UserVO {
 	private String tmember;
 	private int teamCode;
 	
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
 	public int getTeamCode() {
 		return teamCode;
 	}

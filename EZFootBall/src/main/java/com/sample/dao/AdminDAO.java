@@ -57,6 +57,7 @@ public interface AdminDAO {
 	public List<UserVO> UInfoList1(UserVO vo);
 	
 	public List<UserVO> UInfoListB();
+	public List<UserVO> UInfoListB1(UserVO vo);
 	public int UUInfoList(int userCode);
 
 }
