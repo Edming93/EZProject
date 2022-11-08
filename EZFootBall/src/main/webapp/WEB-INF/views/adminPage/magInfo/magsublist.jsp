@@ -42,13 +42,15 @@
 	}
 	
 	#manager_history th, td {
-		border-bottom: 1px solid black;
-		padding: 10px;
-		text-align: center;
+		height: 40px;
+	    text-align: center;
+	    border-bottom: 2px dotted #D2D79F;
 	}
 	
 	#manager_history th {
-		border-bottom: 1px solid black;
+		background-color: #F8EDE3;
+		height: 50px;
+    	border-bottom: 2px solid #D2D79F;
 	}
 	
 	#check, #ck{

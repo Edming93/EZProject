@@ -15,6 +15,7 @@
 	}
 	
 	#main_container{
+		position:relative;
 		display: flex;
 		flex-direction: column;
 	}
@@ -42,18 +43,62 @@
 	}
 	
 	#manager_List th, td {
-		border-bottom: 1px solid black;
-		padding: 10px;
-		text-align: center;
+		height: 40px;
+	    text-align: center;
+	    border-bottom: 2px dotted #D2D79F;
 	}
 	
 	#manager_List th {
-		border-bottom: 1px solid black;
+		background-color: #F8EDE3;
+		height: 50px;
+    	border-bottom: 2px solid #D2D79F;
 	}
+
 	
 	#check, #ck{
 		width: 20px;
    		height: 30px;
+	}
+	
+	#add_box{
+		display:none;
+		position: absolute;
+		top: 100px;
+    	left: 50%;
+  	  	transform: translate(-50%, 0%);
+		width: 300px;
+		height: 300px;
+		background: #eee;
+		padding: 20px;
+	}
+	
+	#add_box h5 {
+		font-size: 16px;
+		padding: 10px 0;
+	}
+	
+	#add_box input{
+		width: 100%;
+		padding:5px 0;
+		font-size: 16px;
+	}
+	
+	.title_h5 {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	
+	.btn_box2 {
+		display:flex;
+		width: 100%;
+		justify-content: center;
+	}
+	
+	.btn_box2 button{
+		padding: 5px;
+		margin: 5px;
+		background: #fff;
+		cursor: pointer;
 	}
 	
 </style>
@@ -61,8 +106,8 @@
 	<h1>매니저리스트</h1>
 	<div id="main_container">
 		<div class="btn_box">
-			<button id="pass" class="btn">버튼1</button>
-			<button id="fail" class="btn">버튼2</button>
+			<button id="add" class="btn">추가</button>
+			<button id="delete" class="btn">삭제</button>
 		</div>
 		<table id="manager_List">
 			<tr>
@@ -86,6 +131,54 @@
 			</tr>				
 			</c:forEach>
 		</table>
+		<div id="add_box">
+			<h5 class="title_h5">매니저 추가</h5>
+			<h5>유저 ID</h5>
+			<input type="text" name="userId" id="userId" />
+			<h5>유저 코드</h5>
+			<input type="text" name="userCode" id="userCode" />
+			<div class="btn_box2">
+				<button id="box_add">추가</button>
+				<button id="box_close">취소</button>
+			</div>
+		</div>
 	</div>
+	
+	
+	
+	<script type="text/javascript">
+		$("#check").click(function(){	 
+			 if($("#check").prop("checked")) {
+			  $(".ck").prop("checked", true);
+			 } else {
+			  $(".ck").prop("checked", false);
+			 }
+		});
+		
+		$(".ck").click(function(){
+			$("#check").prop("checked", false);
+		});
+		
+		$('#add').click(function(){
+			$('#add_box').show();
+		});
+		
+		$('#box_add').click(function(){
+			const userId = $('#userId').val();
+			const userCode = $('#userCode').val();
+			
+			var confirm_val = confirm("매니저를 추가하시겠습니까?");
+			 
+			if(confirm_val) {
+				location.href = "${pageContext.request.contextPath}/admin/manageradd";
+			}
+		});
+		
+		$('#box_close').click(function(){
+			$('#add_box').hide();
+		});
+		
+		
+	</script>
 </body>
 </html>

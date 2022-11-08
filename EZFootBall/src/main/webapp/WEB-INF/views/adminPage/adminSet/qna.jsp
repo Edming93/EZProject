@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,93 +10,40 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
 <style>
-	*{
-		box-sizing: border-box;
-		margin: 0;
-	}
-	
-	#inquiry_list{
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+#main_controller{
+	display: flex;
+	flex-direction: column;
+}
+
+#inquiry_list {
 	width: 100%;
 	border-collapse: collapse;
 	font-size: 14px;
 	margin: 20px 0;
 }
 
-#inquiry_list th, td {
-	border-bottom: 1px solid black;
-	padding: 10px;
-	text-align: center;
-}
-
-/* #inquiry_list th:first-child{ */
-/* 	border-radius: 15px 0 0 0; */
-/* } */
-
-/* #inquiry_list th:last-child{ */
-/* 	border-radius: 0 15px 0 0; */
-/* } */
-
-#inquiry_list th {
-/* 	background-color: #26a653; */
-/* 	color: #fff; */
-	border-bottom: 1px solid black;
-}
+	#inquiry_list th, td {
+		height: 40px;
+	    text-align: center;
+	    border-bottom: 2px dotted #D2D79F;
+	}
 	
-	.up_down{
-	position: relative;
-}
-
-.up_down:after {
-    position: absolute;
-    left: -70px;
-    top: 3px;
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-    transform: rotate(135deg);
-}
-
-.up_down2{
-	display:none;
-	position: relative;
-/* 	float: right; */
-    margin: 8px 0 0 0;
-}
-
-.up_down2:after {
-    position: absolute;
-    left: -70px;
-    top: 8px;
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-    transform: rotate(315deg);
-}
-
-.select_box {
-	position: absolute;
-	display:none;
-	right: 210px;
-	top: 240px;
-	color: #000;
-}
-
-.select_box1, .select_box2, .select_box3 {
-	padding: 10px;
-	background-color: #fff;
-	cursor: pointer;
-}
-
+	#inquiry_list th {
+		background-color: #F8EDE3;
+		height: 50px;
+    	border-bottom: 2px solid #D2D79F;
+	}
 
 .main_content1 {
 	display: flex;
 	flex-direction: column;
 	width: 70%;
-	height:90%;
+	height: 90%;
 	background-color: #fff;
 	padding: 20px;
 }
@@ -108,7 +55,7 @@
 	flex-direction: column;
 }
 
-.main_item1 p, .main_item2 p{
+.main_item1 p, .main_item2 p {
 	display: block;
 	font-size: 15px;
 	opacity: 0.9;
@@ -121,31 +68,29 @@
 	min-width: 100px;
 }
 
-
 .detail_header {
-	display:flex;
+	display: flex;
 	width: 100%;
 	padding: 20px 10px;
 	border-bottom: 1px solid #ccc;
 }
 
-.header_item1{
-	display:flex;
+.header_item1 {
+	display: flex;
 	width: 49%;
 }
 
-.header_item2{
-	display:flex;
+.header_item2 {
+	display: flex;
 	width: 49%;
 	justify-content: space-evenly;
 }
 
-
-.detail_title{
-    display: flex;
-    width: 100%;
-    padding: 20px 10px;
-    border-bottom: 1px solid #ccc;
+.detail_title {
+	display: flex;
+	width: 100%;
+	padding: 20px 10px;
+	border-bottom: 1px solid #ccc;
 }
 
 .title_item {
@@ -154,9 +99,9 @@
 }
 
 .detail_content {
-	display:flex;
+	display: flex;
 	width: 100%;
-	min-height:60%;
+	min-height: 60%;
 	padding: 30px 10px;
 	border-bottom: 1px solid #ccc;
 }
@@ -165,29 +110,35 @@
 	display: flex;
 }
 
-.content_item h5{
+.content_item h5 {
 	align-self: center;
 }
 
-/* .title_item p { */
-/* 	width: 70%; */
-/* 	padding-left: 15%; */
-/* } */
-
-.btn_box{
+.btn_box {
 	display: flex;
 	justify-content: space-evenly;
 }
-    
-    .btn_box button {
+
+#answer{
+	width: 100%;
+	border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+/* .select_box { */
+/* 	align-self: flex-end; */
+/* } */
+
+.btn_box button, #add {
 	display: inline-block;
 	width: 40%;
 	padding: 15px 0;
 	text-decoration: none;
 	margin: 20px 0;
 	color: #fff;
-	font-weight:bold;
-	font-size:18px;
+	font-weight: bold;
+	font-size: 18px;
 	border: 1px solid #26a653;
 	text-align: center;
 	background-color: #26a653;
@@ -201,98 +152,120 @@
 <body>
 	<h1>문의내역</h1>
 	<div id="main_controller">
+		<section class="select_box">
+			<select class="state">
+				<option value="전체상태">전체상태</option>
+				<option value="답변대기">답변대기</option>
+				<option value="답변완료">답변완료</option>
+			</select>
+		</section>
 		<c:if test="${detail eq null }">
-		<table id="inquiry_list">
-							<tr>
-								<th>문의번호</th>
-								<th>문의제목</th>
-								<th>문의날짜</th>
-								<th>유저코드</th>
-								<th class="select">문의상태
-									
-<!-- 									<div class="select_box"> -->
-<!-- 										<div class="select_box1">전체보기</div> -->
-<!-- 										<div class="select_box2">답변대기</div> -->
-<!-- 										<div class="select_box3">답변완료</div> -->
-<!-- 									</div> -->
-<!-- 									<i class="up_down"></i> -->
-<!-- 									<i class="up_down2"></i> -->
-								</th>
-								
-							</tr>
-							
-							<c:forEach var="list" items="${inquiryList}">
-								<tr class="inquiry_item${list.inquiryCode} item_box">
-									<td>${list.inquiryCode}</td>
-									<td>${list.inquiryTitle}</td>
-									<td>${list.createDate}</td>
-									<td>${list.userCode}</td>
-									<td>${list.inquiryState}</td>
-								</tr>	
-								<script type="text/javascript">
-									 $('.inquiry_item${list.inquiryCode}').on("click",function(){
-										location.href = "${pageContext.request.contextPath}/admin/detail/${list.inquiryCode}";
-									 });
-								</script>
-							</c:forEach>
-							
-						</table>
-						</c:if>
-						<c:if test="${detail ne null }">
-						<div class="main_content1">
-					<div class="main_item1">
-						<div class="detail_header">
-							<section class="header_item1">
-								<h5>등록일</h5><p>${inquiryVO.createDate}</p>
-							</section>
-							<section class="header_item2">
-								<h5>처리상태</h5><p>${inquiryVO.inquiryState}</p>
-							</section>
-						</div>
-						<div class="detail_title">
-							<section class="title_item">
-								<h5>제목</h5><p>${inquiryVO.inquiryTitle}</p>
-							</section>
-						</div>
-						<div class="detail_content">
-							<section class="content_item">
-								<h5>내용</h5><p>${inquiryVO.inquiryContent}</p>
-							</section>
-						</div>
+			<table id="inquiry_list">
+				<tr>
+					<th>문의번호</th>
+					<th>문의제목</th>
+					<th>문의날짜</th>
+					<th>유저코드</th>
+					<th>문의상태</th>
+				</tr>
+
+				<c:forEach var="list" items="${inquiryList}">
+					<tr class="inquiry_item${list.inquiryCode} item_box">
+						<td>${list.inquiryCode}</td>
+						<td>${list.inquiryTitle}</td>
+						<td>${list.createDate}</td>
+						<td>${list.userCode}</td>
+						<td>${list.inquiryState}</td>
+					</tr>
+					<script type="text/javascript">
+						$('.inquiry_item${list.inquiryCode}').on("click",function(){
+							location.href = "${pageContext.request.contextPath}/admin/detail/${list.inquiryCode}";
+						});
+						
+						$('.state').on("change", function(){
+							$('.inquiry_item${list.inquiryCode}').show();
+				        	if($('.state').val() == "답변대기"){
+				        		if('${list.inquiryState}' == '답변완료'){
+				        			$('.inquiry_item${list.inquiryCode}').hide();
+				        		}
+				        	}else if($('.state').val() == "답변완료"){
+				        		if('${list.inquiryState}' == '답변대기'){
+				        			$('.inquiry_item${list.inquiryCode}').hide();
+				        		}
+				        	}else{
+				        		$('.inquiry_item${list.inquiryCode}').show();
+				        	}
+			        	});
+					</script>
+				</c:forEach>
+
+			</table>
+		</c:if>
+		<c:if test="${detail ne null }">
+			<div class="main_content1">
+				<div class="main_item1">
+					<div class="detail_header">
+						<section class="header_item1">
+							<h5>등록일</h5>
+							<p>${inquiryVO.createDate}</p>
+						</section>
+						<section class="header_item2">
+							<h5>처리상태</h5>
+							<p>${inquiryVO.inquiryState}</p>
+						</section>
 					</div>
-					<!-- 관리자 답변 들어갈곳 -->
-					<c:if test="${inquiryVO.inquiryState eq '답변완료'}">
+					<div class="detail_title">
+						<section class="title_item">
+							<h5>제목</h5>
+							<p>${inquiryVO.inquiryTitle}</p>
+						</section>
+					</div>
+					<div class="detail_content">
+						<section class="content_item">
+							<h5>내용</h5>
+							<p>${inquiryVO.inquiryContent}</p>
+						</section>
+					</div>
+				</div>
+				<!-- 관리자 답변 들어갈곳 -->
+				<c:if test="${inquiryVO.inquiryState eq '답변완료'}">
 					<div class="main_item2">
 						<div class="detail_header">
 							<section class="header_item1">
-								<h5>답변일</h5><p>${inquiryVO.answerDate}</p>
+								<h5>답변일</h5>
+								<p>${inquiryVO.answerDate}</p>
 							</section>
 						</div>
 						<div class="detail_content">
 							<section class="content_item">
-								<h5>답변</h5><p>${inquiryVO.answerContent}</p>
+								<h5>답변</h5>
+								<p>${inquiryVO.answerContent}</p>
 							</section>
 						</div>
+						<div class="btn_box">
+							<button id="btn">뒤로가기</button>
+						</div>
 					</div>
-					</c:if>
-					<c:if test="${inquiryVO.inquiryState eq '답변대기'}">
+				</c:if>
+				<c:if test="${inquiryVO.inquiryState eq '답변대기'}">
 					<div class="main_item2">
 						<div class="detail_content">
 							<section class="content_item">
-								<h5>답변내용</h5> <textarea id="answer" name="answer" rows="10" cols="100"></textarea>
+								<h5>답변내용</h5>
+								<textarea id="answer" name="answer" rows="10" cols="100"></textarea>
 							</section>
 						</div>
-					</div>
-					<button id="add">답변하기</button>
-					</c:if>
-					<div class="btn_box">
+						<div class="btn_box">
+						<button id="add">답변하기</button>
 						<button id="btn">뒤로가기</button>
 					</div>
 					</div>
-				</div>
-			</c:if>
+				</c:if>
+			</div>
 	</div>
-	
+	</c:if>
+	</div>
+
 	<script type="text/javascript">
 		$('#btn').on("click", function(){
 			location.href = "${pageContext.request.contextPath}/admin/adminselect?adminselect=qna";
@@ -300,7 +273,16 @@
 		
 		$('#add').on("click", function(){
 			const answer = $('#answer').val();
-			location.href = "${pageContext.request.contextPath}/admin/inquiry_add?detail=${inquiryVO.inquiryCode}&answer="+answer;
+			if(answer.trim() == null || answer.trim() == ""){
+				alert('내용이 비었습니다.');
+				return;
+			}
+			
+			var confirm_val = confirm("글을 작성하시겠습니까?");
+			 
+			if(confirm_val) {
+				location.href = "${pageContext.request.contextPath}/admin/inquiry_add?detail=${inquiryVO.inquiryCode}&answer="+answer;
+			}
 		});
 	</script>
 </body>
