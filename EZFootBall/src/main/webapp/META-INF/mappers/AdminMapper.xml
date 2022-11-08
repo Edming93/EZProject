@@ -296,6 +296,97 @@
 		delete from gamelist where rv_code = #{rvCode}
 	</delete>
 	
+	<!-- 유저리스트 뽑기 -->
+	<select id="UInfoList" resultType="UserVO">
+		select user_code, team_code, user_name, user_id, user_pw, user_birth,
+			user_gender, user_local, user_district, user_address, user_email1,
+			user_email2, user_authority, user_black, user_reports, user_score,
+			user_win, user_lose, user_status
+		 from user_info where user_status = '활성' and user_reports != 3
+	</select>
+	<!-- 조건부 유저리스트 뽑기 -->
+	<select id="UInfoList1" resultType="UserVO">
+		select user_code, team_code, user_name, user_id, user_pw, user_birth,
+			user_gender, user_local, user_district, user_address, user_email1,
+			user_email2, user_authority, user_black, user_reports, user_score,
+			user_win, user_lose, user_status
+		 from user_info where user_status = '활성' and user_reports != 3
+
+		 	<if test="userCode != null">
+		 		and user_code like concat ('%',#{userCode},'%')
+		 	</if>
+		 	<if test="userName != null">
+		 		and user_name like concat ('%',#{userName},'%')
+		 	</if>
+		 	<if test="userId != null">
+		 		and user_id like concat ('%',#{userId},'%')
+		 	</if>
+		 	<if test="userBirth != null">
+		 		and user_birth like concat ('%',#{userBirth},'%')
+		 	</if>
+		 	<if test="userGender != null">
+		 		and user_gender like concat ('%',#{userGender},'%')
+		 	</if>
+		 	<if test="userAuthority != null">
+		 		and user_authority like concat ('%',#{userAuthority},'%')
+		 	</if>
+		 	<if test="userReports != null">
+		 		and user_reports like concat ('%',#{userReports},'%')
+		 	</if>
+		 	<if test="userStatus != null">
+		 		and user_status like concat ('%',#{userStatus},'%')
+		 	</if>
+		 
+	</select>
+	<!-- 블랙리스트 유저리스트 뽑기 -->
+	<select id="UInfoListB" resultType="UserVO">
+		select user_code, team_code, user_name, user_id, user_pw, user_birth,
+			user_gender, user_local, user_district, user_address, user_email1,
+			user_email2, user_authority, user_black, user_reports, user_score,
+			user_win, user_lose, user_status
+		 from user_info where user_reports = 3
+	</select>
+	<!-- 블랙리스트 조건부 출력 -->
+	<select id="UInfoListB1" resultType="UserVO">
+		select user_code, team_code, user_name, user_id, user_pw, user_birth,
+			user_gender, user_local, user_district, user_address, user_email1,
+			user_email2, user_authority, user_black, user_reports, user_score,
+			user_win, user_lose, user_status
+		 from user_info where user_reports = 3
+
+		 	<if test="userCode != null">
+		 		and user_code like concat ('%',#{userCode},'%')
+		 	</if>
+		 	<if test="userName != null">
+		 		and user_name like concat ('%',#{userName},'%')
+		 	</if>
+		 	<if test="userId != null">
+		 		and user_id like concat ('%',#{userId},'%')
+		 	</if>
+		 	<if test="userBirth != null">
+		 		and user_birth like concat ('%',#{userBirth},'%')
+		 	</if>
+		 	<if test="userGender != null">
+		 		and user_gender like concat ('%',#{userGender},'%')
+		 	</if>
+		 	<if test="userAuthority != null">
+		 		and user_authority like concat ('%',#{userAuthority},'%')
+		 	</if>
+		 	<if test="userReports != null">
+		 		and user_reports like concat ('%',#{userReports},'%')
+		 	</if>
+		 	<if test="userStatus != null">
+		 		and user_status like concat ('%',#{userStatus},'%')
+		 	</if>
+
+	</select>
+	
+	<!-- 블랙리스트 유저만들기 -->
+	<update id="UUInfoList">
+		update user_info 
+		set user_black ='O', user_reports = 3
+		where user_code = #{userCode}
+	</update>
 	
 	
 	

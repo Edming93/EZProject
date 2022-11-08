@@ -78,8 +78,35 @@ public class AdminController {
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		model.addAttribute("managerList", managerService.getManagerList());
+		// 유저 정보 출력하기
+		model.addAttribute("userList",service.UInfoList());
+		model.addAttribute("team", service.joinList());
+		model.addAttribute("userListB",service.UInfoListB());
 		return "adminPage/adminMain";
 	}
+	// 유저정보 조건부 출력
+		@PostMapping("/select1")
+		public String mainselect(HttpSession session, Model model, UserVO vo,
+								@RequestParam("Uselect") String Uselect, @RequestParam("Usearch") String Usearch) {
+			
+			if (Uselect.equals("userCode")) {
+				vo.setUserCode(Integer.parseInt(Usearch));
+			} else if (Uselect.equals("userName")) {	
+				vo.setUserName(Usearch);
+			} else if (Uselect.equals("userId")) {
+				vo.setUserId(Usearch);
+			} else if (Uselect.equals("userBirth")) {
+				vo.setUserBirth(Usearch);
+			} else if (Uselect.equals("userGender")) {
+				vo.setUserGender(Usearch);
+			} else if (Uselect.equals("userAuthority")) {
+				vo.setUserAuthority(Usearch);
+			} else if (Uselect.equals("userReports")) {
+				vo.setUserReports(Usearch);
+			} 
+			model.addAttribute("userList",service.UInfoList1(vo));
+			return "adminPage/adminMain";
+		}
 
 	@GetMapping("/subselect")
 	public String subselect(@RequestParam("subselect") String subselect, Model model, HttpSession session) {
@@ -96,8 +123,65 @@ public class AdminController {
 	@GetMapping("/idselect")
 	public String idselect(@RequestParam("idselect") String idselect, Model model) {
 		model.addAttribute("idselect", idselect);
+	
+		model.addAttribute("userList",service.UInfoList());
+		model.addAttribute("userListB",service.UInfoListB());
 		return "adminPage/adminMain";
 	}
+	// 블랙리스트 조건부 출력
+			@PostMapping("/idselect1")
+			public String idselect1(HttpSession session, Model model, UserVO vo,
+									@RequestParam("Uselect") String Uselect, @RequestParam("Usearch") String Usearch) {
+				
+				if (Uselect.equals("userCode")) {
+					vo.setUserCode(Integer.parseInt(Usearch));
+				} else if (Uselect.equals("userName")) {	
+					vo.setUserName(Usearch);
+				} else if (Uselect.equals("userId")) {
+					vo.setUserId(Usearch);
+				} else if (Uselect.equals("userBirth")) {
+					vo.setUserBirth(Usearch);
+				} else if (Uselect.equals("userGender")) {
+					vo.setUserGender(Usearch);
+				} else if (Uselect.equals("userAuthority")) {
+					vo.setUserAuthority(Usearch);
+				} else if (Uselect.equals("userReports")) {
+					vo.setUserReports(Usearch);
+				} 
+				model.addAttribute("userList",service.UInfoListB1(vo));
+				return "adminPage/adminMain";
+			}
+	
+	// 블랙리스트로 추가해버리기~
+		@PostMapping("/UUInfoList")
+		@ResponseBody
+		public int UUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
+				UserVO vo) {
+			System.out.println("오긴하나1111111??");
+
+			UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+			String userId = uvo.getUserId();
+
+			int result = 0;
+			int userCode = 0;
+
+			if (uvo != null) {
+				System.out.println("제발~~~");
+
+				for (String i : chArr) {
+					userCode = Integer.parseInt(i);
+					vo.setUserCode(userCode);
+					System.out.println("오긴하나222222??");
+					System.out.println(userCode);
+					System.out.println("왜다지워짐? : " + userCode);
+					service.UUInfoList(userCode);
+					
+				}
+				result = 1;
+			}
+
+			return result;
+		}
 
 	// 매니저 리스트 출력
 	@GetMapping("/magselect")

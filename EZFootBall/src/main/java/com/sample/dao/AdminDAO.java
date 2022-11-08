@@ -52,5 +52,12 @@ public interface AdminDAO {
 	//리뷰 검색
 	public List<ReviewCommentVO> reviewselect(ReviewCommentVO vo);
 	
+	// 유저관리 - 유저리스트 출력
+	public List<UserVO> UInfoList();
+	public List<UserVO> UInfoList1(UserVO vo);
+	
+	public List<UserVO> UInfoListB();
+	public List<UserVO> UInfoListB1(UserVO vo);
+	public int UUInfoList(int userCode);
 
 }
