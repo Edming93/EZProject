@@ -578,7 +578,7 @@
 					}   
 				}
                   </script>
-<!--                   <input type="text" name="merchant" id="merchant" onchange="plz()" /> -->
+
                   <div class="payment_container">
                      <button id="payment_btn" onclick="requestPay()">결제하기</button>
                   </div>
@@ -602,21 +602,18 @@
 
 
 	<script type="text/javascript">
-  		function plz(){
-  			var merchant = document.getElementById("merchant");
-  			console.log("여기는오겠지 :"+merchant.value);
-  		}
+  	
       
       var IMP = window.IMP; // 생략가능
       IMP.init('imp44418126'); // <-- 본인 가맹점 식별코드 삽입
       function requestPay() {
-    	  console.log("과연?? : "+merchant.value);
+
          IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
          IMP.request_pay({
             pg: "inicis",
             pay_method: "card",
-            merchant_uid: merchant.value,
-            name: '${match.fieldName}',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: '목동',
             amount: '100',
             buyer_email: 'iamport@siot.do',
             buyer_name: '구매자',
@@ -625,14 +622,20 @@
             buyer_postcode: '123-456'
          }, function (rsp) { // callback
             if (rsp.success) {
-            	alert("결제에 성공하셨습니다!");
+            	var msg = '결제에 성공하셨습니다!'; 
+            	 msg += '고유ID : ' + rsp.imp_uid;
+                 msg += '상점 거래ID : ' + rsp.merchant_uid;
+                 msg += '결제 금액 : ' + rsp.paid_amount;
+                 msg += '카드 승인번호 : ' + rsp.apply_num;
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
-            	if('${sessionScope.GlistVO.gameType}' == null){ // 구장예약일 경우
+            	if(${sessionScope.GlistVO.gameType eq null}){ // 구장예약일 경우
+            		alert(msg);
                   	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+'${field.fieldCode}'+"&fieldName="+'${field.fieldName}'+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+'${field.fieldRentalfee}'
                   					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+'${time}';
-            	}else if('${sessionScope.GlistVO.gameType}' == 'T') { // 팀매치 예약일 경우
-            		location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
+            	}else if(${sessionScope.GlistVO.gameType eq 'T'}) { // 팀매치 예약일 경우
+            		alert(msg);
+            		location.href ="${pageContext.request.contextPath}/rental/resultTeam";
             	}
             } else {
 				alert("결제에 실패하셨습니다!");
