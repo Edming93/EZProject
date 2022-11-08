@@ -159,7 +159,7 @@
 }
 </style>
 <body>
-	<h1>문의대기</h1>
+	<h1>문의완료</h1>
 	<div id="main_controller">
 <!-- 		<section class="select_box"> -->
 <!-- 			<select class="state"> -->
@@ -190,10 +190,9 @@
 						$('.inquiry_item${list.inquiryCode}').on("click",function(){
 							location.href = "${pageContext.request.contextPath}/admin/detail/${list.inquiryCode}";
 						});
-						
-						if('${list.inquiryState}' == '답변완료'){
-			        		$('.inquiry_item${list.inquiryCode}').hide();
-			        	}
+						if('${list.inquiryState}' == '답변대기'){
+		        			$('.inquiry_item${list.inquiryCode}').hide();
+		        		}
 						
 // 						$('.state').on("change", function(){
 // 							$('.inquiry_item${list.inquiryCode}').show();

@@ -23,6 +23,13 @@
 		WHERE mgr_state = 'TO'
 	</select>
 	
+	<select id="managerHistoryList2" resultType="managerVO">
+		SELECT mgr_code, prefer_area, mgr_content, mgr_date, CASE mgr_state WHEN 'TO' THEN '신청완료' WHEN 'RE' THEN '검토중' WHEN 'PASS' THEN '합격' WHEN 'FAIL' THEN '불합격' END mgr_state, m.user_code, u.user_name
+		FROM manager_history AS m INNER JOIN user_info AS u
+		ON m.user_code = u.user_code
+		WHERE mgr_state = 'FAIL'
+	</select>
+	
 	<!-- 매니저 등록을하면 user_info에서도 매니저로 변경 -->
 	<update id="managerAdd">
 		UPDATE manager_history AS m INNER JOIN user_info AS u
@@ -44,6 +51,21 @@
 		WHERE user_authority = '매니저'
 	</select>
 	
+	<update id="managerAdd2" parameterType="UserVO">
+		UPDATE user_info SET user_authority = '매니저'
+		WHERE user_code = #{userCode} AND user_id = #{userId}
+	</update>
+	
+	<update id="managerDelete" parameterType="UserVO">
+		UPDATE user_info SET user_authority = '일반회원'
+		WHERE user_code = #{userCode}
+	</update>
+	
+	<update id="isManagerHistory" parameterType="managerVO">
+		UPDATE manager_history SET mgr_state = 'FAIL'
+		WHERE mgr_code = 
+		(SELECT mgr_code FROM manager_history WHERE user_code = #{user_code}) 
+	</update>
 
 </mapper>
 

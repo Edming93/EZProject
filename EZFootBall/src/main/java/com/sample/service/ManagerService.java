@@ -30,6 +30,10 @@ public class ManagerService {
 		return managerDAO.managerHistoryList(managerVO);
 	}
 
+	public List<ManagerVO> managerHistoryList2(ManagerVO managerVO) {
+		return managerDAO.managerHistoryList2(managerVO);
+	}
+
 	public void managerAdd(int mgrCode) {
 		managerDAO.managerAdd(mgrCode);
 	}
@@ -40,5 +44,17 @@ public class ManagerService {
 
 	public List<UserVO> getManagerList() {
 		return managerDAO.getManagerList();
+	}
+
+	public void managerAdd2(UserVO uservo) {
+		managerDAO.managerAdd2(uservo);
+	}
+
+	public void managerDelete(int userCode) {
+		managerDAO.managerDelete(userCode);
+	}
+
+	public void isManagerHistory(int userCode) {
+		managerDAO.isManagerHistory(userCode);
 	}
 }

@@ -121,7 +121,7 @@
 			</tr>
 			<c:forEach var="list" items="${managerList}">
 			<tr class="item_box">
-				<td><input type="checkbox" name="ck" id="ck" class="ck" /></td>
+				<td><input type="checkbox" name="ck" id="ck" class="ck"  userCode="${list.userCode}" /></td>
 				<td>${list.userCode}</td>
 				<td>${list.userId}</td>
 				<td>${list.userName}</td>
@@ -133,10 +133,10 @@
 		</table>
 		<div id="add_box">
 			<h5 class="title_h5">매니저 추가</h5>
-			<h5>유저 ID</h5>
-			<input type="text" name="userId" id="userId" />
 			<h5>유저 코드</h5>
 			<input type="text" name="userCode" id="userCode" />
+			<h5>유저 ID</h5>
+			<input type="text" name="userId" id="userId" />
 			<div class="btn_box2">
 				<button id="box_add">추가</button>
 				<button id="box_close">취소</button>
@@ -170,15 +170,46 @@
 			var confirm_val = confirm("매니저를 추가하시겠습니까?");
 			 
 			if(confirm_val) {
-				location.href = "${pageContext.request.contextPath}/admin/manageradd";
+				location.href = "${pageContext.request.contextPath}/admin/manageradd?userId="+userId+"&userCode="+userCode;
 			}
 		});
 		
 		$('#box_close').click(function(){
 			$('#add_box').hide();
+		});		
+	</script>
+	
+	<script type="text/javascript">
+		// 매니저 삭제
+		$('#delete').click(function(){
+			var confirm_val = confirm("매니저 삭제를 진행하시겠습니까?");
+			 
+			if(confirm_val) {
+				var checkArr = new Array();
+				  
+				$("input[class='ck']:checked").each(function(){
+				    checkArr.push($(this).attr("userCode"));
+				});
+				   
+				   var chbox = new Array();
+				   $.ajax({
+				    url : "${pageContext.request.contextPath}/admin/magDelete",
+				    type : "POST",
+				  
+				    data : { chbox : checkArr },
+				    success : function(result){
+				    	if(result == 1) { 
+				    		location.href = "${pageContext.request.contextPath}/admin/magselect?magselect=magList";
+			    		}else {
+			    			alert("삭제 실패");
+			    		}
+		    		},
+		    		error : function(){
+		    			alert("삭제를 진행할 인원을 체크해주세요");
+		    		}
+		    	});
+			}
 		});
-		
-		
 	</script>
 </body>
 </html>

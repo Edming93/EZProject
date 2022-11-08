@@ -60,8 +60,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qna"><li>문의?</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=notice"><li>공지사항???</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qna"><li>문의대기</li></a>
+            <a class="menu" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qnafinish"><li>문의완료</li></a>
         </ul>
     </div>
     <div id="maincontent">
@@ -70,9 +70,9 @@
         		%>
 	    		  <jsp:include page="./qna.jsp"></jsp:include>
 	    		<%
-        	}else if(adminselect.equals("notice")){
+        	}else if(adminselect.equals("qnafinish")){
         		%>
-	    		  <jsp:include page="./notice.jsp"></jsp:include>
+	    		  <jsp:include page="./qnafinish.jsp"></jsp:include>
 	    		<%
         	}
         %>
