@@ -155,7 +155,7 @@ public class RentalController {
 		session.setAttribute("FRVO", rvo);
 		GlistVO gvo = (GlistVO)session.getAttribute("GlistVO");
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
-		
+		System.out.println("이거있는데.? :" + gvo.getGamePlace());
 		
 		if(Tservice.putTeamMatchGlist(gvo)) {
 			int Gnum =	Tservice.getTeamMatchGlist();
@@ -185,7 +185,7 @@ public class RentalController {
 		rvo1.setRvType(gvo.getGameType());
 		rvo1.setGameCode(Gnum);
 		rvo1.setUserPayment(gvo.getUteamPay());
-		rvo1.setTeamCode(uvo.getTeamCode());
+		rvo1.setTeamCode(Tnum);
 		System.out.println("제발제발 : "+Tnum);
 		
 		Tservice.insertFieldRVT(rvo1);
