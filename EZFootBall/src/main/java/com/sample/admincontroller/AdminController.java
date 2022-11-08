@@ -110,10 +110,6 @@ public class AdminController {
 			List<ManagerVO> list = managerService.managerHistoryList(managerVO);
 			model.addAttribute("managerVO", list);
 		}
-		if (magselect.equals("magFailList")) {
-			List<ManagerVO> list = managerService.managerHistoryList2(managerVO);
-			model.addAttribute("managerVO", list);
-		}
 
 		model.addAttribute("magselect", magselect);
 		return "adminPage/adminMain";
@@ -142,31 +138,6 @@ public class AdminController {
 		int result = 0;
 		for (String mgrCode : chArr) {
 			managerService.managerFail(Integer.parseInt(mgrCode));
-			result = 1;
-		}
-		return result;
-	}
-
-	@GetMapping("/manageradd")
-	public String manageradd(@RequestParam("userCode") String userCode, @RequestParam("userId") String userId,
-			Model model, UserVO userVO) {
-
-		userVO.setUserCode(Integer.parseInt(userCode));
-		userVO.setUserId(userId);
-		managerService.managerAdd2(userVO);
-
-		model.addAttribute("magselect", "magList");
-		return "redirect:/admin/magselect";
-	}
-
-	// 매니저 탈락
-	@PostMapping("/magDelete")
-	@ResponseBody
-	public int magDelete(@RequestParam("chbox[]") List<String> chArr, ManagerVO managerVO, HttpSession session) {
-		int result = 0;
-		for (String userCode : chArr) {
-			managerService.managerDelete(Integer.parseInt(userCode));
-			managerService.isManagerHistory(Integer.parseInt(userCode));
 			result = 1;
 		}
 		return result;
