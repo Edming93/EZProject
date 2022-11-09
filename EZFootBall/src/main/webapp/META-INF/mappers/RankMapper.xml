@@ -14,4 +14,16 @@
 		FROM user_abil
 		WHERE user_code = #{userCode}
 	</select>
+	
+	<select id="result" resultType="int" parameterType="GameResultVO">
+		select count(*)
+		from game_result
+		where user_code = #{userCode} and result = '승'
+	</select>
+	
+	<select id="lose" resultType="int"  parameterType="GameResultVO">
+		select count(*)
+		from game_result
+		where user_code = #{userCode} and result = '패'
+	</select>
 </mapper>

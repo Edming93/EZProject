@@ -58,6 +58,7 @@ public class SubController {
 			vo.setGameCode(gameCode[i]);
 			service.delete(vo);
 			service.tdelete(vo);
+			service.delupdate(gameCode[i]);
 		}
 		
 		return "redirect:/admin/select?select="+session.getAttribute("select");
@@ -78,6 +79,7 @@ public class SubController {
 			vo.setUserCode(userCode[i]);
 			vo.setGameCode(gameCode[i]);
 			service.sdelete(vo);
+			service.delupdate(gameCode[i]);
 		}
 		
 		return "redirect:/admin/select?select="+session.getAttribute("select");

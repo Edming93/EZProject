@@ -298,12 +298,15 @@
     	console.log(document.getElementsByClassName("userCode").length);
     	let cnt =0;
     	
-    	var listnum = new Array();
-    	
-    	for(let i=0; i< <%=gamelist.size()%>; i++){
-    		listnum.push()
+    	let pnum=0;
+    	let index = 0;
+    	for(let i=0; i< <%=stgamelist.size()%>; i++){
+    		if(document.getElementsByClassName("gameCode")[i].innerText == ingameCode){
+    			pnum = document.getElementsByClassName("GamePnum")[i].innerText;
+    			index = i;
+    			break;
+    		}
     	} 
-    	
     	if(lcnt > 0 && ccnt >0 ){
     		for(let i=0; i<   document.getElementsByClassName("userCode").length; i++){
         		
@@ -313,8 +316,15 @@
         			break;
         		}
         	} 
+    		var max = false;
+    		if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText){
+    			var confirmflag = confirm("최대 신 팀 이상입니다 신청 하시겠습니까?");
+    			 if(confirmflag){
+    				 max = true
+    	           }
+    		}
         	
-        	if(cnt == 0) {
+        	if(cnt == 0 && max == true) {
         		location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
     			
         	}
@@ -431,6 +441,15 @@
 										%>
 									</td>
 									<td class="GamePnum">
+										<%
+											for(int j=0; j< gamelist.size(); j++){
+												if(stgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
+													out.print(gamelist.get(j).getGamePnum());
+												}
+											}
+										%>
+									</td>
+									<td class="GamePnum" style="display: none;">
 										<%
 											for(int j=0; j< gamelist.size(); j++){
 												if(stgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
