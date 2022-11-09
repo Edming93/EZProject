@@ -1,6 +1,21 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	String authority = null;
+	if(session.getAttribute("sessionVO") != null) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		authority = uvo.getUserAuthority();
+		
+	}else {
+		authority = "일반회원";
+		
+	}
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +58,7 @@
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 15px;
+        padding-top: 20px;
     }
 
     .header_content {
@@ -99,7 +114,7 @@
         display: flex;
         justify-content: center;
 	    margin-bottom: 13px;
-	    margin-top: 13px;
+	    margin-top: 20px;
 	    align-items: center;
         
     }
@@ -192,9 +207,12 @@
 
     .bottom_banner {
         width:100%;
-        height:205px;
+        height:235px;
         background-color: #26A653;
-        margin-top: 100px;
+    	margin-top: 100px;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
     }
     
     footer {
@@ -232,14 +250,23 @@
                <div class="header_left main_logo">
                
                </div>
-               <div class="header_right login_btn etc_btn">
+                              <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
+<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
+                  <div class="adminMove">
+                  	<% if(authority.equals("관리자")){ %>
+                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%}else if(authority.equals("매니저")){%>
+				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%} %>
+                  </div>
+                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-
+<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -250,6 +277,8 @@
                         </svg>
                      </a>
                   </div>
+                  
+                  <% if(session.getAttribute("sessionVO") == null) { %>
                   <div class="etc_icon">
                      <a href="${pageContext.request.contextPath}/etc/etc">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -265,7 +294,55 @@
                         </svg>
                      </a>
                   </div>
+                  <% } %>
+                  
+                  <% if(session.getAttribute("sessionVO") != null) { %>
+                  <div class="logout_icon">
+                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
+						<iconify-icon icon="codicon:sign-out"></iconify-icon>
+                     </a>
+                  </div>
+                  <%} %>
                </div>
+            </div>
+            <script type="text/javascript">
+				if(document.querySelector(".admin_btn")){
+					let admin_btn = document.querySelector(".admin_btn");
+					admin_btn.addEventListener("click",function() {
+	     				if(confirm("관리자 페이지로 이동 하시겠습니까?")){
+	     					admin_btn.href="${pageContext.request.contextPath}/admin/admin";
+	     				}else{
+	     					admin_btn.href="#";
+	     				}
+	            	});
+				}	
+            
+				if(document.querySelector(".manager_btn")){
+					let manager_btn = document.querySelector(".manager_btn");
+					manager_btn.addEventListener("click",function() {
+	     				if(confirm("매니저 페이지로 이동 하시겠습니까?")){
+	     					manager_btn.href="${pageContext.request.contextPath}/manager/manager";
+	     				}else{
+	     					manager_btn.href="#";
+	     				}
+	            	});
+				}	
+            
+            
+            	if(document.querySelector(".logout_btn")){
+            	let logout_btn = document.querySelector(".logout_btn");
+
+					logout_btn.addEventListener("click",function() {
+	     				if(confirm("로그아웃 하시겠습니까?")){
+	     					alert("로그아웃 되었습니다.");
+	     					logout_btn.href="${pageContext.request.contextPath}/loginPage/logout";
+	     				}else{
+	     					alert("로그아웃을 취소하셨습니다.");
+	     					logout_btn.href="#";
+	     				}
+	            	});
+            	}
+            </script>
             </div>
          </div>
       </div>
@@ -285,8 +362,9 @@
     </div>
   
     <div class="bottom_banner">
-		
-
+    	<div class="banner_area">
+			<img src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
+		</div>
     </div>
 
 

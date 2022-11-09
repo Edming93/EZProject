@@ -45,10 +45,6 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
-	@GetMapping("/manager")
-	public String manager() {
-		return "adminPage/managerMain";
-	}
 
 	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
 			ManagerService managerService) {

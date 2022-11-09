@@ -6,15 +6,15 @@
 <%@ page import="java.math.BigInteger" %>
 
   <%
-    String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
-         + "&client_id=" + clientId
-         + "&redirect_uri=" + redirectURI
-         + "&state=" + state;
-    session.setAttribute("state", state);
+//     String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
+//     String redirectURI = URLEncoder.encode("http://localhost:8080/EZFootBall/home", "UTF-8");
+//     SecureRandom random = new SecureRandom();
+//     String state = new BigInteger(130, random).toString();
+//     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+//          + "&client_id=" + clientId
+//          + "&redirect_uri=" + redirectURI
+//          + "&state=" + state;
+//     session.setAttribute("state", state);
  %>
     <%
     	request.setCharacterEncoding("utf-8");

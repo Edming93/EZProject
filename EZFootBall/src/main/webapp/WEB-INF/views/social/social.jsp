@@ -182,6 +182,7 @@
 		    display: flex;
 		    justify-content: center;
 		    font-weight: 700;
+		    width: 70px;
     	}
     	
     	.gamename {

@@ -14,9 +14,8 @@
 	String authority = null;
 	if(session.getAttribute("sessionVO") != null) {
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
-		
 		authority = uvo.getUserAuthority();
-		System.out.println("권한"+uvo.getUserAuthority());	
+		
 	}else {
 		authority = "일반회원";
 		
@@ -97,7 +96,7 @@
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 15px;
+		padding-top: 20px;
     }
 
     .header_content {
@@ -152,7 +151,7 @@
         display: flex;
         justify-content: center;
 	    margin-bottom: 13px;
-	    margin-top: 13px;
+	    margin-top: 20px;
 	    align-items: center;
         
     }
@@ -249,18 +248,15 @@
 
     .bottom_banner {
         width:100%;
-        height:205px;
+        height:235px;
         background-color: #26A653;
     	margin-top: 100px;
-    }
-     .bottom_banner {
-        width:100%;
-        height:205px;
-        background-color: #26A653;
-       margin-top: 100px;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
     }
 
-    .admin_icon {
+    .header_icon {
 	    text-decoration: none;
 	    color: #4e4e4e;
 	    font-size: 27px;
@@ -285,11 +281,12 @@
                   </div>
                   <div class="adminMove">
                   	<% if(authority.equals("관리자")){ %>
-                  		<a class="admin_icon" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
 				  	<%}else if(authority.equals("매니저")){%>
-				  		<a class="admin_icon" href="${pageContext.request.contextPath}/admin/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
 				  	<%} %>
                   </div>
+                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
@@ -303,6 +300,8 @@
                         </svg>
                      </a>
                   </div>
+                  
+                  <% if(session.getAttribute("sessionVO") == null) { %>
                   <div class="etc_icon">
                      <a href="${pageContext.request.contextPath}/etc/etc">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -318,8 +317,55 @@
                         </svg>
                      </a>
                   </div>
+                  <% } %>
+                  
+                  <% if(session.getAttribute("sessionVO") != null) { %>
+                  <div class="logout_icon">
+                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
+						<iconify-icon icon="codicon:sign-out"></iconify-icon>
+                     </a>
+                  </div>
+                  <%} %>
                </div>
             </div>
+            <script type="text/javascript">
+				if(document.querySelector(".admin_btn")){
+					let admin_btn = document.querySelector(".admin_btn");
+					admin_btn.addEventListener("click",function() {
+	     				if(confirm("관리자 페이지로 이동 하시겠습니까?")){
+	     					admin_btn.href="${pageContext.request.contextPath}/admin/admin";
+	     				}else{
+	     					admin_btn.href="#";
+	     				}
+	            	});
+				}	
+            
+				if(document.querySelector(".manager_btn")){
+					let manager_btn = document.querySelector(".manager_btn");
+					manager_btn.addEventListener("click",function() {
+	     				if(confirm("매니저 페이지로 이동 하시겠습니까?")){
+	     					manager_btn.href="${pageContext.request.contextPath}/manager/manager";
+	     				}else{
+	     					manager_btn.href="#";
+	     				}
+	            	});
+				}	
+            
+            
+            	if(document.querySelector(".logout_btn")){
+            	let logout_btn = document.querySelector(".logout_btn");
+
+					logout_btn.addEventListener("click",function() {
+	     				if(confirm("로그아웃 하시겠습니까?")){
+	     					alert("로그아웃 되었습니다.");
+	     					logout_btn.href="${pageContext.request.contextPath}/loginPage/logout";
+	     				}else{
+	     					alert("로그아웃을 취소하셨습니다.");
+	     					logout_btn.href="#";
+	     				}
+	            	});
+            	}
+            </script>
 
          </div>
       </div>
@@ -388,7 +434,9 @@
     </div>
 
     <div class="bottom_banner">
-
+    	<div class="banner_area">
+			<img src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
+		</div>
     </div>
      <footer>
      <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
@@ -423,18 +471,15 @@
 	            </div>
 	        	<div class="footer_right">
 		            <div class="footer_com">
-		                <h2>EZfootball.com</h2>
-		                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
-		                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
-		                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
-		                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
-		                    국번없이 119
-		                </p>
-		                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
-		                    통신판매업 신고 2022-서울강서-0000
-		                </p>
-		                <p>Copyright EZ ALL rights reserved</p>
-		            </div>
+						<h2>EZfootball.com</h2>
+						<p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
+						<p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
+						<p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 | 대표메일
+							dragon695@naver.com | 마케팅 제안 : dragon695@naver.com | 국번없이 119</p>
+						<p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |</p> 
+						<p>통신판매업 신고 2022-서울강서-0000</p>
+						<p>Copyright EZ ALL rights reserved</p>
+					</div>
 	            	<h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
 	        	</div>
         	</div>

@@ -43,6 +43,8 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String postLogin(UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		// 소셜,팀매치 경기번호 세션 저장 여부에 따른 로그인 유효성검사 후 이동
 		if(session.getAttribute("snum") != null) {
 			String snum =(String) session.getAttribute("snum");
 			return (service.isUser(vo, session)) ? "redirect:/msocial/info?num="+snum : "loginPage/login";
@@ -53,46 +55,10 @@ public class LoginController {
 		}
 	
 		String pageurl = (String)session.getAttribute("pageurl");
-		System.out.println("값모야?: "+pageurl);
-		if(pageurl == null) {
-			pageurl = "redirect:/home";
-		}
-		
-		
-		String url = null;
-		
 		String id_ck = request.getParameter("id_remem");
-		if(id_ck == null) {
-			id_ck = "n";
-		}
-
-		session = request.getSession();
-		if(service.isUser(vo, session)) {
-			url = pageurl;
-			
-			if(id_ck.equals("checked")) {
-				Cookie cookie1 = new Cookie("userId", vo.getUserId());
-				Cookie cookie2 = new Cookie("id_ck", id_ck);
-				response.addCookie(cookie1);
-				response.addCookie(cookie2);
-				session.setAttribute("id_ck", id_ck);
-			} else if (id_ck == "n"){
-				Cookie cookie1 = new Cookie("userId",vo.getUserId());
-				Cookie cookie2 = new Cookie("id_ck", id_ck);
-				cookie1.setMaxAge(0);
-				cookie2.setMaxAge(0);
-				response.addCookie(cookie1);
-				response.addCookie(cookie2);
-				session.setAttribute("id_ck", id_ck);
-			}
-
-		}else {
-			request.setAttribute("page", "login");
-			url = "redirect:/loginPage/login?pageurl="+pageurl;
-		}
+		System.out.println("값모야?: "+pageurl);
 		
-		
-		return url;
+		return service.rememId(id_ck,pageurl,vo,session,request,response);
 	}
 
 	@GetMapping("/logout")
