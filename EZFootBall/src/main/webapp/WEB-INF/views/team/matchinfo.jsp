@@ -748,7 +748,7 @@
      	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
      	 	</div>
      	 	<div class="etc">
-     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　20000 / 인당
+     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gamePay} / 팀당
      	 		<!-- <script type="text/javascript">
      	 			if(${matchinfo.gameMacth} == '5vs5'){
      	 				document.getElementById("pay").innerText = "20000";
@@ -827,51 +827,51 @@
 	        	      .then(data => {
 	        	    	  if(data.fieldImg1 != null){
 	            	    		 var nimg1 = document.createElement("img");
-	            	    	     nimg1.src = data.fieldImg1
+	            	    	     nimg1.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg1
 	            	    	     nimg1.className = "field_image img1";
 	            	    	     document.getElementById("field_img_area").append(nimg1);
 	            	    	     var bimg1 = document.createElement("img");
-	            	    	     bimg1.src = data.fieldImg1
+	            	    	     bimg1.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg1
 	            	    	     bimg1.className = "banner_image img1";
 	            	    	     document.getElementById("picture_area").append(bimg1);
 	            	    	}
 	            	    	if(data.fieldImg2 != null){
 	            	    		 var nimg2 = document.createElement("img");
-	            	    	     nimg2.src = data.fieldImg2
+	            	    	     nimg2.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg2
 	            	    	     nimg2.className = "field_image img2";
 	            	    	     document.getElementById("field_img_area").append(nimg2);
 	            	    	     var bimg2 = document.createElement("img");
-	            	    	     bimg2.src = data.fieldImg2
+	            	    	     bimg2.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg2
 	            	    	     bimg2.className = "banner_image img2";
 	            	    	     document.getElementById("picture_area").append(bimg2);
 	            	    	}
 	            	    	if(data.fieldImg3 != null){
 	            	    		 var nimg3 = document.createElement("img");
-	            	    	     nimg3.src = data.fieldImg3
+	            	    	     nimg3.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg3
 	            	    	     nimg3.className = "field_image img3";
 	            	    	     document.getElementById("field_img_area").append(nimg3);
 	            	    	     var bimg3 = document.createElement("img");
-	            	    	     bimg3.src = data.fieldImg3
+	            	    	     bimg3.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg3
 	            	    	     bimg3.className = "banner_image img3";
 	            	    	     document.getElementById("picture_area").append(bimg3);
 	            	    	}
 	            	    	if(data.fieldImg4 != null){
 	            	    		 var nimg4 = document.createElement("img");
-	            	    	     nimg4.src = data.fieldImg4
+	            	    	     nimg4.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg4
 	            	    	     nimg4.className = "field_image img4";
 	            	    	     document.getElementById("field_img_area").append(nimg4);
 	            	    	     var bimg4 = document.createElement("img");
-	            	    	     bimg4.src = data.fieldImg4
+	            	    	     bimg4.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg4
 	            	    	     bimg4.className = "banner_image img4";
 	            	    	     document.getElementById("picture_area").append(bimg4);
 	            	    	}
 	            	    	if(data.fieldImg5 != null){
 	            	    		 var nimg5 = document.createElement("img");
-	            	    	     nimg5.src = data.fieldImg5
+	            	    	     nimg5.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg5
 	            	    	     nimg5.className = "field_image img5";
 	            	    	     document.getElementById("field_img_area").append(nimg5);
 	            	    	     var bimg1 = document.createElement("img");
-	            	    	     bimg5.src = data.fieldImg5
+	            	    	     bimg5.src = "${pageContext.request.contextPath}/image/ground/"+ data.fieldImg5
 	            	    	     bimg5.className = "banner_image img5";
 	            	    	     document.getElementById("picture_area").append(bimg5);
 	            	    	}
