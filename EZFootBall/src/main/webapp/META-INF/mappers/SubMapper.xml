@@ -26,6 +26,12 @@
 		WHERE game_code = #{gameCode} AND team_code = #{teamCode}
 	</delete>
 	
+	<update id="delupdate">
+		UPDATE gamelist
+		SET game_pnum = game_pnum - 1
+		WHERE game_code = #{gameCode}
+	</update>
+	
 	<select id="all" resultType="GlistVO">
 		select*
 		from gamelist

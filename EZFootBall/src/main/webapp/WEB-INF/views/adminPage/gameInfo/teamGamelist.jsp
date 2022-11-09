@@ -261,25 +261,21 @@
                 						<option value="20:00" id="20:00">20:00</option>
                 					</select></li>
                 <li><p>경기레벨 : </p> <select name="level" id="levelselect">
-                						<option value="Rookie1">루키1</option>
-                						<option value="Rookie2">루키2</option>
-                						<option value="Rookie3">루키3</option>
-                						<option value="Amateur1">아마추어1</option>
-                						<option value="Amateur2">아마추어2</option>
-                						<option value="Amateur3">아마추어3</option>
-                						<option value="Semi_pro1">세미프로1</option>
-                						<option value="Semi_pro2">세미프로2</option>
-                						<option value="Semi_pro3">세미프로3</option>
+                						<option value="루키1">루키1</option>
+                						<option value="루키2">루키2</option>
+                						<option value="루키3">루키3</option>
+                						<option value="아마추어1">아마추어1</option>
+                						<option value="아마추어2">아마추어2</option>
+                						<option value="아마추어3">아마추어3</option>
+                						<option value="프로1">세미프로1</option>
+                						<option value="프로2">세미프로2</option>
+                						<option value="프로3">세미프로3</option>
                 					</select></li>
                 <li><p>경기성별 : </p> <select name="gameGender" id="genderselect">
                 						<option value="혼성">혼성</option>
                 						<option value="남성">남성</option>
                 						<option value="여성">여성</option>
                 					</select></li>
-                <!-- <li><p>경기형태 : </p> <select id="matchselect">
-                						<option value="5vs5">5vs5</option>
-                						<option value="6vs6">6vs6</option>
-                					</select></li> -->
                 <li><p>최소팀 : </p> <input type="text" name="gameMinp" id="minp" class="inbox" autocomplete='off'></li>
                 <li><p>최대팀 : </p> <input type="text" name="gameMaxp" id="maxp" class="inbox" autocomplete='off'></li>
                 <li><p>매니저 : </p> <input type="text" name="gameMag" id="mag" class="inbox" autocomplete='off'></li>

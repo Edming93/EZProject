@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,9 +99,10 @@
 			<div class="innerdiv">
 				<div class="namediv">${rank.userName}</div>
 				<div class="scorediv">${rank.userScore} 점</div>
-				<div class="windiv">${rank.userWin} 승</div>
-				<div class="losediv">${rank.userLose} 패</div>
+				<div class="windiv">승</div>
+				<div class="losediv">패</div>
 				<div class="lediv" id="${rank.userCode}"></div>
+				<div class="ucdiv" style="display: none;">${rank.userCode}</div>
 			</div>
 			<%num++; %>
 		</div>
@@ -111,39 +110,83 @@
  	
  	<!-- 레벨 가져오기 -->
  	<script type="text/javascript">
-				window.onload = function(e) {
-					for(let i=0; i< <%=num%>; i++) {
-						let data = {user_code:document.getElementsByClassName("lediv")[i].id};
-						let icon = document.getElementsByClassName("licon")[i];
-						fetch("${pageContext.request.contextPath}/rank/selevel",{
-					         method : "POST", // PUT, PATCH, DELETE
-					         headers : {
-					            "Content-Type" : "application/json"},
-					         body : JSON.stringify(data)
-					      }).then(response => response.json()) 
-					      
-					      .then(data => {
-					    	  let level = data.userLevel
-					    	  let lv = level.substring(0,level.length-1);
-					    	  
-					    	  //document.getElementsByClassName("lediv")[i].innerText = data.userLevel;
-					    	  if(lv == '골드'){
-					    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-g' style='color: #ffd233;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
-					    	  }else if (lv == '실버') {
-					    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-s' style='color: #ccc;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
-					    	  }else if(lv == '브론즈'){
-					    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-b' style='color: #a95608;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
-					    	  }else{
-					    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-n' style='color: #26a653;' width='30' height='30'></iconify-icon>　";
-					    	  }
-					         
-					      }).catch(error => {
-					         console.log("error");
-					      });
-					}
-				}
+ 	window.onload = function(e) {
+		for(let i=0; i< <%=num%>-1; i++) {
+			var userCode = document.getElementsByClassName("ucdiv")[i].innerText;
+			console.log(userCode);
+			var data = {userCode:userCode};
+			let icon = document.getElementsByClassName("licon")[i];
+			fetch("${pageContext.request.contextPath}/rank/selevel",{
+		         method : "POST", // PUT, PATCH, DELETE
+		         headers : {
+		            "Content-Type" : "application/json"},
+		         body : JSON.stringify(data)
+		      }).then(response => response.json()) 
+		      
+		      .then(data => {
+		    	  let level = data.userLevel
+		    	  let lv = level.substring(0,level.length-1);
+		    	  
+		    	  //document.getElementsByClassName("lediv")[i].innerText = data.userLevel;
+		    	  if(lv == '프로'){
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-g' style='color: #ffd233;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
+		    	  }else if (lv == '아마추어') {
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-s' style='color: #ccc;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
+		    	  }else if(lv == '루키'){
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-b' style='color: #a95608;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
+		    	  }else{
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-n' style='color: #26a653;' width='30' height='30'></iconify-icon>　";
+		    	  }
+		         
+		      }).catch(error => {
+		         console.log("error");
+		      });
+		}
+		
+		
+		/* 승 가져오기 */
+		for(let i=0; i< <%=num%>-1; i++) {
+			var userCode = document.getElementsByClassName("ucdiv")[i].innerText;
+			console.log(userCode);
+			var data = {userCode:userCode};
+			fetch("${pageContext.request.contextPath}/rank/result",{
+		         method : "POST", // PUT, PATCH, DELETE
+		         headers : {
+		            "Content-Type" : "application/json"},
+		         body : JSON.stringify(data)
+		      }).then(response => response.json()) 
+		      
+		      .then(data => {
+		    	  document.getElementsByClassName("windiv")[i].innerText = data + "승";
+		         
+		      }).catch(error => {
+		         console.log("error");
+		      });
+		}
+		
+		/* 패 가져오기 */
+		for(let i=0; i< <%=num%>-1; i++) {
+			var userCode = document.getElementsByClassName("ucdiv")[i].innerText;
+			console.log(userCode);
+			var data = {userCode:userCode};
+			fetch("${pageContext.request.contextPath}/rank/lose",{
+		         method : "POST", // PUT, PATCH, DELETE
+		         headers : {
+		            "Content-Type" : "application/json"},
+		         body : JSON.stringify(data)
+		      }).then(response => response.json()) 
+		      
+		      .then(data => {
+		    	  document.getElementsByClassName("losediv")[i].innerText = data + "패";
+		         
+		      }).catch(error => {
+		         console.log("error");
+		      });
+		}
+	}
+				
 	</script>
-	
+		
 	<!-- 1위 테두리 변경 -->
 	<script type="text/javascript">
 		document.getElementById("rank1").style.backgroundColor = "rgba(253, 242, 204, 0.66)";

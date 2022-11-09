@@ -301,10 +301,14 @@
     	console.log(document.getElementsByClassName("userCode").length);
     	let cnt =0;
     	
-    	var listnum = new Array();
-    	
+    	let pnum=0;
+    	let index = 0;
     	for(let i=0; i< <%=gamelist.size()%>; i++){
-    		listnum.push()
+    		if(document.getElementsByClassName("gameCode")[i].innerText == ingameCode){
+    			pnum = document.getElementsByClassName("GamePnum")[i].innerText;
+    			index = i;
+    			break;
+    		}
     	} 
     	
     	if(lcnt > 0 && ccnt >0 ){
@@ -316,6 +320,12 @@
         			break;
         		}
         	} 
+    		if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText){
+    			var confirmflag = confirm("최대 신청자 수 이상입니다 신청 하시겠습니까?");
+    			 if(confirmflag){
+    				 location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
+    	           }
+    		}
         	
         	if(cnt == 0) {
         		location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
@@ -432,6 +442,15 @@
 											for(int j=0; j< gamelist.size(); j++){
 												if(sgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
 													out.print(gamelist.get(j).getGamePnum());
+												}
+											}
+										%>
+									</td>
+									<td class="GameMaxp" style="display: none;">
+										<%
+											for(int j=0; j< gamelist.size(); j++){
+												if(sgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
+													out.print(gamelist.get(j).getGameMaxp());
 												}
 											}
 										%>
