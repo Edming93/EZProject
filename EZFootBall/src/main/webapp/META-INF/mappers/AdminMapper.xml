@@ -55,6 +55,13 @@
 		from game_result
 	</select>
 	
+	<!-- 랭킹관리 -->
+	<select id="rankall" resultType="UinVO">
+		SELECT i.user_code, i.team_code, i.user_name, a.user_level, i.user_gender, i.user_score
+		FROM user_info i JOIN user_abil a
+		ON i.user_code = a.user_code
+	</select>
+	
 	
 	
 	

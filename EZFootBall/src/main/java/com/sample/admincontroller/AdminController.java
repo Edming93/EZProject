@@ -73,6 +73,8 @@ public class AdminController {
 		session.setAttribute("allfield", service.allfield());
 		// 경기결과 정보
 		session.setAttribute("result", service.result());
+		//랭킹정보
+		session.setAttribute("rankall", service.rankall());
 
 		session.setAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("fieldList", fdService.getFieldListAll());
@@ -119,6 +121,12 @@ public class AdminController {
 	public String gameselect(@RequestParam("gameselect") String gameselect, Model model) {
 		model.addAttribute("gameselect", gameselect);
 		return "adminPage/adminMain";
+	}
+	
+	@GetMapping("/rankselect")
+	public String rankselect(@RequestParam("rankselect") String rankselect,Model model) {
+		model.addAttribute("rankselect", rankselect);
+		return "adminPage/adminMain";		
 	}
 
 	@GetMapping("/idselect")

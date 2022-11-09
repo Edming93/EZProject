@@ -13,6 +13,7 @@ import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GameResultVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.ReviewCommentVO;
+import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 @Service
 public class AdminService {
@@ -50,6 +51,11 @@ public class AdminService {
  	public List<GameResultVO> result(){
  		return dao.result();
  	}
+ 	
+	// 랭킹관리
+	public List<UinVO> rankall() {
+		return dao.rankall();
+	}
    
    
    public List<FieldReservationVO> Tgame(){

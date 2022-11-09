@@ -14,6 +14,7 @@ import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GameResultVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.ReviewCommentVO;
+import com.sample.vo.UinVO;
 import com.sample.vo.UserVO;
 
 
@@ -31,6 +32,9 @@ public interface AdminDAO {
 	//경기관리
 	public List<GameFieldInfoVO> allfield();
 	public List<GameResultVO> result();
+	
+	//랭킹관리
+	public List<UinVO> rankall();
 	
 	public List<FieldReservationVO> Tgame();
 	

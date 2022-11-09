@@ -11,6 +11,15 @@ public class UinVO {
 	private double userVr;
 	private String userLevel;
 	private int teamCode;
+	private int userScore;
+	
+	
+	public int getUserScore() {
+		return userScore;
+	}
+	public void setUserScore(int userScore) {
+		this.userScore = userScore;
+	}
 	public int getUserCode() {
 		return userCode;
 	}

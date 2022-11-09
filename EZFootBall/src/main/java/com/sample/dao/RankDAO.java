@@ -22,4 +22,10 @@ public interface RankDAO {
 	
 	public int lose(GameResultVO vo);
 	
+	public int plus(UinVO vo);
+	
+	public int minus(UinVO vo);
+	
+	public int level(UinVO vo);
+	
 }
