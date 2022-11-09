@@ -303,7 +303,7 @@
     	
     	let pnum=0;
     	let index = 0;
-    	for(let i=0; i< <%=gamelist.size()%>; i++){
+    	for(let i=0; i< <%=sgamelist.size()%>; i++){
     		if(document.getElementsByClassName("gameCode")[i].innerText == ingameCode){
     			pnum = document.getElementsByClassName("GamePnum")[i].innerText;
     			index = i;
@@ -320,14 +320,15 @@
         			break;
         		}
         	} 
+    		var max = false;
     		if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText){
     			var confirmflag = confirm("최대 신청자 수 이상입니다 신청 하시겠습니까?");
     			 if(confirmflag){
-    				 location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
+    				 max = true
     	           }
     		}
         	
-        	if(cnt == 0) {
+        	if(cnt == 0 && max == true) {
         		location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
     			
         	}
