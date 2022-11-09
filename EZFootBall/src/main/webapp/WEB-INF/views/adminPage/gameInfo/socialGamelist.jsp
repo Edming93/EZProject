@@ -129,7 +129,7 @@
        		width : 18px;
        		height : 18px;
        }
-       #nev{
+       .nev{
            display: flex;
     		justify-content: center;
     	}
@@ -558,7 +558,7 @@
 					
 				</table>
 			</div>
-			<div id="nev">
+			<div id="nev"  class="nev"> 
 			<a id="pre"> 이전 </a>
 			<%
 			if(gamelist.size()%15 == 0 ) {
@@ -594,6 +594,45 @@
 				
 			%>
 			<a id="next"> 다음 </a>
+			</div>
+			
+			
+			<div id="snev" style="display: none;" class="nev">
+			<a id="spre"> 이전 </a>
+			<%
+			if(gamelist.size()%15 == 0 ) {
+				for(int i=1; i<=gamelist.size()/15;i++){
+					if(i>15) {
+						%>
+						<a id="num<%=i%>" style="display: none;"> <% out.print(i); %></a>
+						<%
+					}else{
+						%>
+						<a id="num<%=i%>"> <% out.print(i); %> </a>
+						<%
+					}
+				}
+			}else if(gamelist.size()%15 > 0 ){
+				for(int i=1; i<=gamelist.size()/15 + 1;i++){
+					if(i>15) {
+						%>
+						<a id="num<%=i%>" style="display: none;"> <% out.print(i); %></a>
+						<%
+					}else{
+						%>
+						<a id="num<%=i%>"> <% out.print(i); %> </a>
+						<%
+					}
+				}
+				
+			}else{
+			%>
+				<a> 1 </a>
+			<%
+			}
+				
+			%>
+			<a id="snext"> 다음 </a>
 			</div>
 		</div>
 		
@@ -698,15 +737,24 @@
 	}
 	</script>
 	
-	
 	<!-- 검색 -->
 	<script type="text/javascript">
 	document.getElementById("sbtn").addEventListener("click",function(){
+		let listselect = 0;
+		let end = 0;
+		if(<%=gamelist.size()%15==0%>){
+			end = <%=gamelist.size()/15%>;
+		}else{
+			end = <%=gamelist.size()/15%> + 1;
+		}
 		
 		/* 경기번호 검색 */
 		if(document.getElementById("select").value == "gameCode"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=gamelist.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
 				var text = document.getElementsByClassName("gameCode")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
@@ -720,23 +768,144 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=0; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum crlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
+				document.getElementById("snev").children[i].className = "crlistnum";
 			}
-			for(let i=0; i<num; i++){
-				document.getElementById("nev").children[i].className = "crlistnum";
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("crlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("crgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("crgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("crgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("crgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+				
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
+			
 		}
 		
 		
 		/* 날짜 검색 */
 		if(document.getElementById("select").value == "gameDay"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=gamelist.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
 				var text = document.getElementsByClassName("gameDay")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
@@ -749,25 +918,147 @@
 					document.getElementById("tbody").children[i].style.display = "none";
 				}
 			}
-						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=0; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			
+			
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "drlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
 			}
-			for(let i=0; i<num; i++){
-				document.getElementById("nev").children[i].className = "listnum drlistnum";
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("drlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+		         
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("drgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("drgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("drgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("drgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+		
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
+			
 		}
 		
 		
 		
 		/* 시간 검색 */
 		if(document.getElementById("select").value == "gameTime"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=gamelist.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
 				var text = document.getElementsByClassName("gameTime")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
@@ -781,23 +1072,142 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=0; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum trlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
 			}
-			for(let i=0; i<num; i++){
-				document.getElementById("nev").children[i].className = "listnum trlistnum";
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("trlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+		        
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("trgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("trgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("trgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("trgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+		
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
 		}
 		
 		
 		/* 레벨 검색 */
 		if(document.getElementById("select").value == "level"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=gamelist.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
 				var text = document.getElementsByClassName("level")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
@@ -811,22 +1221,142 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=0; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum lrlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
 			}
-			for(let i=0; i<num; i++){
-				document.getElementById("nev").children[i].className = "listnum lrlistnum";
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("lrlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+		    
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("lrgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("lrgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("lrgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("lrgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+		
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
 		}
 		
 		/* 형태 검색 */
 		if(document.getElementById("select").value == "gameMacth"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=gamelist.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
 				var text = document.getElementsByClassName("gameMacth")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
@@ -840,21 +1370,138 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=0; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum mrlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
 			}
-			for(let i=0; i<num; i++){
-				document.getElementById("nev").children[i].className = "listnum mrlistnum";
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("mrlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("mrgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("mrgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("mrgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("mrgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+				
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
 		}
 		
 		
 		/* 매니저 검색 */
 		if(document.getElementById("select").value == "mag"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=gamelist.size()%>); i++){
 				var text = document.getElementsByClassName("gameMag")[i].innerText;
@@ -870,16 +1517,133 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=0; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num; i<<%=gamelist.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum arlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
 			}
-			for(let i=0; i<num; i++){
-				document.getElementById("nev").children[i].className = "listnum arlistnum";
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("arlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+		          
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("argamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("argamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("argamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("argamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+			
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
 		}
 		
 		
@@ -896,62 +1660,7 @@
          }
        });
 	</script>
-	
-	
-	<!-- 검색 후 페이징 버튼 -->
-	<script type="text/javascript">
-	/* 코드 */
-	for(let i=0; i< document.getElementsByClassName("crlistnum").length; i++) {
-		document.getElementsByClassName("crlistnum")[i].addEventListener("click",function(){
-			for(let i=0; i<(<%=gamelist.size()%>); i++){
-				document.getElementById("tbody").children[i].style.display = "none";
-			}
-			if (this.innerText > (end-8)){
-				listselect = end-15;
-		        for(let j=0; j< document.getElementsByClassName("crlistnum").length; j++){
-		        	document.getElementsByClassName("crlistnum")[j].style.display = "none";
-		        }
-		        for(let j= listselect; j<listselect+15; j++){
-					document.getElementsByClassName("crlistnum")[j].style.display = "";
-				}
-		        
-			}else if(this.innerText >=8){
-				listselect = this.innerText - 8;
-		        for(let j=0; j< document.getElementsByClassName("crlistnum").length; j++){
-		        	document.getElementsByClassName("crlistnum")[j].style.display = "none";
-		        }
-		        for(let j= listselect; j<listselect+15; j++){
-					document.getElementsByClassName("crlistnum")[j].style.display = "";
-				}
-		        
-			}else if (this.innerText <8){
-				listselect = 0;
-		        for(let j=0; j< document.getElementsByClassName("crlistnum").length; j++){
-		        	document.getElementsByClassName("crlistnum")[j].style.display = "none";
-		        }
-		        for(let j= listselect; j<listselect+15; j++){
-					document.getElementsByClassName("crlistnum")[j].style.display = "";
-				}
-			}
-			
-			
-			/* 리스트 변경 */
-			let sele = this.innerText;
-			let num = (sele-1)*15;
-			
-			for(let i=0; i<document.getElementsByClassName("gamelist").length; i++){
-				document.getElementsByClassName("gamelist")[i].style.display = "none";
-			}
-			
-			for(let i=num; i<num+15; i++){
-				document.getElementsByClassName("crgamelist")[i].style.display = "";
-			}
-			
-	    })
-	}
-	</script>
-	
-	
+
 	<!-- 추가 모달창 -->
 	<script>
         document.getElementById("add").addEventListener("click", function () {
@@ -981,19 +1690,19 @@
 		 let delcnt=0;
 		 for(let i=0; i<<%=gamelist.size()%>; i++){
 			 if(document.getElementsByClassName("checkbox")[i].checked == true){
+				 console.log(i);
 				 delcnt++;
 				 if(document.getElementsByClassName("gameDay")[i].innerText == '<%=nday%>'){
 					 if(document.getElementsByClassName("gameTime")[i].innerText <= '<%=hour%>:00')
+						ttcnt++;
+					 }else if(document.getElementsByClassName("gameDay")[i].innerText <= '<%=nday%>'){
 						 ttcnt++;
-					 }
-					 
-				 }else if(document.getElementsByClassName("gameDay")[i].innerText <= '<%=nday%>'){
-					 ttcnt++;
 				 }else{
 					 gclist = gclist + "&gameCode=" + document.getElementsByClassName("gameCode")[i].innerText;
 				 }
 		 	}
-		 
+		 }
+			 
 		 if(delcnt == 0){
 			 alert("삭제할 경기를 선택해주세요");
 		 }else{
@@ -1004,19 +1713,18 @@
 				 }else{
 					 location.reload();
 				 } 
-			 }else if(ttcnt >1){
+			 }else if(ttcnt >=1){
 				 alert("지난 경기는 삭제할 수 없습니다");
 			 }
 		 }
-		 
-		 
+		 for(let i=0; i<<%=gamelist.size()%>; i++){
+			 document.getElementsByClassName("checkbox")[i].checked = false;
+		 }
 		 
 	 })
 	 
 	</script>
   
-
-	
 	<!-- 수정모달 -->
 	<script type="text/javascript">
 	document.getElementById("upd").addEventListener("click", function () {
@@ -1073,7 +1781,6 @@
 		document.getElementById("upmodal").style.display = "none";
 	});
 	</script>
-	
 	
 	<!-- 수정 -->
 	<script type="text/javascript">

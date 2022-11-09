@@ -126,7 +126,7 @@
        		width : 18px;
        		height : 18px;
        }
-       #nev{
+       .nev{
            display: flex;
     		justify-content: center;
     	}
@@ -341,7 +341,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div id="nev">
+			<div id="nev"class="nev">
 			<a id="pre"> 이전 </a>
 			<%
 			if(result.size()%15 == 0 ) {
@@ -377,6 +377,45 @@
 				
 			%>
 			<a id="next"> 다음 </a>
+			</div>
+			
+			
+			<div id="snev" style="display: none;" class="nev">
+			<a id="spre"> 이전 </a>
+			<%
+			if(result.size()%15 == 0 ) {
+				for(int i=1; i<=result.size()/15;i++){
+					if(i>15) {
+						%>
+						<a id="num<%=i%>" style="display: none;"> <% out.print(i); %></a>
+						<%
+					}else{
+						%>
+						<a id="num<%=i%>"> <% out.print(i); %> </a>
+						<%
+					}
+				}
+			}else if(result.size()%15 > 0 ){
+				for(int i=1; i<=result.size()/15 + 1;i++){
+					if(i>15) {
+						%>
+						<a id="num<%=i%>" style="display: none;"> <% out.print(i); %></a>
+						<%
+					}else{
+						%>
+						<a id="num<%=i%>"> <% out.print(i); %> </a>
+						<%
+					}
+				}
+				
+			}else{
+			%>
+				<a> 1 </a>
+			<%
+			}
+				
+			%>
+			<a id="snext"> 다음 </a>
 			</div>
 			
 		</div>		
@@ -764,8 +803,18 @@
 	<!-- 검색 -->
 	<script type="text/javascript">
 	document.getElementById("sbtn").addEventListener("click",function(){
+		let listselect = 0;
+		let end = 0;
+		if(<%=result.size()%15==0%>){
+			end = <%=result.size()/15%>;
+		}else{
+			end = <%=result.size()/15%> + 1;
+		}
+		
 		/* 경기번호 검색 */
 		if(document.getElementById("select").value == "gameCode"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=result.size()%>); i++){
 				document.getElementById("tbody").children[i].className = "gamelist";
@@ -782,29 +831,151 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			for(let i=1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum crlistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
+				document.getElementById("snev").children[i].className = "crlistnum";
 			}
-			for(let i=1; i<=num; i++){
-				document.getElementById("nev").children[i].className = "crlistnum";
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("crlistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("crgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("crgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("crgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("crgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+				
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
+			
 		}
+		
+		
 		
 		
 		
 		/* 경기타입 검색 */
 		if(document.getElementById("select").value == "gameType"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=result.size()%>); i++){
 				document.getElementById("tbody").children[i].className = "gamelist";
-				var text = document.getElementsByClassName("gameType")[i].innerText;
+				var text = document.getElementsByClassName("gameCode")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
-					document.getElementById("tbody").children[i].className = "gamelist trgamelist";
+					document.getElementById("tbody").children[i].className = "gamelist tygamelist";
 					cnt++;
 					if(cnt>15){
 						document.getElementById("tbody").children[i].style.display = "none";
@@ -814,61 +985,299 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			console.log(num);
-			for(let i=1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
-			}
-			for(let i=1; i<=num; i++){
-				document.getElementById("nev").children[i].className = "crlistnum";
-			}
-		}
-		
-		
-		/* 참여자 검색 */
-		if(document.getElementById("select").value == "userCode"){
-			let cnt = 0;
-			for(let i=0; i<(<%=result.size()%>); i++){
-				document.getElementById("tbody").children[i].className = "gamelist";
-				var text = document.getElementsByClassName("userCode")[i].innerText;
-				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
-					document.getElementById("tbody").children[i].style.display = "";
-					document.getElementById("tbody").children[i].className = "gamelist trgamelist";
-					cnt++;
-					if(cnt>15){
-						document.getElementById("tbody").children[i].style.display = "none";
-					}
-				}else{
-					document.getElementById("tbody").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "listnum tylistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
 				}
+				document.getElementById("snev").children[i].className = "tylistnum";
 			}
-						
-			let num = Math.round((cnt / 15))+1;
-			console.log(num);
-			for(let i=1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("tylistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("tygamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("tygamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("tygamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("tygamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
-			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
-			}
-			for(let i=1; i<=num; i++){
-				document.getElementById("nev").children[i].className = "crlistnum";
-			}
-		}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
 				
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
+			
+		}
+		
+		
+		/* 참여자코드검색 */
+		if(document.getElementById("select").value == "userCode"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
+			let cnt = 0;
+			for(let i=0; i<(<%=result.size()%>); i++){
+				document.getElementById("tbody").children[i].className = "gamelist";
+				var text = document.getElementsByClassName("gameCode")[i].innerText;
+				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
+					document.getElementById("tbody").children[i].style.display = "";
+					document.getElementById("tbody").children[i].className = "gamelist ucgamelist";
+					cnt++;
+					if(cnt>15){
+						document.getElementById("tbody").children[i].style.display = "none";
+					}
+				}else{
+					document.getElementById("tbody").children[i].style.display = "none";
+				}
+			}
+						
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
+			}
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "uclistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
+				
+			}
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("uclistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("ucgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("ucgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("ucgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("ucgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
+			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+				
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
+			
+		}
+		
 		
 		/* 팀코드 검색 */
 		if(document.getElementById("select").value == "teamCode"){
+			document.getElementById("nev").style.display = "none";
+			document.getElementById("snev").style.display = "";
 			let cnt = 0;
 			for(let i=0; i<(<%=result.size()%>); i++){
 				document.getElementById("tbody").children[i].className = "gamelist";
-				var text = document.getElementsByClassName("teamCode")[i].innerText;
+				var text = document.getElementsByClassName("gameCode")[i].innerText;
 				if(text.indexOf(document.getElementById("inputbox").value) != -1) {
 					document.getElementById("tbody").children[i].style.display = "";
-					document.getElementById("tbody").children[i].className = "gamelist trgamelist";
+					document.getElementById("tbody").children[i].className = "gamelist tcgamelist";
 					cnt++;
 					if(cnt>15){
 						document.getElementById("tbody").children[i].style.display = "none";
@@ -878,21 +1287,134 @@
 				}
 			}
 						
-			let num = Math.round((cnt / 15))+1;
-			console.log(num);
-			for(let i=1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].className = "listnum";
+			let num = Math.floor((cnt / 15))+1;
+			for(let i=1; i<end+1; i++){
+				document.getElementById("snev").children[i].className = "listnum";
+				document.getElementById("snev").children[i].style.display = "none";
 			}
-			for(let i=num+1; i<=<%=result.size()/15+1%>; i++){
-				document.getElementById("nev").children[i].style.display = "none";
+			
+			for(let i=1; i<num+1; i++){
+				document.getElementById("snev").children[i].className = "tclistnum";
+				document.getElementById("snev").children[i].style.display = "";
+				if(i>15){
+					document.getElementById("snev").children[i].style.display = "none";
+				}
 			}
-			for(let i=1; i<=num; i++){
-				document.getElementById("nev").children[i].className = "crlistnum";
+			
+			
+			/* 페이징 */
+			var senum = 0;
+	        var seend = num;
+			for(let i=0; i<num;i++){
+				document.getElementsByClassName("tclistnum")[i].addEventListener("click",function(){
+		            if(this.innerText < 8) {
+		            	senum = 0;
+		            }else if(this.innerText > num-8){
+		            	if(num >15){
+		            		senum = num - 15;
+		            	}else{
+		            		senum = 0;
+		            	}
+		            	
+		            }else {
+		            	senum = this.innerText - 8;
+		            }
+		            
+		            if(senum+15 > num){
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i=senum+1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            		
+		            	}
+		            }else{
+		            	for(let i=1; i<num+1; i++){
+		            		document.getElementById("snev").children[i].style.display = "none";
+		            	}
+		            	for(let i = senum+1; i<senum+16; i++){
+		            		document.getElementById("snev").children[i].style.display = "";
+		            	}
+		            }
+		            
+		            
+		            /* 리스트변경 */
+			        var snum = (this.innerText-1)*15;
+			        for(let i=0; i<cnt; i++){
+			        	document.getElementsByClassName("tcgamelist")[i].style.display = "none";		        	
+			        }
+			        if(snum + 15 >cnt){
+			        	if(cnt-15 >= 0){
+			        		for(let i = cnt -15; i<cnt; i++){
+				        		document.getElementsByClassName("tcgamelist")[i].style.display = "";
+				        	}
+			        	}else{
+			        		for(let i = 0; i<cnt; i++){
+				        		document.getElementsByClassName("tcgamelist")[i].style.display = "";
+				        	}
+			        	}
+			        	
+			        }else{
+			        	for(let i = snum; i<snum+15; i++){
+			        		document.getElementsByClassName("tcgamelist")[i].style.display = "";
+			        	}
+			        }
+		        });
 			}
+			
+			/* 다음 */
+			document.getElementById("snext").addEventListener("click",function(){
+	            if(senum+15 >= num){
+	            	if(num-15 <0){
+	            		senum = 0;
+	            	}else{
+	            		senum = num-15;
+	            	}
+	            	
+	            }else {
+	            	senum = senum+15;
+	            }
+	            
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            if((senum+15) >= num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else if(senum+15 < num ){
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+            	
+	            
+	        });
+			/* 이전 */
+			document.getElementById("spre").addEventListener("click",function(){
+				
+	            if(senum-15 < 0){
+	            	senum = 0;
+	            }else {
+	            	senum = senum-15;
+	            }
+	            for(let i=1; i<num+1; i++){
+            		document.getElementById("snev").children[i].style.display = "none";
+            	}
+	            
+	            if(senum+16 > num){
+	            	for(let i=senum+1; i<num+1; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }else{
+	            	for(let i=senum+1; i<senum+16; i++){
+	            		document.getElementById("snev").children[i].style.display = "";
+	            	}
+	            }
+	            
+	        });
+			
 		}
-		
-		
-		
 		
     });	
 	</script>
