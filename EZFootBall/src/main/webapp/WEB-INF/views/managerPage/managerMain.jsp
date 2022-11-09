@@ -1,7 +1,7 @@
 <%@page import="com.sample.vo.UserVO"%>
+<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	
@@ -15,12 +15,25 @@
 		
 	}
 
-%>
+	String p = request.getParameter("page");
+	if(p == null) {
+		p="ranking";
+	}
+
+// 	String sub_p = request.getParameter("subPage");
+// 	request.setAttribute("subPage", sub_p);
+	
+// 	String game_p = request.getParameter("gamePage");
+// 	request.setAttribute("gamePage", game_p);
+
+%> 	
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이지풋볼</title>
+<title>매니저 페이지</title>
 <link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
@@ -72,13 +85,13 @@
         justify-content: center;
         align-items: center;
     }
+    
     .header_icon {
 	    text-decoration: none;
 	    color: #4e4e4e;
 	    font-size: 27px;
 	    margin-left: 15px;
     }
-    
     .main_logo{
          background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
          background-size: 95px 35px;
@@ -145,20 +158,16 @@
         color: black;
         align-items: center;
         display: flex;
-        width: 90px;
+        width: 97px;
         justify-content: center;
     }
     
     .menu1,.menu2,.menu3,.menu4,.menu5,.menu6 {
-        width: 100px;
+        width: 135px;
         justify-content: center;
         display: inline-block;
     }
-    .menu1_a {
-        font-weight: bold;
-        padding-bottom:5px;
-        border-bottom: 3px solid #26A653;
-    }
+
     
 
     .banner_container {
@@ -257,7 +266,7 @@
                <div class="header_left main_logo">
                
                </div>
-                              <div class="header_right login_btn etc_btn">
+                  <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
 <!--                   <input type="text" class="search_input"> -->
@@ -354,16 +363,22 @@
          </div>
       </div>
 
-
     <div class="main">
         <div class="main_area">
+        	<div class="menu_area">
+        		<jsp:include page="../managerPage/menu.jsp"/>
+        	</div>
+        
             <div class="main_content">
-            	<c:if test="${page eq 'login'}">
-            		<jsp:include page="../loginPage/login.jsp"></jsp:include>
-            	</c:if>
-            	<c:if test="${page eq 'signup'}">
-            		<jsp:include page="../loginPage/signUp.jsp"></jsp:include>
-            	</c:if>
+            
+				<%if(p.equals("ranking")) { %>
+				<jsp:include page="../managerPage/ranking/rankingMain.jsp"></jsp:include>
+				<%} else if(p.equals("subMain")) {%>
+				<jsp:include page="../managerPage/subInfo/subMain.jsp"></jsp:include>
+				<%} else if(p.equals("gameMain")) {%>
+				<jsp:include page="../managerPage/gameInfo/gameMain.jsp"></jsp:include>
+				<%}%>
+			
             </div>
         </div>
     </div>

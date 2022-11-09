@@ -49,7 +49,7 @@
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 15px;
+        padding-top: 20px;
     }
     .header_icon {
 	    text-decoration: none;
@@ -317,7 +317,7 @@ footer {
                <div class="header_left main_logo">
 
                </div>
-                              <div class="header_right login_btn etc_btn">
+               <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
 <!--                   <input type="text" class="search_input"> -->
