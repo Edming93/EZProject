@@ -59,9 +59,9 @@
         #sbtn{
         	width: 13%;
 		    height: 30px;
-		    border: 2px solid #26a563;
+		    border: 2px solid #BDD2B6;
 		    border-radius: 10px;
-		    background-color: #26a563;
+		    background-color: #BDD2B6;
 		    color: white;
 		    font-weight: 700;
         }
@@ -70,14 +70,20 @@
         	background-color : red;
         }
         #add{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+        	border: 1px solid #BDD2B6;;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
         #del{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+        	border: 1px solid #BDD2B6;
+    		background: #BDD2B6;
+    		color: white;
+    		border-radius: 5px;
+        }
+        #upd{
+        	border: 1px solid #BDD2B6;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
@@ -85,21 +91,27 @@
     		display: flex;
     		justify-content: center;
         }
-        table thead tr{
+        #list table{
+        	border-collapse: collapse;
+        }
+        #list table thead tr{
         	background-color : #D2D79F;
         }
-       table tr th{
-       		height : 40px;
-       		width : 110px;
+       #list table tr th{
+       		width: 120px;
+		    height: 50px;
+		    border-bottom: 2px solid #D2D79F;
+		    background-color: #F8EDE3;
+		}
        		
        }
-       table tr th:first-child{
+       #list table tr th:first-child{
        		width : 50px;
        }
-       table tr td{
-       		height : 30px;
-       		border-bottom : 1px dotted #F8EDE3;
-       		text-align : center;
+       #list table tr td{
+       		height: 40px;
+		    text-align: center;
+		    border-bottom: 2px dotted #D2D79F;
        }
        #Cbox{
        		width : 18px;
@@ -109,10 +121,12 @@
        		width : 18px;
        		height : 18px;
        }
-       #nev{
+       .nev{
            display: flex;
     		justify-content: center;
     	}
+	
+	
 </style>
 </head>
 <body>
@@ -231,7 +245,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div id="nev">
+			<div id="nev" class="nev">
 			
 			<%
 			if((cgamelist.size()/15)>=1){

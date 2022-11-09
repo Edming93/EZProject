@@ -31,7 +31,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#searchbox {
+	#searchbox {
 		display: flex;
 		height: 80px;
 		align-items: center;
@@ -64,9 +64,9 @@
         #sbtn{
         	width: 13%;
 		    height: 30px;
-		    border: 2px solid #26a563;
+		    border: 2px solid #BDD2B6;
 		    border-radius: 10px;
-		    background-color: #26a563;
+		    background-color: #BDD2B6;
 		    color: white;
 		    font-weight: 700;
         }
@@ -75,26 +75,20 @@
         	background-color : red;
         }
         #add{
-        	border: 1px solid #26a563;
-    		background: #26a563;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #endup{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+        	border: 1px solid #BDD2B6;;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
         #del{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+        	border: 1px solid #BDD2B6;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
-        #upd{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+       #upd{
+        	border: 1px solid #BDD2B6;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
@@ -102,21 +96,27 @@
     		display: flex;
     		justify-content: center;
         }
+        #list table{
+        	border-collapse: collapse;
+        }
         #list table thead tr{
         	background-color : #D2D79F;
         }
        #list table tr th{
-       		height : 40px;
-       		width : 110px;
+       		width: 120px;
+		    height: 50px;
+		    border-bottom: 2px solid #D2D79F;
+		    background-color: #F8EDE3;
+		}
        		
        }
        #list table tr th:first-child{
        		width : 50px;
        }
        #list table tr td{
-       		height : 30px;
-       		border-bottom : 1px dotted #F8EDE3;
-       		text-align : center;
+       		height: 40px;
+		    text-align: center;
+		    border-bottom: 2px dotted #D2D79F;
        }
        #Cbox{
        		width : 18px;
@@ -130,6 +130,8 @@
            display: flex;
     		justify-content: center;
     	}
+	
+	
     	
     /* 모달 */
 	
@@ -296,43 +298,43 @@
 								if(i>15){
 									%>
 									<tr style="display: none;" class="gamelist" id="game<%=i%>" >
-									<th id="rc<%=i %>" class="resultCode" style="display: none;"><%out.println(result.get(i).getResultCode());%></th>
-									<th><input type="checkbox" name="" id="Cbox" class="checkbox"></th>
-									<th class="gameCode"><%out.println(result.get(i).getGameCode()); %></th>
-									<th class="gameType"><%out.println(result.get(i).getGameType()); %></th>
-									<th class="userCode"><%out.println(result.get(i).getUserCode()); %></th>
-									<th class="userName"><%
+									<td id="rc<%=i %>" class="resultCode" style="display: none;"><%out.println(result.get(i).getResultCode());%></td>
+									<td><input type="checkbox" name="" id="Cbox" class="checkbox"></td>
+									<td class="gameCode"><%out.println(result.get(i).getGameCode()); %></td>
+									<td class="gameType"><%out.println(result.get(i).getGameType()); %></td>
+									<td class="userCode"><%out.println(result.get(i).getUserCode()); %></td>
+									<td class="userName"><%
 										for(int j=0; j<userlist.size();j++){
 											if(userlist.get(j).getUserCode()==result.get(i).getUserCode()){
 												out.println(userlist.get(j).getUserName());
 											}
 										}
-									%></th>
-									<th class="teamCode"><%out.println(result.get(i).getTeamCode()); %></th>
-									<th class="result"><%out.println(result.get(i).getResult()); %></th>
-									<th class="score"><%out.println(result.get(i).getScore());%></th>
-									<th class="assist"><%out.println(result.get(i).getAssist()); %></th>
+									%></td>
+									<td class="teamCode"><%out.println(result.get(i).getTeamCode()); %></td>
+									<td class="result"><%out.println(result.get(i).getResult()); %></td>
+									<td class="score"><%out.println(result.get(i).getScore());%></td>
+									<td class="assist"><%out.println(result.get(i).getAssist()); %></td>
 									</tr>
 									<%
 								} else{
 								%>
 								<tr class="gamelist" id="game<%=i%>" >
-								<th id="rc<%=i %>" class="resultCode" style="display: none;"><%out.println(result.get(i).getResultCode());%></th>
-								<th><input type="checkbox" name="" id="Cbox" class="checkbox"></th>
-								<th class="gameCode"><%out.println(result.get(i).getGameCode()); %></th>
-								<th class="gameType"><%out.println(result.get(i).getGameType()); %></th>
-								<th class="userCode"><%out.println(result.get(i).getUserCode()); %></th>
-								<th class="userName"><%
+								<td id="rc<%=i %>" class="resultCode" style="display: none;"><%out.println(result.get(i).getResultCode());%></td>
+								<td><input type="checkbox" name="" id="Cbox" class="checkbox"></td>
+								<td class="gameCode"><%out.println(result.get(i).getGameCode()); %></td>
+								<td class="gameType"><%out.println(result.get(i).getGameType()); %></td>
+								<td class="userCode"><%out.println(result.get(i).getUserCode()); %></td>
+								<td class="userName"><%
 									for(int j=0; j<userlist.size();j++){
 										if(userlist.get(j).getUserCode()==result.get(i).getUserCode()){
 											out.println(userlist.get(j).getUserName());
 										}
 									}
-								%></th>
-								<th class="teamCode"><%out.println(result.get(i).getTeamCode()); %></th>
-								<th class="result"><%out.println(result.get(i).getResult()); %></th>
-								<th class="score"><%out.println(result.get(i).getScore());%></th>
-								<th class="assist"><%out.println(result.get(i).getAssist()); %></th>
+								%></td>
+								<td class="teamCode"><%out.println(result.get(i).getTeamCode()); %></td>
+								<td class="result"><%out.println(result.get(i).getResult()); %></td>
+								<td class="score"><%out.println(result.get(i).getScore());%></td>
+								<td class="assist"><%out.println(result.get(i).getAssist()); %></td>
 								</tr>
 								<%
 								}

@@ -40,7 +40,7 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <title>Insert title here</title>
 <style>
-	#searchbox {
+#searchbox {
 		display: flex;
 		height: 80px;
 		align-items: center;
@@ -73,9 +73,9 @@
         #sbtn{
         	width: 13%;
 		    height: 30px;
-		    border: 2px solid #26a563;
+		    border: 2px solid #BDD2B6;
 		    border-radius: 10px;
-		    background-color: #26a563;
+		    background-color: #BDD2B6;
 		    color: white;
 		    font-weight: 700;
         }
@@ -84,20 +84,20 @@
         	background-color : red;
         }
         #add{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+        	border: 1px solid #BDD2B6;;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
         #del{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+        	border: 1px solid #BDD2B6;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
-        #upd{
-        	border: 1px solid #26a563;
-    		background: #26a563;
+          #upd{
+        	border: 1px solid #BDD2B6;
+    		background: #BDD2B6;
     		color: white;
     		border-radius: 5px;
         }
@@ -105,21 +105,27 @@
     		display: flex;
     		justify-content: center;
         }
+        #list table{
+        	border-collapse: collapse;
+        }
         #list table thead tr{
         	background-color : #D2D79F;
         }
        #list table tr th{
-       		height : 40px;
-       		width : 110px;
+       		width: 120px;
+		    height: 50px;
+		    border-bottom: 2px solid #D2D79F;
+		    background-color: #F8EDE3;
+		}
        		
        }
        #list table tr th:first-child{
        		width : 50px;
        }
        #list table tr td{
-       		height : 30px;
-       		border-bottom : 1px dotted #F8EDE3;
-       		text-align : center;
+       		height: 40px;
+		    text-align: center;
+		    border-bottom: 2px dotted #D2D79F;
        }
        #Cbox{
        		width : 18px;
@@ -133,7 +139,6 @@
            display: flex;
     		justify-content: center;
     	}
-	
 	
 	
 	/* 모달 */
@@ -518,37 +523,37 @@
 								if(i<15){
 							%>
 							<tr class="gamelist" id="game<%=i%>">
-							<th><input type="checkbox" name="" id="Cbox" class="checkbox"></th>
-							<th class="gameCode"><%out.println(gamelist.get(i).getGameCode()); %></th>
-							<th class="gameDay"><%out.println(gamelist.get(i).getGameDay()); %></th>
-							<th class="gameTime"><%out.println(gamelist.get(i).getGameTime()+":00");%></th>
-							<th class="level"><%out.println(gamelist.get(i).getLevel()); %></th>
-							<th class="gameMacth"><%out.println(gamelist.get(i).getGameMacth()); %></th>
-							<th class="close"><%out.println(gamelist.get(i).getClose()); %></th>
-							<th class="gameMinp"><%out.println(gamelist.get(i).getGameMinp()); %></th>
-							<th class="gameMaxp"><%out.println(gamelist.get(i).getGameMaxp()); %></th>
-							<th class="gamePnum"><%out.println(gamelist.get(i).getGamePnum()); %></th>
-							<th class="gameMag"><%out.println(gamelist.get(i).getGameMag()); %></th>
-							<th class="gamePay"><%out.println(gamelist.get(i).getGamePay()); %></th>
-							<th class="fieldcode" style="display: none;"><%out.println(gamelist.get(i).getFieldCode()); %></th>
+							<td><input type="checkbox" name="" id="Cbox" class="checkbox"></td>
+							<td class="gameCode"><%out.println(gamelist.get(i).getGameCode()); %></td>
+							<td class="gameDay"><%out.println(gamelist.get(i).getGameDay()); %></td>
+							<td class="gameTime"><%out.println(gamelist.get(i).getGameTime()+":00");%></td>
+							<td class="level"><%out.println(gamelist.get(i).getLevel()); %></td>
+							<td class="gameMacth"><%out.println(gamelist.get(i).getGameMacth()); %></td>
+							<td class="close"><%out.println(gamelist.get(i).getClose()); %></td>
+							<td class="gameMinp"><%out.println(gamelist.get(i).getGameMinp()); %></td>
+							<td class="gameMaxp"><%out.println(gamelist.get(i).getGameMaxp()); %></td>
+							<td class="gamePnum"><%out.println(gamelist.get(i).getGamePnum()); %></td>
+							<td class="gameMag"><%out.println(gamelist.get(i).getGameMag()); %></td>
+							<td class="gamePay"><%out.println(gamelist.get(i).getGamePay()); %></td>
+							<td class="fieldcode" style="display: none;"><%out.println(gamelist.get(i).getFieldCode()); %></td>
 							</tr>
 							<%
 								}
 								else{%>
 							<tr class="gamelist" id="game<%=i%>" style="display: none;">
-							<th><input type="checkbox" name="" id="Cbox" class="checkbox"></th>
-							<th class="gameCode"><%out.println(gamelist.get(i).getGameCode()); %></th>
-							<th class="gameDay"><%out.println(gamelist.get(i).getGameDay()); %></th>
-							<th class="gameTime"><%out.println(gamelist.get(i).getGameTime()+":00");%></th>
-							<th class="level"><%out.println(gamelist.get(i).getLevel()); %></th>
-							<th class="gameMacth"><%out.println(gamelist.get(i).getGameMacth()); %></th>
-							<th class="close"><%out.println(gamelist.get(i).getClose()); %></th>
-							<th class="gameMinp"><%out.println(gamelist.get(i).getGameMinp()); %></th>
-							<th class="gameMaxp"><%out.println(gamelist.get(i).getGameMaxp()); %></th>
-							<th class="gamePnum"><%out.println(gamelist.get(i).getGamePnum()); %></th>
-							<th class="gameMag"><%out.println(gamelist.get(i).getGameMag()); %></th>
-							<th class="gamePay"><%out.println(gamelist.get(i).getGamePay()); %></th>
-							<th class="fieldcode" style="display: none;"><%out.println(gamelist.get(i).getFieldCode()); %></th>
+							<td><input type="checkbox" name="" id="Cbox" class="checkbox"></td>
+							<td class="gameCode"><%out.println(gamelist.get(i).getGameCode()); %></td>
+							<td class="gameDay"><%out.println(gamelist.get(i).getGameDay()); %></td>
+							<td class="gameTime"><%out.println(gamelist.get(i).getGameTime()+":00");%></td>
+							<td class="level"><%out.println(gamelist.get(i).getLevel()); %></td>
+							<td class="gameMacth"><%out.println(gamelist.get(i).getGameMacth()); %></td>
+							<td class="close"><%out.println(gamelist.get(i).getClose()); %></td>
+							<td class="gameMinp"><%out.println(gamelist.get(i).getGameMinp()); %></td>
+							<td class="gameMaxp"><%out.println(gamelist.get(i).getGameMaxp()); %></td>
+							<td class="gamePnum"><%out.println(gamelist.get(i).getGamePnum()); %></td>
+							<td class="gameMag"><%out.println(gamelist.get(i).getGameMag()); %></td>
+							<td class="gamePay"><%out.println(gamelist.get(i).getGamePay()); %></td>
+							<td class="fieldcode" style="display: none;"><%out.println(gamelist.get(i).getFieldCode()); %></td>
 							</tr>
 							<%	
 								}
