@@ -120,4 +120,26 @@ public class AdminService {
    public void UUInfoList(int userCode) {
 	   dao.UUInfoList(userCode);
    }
+   public void RUInfoList(int userCode) {
+	   dao.RUInfoList(userCode);
+   }
+   // 블랙리스트 추가시 변경되야할 기능들
+   public void UpdateFRstate(int userCode) {
+	   dao.UpdateFRstate(userCode);
+   }
+   
+   public void UpdateGLPnum(int userCode) {
+	   dao.UpdateGLPnum(userCode);
+   }
+   public void UpdateGLClose(int userCode) {
+	   dao.UpdateGLClose(userCode);
+   }
+   
+   public void DeleteGSList(int userCode) {
+	   dao.DeleteGSList(userCode);
+   }
+   public void DeleteGR(int userCode) {
+	   dao.DeleteGR(userCode);
+   }
+   
 }

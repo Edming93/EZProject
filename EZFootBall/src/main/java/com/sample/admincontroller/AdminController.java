@@ -176,6 +176,18 @@ public class AdminController {
 				System.out.println(userCode);
 				System.out.println("왜다지워짐? : " + userCode);
 				service.UUInfoList(userCode);
+				
+				System.out.println("새로운기능1");
+				service.UpdateFRstate(userCode);
+				System.out.println("새로운기능2");
+				service.UpdateGLPnum(userCode);
+				System.out.println("새로운기능3");
+				service.UpdateGLClose(userCode);
+				System.out.println("새로운기능4");
+				service.DeleteGR(userCode);
+				System.out.println("새로운기능5");
+			
+				service.DeleteGSList(userCode);
 
 			}
 			result = 1;
@@ -183,6 +195,35 @@ public class AdminController {
 
 		return result;
 	}
+	// 블랙리스트에서 다시 유저로 복귀시키기
+	@PostMapping("/RUInfoList")
+	@ResponseBody
+	public int RUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
+			UserVO vo) {
+		System.out.println("오긴하나1111111??");
+
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();
+
+		int result = 0;
+		int userCode = 0;
+
+		if (uvo != null) {
+
+			for (String i : chArr) {
+				userCode = Integer.parseInt(i);
+				vo.setUserCode(userCode);
+				System.out.println("오긴하나222222??");
+				System.out.println(userCode);
+				System.out.println("왜다지워짐? : " + userCode);
+				service.RUInfoList(userCode);
+	
+			}
+			result = 1;
+		}
+
+		return result;
+	}	
 
 	// 매니저 리스트 출력
 	@GetMapping("/magselect")
