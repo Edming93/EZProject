@@ -59,5 +59,12 @@ public interface AdminDAO {
 	public List<UserVO> UInfoListB();
 	public List<UserVO> UInfoListB1(UserVO vo);
 	public int UUInfoList(int userCode);
+	public int RUInfoList(int userCode);
+	
+	public int UpdateFRstate(int userCode);
+	public int UpdateGLPnum(int userCode);
+	public int UpdateGLClose(int userCode);
+	public int DeleteGSList(int userCode);
+	public int DeleteGR(int userCode);
 
 }
