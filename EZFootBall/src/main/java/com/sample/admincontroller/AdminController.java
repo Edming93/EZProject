@@ -44,7 +44,6 @@ public class AdminController {
 	public String admin() {
 		return "adminPage/adminMain";
 	}
-	
 
 	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
 			ManagerService managerService) {
@@ -80,34 +79,35 @@ public class AdminController {
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		model.addAttribute("managerList", managerService.getManagerList());
 		// 유저 정보 출력하기
-		model.addAttribute("userList",service.UInfoList());
+		model.addAttribute("userList", service.UInfoList());
 		model.addAttribute("team", service.joinList());
-		model.addAttribute("userListB",service.UInfoListB());
+		model.addAttribute("userListB", service.UInfoListB());
 		return "adminPage/adminMain";
 	}
+
 	// 유저정보 조건부 출력
-		@PostMapping("/select1")
-		public String mainselect(HttpSession session, Model model, UserVO vo,
-								@RequestParam("Uselect") String Uselect, @RequestParam("Usearch") String Usearch) {
-			
-			if (Uselect.equals("userCode")) {
-				vo.setUserCode(Integer.parseInt(Usearch));
-			} else if (Uselect.equals("userName")) {	
-				vo.setUserName(Usearch);
-			} else if (Uselect.equals("userId")) {
-				vo.setUserId(Usearch);
-			} else if (Uselect.equals("userBirth")) {
-				vo.setUserBirth(Usearch);
-			} else if (Uselect.equals("userGender")) {
-				vo.setUserGender(Usearch);
-			} else if (Uselect.equals("userAuthority")) {
-				vo.setUserAuthority(Usearch);
-			} else if (Uselect.equals("userReports")) {
-				vo.setUserReports(Usearch);
-			} 
-			model.addAttribute("userList",service.UInfoList1(vo));
-			return "adminPage/adminMain";
+	@PostMapping("/select1")
+	public String mainselect(HttpSession session, Model model, UserVO vo, @RequestParam("Uselect") String Uselect,
+			@RequestParam("Usearch") String Usearch) {
+
+		if (Uselect.equals("userCode")) {
+			vo.setUserCode(Integer.parseInt(Usearch));
+		} else if (Uselect.equals("userName")) {
+			vo.setUserName(Usearch);
+		} else if (Uselect.equals("userId")) {
+			vo.setUserId(Usearch);
+		} else if (Uselect.equals("userBirth")) {
+			vo.setUserBirth(Usearch);
+		} else if (Uselect.equals("userGender")) {
+			vo.setUserGender(Usearch);
+		} else if (Uselect.equals("userAuthority")) {
+			vo.setUserAuthority(Usearch);
+		} else if (Uselect.equals("userReports")) {
+			vo.setUserReports(Usearch);
 		}
+		model.addAttribute("userList", service.UInfoList1(vo));
+		return "adminPage/adminMain";
+	}
 
 	@GetMapping("/subselect")
 	public String subselect(@RequestParam("subselect") String subselect, Model model, HttpSession session) {
@@ -124,65 +124,65 @@ public class AdminController {
 	@GetMapping("/idselect")
 	public String idselect(@RequestParam("idselect") String idselect, Model model) {
 		model.addAttribute("idselect", idselect);
-	
-		model.addAttribute("userList",service.UInfoList());
-		model.addAttribute("userListB",service.UInfoListB());
+
+		model.addAttribute("userList", service.UInfoList());
+		model.addAttribute("userListB", service.UInfoListB());
 		return "adminPage/adminMain";
 	}
+
 	// 블랙리스트 조건부 출력
-			@PostMapping("/idselect1")
-			public String idselect1(HttpSession session, Model model, UserVO vo,
-									@RequestParam("Uselect") String Uselect, @RequestParam("Usearch") String Usearch) {
-				
-				if (Uselect.equals("userCode")) {
-					vo.setUserCode(Integer.parseInt(Usearch));
-				} else if (Uselect.equals("userName")) {	
-					vo.setUserName(Usearch);
-				} else if (Uselect.equals("userId")) {
-					vo.setUserId(Usearch);
-				} else if (Uselect.equals("userBirth")) {
-					vo.setUserBirth(Usearch);
-				} else if (Uselect.equals("userGender")) {
-					vo.setUserGender(Usearch);
-				} else if (Uselect.equals("userAuthority")) {
-					vo.setUserAuthority(Usearch);
-				} else if (Uselect.equals("userReports")) {
-					vo.setUserReports(Usearch);
-				} 
-				model.addAttribute("userList",service.UInfoListB1(vo));
-				return "adminPage/adminMain";
-			}
-	
-	// 블랙리스트로 추가해버리기~
-		@PostMapping("/UUInfoList")
-		@ResponseBody
-		public int UUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
-				UserVO vo) {
-			System.out.println("오긴하나1111111??");
+	@PostMapping("/idselect1")
+	public String idselect1(HttpSession session, Model model, UserVO vo, @RequestParam("Uselect") String Uselect,
+			@RequestParam("Usearch") String Usearch) {
 
-			UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-			String userId = uvo.getUserId();
-
-			int result = 0;
-			int userCode = 0;
-
-			if (uvo != null) {
-				System.out.println("제발~~~");
-
-				for (String i : chArr) {
-					userCode = Integer.parseInt(i);
-					vo.setUserCode(userCode);
-					System.out.println("오긴하나222222??");
-					System.out.println(userCode);
-					System.out.println("왜다지워짐? : " + userCode);
-					service.UUInfoList(userCode);
-					
-				}
-				result = 1;
-			}
-
-			return result;
+		if (Uselect.equals("userCode")) {
+			vo.setUserCode(Integer.parseInt(Usearch));
+		} else if (Uselect.equals("userName")) {
+			vo.setUserName(Usearch);
+		} else if (Uselect.equals("userId")) {
+			vo.setUserId(Usearch);
+		} else if (Uselect.equals("userBirth")) {
+			vo.setUserBirth(Usearch);
+		} else if (Uselect.equals("userGender")) {
+			vo.setUserGender(Usearch);
+		} else if (Uselect.equals("userAuthority")) {
+			vo.setUserAuthority(Usearch);
+		} else if (Uselect.equals("userReports")) {
+			vo.setUserReports(Usearch);
 		}
+		model.addAttribute("userList", service.UInfoListB1(vo));
+		return "adminPage/adminMain";
+	}
+
+	// 블랙리스트로 추가해버리기~
+	@PostMapping("/UUInfoList")
+	@ResponseBody
+	public int UUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, UserVO vo) {
+		System.out.println("오긴하나1111111??");
+
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();
+
+		int result = 0;
+		int userCode = 0;
+
+		if (uvo != null) {
+			System.out.println("제발~~~");
+
+			for (String i : chArr) {
+				userCode = Integer.parseInt(i);
+				vo.setUserCode(userCode);
+				System.out.println("오긴하나222222??");
+				System.out.println(userCode);
+				System.out.println("왜다지워짐? : " + userCode);
+				service.UUInfoList(userCode);
+
+			}
+			result = 1;
+		}
+
+		return result;
+	}
 
 	// 매니저 리스트 출력
 	@GetMapping("/magselect")
@@ -190,6 +190,8 @@ public class AdminController {
 		if (magselect.equals("magList")) {
 			List<UserVO> list = managerService.getManagerList();
 			model.addAttribute("managerList", list);
+			List<GameFieldInfoVO> list2 = managerService.getGameFieldInfo();
+			model.addAttribute("fieldList", list2);
 		}
 		if (magselect.equals("magSignUpList")) {
 			List<ManagerVO> list = managerService.managerHistoryList(managerVO);
@@ -428,55 +430,56 @@ public class AdminController {
 
 	// 구장 추가
 	@PostMapping("/addField")
-	public String addField(Model model,GameFieldInfoVO vo,@RequestParam("fieldImg") MultipartFile[] files,
-						@RequestParam("select") String select,HttpSession session) 
-									throws IllegalStateException, IOException {
+	public String addField(Model model, GameFieldInfoVO vo, @RequestParam("fieldImg") MultipartFile[] files,
+			@RequestParam("select") String select, HttpSession session) throws IllegalStateException, IOException {
 		int cnt = 0;
 		List<String> imglist = new ArrayList<String>();
-		
-		for(MultipartFile file : files) {
+
+		for (MultipartFile file : files) {
 			try {
-				if(!file.getOriginalFilename().isEmpty() || file.getOriginalFilename() != null ) {
-	                // 해당 파일의 이름을 첨부한 상태로 저장하겠다.
-					Path path = Paths.get("C:/Users/GDJ 52/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"+file.getOriginalFilename());
+				if (!file.getOriginalFilename().isEmpty() || file.getOriginalFilename() != null) {
+					// 해당 파일의 이름을 첨부한 상태로 저장하겠다.
+					Path path = Paths
+							.get("C:/Users/GDJ 52/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
+									+ file.getOriginalFilename());
 					file.transferTo(path);
 					System.out.println(file.getOriginalFilename() + "저장 완료.");
 					imglist.add(file.getOriginalFilename());
 					cnt++;
-				}else {
+				} else {
 					System.out.println("에러가 발생했습니다.");
 				}
 			} catch (Exception e) {
 				System.out.println("여기가 문제");
 				System.out.println(cnt);
 			}
-			
-		}		
-		
-		if(imglist.size() == 1) {
+
+		}
+
+		if (imglist.size() == 1) {
 			vo.setFieldImg1(imglist.get(0));
-		}else if(imglist.size() == 2) {
+		} else if (imglist.size() == 2) {
 			vo.setFieldImg1(imglist.get(0));
 			vo.setFieldImg2(imglist.get(1));
-		}else if(imglist.size() == 3) {
+		} else if (imglist.size() == 3) {
 			vo.setFieldImg1(imglist.get(0));
 			vo.setFieldImg2(imglist.get(1));
 			vo.setFieldImg3(imglist.get(2));
-		}else if(imglist.size() == 4) {
+		} else if (imglist.size() == 4) {
 			vo.setFieldImg1(imglist.get(0));
 			vo.setFieldImg2(imglist.get(1));
 			vo.setFieldImg3(imglist.get(2));
 			vo.setFieldImg4(imglist.get(3));
-		}else if(imglist.size() == 5) {
+		} else if (imglist.size() == 5) {
 			vo.setFieldImg1(imglist.get(0));
 			vo.setFieldImg2(imglist.get(1));
 			vo.setFieldImg3(imglist.get(2));
 			vo.setFieldImg4(imglist.get(3));
 			vo.setFieldImg5(imglist.get(4));
 		}
-		
+
 		fdService.insertFieldInfo(vo);
-		return "redirect:/admin/select?select="+session.getAttribute("select");
+		return "redirect:/admin/select?select=" + session.getAttribute("select");
 	}
 
 	@GetMapping("/comuselect")

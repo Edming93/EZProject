@@ -69,7 +69,7 @@
 			<tr>
 				<th><input type="checkbox" name="check" id="check" /></th>
 				<th>신청번호</th>
-				<th>선호지역</th>
+				<th>선택구장</th>
 				<th>신청내용</th>
 				<th>신청일</th>
 				<th>유저코드</th>

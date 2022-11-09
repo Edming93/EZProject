@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sample.dao.ManagerDAO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.ManagerVO;
 import com.sample.vo.UserVO;
 
@@ -56,5 +57,9 @@ public class ManagerService {
 
 	public void isManagerHistory(int userCode) {
 		managerDAO.isManagerHistory(userCode);
+	}
+
+	public List<GameFieldInfoVO> getGameFieldInfo() {
+		return managerDAO.getGameFieldInfo();
 	}
 }

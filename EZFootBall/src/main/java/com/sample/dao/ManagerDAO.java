@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.ManagerVO;
 import com.sample.vo.UserVO;
 
@@ -29,4 +30,6 @@ public interface ManagerDAO {
 	public void managerDelete(int userCode);
 
 	public void isManagerHistory(int userCode);
+
+	public List<GameFieldInfoVO> getGameFieldInfo();
 }

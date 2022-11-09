@@ -101,6 +101,10 @@
 		cursor: pointer;
 	}
 	
+/* 	.select_box{ */
+/* 		align-self: flex-end; */
+/* 	} */
+	
 </style>
 <body>
 	<h1>매니저리스트</h1>
@@ -109,6 +113,14 @@
 			<button id="add" class="btn">추가</button>
 			<button id="delete" class="btn">삭제</button>
 		</div>
+		<section class="select_box">
+			<select class="state">
+                <option value="">구장선택</option>
+		        <c:forEach var="field" items="${fieldList}">
+					<option value="${field.fieldName}">${field.fieldName}</option>
+				</c:forEach>
+	        </select>
+	    </section>
 		<table id="manager_List">
 			<tr>
 				<th><input type="checkbox" name="check" id="check" /></th>
@@ -117,18 +129,32 @@
 				<th>유저이름</th>
 				<th>생년월일</th>
 				<th>성별</th>
-				<th>주소</th>
+				<th>담당구장</th>
 			</tr>
-			<c:forEach var="list" items="${managerList}">
-			<tr class="item_box">
+			
+			<c:forEach var="list" items="${managerList}" varStatus="status">
+			<tr class="item_box${list.userCode} box_box">
 				<td><input type="checkbox" name="ck" id="ck" class="ck"  userCode="${list.userCode}" /></td>
 				<td>${list.userCode}</td>
 				<td>${list.userId}</td>
 				<td>${list.userName}</td>
 				<td>${list.userBirth}</td>
 				<td>${list.userGender}</td>
-				<td>${list.userAddress}</td>
-			</tr>				
+				<td class="area">${list.preferArea}</td>
+			</tr>
+				<script type="text/javascript">
+					$('.state').on("change", function(){
+						
+						$('.item_box${list.userCode}').show();
+								
+							if ($('.state').val() == ''){
+								$('.item_box${list.userCode}').show();
+							}else if('${list.preferArea}' != $('.state').val()){
+								$('.item_box${list.userCode}').hide();
+							}
+					});
+					
+					</script>			
 			</c:forEach>
 		</table>
 		<div id="add_box">

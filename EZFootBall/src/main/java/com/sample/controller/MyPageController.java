@@ -23,6 +23,7 @@ import com.sample.service.ManagerService;
 import com.sample.service.RentalService;
 import com.sample.service.UinService;
 import com.sample.vo.FieldReservationVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.InquiryVO;
 import com.sample.vo.ManagerVO;
 import com.sample.vo.UinVO;
@@ -226,10 +227,12 @@ public class MyPageController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		int UserCode = uvo.getUserCode();
 		managerVO = managerService.isManager(UserCode);
+		List<GameFieldInfoVO> list = managerService.getGameFieldInfo();
 		System.out.println("manager :::" + managerVO);
 		if (managerVO != null) {
 			model.addAttribute("managerVO", managerVO);
 		}
+		model.addAttribute("fieldList", list);
 		model.addAttribute("userVO", uvo);
 		return "/myPage/manager";
 	}

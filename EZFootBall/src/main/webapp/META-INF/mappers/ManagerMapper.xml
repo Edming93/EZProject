@@ -47,8 +47,9 @@
 	
 	<!-- 관리자페이지 매니저 리스트 -->
 	<select id="getManagerList" resultType="UserVO">
-		SELECT * FROM user_info
-		WHERE user_authority = '매니저'
+		SELECT * FROM user_info AS u INNER JOIN manager_history m
+		ON u.user_code = m.user_code
+		WHERE u.user_authority = '매니저'
 	</select>
 	
 	<update id="managerAdd2" parameterType="UserVO">
@@ -66,6 +67,10 @@
 		WHERE mgr_code = 
 		(SELECT mgr_code FROM manager_history WHERE user_code = #{user_code}) 
 	</update>
+	
+	<select id="getGameFieldInfo" resultType="GameFieldInfoVO">
+		SELECT * FROM gamefield_info
+	</select>
 
 </mapper>
 

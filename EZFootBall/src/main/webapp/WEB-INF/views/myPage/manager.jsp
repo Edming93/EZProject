@@ -352,14 +352,12 @@ footer {
 									<h5>이름</h5><h5>${userVO.userName}</h5>
 								</div>
 								<div class="title_item">
-									<h5>선호지역</h5>
+									<h5>선택구장</h5>
 									<select id="area" name="area">
 										<option value="">--선택--</option>
-										<option value="서울">서울</option>
-										<option value="부천">부천</option>
-										<option value="인천">인천</option>
-										<option value="안양">안양</option>
-										<option value="수원">수원</option>
+										<c:forEach var="list" items="${fieldList}">
+											<option value="${list.fieldName}">${list.fieldName}</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
