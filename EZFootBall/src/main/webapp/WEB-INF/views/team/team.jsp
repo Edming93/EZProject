@@ -354,6 +354,8 @@
         
         if(<%=today%> < 10){
         	datdata = '0'+<%=today%>;
+        }else{
+        	datdata = <%=today%>;
         }
         var day = <%=year%> + "-" +<%=month%> +"-" +datdata;
         console.log(<%=today%>);
