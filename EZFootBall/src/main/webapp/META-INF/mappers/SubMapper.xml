@@ -40,7 +40,7 @@
 	
 	<insert id="add" parameterType="GlistVO">
 		INSERT INTO `field_reservation` (`rv_type`, `rv_state`, `field_code`, `field_name`, `field_address`, `field_type`, `field_rentalfee`, `user_code`, `team_code`, `user_payment`, `game_day`, `game_time`, `game_code`) 
-		VALUES ('S', '예약완료', #{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, NULL, #{userCode}, NULL, 10000, #{gameDay}, #{gameTime}, #{gameCode})
+		VALUES ('S', '신청완료', #{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, NULL, #{userCode}, NULL, 10000, #{gameDay}, #{gameTime}, #{gameCode})
 	</insert>
 	
 	<insert id="slistadd" parameterType="GlistVO">
@@ -63,7 +63,7 @@
 	
 	<insert id="tadd" parameterType="GlistVO">
 		INSERT INTO `field_reservation` (`rv_type`, `rv_state`, `field_code`, `field_name`, `field_address`, `field_type`, `field_rentalfee`, `user_code`, `team_code`, `user_payment`, `game_day`, `game_time`, `game_code`) 
-		VALUES ('TS', '예약완료', #{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, NULL, #{userCode}, #{teamCode}, 10000, #{gameDay}, #{gameTime}, #{gameCode})
+		VALUES ('TS', '신청완료', #{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, NULL, #{userCode}, #{teamCode}, 10000, #{gameDay}, #{gameTime}, #{gameCode})
 	</insert>
 		
 	<insert id="tlistadd" parameterType="GlistVO">
