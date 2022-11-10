@@ -30,95 +30,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	
-	#searchbox1{
-		display: flex;
-    	justify-content: space-between;
-    	margin: 2% 0;
-	}
-	
-	#upside{
-		display: flex;
-		justify-content: space-between;
-    	padding: 0 15px;
-    	
-	}
-	
-	 #select{
-        	width: 10%;
-    		height: 30px;
-    		border: 2px solid black;
-   			border-radius: 10px;
-   			margin-left: 2%;
-        }
-        #saerch{
-        	width: 50%;
-    		height: 30px;
-        }
-        #inputbox{
-        	width : 85%;
-        	height : 30px;
-        }
-        #sbtn{
-        	width: 13%;
-		    height: 30px;
-		    border: 2px solid #BDD2B6;
-		    border-radius: 10px;
-		    background-color: #BDD2B6;
-		    color: white;
-		    font-weight: 700;
-        }
-        #sbtn:hover {
-        	cursor : pointer;
-        	background-color : red;
-        }
-        #add{
-        	border: 1px solid #BDD2B6;;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #del{
-        	border: 1px solid #BDD2B6;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #upd{
-        	border: 1px solid #BDD2B6;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #list{
-    		display: flex;
-    		justify-content: center;
-        }
-        #list table{
-        	border-collapse: collapse;
-        }
-        #list table thead tr{
-        	background-color : #D2D79F;
-        }
-       #list table tr th{
-       		width: 120px;
-		    height: 50px;
-		    border-bottom: 2px solid #D2D79F;
-		    background-color: #F8EDE3;
-		}
-       		
-       }
-       #list table tr th:first-child{
-       		width : 50px;
-       }
-       #list table tr td{
-       		height: 40px;
-		    text-align: center;
-		    border-bottom: 2px dotted #D2D79F;
-       }
-       #Cbox{
-       		width : 18px;
-       		height : 18px;#searchbox {
+		#searchbox {
 		display: flex;
 		height: 80px;
 		align-items: center;
@@ -126,11 +38,6 @@
 		padding: 0 30px;
 
 	}
-	#searchbox1{
-		display: flex;
-    	justify-content: space-between;
-    	margin: 2% 0;
-	}
 	
 	#upside{
 		display: flex;
@@ -142,9 +49,8 @@
 	 #select{
         	width: 10%;
     		height: 30px;
-    		border: 2px solid black;
+    		border: 2px solid #26a563;
    			border-radius: 10px;
-   			margin-left: 2%;
         }
         #saerch{
         	width: 50%;
@@ -224,15 +130,6 @@
     		justify-content: center;
     	}
 	
-       }
-       .checkbox{
-       		width : 18px;
-       		height : 18px;
-       }
-       .nev{
-           display: flex;
-    		justify-content: center;
-    	}
 	
 	
 	
@@ -373,7 +270,11 @@
 				}
 				 if(intext == ortext){
 					 lcnt++;
+					 break;
+				 }else{
+					 lcnt = 0;
 				 }
+				
 			 }
 			 
 		 }
@@ -389,17 +290,19 @@
 		 document.getElementById("uclist").style.visibility = "visible";
 		for(let i =0; i< <%=tcodelist.size()%>; i++){document.getElementById("cnum"+i).style.display = "none";}
 		 
-		 
+		 let intext = document.getElementById("inuserCode").value.trim();
 		 for(let i =0; i< <%=tcodelist.size()%>; i++){
-			 let intext = document.getElementById("inuserCode").value.trim();
-			 let ortext = document.getElementsByClassName("cnumlist")[i].innerText.trim();
 			 if(intext.length >= 1 ){
+				 let ortext = document.getElementsByClassName("cnumlist")[i].innerText.trim();
 				 if(ortext.indexOf(intext) != -1){
 					 document.getElementById("cnum"+i).style.display = "block";
 					 document.getElementById("cnum"+i).style.backgroundColor = "#fff";
 				 }
 				 if(intext == ortext){
 					 ccnt++;
+					 break;
+				 }else{
+					 ccnt = 0;
 				 }
 			 }
 			 
@@ -413,38 +316,51 @@
     document.getElementById("addbtn").addEventListener("click",function(){
     	let ingameCode = document.getElementById("ingameCode").value;
     	let inuserCode = document.getElementById("inuserCode").value;
-    	console.log(document.getElementsByClassName("userCode").length);
+    	
     	let cnt =0;
     	
-    	var listnum = new Array();
-    	
-    	for(let i=0; i< <%=gamelist.size()%>; i++){
-    		listnum.push()
+    	let pnum=0;
+    	let index = 0;
+    	for(let i=0; i< <%=stgamelist.size()%>; i++){
+    		if(document.getElementsByClassName("gameCode")[i].innerText == ingameCode){
+    			pnum = document.getElementsByClassName("GamePnum")[i].innerText;
+    			index = i;
+    			break;
+    		}
     	} 
     	
-    	if(lcnt > 0 && ccnt >0 ){
+    	if(lcnt > 0 && ccnt > 0 ){
     		for(let i=0; i<   document.getElementsByClassName("userCode").length; i++){
-        		
-        		if(ingameCode == document.getElementsByClassName("gameCode")[i].innerText && inuserCode == document.getElementsByClassName("userCode")[i].innerText){
+        		if(ingameCode == document.getElementsByClassName("gameCode")[i].innerText && inuserCode == document.getElementsByClassName("teamCode")[i].innerText){
+        			console.log(ingameCode);
+        			console.log(document.getElementsByClassName("gameCode")[i].innerText);
+        			console.log(inuserCode);
+        			console.log(document.getElementsByClassName("teamCode")[i].innerText);
         			alert("이미 존재하는 신청팀 입니다");
         			cnt++;
         			break;
         		}
         	} 
-        	
-        	if(cnt == 0) {
-        		location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
-    			
-        	}
+    		var max = false;
+    		if(cnt == 0){
+    			if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText.trim()){
+    				console.log(pnum);
+    				console.log("최대"+document.getElementsByClassName("GameMaxp")[index].innerText.trim())
+        			var confirmflag = confirm("최대 신 팀 이상입니다 신청 하시겠습니까?");
+        			 if(confirmflag){
+        				 location.href = "${pageContext.request.contextPath}/manager/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
+        	           }
+        		}else{
+        			location.href = "${pageContext.request.contextPath}/manager/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
+        		}
+    		}
 		}else {
-			alert("게임코드와 신청자코드를 확인해주세요");
+			alert("게임코드와 팀코드를 확인해주세요");
 		}
     	
     });
     
     </script>
-    
-    
     
     
     <!-- 모달 닫기 -->
@@ -457,7 +373,7 @@
     </script>
     
 	<div id="out">
-		<div id="searchbox1">
+		<div id="searchbox">
 			<select name="" id="select">
 				<option value="null">카테고리</option>
 				<option value="subname">신청자</option>
@@ -553,6 +469,15 @@
 											for(int j=0; j< gamelist.size(); j++){
 												if(stgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
 													out.print(gamelist.get(j).getGamePnum());
+												}
+											}
+										%>
+									</td>
+									<td class="GameMaxp" style="display: none;">
+										<%
+											for(int j=0; j< gamelist.size(); j++){
+												if(stgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
+													out.print(gamelist.get(j).getGameMaxp());
 												}
 											}
 										%>
@@ -850,7 +775,7 @@
 		 
 		 var del = confirm("정말삭제하시겠습니까?");
 		 if(del){
-			 location.href = "${pageContext.request.contextPath}/sub/tdel?"+cklist+"&"+tclist+"&"+gclist;
+			 location.href = "${pageContext.request.contextPath}/manager/tdel?"+cklist+"&"+tclist+"&"+gclist;
 		 }else{
 			 location.reload();
 		 }

@@ -242,7 +242,7 @@
 <div id="modalout"></div>
     <div id="modal">
         <h3>수정</h3>
-        <form action="${pageContext.request.contextPath}/ran/update" method="post">
+        <form action="${pageContext.request.contextPath}/manager/update" method="post">
         <input type="hidden" name="select" value="rankAdmin">
         <input type="hidden" name="ty" value="add" id="ty">
         <input type="hidden" name="resultCode" value="-1" id="rcode">

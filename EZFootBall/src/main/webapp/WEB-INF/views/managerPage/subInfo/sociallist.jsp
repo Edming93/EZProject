@@ -28,11 +28,13 @@
 <style>
 	
 	
-
-	#searchbox1{
+		#searchbox {
 		display: flex;
-    	justify-content: space-between;
-    	margin: 2% 0;
+		height: 80px;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 30px;
+
 	}
 	
 	#upside{
@@ -41,13 +43,12 @@
     	padding: 0 15px;
     	
 	}
-
+	
 	 #select{
         	width: 10%;
     		height: 30px;
-    		border: 2px solid black;
+    		border: 2px solid #26a563;
    			border-radius: 10px;
-   			margin-left: 2%;
         }
         #saerch{
         	width: 50%;
@@ -126,6 +127,8 @@
            display: flex;
     		justify-content: center;
     	}
+	
+	
 	
 	
 	
@@ -266,14 +269,15 @@
 				}
 				 if(intext == ortext){
 					 lcnt++;
+					 break;
+				 }else{
+					 lcnt = 0;
 				 }
 			 }
 			 
 		 }
        });
 	</script>
-	
-	
 	
 	<!-- 유저 코드 숫자 검색 -->
 	<script type="text/javascript">
@@ -294,6 +298,9 @@
 				 }
 				 if(intext == ortext){
 					 ccnt++;
+					 break;
+				 }else{
+					 ccnt = 0;
 				 }
 			 }
 			 
@@ -302,8 +309,6 @@
 	</script>
 	
 	
-	
-    
     <!-- 추가 -->
     <script type="text/javascript">
     document.getElementById("addbtn").addEventListener("click",function(){
@@ -312,10 +317,14 @@
     	console.log(document.getElementsByClassName("userCode").length);
     	let cnt =0;
     	
-    	var listnum = new Array();
-    	
-    	for(let i=0; i< <%=gamelist.size()%>; i++){
-    		listnum.push()
+    	let pnum=0;
+    	let index = 0;
+    	for(let i=0; i< <%=sgamelist.size()%>; i++){
+    		if(document.getElementsByClassName("gameCode")[i].innerText == ingameCode){
+    			pnum = document.getElementsByClassName("GamePnum")[i].innerText;
+    			index = i;
+    			break;
+    		}
     	} 
     	
     	if(lcnt > 0 && ccnt >0 ){
@@ -327,11 +336,21 @@
         			break;
         		}
         	} 
+    		
+    		var max = false;
+    		if(cnt == 0 ){
+    			console.log("신청"+pnum);
+    			console.log("최대"+document.getElementsByClassName("GameMaxp")[index].innerText.trim());
+    			if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText.trim()){
+        			var confirmflag = confirm("최대 신청자 수 이상입니다 신청 하시겠습니까?");
+        			 if(confirmflag){
+        				 location.href = "${pageContext.request.contextPath}/manager/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
+        	           }
+        		}else{
+        			location.href = "${pageContext.request.contextPath}/manager/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
+        		}
+    		}
         	
-        	if(cnt == 0) {
-        		location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
-    			
-        	}
 		}else {
 			alert("게임코드와 신청자코드를 확인해주세요");
 		}
@@ -347,12 +366,14 @@
         document.getElementById("modalout").style.display = "none";
         var modal =  document.getElementById("modal");
         modal.style.display = "none";
+        document.getElementById("ingameCode").value = "";
+        document.getElementById("inuserCode").value = "";
     });
     </script>
 	
     
 	<div id="out">
-		<div id="searchbox1">
+		<div id="searchbox">
 			<select name="" id="select">
 				<option value="null">카테고리</option>
 				<option value="subname">신청자</option>
@@ -443,6 +464,15 @@
 											for(int j=0; j< gamelist.size(); j++){
 												if(sgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
 													out.print(gamelist.get(j).getGamePnum());
+												}
+											}
+										%>
+									</td>
+									<td class="GameMaxp" style="display: none;">
+										<%
+											for(int j=0; j< gamelist.size(); j++){
+												if(sgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
+													out.print(gamelist.get(j).getGameMaxp());
 												}
 											}
 										%>
@@ -733,7 +763,7 @@
 			 
 			 var del = confirm("정말삭제하시겠습니까?");
 			 if(del){
-				 location.href = "${pageContext.request.contextPath}/sub/sdel?"+cklist+"&"+uclist+"&"+gclist;
+				 location.href = "${pageContext.request.contextPath}/manager/sdel?"+cklist+"&"+uclist+"&"+gclist;
 			 }else{
 				 location.reload();
 			 }

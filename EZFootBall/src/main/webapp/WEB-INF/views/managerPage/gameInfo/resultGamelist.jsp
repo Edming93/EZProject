@@ -198,7 +198,7 @@
 <div id="modalout"></div>
     <div id="modal">
         <h3>경기 결과 추가</h3>
-        <form action="${pageContext.request.contextPath}/game/radd" method="post">
+        <form action="${pageContext.request.contextPath}/manager/radd" method="post">
         <input type="hidden" name="select" value="gameAdmin">
         <input type="hidden" name="ty" value="add" id="ty">
         <input type="hidden" name="resultCode" value="-1" id="rcode">
@@ -574,7 +574,7 @@
 		if(ttcnt >0){
 			 var del = confirm("삭제 후 상황에 맞게 신청내역도 수정이 필요할 수 있습니다.\n정말 삭제하시겠습니까?");
 			 if(del){
-				 location.href = "${pageContext.request.contextPath}/game/rdel?"+rclist;
+				 location.href = "${pageContext.request.contextPath}/manager/rdel?"+rclist;
 			 }else{
 				 location.reload();
 			 } 
