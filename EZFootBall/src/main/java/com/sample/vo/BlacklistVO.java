@@ -6,14 +6,43 @@ import org.apache.ibatis.type.Alias;
 public class BlacklistVO {
 	private int blacklistCode;
 	private String userId;
-	private String userName;
+	private String buserName;
 	private int userCode;
 	private String blacklistTitle;
 	private String blacklistContent;
 	private String blacklistCreateDate;
 	private String blacklistLocal;
 	private int isDelete;
+	private int blackuserCode;
+	private String userName;
+	private int count;
+	private String userBlack;
 	
+	
+	public String getUserBlack() {
+		return userBlack;
+	}
+	public void setUserBlack(String userBlack) {
+		this.userBlack = userBlack;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getBlackuserCode() {
+		return blackuserCode;
+	}
+	public void setBlackuserCode(int blackuserCode) {
+		this.blackuserCode = blackuserCode;
+	}
 	public int getBlacklistCode() {
 		return blacklistCode;
 	}
@@ -26,11 +55,12 @@ public class BlacklistVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+	
+	public String getBuserName() {
+		return buserName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setBuserName(String buserName) {
+		this.buserName = buserName;
 	}
 	public String getBlacklistTitle() {
 		return blacklistTitle;

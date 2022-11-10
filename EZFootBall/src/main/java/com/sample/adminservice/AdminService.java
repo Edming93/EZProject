@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sample.dao.AdminDAO;
+import com.sample.vo.BlacklistPageVO;
+import com.sample.vo.BlacklistVO;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
@@ -97,16 +99,6 @@ public class AdminService {
 	      return list;
 	   }
    
-   public List<ReviewCommentVO> reviewCommentList(){
-      return dao.reviewCommentList();
-   }
-   
-   public List<ReviewCommentVO> selectCommentList(ReviewCommentVO vo){
-      
-      List<ReviewCommentVO> list = dao.reviewselect(vo);
-
-      return list;
-   }
    
    //유저관리 - 유저리스트 출력
    public List<UserVO> UInfoList(){
@@ -146,6 +138,51 @@ public class AdminService {
    }
    public void DeleteGR(int userCode) {
 	   dao.DeleteGR(userCode);
+   }
+   
+
+   public List<ReviewCommentVO> reviewCommentList(){
+      return dao.reviewCommentList();
+   }
+   
+   public List<ReviewCommentVO> selectCommentList(ReviewCommentVO vo){
+      
+      List<ReviewCommentVO> list = dao.reviewselect(vo);
+
+      return list;
+   }
+   
+ //리뷰 삭제
+   public void deletereview(int reviewCode) {
+	   dao.deletereviewComment(reviewCode);
+   }
+   
+   public void getBlackList(Model model) {
+		BlacklistPageVO vo = new BlacklistPageVO();
+		vo.setStart(0);
+		vo.setCntPerPage(15);
+		model.addAttribute("list", dao.selectBlackList(vo));
+	}
+   
+   //블랙리스트 삭제
+   public void deleteblacklist(int blacklistCode) {
+	   dao.delBlackList(blacklistCode);
+   }
+   
+   
+   //블랙유저 명단 가져오기
+   public List<BlacklistVO> getBlackUser() {
+	  return dao.selectBlackUser();
+   }
+   
+   //블랙유저 추가
+   public void addBlacklist(int userCode){
+	   dao.blackuserCheck(userCode);
+   }
+   
+   //블랙유저 해제
+   public void clearBlacklist(int userCode){
+	   dao.blackuserClear(userCode);
    }
    
 }

@@ -23,6 +23,7 @@ import com.sample.adminservice.AdminService;
 import com.sample.adminservice.FieldAdminService;
 import com.sample.service.InquiryService;
 import com.sample.service.ManagerService;
+import com.sample.vo.BlacklistVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -557,31 +558,123 @@ public class AdminController {
 		return "redirect:/admin/select?select=" + session.getAttribute("select");
 	}
 
+	//커뮤니티 페이지
 	@GetMapping("/comuselect")
-	public String comuselect(@RequestParam("comuselect") String comuselect, Model model) {
+	public String comuselect(@RequestParam("comuselect") String comuselect, HttpSession session, Model model) {
+		service.getBlackList(model);
+		System.out.println(service.getBlackUser());
+		model.addAttribute("black", service.getBlackUser());
 		model.addAttribute("review", service.reviewCommentList());
 		model.addAttribute("comuselect", comuselect);
 		return "adminPage/adminMain";
 	}
 
+	//리뷰 검색
 	@PostMapping("/reviewselect")
-	public String reviewselect(@RequestParam("reviewsel") String reviewsel, @RequestParam("reviewcode") int reviewcode,
+	public String reviewselect(@RequestParam("reviewcode") int reviewcode,
 			Model model, ReviewCommentVO vo) {
-		vo.setUserName(reviewsel);
 		vo.setUserCode(reviewcode);
 		List<ReviewCommentVO> list = service.selectCommentList(vo);
 		model.addAttribute("review", list);
 		System.out.println(list.get(0));
 		return "adminPage/adminMain";
 	}
+	
+	//리뷰 검색 2
+	@PostMapping("/reviewselect1")
+	public String reviewselect1(Model model, FieldReservationVO vo, @RequestParam("Tselect") String Tselect,
+			@RequestParam("Tsearch") String Tsearch) {
 
-	/*
-	 * @PostMapping("/reviewselect2") public String reviewselect
-	 * (@RequestParam("reviewcode") int reviewcode, Model model, ReviewCommentVO vo)
-	 * { vo.setUserCode(reviewcode); List<ReviewCommentVO> list =
-	 * service.selectCommentList(vo); model.addAttribute("review", list); return
-	 * "adminPage/adminMain"; }
-	 */
+		if (Tselect.equals("rvCode")) {
+			vo.setSrvCode(Tsearch);
+		} else if (Tselect.equals("rvDay")) {
+			vo.setRvDay(Tsearch);
+		} 
+		model.addAttribute("team", service.joinList1(vo));
+
+		return "adminPage/adminMain";
+	}
+	
+	
+	
+	//리뷰 삭제
+	@PostMapping("/reviewdelete")
+	@ResponseBody
+	public int reviewdelete(HttpSession session, @RequestParam(value = "reviewChkCode[]") List<String> chArr,
+			ReviewCommentVO vo) {
+		System.out.println(chArr);
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();
+		int result = 0;
+
+		if (uvo != null) {
+			for (String reviewCode : chArr) {
+				service.deletereview(Integer.parseInt(reviewCode));
+			}
+			result = 1;
+		}
+
+		return result;
+	}
+	
+	//블랙 리스트 삭제
+	@PostMapping("/blacklistdelete")
+	@ResponseBody
+	public int blacklistdelete(HttpSession session, @RequestParam(value = "blackChkCode[]") List<String> chArr,
+			BlacklistVO vo) {
+		System.out.println(chArr);
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();
+		int result = 0;
+
+		if (uvo != null) {
+			for (String blacklistCode : chArr) {
+				service.deleteblacklist(Integer.parseInt(blacklistCode));
+			}
+			result = 1;
+		}
+
+		return result;
+	}
+	
+	
+	//블랙리스트 등록
+	@PostMapping("/blackcheck")
+	@ResponseBody
+	public int blackCheckList(HttpSession session, @RequestParam(value = "blakcChkCode[]") List<String> chArr,
+			BlacklistVO vo) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();		
+		int result = 0;
+
+		if (uvo != null) {
+			for (String userCode : chArr) {
+				service.addBlacklist(Integer.parseInt(userCode));
+			}
+			result = 1;
+		}
+
+		return result;
+	}
+	
+	//블랙리스트 해제
+	@PostMapping("/blackclear")
+	@ResponseBody
+	public int blackClearList(HttpSession session, @RequestParam(value = "blakcChkCode[]") List<String> chArr,
+			BlacklistVO vo) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		String userId = uvo.getUserId();	
+		int result = 0;
+
+		if (uvo != null) {
+			for (String userCode : chArr) {
+				service.clearBlacklist(Integer.parseInt(userCode));
+			}
+			result = 1;
+		}
+
+		return result;
+	}
 
 	@GetMapping("/payselect")
 	public String payselect(@RequestParam("payselect") String payselect, Model model) {

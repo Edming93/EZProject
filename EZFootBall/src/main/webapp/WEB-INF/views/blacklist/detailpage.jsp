@@ -46,7 +46,7 @@ body{
 	margin : 0 auto;
 	display: grid;
   	grid-template-columns: 5vh 1fr 5vh;
-	grid-template-rows: 3vh 2vh 3vh 40vh 0.5vh 5vh 10vh 10vh 30vh;
+	grid-template-rows: 1vh 6vh 3vh 40vh 0.5vh 5vh 10vh 10vh 30vh;
 	gap: 10px 10px;
 	grid-auto-flow: row;
 	grid-template-areas: 
@@ -81,7 +81,7 @@ body{
 	
 	grid-area: header;
 	display: grid;
-	grid-template-columns: 75px 1fr;
+	grid-template-columns: 120px 1fr;
 	grid-template-rows: 1fr;
 	gap: 3px;
 }
@@ -583,6 +583,8 @@ button{
 		<div class="header">
 			<h4>제목 :</h4>
 			<h4>${BlacklistVO.blacklistTitle}</h4>
+			<h4>신고유저코드 :</h4>
+			<h4>${BlacklistVO.blackuserCode}</h4>
 		</div>
 		<div class="maindetail">
 			<p>${BlacklistVO.blacklistContent}</p>

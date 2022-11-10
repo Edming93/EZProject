@@ -49,6 +49,14 @@ public class BlacklistService {
 		return (blackDAO.deleteBlackList(vo)>0)?true:false;
 	}
 	
+	public boolean adduserBlack(BlacklistVO vo) {
+		return (blackDAO.adduserBlack(vo)>0)?true:false;
+	}
+	
+	public boolean deleteuserBlack(BlacklistVO vo) {
+		return (blackDAO.deleteuserBlack(vo)>0)?true:false;
+	}
+	
 	public List<BlacklistCommentVO> getCommentList(int blackCode) {
 		return blackDAO.selectBlackListComment(blackCode);
 	}

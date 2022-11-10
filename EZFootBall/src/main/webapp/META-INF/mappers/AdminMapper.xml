@@ -177,21 +177,7 @@
 		ORDER BY a.rv_code DESC
 	</select>
 	
-	<select id="reviewCommentList" resultType="commentVO">
-		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
-		from review
-		<where>
-			<if test="userName != null">
-				user_name = #{userName}
-			</if>
-		</where>
-	</select>
-	
-	<select id="reviewselect" resultType="commentVO" parameterType="commentVO">
-		select review_code, user_name, content, date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
-		from review WHERE user_name = #{userName} or user_code = #{userCode}
-	</select>
-	
+
 	
 	<!-- 구장관리 (수정,삭제) -->
 	<select id="getFieldListAll" resultType="GameFieldInfoVO">
@@ -439,6 +425,87 @@
 		update user_info 
 		set user_black ='X', user_reports = 0
 		where user_code = #{userCode}
+	</update>
+	
+	
+	
+	<!-- 리뷰!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<select id="reviewCommentList" resultType="commentVO">
+		select review_code, user_name, content, date_format(create_date,
+		'%Y-%m-%d %H:%i') create_date, user_code
+		from review
+		<where>
+			<if test="userName != null">
+				user_name = #{userName}
+			</if>
+		</where>
+	</select>
+
+	<select id="reviewselect" resultType="commentVO"
+		parameterType="commentVO">
+		select review_code, user_name, content,
+		date_format(create_date, '%Y-%m-%d %H:%i') create_date, user_code
+		from
+		review WHERE user_name = #{userName} or user_code = #{userCode}
+	</select>
+
+	<delete id="deletereviewComment">
+		delete from review where review_code = #{reviewCode}
+	</delete>
+
+
+
+	<!-- 블랙리스트 !!!!!!!!!!!!! -->
+	<select id="selectBlackList" resultType="BlacklistVO">
+		select blacklist_code,
+		user_id, buser_name, blacklist_title, blacklist_content,
+		blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i')
+		blacklist_create_date, user_code, blackuser_code
+		from blacklist
+		where is_delete = 0
+		order by
+		blacklist_code desc
+		limit #{start}, #{cntPerPage}
+	</select>
+	
+	<update id="delBlackList">
+		update blacklist set is_delete = 1 
+		where blacklist_code = #{blacklistCode}
+	</update>
+
+	<!-- 유저 신고!!!!!!!!!!!!!!! -->
+<!-- 	<select id="selectBlackUser" resultType="BlacklistVO">
+		SELECT user_name ,
+		blackuser_code, COUNT(blackuser_code) 'count', user_black
+		FROM
+		blacklist
+		INNER JOIN user_info ON user_info.user_code =
+		blacklist.blackuser_code
+		where user_black = 'x'
+		GROUP BY blackuser_code
+		HAVING COUNT(blackuser_code) > 2
+	</select> -->
+	
+	<select id="selectBlackUser" resultType="BlacklistVO">
+		SELECT user_name ,
+		blackuser_code, COUNT(blackuser_code) 'count', user_black
+		FROM
+		blacklist
+		INNER JOIN user_info ON user_info.user_code =
+		blacklist.blackuser_code
+		GROUP BY blackuser_code
+		HAVING COUNT(blackuser_code) > 2
+	</select>
+
+	<update id="blackuserCheck">
+		UPDATE user_info SET user_black = 'O'
+		WHERE user_code = #{userCode};
+	</update>
+
+	<update id="blackuserClear">
+		UPDATE user_info SET user_black = 'X'
+		WHERE user_code = #{userCode};
 	</update>
 	
 	

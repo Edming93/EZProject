@@ -30,6 +30,12 @@ public interface BlacklistDAO {
 	//게시판 update
 	public int updateBlackList(BlacklistVO vo);
 	
+	//게시판 블랙유저 user_info에 추가
+	public int adduserBlack(BlacklistVO vo);
+	
+	//게시판 블랙유저 user_info에서 삭제
+	public int deleteuserBlack(BlacklistVO vo);
+	
 	//게시판 delete
 	public int deleteBlackList(BlacklistVO vo);
 	

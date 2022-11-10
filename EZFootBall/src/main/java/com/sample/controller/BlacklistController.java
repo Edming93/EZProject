@@ -82,9 +82,11 @@ public class BlacklistController {
 		if (uvo != null) {
 			System.out.println(uvo.getUserCode());
 			bvo.setUserId(uvo.getUserId());
-			bvo.setUserName(uvo.getUserName());
+			bvo.setBuserName(uvo.getUserName());
 			bvo.setUserCode(uvo.getUserCode());
+			service.adduserBlack(bvo);
 			if (service.setBlackList(bvo)) {
+				
 				return "redirect:/blacklist/blacklistmain";
 			} else {
 				return "blacklist/setbbs";
@@ -113,9 +115,10 @@ public class BlacklistController {
 	public String editBBSResult(@SessionAttribute("sessionVO") UserVO uvo,
 			@ModelAttribute("BlacklistVO") BlacklistVO bvo) {
 		bvo.setUserId(uvo.getUserId());
-		bvo.setUserName(uvo.getUserName());
+		bvo.setBuserName(uvo.getUserName());
 		bvo.setUserCode(uvo.getUserCode());
 		if (service.editBlackList(bvo)) {
+			service.adduserBlack(bvo);
 			return "redirect:/blacklist/blacklistmain";
 		} else {
 			return "redirect:/blacklist/editbbs/" + bvo.getBlacklistCode();
@@ -126,7 +129,10 @@ public class BlacklistController {
 	@GetMapping("/blacklistmain/deletebbs/{blacklistCode}")
 	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo,
 			@ModelAttribute("BlacklistVO") BlacklistVO bvo, @PathVariable("blacklistCode") String blacklistCode) {
+		
 		bvo.setUserCode(uvo.getUserCode());
+		System.out.println(bvo.getBlackuserCode());
+		service.deleteuserBlack(bvo);
 		if (service.deleteBlackList(bvo)) {
 			return "redirect:/blacklist/blacklistmain";
 		} else {
