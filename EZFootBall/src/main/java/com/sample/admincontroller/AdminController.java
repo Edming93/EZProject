@@ -587,5 +587,8 @@ public class AdminController {
 		model.addAttribute("adminselect", "qna");
 		return "redirect:/admin/adminselect";
 	}
+	
+	
+	
 
 }

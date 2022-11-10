@@ -377,6 +377,8 @@
         if(<%=today%> < 10){
         	// 값 비교를 위한 문자처리
         	date = "0"+<%=today%>;
+        }else {
+        	date = <%=today%>;
         }
         
 		var day = <%=year%> + "-" +<%=month%> +"-" +date;

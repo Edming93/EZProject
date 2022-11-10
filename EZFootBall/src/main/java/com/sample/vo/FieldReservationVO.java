@@ -18,7 +18,7 @@ public class FieldReservationVO {
 	private int fieldRentalfee;
 
 	private int userCode;
-	private int userPayment;
+
 
 	private String gameDay;
 	private String gameTime;
@@ -37,7 +37,31 @@ public class FieldReservationVO {
 	private String sgameCode;
 
 	private String payCode;
+	private String storeCode;
+	private int userPayment;
+	private int cardCode;
+	
+	
 	private int uteamPay;
+
+	
+	
+	
+	public int getCardCode() {
+		return cardCode;
+	}
+
+	public void setCardCode(int cardCode) {
+		this.cardCode = cardCode;
+	}
+
+	public String getStoreCode() {
+		return storeCode;
+	}
+
+	public void setStoreCode(String storeCode) {
+		this.storeCode = storeCode;
+	}
 
 	public String getGamePlace() {
 		return gamePlace;

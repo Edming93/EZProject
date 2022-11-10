@@ -96,8 +96,8 @@
 <!-- 	</select> -->
 
 	<insert id="insertFieldReservation">
-		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,user_payment,game_day,game_time,game_code,game_place)
-		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{userPayment},#{gameDay},#{gameTime},#{gameCode},#{gamePlace})
+		insert into field_reservation (rv_type,field_code,field_name,field_address,field_type,field_rentalfee,user_code,game_day,game_time,game_code,game_place,pay_code,store_code,user_payment,card_code)
+		values(#{rvType},#{fieldCode},#{fieldName},#{fieldAddress},#{fieldType},#{fieldRentalfee},#{userCode},#{gameDay},#{gameTime},#{gameCode},#{gamePlace},#{payCode},#{storeCode},#{userPayment},#{cardCode})
 	</insert>
 	<insert id="insertRvInGameList" keyProperty="gameCode">
 		insert into gamelist (game_type,field_code,field_name,field_address,game_day,game_time,game_macth,game_place)

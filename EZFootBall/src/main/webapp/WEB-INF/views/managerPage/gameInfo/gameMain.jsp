@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	System.out.println("겜네");
 	request.setCharacterEncoding("utf-8");
 	String game_p = request.getParameter("gamePage");
 	if(game_p == null ){

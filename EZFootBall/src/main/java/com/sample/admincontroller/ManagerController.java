@@ -37,6 +37,8 @@ public class ManagerController {
 				session.setAttribute("allfield", service.allfield());
 				// 경기결과 정보
 				session.setAttribute("result", service.result());
+				//랭킹정보
+				session.setAttribute("rankall", service.rankall());
 				
 		String page = request.getParameter("page");
 		if(page == null) {
@@ -78,18 +80,28 @@ public class ManagerController {
 		}else if(gamePage.equals("game3")) {
 			request.setAttribute("gamePage", "game3");
 		}
+		
+		String rankPage = request.getParameter("rankPage");
+		
+		if(rankPage == null) {
+			rankPage = "rank1";
+		}
+		
+		if(rankPage.equals("rank1")) {
+			request.setAttribute("rankPage","rank1");
+		}
 
 		return "managerPage/managerMain";
 	}
 	
-	@GetMapping("/sub") 
-	public String sub(HttpServletRequest request,HttpSession session) {
-		String subPage = request.getParameter("subPage");
-		
-		if(subPage == null) {
-			subPage = "sub1";
-		}
-		
+//	@GetMapping("/sub") 
+//	public String sub(HttpServletRequest request,HttpSession session) {
+//		String subPage = request.getParameter("subPage");
+//		
+//		if(subPage == null) {
+//			subPage = "sub1";
+//		}
+//		
 //		if(subPage.equals("sub1")) {
 //			request.setAttribute("page","sub1");
 //		}else if(subPage.equals("sub2")) {
@@ -97,26 +109,26 @@ public class ManagerController {
 //		}else if(subPage.equals("sub3")) {
 //			request.setAttribute("page", "sub3");
 //		}
-		return "redirect:/manager/manager?subPage="+subPage;
-	}
-	
-	@GetMapping("/game") 
-	public String game(HttpServletRequest request) {
-		String subPage = request.getParameter("page");
-		
-		if(subPage == null) {
-			subPage = "game1";
-		}
-		
-		if(subPage.equals("game1")) {
-			request.setAttribute("page","game1");
-		}else if(subPage.equals("game2")) {
-			request.setAttribute("page", "game2");
-		}else if(subPage.equals("game3")) {
-			request.setAttribute("page", "game3");
-		}
-		return "managerPage/managerMain";
-	}
+//		return "redirect:/manager/manager?subPage="+subPage;
+//	}
+//	
+//	@GetMapping("/game") 
+//	public String game(HttpServletRequest request) {
+//		String subPage = request.getParameter("page");
+//		
+//		if(subPage == null) {
+//			subPage = "game1";
+//		}
+//		
+//		if(subPage.equals("game1")) {
+//			request.setAttribute("page","game1");
+//		}else if(subPage.equals("game2")) {
+//			request.setAttribute("page", "game2");
+//		}else if(subPage.equals("game3")) {
+//			request.setAttribute("page", "game3");
+//		}
+//		return "managerPage/managerMain";
+//	}
 	
 	
 }

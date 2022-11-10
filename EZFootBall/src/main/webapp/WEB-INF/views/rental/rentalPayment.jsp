@@ -564,10 +564,7 @@
                   window.onload = function() {
                   let amount_fee = document.querySelector(".amount_fee");
                   let total_fee = document.querySelector(".total_fee");
-               			console.dir(${sessionScope.GlistVO.uteamPay});
-                		console.dir(${sessionScope.GlistVO.uteamPay}.tolocaleString());
-                		console.log(${seesionSCopr.GlistVO.gameType})
-
+                  
  					if('${sessionScope.GlistVO.gameType}' == 'T'){
  	                  amount_fee.innerHTML = Number(${sessionScope.GlistVO.uteamPay}).toLocaleString("ko-KR");
  	                  total_fee.innerHTML = Number(${sessionScope.GlistVO.uteamPay - 0}).toLocaleString("ko-KR");
@@ -601,11 +598,11 @@
    </div>
 
 
-	<script type="text/javascript">
-  	
+	<script type="text/javascript">      
       
       var IMP = window.IMP; // 생략가능
-      IMP.init('imp44418126'); // <-- 본인 가맹점 식별코드 삽입
+      IMP.init('imp26017217'); // <-- 본인 가맹점 식별코드 삽입
+
       function requestPay() {
 
          IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
@@ -613,30 +610,64 @@
             pg: "inicis",
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: '목동',
+            name: '${field.fieldName}',
             amount: '100',
-            buyer_email: 'iamport@siot.do',
-            buyer_name: '구매자',
-            buyer_tel: '010-1234-5678',
-            buyer_addr: '서울특별시 강남구 삼성동',
-            buyer_postcode: '123-456'
+            buyer_email: '${sessionScope.sessionVO.userEmail1}${sessionScope.sessionVO.userEmail2}',
+            buyer_name: '${sessionScope.sessionVO.userName}',
+            buyer_addr: '${sessionScope.sessionVO.userAddress}',
+            /*  
+            모바일 결제시,
+            결제가 끝나고 랜딩되는 URL을 지정 
+            (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
+            */
+//             m_redirect_url: '${pageContext.request.contextPath}/myPage/rentalList'
          }, function (rsp) { // callback
             if (rsp.success) {
-            	var msg = '결제에 성공하셨습니다!'; 
-            	 msg += '고유ID : ' + rsp.imp_uid;
-                 msg += '상점 거래ID : ' + rsp.merchant_uid;
-                 msg += '결제 금액 : ' + rsp.paid_amount;
-                 msg += '카드 승인번호 : ' + rsp.apply_num;
+//             	var msg = '결제에 성공하셨습니다!'; 
+//             	 msg += '고유ID : ' + rsp.imp_uid;
+//                  msg += '상점 거래ID : ' + rsp.merchant_uid;
+//                  msg += '결제 금액 : ' + rsp.paid_amount;
+//                  msg += '카드 승인번호 : ' + rsp.apply_num;
+
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
-            	if(${sessionScope.GlistVO.gameType eq null}){ // 구장예약일 경우
-            		alert(msg);
-                  	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode="+'${field.fieldCode}'+"&fieldName="+'${field.fieldName}'+"&fieldAddress=${field.fieldAddress}&fieldRentalfee="+'${field.fieldRentalfee}'
-                  					+"&fieldType=${field.fieldType}&gameDay=${day}&gameTime="+'${time}';
-            	}else if(${sessionScope.GlistVO.gameType eq 'T'}) { // 팀매치 예약일 경우
-            		alert(msg);
+             	if(${sessionScope.GlistVO.gameType eq 'T'}) { // 팀매치 예약일 경우
+            		alert("결제에 성공하셨습니다.");
             		location.href ="${pageContext.request.contextPath}/rental/resultTeam";
+            	}else { // 구장예약일 경우
+//                   	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}"+
+//                   			"&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}"+
+//                   			"&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00"+
+//                   			"&rvType=G&gamePlace=${field.gamePlace}&payCode="+rsp.imp_uid+"&storeCode="+rsp.merchant_uid;
+      
+                  	let data = {fieldCode:'${field.fieldCode}',fieldName:'${field.fieldName}',fieldAddress:'${field.fieldAddress}',fieldRentalfee:'${field.fieldRentalfee}',
+                  			fieldType:'${field.fieldType}',gameDay:'${sessionScope.fieldData.gameDay}',gameTime:'${sessionScope.fieldData.gameTime}:00:00',
+                  			rvType:'G',gamePlace:'${field.gamePlace}',payCode:rsp.imp_uid, storeCode:rsp.merchant_uid,userPayment:rsp.paid_amount,cardCode:rsp.apply_num};
+
+                    fetch("${pageContext.request.contextPath}/rental/resultField",{
+                        method : "POST",
+                        headers : {
+                           "Content-Type" : "application/json"},
+                        body : JSON.stringify(data)
+                     }).then(response => response.json()) 
+                     .then(state => {
+						alert("결제에 성공하셨습니다.");
+						
+						if(state.url == "ok"){
+							location.href="${pageContext.request.contextPath}/myPage/rentalList";
+						}else {
+							location.href="${pageContext.request.contextPath}/rental/rentalPayment";
+						}
+                     }).catch(error => {
+                        console.log("무슨에러냐면! : " + error);
+                     });
             	}
+            	
+
+            	
+            	
+            	
+            	
             } else {
 				alert("결제에 실패하셨습니다!");
 	             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+'${field.fieldCode}';

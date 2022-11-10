@@ -129,24 +129,29 @@ public class RentalController {
 	}
 	
 	
-	@GetMapping("/resultField")
-	public String fieldResultMove(FieldReservationVO fvo,GlistVO gvo,Model model,
+	@PostMapping("/resultField")
+	@ResponseBody
+	public Map<String,String> fieldResultMove(@RequestBody FieldReservationVO fvo,Model model,
 								@SessionAttribute("sessionVO") UserVO uvo, HttpSession session) {
+		System.out.println("-----------------------------------------");
+		System.out.println(fvo.getPayCode());
+		System.out.println(fvo.getStoreCode());
+		System.out.println(fvo.getUserPayment());
+		System.out.println(fvo.getCardCode());
+		
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
-		
-//		gvo.setGameType(fvo.getRvType());
-//		gvo.setGameMacth(fvo.getFieldType());
-//		gvo.setGamePay(fvo.getFieldRentalfee());
 
+		Map<String,String> map = new HashMap<>();
 		// 유효성검사 필요 없지만 확실하게 적용
 		if(service.rvCheck(fvo)) {
 			service.insertRvInGameList(fvo);
 			service.insertFieldReservation(fvo);
-			return "redirect:/myPage/rentalList";
+			map.put("url","ok"); 
 		}else {
-			return "redirect:/rental/rentalPayment";
+			map.put("url","fail"); 
 		}
+		return map;
 	}
 	
 	@GetMapping("/resultTeam")
