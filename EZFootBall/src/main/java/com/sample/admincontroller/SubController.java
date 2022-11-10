@@ -34,20 +34,17 @@ import com.sample.vo.UserVO;
 public class SubController {
 	
 	private SubService service;
-	private AdminService aservice;
 	
-	public SubController(SubService service,AdminService aservice){
+	public SubController(SubService service){
 		super();
 		this.service = service;
-		this.aservice = aservice;
 	}
 	
 	@GetMapping("tdel")
 	public String tdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("teamCode") int[] teamCode,
 						@RequestParam("gameCode") int[] gameCode,HttpSession session) {
-		System.out.println("팀삭제");
+	
 		for(int i=0; i<teamCode.length; i++) {
-			System.out.println("여긴");
 			DataVO vo = new DataVO();
 			
 			vo.setTeamCode(teamCode[i]);
@@ -63,13 +60,11 @@ public class SubController {
 	@GetMapping("sdel")
 	public String sdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("userCode") int[] userCode,
 			@RequestParam("gameCode") int[] gameCode,HttpSession session) {
-		System.out.println("삭제");
+		
 		for(int i=0; i<rvCode.length; i++) {
-			System.out.println(rvCode[i]);
 			service.rdelete(rvCode[i]);
 		}
 		for(int i=0; i<userCode.length; i++) {
-			System.out.println("여긴");
 			DataVO vo = new DataVO();
 			
 			vo.setUserCode(userCode[i]);
@@ -83,8 +78,7 @@ public class SubController {
 	
 	@GetMapping("/sadd")
 	public String add(HttpSession session,@RequestParam("userCode") int userCode, @RequestParam("gameCode") int gameCode) {
-		System.out.println("추가컨트롤러");
-		GlistVO vo = new GlistVO();
+	GlistVO vo = new GlistVO();
 		vo = service.all(gameCode);
 		vo.setUserCode(userCode);
 		vo.setTeamCode(0);
@@ -98,7 +92,6 @@ public class SubController {
 	
 	@GetMapping("/tadd")
 	public String tadd(HttpSession session,@RequestParam("teamCode") int teamCode, @RequestParam("gameCode") int gameCode) {
-		System.out.println("추가컨트롤러");
 		List<Integer> ucList = new ArrayList<Integer>();
 		ucList = service.usercode(teamCode);
 		for(int i=0; i<ucList.size(); i++) {

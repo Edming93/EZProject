@@ -30,26 +30,19 @@ public class RanController {
    public String update (@RequestParam("plus")String plus,@RequestParam("minus")String minus,
                      @RequestParam("userLevel")String userLevel,@RequestParam("ty")String usercode,
                      HttpSession session) {
-      System.out.println("랭크");
-      System.out.println(plus);
-      System.out.println(minus);
-      System.out.println(usercode);
+     
       UinVO vo = new UinVO();
       int code = Integer.parseInt(usercode);
       vo.setUserCode(code);
-      System.out.println("그전에");
       if(plus.equals("0")) {
          int num = Integer.parseInt(minus);
          vo.setUserScore(num);
-         
          service.minus(vo);
-         System.out.println("마");
+      
       }else if (minus.equals("0")) {
          int num = Integer.parseInt(plus);
          vo.setUserScore(num);
          service.plus(vo);
-         
-         System.out.println("플");
       }
       vo.setUserLevel(userLevel);
       service.level(vo);

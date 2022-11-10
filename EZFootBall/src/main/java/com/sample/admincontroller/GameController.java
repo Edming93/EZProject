@@ -53,28 +53,27 @@ public class GameController {
 	
 	@PostMapping("/tadd")
 	public String tadd(HttpSession session, GlistVO vo) {
-		System.out.println("여기 왜 안옴");
 		GameFieldInfoVO gvo = service.fieldinfo(vo.getFieldCode());
 		vo.setFieldAddress(gvo.getFieldAddress());
 		vo.setFieldName(gvo.getFieldName());
 		vo.setGameMacth(gvo.getFieldType());
 		service.tadd(vo);
-		return "adminPage/adminMain";
+		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
 	@GetMapping("/del")
-	public String del(@RequestParam("gameCode") int[] gameCode) {
+	public String del(@RequestParam("gameCode") int[] gameCode,HttpSession session) {
 		for(int i=0; i<gameCode.length;i++) {
 			service.del(gameCode[i]);
 		}
-		return "adminPage/adminMain";
+		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
 	
 	@PostMapping("/update")
-	public String update(GlistVO vo) {
+	public String update(GlistVO vo,HttpSession session) {
 		service.update(vo);
-		return "adminPage/adminMain";
+		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
 	@GetMapping("rdel")
@@ -86,27 +85,11 @@ public class GameController {
 		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	
-//	@PostMapping("radd")
-//	public String radd(GameResultVO vo,HttpSession session) {
-//		System.out.println("추가");
-//		if(vo.getTeamCode()==0) {
-//			vo.setGameType("S");
-//		}else {
-//			vo.setGameType("T");
-//		}
-//		service.radd(vo);
-//		System.out.println(vo.getGameCode());
-//		return "redirect:/admin/select?select="+session.getAttribute("select");
-//	}
-	
-	
 	@PostMapping("radd")
 	public String rup(GameResultVO vo,HttpSession session,String ty) {
-		System.out.println("업데이트");
 		if(vo.getUserCode()==0) {
 			vo.setGameType("T");
 			if(ty.equals("add")) {
-				System.out.println("추가");
 				List<Integer> mList = service.teamlist(vo.getTeamCode());
 				for(int i =0; i<mList.size(); i++) {
 					vo.setUserCode(mList.get(i));
@@ -114,22 +97,17 @@ public class GameController {
 				}
 				
 			}else {
-				System.out.println("업뎃");
 				service.rup(vo);
 			}
 		}else {
 			vo.setGameType("S");
 			if(ty.equals("add")) {
-				System.out.println("추가");
 				service.radd(vo);
 			}else {
-				System.out.println("업뎃");
 				service.rup(vo);
 			}
 		}
 		
-		//service.radd(vo);
-		System.out.println(vo.getGameCode());
 		return "redirect:/admin/select?select="+session.getAttribute("select");
 	}
 	

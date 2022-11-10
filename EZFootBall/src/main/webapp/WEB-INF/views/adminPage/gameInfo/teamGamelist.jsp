@@ -1793,8 +1793,8 @@
 	<!-- 수정 -->
 	<script type="text/javascript">
 	document.getElementById("upsub").addEventListener("click", function () {
-		alert("시간을 선택 해주세요");
 		if(document.getElementById("uptime").value == "null"){
+			alert("시간을 선택 해주세요");
 			this.type = "button";
 		}else{
 			this.type = "submit";
