@@ -240,7 +240,7 @@
 <div id="modalout"></div>
     <div id="modal">
         <h3>게임 추가</h3>
-        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/game/tadd">
+        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/tadd">
         <input type="hidden" name="select" value="gameAdmin">
             <ul id="flist">
                 <li><p>경기장코드 : </p> <input type="text" name="fieldCode" id="infieldCode" class="inbox" autocomplete='off'></li>
@@ -297,7 +297,7 @@
     
 <div id="updiv"></div>
     <div id="upmodal">
-        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/game/update">
+        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/update">
             <ul id="upul">
                 <li><p>경기번호 : </p><input type="text" name="gameCode" id="upcode" readonly></li>
                 <li><p>경기날짜 : </p><input type="text" name="gameDay" id="upday" autocomplete="off"></li>
@@ -1714,7 +1714,7 @@
 			 if(ttcnt <1){
 				 var del = confirm("정말삭제하시겠습니까?");
 				 if(del){
-					 location.href = "${pageContext.request.contextPath}/game/del?"+gclist;
+					 location.href = "${pageContext.request.contextPath}/manager/del?"+gclist;
 				 }else{
 					 location.reload();
 				 } 
