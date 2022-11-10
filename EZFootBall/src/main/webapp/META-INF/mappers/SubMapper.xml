@@ -6,13 +6,13 @@
 	
 	<delete id="delete" parameterType="DataVO">
 		UPDATE field_reservation
-		SET rv_state = '신청취소'
+		SET rv_state = '신청취소', cancel_day = now()
 		WHERE game_code = #{gameCode} AND team_code = #{teamCode}
 	</delete>
 	
 	<delete id="rdelete">
 		UPDATE field_reservation
-		SET rv_state = '신청취소'
+		SET rv_state = '신청취소', cancel_day = now()
 		WHERE rv_code = #{rvCode}
 	</delete>
 	

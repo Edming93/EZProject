@@ -190,23 +190,43 @@ public class SocialController {
 				tservice.setslist(dvo);
 				tservice.maxgame(num);
 				for(int i=0; i<tvo.size(); i++) {
-					tservice.info(num,model);
-					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
-					vo1.setUserCode(tvo.get(i).getUserCode());
-					vo1.setTeamCode(team_code);
-					tservice.newreser(vo1);
-					tservice.newresult(vo1);
+					if(uvo.getUserCode() == tvo.get(i).getUserCode()) {
+						tservice.info(num,model);
+						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+						vo1.setUserCode(tvo.get(i).getUserCode());
+						vo1.setTeamCode(team_code);
+						tservice.newreser(vo1);
+						tservice.newresult(vo1);
+					}else {
+						tservice.info(num,model);
+						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+						vo1.setUserCode(tvo.get(i).getUserCode());
+						vo1.setTeamCode(team_code);
+						vo1.setGamePay(0);
+						tservice.newreser(vo1);
+						tservice.newresult(vo1);
+					}
 				}
 			}else {
 				tservice.setslist(dvo);
 				tservice.subgame(num);
 				for(int i=0; i<tvo.size(); i++) {
-					tservice.info(num,model);
-					TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
-					vo1.setUserCode(tvo.get(i).getUserCode());
-					vo1.setTeamCode(team_code);
-					tservice.newreser(vo1);
-					tservice.newresult(vo1);
+					if(uvo.getUserCode() == tvo.get(i).getUserCode()) {
+						tservice.info(num,model);
+						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+						vo1.setUserCode(tvo.get(i).getUserCode());
+						vo1.setTeamCode(team_code);
+						tservice.newreser(vo1);
+						tservice.newresult(vo1);
+					}else {
+						tservice.info(num,model);
+						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
+						vo1.setUserCode(tvo.get(i).getUserCode());
+						vo1.setTeamCode(team_code);
+						vo1.setGamePay(0);
+						tservice.newreser(vo1);
+						tservice.newresult(vo1);
+					}
 				}
 			}
 			
