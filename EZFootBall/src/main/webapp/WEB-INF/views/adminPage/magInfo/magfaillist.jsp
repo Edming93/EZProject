@@ -17,6 +17,7 @@
 	#main_container{
 		display: flex;
 		flex-direction: column;
+		padding: 15px;
 	}
 	
 	.btn_box{
@@ -60,7 +61,6 @@
 	
 </style>
 <body>
-	<h1>매니저불합격리스트</h1>
 	<div id="main_container">
 		<div class="btn_box">
 			<button id="pass" class="btn">합격</button>
