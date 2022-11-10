@@ -41,45 +41,6 @@ public class GameController {
 		this.service = service;
 	}
 
-
-	@PostMapping("/alllist")
-	@ResponseBody
-	public List<GlistVO> alllist(@RequestBody GlistVO vo) {
-		List<GlistVO> result = service.all(vo.getGameType());
-		return result;
-	}
-	
-	
-	@PostMapping("/cnt")
-	@ResponseBody
-	public int page(@RequestBody GlistVO vo) {
-		return service.count(vo.getGameType());
-	}
-	
-
-
-	@PostMapping("/list")
-	@ResponseBody
-	public List<GlistVO> slist(HttpSession session,@RequestBody GlistVO vo) {
-		List<GlistVO> result = service.all(vo.getGameType());
-		return result;
-	}
-	
-	@PostMapping("/numlist")
-	@ResponseBody
-	public List<GlistVO> numlist(@RequestBody GlistVO vo){
-		vo.setUserCode((vo.getGameCode()-1)*15);
-		return service.numlist(vo);
-	}
-	
-	
-	@PostMapping("/searchlist")
-	@ResponseBody
-	public List<GlistVO> searchlist(@RequestBody GlistVO vo){
-		return service.searchlist(vo);
-	}
-	
-	
 	@PostMapping("/sadd")
 	public String sadd(HttpSession session, GlistVO vo) {
 		GameFieldInfoVO gvo = service.fieldinfo(vo.getFieldCode());

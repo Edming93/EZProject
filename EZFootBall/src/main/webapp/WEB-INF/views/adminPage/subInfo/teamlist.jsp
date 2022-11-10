@@ -270,7 +270,11 @@
 				}
 				 if(intext == ortext){
 					 lcnt++;
+					 break;
+				 }else{
+					 lcnt = 0;
 				 }
+				
 			 }
 			 
 		 }
@@ -286,17 +290,19 @@
 		 document.getElementById("uclist").style.visibility = "visible";
 		for(let i =0; i< <%=tcodelist.size()%>; i++){document.getElementById("cnum"+i).style.display = "none";}
 		 
-		 
+		 let intext = document.getElementById("inuserCode").value.trim();
 		 for(let i =0; i< <%=tcodelist.size()%>; i++){
-			 let intext = document.getElementById("inuserCode").value.trim();
-			 let ortext = document.getElementsByClassName("cnumlist")[i].innerText.trim();
 			 if(intext.length >= 1 ){
+				 let ortext = document.getElementsByClassName("cnumlist")[i].innerText.trim();
 				 if(ortext.indexOf(intext) != -1){
 					 document.getElementById("cnum"+i).style.display = "block";
 					 document.getElementById("cnum"+i).style.backgroundColor = "#fff";
 				 }
 				 if(intext == ortext){
 					 ccnt++;
+					 break;
+				 }else{
+					 ccnt = 0;
 				 }
 			 }
 			 
@@ -310,7 +316,7 @@
     document.getElementById("addbtn").addEventListener("click",function(){
     	let ingameCode = document.getElementById("ingameCode").value;
     	let inuserCode = document.getElementById("inuserCode").value;
-    	console.log(document.getElementsByClassName("userCode").length);
+    	
     	let cnt =0;
     	
     	let pnum=0;
@@ -322,36 +328,39 @@
     			break;
     		}
     	} 
-    	if(lcnt > 0 && ccnt >0 ){
+    	
+    	if(lcnt > 0 && ccnt > 0 ){
     		for(let i=0; i<   document.getElementsByClassName("userCode").length; i++){
-        		
-        		if(ingameCode == document.getElementsByClassName("gameCode")[i].innerText && inuserCode == document.getElementsByClassName("userCode")[i].innerText){
+        		if(ingameCode == document.getElementsByClassName("gameCode")[i].innerText && inuserCode == document.getElementsByClassName("teamCode")[i].innerText){
+        			console.log(ingameCode);
+        			console.log(document.getElementsByClassName("gameCode")[i].innerText);
+        			console.log(inuserCode);
+        			console.log(document.getElementsByClassName("teamCode")[i].innerText);
         			alert("이미 존재하는 신청팀 입니다");
         			cnt++;
         			break;
         		}
         	} 
     		var max = false;
-    		if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText){
-    			var confirmflag = confirm("최대 신 팀 이상입니다 신청 하시겠습니까?");
-    			 if(confirmflag){
-    				 max = true
-    	           }
+    		if(cnt == 0){
+    			if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText.trim()){
+    				console.log(pnum);
+    				console.log("최대"+document.getElementsByClassName("GameMaxp")[index].innerText.trim())
+        			var confirmflag = confirm("최대 신 팀 이상입니다 신청 하시겠습니까?");
+        			 if(confirmflag){
+        				 location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
+        	           }
+        		}else{
+        			location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
+        		}
     		}
-        	
-        	if(cnt == 0 && max == true) {
-        		location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
-    			
-        	}
 		}else {
-			alert("게임코드와 신청자코드를 확인해주세요");
+			alert("게임코드와 팀코드를 확인해주세요");
 		}
     	
     });
     
     </script>
-    
-    
     
     
     <!-- 모달 닫기 -->
@@ -464,11 +473,11 @@
 											}
 										%>
 									</td>
-									<td class="GamePnum" style="display: none;">
+									<td class="GameMaxp" style="display: none;">
 										<%
 											for(int j=0; j< gamelist.size(); j++){
 												if(stgamelist.get(i).getGameCode() == gamelist.get(j).getGameCode()){
-													out.print(gamelist.get(j).getGamePnum());
+													out.print(gamelist.get(j).getGameMaxp());
 												}
 											}
 										%>

@@ -269,14 +269,15 @@
 				}
 				 if(intext == ortext){
 					 lcnt++;
+					 break;
+				 }else{
+					 lcnt = 0;
 				 }
 			 }
 			 
 		 }
        });
 	</script>
-	
-	
 	
 	<!-- 유저 코드 숫자 검색 -->
 	<script type="text/javascript">
@@ -297,6 +298,9 @@
 				 }
 				 if(intext == ortext){
 					 ccnt++;
+					 break;
+				 }else{
+					 ccnt = 0;
 				 }
 			 }
 			 
@@ -305,8 +309,6 @@
 	</script>
 	
 	
-	
-    
     <!-- 추가 -->
     <script type="text/javascript">
     document.getElementById("addbtn").addEventListener("click",function(){
@@ -334,18 +336,21 @@
         			break;
         		}
         	} 
+    		
     		var max = false;
-    		if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText){
-    			var confirmflag = confirm("최대 신청자 수 이상입니다 신청 하시겠습니까?");
-    			 if(confirmflag){
-    				 max = true
-    	           }
+    		if(cnt == 0 ){
+    			console.log("신청"+pnum);
+    			console.log("최대"+document.getElementsByClassName("GameMaxp")[index].innerText.trim());
+    			if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText.trim()){
+        			var confirmflag = confirm("최대 신청자 수 이상입니다 신청 하시겠습니까?");
+        			 if(confirmflag){
+        				 location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
+        	           }
+        		}else{
+        			location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
+        		}
     		}
         	
-        	if(cnt == 0 && max == true) {
-        		location.href = "${pageContext.request.contextPath}/sub/sadd?userCode="+inuserCode+"&gameCode="+ingameCode;
-    			
-        	}
 		}else {
 			alert("게임코드와 신청자코드를 확인해주세요");
 		}
@@ -361,6 +366,8 @@
         document.getElementById("modalout").style.display = "none";
         var modal =  document.getElementById("modal");
         modal.style.display = "none";
+        document.getElementById("ingameCode").value = "";
+        document.getElementById("inuserCode").value = "";
     });
     </script>
 	

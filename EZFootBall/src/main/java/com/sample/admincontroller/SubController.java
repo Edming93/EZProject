@@ -41,15 +41,11 @@ public class SubController {
 		this.service = service;
 		this.aservice = aservice;
 	}
-	/*public SubController(RankService service) {
-		super();
-		this.service = service;
-	}*/
 	
 	@GetMapping("tdel")
 	public String tdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("teamCode") int[] teamCode,
 						@RequestParam("gameCode") int[] gameCode,HttpSession session) {
-		System.out.println("삭제");
+		System.out.println("팀삭제");
 		for(int i=0; i<teamCode.length; i++) {
 			System.out.println("여긴");
 			DataVO vo = new DataVO();
