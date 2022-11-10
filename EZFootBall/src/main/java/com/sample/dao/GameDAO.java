@@ -45,5 +45,9 @@ public interface GameDAO {
 	public List<GameFieldInfoVO> allfieldinfo ();
 	
 	public ManagerVO maginfo(int field_code);
+	
+	public int getcode (int userCode);
+	
+	public GameFieldInfoVO getfieldinfo (int fieldCode);
 
 }

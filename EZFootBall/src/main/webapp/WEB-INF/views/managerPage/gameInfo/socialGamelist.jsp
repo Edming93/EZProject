@@ -318,7 +318,7 @@
     
 <div id="updiv"></div>
     <div id="upmodal">
-        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/update">
+        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/gupdate">
             <ul id="upul">
                 <li><p>경기번호 : </p><input type="text" name="gameCode" id="upcode" readonly></li>
                 <li><p>경기날짜 : </p><input type="text" name="gameDay" id="upday" autocomplete="off"></li>

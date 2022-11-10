@@ -85,4 +85,12 @@ public class GameService {
 	public ManagerVO maginfo(int field_code){
 		return dao.maginfo(field_code);
 	}
+	
+	public int getcode (int userCode) {
+	    return dao.getcode(userCode);
+	}
+	
+	public GameFieldInfoVO getfieldinfo (int fieldCode) {
+	    return dao.getfieldinfo(fieldCode);
+	}
 }

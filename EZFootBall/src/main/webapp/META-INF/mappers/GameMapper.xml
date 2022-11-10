@@ -136,6 +136,17 @@
 		GROUP BY field_code
 	</select>
 	
+	<select id="getcode" resultType="int">
+		 select field_code
+		 from manager_history
+		 where user_code = #{userCode}
+	</select>
+	
+	<select id="getfieldinfo" resultType="GameFieldInfoVO">
+		select *
+		from gamefield_info
+		where field_code = #{fieldCode}
+	</select>
 	
 	
 </mapper>
