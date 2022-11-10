@@ -238,12 +238,14 @@ public class MyPageController {
 	}
 
 	@PostMapping("/manager_app")
-	public String managerApp(@RequestParam("area") String area, @RequestParam("manager_content") String content,
+	public String managerApp(@RequestParam("area") String fieldName, @RequestParam("manager_content") String content,
 			HttpSession session, ManagerVO managerVO) {
 		System.out.println("content : " + content);
+		managerVO.setPreferArea(fieldName);
+		managerVO.setFieldCode(managerService.getFieldCode(fieldName));
+		System.out.println(managerVO.getFieldCode());
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		managerVO.setUserCode(uvo.getUserCode());
-		managerVO.setPreferArea(area);
 		managerVO.setMgrContent(content);
 		managerService.insertManager(managerVO);
 		return "redirect:/myPage/manager";

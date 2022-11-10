@@ -32,8 +32,15 @@ public class GlistVO {
     
     private int num;
     
+    private int gameMagcode;
 	
-  	public int getNum() {
+  	public int getGameMagcode() {
+		return gameMagcode;
+	}
+	public void setGameMagcode(int gameMagcode) {
+		this.gameMagcode = gameMagcode;
+	}
+	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {

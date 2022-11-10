@@ -11,6 +11,8 @@ public class ManagerVO {
 	private String mgrState;
 	private int userCode;
 
+	private int fieldCode;
+
 	private String userName;
 
 	public int getMgrCode() {
@@ -67,6 +69,14 @@ public class ManagerVO {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public int getFieldCode() {
+		return fieldCode;
+	}
+
+	public void setFieldCode(int fieldCode) {
+		this.fieldCode = fieldCode;
 	}
 
 }

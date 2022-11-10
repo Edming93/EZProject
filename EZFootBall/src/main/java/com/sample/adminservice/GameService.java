@@ -11,6 +11,7 @@ import com.sample.vo.DataVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GameResultVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.ManagerVO;
 @Service
 public class GameService {
 
@@ -71,5 +72,17 @@ public class GameService {
 	
 	public List<Integer> teamlist (int teamCode) {
 		return dao.teamlist(teamCode);
+	}
+	
+	public void newgame(GlistVO vo) {
+		dao.newgame(vo);
+	}
+	
+	public List<GameFieldInfoVO> allfieldinfo(){
+		return dao.allfieldinfo();
+	}
+	
+	public ManagerVO maginfo(int field_code){
+		return dao.maginfo(field_code);
 	}
 }

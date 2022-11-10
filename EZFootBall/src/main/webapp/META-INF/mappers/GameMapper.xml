@@ -115,6 +115,27 @@
 		where result_code = #{resultCode}
 	</update>
 	
+	<insert id="newgame" parameterType="GlistVO">
+		INSERT INTO `gamelist` (`game_type`, `field_name`, `field_address`, `field_code`, `game_day`, `game_time`, `level`, `game_gender`, `game_place`, `game_macth`, `close`, `game_minp`, `game_maxp`, `game_pnum`, `game_mag`, `game_magcode`,`game_pay`, `uteam_pay`) 
+		VALUES	('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '08:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL),
+				('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '10:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL),
+				('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '16:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL),
+				('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '20:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL)
+	</insert>
+	
+	<select id="allfieldinfo" resultType="GameFieldInfoVO">
+		select*
+		from gamefield_info
+	</select>
+	
+	<select id="maginfo" resultType="ManagerVO">
+		SELECT m.mgr_code,m.field_code,m.prefer_area,m.mgr_state,m.user_code,i.user_name
+		FROM manager_history m JOIN user_info i
+		ON m.user_code = i.user_code
+		WHERE mgr_state = 'PASS' AND field_code = #{fieldCode}
+		GROUP BY field_code
+	</select>
+	
 	
 	
 </mapper>

@@ -410,18 +410,16 @@
 		WHERE b.user_code = #{userCode}
 	</update>
 	
-	<update id="UpdateGLClose">
+	<update id="UpdateGLClose" parameterType="int">
 		UPDATE gamelist AS a INNER JOIN game_result AS b
 		ON a.game_code = b.game_code
 		<set> 
-			<if test="a.close == 'false'">
+			<if test="userCode != null">
 				a.close = 'true'
 			</if>
-			<if test="a.close == 'true'">
-				a.close = 'true'
-			</if>
+			
 		</set>	
-		WHERE b.user_code = #{userCode}
+		WHERE b.user_code = #{userCode} and a.close = 'false'
 	</update>
 	
 	<!-- 3.game_sjoinlist 삭제 -->

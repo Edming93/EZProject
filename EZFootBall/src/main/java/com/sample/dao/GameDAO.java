@@ -9,6 +9,7 @@ import com.sample.vo.DataVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GameResultVO;
 import com.sample.vo.GlistVO;
+import com.sample.vo.ManagerVO;
 
 @Mapper
 public interface GameDAO {
@@ -38,5 +39,11 @@ public interface GameDAO {
 	public int radd(GameResultVO vo);
 	
 	public List<Integer>teamlist(int teamCode);
+	
+	public int newgame(GlistVO vo);
+	
+	public List<GameFieldInfoVO> allfieldinfo ();
+	
+	public ManagerVO maginfo(int field_code);
 
 }

@@ -32,4 +32,8 @@ public interface ManagerDAO {
 	public void isManagerHistory(int userCode);
 
 	public List<GameFieldInfoVO> getGameFieldInfo();
+
+	public List<UserVO> searchManager(UserVO vo);
+
+	public int getFieldCode(String fieldName);
 }

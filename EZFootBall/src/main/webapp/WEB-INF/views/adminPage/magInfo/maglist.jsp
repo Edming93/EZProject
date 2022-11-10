@@ -20,9 +20,29 @@
 		flex-direction: column;
 	}
 	
+	.header_box{
+		width:100%;
+		display: flex;
+	}
+	
+	.header_right{
+		display: flex;
+		width: 100%;
+		justify-content: flex-end;
+	}
+	
+	.search_bar input{
+		height: 30px;
+		margin: 0 10px 0 0;
+	}
+	
+	.state, .mselect {
+		height: 30px;
+	}
+	
 	.btn_box{
-		width:10%;
-		align-self: flex-end;
+		width:15%;
+/* 		align-self: flex-end; */
 	}
 	
 	.btn{
@@ -31,7 +51,8 @@
 	    background-color: #26a563;
 	    border: none;
 	    border-radius: 10px;
-	    width: 45%;
+/* 	    width: 45%; */
+	    min-width:45px;
 	    cursor: pointer;
 	}
 	
@@ -109,18 +130,36 @@
 <body>
 	<h1>매니저리스트</h1>
 	<div id="main_container">
-		<div class="btn_box">
-			<button id="add" class="btn">추가</button>
-			<button id="delete" class="btn">삭제</button>
+		<div class="header_box">
+			<section class="select_box">
+				<select class="state">
+	                <option value="">구장선택</option>
+			        <c:forEach var="field" items="${fieldList}">
+						<option value="${field.fieldName}">${field.fieldName}</option>
+					</c:forEach>
+		        </select>
+		    </section>
+		    <div class="header_right">
+				<div class="search_bar">
+			  		<select class="mselect">
+	                	<option value="">카테고리</option>
+			        	<option value="유저코드">유저코드</option>
+			        	<option value="유저ID">유저ID</option>
+			        	<option value="유저이름">유저이름</option>
+			        	<option value="생년월일">생년월일</option>
+			        	<option value="성별">성별</option>
+			        	<option value="담당구장">담당구장</option>
+		       		</select>
+			    	<input type="text" name="msearch" id="msearch" placeholder="검색어를 입력해주세요" />
+			    	
+			    </div>
+				<div class="btn_box">
+					<button id="search_btn" class="btn">검색</button>
+					<button id="add" class="btn">추가</button>
+					<button id="delete" class="btn">삭제</button>
+				</div>
+			</div>
 		</div>
-		<section class="select_box">
-			<select class="state">
-                <option value="">구장선택</option>
-		        <c:forEach var="field" items="${fieldList}">
-					<option value="${field.fieldName}">${field.fieldName}</option>
-				</c:forEach>
-	        </select>
-	    </section>
 		<table id="manager_List">
 			<tr>
 				<th><input type="checkbox" name="check" id="check" /></th>
@@ -235,6 +274,21 @@
 		    		}
 		    	});
 			}
+		});
+	</script>
+	
+	<script type="text/javascript">
+		$('#search_btn').click(function(){
+			const mselect = $('.mselect').val();
+			const msearch = $.trim($('#msearch').val());
+			if(mselect == null || mselect == ""){
+				alert('카테고리를 선택해주세요');
+			}else if(msearch == null || msearch == "" ) {
+				alert('검색어를 입력해주세요');
+			}else{
+				location.href = "${pageContext.request.contextPath}/admin/managerSearch?mselect="+mselect+"&msearch="+msearch;	
+			}
+			
 		});
 	</script>
 </body>
