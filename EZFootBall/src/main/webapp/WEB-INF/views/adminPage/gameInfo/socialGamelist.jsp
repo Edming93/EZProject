@@ -29,6 +29,18 @@
 	LocalTime now = LocalTime.now();
 	int hour = now.getHour();
 	LocalDate nday = LocalDate.now();
+	
+	
+	LocalDate nowd = LocalDate.now();
+	int year = nowd.getYear();
+	int month = nowd.getMonthValue();
+	
+	String dateset ="";
+	if(month == 12) {
+		dateset = year + "-" + (01) + "-17";
+	}else {
+		dateset = year + "-" + (month+1) + "-17";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -82,6 +94,12 @@
         #sbtn:hover {
         	cursor : pointer;
         	background-color : red;
+        }
+        #newgame{
+        	border: 1px solid #BDD2B6;;
+    		background: #BDD2B6;
+    		color: white;
+    		border-radius: 5px;
         }
         #add{
         	border: 1px solid #BDD2B6;;
@@ -494,6 +512,7 @@
 			<div id="upside">
 				<div>총 <%=gamelist.size() %>건</div>
 				<div id="btnbox">
+					<button id="newgame">다음달 경기 일괄 생성</button>
 					<button id="add">추가</button>
 					<button id="del">삭제</button>
 					<button id="upd">수정</button>
@@ -1816,6 +1835,29 @@
     });
 	</script>
 	
+	<!-- 일괄 -->
+	<script type="text/javascript">
+	document.getElementById("newgame").addEventListener("click", function () {
+	let dcnt =0;
+	for(let i=0; i<(<%=gamelist.size()%>); i++){
+		if(document.getElementsByClassName("gameDay")[i].innerText.trim() == '<%=dateset%>'){
+			alert("이미 등록 하셨습니다");
+			dcnt++;
+			break;
+		}
+	}
+	
+	if(dcnt == 0){
+		var newgame = confirm("경기성별과 레벨은 기본값으로 생성됩니다.\n 매니저는 경기장별 대표 매니저로 설정됩니다");
+		 if(newgame){
+			 location.href = "${pageContext.request.contextPath}/game/newgame";
+		 }else{
+			 location.reload();
+		 } 
+	}
+	 
+	});
+	</script>
 	
 	</div>
 </body>
