@@ -24,6 +24,35 @@ public class TlistVO {
     private int userCode;
     private int teamCode;
     
+    private String payCode;
+	private String storeCode;
+	private int userPayment;
+	private int cardCode;
+    
+	public String getPayCode() {
+		return payCode;
+	}
+	public void setPayCode(String payCode) {
+		this.payCode = payCode;
+	}
+	public String getStoreCode() {
+		return storeCode;
+	}
+	public void setStoreCode(String storeCode) {
+		this.storeCode = storeCode;
+	}
+	public int getUserPayment() {
+		return userPayment;
+	}
+	public void setUserPayment(int userPayment) {
+		this.userPayment = userPayment;
+	}
+	public int getCardCode() {
+		return cardCode;
+	}
+	public void setCardCode(int cardCode) {
+		this.cardCode = cardCode;
+	}
 	public int getTeamCode() {
 		return teamCode;
 	}

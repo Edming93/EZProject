@@ -24,6 +24,7 @@ import com.sample.adminservice.FieldAdminService;
 import com.sample.service.InquiryService;
 import com.sample.service.ManagerService;
 import com.sample.vo.BlacklistVO;
+import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -76,8 +77,11 @@ public class AdminController {
 		session.setAttribute("result", service.result());
 		// 랭킹정보
 		session.setAttribute("rankall", service.rankall());
-
+		// 구장정보
 		session.setAttribute("fieldList", fdService.getFieldListAll());
+		// 결제내역 정보
+		session.setAttribute("rvListAll", fdService.FieldReservationListAll());
+		
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		model.addAttribute("managerList", managerService.getManagerList());
@@ -677,7 +681,37 @@ public class AdminController {
 	}
 
 	@GetMapping("/payselect")
-	public String payselect(@RequestParam("payselect") String payselect, Model model) {
+	public String payselect(@RequestParam("payselect") String payselect, Model model,HttpSession session,
+							HttpServletRequest request) {
+		String chBox[] = request.getParameterValues("chBox");
+		
+		if(payselect.equals("pay")) {
+			model.addAttribute("rvListAll", fdService.FieldReservationListAll());
+		}else if(payselect.equals("cancel")){
+			model.addAttribute("rfListAll", fdService.FieldRefundListAll());
+		}else if(payselect.equals("pay_cancel")) {
+			for(int i=0; i<chBox.length; i++) {
+				DataVO dvo = new DataVO();
+				
+				if(fdService.selectRvType(chBox[i]).equals("S") || fdService.selectRvType(chBox[i]).equals("TS")) {
+					if(fdService.selectRvType(chBox[i]).equals("TS")) {
+						dvo.setGameCode(Integer.parseInt(fdService.selectGameCode(chBox[i])));
+						dvo.setTeamCode(Integer.parseInt(fdService.selectTeamCode(chBox[i])));
+						fdService.TeamFieldReservationCancelUpdate(dvo);
+					}else {
+						System.out.println("몇번와?");
+						fdService.GameSignUpCancelUpdate(chBox[i]);
+					}
+				}else {
+					System.out.println("여긴 몇번와?");
+					fdService.payCancelUpdate(chBox[i]);
+					fdService.TGRCancelUpdate(fdService.selectGameCode(chBox[i]));
+				}
+			}
+			model.addAttribute("rfListAll", fdService.FieldRefundListAll());
+			return "redirect:/admin/payselect?payselect=cancel";
+		}
+		
 		model.addAttribute("payselect", payselect);
 		return "adminPage/adminMain";
 	}

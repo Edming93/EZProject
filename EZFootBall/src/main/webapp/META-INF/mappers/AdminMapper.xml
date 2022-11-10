@@ -130,7 +130,7 @@
 	
 	<update id="TupdateF" parameterType="int">
 		update field_reservation
-		set rv_state = '예약취소'
+		set rv_state = '예약취소',cancel_day = now()
 		WHERE game_code = #{gameCode}
 	</update>
 	

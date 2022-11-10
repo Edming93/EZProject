@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.AdminDAO;
 import com.sample.dao.RentalDAO;
+import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -84,4 +85,50 @@ public class FieldAdminService {
 	public List<FieldReservationVO> GCancelList() {
 		return dao.GCancelList();
 	}
+	
+	// ------------------------ 결제 내역 관리 ----------------------
+	
+	public List<FieldReservationVO> FieldReservationListAll() {
+		return dao.FieldReservationListAll();
+	}
+	
+	public List<FieldReservationVO> FieldRefundListAll() {
+		return dao.FieldRefundListAll();
+	}
+	
+	public String selectRvType(String rvCode) {
+		return dao.selectRvType(rvCode);
+	}
+	
+	public String selectGameCode(String rvCode) {
+		return dao.selectGameCode(rvCode);
+		
+	}
+	
+	public String selectTeamCode(String rvCode) {
+		return dao.selectTeamCode(rvCode);
+	}
+	
+	public void TeamFieldReservationCancelUpdate(DataVO dvo) {
+		 dao.TeamFieldReservationCancelUpdate(dvo);
+	}
+	
+	public void payCancelUpdate(String rvCode) {
+		dao.payCancelUpdate(rvCode);
+	}
+	
+	public void GameSignUpCancelUpdate(String rvCode) {
+		dao.GameSignUpCancelUpdate(rvCode);
+	}
+
+	public void TGRCancelUpdate(String gameCode) {
+		dao.TGRCancelUpdate(gameCode);
+		
+	}
+
+
+
+
+	
+	
 }

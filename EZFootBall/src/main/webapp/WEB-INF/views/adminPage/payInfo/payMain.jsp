@@ -61,7 +61,7 @@
     <div>
         <ul id="submenu">
             <a class="menu menu1" href="${pageContext.request.contextPath}/admin/payselect?payselect=pay"><li>결제내역</li></a>
-            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/payselect?payselect=cancel"><li>취소내역</li></a>            
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/payselect?payselect=cancel"><li>환불내역</li></a>            
         </ul>
     </div>
     <div id="maincontent">

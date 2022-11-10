@@ -43,10 +43,20 @@ public class FieldReservationVO {
 	
 	
 	private int uteamPay;
+	
+	private String cancelDay;
 
 	
 	
-	
+
+	public String getCancelDay() {
+		return cancelDay;
+	}
+
+	public void setCancelDay(String cancelDay) {
+		this.cancelDay = cancelDay;
+	}
+
 	public int getCardCode() {
 		return cardCode;
 	}

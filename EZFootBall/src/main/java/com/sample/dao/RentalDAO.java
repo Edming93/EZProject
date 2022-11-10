@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -55,5 +57,26 @@ public interface RentalDAO {
 	public void updateFieldReservation(String gameCode);
 	public void deleteFieldGamelist(String gameCode);
 	public List<FieldReservationVO> GCancelList();
+	
+	// ------------------- 관리자 결제관리 ----------------------
+	public List<FieldReservationVO> FieldReservationListAll();
+	public List<FieldReservationVO> FieldRefundListAll();
+	
+	public String selectRvType(String rvCode);
+	public String selectGameCode(String rvCode);
+	public String selectTeamCode(String rvCode);
+	
+	public void TeamFieldReservationCancelUpdate(DataVO dvo);
+	public void TGRCancelUpdate(String gameCode);
+	
+	public void payCancelUpdate(String rvCode);
+	public void GameSignUpCancelUpdate(String rvCode);
+
+
+
+
+
+
+
 	
 }

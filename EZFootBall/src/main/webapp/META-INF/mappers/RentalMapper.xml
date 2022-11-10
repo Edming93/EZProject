@@ -227,8 +227,68 @@
 	</select>
 	
 	
+	<!-- 결제 내역 List 출력 -->
+	<select id="FieldReservationListAll" resultType="FieldReservationVO">
+		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code
+		where a.rv_state='예약완료' or a.rv_state='신청완료'
+		ORDER BY a.rv_code DESC
+	</select>
+	<!-- 환불 내역 List 출력 -->
+	<select id="FieldRefundListAll" resultType="FieldReservationVO">
+		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment,date_format(a.cancel_day, '%Y.%m.%d %T') as cancel_day
+		FROM field_reservation a
+		inner JOIN user_info b ON a.user_code = b.user_code
+		where a.rv_state = '예약취소' or a.rv_state='신청취소' 
+		ORDER BY a.cancel_day DESC
+	</select>
+	<!-- 취소하기 위해 rv_code값으로 rv_type값 뽑기 -->
+	<select id="selectRvType" resultType="String">
+		select rv_type from field_reservation
+		where rv_code = #{rvCode}
+	</select>
+	<!-- 팀 취소하기 위해 rv_code값으로 gameCode값 뽑기 -->
+	<select id="selectGameCode" resultType="String">
+		select game_code from field_reservation
+		where rv_code = #{rvCode}
+	</select>
+	<!-- 팀 취소하기 위해 rv_code값으로 teamCode값 뽑기 -->
+	<select id="selectTeamCode" resultType="String">
+		select team_code from field_reservation
+		where rv_code = #{rvCode}
+	</select>
+	<!-- 팀매치 일괄 결제 취소 -->
+	<update id="TeamFieldReservationCancelUpdate" parameterType="DataVO">
+		update field_reservation
+		set rv_state = "신청취소", cancel_day = now()
+		where game_code =#{gameCode} and team_code = #{teamCode}
+	</update>
+	<!-- 팀구장예약 일괄 결제 취소 -->
+	<update id="TGRCancelUpdate" parameterType="String">
+		update field_reservation
+		set rv_state = "예약취소", cancel_day = now()
+		where game_code =#{gameCode}
+	</update>
 	
-	
+	<!-- 결제내역 관리에서 게임신청에 대한 강제 결제 취소시 -->
+	<update id="GameSignUpCancelUpdate">
+		update field_reservation
+		<set>
+			<if test="rvCode != null">rv_state = '신청취소'</if>
+			,cancel_day = now()
+		</set>
+		where rv_code = #{rvCode} and rv_state = '신청완료'
+	</update>
+	<!-- 결제내역 관리에서 구장예약 팀 구장예약에 대한 강제 결제 취소시 -->
+	<update id="payCancelUpdate">
+		update field_reservation
+		<set>
+			<if test="rvCode != null">rv_state = '예약취소'</if>
+				,cancel_day = now()
+		</set>
+		where rv_code = #{rvCode} and rv_state = '예약완료'
+	</update>
 	
 	
 </mapper>
