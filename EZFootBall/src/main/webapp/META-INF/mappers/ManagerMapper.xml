@@ -11,8 +11,8 @@
 	</select>
 	
 	<insert id="insertManager">
-		INSERT INTO manager_history (prefer_area, mgr_content, mgr_date, mgr_state, user_code)
-		VALUES (#{preferArea}, #{mgrContent}, now(), 'TO', #{userCode})
+		INSERT INTO manager_history (prefer_area, field_code, mgr_content, mgr_date, mgr_state, user_code)
+		VALUES (#{preferArea}, #{fieldCode}, #{mgrContent}, now(), 'TO', #{userCode})
 	</insert>
 	
 	<!-- 관리자 페이지에서 가져오기 -->
@@ -70,6 +70,38 @@
 	
 	<select id="getGameFieldInfo" resultType="GameFieldInfoVO">
 		SELECT * FROM gamefield_info
+	</select>
+	
+	<!-- 관리자페이지 매니저 검색 -->
+	<select id="searchManager" resultType="UserVO">
+		SELECT * FROM user_info AS u INNER JOIN manager_history m
+		ON u.user_code = m.user_code
+		WHERE u.user_authority = '매니저' 
+			<if test="userCode != null">
+				AND u.user_code like concat('%',#{userCode},'%')
+			</if>
+			<if test="userId != null">
+				AND user_id like concat('%',#{userId},'%')
+			</if>
+			<if test="userName != null">
+				AND user_name like concat('%',#{userName},'%')
+			</if>
+			<if test="userBirth != null">
+				AND user_birth like concat('%',#{userBirth},'%')
+			</if>
+			<if test="userGender != null">
+				AND user_gender like concat('%',#{userGender},'%')
+			</if>
+			<if test="preferArea != null">
+				AND prefer_area like concat('%',#{preferArea},'%')
+			</if>
+		
+	</select>
+	
+	<select id="getFieldCode" resultType="int" >
+		SELECT field_code
+		FROM gamefield_info
+		WHERE field_name = #{fieldName}
 	</select>
 
 </mapper>

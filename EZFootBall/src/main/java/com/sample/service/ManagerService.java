@@ -62,4 +62,12 @@ public class ManagerService {
 	public List<GameFieldInfoVO> getGameFieldInfo() {
 		return managerDAO.getGameFieldInfo();
 	}
+
+	public List<UserVO> searchManager(UserVO userVO) {
+		return managerDAO.searchManager(userVO);
+	}
+
+	public int getFieldCode(String fieldName) {
+		return managerDAO.getFieldCode(fieldName);
+	}
 }

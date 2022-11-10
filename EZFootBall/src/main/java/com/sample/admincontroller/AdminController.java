@@ -73,7 +73,7 @@ public class AdminController {
 		session.setAttribute("allfield", service.allfield());
 		// 경기결과 정보
 		session.setAttribute("result", service.result());
-		//랭킹정보
+		// 랭킹정보
 		session.setAttribute("rankall", service.rankall());
 
 		session.setAttribute("fieldList", fdService.getFieldListAll());
@@ -122,11 +122,11 @@ public class AdminController {
 		model.addAttribute("gameselect", gameselect);
 		return "adminPage/adminMain";
 	}
-	
+
 	@GetMapping("/rankselect")
-	public String rankselect(@RequestParam("rankselect") String rankselect,Model model) {
+	public String rankselect(@RequestParam("rankselect") String rankselect, Model model) {
 		model.addAttribute("rankselect", rankselect);
-		return "adminPage/adminMain";		
+		return "adminPage/adminMain";
 	}
 
 	@GetMapping("/idselect")
@@ -184,7 +184,7 @@ public class AdminController {
 				System.out.println(userCode);
 				System.out.println("왜다지워짐? : " + userCode);
 				service.UUInfoList(userCode);
-				
+
 				System.out.println("새로운기능1");
 				service.UpdateFRstate(userCode);
 				System.out.println("새로운기능2");
@@ -194,7 +194,7 @@ public class AdminController {
 				System.out.println("새로운기능4");
 				service.DeleteGR(userCode);
 				System.out.println("새로운기능5");
-			
+
 				service.DeleteGSList(userCode);
 
 			}
@@ -203,11 +203,11 @@ public class AdminController {
 
 		return result;
 	}
+
 	// 블랙리스트에서 다시 유저로 복귀시키기
 	@PostMapping("/RUInfoList")
 	@ResponseBody
-	public int RUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
-			UserVO vo) {
+	public int RUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, UserVO vo) {
 		System.out.println("오긴하나1111111??");
 
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
@@ -225,13 +225,13 @@ public class AdminController {
 				System.out.println(userCode);
 				System.out.println("왜다지워짐? : " + userCode);
 				service.RUInfoList(userCode);
-	
+
 			}
 			result = 1;
 		}
 
 		return result;
-	}	
+	}
 
 	// 매니저 리스트 출력
 	@GetMapping("/magselect")
@@ -295,7 +295,7 @@ public class AdminController {
 		return "redirect:/admin/magselect";
 	}
 
-	// 매니저 탈락
+	// 매니저 삭제
 	@PostMapping("/magDelete")
 	@ResponseBody
 	public int magDelete(@RequestParam("chbox[]") List<String> chArr, ManagerVO managerVO, HttpSession session) {
@@ -306,6 +306,32 @@ public class AdminController {
 			result = 1;
 		}
 		return result;
+	}
+
+	@GetMapping("/managerSearch")
+	public String managerSearch(@RequestParam("mselect") String mselect, @RequestParam("msearch") String msearch,
+			Model model) {
+		List<GameFieldInfoVO> list2 = managerService.getGameFieldInfo();
+		model.addAttribute("fieldList", list2);
+		System.out.println(msearch);
+		UserVO userVO = new UserVO();
+		if (mselect.equals("유저코드")) {
+			userVO.setUserCode(Integer.parseInt(msearch));
+		} else if (mselect.equals("유저ID")) {
+			userVO.setUserId(msearch);
+		} else if (mselect.equals("유저이름")) {
+			userVO.setUserName(msearch);
+		} else if (mselect.equals("생년월일")) {
+			userVO.setUserBirth(msearch);
+		} else if (mselect.equals("성별")) {
+			userVO.setUserGender(msearch);
+		} else if (mselect.equals("담당구장")) {
+			userVO.setPreferArea(msearch);
+		}
+		List<UserVO> list = managerService.searchManager(userVO);
+		model.addAttribute("managerList", list);
+		model.addAttribute("magselect", "magList");
+		return "adminPage/adminMain";
 	}
 
 	// 팀매치 리스트 출력
