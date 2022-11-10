@@ -1,4 +1,3 @@
-<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,19 +8,7 @@
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%
-	request.setCharacterEncoding("utf-8");
-	
-	String authority = null;
-	if(session.getAttribute("sessionVO") != null) {
-		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
-		authority = uvo.getUserAuthority();
-		
-	}else {
-		authority = "일반회원";
-		
-	}
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +86,7 @@ td > a{
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 20px;
+        padding-top: 15px;
     }
 
     .header_content {
@@ -113,18 +100,11 @@ td > a{
         justify-content: center;
         align-items: center;
     }
-    .header_icon {
-	    text-decoration: none;
-	    color: #4e4e4e;
-	    font-size: 27px;
-	    margin-left: 15px;
-    }
     .main_logo{
          background: url("${pageContext.request.contextPath}/image/ez_logo1.svg") no-repeat center;
          background-size: 95px 35px;
     	cursor: pointer;
     }
-
     .ez_icon {
         width: 65px;
         height:35px;
@@ -161,7 +141,7 @@ td > a{
         display: flex;
         justify-content: center;
 	    margin-bottom: 13px;
-    	margin-top: 20px;
+	    margin-top: 13px;
 	    align-items: center;
         
     }
@@ -258,13 +238,16 @@ td > a{
 
     .bottom_banner {
         width:100%;
-        height:235px;
+        height:205px;
         background-color: #26A653;
     	margin-top: 100px;
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
     }
+     .bottom_banner {
+        width:100%;
+        height:205px;
+        background-color: #26A653;
+       margin-top: 100px;
+        }
         footer {
             width: 100%;
           
@@ -441,14 +424,6 @@ table th {
 <!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
-                  <div class="adminMove">
-                  	<% if(authority.equals("관리자")){ %>
-                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%}else if(authority.equals("매니저")){%>
-				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%} %>
-                  </div>
-                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
@@ -462,8 +437,6 @@ table th {
                         </svg>
                      </a>
                   </div>
-                  
-                  <% if(session.getAttribute("sessionVO") == null) { %>
                   <div class="etc_icon">
                      <a href="${pageContext.request.contextPath}/etc/etc">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -479,55 +452,9 @@ table th {
                         </svg>
                      </a>
                   </div>
-                  <% } %>
-                  
-                  <% if(session.getAttribute("sessionVO") != null) { %>
-                  <div class="logout_icon">
-                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
-						<iconify-icon icon="codicon:sign-out"></iconify-icon>
-                     </a>
-                  </div>
-                  <%} %>
                </div>
-               <script type="text/javascript">
-				if(document.querySelector(".admin_btn")){
-					let admin_btn = document.querySelector(".admin_btn");
-					admin_btn.addEventListener("click",function() {
-	     				if(confirm("관리자 페이지로 이동 하시겠습니까?")){
-	     					admin_btn.href="${pageContext.request.contextPath}/admin/admin";
-	     				}else{
-	     					admin_btn.href="#";
-	     				}
-	            	});
-				}	
-            
-				if(document.querySelector(".manager_btn")){
-					let manager_btn = document.querySelector(".manager_btn");
-					manager_btn.addEventListener("click",function() {
-	     				if(confirm("매니저 페이지로 이동 하시겠습니까?")){
-	     					manager_btn.href="${pageContext.request.contextPath}/manager/manager";
-	     				}else{
-	     					manager_btn.href="#";
-	     				}
-	            	});
-				}	
-            
-            
-            	if(document.querySelector(".logout_btn")){
-            	let logout_btn = document.querySelector(".logout_btn");
-
-					logout_btn.addEventListener("click",function() {
-	     				if(confirm("로그아웃 하시겠습니까?")){
-	     					alert("로그아웃 되었습니다.");
-	     					logout_btn.href="${pageContext.request.contextPath}/loginPage/logout";
-	     				}else{
-	     					alert("로그아웃을 취소하셨습니다.");
-	     					logout_btn.href="#";
-	     				}
-	            	});
-            	}
-            </script>
             </div>
+
          </div>
       </div>
     <div class="big_menu_container">
@@ -571,7 +498,7 @@ table th {
 						<%-- <c:if test="${vo.isDelete == 1}"> --%>
 						<tr>
 							<td>${vo.blacklistCode}</td>
-							<td>${vo.userName}</td>
+							<td>${vo.buserName}</td>
 							<td><a
 								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistTitle}</a></td>
 					<!-- 	<td>${vo.blacklistContent}</td>  -->	
@@ -635,12 +562,55 @@ table th {
     </div>
 
     <div class="bottom_banner">
-    	<div class="banner_area">
-			<img src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
-		</div>
+
     </div>
      <footer>
-        <jsp:include page="../etc/footer.jsp"></jsp:include>
+        <div class="footer_subcon">
+            <div class="footer_left">
+                <div class="footer_nav">
+                    <ul>
+                        <h3>매치 정보</h3>
+                        <li>소셜 매치</li>
+                        <li>팀 매치</li>
+                        <li>구장 예약</li>
+                    </ul>
+                    <ul>
+                        <h3>서비스 지역</h3>
+                        <li>서울</li>
+                        <li>인천</li>
+                        <li>경기</li>
+                        <li>전라도</li>
+                        <li>경상도</li>
+                        <li>충청도</li>
+                        <li>제주도</li>
+                    </ul>
+                    <ul>
+                        <h3>이지풋볼</h3>
+                        <li>이지풋볼 소개</li>
+                        <li>공지사항</li>
+                        <li>자주 묻는 질문</li>
+                        <li>구장 제휴</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer_right">
+            <div class="footer_com">
+                <h2>EZfootball.com</h2>
+                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
+                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
+                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
+                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
+                    국번없이 119
+                </p>
+                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
+                    통신판매업 신고 2022-서울강서-0000
+                </p>
+                <p>Copyright EZ ALL rights reserved</p>
+            </div>
+            <h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
+        </div>
+        
     </footer>
 </div>
 

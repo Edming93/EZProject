@@ -29,7 +29,15 @@ public class InquiryService {
 		inquiryDAO.InquiryAdd(inquiryVO);
 	}
 
+	public void InquiryAdd2(InquiryVO inquiryVO) {
+		inquiryDAO.InquiryAdd2(inquiryVO);
+	}
+
 	public List<InquiryVO> inquiryListAdmin() {
 		return inquiryDAO.InquiryListAdmin();
+	}
+
+	public List<InquiryVO> inquiryListAdmin(InquiryVO inquiryVO) {
+		return inquiryDAO.InquiryListAdmin(inquiryVO);
 	}
 }

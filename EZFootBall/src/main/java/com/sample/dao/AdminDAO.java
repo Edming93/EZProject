@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 
+import com.sample.vo.BlacklistPageVO;
+import com.sample.vo.BlacklistVO;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
 import com.sample.vo.GameFieldInfoVO;
@@ -50,11 +52,7 @@ public interface AdminDAO {
 	// 팀 예약취소현황 출력
 	public List<FieldReservationVO> joinList2();
 	public List<FieldReservationVO> joinList3(FieldReservationVO vo);
-	//리뷰
-	public List<ReviewCommentVO> reviewCommentList();
-	
-	//리뷰 검색
-	public List<ReviewCommentVO> reviewselect(ReviewCommentVO vo);
+
 	
 	// 유저관리 - 유저리스트 출력
 	public List<UserVO> UInfoList();
@@ -70,5 +68,30 @@ public interface AdminDAO {
 	public int UpdateGLClose(int userCode);
 	public int DeleteGSList(int userCode);
 	public int DeleteGR(int userCode);
+	
+	//리뷰
+		public List<ReviewCommentVO> reviewCommentList();
+		
+		//리뷰 검색
+		public List<ReviewCommentVO> reviewselect(ReviewCommentVO vo);
+		
+		//리뷰 삭제
+		public int deletereviewComment(int reviewCode);
+			
+		//블랙리스트
+		public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
+		
+		//블랙리스트 삭제
+		public int delBlackList(int blacklistCode);
+		
+		//블랙 유저
+		public List<BlacklistVO> selectBlackUser();
+		
+		//블랙유저 추가
+		public int blackuserCheck(int userCode);
+		
+		//블랙유저 해제
+		public int blackuserClear(int userCode);
+	
 
 }

@@ -10,7 +10,7 @@
 	 <select id="getListPaging" resultType="BlacklistVO">
     
         select * from (
-                select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,
+                select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local, blackuser_code,
 		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
                 from blacklist order by blacklist_code desc) as T1 
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
@@ -20,8 +20,8 @@
 	
 	
 	<select id="selectBlackList" resultType="BlacklistVO">
-		select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,
-		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
+		select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date, blackuser_code
 		from blacklist
 		where is_delete = 0
 		order by blacklist_code desc
@@ -29,21 +29,27 @@
 	</select>
 	
 	<select id="selectBlackListdetail" resultType="BlacklistVO">
-		select blacklist_code, user_id, user_name, blacklist_title, blacklist_content, blacklist_local,
-		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
+		select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date, blackuser_code
 		from blacklist
 		where is_delete = 0
 		and blacklist_code = #{blacklistCode}
 	</select>
 
 	<insert id="insertBlackList">
-		insert into blacklist(blacklist_local, blacklist_title, user_id, user_name, blacklist_content, user_code)
-		values(#{blacklistLocal}, #{blacklistTitle}, #{userId}, #{userName}, #{blacklistContent}, #{userCode})
+		insert into blacklist(blacklist_local, blacklist_title, user_id, buser_name, blacklist_content, user_code, blackuser_code)
+		values(#{blacklistLocal}, #{blacklistTitle}, #{userId}, #{buserName}, #{blacklistContent}, #{userCode}, #{blackuserCode})
 	</insert>
 	
 	<update id="updateBlackList">
-		update blacklist set blacklist_local = #{blacklistLocal}, blacklist_title=#{blacklistTitle}, blacklist_content=#{blacklistContent}
+		update blacklist set blacklist_local = #{blacklistLocal}, blacklist_title= #{blacklistTitle}, 
+		blacklist_content=#{blacklistContent}, blackuser_code=#{blackuserCode}
 		where blacklist_code = #{blacklistCode} and user_code = #{userCode}
+	</update>
+	
+	<update id="adduserBlack">
+		update user_info set user_reports = user_reports+1
+		WHERE user_code = #{blackuserCode}
 	</update>
 	
 	<update id="deleteBlackList">
@@ -51,6 +57,11 @@
 		where blacklist_code = #{blacklistCode} and user_code = #{userCode}
 	</update>
 	
+	<update id="deleteuserBlack">
+		update user_info set user_reports = user_reports-1
+		WHERE user_code = #{blackuserCode}
+	</update>
+		
 	<select id="selectBlackListComment" resultType="BlacklistcommentVO">
 		select comment_code, black_code, user_code, user_name, content, 
 		date_format(bcoment_create_date, '%Y-%m-%d %H:%i') bcoment_create_date, order_code

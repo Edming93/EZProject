@@ -40,7 +40,7 @@ body{
 	margin : 0 auto;
 	display: grid;
     grid-template-columns: 12vh 1fr 12vh;
-    grid-template-rows: 6vh 2vh 5vh 55vh;
+    grid-template-rows: 3vh 7vh 5vh 53vh;
 	gap: 10px 10px;
 	grid-auto-flow: row;
 	grid-template-areas: ". . ." ". header ." ". . ." ". main ."
@@ -64,11 +64,13 @@ body{
 .header {
 	grid-area: header;
 	display: grid;
-	grid-template-columns: 75px 1fr;
+	grid-template-columns: 130px 1fr;
 	grid-template-rows: 30px 30px;
 	align-items: center;
 	gap: 10px;
 }
+
+
 
 .header h4 {
 	margin: 10px;
@@ -519,6 +521,8 @@ button{
 				</form:select>
 				<h4>제목 :</h4>
 			<form:input path="blacklistTitle" placeholder ="제목을 입력해 주세요"/>
+			<h4>신고유저코드 : </h4>
+			<form:input path="blackuserCode" placeholder ="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)"/>
 			</div>
 			<div class="main">
 				<form:textarea path="blacklistContent" placeholder ="신고할 내용을 입력해 주세요"/>

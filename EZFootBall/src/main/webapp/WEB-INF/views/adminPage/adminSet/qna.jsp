@@ -19,6 +19,22 @@
 #main_controller{
 	display: flex;
 	flex-direction: column;
+	padding: 15px;
+}
+
+.header_box{
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+}
+
+.search_bar input{
+	height: 30px;
+	margin: 0 10px 0 0;
+}
+
+.iselect {
+	height: 30px;
 }
 
 #inquiry_list {
@@ -26,6 +42,17 @@
 	border-collapse: collapse;
 	font-size: 14px;
 	margin: 20px 0;
+}
+
+.btn_box2 button{
+    color: #fff;
+   	height: 30px;
+	background-color: #26a563;
+	border: none;
+	border-radius: 10px;
+/* 	width: 45%; */
+	min-width:45px;
+	cursor: pointer;
 }
 
 	#inquiry_list th, td {
@@ -159,7 +186,6 @@
 }
 </style>
 <body>
-	<h1>문의대기</h1>
 	<div id="main_controller">
 <!-- 		<section class="select_box"> -->
 <!-- 			<select class="state"> -->
@@ -169,6 +195,21 @@
 <!-- 			</select> -->
 <!-- 		</section> -->
 		<c:if test="${detail eq null }">
+		<div class="header_box">
+				<div class="search_bar">
+					<select class="iselect">
+	                	<option value="">카테고리</option>
+			        	<option value="문의번호">문의번호</option>
+			        	<option value="문의제목">문의제목</option>
+			        	<option value="문의날짜">문의날짜</option>
+			        	<option value="유저코드">유저코드</option>
+		       		</select>
+			    	<input type="text" name="isearch" id="isearch" placeholder="검색어를 입력해주세요." />
+			    </div>
+				<div class="btn_box2">
+					<button id="search_btn" class="btn">검색</button>
+				</div>
+		</div>
 			<table id="inquiry_list">
 				<tr>
 					<th>문의번호</th>
@@ -296,6 +337,28 @@
 			if(confirm_val) {
 				location.href = "${pageContext.request.contextPath}/admin/inquiry_add?detail=${inquiryVO.inquiryCode}&answer="+answer;
 			}
+		});
+	</script>
+	
+		<script type="text/javascript">
+		$('#search_btn').click(function(){
+			const iselect = $('.iselect').val();
+			const isearch = $.trim($('#isearch').val());
+			
+			if(iselect == null || iselect == ""){
+				alert('카테고리를 선택해주세요');
+			}else if(isearch == null || isearch == "" ) {
+				alert('검색어를 입력해주세요');
+			}else{
+				location.href = "${pageContext.request.contextPath}/admin/inquirySearch?adminselect=qna&iselect="+iselect+"&isearch="+isearch;	
+			}
+			
+		});
+		
+		$('#isearch').on("keyup", function(e){
+			if (e.keyCode == 13) {
+				$('#search_btn').click(); 
+	        }
 		});
 	</script>
 </body>
