@@ -18,6 +18,7 @@
 		position:relative;
 		display: flex;
 		flex-direction: column;
+		padding: 15px;
 	}
 	
 	.header_box{
@@ -128,7 +129,6 @@
 	
 </style>
 <body>
-	<h1>매니저리스트</h1>
 	<div id="main_container">
 		<div class="header_box">
 			<section class="select_box">
@@ -288,8 +288,13 @@
 			}else{
 				location.href = "${pageContext.request.contextPath}/admin/managerSearch?mselect="+mselect+"&msearch="+msearch;	
 			}
-			
 		});
+		
+		$('#msearch').on("keyup", function(e){
+			if (e.keyCode == 13) {
+				$('#search_btn').click(); 
+	        }
+		})
 	</script>
 </body>
 </html>

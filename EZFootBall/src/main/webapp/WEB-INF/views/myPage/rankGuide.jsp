@@ -394,7 +394,7 @@ footer {
 						</div>
 						<div class="rank_box">
 							<h3>세미프로</h3>
-							<span>Semi_pro</span>
+							<span>(Semi_pro)</span>
 <!-- 							<span>(세미프로1, 세미프로2, 세미프로3)</span> -->
 						</div>
 						<div class="rank_box2">

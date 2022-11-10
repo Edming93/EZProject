@@ -30,17 +30,32 @@
 		SELECT inquiry_code, inquiry_title, inquiry_content, CASE inquiry_state WHEN 'TO' THEN '답변대기' WHEN 'RE' THEN '답변완료' ELSE 'NULL' END inquiry_state, create_date, answer_date, answer_content, i.user_code, u.user_name
 		FROM inquiry AS i INNER JOIN user_info AS u
 		ON i.user_code = u.user_code
-		<where>
-			<if test="inquiryState != null">
-				inquiry_state = #{inquiryState}
+		WHERE NOT inquiry_code = ""
+<!-- 			<if test="inquiryState != null"> -->
+<!-- 				AND inquiry_state = #{inquiryState} -->
+<!-- 			</if> -->
+			<if test="inquiryCode != 0 and inquiryCode != null">
+				AND inquiry_code like concat('%',#{inquiryCode},'%')
 			</if>
-		</where>
+			<if test="inquiryTitle != null">
+				AND inquiry_title like concat('%',#{inquiryTitle},'%')
+			</if>
+			<if test="createDate != null">
+				AND create_date like concat('%',#{createDate},'%')
+			</if>
+			<if test="userCode != null">
+				AND i.user_code like concat('%',#{userCode},'%')
+			</if>
 	</select>
 	
 	<!-- 문의 작성 -->
-	<insert id="InquiryAdd" parameterType="inquiryVO">
+	<update id="InquiryAdd" parameterType="inquiryVO">
+		INSERT INTO inquiry (inquiry_title, inquiry_content, inquiry_state, create_date, user_code)
+		VALUES (#{inquiryTitle}, #{inquiryContent}, 'TO', now(), #{userCode})
+	</update>
+	
+	<update id="InquiryAdd2" parameterType="inquiryVO">
 		UPDATE inquiry SET answer_content = #{answerContent}, answer_date = now(), inquiry_state = 'RE'
 		WHERE inquiry_code = ${inquiryCode}
-	</insert>
-	
+	</update>
 </mapper>

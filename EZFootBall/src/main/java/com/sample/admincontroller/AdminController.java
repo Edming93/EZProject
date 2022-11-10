@@ -706,8 +706,25 @@ public class AdminController {
 		model.addAttribute("adminselect", "qna");
 		return "redirect:/admin/adminselect";
 	}
-	
-	
-	
+
+	@GetMapping("/inquirySearch")
+	public String inquirySearch(@RequestParam("adminselect") String adminselect,
+			@RequestParam("iselect") String iselect, @RequestParam("isearch") String isearch, Model model) {
+		InquiryVO ivo = new InquiryVO();
+		if (iselect.equals("문의번호")) {
+			ivo.setInquiryCode(Integer.parseInt(isearch));
+		} else if (iselect.equals("문의제목")) {
+			ivo.setInquiryTitle(isearch);
+		} else if (iselect.equals("문의날짜")) {
+			ivo.setCreateDate(isearch);
+		} else if (iselect.equals("유저코드")) {
+			ivo.setUserCode(Integer.parseInt(isearch));
+
+		}
+		List<InquiryVO> list = inquiryService.inquiryListAdmin(ivo);
+		model.addAttribute("inquiryList", list);
+		model.addAttribute("adminselect", adminselect);
+		return "adminPage/adminMain";
+	}
 
 }
