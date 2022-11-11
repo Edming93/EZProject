@@ -10,6 +10,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	UserVO myvo = (UserVO)session.getAttribute("sessionVO");
 	List<UserVO>userlist = null;
 	List<GlistVO> gamelist = new ArrayList<GlistVO>();
 	List<GameFieldInfoVO> allfield = (List<GameFieldInfoVO>)session.getAttribute("allfield");
@@ -1840,7 +1841,7 @@
 	document.getElementById("newgame").addEventListener("click", function () {
 	let dcnt =0;
 	for(let i=0; i<(<%=gamelist.size()%>); i++){
-		if(document.getElementsByClassName("gameDay")[i].innerText.trim() == '<%=dateset%>'){
+		if(document.getElementsByClassName("gameDay")[i].innerText.trim() == '<%=dateset%>' && document.getElementsByClassName("gameMag")[i].innerText.trim() == '<%=myvo.getUserName()%>'){
 			alert("이미 등록 하셨습니다");
 			dcnt++;
 			break;
