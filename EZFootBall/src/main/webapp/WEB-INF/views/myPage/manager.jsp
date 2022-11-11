@@ -1,7 +1,21 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	String authority = null;
+	if(session.getAttribute("sessionVO") != null) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		authority = uvo.getUserAuthority();
+		
+	}else {
+		authority = "일반회원";
+		
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +49,7 @@
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 15px;
+        padding-top: 20px;
     }
 
     .header_content {
@@ -90,6 +104,7 @@
 /* 	background: url("${pageContext.request.contextPath}/image/myPage1.png") no-repeat 5px; */
 /* 	background-size: contain; */
  	padding: 5px 0;
+ 	color:#525252;
 /* 	text-indent: -9999px; */
 }
 
@@ -105,30 +120,30 @@
 .main_area {
 	display:flex;
     width: 1024px;
-/*     height: 900px; */
-/*     min-height: 900px; */
-/*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-/*     border: 1px solid black; */
+    margin-top: 130px;
+
 }
 
 .main_content1 {
 	display: flex;
 	flex-direction: column;
 	width: 70%;
-	/* height: 98%; */
 	height:90%;
 	background-color: #fff;
-/* 	border: 1px solid black; */
-	padding: 20px;
+	padding: 32px 20px;
+}
+.main_content1 p {
+	font-size: 15px;
+    color: #525252;
+    padding-left: 10px;
 }
 
 .main_item1 {
 	display: flex;
 	width: 100%;
-	height: 40vh;
 	flex-direction: column;
 }
 
@@ -141,16 +156,18 @@
 }
 
 .app_title{
-    display: flex;
+	display: flex;
     width: 100%;
-    padding: 20px 10px;
+    padding: 20px 10px 10px 10px;
     border-bottom: 1px solid #ccc;
+    flex-direction: column;
 }
 
 .title_item {
  	display: flex;
 	width: 50%;
-/* 	justify-content: space-evenly; */
+    height: 40px;
+    align-items: center;
 }
 
 /* #area { */
@@ -197,21 +214,23 @@ textarea:focus { outline: none; }
 .btn_box{
 	display: flex;
 	justify-content: space-evenly;
+	
 }
     
 .btn_box button {
-	display: inline-block;
-	width: 40%;
-	padding: 15px 0;
-	text-decoration: none;
-	margin: 20px 0;
-	color: #fff;
-	font-weight:bold;
-	font-size:18px;
-	border: 1px solid #26a653;
-	text-align: center;
-	background-color: #26a653;
-	border-radius: 20px;
+    display: inline-block;
+    width: 100%;
+    padding: 13px 0;
+    text-decoration: none;
+    margin: 20px 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid #26a653;
+    text-align: center;
+    background-color: #26a653;
+    border-radius: 20px;
+    margin-top: 55px;
 }
 
 .btn_box button:hover {
@@ -232,6 +251,7 @@ footer {
 	justify-content: space-evenly;
 	padding: 30px;
 	background-color: #2a2a2a;
+	margin-top: 150px;
 }
 
 .footer_left {
@@ -249,6 +269,12 @@ footer {
 .etc_icon {
 	margin-left: 10px;
 }
+    .header_icon {
+	    text-decoration: none;
+	    color: #4e4e4e;
+	    font-size: 27px;
+	    margin-left: 15px;
+    }
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -266,6 +292,14 @@ footer {
 <!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
+                  <div class="adminMove">
+                  	<% if(authority.equals("관리자")){ %>
+                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%}else if(authority.equals("매니저")){%>
+				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%} %>
+                  </div>
+                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
@@ -279,33 +313,42 @@ footer {
                         </svg>
                      </a>
                   </div>
-						<div class="etc_icon">
-							<a href="${pageContext.request.contextPath}/etc/etc"> <svg
-									width="24" height="24" viewBox="0 0 24 24" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-                                <path
-										d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
-										fill="#464A54" />
-                                <path
-										d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
-										fill="#464A54" />
-                                <path
-										d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
-										fill="#464A54" />
-                            </svg>
-							</a>
-						</div>
-					</div>
+                  
+                  <% if(session.getAttribute("sessionVO") == null) { %>
+                  <div class="etc_icon">
+                     <a href="${pageContext.request.contextPath}/etc/etc">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
+                              fill="#464A54" />
+                        </svg>
+                     </a>
+                  </div>
+                  <% } %>
+                  
+                  <% if(session.getAttribute("sessionVO") != null) { %>
+                  <div class="logout_icon">
+                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
+						<iconify-icon icon="codicon:sign-out"></iconify-icon>
+                     </a>
+                  </div>
+                  <%} %>
+               </div>
 				</div>
 
 			</div>
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">매니저 지원</h1>
+			<h1 class="main_title">매니저 지원내역</h1>
 			<c:if test="${managerVO.mgrCode ne 0}">
 				<div class="main_content1">
-					<h3>매니저 지원내역</h3> 
 					<div class="main_item1">
 						
 							<div class="app_title">
@@ -342,7 +385,6 @@ footer {
 			</c:if>
 			<c:if test="${managerVO.mgrCode eq 0}">
 				<div class="main_content1">
-					<h3>매니저 지원하기</h3>
 					<br />
 					<p>매니저 지원에 대한 자세한 내용은 <a href="${pageContext.request.contextPath}/myPage/notice">공지사항</a>을 참조해주세요!</p> 
 					<div class="main_item1">
@@ -370,7 +412,6 @@ footer {
 					</div>
 					<div class="btn_box">
 						<button id="manager_btn">지원하기</button>
-						<button id="btn">뒤로가기</button>
 					</div>
 					</div>
 				</c:if>
@@ -379,12 +420,10 @@ footer {
 		
 		
         
-        <div class="bottom_banner"></div>
-		<footer>
-			<div class="footer_left"></div>
-			<div class="footer_right"></div>
-
-		</footer>	
+    <footer>
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
+    </footer>
+    
 	</div>
 	
 	<script type="text/javascript">

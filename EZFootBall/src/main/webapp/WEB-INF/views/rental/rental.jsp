@@ -156,10 +156,10 @@
     	.matchgame{
 			display: flex;
 		    color: black;
-		    text-decoration: none;
+		    text-decoration: none
 		    padding: 10px 0;
 		    border-bottom: 1px solid #efefef;
-		    height: 80px;
+		    height: 70px;
 		    align-items: center;
 		    justify-content: space-around;
     	}
@@ -171,7 +171,7 @@
     	}
     	
     	.gamename {
-    		font-size: 20px;
+    		font-size: 16px;
     	}
     	.mid_div{
 		    display: flex;

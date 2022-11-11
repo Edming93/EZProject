@@ -45,9 +45,18 @@ public class FieldReservationVO {
 	private int uteamPay;
 	
 	private String cancelDay;
+	private String refundState;
 
 	
 	
+
+	public String getRefundState() {
+		return refundState;
+	}
+
+	public void setRefundState(String refundState) {
+		this.refundState = refundState;
+	}
 
 	public String getCancelDay() {
 		return cancelDay;

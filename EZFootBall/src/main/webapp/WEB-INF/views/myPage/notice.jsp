@@ -1,7 +1,20 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	String authority = null;
+	if(session.getAttribute("sessionVO") != null) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		authority = uvo.getUserAuthority();
+		
+	}else {
+		authority = "일반회원";
+		
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +49,7 @@
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 15px;
+        padding-top: 20px;
     }
 
     .header_content {
@@ -116,11 +129,7 @@
 
 .main_content1 {
 	width: 100%;
-	/* height: 98%; */
-	height:100%;
-/* 	background-color: #fff; */
-/* 	background: url("${pageContext.request.contextPath}/image/guide1.png") no-repeat center; */
-/*     background-size: contain; */
+	margin-top: 40px;
 }
 
 #notice_list {
@@ -205,6 +214,7 @@ footer {
 	justify-content: space-evenly;
 	padding: 30px;
 	background-color: #2a2a2a;
+	margin-top: 150px;
 }
 
 .footer_left {
@@ -233,6 +243,12 @@ footer {
     padding: 20px 0;
     background-color: #fffaec;
 }
+    .header_icon {
+	    text-decoration: none;
+	    color: #4e4e4e;
+	    font-size: 27px;
+	    margin-left: 15px;
+    }
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -250,6 +266,14 @@ footer {
 <!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
+                  <div class="adminMove">
+                  	<% if(authority.equals("관리자")){ %>
+                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%}else if(authority.equals("매니저")){%>
+				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%} %>
+                  </div>
+                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
@@ -263,23 +287,33 @@ footer {
                         </svg>
                      </a>
                   </div>
-						<div class="etc_icon">
-							<a href="${pageContext.request.contextPath}/etc/etc"> <svg
-									width="24" height="24" viewBox="0 0 24 24" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-                                <path
-										d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
-										fill="#464A54" />
-                                <path
-										d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
-										fill="#464A54" />
-                                <path
-										d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
-										fill="#464A54" />
-                            </svg>
-							</a>
-						</div>
-					</div>
+                  
+                  <% if(session.getAttribute("sessionVO") == null) { %>
+                  <div class="etc_icon">
+                     <a href="${pageContext.request.contextPath}/etc/etc">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
+                              fill="#464A54" />
+                        </svg>
+                     </a>
+                  </div>
+                  <% } %>
+                  
+                  <% if(session.getAttribute("sessionVO") != null) { %>
+                  <div class="logout_icon">
+                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
+						<iconify-icon icon="codicon:sign-out"></iconify-icon>
+                     </a>
+                  </div>
+                  <%} %>
+               </div>
 				</div>
 
 			</div>
@@ -406,12 +440,9 @@ EZ풋볼 소셜경기의 경기 매니저로서 참가자들이 즐겁게 운동
 
 		
         
-        <div class="bottom_banner"></div>
-		<footer>
-			<div class="footer_left"></div>
-			<div class="footer_right"></div>
-
-		</footer>
+    <footer>
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
+    </footer>
 
 		<script type="text/javascript">
             let main_logo = document.querySelector(".main_logo");

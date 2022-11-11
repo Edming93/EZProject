@@ -214,8 +214,18 @@ public class RentalController {
 //		rvo.setUserPayment(rvo.getFieldRentalfee()/2);
 //		Tservice.insertFieldRVT(rvo);
 //		return "rental/resultTeam";
-//
 //	}
 		
+	@PostMapping("refundPay")
+	@ResponseBody
+	public String refundPay(@RequestParam("merchant_uid") String merchant_uid) {
+		System.out.println(merchant_uid);
+		
+		FieldReservationVO fvo = new FieldReservationVO();
+		
+
+		
+		return "myPage/success";
+	}
 	
 }

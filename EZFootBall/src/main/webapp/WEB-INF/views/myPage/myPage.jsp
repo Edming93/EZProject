@@ -278,6 +278,7 @@ footer {
 	justify-content: space-evenly;
 	padding: 30px;
 	background-color: #2a2a2a;
+	margin-top: 150px;
 }
 
 .footer_left {
@@ -463,11 +464,6 @@ footer {
 
 		
         
-    <div class="bottom_banner">
-    	<div class="banner_area">
-			<img src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
-		</div>
-    </div>
     <footer>
         <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>

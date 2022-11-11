@@ -120,54 +120,65 @@
 		    font-size: 12px;
 		    margin-bottom: 40px;
 		    margin-left: 20px;
+		    align-items: center;
+		    justify-content: space-between;
+    	}
+    	.option_area {
+    		display: flex;
     	}
     	
+    	
+    	
     	.local{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
+		    width: 75px;
+		    border-radius: 30px;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	
     	.closediv{
-    		width: 100px;
-    		border-radius: 30px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		border: 1px solid black;
-    		margin-right: 10px;
+		    width: 95px;
+		    border-radius: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    border: 1px solid black;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	.gender{
-    		width: 42px;
-    		border-radius: 55px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		border: 1px solid black;
-    		margin-right: 10px;
+		    width: 37px;
+		    border-radius: 55px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    border: 1px solid black;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	#level{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
+    		width: 75px;
+		    border-radius: 30px;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	option {
     		text-align: center;
     	}
     	#mvar{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
+		    width: 95px;
+		    border-radius: 30px;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	.listreset{
-    		width: 100px;
-    		border-radius: 30px;
-    		border: 1px solid black;
-    		display: flex;
-    		justify-content: center;
-    		align-items: center;
-    
-    		
+			width: 80px;
+		    border-radius: 30px;
+		    border: 1px solid black;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    height: 35px;
     	}
     	.matchgame{
 			display: flex;
@@ -175,7 +186,7 @@
 		    text-decoration: none;
 		    padding: 10px 0;
 		    border-bottom: 1px solid #efefef;
-		    height: 80px;
+		    height: 70px;
 		    align-items: center;
 		    justify-content: space-around;
     	}
@@ -187,7 +198,7 @@
     	}
     	
     	.gamename {
-    		font-size: 20px;
+    		font-size: 16px;
     	}
     	.mid_div{
 		    display: flex;
@@ -202,9 +213,9 @@
 		    justify-content: center;
 		    background-color: white;
 		    border: 1px solid #26A653;
-		    width: 110px;
-    		height: 40px;
-		    font-size: small;
+		    width: 85px;
+		    height: 40px;
+		    font-size: 12px;
 		    color: #26A653;
     		
     	}
@@ -250,8 +261,7 @@
          font-weight : 700;
 	   }
      .matchR{
-      display: flex;
-	   
+        display: flex;
 	    width: 180px;
 	    justify-content: end;
 	    align-items: center;
@@ -267,7 +277,7 @@
      	
      }
      .teamR p:hover{
-     	color : blue;
+     	color : #26A653;
      }
       .matchR:hover{
       	cursor:pointer;
@@ -275,10 +285,19 @@
      	transform : scale(1.2);
       }
       .matchR p:hover{
-      	color : blue;
+      	color : #26A653;
       }
       .disable{
 			pointer-events : none;
+		}
+		.teamR_area {
+			display: flex;
+			width: 26%;
+			
+		}
+		
+		.p1 {
+			margin-right: 10px;
 		}
     </style>
 </head>
@@ -625,46 +644,49 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 
   
    <div id="settingbutton"> 
-	   <select name="" id="local" class="select_border local">
-	      <option id="null" value="null">지역</option>
-	      <option id="서울" value="서울">서울</option>
-	      <option id="인천" value="인천">인천</option>
-	      <option id="경기" value="경기">경기도</option>
-	      <option id="강원" value="강원">강원도</option>
-	      <option id="경상" value="경상">경상도</option>
-	      <option id="전라" value="전라">전라도</option>
-	      <option id="충청" value="충청">충청도</option>
-	      <option id="제주" value="제주">제주도</option>
-	   </select>
-
-	   
-	   <select name="" id="mvar" class="select_border mvar">
-		   <option id="null" value="null">매치형태</option>
-		   <option id="5" value="5vs5">5vs5</option>
-		   <option id="6" value="6vs6">6vs6</option>
-	   </select>
-		
-	   <select name="" id="level" class="select_border level">
-		   <option id="null" value="null">레벨</option>
-		   <option id="Rookie" value="루키">루키</option>
-		   <option id="Amateur" value="아마추어">아마추어</option>
-		   <option id="Semi_pro" value="프로">세미프로</option>
-	   </select>
-		
-	  <label for="close" id="closediv" class="select_border closediv">마감 가리기</label> <input type="checkbox" name="close" id="close" style="display: none";>
+   		<div class="option_area">
+		   <select name="" id="local" class="select_border local">
+		      <option id="null" value="null">지역</option>
+		      <option id="서울" value="서울">서울</option>
+		      <option id="인천" value="인천">인천</option>
+		      <option id="경기" value="경기">경기도</option>
+		      <option id="강원" value="강원">강원도</option>
+		      <option id="경상" value="경상">경상도</option>
+		      <option id="전라" value="전라">전라도</option>
+		      <option id="충청" value="충청">충청도</option>
+		      <option id="제주" value="제주">제주도</option>
+		   </select>
 	
-	   <label for="ygender" class="select_border gender" id="sla"> 남 </label> <input type="checkbox" name="ygender" id="ygender" style="display: none";> 
-	   <label for="xgender" class="select_border gender" id="du"> 여 </label> <input type="checkbox" name="xgender" id="xgender" style="display: none";>
-	   
-	   <div id="listreset" class="select_border listreset">
-	   		RESET
+		   
+		   <select name="" id="mvar" class="select_border mvar">
+			   <option id="null" value="null">매치형태</option>
+			   <option id="5" value="5vs5">5vs5</option>
+			   <option id="6" value="6vs6">6vs6</option>
+		   </select>
+			
+		   <select name="" id="level" class="select_border level">
+			   <option id="null" value="null">레벨</option>
+			   <option id="Rookie" value="루키">루키</option>
+			   <option id="Amateur" value="아마추어">아마추어</option>
+			   <option id="Semi_pro" value="프로">세미프로</option>
+		   </select>
+			
+		  <label for="close" id="closediv" class="select_border closediv">마감 가리기</label> <input type="checkbox" name="close" id="close" style="display: none";>
+		
+		   <label for="ygender" class="select_border gender" id="sla"> 남 </label> <input type="checkbox" name="ygender" id="ygender" style="display: none";> 
+		   <label for="xgender" class="select_border gender" id="du"> 여 </label> <input type="checkbox" name="xgender" id="xgender" style="display: none";>
+		   
+		   <div id="listreset" class="select_border listreset">
+		   		RESET
+		   </div>
 	   </div>
-	   
-	   <div class="teamR">
-			<span class="p1"><iconify-icon icon="fluent:people-team-add-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 등록</p>
-	   </div>
-	   <div class="matchR">
-			<span id="posting"><iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="40" height="40"></iconify-icon></span><p>팀 매치 등록</p>
+	   <div class="teamR_area">
+		   <div class="teamR">
+				<span class="p1"><iconify-icon icon="fluent:people-team-add-24-filled" style="color: #26a563;" width="30" height="30"></iconify-icon></span><p>팀 등록</p>
+		   </div>
+		   <div class="matchR">
+				<span class="p1" id="posting"><iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="30" height="30"></iconify-icon></span><p>팀 매치 등록</p>
+		   </div>
 	   </div>
    
    </div>

@@ -583,9 +583,9 @@
       var IMP = window.IMP; // 생략가능
       IMP.init('imp44418126'); // <-- 본인 가맹점 식별코드 삽입
       function requestPay() {
-         IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+         IMP.init('imp44418126'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
          IMP.request_pay({
-            pg: "inicis",
+            pg: "html5_inicis",
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
             name: '${matchinfo.fieldName}',

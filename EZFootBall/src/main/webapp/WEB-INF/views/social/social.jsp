@@ -118,54 +118,60 @@
 		    font-size: 12px;
 		    margin-bottom: 40px;
 		    margin-left: 20px;
+		    align-items: center;
     	}
     	
     	.local{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
+		    width: 75px;
+		    border-radius: 30px;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	
     	.closediv{
-    		width: 100px;
-    		border-radius: 30px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		border: 1px solid black;
-    		margin-right: 10px;
+		    width: 95px;
+		    border-radius: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    border: 1px solid black;
+		    margin-right: 10px;
+		    height: 35px;
     	}
+    	
     	.gender{
-    		width: 42px;
-    		border-radius: 55px;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		border: 1px solid black;
-    		margin-right: 10px;
+		    width: 37px;
+		    border-radius: 55px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    border: 1px solid black;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	#level{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
+    		width: 75px;
+		    border-radius: 30px;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	option {
     		text-align: center;
     	}
     	#mvar{
-    		width: 100px;
-    		border-radius: 30px;
-    		margin-right: 10px;
+		    width: 95px;
+		    border-radius: 30px;
+		    margin-right: 10px;
+		    height: 35px;
     	}
     	.listreset{
-    		width: 100px;
-    		border-radius: 30px;
-    		border: 1px solid black;
-    		display: flex;
-    		justify-content: center;
-    		align-items: center;
-    
-    		
+			width: 80px;
+		    border-radius: 30px;
+		    border: 1px solid black;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    height: 35px;
     	}
     	.matchgame{
 			display: flex;
@@ -173,7 +179,7 @@
 		    text-decoration: none;
 		    padding: 10px 0;
 		    border-bottom: 1px solid #efefef;
-		    height: 80px;
+		    height: 70px;
 		    align-items: center;
 		    justify-content: space-around;
     	}
@@ -186,7 +192,7 @@
     	}
     	
     	.gamename {
-    		font-size: 20px;
+    		font-size: 16px;
     	}
     	.mid_div{
 		    display: flex;
@@ -201,9 +207,9 @@
 		    justify-content: center;
 		    background-color: white;
 		    border: 1px solid #26A653;
-		    width: 110px;
-    		height: 40px;
-		    font-size: small;
+		    width: 85px;
+		    height: 40px;
+		    font-size: 12px;
 		    color: #26A653;
     		
     	}
@@ -215,6 +221,7 @@
 		    width: 200px;
     		justify-content: space-between;
 		    color: #848484;
+		    font-size:14px;
     	}
 
     	

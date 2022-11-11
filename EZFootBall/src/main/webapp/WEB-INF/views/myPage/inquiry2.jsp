@@ -256,6 +256,7 @@ footer {
 	justify-content: space-evenly;
 	padding: 30px;
 	background-color: #2a2a2a;
+	margin-top: 150px;
 }
 
 .footer_left {
@@ -273,6 +274,12 @@ footer {
 .etc_icon {
 	margin-left: 10px;
 }
+    .header_icon {
+	    text-decoration: none;
+	    color: #4e4e4e;
+	    font-size: 27px;
+	    margin-left: 15px;
+    }
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>

@@ -1,6 +1,19 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	String authority = null;
+	if(session.getAttribute("sessionVO") != null) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		authority = uvo.getUserAuthority();
+		
+	}else {
+		authority = "일반회원";
+		
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +47,7 @@
     .header_area {
         width: 1024px;
         height: 100%;
-        padding-top: 15px;
+        padding-top: 20px;
     }
 
     .header_content {
@@ -77,20 +90,20 @@
 	     top: 8px;
 	     color: #464a54;
       }
-    .header_right {
+      .header_right {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+      }
     
-    .main_title{
-		display: block;
-		width: 100%;
-		background: url("${pageContext.request.contextPath}/image/myPage3.png") no-repeat 10px;
-		background-size: contain;
-	 	padding: 8px 0;
-		text-indent: -9999px;
-	}
+/*     .main_title{ */
+/* 		display: block; */
+/* 		width: 100%; */
+/* 		background: url("${pageContext.request.contextPath}/image/myPage3.png") no-repeat 10px; */
+/* 		background-size: contain; */
+/* 	 	padding: 8px 0; */
+/* 		text-indent: -9999px; */
+/* 	} */
 
     #main_container{
     	width: 100%;
@@ -108,56 +121,74 @@
     }
     
     .main_content {
-    	width: 40%;
-    	height: 50%;
-    	margin: 0 auto;
-    	margin-top: 5%;
-    	padding: 20px;
-    	background-color: #fff;
+		width: 42%;
+	    margin: 0 auto;
+	    margin-top: 12%;
+	    padding: 35px 35px 15px 35px;
+	    background-color: #fff;
+	    box-shadow: 6px 6px 20px #00000014;
+	    border-radius: 20px;
+	    margin-bottom: 20%;
+    }
+    .main_content h4 {
+    	padding-bottom: 38px;
+    	font-size: 20px;
+    	color: #525252;
     }
     
     #btnbox{
-	display: flex;
-	justify-content: space-evenly;
-}
+		display: flex;
+		justify-content: space-evenly;
+	    margin-top: 35px;
+	}
     
     .main_content button {
-	display: inline-block;
-	width: 40%;
-	padding: 15px 0;
-	text-decoration: none;
-	margin: 20px 0;
-	color: #fff;
-	font-weight:bold;
-	font-size:18px;
-	border: 1px solid #26a653;
-	text-align: center;
-	background-color: #26a653;
-	border-radius: 20px;
-}
+	    display: inline-block;
+	    width: 30%;
+	    padding: 10px 0;
+	    text-decoration: none;
+	    margin: 20px 0;
+	    color: #fff;
+	    font-weight: bold;
+	    font-size: 13px;
+	    border: 1px solid #26a653;
+	    text-align: center;
+	    background-color: #26a653;
+	    border-radius: 27px;
+	}
 
-.main_content button:hover {
-	opacity: 0.8;
-}
+	.main_content button:hover {
+		opacity: 0.8;
+	}
+	
+	.main_content p {
+		font-size: 12px;
+    	color: #989898;
+	}
     
     .input{
-			border: 1px solid #2a2a2a;
-		    background-color: #fff;
-		    padding: 8px;
-		    width: 100%;
-            height: 50px;
-		    border-radius: 7px;
-		    color: #000000;
-            padding-left: 20px;
-        }
+	    border: 1px solid #D7D7D7;
+	    background-color: #fff;
+	    padding: 8px;
+	    width: 100%;
+	    height: 38px;
+	    border-radius: 7px;
+	    color: #000000;
+	    padding-left: 13px;
+	    margin-bottom: 16px;
+     }
         
-       .title {
-    font-weight: bold;
-    font-size: 12px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    color: #000;
-}
+    .input::placeholder {
+    	color:#C0C0C0;
+    }
+        
+    .title {
+	    font-weight: bold;
+	    font-size: 12px;
+	    margin-top: 10px;
+	    margin-bottom: 5px;
+	    color: #000;
+	}
     
     
 
@@ -174,6 +205,7 @@
         justify-content: space-evenly;   
         padding: 30px;
         background-color: #2a2a2a;
+        margin-top: 150px;
     }
     .footer_left {
         width:40%;
@@ -190,6 +222,12 @@
     }
     .etc_icon {
         margin-left:10px;
+    }
+    .header_icon {
+	    text-decoration: none;
+	    color: #4e4e4e;
+	    font-size: 27px;
+	    margin-left: 15px;
     }
 
 </style>
@@ -210,6 +248,14 @@
 <!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
+                  <div class="adminMove">
+                  	<% if(authority.equals("관리자")){ %>
+                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%}else if(authority.equals("매니저")){%>
+				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
+				  	<%} %>
+                  </div>
+                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
@@ -223,16 +269,33 @@
                         </svg>
                      </a>
                   </div>
-                    <div class="etc_icon">
-                        <a href="${pageContext.request.contextPath}/etc/etc">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z" fill="#464A54"/>
-                                <path d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z" fill="#464A54"/>
-                                <path d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z" fill="#464A54"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                  
+                  <% if(session.getAttribute("sessionVO") == null) { %>
+                  <div class="etc_icon">
+                     <a href="${pageContext.request.contextPath}/etc/etc">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
+                              fill="#464A54" />
+                           <path
+                              d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
+                              fill="#464A54" />
+                        </svg>
+                     </a>
+                  </div>
+                  <% } %>
+                  
+                  <% if(session.getAttribute("sessionVO") != null) { %>
+                  <div class="logout_icon">
+                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
+						<iconify-icon icon="codicon:sign-out"></iconify-icon>
+                     </a>
+                  </div>
+                  <%} %>
+               </div>
             </div>
 
         </div>
@@ -240,20 +303,14 @@
 
     <div id="main_container">
     	<div class="main_area">
-    	<h1 class="main_title">비밀번호 변경</h1>
     		<div class="main_content">
-    		
-			<h4>${userVO.userName}님</h4>
+			<h4>비밀번호 변경</h4>
 				<form action="${pageContext.request.contextPath}/myPage/changePw/result" id="change" method="post">
-					<div class="title">기존 비밀번호</div>
-					<input type="password" class="input" name="pw1" id="pw1" />
-					<hr />
-					<div class="title">새 비밀번호</div> 
-					<input type="password" class="input" name="new_pw1" id="new_pw1" />
-					<div class="title">새 비밀번호 확인</div> 
-					<input type="password" class="input" name="new_pw2" id="new_pw2" />
-					<p>비밀번호는 8자이상, 16자 이하여야 합니다.</p>
-					<p>비밀번호는 숫자와 영문만 사용하여야 합니다.</p>
+					<input type="password" class="input" name="pw1" id="pw1" placeholder="현재 비밀번호"/>
+					<input type="password" class="input" name="new_pw1" id="new_pw1" placeholder="새 비밀번호"/>
+					<input type="password" class="input" name="new_pw2" id="new_pw2" placeholder="새 비밀번호 확인"/>
+					<p>비밀번호는 숫자, 영문으로 구성하여</p>
+					<p>8자 이상, 16자 이하여야 합니다.</p>
 				</form>
 				<div id="btnbox">
 					<button id="btn" type="submit">변경하기</button>
@@ -262,13 +319,10 @@
 			</div>
 		</div>
 	</div>
-
-		<div class="bottom_banner"></div>
-		<footer>
-			<div class="footer_left"></div>
-			<div class="footer_right"></div>
-
-		</footer>
+	
+	    <footer>
+	        <jsp:include page="../etc/footer.jsp"></jsp:include>
+	    </footer>
     </div>
 
 	
