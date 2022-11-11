@@ -22,19 +22,22 @@
 		SELECT rv_code,rv_type,rv_day,rv_state,field_code,field_name,field_address,field_type,field_rentalfee,user_code, team_code,user_payment,game_day,game_time,game_code
 		FROM field_reservation
 		WHERE rv_type = 'TS' and rv_state = '신청완료'
-		GROUP BY team_code,game_code;
+		GROUP BY team_code,game_code
+		order by rv_code desc
 	</select>
 	
 	<select id="sgame" resultType="FieldReservationVO">
 		select *
 		from field_reservation
 		where rv_type = 'S' and rv_state = '신청완료'
+		order by rv_code desc
 	</select>
 	
 	<select id="cgame" resultType="FieldReservationVO">
 		select *
 		from field_reservation
 		where (rv_type = 'S' or rv_type = 'TS') and rv_state = '신청취소'
+		order by cancel_day desc
 	</select>
 	
 	<select id="teamcode" resultType="int">
