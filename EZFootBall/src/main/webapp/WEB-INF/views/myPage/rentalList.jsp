@@ -332,7 +332,7 @@ td > a{
     margin-right: 10px;
     border: 1px solid #A9A9A9;
     font-size: 12px;
-    height: 35px;
+    height: 30px;
 }
 </style>
 </head>
