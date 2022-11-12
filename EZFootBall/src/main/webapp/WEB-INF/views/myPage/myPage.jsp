@@ -122,40 +122,36 @@
 }
 
 .main_area {
-	display:flex;
+    display: flex;
     width: 1024px;
-    height: 900px;
-/*     background-color: #ffaaaa; */
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
-/*     border: 1px solid black; */
+    margin-top: 75px;
 }
 
 .main_content1 {
 	display: flex;
-	flex-direction: column;
-	width: 36%;
-	/* height: 98%; */
-	height:90%;
-/* 	background-color: #fff; */
+    flex-direction: column;
+    width: 35%;
 }
 
 .main_content2 {
-	width: 62%;
-	height:90%;
-	background-color: #fff;
-	padding: 0 30px;
+    width: 60%;
+    background-color: #fff;
+    padding: 0px 0px 0px 45px;
+}
+
+.main_content2 h3 {
+	margin-bottom:15px;
 }
 
 .main_left1 {
 	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
+    height: 35%;
+    padding: 20px 0px 30px 20px;
+    border-radius: 15px;
+    box-shadow: 6px 6px 20px 0px #00000010;
 }
 
 #user_info > ul {
@@ -164,42 +160,65 @@
 }
 
 #user_info > ul > li{
-	padding: 10px 0;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+.info_margin {
+	margin-bottom:7px;
+}
+.name_area {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 15px 0px 15px;
+}
+
+.info_bold {
+    font-weight: bold;
+    margin: 0px 0px 0px 15px;
+    width: 60px;
+}
+.info_small_size {
+	font-size: 14px;
 }
 
 .main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
+    width: 100%;
+    height: 65%;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 285px;
 }
 
 .main_right1 {
 	width: 100%;
 	height: 62%;
 	padding: 15px;
-	border: 5px solid #26a653;
 	border-radius: 15px 15px 0 0;
 	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
+	padding-top: 0px;
 }
 
 .main_right2 {
 	width: 100%;
 	height: 38%;
 	padding: 15px;
-	border: 5px solid #26a653;
 	border-top: none;
 	border-radius: 0 0 15px 15px;
-	font-size: 18px;
-/* 	background-color: #fffaec; */
-	
+	font-size: 18px;	
+}
+
+.main_right3 {
+	width: 100%;
+    height: 38%;
+    padding: 15px;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    font-size: 18px;
 }
 
 .name1 {
@@ -207,58 +226,80 @@
 }
 
 .main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 90%;
 }
 
 .main_left2 > ul > li {
-	margin-bottom: 30px;
+	color: #929292;
+	font-size: 11px;
 }
 
 .main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
+	display: inline-block;
+    text-decoration: none;
+    border-radius: 20px;
+    color: #929292;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+}
+
+.main_right1 > ul, .main_right2 > ul, .main_right3 > ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid #d5d5d5;
+    border-radius: 20px;
+}
+
+.main_right1 > ul > li, .main_right2 > ul > li, .main_right3 > ul > li {
+	font-size: 16px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    
+}
+
+.main_right1 > ul > li:hover, .main_right2 > ul > li:hover, .main_right3 > ul > li:hover {
+	background-color:#BBBBBB;
+	font-weight: bold;
 	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
+} 
+
+.main_right1 > ul > li:hover div span, .main_right2 > ul > li:hover a, .main_right3 > ul > li:hover a{
+	color:white;
 }
 
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-	height: 90%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+
+.border_div {
+	border-bottom: 1px solid #d6d6d6;
+    width: 90%;
+}
+.no_border_div {
+    width: 90%;
 }
 
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
-}
-
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
-}
+/* .main_right1 > ul > li > a, .main_right2 > ul > li > a { */
+/* 	display:inline-block; */
+/* 	text-decoration: none; */
+/* 	border-radius: 20px; */
+/* 	color: #000; */
+/* 	width: 100%; */
+/* 	height: 100%; */
+/* 	padding: 20px 0; */
+/* } */
 
 
 .bottom_banner {
@@ -296,17 +337,16 @@ footer {
 .etc_icon {
 	margin-left: 10px;
 }
-#MTbtn{
-	display: inline-block;
+.right_btn {
+    display: inline-block;
     text-decoration: none;
     border-radius: 20px;
-    color: #000;
-    text-align: center;
+    color: #4e4e4e;
     width: 100%;
     height: 100%;
-    padding: 20px 0;
-    background-color: #fffaec;
+    padding: 20px 10px;
 }
+
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -416,46 +456,64 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">나의 EZ</h1>
+<!-- 			<h1 class="main_title">나의 EZ</h1> -->
 			
 				<div class="main_content1">
 					<section class="main_left1">
 						<div id="user_info">
 							<ul>
-								<li><h3 class="name1">${userVO.userName }</h3><span>(유저코드:${userVO.userCode })</span></li>
-								<li>주소 : ${userVO.userLocal }</li>
-								<li>Email : ${userVO.userEmail1}${userVO.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% <span>(${userVO.userWin+userVO.userLose}전 ${userVO.userWin}승 ${userVO.userLose}패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
+								<li class="info_margin"><img src="${pageContext.request.contextPath}/image/profile_photo.png">
+									<div class="name_area">
+										<h3 class="name1">${userVO.userName }</h3>
+										<span class="info_small_size">#${userVO.userCode}</span>
+									</div>
+									<span class="email_area">${userVO.userEmail1}${userVO.userEmail2}</span>
+								</li>
+<%-- 								<li>주소 : ${userVO.userLocal }</li> --%>
+								<li><span class="info_bold">Team</span> <span class="info_small_size">${uinVO.userGroup }</span></li>
+								<li><span class="info_bold">랭크</span>  <span class="info_small_size">${uinVO.userLevel }</span></li>
+								<li><span class="info_bold">승률</span> <span class="info_small_size"><fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>%&nbsp;<span>(${userVO.userWin}승 ${userVO.userLose}패)</span></span></li>
 							</ul>
 						</div>
 					</section>
 					<section class="main_left2">
+						<div class="left2_image_area">
+							<img src="${pageContext.request.contextPath}/image/EZ_image.png">
+						</div>
 						<ul>
+							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
+							<li>|</li>
 							<li><a href="${pageContext.request.contextPath}/myPage/notice">공지사항</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rankGuide">랭킹시스템 소개</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/guide1">EZ문화 소셜 가이드</a></li>
+							<li>|</li>
+							<li><a href="${pageContext.request.contextPath}/myPage/rankGuide">랭킹소개</a></li>
+							<li>|</li>
+							<li><a href="${pageContext.request.contextPath}/myPage/guide1">소셜가이드</a></li>
 						</ul>
 					</section>
 				</div>
 				<div class="main_content2">
 					<section class="main_right1">
-						<h3>도구</h3>
+						<h3>팀 설정</h3>
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></li>
-							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
-							<li><span id="MTbtn">팀 정보 수정</span></li>
+							<li><div class="border_div"> <span id="MTbtn2" class="right_btn">소속 팀 정보</span></div></li>
+							<li><div class="no_border_div"><span id="MTbtn" class="right_btn">팀 수정 및 삭제</span></div></li>
 						</ul>
 					</section>
 					<section class="main_right2">
-						<h3>더보기</h3>
+						<h3>예약 내역</h3>
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/myPage/inquiry">고객문의</a></li>
-							<li><a href="#" class="qna">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></li>
+							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/matchList">경기내역</a></div></li>
+							<li><div class="no_border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/rentalList">구장예약 내역</a></div></li>
+						</ul>
+					</section>
+					<section class="main_right3">
+						<h3>내 정보</h3>
+						<ul>
+							<li><div class="border_div"><a class="right_btn" href="#">내 정보 수정</a></div></li>
+							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></div></li>
+							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></div></li>
+<!-- 							<li><a href="#" class="qna">자주 묻는 질문 (Q&A)</a></li> -->
+							<li><div class="no_border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/inquiry">내 문의</a></div></li>
 						</ul>
 					</section>
 				</div>
