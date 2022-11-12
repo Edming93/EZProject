@@ -191,7 +191,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 285px;
+    margin-top: 340px;
 }
 
 .main_right1 {
@@ -262,6 +262,7 @@
     justify-content: space-between;
     border: 2px solid #d5d5d5;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .main_right1 > ul > li, .main_right2 > ul > li, .main_right3 > ul > li {
@@ -269,13 +270,16 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
     
+}
+.main_right1 > ul > li > div {
+	cursor: pointer;
 }
 
 .main_right1 > ul > li:hover, .main_right2 > ul > li:hover, .main_right3 > ul > li:hover {
 	background-color:#BBBBBB;
 	font-weight: bold;
-	border-radius: 20px;
 } 
 
 .main_right1 > ul > li:hover div span, .main_right2 > ul > li:hover a, .main_right3 > ul > li:hover a{
@@ -510,10 +514,10 @@ footer {
 						<h3>내 정보</h3>
 						<ul>
 							<li><div class="border_div"><a class="right_btn" href="#">내 정보 수정</a></div></li>
-							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></div></li>
 							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></div></li>
+							<li><div class="no_border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/inquiry">내 문의</a></div></li>							
+							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></div></li>
 <!-- 							<li><a href="#" class="qna">자주 묻는 질문 (Q&A)</a></li> -->
-							<li><div class="no_border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/inquiry">내 문의</a></div></li>
 						</ul>
 					</section>
 				</div>
