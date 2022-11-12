@@ -21,8 +21,784 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/js/jquery-ui.css"/>
     <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/jquery-ui.js"></script>
- 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/TeamMatchPosting.css">
  	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+ 	<style>
+ 	.sub_con{
+	    grid-area: sub;
+	    justify-content: center;
+	    width: 50%;
+	    border-radius:20px;
+	    box-shadow : 5px 5px 10px 10px #ddd;
+	    padding: 20px;
+    
+	}
+	/* 매치작성 제목 */
+	.title{
+	    align-items: center;
+	   	color: #525252;
+	   	font-size: 20px;
+	   	font-weight: bold;
+	   	padding-bottom: 30px;
+	}
+
+*{
+    box-sizing : border-box;
+}
+.container {
+
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-template-areas: '. sub .';
+    justify-items: center;
+    padding-bottom: 20px;
+   
+    
+}
+
+/* 공통 틀 css */
+.subt{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+	padding-bottom: 20px;
+}
+
+.ticon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.gicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2%;
+}
+#gameGender{
+     width: 25%; /* 원하는 너비설정 */
+	 padding : 0 10px;
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background-size : 25%;
+     background-color : white; 
+     border: 1px solid #D7D7D7;
+     height : 40px;
+     border-radius : 10px;
+     appearance: none;
+     font-size: 12px;
+}
+
+/* 매치 날짜 */
+.date {
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    color: #525252;
+    padding-bottom: 20px;
+}
+.dinput{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+    width: 100%;
+}
+.dicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+
+
+#txtDate{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left : 10px;
+    font-size: 12px;
+    border : 1px solid #C0C0C0;
+}
+/* 매치 지역 */
+.matchp{
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    color: #525252;
+    padding-bottom: 15px;
+}
+
+.matchp p{
+    font-weight: 700;
+    font-size: 15px;
+}
+.micon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+#gameplace{
+     width: 25%; /* 원하는 너비설정 */
+	 padding : 0 10px;
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background-size : 25%;
+     background-color : white; 
+     border: 1px solid #D7D7D7;
+     height : 40px;
+     border-radius : 10px;
+     appearance: none;
+     font-size: 12px;
+}
+
+.matchp .match_place_span{
+    font-size: 12px;
+    color : red;
+}
+
+.ficon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+.matchf_in {
+    display: flex;
+    justify-content:space-between;
+}
+
+.matchf_in .finput{
+    width: 60%;
+}
+
+#fieldName{
+    width: 75%;
+    height: 40px;
+    font-size:12px;
+    border-radius: 10px;
+    padding-left : 5px;
+    border : 1px solid #C0C0C0;
+}
+
+.fbutton{
+    height: 40px;
+    width: 20%;
+    background-color: #26a653;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+}
+
+.fbutton span {
+    text-decoration: none;
+}
+
+   /* 지도검색 modal창 디자인 */
+    .modal22 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal22.show {
+  display: block;
+}
+
+.modal22_body22 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 1300px;
+  height: 850px;
+
+  padding: 30px;
+
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+  overflow : hidden;
+}
+
+
+.modal22_body22 span{
+	background-color : #26a563;
+	color : white;
+	font-weight : 700;
+}
+#mapcontent{
+	overflow : scroll;
+}
+
+
+#map{
+		
+		width : 75vw;
+		height : 50vh;
+	}
+	.map_search{
+		width : 80%;
+		height : 60px;
+		display : flex;
+		justify-content : space-between;
+	}
+	.map_search .search_area{
+		width : 90%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+		
+	}
+	.map_search .search_area #search1{
+		width : 100%;
+		height : 80%;
+		border-radius : 10px;
+		
+	}
+	.map_search .search_button{
+		width : 8%;
+		
+		display : flex;
+		justify-content : center;
+		align-items : center;
+		background-color : #26a563;
+		height : 50px;
+		margin-top : 5px;
+		margin-left : 5px;
+		margin-right : 5px;
+		border-radius : 10px;
+	}
+	
+	.map_search .search_button span{
+		color : white;
+		font-size : 20px;
+		text-decoration : none;
+	}
+	
+	
+
+/* 경기장 시간 */
+.matcht {
+    display: flex;
+}
+.matcht p {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.timeicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+#gameTime{
+     width: 100%; /* 원하는 너비설정 */
+	 padding : 0 10px;
+     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background-size : 20%;
+     background-color : white; 
+     border: 1px solid #D7D7D7;
+     height : 40px;
+     border-radius : 10px;
+     appearance: none;
+     font-size: 12px;
+     
+}
+.matcht .match_time_span{
+    font-size: 12px;
+    color : red;
+}
+
+/* 경기장 주소 */
+.matchadd{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: #909090;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    height: 50px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.addicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+
+.addinput {
+    width: 100%;
+}
+
+#fieldAddress{
+    width: 100%;
+    height: 50px;
+    border: 1px solid #909090;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+/* 경기장 선택시 자동완성 부분 매치방식, 매치코드, 참가비 */
+.subt1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+.innersubt1{
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.matchtype{
+    display: flex;
+}
+
+.matchtype p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.matchicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.typeinput{
+    width: 100%;
+}
+
+#fieldAddress::placeholder{
+	text-align: center;
+}
+
+.matchc{
+    display: flex;
+}
+
+.matchc p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.cicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.cinput{
+    width: 100%;
+}
+
+.matchpay{
+    display: flex;
+}
+
+.matchpay p{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.payicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.payinput{
+    width: 100%;
+}
+
+/* 팀 선택 */
+.team{
+    display: flex;
+}
+
+.team p{
+    font-size: 15px;
+    font-weight: 700;
+}
+.team .sub_title3_span{
+    font-size: 12px;
+    color : red;
+}
+.teamicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 1%;
+}
+.innerteam{
+    display: flex;
+}
+.teaminput {
+    width: 50%;
+    margin-right:7%; 
+}
+
+#mTeamName{
+    width: 100%;
+    height: 50px;
+    background-color: #EDEDED;
+    border-color: #EDEDED;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-left : 5px;
+}
+.sbutton{
+    width: 20%;
+    background-color: #26a563;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    
+}
+.rbutton{
+    width: 18%;
+    background-color: #26a563;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    
+}
+.rbutton a{
+	text-decoration:none;
+	font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.submit{
+    width: 100%;
+    height: 50px;   
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+.submit #subtn{	 
+  	border: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: #26a563;
+    color: white;
+    
+}
+.submit #subtn:hover{
+  cursor : pointer;
+  background-color : white;
+  color : #26a563;
+  border: 1px solid #26a563;
+  border-radius: 20px;
+}
+
+/* 팀 검색 modal 창 */
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal.show {
+    display: block;
+  }
+
+  .modal_body {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .modal_inner_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .modal_inner_box input {
+      height: 30px;
+    margin-right: 10px;
+    padding-left : 10px;
+    border-radius : 10px;
+  }
+ 
+  .modal_search_button{
+    background-color: #26a563;
+    display: flex;
+    justify-content : center;
+    align-items : center;
+    width: 40px;
+    height: 30px;
+    border-radius : 10px;
+    
+  }
+  .modal_search_button span{
+  	color : white;
+  	font-weight : 700;
+  	text-decoration : none;
+  }
+  .modal_confirm{
+  	background-color : black;
+  	margin-left : 5px;
+  	display: flex;
+    justify-content : center;
+    align-items : center;
+  }
+  
+   .modal_confirm span{
+   	color : white;
+  	font-weight : 700;
+  	text-decoration : none;
+   }
+   #modaldata{
+   	height : 100%;
+   	overflow : auto;
+   	margin : 0 auto;
+   	width : 72%;
+   }
+
+
+    
+    /* 헤더 */
+    .container1 {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .header_container {
+        width: 100%;
+        height: 56px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .header_area {
+        width: 1024px;
+        height: 100%;
+        padding-top: 15px;
+    }
+
+    .header_content {
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+    }
+    .header_left {
+        width:95px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .ez_icon {
+        width: 65px;
+        height:35px;
+    }
+    
+      .search_input_area {
+      	 position: relative;
+      }
+
+      .search_input {
+         width: 375px;
+         height: 35px;
+         background-color: white;
+         border: 1px solid #e5e5e5;
+         border-radius: 10px;
+      }
+      
+      .glass {
+      	 font-size: 20px;
+	     position: absolute;
+	     right: 13px;
+	     top: 8px;
+	     color: #464a54;
+      }
+    .header_right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .big_menu_container {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+	    margin-bottom: 13px;
+	    margin-top: 13px;
+	    align-items: center;
+        
+    }
+    .big_menu_area {
+        max-width: 1024px;
+        width: 1024px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+    }
+
+    .big_menu_content {
+        height: 100%;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .big_menu_content a {
+        font-size: 18px;
+        text-decoration: none;
+        color: black;
+        align-items: center;
+        display: flex;
+        width: 90px;
+        justify-content: center;
+    }
+    
+    .menu1,.menu2,.menu3,.menu4,.menu5,.menu6 {
+        width: 100px;
+        justify-content: center;
+        display: inline-block;
+    }
+    .menu2_a {
+        font-weight: bold;
+        padding-bottom:5px;
+        border-bottom: 3px solid #26A653;
+    }
+    
+
+
+
+    .login_icon {
+        margin-left:15px;
+    }
+    .etc_icon {
+        margin-left:10px;
+    }
+    #uteamPay{
+        width: 70%;
+	    height: 50px;
+	    border-radius: 10px;
+	    padding-left: 10px;
+	    margin-right: 20px;
+	    border-color: #C0C0C0;
+	}
+	.calbox{
+		display: flex;
+		width: 60%;
+	}
+	#daybox{
+		width: 32%;
+	}
+	.gameinfo{
+		font-size: 14px;
+		font-weight: bold;
+		color: #525252;
+	}
+	#adbox{
+		padding-bottom: 20px;
+	}
+	.ntitlebox{
+		display: flex;
+	    align-items:center;
+	    justify-content: center;
+	    background-color: #909090;
+	    color: white;
+	    font-size: 14px;
+	    font-weight: bold;
+	    height: 40px;
+	    border-top-left-radius: 10px;
+	    border-top-right-radius: 10px;
+		
+	}
+	.inputbbox{
+		width: 100%;
+	    height: 60px;
+	    border: 1px solid #909090;
+	    border-bottom-left-radius: 10px;
+	    border-bottom-right-radius: 10px;
+	}
+	.inputbbox::placeholder{
+            text-align: center;
+        }
+    .paybox{
+    	display: flex;
+    	justify-content: flex-end;
+    	padding-top: 10px;
+    }
+    .paybox span{
+    	font-size: 14px;
+    	font-weight: bold;
+    }
+ 	</style>
 	
 
 </head>
@@ -89,39 +865,27 @@
         <div class="sub_con">
         <form action="${pageContext.request.contextPath }/team/postingFinish" method="post">
         	<div class="title">
-	            <span class="ticon"><iconify-icon icon="fluent-emoji-flat:four-leaf-clover"></iconify-icon></span>
-	            <h1>매치 작성</h1>
-	            <span class="ticon"><iconify-icon icon="fluent-emoji-flat:four-leaf-clover"></iconify-icon></span>
+	            <p>매치 작성하기</p>
         	</div>
         	<div class="subt">
-	         	<div class="gender">
-		                <p>성별</p><span class="gicon"><iconify-icon icon="mdi:gender-transgender" style="color: #26a653;"></iconify-icon></span>
-		            </div>
-		            <div class="option">
+		    		<div class="option">
 		                <select name="gameGender" id="gameGender">
-		                    <option value="">매치 성별을 선택해주세요</option>
-		                    <option value="남">남자</option>
-		                    <option value="여">여자</option>
+		                    <option style="color:gray" value="">매치 성별</option>
+		                    <option value="남">남성</option>
+		                    <option value="여">여성</option>
 		                    <option value="혼성">혼성</option>
 		                </select>
 		            </div>
-        		</div>
+        	</div>
         	
-        <div class="subt">
-            <div class="date">
-                <p>경기 날짜</p><span class="dicon"><iconify-icon icon="ic:round-date-range" style="color: #26a653;"></iconify-icon></span>
-            </div>
-            <div class="dinput">
-            	<input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭 하세요" autocomplete="off">
-            </div>
-      	</div>
+        
       	<div class="subt">
        		<div class="matchp">
-            	<p>매치 지역 <span class="match_place_span">(목록에서 지역을 선택해주세요)</span></p><span class="micon"><iconify-icon icon="fa6-solid:location-crosshairs" style="color: #26a653;"></iconify-icon></span>
+            	<p>경기장소</p>
        		</div>
             <div class="option">
                 <select name="gamePlace" id="gameplace">
-                    <option value="">지역을 선택해주세요</option>
+                    <option value="">매치지역</option>
                     <option value="서울">서울</option>
                     <option value="인천">인천</option>
                     <option value="경기도">경기도</option>
@@ -133,13 +897,10 @@
                 </select>
             </div>
          </div>
+         
         <div class="subt">
-          
-                <div class="matchf">
-                    <p>경기장</p><span class="ficon"><iconify-icon icon="tabler:soccer-field" style="color: #26a653;"></iconify-icon></span>
-                </div>
                 <div class="matchf_in">
-                <input type="text" name="fieldName" id="fieldName" >
+                <input type="text" name="fieldName" id="fieldName" placeholder="경기장">
                     <div class="modal22">
 				      <div class="modal22_body22"><strong style="font-size : 30px">지도 검색하기</strong>
 				      
@@ -277,14 +1038,18 @@
                 </div>
             
         </div>
-        
-         <div class="subt">
-            <div class="matcht">
-                <p>경기 시작 시간 <span class="match_time_span">(목록에서 없는 시간은 예약마감입니다.)</span></p><span class="timeicon"><iconify-icon icon="bx:time-five" style="color: #26a563;"></iconify-icon></span>
+        <div class="subt">
+            <div class="date">
+                <p>경기 날짜</p>
             </div>
-            <div class="option">
+            <div class="dinput">
+            	<div class="calbox">
+            	<span class="dicon"><iconify-icon icon="ic:round-date-range" style="color: #26a653;"  width="27" height="24"></iconify-icon></span>
+            	<input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭" autocomplete="off">
+            	</div>
+            	<div class="option" id="daybox">
                 <select name="gameTime" id="gameTime">
-                    <option value="">매치시작 시간을 선택해주세요</option>
+                    <option value="">경기 시작 시간</option>
                     <option id="reservation1" value="08:00:00">AM8</option>
                     <option id="reservation2" value="10:00:00">AM10</option>
                     <option id="reservation3" value="12:00:00">PM12</option>
@@ -294,9 +1059,9 @@
                     <option id="reservation7" value="20:00:00">PM8</option>
                     <option id="reservation8" value="22:00:00">PM10</option>
                 </select>
-            </div>
+            	</div>
+            
             <script type="text/javascript">
-            	
             	
             document.getElementById("gameTime").addEventListener("click",function(){
             			
@@ -398,63 +1163,54 @@
             			});
             		});
             </script>
-           
+            </div>
+      	</div>
+      	
+      	<div class="subt">
+             <p class="gameinfo">경기 정보</p>
         </div>
-        <div class="subt">
+      	
+        <div id="adbox">
             <div class="matchadd">
-                <p>경기장 주소</p><span class="addicon"><iconify-icon icon="ant-design:home-filled" style="color: #26a563;"></iconify-icon></span>
+                <p>경기장 주소</p>
             </div>
             <div class="addinput">
-                <input type="text" name="fieldAddress" id="fieldAddress" placeholder="경기장 선택시 자동입력됩니다.">
+                <input type="text" name="fieldAddress" id="fieldAddress" placeholder="경기장 선택시 자동입력">
             </div>
         </div>
+        
          <div class="subt1">
          	<div class="innersubt1">
-	            <div class="matchtype">
-	                <p>매치 방식</p><span class="matchicon"><iconify-icon icon="emojione-monotone:vs-button" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	            <div class="ntitlebox">
+	                <p>매치 방식</p>
 	            </div>
 	            <div class="typeinput">
-	                <input type="text" name="gameMacth" id="gameMacth" placeholder="경기장 선택시 자동입력됩니다.">
+	                <input type="text" name="gameMacth" id="gameMacth" class="inputbbox" placeholder="자동 입력"/>
 	            </div>
 	       </div>
 	       <div class="innersubt1">
-	            <div class="matchc">
-	                <p>경기장 코드</p><span class="cicon"><iconify-icon icon="simple-icons:codemagic" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	            <div class="ntitlebox">
+	                <p>경기장 코드</p>
 	            </div>
 	            <div class="cinput">
-	                <input type="text" name="fieldCode" id="fieldCode" placeholder="경기장 선택시 자동입력됩니다.">
+	                <input type="text" name="fieldCode" id="fieldCode" class="inputbbox" placeholder="자동 입력"/>
 	            </div>
 	       </div>
 	       <div class="innersubt1">
-	            <div class="matchpay">
-	                <p>구장대여료</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
+	            <div class="ntitlebox">
+	                <p>구장대여료</p>
 	            </div>
 	            <div class="payinput">
-	                <input type="text" name="gamePay" id="gamePay" placeholder="경기장 선택시 자동입력됩니다."/>
+	                <input type="text" name="gamePay" id="gamePay" class="inputbbox" placeholder="자동 입력"/>
 	            </div>
             </div> 
            
         </div>
      
+        
         <div class="subt">
-            <div class="date">
-                <p>팀이 지불할 참가비</p><span class="payicon"><iconify-icon icon="game-icons:money-stack" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
-            </div>
-            <div class="dinput">
-            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="팀이 지불할 금액을 입력하세요"/>
-            </div>
-      	</div>
-        <div class="subt">
-           
-                <div class="team">
-                    <p>팀 이름<span class="sub_title3_span">(팀 이름을 알아도 검색기능을 사용해주세요)</span></p><span class="teamicon"><iconify-icon icon="fluent:people-team-20-filled" style="color: #26a563;" width="16" height="16"></iconify-icon></span>
-                </div>
                 <div class="innerteam">
-	                <div class="teaminput">
-	                	<input type="text" name="mTeamName" id="mTeamName" placeholder="팀 검색을 이용해주세요">
-	                	<input type="hidden" name="teamCode" id="teamCode"/>
-	                </div>
-                    <div class="sbutton">
+	                  <div class="sbutton">
                         <div class="modal">
                             <div class="modal_body"><h2>팀 검색하기</h2>
                         
@@ -569,15 +1325,26 @@
                         </div>
                         <span class="btn-open-popup">팀 검색</span>
                     </div>
+                    <div class="teaminput">
+	                	<input type="text" name="mTeamName" id="mTeamName" placeholder="팀 검색을 이용해주세요" readonly="readonly">
+	                	<input type="hidden" name="teamCode" id="teamCode"/>
+	                </div>
                     <div class="rbutton">
-                        <a class="tbtn" href="${pageContext.request.contextPath}/team/register">팀 등록하기</a>
+                        <a class="tbtn" href="${pageContext.request.contextPath}/team/register">팀 등록</a>
                     </div>
                 </div>
          
         </div>
       
+      	<div class="subt">
+            <div class="dinput paybox">
+            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="팀이 지불할 금액을 입력하세요"/> <span>원</span>
+            </div>
+      	</div>
+      	
+      	
         <div class="submit">
-            <button type="submit" id="subtn">팀 매치 작성 완료!</button>
+            <button type="submit" id="subtn">매치 작성 완료</button>
         </div>
          
         </form>
@@ -719,7 +1486,6 @@
 <style type="text/css">
 		*{
 			box-sizing : border-box;
-			margin : revert;
 		}
 	
 		.main_logo{
