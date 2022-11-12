@@ -50,11 +50,10 @@
 
 textarea {
 	width: 100%;
-	height: 200px;
+	height: 150px;
 	padding: 10px;
 	box-sizing: border-box;
-	border: solid 3px rgb(38, 166, 83);
-	border-radius: 15px;
+	border: solid 2px #26A653;
 	font-size: 16px;
 	resize: both;
 }
@@ -63,23 +62,22 @@ div{
 	font-family: 'Gowun Dodum', sans-serif;
 }
 textarea::placeholder {
-  color: rgb(38, 166, 83);
+  color: #26A653;
   font-weight: bold;
-  text-align: center;
   
 }
 
 #div1 {
 	margin: 0 auto;
-	width: 40%;
+	width: 1024px;
+	padding-top: 50px;
 	
 }
 
 #submit{
-	background-color: rgb(38, 166, 83);
+	background-color: #26A653;
 	color : white;
-	border : white;
-	border-radius: 5px;
+	border : #26A653;
 	
 	
 }
@@ -410,6 +408,54 @@ font-family: 'Gowun Dodum', sans-serif;
 	    font-size: 27px;
 	    margin-left: 15px;
     }
+    .comentbox{
+    	border-bottom: 1px solid #26A653;
+    	border-left: 20px solid #26A653;
+    	margin-bottom: 20px;
+    	padding: 22px;
+    	display: flex;
+    	justify-content: space-between;
+    }
+    .rightbox{
+    	display: flex;
+    }
+    .namebox{
+    	font-size: 12px;
+    	font-weight: bold;
+    }
+    .coment{
+    	font-size: 20px;
+    	font-weight: bold;
+    	letter-spacing: 1.5px;
+    }
+    .time{
+    	font-size: 11px;
+    	color : #ABABAB;
+    	display: flex;
+        align-items: center;
+        padding-right: 20px;
+    }
+    .just{
+    	display: flex;
+        align-items: center;
+    }
+    .updatebtn{
+    	font-size: 13px;
+    	font-weight: bold;
+    	background: none;
+    	border: none;
+        padding-right: 20px;
+    }
+    .deletebtn{
+    	font-size: 13px;
+    	font-weight: bold;
+    	background: none;
+    	border: none;
+    }
+    #input{
+    	display: flex;
+    	
+    }
 </style>
 </head>
 <body>
@@ -548,7 +594,7 @@ font-family: 'Gowun Dodum', sans-serif;
 <!-- 			</div> -->
 <!-- 		</div> -->
 
-		<script>
+<script>
 
 let button_flag = true;
 var time_out;
@@ -669,13 +715,14 @@ let play_btn = document.querySelector(".fa-play");
 
 				<textarea name="content" id="content" placeholder="댓글을 입력해 주세요"><c:if
 						test="${empty requestScope.userdata}">로그인이 필요합니다.</c:if></textarea>
-				<button id="submit">전송</button>
+				<button id="submit">등록</button>
 			</div>
 
 
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-			<script type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+			
+			
+<script type="text/javascript">
 		//비로그인시 댓글 창 클릭하면 로그인 페이지로 이동
 
 	document.getElementById("content").addEventListener("click", function(){
@@ -883,44 +930,81 @@ let play_btn = document.querySelector(".fa-play");
 					for(let comment of data){
 						console.log(comment);	
 					
+						const leftdiv = document.createElement("div");
+						leftdiv.className = "leftbox";
+						
+						const rightdiv = document.createElement("div");
+						rightdiv.className = "rightbox";
+						
+						
 						const div = document.createElement("div");
-						div.style.display = "flex";
+						div.className = "comentbox";
+						/* div.style.display = "flex";
 						div.style.flexDirection = "column";
 						div.style.borderTop = "1px solid black";
-						div.style.fontFamily = "Gowun Dodum";
-						
+						div.style.fontFamily = "Gowun Dodum"; */
+						div.append(leftdiv);
+						div.append(rightdiv);
 						
                         const div2 = document.createElement("div");
+						div2.className = "coment";
 
-                        div2.style.display = "flex";
+                        /* div2.style.display = "flex";
                         div2.style.justifyContent = "center";
-                        div2.style.fontSize = "25px";
+                        div2.style.fontSize = "25px"; */
+                        
+                        
                         const div3 = document.createElement("div");
-                        div3.style.flex = "1";
+                        div3.className = "just";
+                        /* div3.style.flex = "1"; */
 
                         
 						
 						const cname = document.createElement("p");
+                        cname.className = "namebox";
 						cname.innerText = comment.userName;
-						const ccontent = document.createElement("P");
-						ccontent.innerText = comment.content;
-						const cdate = document.createElement("p");
+						
+						/* const ccontent = document.createElement("P");
+						ccontent.className = "what"; */
+						div2.innerText = comment.content;
+						
+						const cdate = document.createElement("div");
+						cdate.className = "time";
 						cdate.innerText = comment.createDate;
+						
+						leftdiv.append(cname);
+						leftdiv.append(div2);
+						rightdiv.append(cdate);
+						rightdiv.append(div3);
+						
+						
+						const btn1 = document.createElement("button");
+						btn1.classList.add("updatebtn");
+						const btn2 = document.createElement("button");
+						btn2.classList.add("deletebtn");
+						btn1.innerText = "수정"
+						btn2.innerText = "삭제"	
+						div3.append(btn1);
+						div3.append(btn2);
+						div3.style.visibility="hidden";
+						
 						/* const cid = document.createElement("h4");
 						cid.innerText = comment.id; */
 						if (username == comment.userName) {
-							const btn1 = document.createElement("button");
-							const btn2 = document.createElement("button");
-							btn1.style.borderRadius = "5px";
+							div3.style.visibility="visible";
+							/* btn1.style.borderRadius = "5px";
 							btn2.style.borderRadius = "5px";
 							btn1.style.backgroundColor = "#26A653";
 							btn2.style.backgroundColor = "#26A653";
 							btn1.style.color = "white";
 							btn2.style.color = "white";
 							btn1.style.border = "1px solid white";
-							btn2.style.border = "1px solid white";
-							btn1.innerText = "수정"
-							btn2.innerText = "삭제"	
+							btn2.style.border = "1px solid white"; */
+							
+							
+							
+							
+							
 								//수정 버튼 클릭시 수정폼 생성
 								btn1.addEventListener("click", function(){
 									document.getElementById("input").style.display = "none";
@@ -1002,21 +1086,24 @@ let play_btn = document.querySelector(".fa-play");
 //		 								}
 									});
 								});
-								div3.append(btn1);
-								div3.append(btn2);
+								
 						}
 						
 						
-
-						div.append(cdate);
-						div.append(cname);
-						div2.append(ccontent);
-						div.append(div2);
-						div.append(div3);
+						//div.append(cname);
+						
+						//div.append(div2);//내용
+						//div.append(div3);//여백
+						//div.append(cdate);
+						
+						
+						//div2.append(ccontent);
+						
 						comdiv.append(div);
-						div.style.marginTop = "2%";
+						
+						/* div.style.marginTop = "2%";
 						comdiv.style.marginTop = "3%";
-						comdiv.style.marginBottom = "3%";
+						comdiv.style.marginBottom = "3%"; */
 						
 
 						
