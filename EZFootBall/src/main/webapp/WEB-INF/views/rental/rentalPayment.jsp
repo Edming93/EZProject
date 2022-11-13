@@ -413,7 +413,6 @@
 	           	<h4>${sessionScope.GlistVO.gameDay}</h4>
 	           	<fmt:parseNumber var="i" integerOnly="true" type="number" value="${sessionScope.GlistVO.gameTime}" />
 	           	<h4><c:out value="${i}"/>:00 ~ <c:out value="${i+2}"/>:00</h4>
-	           	
            </c:if>
          </div>
          <div class="rv_time">
@@ -671,8 +670,13 @@
                      });
             	}
             } else {
-				alert("결제에 실패하셨습니다!");
-	             location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+'${field.fieldCode}';
+            	if(${sessionScope.GlistVO.gameType eq 'T'}){
+            		alert("결제에 실패 하셨습니다!");
+            		
+            	}else {
+					alert("결제에 실패하셨습니다!");
+	             	location.href = "${pageContext.request.contextPath}/rental/rentalPayment?fieldCode="+'${field.fieldCode}';
+            	}
             }
          });
       }

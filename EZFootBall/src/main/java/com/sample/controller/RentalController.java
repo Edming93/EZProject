@@ -111,6 +111,7 @@ public class RentalController {
 		if(session.getAttribute("fieldData") != null || session.getAttribute("pageurl") != null) {
 			session.removeAttribute("fieldData");
 			session.removeAttribute("pageurl");
+			session.removeAttribute("GlistVO");
 		}
 			session.setAttribute("fieldData", fvo);
 			session.setAttribute("pageurl",pageurl);

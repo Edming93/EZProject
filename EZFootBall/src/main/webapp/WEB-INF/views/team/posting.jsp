@@ -208,7 +208,7 @@
     top: 0px;
     left: 0;
     width: 100%;
-    height: 125%;
+    height: 200%;
     display: none;
     background-color: rgba(0, 0, 0, 0.4);
 }
@@ -545,7 +545,7 @@
     top: 0;
     left: 0;
     width: 100%;
-	height: 125%;
+    height: 200%;
     display: none;
     background-color: rgba(0, 0, 0, 0.4);
   }
@@ -1564,13 +1564,10 @@
 		});
 	
 	</script>
-=======
-
     <footer>
         <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
 
->>>>>>> branch 'master' of https://github.com/Edming93/EZProject.git
 
 </body>
 <style type="text/css">

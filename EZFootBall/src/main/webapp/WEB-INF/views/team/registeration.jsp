@@ -304,10 +304,6 @@
         padding-bottom:5px;
         border-bottom: 3px solid #26A653;
     }
-    
-
-
-
     .login_icon {
         margin-left:15px;
     }
