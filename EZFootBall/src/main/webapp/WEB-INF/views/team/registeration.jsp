@@ -36,21 +36,19 @@
     .team_info{
         display: flex;
         flex-direction: column;
-            width: 51%;
+        width: 30%;
 	    background-color: white;
-	    border-radius: 10px;
+	    border-radius: 30px;
 	    padding: 30px;
-	        border: 2px solid #26a563;
+	    box-shadow: 5px 5px 10px 10px #ddd;
     }
     .team_info .team_register{
         display: flex;
-        flex-direction : column;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-        font-size: 40px;
-        width: 100%;
-        padding-left: 5px;
+        justify-content: flex-start;
+        font-size: 20px;
+        font-weight: bold;
+        color: #525252;
+        padding-bottom: 30px;
     }
     .add_info{
     	color : red;
@@ -61,92 +59,133 @@
         width: 100%;
         float: left;
     }
+    .team_name{
+    	padding-bottom: 30px;
+    }
 	.ques{
 	    display: flex;
     	flex-direction: column;
+    	padding-bottom: 30px;
 	}
 	.subtitle{
 		display: flex;
-	    justify-content: space-around;
+		align-items:flex-end;
+	    justify-content: flex-start;
+	    padding-left: 10px;
 	}
+	.subtitle > p{
+		font-size: 14px;
+		font-weight: bold;
+		color: #525252;
+		
+	}
+	
+	.subtitle > span{
+		font-size: 10px;
+		color: #FF6B6B;
+		padding-left: 10px;
+	}
+	
 	.content {
 		display: flex;
    		justify-content: space-between;
+   		width: 100%;
 	}
 	.content1{
-		flex : 2;
 		line-height : 2.5;
+		width: 50%;
+	    display: flex;
+	    flex-direction: column;
 	}
-	.content1 input{
+	/* .content1 input{
 		border : 1px solid #26a563;
 		height : 30px;
 		border-radius : 7px;
 		padding-left : 5px;
 		width : 300px;
+	} */
+	.tmem{
+		width: 30%;
+		border : 1px solid #D7D7D7;
+		height : 40px;
+		border-radius : 10px;
+		padding-left : 5px;
+		width: 100%;
+		margin-bottom: 10px;
 	}
-	.content2{
+	/* .content2{
 		display: flex;
 	    flex-direction: column;
 	    width: 100%;
+	} */
+	.content2{
+		display: flex;
+	    flex-direction: column;
+	    width: 20%;
 	}
 	.content3{
-		flex : 2;
 		line-height : 2.5;
+		width: 20%
 	}
 	.content3 input{
-		border : 1px solid #26a563;
-		height : 30px;
-		border-radius : 7px;
+		border : 1px solid #C0C0C0;
+		height: 40px;
+    	margin-bottom: 10px;
 		border-radius : 7px;
 		padding-left : 5px;
-		width : 300px;
+		color : #26A653;
+		font-size:12px;
+		width: 100%;
 	}
 	.btn{
-	border: none;
-    background: white;
-    color: #26a563;
-    font-weight: 700;
-    height : 30px;
-    margin : 5px 0;
+		border: none;
+	    background: white;
+	    color: #D7D7D7;
+	    font-size:12px;
+	    font-weight: 700;
+	    height: 40px;
+	    margin-bottom: 10px;
     }
     
     .btn:hover{
-    	background-color : pink;
+    	background-color : #D7D7D7;
+    	color: white;
+    	border-radius: 20px;
     	cursor : pointer;
     }
     .namename{
     	width : 40%;
     }
     
-	.tname{
+	/* .tname{
 		font-weight : 700;
-	}
+	} */
 	#teamName{
 	    width: 100%;
-    height: 50px;
-    border-radius: 10px;
-    padding-left: 5px;
-    border: 1px solid #26a563;
+	    height: 50px;
+	    border-radius: 10px;
+	    padding-left: 5px;
+	    border: 1px solid #D7D7D7;
     }
     .submit_button{
-    	margin-top: 20px;
-        width: 100%;
-        height: 60px;
+    	margin: 0 auto;
+        width: 30%;
+        height: 50px;
         background-color: #26a563;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius : 10px;
+        border-radius : 25px;
     }
     #writer_submit{
         width: 100%;
-        height: 60px;
-        background-color:  #26a563;
+        height: 50px;
+        background-color: #26a563;
         border: none;
-        color: black;
+        color: white;
         font-weight: 700;
         font-size: 15px;
-         border-radius : 10px;
+        border-radius : 25px;
     }
     #writer_submit:hover{
         cursor: pointer;
@@ -355,18 +394,18 @@
        
         <div class="team_info">
             <div class="team_register">
-                <p>팀 등록하기</p><span class="add_info">※5명팀은 5명만 적어주세요</span>
+                <p>팀 등록하기</p>
             </div>
-            <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post" onsubmit="return jbSubmit();">
+            <form action="${pageContext.request.contextPath}/team/teamUpdate" method="post" onsubmit="return jbSubmit();" style="width: 100%;">
             <div class="ques">
 	            <div class="team_name">
-	                <p class="tname">팀 이름</p>
+	                <p class="tname" style="display: none;">팀 이름</p>
 	                <input type="text" name="teamName" id="teamName" placeholder="매력있는 팀 이름 정하기">
 	            </div>
            
             	<div class="subtitle">
-                   <h4 class="namename">이름</h4>
-                   <h4>회원코드</h4>
+            		<p>팀원</p>
+            		<span>5명 팀은 5명만 입력해주세요</span>
                 </div>
               </div>  
                 <div class="content">
@@ -380,13 +419,13 @@
               		</div>
               		
               		<div class="content2">
-                     <button type="button" class="btn">코드확인-눌러주세요</button>
-                     <button type="button" class="btn">코드확인-눌러주세요</button>
-        				<button type="button" class="btn">코드확인-눌러주세요</button>
-		               <button type="button" class="btn">코드확인-눌러주세요</button>
-	                     <button type="button" class="btn">코드확인-눌러주세요</button>
-	                     <button type="button" class="btn">코드확인-눌러주세요</button>
-	                   </div>
+                     <button type="button" class="btn">코드확인</button>
+                     <button type="button" class="btn">코드확인</button>
+                     <button type="button" class="btn">코드확인</button>
+                     <button type="button" class="btn">코드확인</button>
+                     <button type="button" class="btn">코드확인</button>
+                     <button type="button" class="btn">코드확인</button>
+                     </div>
 	                   
                		<div class="content3">
 	                    <input type="text" name="userCode1" class="userCode" placeholder="회원코드" value="${user.userCode}">
