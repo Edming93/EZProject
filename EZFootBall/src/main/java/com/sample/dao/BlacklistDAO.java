@@ -49,11 +49,13 @@ public interface BlacklistDAO {
 	public int insertBlackListComment(BlacklistCommentVO vo);
 	
 	//게시판 댓글 보이기
-	public BlacklistCommentVO selectComment(BlacklistCommentVO vo);
+	public List<BlacklistCommentVO> selectComment(BlacklistCommentVO vo);
+	
+	//블랙 
 	
 	//게시판 댓글 update
 	public int updateBlackListComment(BlacklistCommentVO vo);
 		
 	//게시판 댓글 delete
-	public BlacklistCommentVO deleteBlackListComment(BlacklistCommentVO vo);
+	public int deleteBlackListComment(BlacklistCommentVO vo);
 }

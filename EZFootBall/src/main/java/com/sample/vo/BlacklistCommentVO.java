@@ -13,6 +13,12 @@ public class BlacklistCommentVO{
 	private int orderCode;
 	private int isDelete;
 	
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
 	public int getCommentCode() {
 		return commentCode;
 	}
@@ -55,12 +61,7 @@ public class BlacklistCommentVO{
 	public void setOrderCode(int orderCode) {
 		this.orderCode = orderCode;
 	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
+	
 
 	
 	

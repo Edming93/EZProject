@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -149,47 +151,45 @@ public class BlacklistController {
 	}
 
 	// 댓글 view
-	@GetMapping("/comment/{blackCode}")
+	@PostMapping("/comment/{blackCode}")
 	@ResponseBody
-	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode") int blackCode) {
+	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode") int blackCode,HttpSession session, Model model) {
+		UserVO vo = (UserVO)session.getAttribute("sessionVO");
+		model.addAttribute("userdata", vo);
 		return service.getCommentList(blackCode);
 	}
 
 	// 댓글 작성
 	// 커멘트를 저장
-		@PostMapping("/comment")
+		@PostMapping("/comment/save")
 		@ResponseBody
-		public BlacklistCommentVO setComments(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO bvo) {
-			
+		public Map<String, Object> setComments(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO bvo) {
 			bvo.setUserCode(uvo.getUserCode());
 			bvo.setUserName(uvo.getUserName());
-			
+
 			return service.setBlacklistComment(bvo);
 
 		}
 		
 		
 		// 댓글 수정
-		@PostMapping("/comment/edit")
+		@PutMapping("/comment/edit")
 		@ResponseBody
-		public String editblacklistComment(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO vo
+		public Map<String,String> editblacklistComment(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO vo
 				,@ModelAttribute("BlacklistVO") BlacklistVO bvo){
 			
 			vo.setUserCode(uvo.getUserCode());
 			vo.setUserName(uvo.getUserName());
-			if (service.editBlackListComment(vo)) {
-				return "redirect:/blacklist/blacklistmain";
-			} else {
-				return "redirect:/blacklist/blacklistmain/" + bvo.getBlacklistCode();
-			}
+			
+			return service.editBlackListComment(vo);
 			
 		}
 
 			
 		  //댓글 삭제
-		  @PostMapping("/comment/delete")
+		  @DeleteMapping("/comment/delete")
 		  @ResponseBody
-		  public BlacklistCommentVO deleteblacklistComment(@RequestBody BlacklistCommentVO vo){
+		  public Map<String,String> deleteblacklistComment(HttpSession session, @RequestBody BlacklistCommentVO vo){
 		    return service.deleteBlackListComment(vo);
 		  }
 		

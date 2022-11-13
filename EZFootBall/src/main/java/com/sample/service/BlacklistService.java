@@ -1,7 +1,9 @@
 package com.sample.service;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -62,20 +64,40 @@ public class BlacklistService {
 		return blackDAO.selectBlackListComment(blackCode);
 	}
 	
-	public BlacklistCommentVO setBlacklistComment(BlacklistCommentVO vo) {
+	public Map<String, Object> setBlacklistComment(BlacklistCommentVO vo) {
+		Map<String, Object> map = new HashMap<String,Object>();
 		int a = blackDAO.insertBlackListComment(vo);
 		if(a>0) {
-			blackDAO.selectComment(vo);	
+			map.put("state", "ok");
+			/* map.put("vo", blackDAO.selectComment(vo)); */
+		}else {
+			map.put("state", "error");
 		}
-		return vo;
+		return map;
 	}
 	
-	public boolean editBlackListComment(BlacklistCommentVO vo) {
-		return (blackDAO.updateBlackListComment(vo)>0)?true:false;
+	public Map<String, String> editBlackListComment(BlacklistCommentVO vo) {
+		 Map<String, String> map = new HashMap<String,String>();
+		 try {
+			 blackDAO.updateBlackListComment(vo);
+			 map.put("state", "ok");        
+	      } catch (Exception e) {
+	       e.printStackTrace();
+	       map.put("state", "error");
+	      }
+	    return map;
 		
 	}
 	
-	public BlacklistCommentVO deleteBlackListComment(BlacklistCommentVO vo) {
-		return blackDAO.deleteBlackListComment(vo);
-	}
+	public Map<String, String> deleteBlackListComment(BlacklistCommentVO vo) {
+		Map<String, String> map = new HashMap<String,String>();
+		try {
+		   blackDAO.deleteBlackListComment(vo);
+		   map.put("state", "ok");        
+	      } catch (Exception e) {
+	       e.printStackTrace();
+	       map.put("state", "error");
+	      }
+		  return map;
+		}
 }

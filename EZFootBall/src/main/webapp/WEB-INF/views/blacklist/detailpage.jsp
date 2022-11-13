@@ -20,7 +20,6 @@
 <script src="https://kit.fontawesome.com/3a7191171a.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +45,7 @@ body{
 	margin : 0 auto;
 	display: grid;
   	grid-template-columns: 5vh 1fr 5vh;
-	grid-template-rows: 1vh 6vh 3vh 40vh 0.5vh 5vh 10vh 10vh 30vh;
+	grid-template-rows: 1vh 6vh 3vh 40vh 0.5vh 5vh;
 	gap: 10px 10px;
 	grid-auto-flow: row;
 	grid-template-areas: 
@@ -55,11 +54,8 @@ body{
 	". . ." 
 	". main ." 
 	". . ." 
-	". footer ."
-	". insert ."
-	". . ." 
-	". comment .";
-	height: 80vh;	
+	". footer .";
+	height: 65vh;	
 }
   
   
@@ -596,261 +592,335 @@ button{
 		<button id="editbtn">수정</button>
 		</c:if>
 		</div>
-		<div class="insert" id="insert">
+		
+		
+	</div>
+	<div id="comment"></div>
+	<div class="insert" id="insert">
+		
 			<textarea name="inittext" id="inittext"></textarea>
 			<%-- <c:if test="${BlacklistVO.userId eq requestScope.userdata.userId}"> --%>
 			<button id="ibtn">댓글달기</button>
 			<%-- </c:if> --%>
 		</div>
-		
-	</div>
-	<div class="comment" id="comment"></div>
-	
 	</div>
 	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
 	
-
-	const commentmain = document.getElementById("comment");
-
-	document.getElementById("ibtn").addEventListener("click",function(){
-		
-		let str = document.getElementById("inittext").value;
-		
-		
-		const sendObj = {
-				blackCode : ${BlacklistVO.blacklistCode},
-				/* userCode : ${userdata.userCode},
-				userName : ${vo.userName},*/
-				content : str,
-				orderCode : 0
-		}
-		console.log(str);
-		
-		fetch("${pageContext.request.contextPath}/blacklist/comment/", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(sendObj)
-		})
-		.then((response) => response.json())
-		.then((data) => {
-			console.log(data);
-			makecommentlist(0, data);
-			
-		})
-		.catch(err => {
-			console.log(err);
-		});
-		
-	});
-	
-	
-	
-	
-	window.addEventListener('DOMContentLoaded', (e) => {
-		
-		
-		
-		fetch("${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}")
-		  .then(response => response.json())
-		  .then(data => {
-			  
-			  console.log(data);
-				
-				let commentlist = [];
-			  
-			  for(const obj of data) {  
-				  //상위댓글이 아무것도 없을때
-				  if(obj.orderCode === 0){
-					  commentlist.push(obj);
-					  }else{
-						  //else문 상위댓글과 자신이 쓰는 댓글 아이디 비교
-						  for(const comp of data){
-							  //만약 비교한 댓글 아이디가 상위댓글 번호와 같고
-							  if(comp.commentCode == obj.orderCode){
-								  //비교댓글의 리스트가 비었을 경우
-								  if(comp.innerlist == null){
-									  //리스트를 담을 배열을 생성
-									  comp.innerlist = [];
-								  }
-								  	//그후 리스트 배열을 obj에 푸쉬
-								  	comp.innerlist.push(obj);
-								  	break;
-							  }
-						  }
-					  }
-				  } 
-				
-			  console.log(commentlist);
-				  
-			  //for obj commentlist 순환
-			  for(const obj of commentlist){
-				  makecommentlist(0,obj);
-			  }
-			  
-		  }).catch(err => {
-			  console.log(err);
-		  });
-	});
-				  
-			//위에서 실행할 makecommentlist 함수생성	  
-			function makecommentlist(num, item){
-			
-				let username = "${userdata.userName}";
-				console.log(username);
-				const maindiv = document.createElement("div");
-				maindiv.style.height = "8vh";
-				maindiv.style.display = "flex";
-				maindiv.style.justifyContent = "center";
-				maindiv.style.flexDirection = "column";
-				maindiv.style.fontFamily = "Gowun Dodum";
-				maindiv.style.border = "1px solid black";
-/* 				maindiv.style.padding = "5px"; */
-				
-				const div = document.createElement("div");
-				div.style.display = "flex";
-				div.style.justifyContent = "space-between";
-				
-				const div2 = document.createElement("div");
-
-                div2.style.display = "flex";
-                div2.style.justifyContent = "center";
-                div2.style.fontSize = "15px";
-				
-				let lpad = (40*num) + 5;
-				maindiv.style.paddingLeft = lpad + "px";
-				
-				const h4 = document.createElement("h4");
-				h4.innerText = item.userName;
-				const p = document.createElement("p");
-				let content = (num > 0)?"↳":"";
-				p.innerText = content + item.content;
-				const p2 = document.createElement("p");
-				p2.innerText = item.bcomentCreateDate;
-				
-				
-				
-				
-			 	const div3 = document.createElement("div");
-			  	div3.style.display = "flex";
-	            div3.style.justifyContent = "flex-end";
-			 	div2.append(p);
-				div.append(h4);
-				div.append(p2);
-				maindiv.append(div);
-				maindiv.append(div2);
-				maindiv.append(div3);
-				
-				
-						
-				commentmain.append(maindiv);
-				
-				  if (username == item.userName) {  
-					 
-						const btn1 = document.createElement("button");
-						btn1.id = "btnedit";
-						const btn2 = document.createElement("button");
-						btn1.innerText = "수정"
-						btn2.innerText = "삭제"	
-						btn1.style.width = "40px"
-						btn1.style.height = "20px"
-						btn2.style.width = "40px"
-						btn2.style.height = "20px"
-						div3.append(btn1);
-						div3.append(btn2);
-					 
-				btn1.addEventListener("click", function(){
-					div2.classList.add('test3');
-					const updateform = document.createElement("div");
-					const updateinput = document.createElement("textarea");
-					updateinput.cols = "30";
-					updateinput.rows = "10";
-					updateinput.placeholder="수정할 내용을 입력하세요"
-					const updatebtn = document.createElement("button");
-					updatebtn.innerText = "수정완료";
-					updatebtn.style.borderRadius = "5px";
-					updatebtn.style.backgroundColor = "#26A653";
-					updatebtn.style.color = "white";
-					updatebtn.style.border = "1px solid white";
-					document.getElementsByClassName("test3")[0].style.display = "none";
-					updateform.append(updateinput);
-					updateform.append(updatebtn);
-					
-					maindiv.append(updateform);
-					
-				});
-				
-				 } 
-				
-				// 아이템의 innerlist가 비어있지 않다면
-				if(item.innerlist != null){
-					for(const inneritem of item.innerlist){
-						makecommentlist(num+1,inneritem);
-					}
-				}
-			}	  
-			
-			
-
-			
-			
-			 
-			
-			 
-	
-	document.getElementById("backbtn").addEventListener("click",function(){
-		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain";
-	});
-	
-	
-document.getElementById("inittext").addEventListener("click", function(){
-	
-
-	//로그인 여부
-	//로그인 컨트롤러에서 logincheck를 ajax로 불러옴
-
-	$.ajax({
-			url : "${pageContext.request.contextPath}/loginPage/logincheck",
-			type : "GET",
+	document.getElementById("ibtn").addEventListener("click", function(){
+		let content = document.getElementById("inittext").value;
+		const blackCode = ${BlacklistVO.blacklistCode}
+		const commentCode = ${BlacklistcommentVO.comentCode}
+		console.log(blackCode);
+		const simple_data = {content,blackCode};
+		console.log(simple_data);
+		//댓글 작성
+		$.ajax({
+			url : "${pageContext.request.contextPath}/blacklist/comment/save/${BlacklistVO.blacklistCode}",
+			type : "POST",
 			contentType:"application/json; charset=utf-8",
 			dataType : "json",
-			data : JSON.stringify(),
+			data : JSON.stringify(simple_data),
+			/* anync : false, */
 			success : function(data){
+				console.log(data);
+				if(data.state == "ok"){
+					const comdiv = document.getElementById("comment");
+					
+					const div = document.createElement("div");
+					div.style.display = "flex";
+					div.style.flexDirection = "column";
+					div.classList.add('test');
+					div.style.borderTop = "1px solid black";
+					
+					const div2 = document.createElement("div");
+					div2.classList.add('test2');
+                	div2.style.display = "flex";
+                    div2.style.justifyContent = "center";
+                    div2.style.fontSize = "25px";
+                    
+                    
+                    const div3 = document.createElement("div");
+                    div3.style.flex = "1";
+                    
+ 
+					const cname = document.createElement("p");
+					cname.innerText = data.vo.userName;
+					const ccontent = document.createElement("p");
+					ccontent.innerText = content;
+					const cdate = document.createElement("p");
+					cdate.innerText = data.vo.bcomentCreateDate;
+					const btn1 = document.createElement("button");
+					btn1.id = "btnedit";
+					const btn2 = document.createElement("button");
+					btn1.style.borderRadius = "5px";
+					btn2.style.borderRadius = "5px";
+					btn1.style.backgroundColor = "#26A653";
+					btn2.style.backgroundColor = "#26A653";
+					btn1.style.color = "white";
+					btn2.style.color = "white";
+					btn1.style.border = "1px solid white";
+					btn2.style.border = "1px solid white";
+					btn1.innerText = "수정"
+					btn2.innerText = "삭제"	
+					
+					div3.append(btn1);
+					div3.append(btn2);
+		 			div.append(cdate); 
+		 			div.append(cname);
+					div2.append(ccontent);
+					div.append(div2);
+					div.append(div3);
+					comdiv.append(div);
+					div.style.marginTop = "2%";
+					
+					//수정 버튼 클릭시 수정폼 생성
+					btn1.addEventListener("click", function(){
+						document.getElementById("insert").style.display = "none";
+					 	this.setAttribute("disabled", "disabled"); 
+						const updateform = document.createElement("div");
+						/* updateform.style.border = "1px solid black"; */
+						const updateinput = document.createElement("textarea");
+						updateinput.cols = "40";
+						updateinput.rows = "10";
+						updateinput.placeholder="수정할 내용을 입력하세요"
+						const updatebtn = document.createElement("button");
+						updatebtn.innerText = "수정완료";
+						
+						document.getElementsByClassName("test2")[0].style.display = "none";
+						updateform.append(updateinput);
+						updateform.append(updatebtn);
+						div.append(updateform);
+						
+						
+						//수정완료 버튼 클릭시 수정된 내용으로 수정
+						 updatebtn.addEventListener("click", function(){						 
+							 document.getElementById("insert").style.display = "block";
+						 	const target = document.getElementById('btnedit');
+						 	target.disabled = false;
+						 	document.getElementsByClassName("test2")[0].style.display = "flex";
+						 	const content = updateinput.value;
+						 	const commentCode = data.vo.commentCode;
+						 	const bcomentCreateDate = new Date();
+						 	console.log(createDate);
+						 	const simple_data = {commentCode, content, bcomentCreateDate};
 
-				if(data==false){
-					Swal.fire({
-					   title: '글쓰기를 위해 로그인 해주세요!',
-					   text: '로그인 페이지로 이동하시겠습니까?',
-					   icon: 'warning',
-					   
-					   
-					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
-					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
-					   
- 					   
-					   reverseButtons: false, // 버튼 순서 거꾸로
-					   
-					}).then(result => {
-					   // 만약 Promise리턴을 받으면,
-					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-					   
-						  location.href="${pageContext.request.contextPath}/loginPage/login";
-					   	  	
-					   }
+						 	$.ajax({
+						 		url : "${pageContext.request.contextPath}/blacklist/comment/edit",
+					 			type : "PUT",
+						 			contentType:"application/json; charset=utf-8",
+						 			dataType : "json",
+						 			data : JSON.stringify(simple_data),
+						 			success : function(data){
+						 				console.log(data);
+						 				if(data.state == "ok"){
+						 					ccontent.innerText = content;
+						 					updateform.remove();
+						 					var now = moment(bcomentCreateDate).format("YYYY-MM-DD HH:mm");
+						 					cdate.innerText = now;
+						 					console.log(now);
+						 					updateform.remove();
+						 					
+						 					
+						 				}
+										console.log(simple_data);
+									}
+						 		});
+						 	});
+						 });
+					
+					//삭제 버튼 이벤트 리스너
+					btn2.addEventListener("click", function(){
+						const commentCode = data.vo.commentCode;
+						const simple_data = {commentCode};
+						document.getElementById("insert").style.display = "block";
+
+						$.ajax({
+							url : "${pageContext.request.contextPath}/blacklist/comment/delete",
+							type : "delete",
+							contentType:"application/json; charset=utf-8",
+							dataType : "json",
+							data : JSON.stringify(simple_data),
+							success : function(data){
+								if(data.state == "ok"){	
+									div.remove();
+									}
+							},
+							error : function(e){
+								alert(e);
+			
+							}
+						});
 					});
+					
 				}
-		}
+			},
+				error : function(e){
+					alert(e);
+			}
+			
 		});
+		
+	});
 	
-});
 
+	//db에서 댓글 가져오기
+	window.addEventListener("DOMContentLoaded", function(){
+		let username = "${userdata.userName}";
+		console.log(username);
+		$.ajax({
+			url : "${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}",
+			type : "POST",
+			contentType:"application/json; charset=utf-8",
+			dataType : "json",
+			success : function(data){
+				const comdiv = document.getElementById("comment");
+				
+				for(let comment of data){
+					console.log(comment);	
+				
+					const div = document.createElement("div");
+					div.style.display = "flex";
+					div.style.flexDirection = "column";
+					div.style.borderTop = "1px solid black";
+					
+					
+                    const div2 = document.createElement("div");
 
+                    div2.style.display = "flex";
+                    div2.style.justifyContent = "center";
+                    div2.style.fontSize = "1px";
+                    const div3 = document.createElement("div");
+                    div3.style.flex = "1";
+
+					const cname = document.createElement("p");
+					cname.innerText = comment.userName;
+					const ccontent = document.createElement("P");
+					ccontent.innerText = comment.content;
+					const cdate = document.createElement("p");
+					cdate.innerText = comment.bcomentCreateDate;					
+					if (username == comment.userName) {
+						const btn1 = document.createElement("button");
+						const btn2 = document.createElement("button");
+						btn1.style.borderRadius = "5px";
+						btn2.style.borderRadius = "5px";
+						btn1.style.backgroundColor = "#26A653";
+						btn2.style.backgroundColor = "#26A653";
+						btn1.style.color = "white";
+						btn2.style.color = "white";
+						btn1.style.border = "1px solid white";
+						btn2.style.border = "1px solid white";
+						btn1.innerText = "수정"
+						btn2.innerText = "삭제"	
+							//수정 버튼 클릭시 수정폼 생성
+							btn1.addEventListener("click", function(){
+								document.getElementById("insert").style.display = "none";
+								div2.classList.add('test3');
+								btn1.id = "btnedit2";
+								
+								this.setAttribute("disabled", "disabled");
+								
+								const updateform = document.createElement("div");
+								const updateinput = document.createElement("textarea");
+								updateinput.cols = "30";
+								updateinput.rows = "10";
+								updateinput.placeholder="수정할 내용을 입력하세요"
+								const updatebtn = document.createElement("button");
+								updatebtn.innerText = "수정완료";
+								updatebtn.style.borderRadius = "5px";
+								updatebtn.style.backgroundColor = "#26A653";
+								updatebtn.style.color = "white";
+								updatebtn.style.border = "1px solid white";
+								document.getElementsByClassName("test3")[0].style.display = "none";
+								/* updateinput.append(updatebtn); */
+								updateform.append(updateinput);
+								 updateform.append(updatebtn);
+								
+								div.append(updateform);
+						
+								//수정버튼 연속 클릭시 연속 생성 제한거는 함수 찾기
+								
+								//수정완료 버튼 클릭시 수정된 내용으로 수정
+								 updatebtn.addEventListener("click", function(){		
+									 document.getElementById("insert").style.display = "block";
+								 	const target = document.getElementById('btnedit2');
+								 	target.disabled = false; 
+								 	document.getElementsByClassName("test3")[0].style.display = "flex";
+								 	const content = updateinput.value;
+								 	const bcomentCreateDate = new Date();
+								 	//아이디값 받아오는게 문제듯
+								 	const commentCode = comment.commentCode;
+								 	const simple_data = {commentCode, content, bcomentCreateDate};
+								 		$.ajax({
+								 			url : "${pageContext.request.contextPath}/blacklist/comment/edit",
+								 			type : "PUT",
+								 			contentType:"application/json; charset=utf-8",
+								 			dataType : "json",
+								 			data : JSON.stringify(simple_data),
+								 			success : function(data){
+								 				if(data.state == "ok"){
+								 					ccontent.innerText = content;
+								 					var now = moment(bcomentCreateDate).format("YYYY-MM-DD HH:mm");
+								 					cdate.innerText = now;
+								 					updateform.remove();
+								 				}
+											
+											}
+								 		});
+								 	});
+								 });
+							
+							//삭제 버튼 이벤트
+							btn2.addEventListener("click", function(){
+								const commentCode = comment.commentCode;
+								const simple_data = {commentCode};
+								document.getElementById("insert").style.display = "block";
+								$.ajax({
+									url : "${pageContext.request.contextPath}/blacklist/comment/delete",
+									type : "delete",
+									contentType:"application/json; charset=utf-8",
+									dataType : "json",
+									data : JSON.stringify(simple_data),
+									success : function(data){
+										if(data.state == "ok"){	
+											div.remove();
+										}
+									},
+									 error : function(e){
+										alert(e);
+									 }
+//	 								error : function(request, status, error) {
+//	 							        alert("status : " + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+//	 								}
+								});
+							});
+							div3.append(btn1);
+							div3.append(btn2);
+					}
+					
+					
+
+					div.append(cdate);
+					div.append(cname);
+					div2.append(ccontent);
+					div.append(div2);
+					div.append(div3);
+					comdiv.append(div);
+					div.style.marginTop = "2%";
+					comdiv.style.marginTop = "3%";
+					comdiv.style.marginBottom = "3%";
+					
+
+					
+					
+				}
+			},
+			error : function(e){
+				alert(e);
+			}
+		});		
+	});
 
 document.getElementById("editbtn").addEventListener("click",function(){
 	location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}";
@@ -863,9 +933,7 @@ document.getElementById("deletebtn").addEventListener("click",function(){
 	const data = 
 		{blackuserCode : ${BlacklistVO.blackuserCode}}
 		
-	
-	
-	
+
 	let isDelete = confirm("정말로 삭제하시겠습니까?");
 	if(isDelete){
 		
