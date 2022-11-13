@@ -91,12 +91,34 @@ border-radius : 5px;
 width : 8vh;
 height: 4vh;
 }
+
 .input{
-	width: 50%; 
+	width: 100%; 
 	margin-right: 30px;
+	margin: 5px;
 }
-input{
-	width : 100%;
+
+#search{
+width: 100%; 
+height :30px;
+margin: 5px;
+}
+
+#blacklocal{
+	width: 100%; 
+	height : 27px;
+	margin: 5px;
+}
+
+
+
+.TCRHcon{
+	display : flex;
+	justify-content: space-between;
+}
+
+.searchmenu{
+	   width: 40%;
 }
 </style>
 
@@ -107,6 +129,8 @@ input{
 <div class="TCRcontainer">
 		<form action="${pageContext.request.contextPath}/admin/blackselect?comuselect=black" method="post">
 			<div class="TCRHcon">
+				<div class = "searchmenu">
+				
 				<div class="selectMenu">
 					<select name="blacklocal" id="blacklocal">
 						<option id="null" value="null">카테고리</option>
@@ -116,18 +140,20 @@ input{
 						<option id="blackuserCode" value="blackuserCode">신고대상유저코드</option>
 					</select> 
 				</div>
-				<div class="">
-					<div class="">
+				
+					<div class="text">
 						<input type="text" name="search" id="search" placeholder="카테고리에 맞게 단어를 검색하세요" />
 					</div>
-					<div class="">
-						<button id="">검색</button>
-					</div>
+				</div>
+					
 					<div class="button">
+					<button class="ch">검색</button>
 						<button class="deletebtn">삭제</button>
-					</div>				
-				</div>	
-			</div>
+					</div>	
+					
+								
+			</div>	
+			
 </form>
 </div>
 
