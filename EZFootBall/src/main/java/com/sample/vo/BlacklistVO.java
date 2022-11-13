@@ -18,7 +18,23 @@ public class BlacklistVO {
 	private int count;
 	private String userBlack;
 	
+	private String suserCode;
+	private String sblackuserCode;
+
 	
+	
+	public String getSuserCode() {
+		return suserCode;
+	}
+	public void setSuserCode(String suserCode) {
+		this.suserCode = suserCode;
+	}
+	public String getSblackuserCode() {
+		return sblackuserCode;
+	}
+	public void setSblackuserCode(String sblackuserCode) {
+		this.sblackuserCode = sblackuserCode;
+	}
 	public String getUserBlack() {
 		return userBlack;
 	}
@@ -98,6 +114,7 @@ public class BlacklistVO {
 	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
 	}
+
 
 	
 

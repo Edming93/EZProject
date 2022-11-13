@@ -81,6 +81,9 @@ public interface AdminDAO {
 		//블랙리스트
 		public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
 		
+		// 블랙리스트 현황 조건부 리스트 출력
+		public List<BlacklistVO> joinblackList(BlacklistVO vo);
+		
 		//블랙리스트 삭제
 		public int delBlackList(int blacklistCode);
 		

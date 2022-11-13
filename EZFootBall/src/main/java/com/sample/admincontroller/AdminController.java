@@ -584,21 +584,24 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 	
-	//리뷰 검색 2
-	@PostMapping("/reviewselect1")
-	public String reviewselect1(Model model, FieldReservationVO vo, @RequestParam("Tselect") String Tselect,
-			@RequestParam("Tsearch") String Tsearch) {
+	//블랙리스트 검색
+		@PostMapping("/blackselect")
+		public String blacklistselect(Model model, BlacklistVO vo, @RequestParam("blacklocal") String blacklocal,
+				@RequestParam("search") String search) {
 
-		if (Tselect.equals("rvCode")) {
-			vo.setSrvCode(Tsearch);
-		} else if (Tselect.equals("rvDay")) {
-			vo.setRvDay(Tsearch);
-		} 
-		model.addAttribute("team", service.joinList1(vo));
+			if (blacklocal.equals("local")) {
+				vo.setBlacklistLocal(search);
+			} else if (blacklocal.equals("buserName")) {
+				vo.setBuserName(search);
+			} else if (blacklocal.equals("userCode")) {
+				vo.setSuserCode(search);
+			} else if (blacklocal.equals("blackuserCode")) {
+				vo.setSblackuserCode(search);
+			} 
+			model.addAttribute("list", service.joinblackList(vo));
 
-		return "adminPage/adminMain";
-	}
-	
+			return "adminPage/adminMain";
+		}
 	
 	
 	//리뷰 삭제

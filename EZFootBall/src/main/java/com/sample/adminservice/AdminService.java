@@ -164,6 +164,15 @@ public class AdminService {
 		model.addAttribute("list", dao.selectBlackList(vo));
 	}
    
+   // 블랙리스트 예약현황 조건부 리스트 출력
+   public List<BlacklistVO> joinblackList(BlacklistVO vo){
+      
+      List<BlacklistVO> list = dao.joinblackList(vo);
+
+      return list;
+   }
+   
+   
    //블랙리스트 삭제
    public void deleteblacklist(int blacklistCode) {
 	   dao.delBlackList(blacklistCode);

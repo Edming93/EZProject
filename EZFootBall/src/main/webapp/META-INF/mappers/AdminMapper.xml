@@ -476,6 +476,35 @@
 		update blacklist set is_delete = 1 
 		where blacklist_code = #{blacklistCode}
 	</update>
+	
+	<!-- 블랙리스트 검색 !!!!!!!!!!!!! -->
+	
+	<select id="joinblackList" resultType="BlacklistVO" parameterType="BlacklistVO">
+		select blacklist_code,
+		user_id, buser_name, blacklist_title, blacklist_content,
+		blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i')
+		blacklist_create_date, user_code, blackuser_code
+		from blacklist
+		where is_delete = 0
+
+		<if test="blacklistLocal != null">
+			and blacklist_local like concat('%',#{blacklistLocal},'%')
+		</if>
+		<if test="buserName != null">
+			and buser_name like concat('%',#{buserName},'%')
+		</if>
+		<if test="suserCode != null">
+			and user_code like concat('%',#{suserCode},'%')
+		</if>
+		<if test="sblackuserCode != null">
+			and blackuser_code like concat('%',#{sblackuserCode},'%')
+		</if>
+		
+		order by
+		blacklist_code desc
+	</select>
+	
 
 	<!-- 유저 신고!!!!!!!!!!!!!!! -->
 <!-- 	<select id="selectBlackUser" resultType="BlacklistVO">

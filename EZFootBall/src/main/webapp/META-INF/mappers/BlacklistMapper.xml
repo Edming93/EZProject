@@ -59,7 +59,7 @@
 	
 	<update id="deleteuserBlack">
 		update user_info set user_reports = user_reports-1
-		WHERE user_code = #{blackuserCode}
+		WHERE user_code = #{userCode}
 	</update>
 		
 	<select id="selectBlackListComment" resultType="BlacklistcommentVO">

@@ -105,19 +105,20 @@ input{
 <h1>블랙리스트 게시글 관리</h1>
 <div class ="container">
 <div class="TCRcontainer">
-		<form action="${pageContext.request.contextPath}/admin/" method="post">
+		<form action="${pageContext.request.contextPath}/admin/blackselect?comuselect=black" method="post">
 			<div class="TCRHcon">
 				<div class="selectMenu">
 					<select name="blacklocal" id="blacklocal">
 						<option id="null" value="null">카테고리</option>
-						<option id="서울" value="서울">서울</option>
-						<option id="인천" value="인천">인천</option>
-						<option id="제주도" value="제주도">제주도</option>
+						<option id="local" value="local">지역</option>
+						<option id="buserName" value="buserName">유저네임</option>
+						<option id="userCode" value="userCode">유저코드</option>
+						<option id="blackuserCode" value="blackuserCode">신고대상유저코드</option>
 					</select> 
 				</div>
 				<div class="">
 					<div class="">
-						<input type="text" name="" id="" placeholder="카테고리에 맞게 단어를 검색하세요" />
+						<input type="text" name="search" id="search" placeholder="카테고리에 맞게 단어를 검색하세요" />
 					</div>
 					<div class="">
 						<button id="">검색</button>
