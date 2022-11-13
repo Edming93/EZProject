@@ -678,37 +678,6 @@ button{
 		</div>
 
 
-<!-- 		<div class="pagination-area"> -->
-<!-- 			<div class="page_container"> -->
-<!-- 				<div class="pagination_controller"> -->
-<!-- 					<div class="index_num"> -->
-<!-- 						<span class="current_index">1</span> <span class="total_count">/ -->
-<!-- 							2</span> -->
-<!-- 					</div> -->
-<!-- 					<div class="control_wrapper"> -->
-<!-- 						<button class="control_previous_button e_previous_banner"> -->
-<!-- 							<i class="fa-solid fa-angle-left"></i> -->
-<!-- 						</button> -->
-
-<!-- 						<button type="button" -->
-<!-- 							class="control_play_pause_button e_play_pause_swiper"> -->
-<!-- 							<svg class="fa-pause" width="14px" height="14px" -->
-<!-- 								enable-background="new 0 0 155.3 159.3" -->
-<!-- 								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"> -->
-<!-- 								<path fill="#ffffff" -->
-<!-- 									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path> -->
-<!-- 								<path fill="#ffffff" -->
-<!-- 									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg> -->
-<!-- 							<i class="fas fa-play"></i> -->
-<!-- 						</button> -->
-
-<!-- 						<button type="button" class="control_next_button e_next_banner"> -->
-<!-- 							<i class="fa-solid fa-angle-right"> </i> -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
 
 <script>
 
@@ -729,7 +698,7 @@ let play_btn = document.querySelector(".fa-play");
   // 최상단 디브
   let slider_area = document.querySelector(".banner_container");
 
-  var slider_width = slider_area.clientWidth; // container의 width
+  var slider_width = slider_area.clientWidth; 
   var slide_index = 0;
 
   let top_pagination_btn = document.getElementsByClassName("swiper_pagination_bullet");
@@ -875,6 +844,7 @@ let play_btn = document.querySelector(".fa-play");
 			success : function(data){
 				console.log(data);
 				if(data.state == "ok"){
+					
 					const comdiv = document.getElementById("comment");
 					
 					const div = document.createElement("div");
@@ -923,6 +893,8 @@ let play_btn = document.querySelector(".fa-play");
 					div.append(div3);
 					comdiv.append(div);
 					div.style.marginTop = "2%";
+					
+					
 					
 					//수정 버튼 클릭시 수정폼 생성
 					btn1.addEventListener("click", function(){
@@ -1004,6 +976,8 @@ let play_btn = document.querySelector(".fa-play");
 					});
 					
 				}
+				
+				
 			},
 				error : function(e){
 					alert(e);
@@ -1011,6 +985,8 @@ let play_btn = document.querySelector(".fa-play");
 			
 		});
 		
+		location.href="${pageContext.request.contextPath}/blacklist/blacklistmain/${BlacklistVO.blacklistCode}";
+		//임시 비동기 방법 더 찾아보기
 	});
 	
 
