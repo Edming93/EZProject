@@ -1,4 +1,3 @@
-<%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,19 +8,6 @@
 <%@ page import="java.io.BufferedReader"%>
 <%@ page import="java.io.InputStreamReader"%>
 
-<%
-	request.setCharacterEncoding("utf-8");
-	
-	String authority = null;
-	if(session.getAttribute("sessionVO") != null) {
-		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
-		authority = uvo.getUserAuthority();
-		
-	}else {
-		authority = "일반회원";
-		
-	}
-%>
 
 <!DOCTYPE html>
 <html>
@@ -50,10 +36,11 @@
 
 textarea {
 	width: 100%;
-	height: 150px;
+	height: 200px;
 	padding: 10px;
 	box-sizing: border-box;
-	border: solid 2px #26A653;
+	border: solid 3px rgb(38, 166, 83);
+	border-radius: 15px;
 	font-size: 16px;
 	resize: both;
 }
@@ -62,22 +49,23 @@ div{
 	font-family: 'Gowun Dodum', sans-serif;
 }
 textarea::placeholder {
-  color: #26A653;
+  color: rgb(38, 166, 83);
   font-weight: bold;
+  text-align: center;
   
 }
 
 #div1 {
 	margin: 0 auto;
-	width: 1024px;
-	padding-top: 50px;
+	width: 40%;
 	
 }
 
 #submit{
-	background-color: #26A653;
+	background-color: rgb(38, 166, 83);
 	color : white;
-	border : #26A653;
+	border : white;
+	border-radius: 5px;
 	
 	
 }
@@ -111,7 +99,7 @@ font-family: 'Gowun Dodum', sans-serif;
 .header_area {
 	width: 1024px;
 	height: 100%;
-	padding-top: 20px;
+	padding-top: 15px;
 }
 
 .header_content {
@@ -178,8 +166,8 @@ font-family: 'Gowun Dodum', sans-serif;
 .big_menu_area {
 	max-width: 1024px;
 	width: 1024px;
-    margin-bottom: 13px;
-    margin-top: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 .big_menu_content {
@@ -189,13 +177,13 @@ font-family: 'Gowun Dodum', sans-serif;
 }
 
 .big_menu_content a {
-	font-size: 17px;
-    text-decoration: none;
-    color: black;
-    align-items: center;
-    display: flex;
-    width: 85px;
-    justify-content: center;
+	font-size: 18px;
+	text-decoration: none;
+	color: black;
+	align-items: center;
+	display: flex;
+	width: 90px;
+	justify-content: center;
 }
 
 .menu1, .menu2, .menu3, .menu4, .menu5, .menu6 {
@@ -209,18 +197,6 @@ font-family: 'Gowun Dodum', sans-serif;
 	padding-bottom: 5px;
 	border-bottom: 3px solid #26A653;
 }
-    .menu2_a {
-    	width: 80px !important;
-    }
-    .menu4 {
-    	width: 82px;
-    }
-    .menu4_a {
-    	width:70px !important;
-    }
-    .menu6 {
-    	margin-left: 10px;
-    }
 
 .banner_container {
 	max-width: 1024px;
@@ -276,15 +252,12 @@ font-family: 'Gowun Dodum', sans-serif;
 	align-items: center;
 }
 
-	.bottom_banner {
-        width:100%;
-        height:235px;
-        background-color: #26A653;
-    	margin-top: 100px;
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
-	}
+.bottom_banner {
+	width: 100%;
+	height: 205px;
+	background-color: #26A653;
+	margin-top: 100px;
+}
   footer {
             width: 100%;
           
@@ -402,60 +375,6 @@ font-family: 'Gowun Dodum', sans-serif;
 .fa-play {
 	display: none;
 }
-    .header_icon {
-	    text-decoration: none;
-	    color: #4e4e4e;
-	    font-size: 27px;
-	    margin-left: 15px;
-    }
-    .comentbox{
-    	border-bottom: 1px solid #26A653;
-    	border-left: 20px solid #26A653;
-    	margin-bottom: 20px;
-    	padding: 22px;
-    	display: flex;
-    	justify-content: space-between;
-    }
-    .rightbox{
-    	display: flex;
-    }
-    .namebox{
-    	font-size: 12px;
-    	font-weight: bold;
-    }
-    .coment{
-    	font-size: 20px;
-    	font-weight: bold;
-    	letter-spacing: 1.5px;
-    }
-    .time{
-    	font-size: 11px;
-    	color : #ABABAB;
-    	display: flex;
-        align-items: center;
-        padding-right: 20px;
-    }
-    .just{
-    	display: flex;
-        align-items: center;
-    }
-    .updatebtn{
-    	font-size: 13px;
-    	font-weight: bold;
-    	background: none;
-    	border: none;
-        padding-right: 20px;
-    }
-    .deletebtn{
-    	font-size: 13px;
-    	font-weight: bold;
-    	background: none;
-    	border: none;
-    }
-    #input{
-    	display: flex;
-    	
-    }
 </style>
 </head>
 <body>
@@ -464,61 +383,45 @@ font-family: 'Gowun Dodum', sans-serif;
 			<div class="header_area">
 				<div class="header_content">
 					<div class="header_left main_logo"></div>
-               <div class="header_right login_btn etc_btn">
-                  <div class="search_input_area">
-  		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
-	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
-                  </div>
-                  <div class="adminMove">
-                  	<% if(authority.equals("관리자")){ %>
-                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%}else if(authority.equals("매니저")){%>
-				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%} %>
-                  </div>
-                  
-                  <div class="login_icon">
-                     <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
-                        <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<div class="header_right login_btn etc_btn">
+						<div class="search_input_area">
+							<jsp:include page="../search/search.jsp"></jsp:include>
+							<!--                   <input type="text" class="search_input"> -->
+							<iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
+						</div>
+						<div class="login_icon">
+							<a href="${pageContext.request.contextPath}/loginPage/login">
+								<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
+								<svg width="25" height="28" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
-                              fill="#464A54" />
+										d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
+										fill="#464A54" />
                            <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M12 13.5C7.5502 13.5 5.07689 15.0054 3.93312 16.0093C3.22723 16.6288 3 17.4996 3 18.2447C3 20.3187 4.68132 22 6.75534 22H17.2447C19.3187 22 21 20.3187 21 18.2447C21 17.4996 20.7728 16.6288 20.0669 16.0093C18.9231 15.0054 16.4498 13.5 12 13.5ZM5.25244 17.5124C6.03934 16.8217 8.04626 15.5 12 15.5C15.9537 15.5 17.9607 16.8217 18.7476 17.5124C18.8856 17.6335 19 17.8668 19 18.2447C19 19.2141 18.2141 20 17.2447 20H6.75534C5.78589 20 5 19.2141 5 18.2447C5 17.8668 5.11441 17.6335 5.25244 17.5124Z"
-                              fill="#464A54" />
+										d="M12 13.5C7.5502 13.5 5.07689 15.0054 3.93312 16.0093C3.22723 16.6288 3 17.4996 3 18.2447C3 20.3187 4.68132 22 6.75534 22H17.2447C19.3187 22 21 20.3187 21 18.2447C21 17.4996 20.7728 16.6288 20.0669 16.0093C18.9231 15.0054 16.4498 13.5 12 13.5ZM5.25244 17.5124C6.03934 16.8217 8.04626 15.5 12 15.5C15.9537 15.5 17.9607 16.8217 18.7476 17.5124C18.8856 17.6335 19 17.8668 19 18.2447C19 19.2141 18.2141 20 17.2447 20H6.75534C5.78589 20 5 19.2141 5 18.2447C5 17.8668 5.11441 17.6335 5.25244 17.5124Z"
+										fill="#464A54" />
                         </svg>
-                     </a>
-                  </div>
-                  
-                  <% if(session.getAttribute("sessionVO") == null) { %>
-                  <div class="etc_icon">
-                     <a href="${pageContext.request.contextPath}/etc/etc">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							</a>
+						</div>
+						<div class="etc_icon">
+							<a href="${pageContext.request.contextPath}/etc/etc"> <svg
+									width="28" height="28" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
                            <path
-                              d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
-                              fill="#464A54" />
+										d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
+										fill="#464A54" />
                            <path
-                              d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
-                              fill="#464A54" />
+										d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
+										fill="#464A54" />
                            <path
-                              d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
-                              fill="#464A54" />
+										d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
+										fill="#464A54" />
                         </svg>
-                     </a>
-                  </div>
-                  <% } %>
-                  
-                  <% if(session.getAttribute("sessionVO") != null) { %>
-                  <div class="logout_icon">
-                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
-						<iconify-icon icon="codicon:sign-out"></iconify-icon>
-                     </a>
-                  </div>
-                  <%} %>
-               </div>
+							</a>
+						</div>
+					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="big_menu_container">
@@ -562,39 +465,39 @@ font-family: 'Gowun Dodum', sans-serif;
 			</div>
 		</div>
 
-<!-- 		<div class="pagination-area"> -->
-<!-- 			<div class="page_container"> -->
-<!-- 				<div class="pagination_controller"> -->
-<!-- 					<div class="index_num"> -->
-<!-- 						<span class="current_index">1</span> <span class="total_count">/ -->
-<!-- 							2</span> -->
-<!-- 					</div> -->
-<!-- 					<div class="control_wrapper"> -->
-<!-- 						<button class="control_previous_button e_previous_banner"> -->
-<!-- 							<i class="fa-solid fa-angle-left"></i> -->
-<!-- 						</button> -->
+		<div class="pagination-area">
+			<div class="page_container">
+				<div class="pagination_controller">
+					<div class="index_num">
+						<span class="current_index">1</span> <span class="total_count">/
+							2</span>
+					</div>
+					<div class="control_wrapper">
+						<button class="control_previous_button e_previous_banner">
+							<i class="fa-solid fa-angle-left"></i>
+						</button>
 
-<!-- 						<button type="button" -->
-<!-- 							class="control_play_pause_button e_play_pause_swiper"> -->
-<!-- 							<svg class="fa-pause" width="14px" height="14px" -->
-<!-- 								enable-background="new 0 0 155.3 159.3" -->
-<!-- 								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"> -->
-<!-- 								<path fill="#ffffff" -->
-<!-- 									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path> -->
-<!-- 								<path fill="#ffffff" -->
-<!-- 									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg> -->
-<!-- 							<i class="fas fa-play"></i> -->
-<!-- 						</button> -->
+						<button type="button"
+							class="control_play_pause_button e_play_pause_swiper">
+							<svg class="fa-pause" width="14px" height="14px"
+								enable-background="new 0 0 155.3 159.3"
+								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg">
+								<path fill="#ffffff"
+									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path>
+								<path fill="#ffffff"
+									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg>
+							<i class="fas fa-play"></i>
+						</button>
 
-<!-- 						<button type="button" class="control_next_button e_next_banner"> -->
-<!-- 							<i class="fa-solid fa-angle-right"> </i> -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+						<button type="button" class="control_next_button e_next_banner">
+							<i class="fa-solid fa-angle-right"> </i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-<script>
+		<script>
 
 let button_flag = true;
 var time_out;
@@ -715,14 +618,13 @@ let play_btn = document.querySelector(".fa-play");
 
 				<textarea name="content" id="content" placeholder="댓글을 입력해 주세요"><c:if
 						test="${empty requestScope.userdata}">로그인이 필요합니다.</c:if></textarea>
-				<button id="submit">등록</button>
+				<button id="submit">전송</button>
 			</div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-			
-			
-<script type="text/javascript">
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+			<script type="text/javascript">
 		//비로그인시 댓글 창 클릭하면 로그인 페이지로 이동
 
 	document.getElementById("content").addEventListener("click", function(){
@@ -833,7 +735,7 @@ let play_btn = document.querySelector(".fa-play");
 						//수정 버튼 클릭시 수정폼 생성
 						btn1.addEventListener("click", function(){
 							document.getElementById("input").style.display = "none";
-						/* 	this.setAttribute("disabled", "disabled"); */
+						 	this.setAttribute("disabled", "disabled");
 							const updateform = document.createElement("div");
 							/* updateform.style.border = "1px solid black"; */
 							const updateinput = document.createElement("textarea");
@@ -930,81 +832,44 @@ let play_btn = document.querySelector(".fa-play");
 					for(let comment of data){
 						console.log(comment);	
 					
-						const leftdiv = document.createElement("div");
-						leftdiv.className = "leftbox";
-						
-						const rightdiv = document.createElement("div");
-						rightdiv.className = "rightbox";
-						
-						
 						const div = document.createElement("div");
-						div.className = "comentbox";
-						/* div.style.display = "flex";
+						div.style.display = "flex";
 						div.style.flexDirection = "column";
 						div.style.borderTop = "1px solid black";
-						div.style.fontFamily = "Gowun Dodum"; */
-						div.append(leftdiv);
-						div.append(rightdiv);
+						div.style.fontFamily = "Gowun Dodum";
+						
 						
                         const div2 = document.createElement("div");
-						div2.className = "coment";
 
-                        /* div2.style.display = "flex";
+                        div2.style.display = "flex";
                         div2.style.justifyContent = "center";
-                        div2.style.fontSize = "25px"; */
-                        
-                        
+                        div2.style.fontSize = "25px";
                         const div3 = document.createElement("div");
-                        div3.className = "just";
-                        /* div3.style.flex = "1"; */
+                        div3.style.flex = "1";
 
                         
 						
 						const cname = document.createElement("p");
-                        cname.className = "namebox";
 						cname.innerText = comment.userName;
-						
-						/* const ccontent = document.createElement("P");
-						ccontent.className = "what"; */
-						div2.innerText = comment.content;
-						
-						const cdate = document.createElement("div");
-						cdate.className = "time";
+						const ccontent = document.createElement("P");
+						ccontent.innerText = comment.content;
+						const cdate = document.createElement("p");
 						cdate.innerText = comment.createDate;
-						
-						leftdiv.append(cname);
-						leftdiv.append(div2);
-						rightdiv.append(cdate);
-						rightdiv.append(div3);
-						
-						
-						const btn1 = document.createElement("button");
-						btn1.classList.add("updatebtn");
-						const btn2 = document.createElement("button");
-						btn2.classList.add("deletebtn");
-						btn1.innerText = "수정"
-						btn2.innerText = "삭제"	
-						div3.append(btn1);
-						div3.append(btn2);
-						div3.style.visibility="hidden";
-						
 						/* const cid = document.createElement("h4");
 						cid.innerText = comment.id; */
 						if (username == comment.userName) {
-							div3.style.visibility="visible";
-							/* btn1.style.borderRadius = "5px";
+							const btn1 = document.createElement("button");
+							const btn2 = document.createElement("button");
+							btn1.style.borderRadius = "5px";
 							btn2.style.borderRadius = "5px";
 							btn1.style.backgroundColor = "#26A653";
 							btn2.style.backgroundColor = "#26A653";
 							btn1.style.color = "white";
 							btn2.style.color = "white";
 							btn1.style.border = "1px solid white";
-							btn2.style.border = "1px solid white"; */
-							
-							
-							
-							
-							
+							btn2.style.border = "1px solid white";
+							btn1.innerText = "수정"
+							btn2.innerText = "삭제"	
 								//수정 버튼 클릭시 수정폼 생성
 								btn1.addEventListener("click", function(){
 									document.getElementById("input").style.display = "none";
@@ -1086,24 +951,21 @@ let play_btn = document.querySelector(".fa-play");
 //		 								}
 									});
 								});
-								
+								div3.append(btn1);
+								div3.append(btn2);
 						}
 						
 						
-						//div.append(cname);
-						
-						//div.append(div2);//내용
-						//div.append(div3);//여백
-						//div.append(cdate);
-						
-						
-						//div2.append(ccontent);
-						
+
+						div.append(cdate);
+						div.append(cname);
+						div2.append(ccontent);
+						div.append(div2);
+						div.append(div3);
 						comdiv.append(div);
-						
-						/* div.style.marginTop = "2%";
+						div.style.marginTop = "2%";
 						comdiv.style.marginTop = "3%";
-						comdiv.style.marginBottom = "3%"; */
+						comdiv.style.marginBottom = "3%";
 						
 
 						
@@ -1118,21 +980,58 @@ let play_btn = document.querySelector(".fa-play");
 	</script>
 		</div>
 	</div>
-    <div class="bottom_banner">
-    	<div class="banner_area">
-			<img src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
-		</div>
+	 <div class="bottom_banner">
+
     </div>
-    <footer>
-        <jsp:include page="../etc/footer.jsp"></jsp:include>
+     <footer>
+        <div class="footer_subcon">
+            <div class="footer_left">
+                <div class="footer_nav">
+                    <ul>
+                        <h3>매치 정보</h3>
+                        <li>소셜 매치</li>
+                        <li>팀 매치</li>
+                        <li>구장 예약</li>
+                    </ul>
+                    <ul>
+                        <h3>서비스 지역</h3>
+                        <li>서울</li>
+                        <li>인천</li>
+                        <li>경기</li>
+                        <li>전라도</li>
+                        <li>경상도</li>
+                        <li>충청도</li>
+                        <li>제주도</li>
+                    </ul>
+                    <ul>
+                        <h3>이지풋볼</h3>
+                        <li>이지풋볼 소개</li>
+                        <li>공지사항</li>
+                        <li>자주 묻는 질문</li>
+                        <li>구장 제휴</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer_right">
+            <div class="footer_com">
+                <h2>EZfootball.com</h2>
+                <p>풋살하고싶죠? 고민하지말고 이지풋볼</p>
+                <p>이용약관 | 개인정보 처리방침 | 사업자 정보 확인</p>
+                <p>이지풋볼 | 서울특별시 강서구 화곡동 까치산역 2번출구 앞 돗자리 |
+                    대표메일 dragon695@naver.com | 마케팅 제안 : dragon695@naver.com |
+                    국번없이 119
+                </p>
+                <p>주식회사 기밍지아케데미 | 사업자번호 : 000-00-00000 | 대표 김민지 |
+                    통신판매업 신고 2022-서울강서-0000
+                </p>
+                <p>Copyright EZ ALL rights reserved</p>
+            </div>
+            <h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
+        </div>
+        
     </footer>
 </div>
-	<script type="text/javascript">
-	let main_logo = document.querySelector(".main_logo");
 	
-	main_logo.addEventListener("click",function() {
-		location.href="${pageContext.request.contextPath}";
-	});
-</script>
 </body>
 </html>
