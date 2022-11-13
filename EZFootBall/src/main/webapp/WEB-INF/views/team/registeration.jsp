@@ -315,7 +315,8 @@
         margin-left:10px;
     }
     .confirm{
-	    flex-direction: row;
+    	display : none;
+    	flex-direction: row;
 	    flex-wrap: wrap;
 	    position: absolute;
 	    width: 298px;
