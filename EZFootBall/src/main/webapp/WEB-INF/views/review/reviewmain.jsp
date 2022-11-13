@@ -788,6 +788,7 @@ let play_btn = document.querySelector(".fa-play");
 						btn2.addEventListener("click", function(){
 							const reviewCode = data.vo.reviewCode;
 							const simple_data = {reviewCode};
+							document.getElementById("input").style.display = "block";
 							$.ajax({
 								url : "${pageContext.request.contextPath}/review/comment/delete",
 								type : "delete",
@@ -900,7 +901,7 @@ let play_btn = document.querySelector(".fa-play");
 									
 									//수정완료 버튼 클릭시 수정된 내용으로 수정
 									 updatebtn.addEventListener("click", function(){		
-										 document.getElementById("input").style.display = "block";
+										document.getElementById("input").style.display = "block";
 									 	const target = document.getElementById('btnedit2');
 									 	target.disabled = false; 
 									 	document.getElementsByClassName("test3")[0].style.display = "flex";
@@ -932,6 +933,7 @@ let play_btn = document.querySelector(".fa-play");
 								btn2.addEventListener("click", function(){
 									const reviewCode = comment.reviewCode;
 									const simple_data = {reviewCode};
+									document.getElementById("input").style.display = "block";
 									$.ajax({
 										url : "${pageContext.request.contextPath}/review/comment/delete",
 										type : "delete",

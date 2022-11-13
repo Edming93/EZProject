@@ -662,28 +662,6 @@ button{
 			  console.log(data);
 				
 				let commentlist = [];
-			  
-			  for(const obj of data) {  
-				  //상위댓글이 아무것도 없을때
-				  if(obj.orderCode === 0){
-					  commentlist.push(obj);
-					  }else{
-						  //else문 상위댓글과 자신이 쓰는 댓글 아이디 비교
-						  for(const comp of data){
-							  //만약 비교한 댓글 아이디가 상위댓글 번호와 같고
-							  if(comp.commentCode == obj.orderCode){
-								  //비교댓글의 리스트가 비었을 경우
-								  if(comp.innerlist == null){
-									  //리스트를 담을 배열을 생성
-									  comp.innerlist = [];
-								  }
-								  	//그후 리스트 배열을 obj에 푸쉬
-								  	comp.innerlist.push(obj);
-								  	break;
-							  }
-						  }
-					  }
-				  } 
 				
 			  console.log(commentlist);
 				  
