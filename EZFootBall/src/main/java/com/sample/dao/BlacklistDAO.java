@@ -36,6 +36,9 @@ public interface BlacklistDAO {
 	//게시판 블랙유저 user_info에서 삭제
 	public int deleteuserBlack(BlacklistVO vo);
 	
+	//게시판 블랙유저 코드 가져오기
+	public int selectBlackuserCode(BlacklistVO vo);
+	
 	//게시판 delete
 	public int deleteBlackList(BlacklistVO vo);
 	

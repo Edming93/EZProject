@@ -19,6 +19,7 @@
     </select>
 	
 	
+	
 	<select id="selectBlackList" resultType="BlacklistVO">
 		select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local,
 		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date, blackuser_code
@@ -34,6 +35,12 @@
 		from blacklist
 		where is_delete = 0
 		and blacklist_code = #{blacklistCode}
+	</select>
+	
+	<select id="selectBlackuserCode">
+		select blackuser_code
+		from blacklist
+		where is_delete = 0
 	</select>
 
 	<insert id="insertBlackList">
@@ -59,7 +66,7 @@
 	
 	<update id="deleteuserBlack">
 		update user_info set user_reports = user_reports-1
-		WHERE user_code = #{userCode}
+		WHERE user_code = #{blackuserCode}
 	</update>
 		
 	<select id="selectBlackListComment" resultType="BlacklistcommentVO">

@@ -592,7 +592,6 @@ button{
 		<div class="footerdetail">
 			<button id="backbtn">뒤로가기</button>
 		<c:if test="${BlacklistVO.userId eq requestScope.userdata.userId}">
-		
 		<button id="deletebtn">삭제</button>
 		<button id="editbtn">수정</button>
 		</c:if>
@@ -662,6 +661,28 @@ button{
 			  console.log(data);
 				
 				let commentlist = [];
+			  
+			  for(const obj of data) {  
+				  //상위댓글이 아무것도 없을때
+				  if(obj.orderCode === 0){
+					  commentlist.push(obj);
+					  }else{
+						  //else문 상위댓글과 자신이 쓰는 댓글 아이디 비교
+						  for(const comp of data){
+							  //만약 비교한 댓글 아이디가 상위댓글 번호와 같고
+							  if(comp.commentCode == obj.orderCode){
+								  //비교댓글의 리스트가 비었을 경우
+								  if(comp.innerlist == null){
+									  //리스트를 담을 배열을 생성
+									  comp.innerlist = [];
+								  }
+								  	//그후 리스트 배열을 obj에 푸쉬
+								  	comp.innerlist.push(obj);
+								  	break;
+							  }
+						  }
+					  }
+				  } 
 				
 			  console.log(commentlist);
 				  
@@ -838,8 +859,29 @@ document.getElementById("editbtn").addEventListener("click",function(){
 
 
 document.getElementById("deletebtn").addEventListener("click",function(){
+	
+	const data = 
+		{blackuserCode : ${BlacklistVO.blackuserCode}}
+		
+	
+	
+	
 	let isDelete = confirm("정말로 삭제하시겠습니까?");
 	if(isDelete){
+		
+		/* $.ajax({
+			url : "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}",
+			type : "GET",
+			contentType:"application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify(data),
+			console.log(data);
+			success : function(data){
+
+			
+		}
+		});
+		 */
 		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}";
 	}
 });

@@ -57,6 +57,7 @@ public class BlacklistService {
 		return (blackDAO.deleteuserBlack(vo)>0)?true:false;
 	}
 	
+	
 	public List<BlacklistCommentVO> getCommentList(int blackCode) {
 		return blackDAO.selectBlackListComment(blackCode);
 	}
