@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.sample.service.BlacklistService;
 import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistVO;
+import com.sample.vo.Criteria;
+import com.sample.vo.PageMakerVO;
 import com.sample.vo.UserVO;
 
 @Controller
@@ -37,7 +39,7 @@ public class BlacklistController {
 		this.service = service;
 	}
 
-	// 페이지 이동
+	/* 페이지 이동
 	@GetMapping("/blacklistmain")
 	public String move(HttpSession session, Model model) {
 		UserVO vo = (UserVO) session.getAttribute("sessionVO");
@@ -45,6 +47,25 @@ public class BlacklistController {
 		service.getBlackList(model);
 		return "/blacklist/blacklistmain";
 	}
+	*/
+	
+	// 페이지 이동
+		@GetMapping("/blacklistmain")
+		public String move(HttpSession session, Model model, Criteria cri) {
+			UserVO vo = (UserVO) session.getAttribute("sessionVO");
+			model.addAttribute("userdata", vo);
+			service.getBlackList(model);
+			
+			model.addAttribute("list", service.getListPaging(cri));
+			
+			 int total = service.getTotal();
+			 
+			 PageMakerVO pageMake = new PageMakerVO(cri, total);
+			 
+			 model.addAttribute("pageMaker", pageMake);
+			
+			return "/blacklist/blacklistmain";
+		}
 
 	// 상세 페이지 이동
 	@GetMapping("/blacklistmain/{blacklistCode}")

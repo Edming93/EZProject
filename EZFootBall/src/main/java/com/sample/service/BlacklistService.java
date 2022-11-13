@@ -13,6 +13,7 @@ import com.sample.dao.UserDAO;
 import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistPageVO;
 import com.sample.vo.BlacklistVO;
+import com.sample.vo.Criteria;
 
 
 
@@ -28,6 +29,17 @@ public class BlacklistService {
 		this.userDAO = userDAO;
 	}
 
+	 /* 게시판 목록(페이징 적용) */
+    public List<BlacklistVO> getListPaging(Criteria cri) {
+        
+        return blackDAO.getListPaging(cri);
+    }    
+    
+    public int getTotal() {
+        return blackDAO.getTotal();
+    }    
+ 
+	
 	public void getBlackList(Model model) {
 		BlacklistPageVO vo = new BlacklistPageVO();
 		vo.setStart(0);
@@ -100,4 +112,9 @@ public class BlacklistService {
 	      }
 		  return map;
 		}
+	
+	
+	
+	
+	
 }

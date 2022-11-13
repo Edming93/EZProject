@@ -13,7 +13,6 @@ import com.sample.vo.BlacklistPageVO;
 @Mapper
 public interface BlacklistDAO {
 	
-	public int selectBBSCount();
 	
 	//페이지 VIEW
 	public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
@@ -22,7 +21,10 @@ public interface BlacklistDAO {
 	public BlacklistVO selectBlackListdetail(String blacklistCode);
 	
 	//게시판 view(페이징)
-	 public List<BlacklistVO> getListPaging(Criteria cri);
+	public List<BlacklistVO> getListPaging(Criteria cri);
+	
+	//게시판 총 갯수
+	public int getTotal();
 	
 	//게시판 insert
 	public int insertBlackList(BlacklistVO vo);
