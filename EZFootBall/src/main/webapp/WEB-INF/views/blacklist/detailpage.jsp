@@ -809,6 +809,13 @@ let play_btn = document.querySelector(".fa-play");
 		<button id="deletebtn">삭제</button>
 		<button id="editbtn">수정</button>
 		</c:if>
+		<form id="infoForm" action="${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}" method="get">
+		
+		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
+		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>		
+		
+		</form>
 		</div>
 		
 		
@@ -825,6 +832,30 @@ let play_btn = document.querySelector(".fa-play");
 	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
+	
+	
+	let form = $("#infoForm");
+	
+	$("#backbtn").on("click", function(e){
+		form.find("#bno").remove();
+		form.attr("action", "/EZFootBall/blacklist/blacklistmain");
+		form.submit();
+	});
+	
+	$("#editbtn").on("click", function(e){
+		form.attr("action", "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}");
+		form.submit();
+	});	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	document.getElementById("ibtn").addEventListener("click", function(){
 		let content = document.getElementById("inittext").value;

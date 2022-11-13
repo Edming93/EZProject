@@ -70,12 +70,12 @@ public class BlacklistController {
 	// 상세 페이지 이동
 	@GetMapping("/blacklistmain/{blacklistCode}")
 	public String getBlacklistItem(HttpSession session, Model model,
-			@PathVariable("blacklistCode") String blacklistCode, BlacklistVO bvo) {
+			@PathVariable("blacklistCode") String blacklistCode, BlacklistVO bvo, Criteria cri) {
 		System.out.println(blacklistCode);
 		System.out.println(bvo.getBlacklistCode());
 		UserVO vo = (UserVO) session.getAttribute("sessionVO");
 		model.addAttribute("userdata", vo);
-		
+		model.addAttribute("cri", cri);
 		service.getBlackListContent(model, blacklistCode);
 		return "blacklist/detailpage";
 	}

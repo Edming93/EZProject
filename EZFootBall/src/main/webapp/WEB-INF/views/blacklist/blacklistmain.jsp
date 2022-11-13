@@ -441,11 +441,12 @@ table th {
            
            
            
-           
-           
+     
+      
   .pageInfo{
+ 	padding-left: 23%;
     list-style : none;
-    display: inline-block;
+    display: flex;
     margin: 50px 0 0 100px;      
   }
   
@@ -595,7 +596,7 @@ table th {
 							
 							  <!-- 이전페이지 버튼 -->
 				                <c:if test="${pageMaker.prev}">
-				                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+				                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">◀</a></li>
 				                </c:if>
 				                
 								 <!-- 각 번호 페이지 버튼 -->
@@ -606,7 +607,7 @@ table th {
               					
               					 <!-- 다음페이지 버튼 -->
 				                <c:if test="${pageMaker.next}">
-				                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+				                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">▶</a></li>
 				                </c:if>    
 							</ul>
 						</div>
@@ -630,7 +631,7 @@ table th {
 		e.preventDefault();
 		
 		moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+ "'>");
-		moveForm.attr("action", "/blacklist/get");
+		moveForm.attr("action", "/EZFootBall/blacklist/blacklistmain/{blacklistCode}");
 		moveForm.submit();
 	});
 
