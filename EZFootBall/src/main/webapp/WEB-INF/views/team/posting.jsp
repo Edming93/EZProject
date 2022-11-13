@@ -26,19 +26,18 @@
  	.sub_con{
 	    grid-area: sub;
 	    justify-content: center;
-	    width: 50%;
-	    border-radius:20px;
-	    box-shadow : 5px 5px 10px 10px #ddd;
-	    padding: 20px;
-    
+	    width: 100%;
+	    border-radius: 20px;
+	    box-shadow: 5px 5px 10px 10px #ddd;
+	    padding: 60px;
 	}
 	/* 매치작성 제목 */
 	.title{
-	    align-items: center;
-	   	color: #525252;
-	   	font-size: 20px;
-	   	font-weight: bold;
-	   	padding-bottom: 30px;
+		align-items: center;
+	    color: #525252;
+	    font-size: 24px;
+	    font-weight: bold;
+	    padding-bottom: 30px;
 	}
 
 *{
@@ -109,7 +108,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding : 1%;
+    padding: 0px 10px 5px 0px;
 }
 
 
@@ -177,11 +176,11 @@
 }
 
 #fieldName{
-    width: 75%;
+    width: 78%;
     height: 40px;
     font-size:12px;
     border-radius: 10px;
-    padding-left : 5px;
+    padding-left: 10px;
     border : 1px solid #C0C0C0;
 }
 
@@ -204,16 +203,13 @@
 
    /* 지도검색 modal창 디자인 */
     .modal22 {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  display: none;
-
-  background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal22.show {
@@ -271,10 +267,11 @@
 		
 	}
 	.map_search .search_area #search1{
-		width : 100%;
-		height : 80%;
-		border-radius : 10px;
-		
+	    width: 100%;
+	    height: 80%;
+	    border-radius: 10px;
+	    padding-left: 15px;
+	    border: 1px solid #8d8d8d;
 	}
 	.map_search .search_button{
 		width : 8%;
@@ -364,6 +361,7 @@
     border: 1px solid #909090;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    text-align: center;
 }
 
 
@@ -464,18 +462,18 @@
     display: flex;
 }
 .teaminput {
-    width: 50%;
-    margin-right:7%; 
+    width: 60%;
+    margin-right: 2%;
 }
 
 #mTeamName{
     width: 100%;
     height: 50px;
-    background-color: #EDEDED;
-    border-color: #EDEDED;
+    background-color: #f9f9f9;
+    border: 1px solid #EDEDED;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    padding-left : 5px;
+    padding-left: 10px;
 }
 .sbutton{
     width: 20%;
@@ -744,12 +742,12 @@
         margin-left:10px;
     }
     #uteamPay{
-        width: 70%;
-	    height: 50px;
-	    border-radius: 10px;
-	    padding-left: 10px;
-	    margin-right: 20px;
-	    border-color: #C0C0C0;
+    width: 50%;
+    height: 50px;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-right: 20px;
+    border: 1px solid #c0c0c0;
 	}
 	.calbox{
 		display: flex;
@@ -785,6 +783,7 @@
 	    border: 1px solid #909090;
 	    border-bottom-left-radius: 10px;
 	    border-bottom-right-radius: 10px;
+	    text-align: center;
 	}
 	.inputbbox::placeholder{
             text-align: center;
@@ -1044,7 +1043,7 @@
             </div>
             <div class="dinput">
             	<div class="calbox">
-            	<span class="dicon"><iconify-icon icon="ic:round-date-range" style="color: #26a653;"  width="27" height="24"></iconify-icon></span>
+            	<span class="dicon"><iconify-icon icon="ic:round-date-range" style="color: #26a653;"  width="30" height="30"></iconify-icon></span>
             	<input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭" autocomplete="off">
             	</div>
             	<div class="option" id="daybox">
@@ -1338,7 +1337,7 @@
       
       	<div class="subt">
             <div class="dinput paybox">
-            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="팀이 지불할 금액을 입력하세요"/> <span>원</span>
+            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="우리팀이 지불할 금액을 입력하세요"/> <span>원</span>
             </div>
       	</div>
       	

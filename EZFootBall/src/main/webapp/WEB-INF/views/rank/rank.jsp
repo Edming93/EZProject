@@ -37,7 +37,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
+            font-size: 21px;
             
         }
         .numdiv > div{
@@ -56,35 +56,35 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 15px;
         }
         .scorediv{
             width: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 15px;
         }
         .windiv{
         	width: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 15px;
         }
         .losediv{
         	width: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 15px;
         }
         .lediv{
         	width: 150px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 20px;
+            font-size: 15px;
             padding-right: 20px;
         }
 
@@ -193,14 +193,14 @@
 		document.getElementById("rank1").style.borderColor = "#ffd233";
 		document.getElementById("rank1").style.height = "170px";
 		document.getElementById("rank1").style.width = "99%";
-		document.getElementsByClassName("numdiv")[0].style.fontSize = "45px";
+		document.getElementsByClassName("numdiv")[0].style.fontSize = "30px";
 		document.getElementsByClassName("numdiv")[0].style.fontWeight = "600";
-		document.getElementsByClassName("namediv")[0].style.fontSize = "30px";
-		document.getElementsByClassName("scorediv")[0].style.fontSize = "30px";
-		document.getElementsByClassName("windiv")[0].style.fontSize = "30px";
-		document.getElementsByClassName("losediv")[0].style.fontSize = "30px";
-		document.getElementsByClassName("lediv")[0].style.fontSize = "30px";
-		document.getElementsByClassName("lediv")[0].style.padding = "0";
+		document.getElementsByClassName("namediv")[0].style.fontSize = "23px";
+		document.getElementsByClassName("scorediv")[0].style.fontSize = "23px";
+		document.getElementsByClassName("windiv")[0].style.fontSize = "23px";
+		document.getElementsByClassName("losediv")[0].style.fontSize = "23px";
+		document.getElementsByClassName("lediv")[0].style.fontSize = "19px";
+		document.getElementsByClassName("lediv")[0].style.padding = "10px";
 	</script>
 	
 	<!-- 2위 테두리 변경 -->
@@ -209,13 +209,13 @@
 		document.getElementById("rank2").style.borderColor = "#BBBBBB";
 		document.getElementById("rank2").style.height = "150px";
 		document.getElementById("rank2").style.width = "95%";
-		document.getElementsByClassName("numdiv")[1].style.fontSize = "40px";
+		document.getElementsByClassName("numdiv")[1].style.fontSize = "28px";
 		document.getElementsByClassName("numdiv")[1].style.fontWeight = "400";
-		document.getElementsByClassName("namediv")[1].style.fontSize = "25px";
-		document.getElementsByClassName("scorediv")[1].style.fontSize = "25px";
-		document.getElementsByClassName("windiv")[1].style.fontSize = "25px";
-		document.getElementsByClassName("losediv")[1].style.fontSize = "25px";
-		document.getElementsByClassName("lediv")[1].style.fontSize = "25px";
+		document.getElementsByClassName("namediv")[1].style.fontSize = "18px";
+		document.getElementsByClassName("scorediv")[1].style.fontSize = "18px";
+		document.getElementsByClassName("windiv")[1].style.fontSize = "18px";
+		document.getElementsByClassName("losediv")[1].style.fontSize = "18px";
+		document.getElementsByClassName("lediv")[1].style.fontSize = "16px";
 		
 	</script>
 	

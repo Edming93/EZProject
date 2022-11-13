@@ -144,6 +144,7 @@
 
 .main_content2 h3 {
 	margin-bottom:15px;
+	color: #2c2c2c;
 }
 
 .main_left1 {
@@ -160,9 +161,9 @@
 }
 
 #user_info > ul > li{
-    padding: 10px 0;
+    padding: 11px 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 .info_margin {
 	margin-bottom:7px;
@@ -172,6 +173,13 @@
     flex-direction: column;
     margin: 5px 15px 0px 15px;
 }
+
+.email_area {
+	padding-top: 5px;
+    padding-left: 8px;
+}
+
+
 
 .info_bold {
     font-weight: bold;
@@ -278,7 +286,7 @@
 }
 
 .main_right1 > ul > li:hover, .main_right2 > ul > li:hover, .main_right3 > ul > li:hover {
-	background-color:#BBBBBB;
+	background-color:#d6d6d6;
 	font-weight: bold;
 } 
 

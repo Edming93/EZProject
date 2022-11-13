@@ -98,12 +98,10 @@
     }
 
 .main_title{
-	display: block;
-	width: 70%;
-/* 	background: url("${pageContext.request.contextPath}/image/myPage1.png") no-repeat 5px; */
-/* 	background-size: contain; */
- 	padding: 5px 0;
-/* 	text-indent: -9999px; */
+    display: block;
+    width: 70%;
+    padding: 5px 0;
+    color: #525252;
 }
 
 #main_container {
@@ -115,15 +113,12 @@
 }
 
 .main_area {
-	display:flex;
+    display: flex;
     width: 1024px;
-/*     height: 900px; */
-/*     min-height: 900px; */
-/*     background-color: #ffaaaa; */
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-/*     border: 1px solid black; */
+    margin-top: 130px;
 }
 
 .main_content1 {
@@ -140,7 +135,6 @@
 .main_item1 {
 	display: flex;
 	width: 100%;
-	height: 40vh;
 	flex-direction: column;
 }
 
@@ -203,18 +197,19 @@ textarea:focus { outline: none; }
 }
     
     .btn_box button {
-	display: inline-block;
-	width: 40%;
-	padding: 15px 0;
-	text-decoration: none;
-	margin: 20px 0;
-	color: #fff;
-	font-weight:bold;
-	font-size:18px;
-	border: 1px solid #26a653;
-	text-align: center;
-	background-color: #26a653;
-	border-radius: 20px;
+    display: inline-block;
+    width: 100%;
+    padding: 13px 0;
+    text-decoration: none;
+    margin: 20px 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid #26a653;
+    text-align: center;
+    background-color: #26a653;
+    border-radius: 20px;
+    margin-top: 55px;
 }
 
 .btn_box button:hover {
@@ -332,7 +327,7 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">문의작성하기</h1>
+			<h1 class="main_title">문의 작성하기</h1>
 				<div class="main_content1">
 					<div class="main_item1">
 						<form action="${pageContext.request.contextPath}/myPage/inquiry_add" id="form1" method="post">
@@ -353,7 +348,6 @@ footer {
 					</div>
 					<div class="btn_box">
 						<button id="writing">작성하기</button>
-						<button id="btn">뒤로가기</button>
 					</div>
 				</div>
             </div>

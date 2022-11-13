@@ -354,7 +354,7 @@ td > a{
     }
     .refund{
     	height: 35px;
-    	width : 80%;
+    	width : 91%;
     	margin: 0 auto;
     	display: flex;
     	justify-content: flex-end;
@@ -362,7 +362,7 @@ td > a{
     }
     .refundbtn{
     	background-color: white;
-    	border: 2px solid #26A653;
+    	border: 1px solid #26A653;
     	font-size: 12px;
     	border-radius: 40px;
     }

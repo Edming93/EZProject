@@ -99,12 +99,12 @@
     }
 
 .main_title{
-	display: block;
-	width: 70%;
-/* 	background: url("${pageContext.request.contextPath}/image/myPage1.png") no-repeat 5px; */
-/* 	background-size: contain; */
- 	padding: 5px 0;
-/* 	text-indent: -9999px; */
+    display: flex;
+    justify-content: flex-start;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 15px;
+    color: #525252;
 }
 
 #main_container {
@@ -112,44 +112,34 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
+    padding-top: 50px;
 }
 
 .main_area {
-	display:flex;
+    display: flex;
     width: 1024px;
-/*     height: 900px; */
-    min-height: 900px;
-/*     background-color: #ffaaaa; */
-    justify-content: space-evenly;
-    align-items: center;
+    min-height: 500px;
     flex-wrap: wrap;
-/*     border: 1px solid black; */
 }
 
 .main_content1 {
-	display: flex;
-	flex-direction: column;
-	width: 70%;
-	/* height: 98%; */
-	height:90%;
-	background-color: #fff;
-/* 	border: 1px solid black; */
-	padding: 20px;
+display: flex;
+    flex-direction: column;
+    width: 98%;
+    background-color: #fff;
 }
 
 #inquiry_list{
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 14px;
-	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-	margin: 20px 0;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #fbfbfb 100%);
+    margin: 20px 0;
 }
 
 #inquiry_list th, td {
-	border-bottom: 1px solid black;
-	padding: 10px;
-	text-align: center;
+	padding: 18px;
+    text-align: center;
 }
 
 #inquiry_list th:first-child{
@@ -168,6 +158,13 @@
 
 .item_box{
 	cursor: pointer;
+	border: 1px solid #CDCDCD;
+    margin: 3px;
+    padding: 3px;
+}
+.codebox {
+	display: flex;
+    justify-content: space-around;
 }
 
 .btn_box{
@@ -178,7 +175,7 @@
 .btn_box button {
 	display: inline-block;
 	width: 40%;
-	padding: 15px 0;
+	padding: 13px 0;
 	text-decoration: none;
 	margin: 20px 0;
 	color: #fff;
@@ -236,8 +233,28 @@
 }
 
 .select_box {
-	align-self: flex-end;
+    align-self: flex-end;
+    display: flex;
+    justify-content: end;
 }
+.main_box1 {
+	width: 100%;
+    height: 100%;
+    padding: 15px;
+}
+
+
+.state {
+	width: 90px;
+    text-align: center;
+    border-radius: 30px;
+    margin-right: 10px;
+    border: 1px solid #A9A9A9;
+    font-size: 12px;
+    height: 30px;
+}
+
+
 
 #hidden {
 	width: 100%;
@@ -355,76 +372,76 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-			<h1 class="main_title">고객문의</h1>
+            	<div class="main_title"> 나의 문의내역 </div>
 				<div class="main_content1">
-<%-- 					<c:if test="${list[0] ne null}"> --%>
-					<h3>나의 문의내역</h3>
-					<section class="select_box">
-						<select class="state">
-		                    <option value="전체상태">전체상태</option>
-		                    <option value="답변대기">답변대기</option>
-		                    <option value="답변완료">답변완료</option>
-		                </select>
-	                </section>
-					<div class="main_item1">
-						<table id="inquiry_list">
-							<tr>
-								<th>문의번호</th>
-								<th>문의제목</th>
-								<th>문의날짜</th>
-								<th>문의상태</th>
-							</tr>
-							<c:forEach var="list" items="${list}">
-								<tr class="inquiry_item${list.inquiryCode} item_box">
-									<td>${list.inquiryCode}</td>
-									<td>${list.inquiryTitle}</td>
-									<td>${list.createDate}</td>
-									<td class="state_val">${list.inquiryState}</td>
-								</tr>	
+					<div class="main_box1">
+						<section class="select_box">
+							<select class="state">
+			                    <option value="전체상태">전체상태</option>
+			                    <option value="답변대기">답변대기</option>
+			                    <option value="답변완료">답변완료</option>
+			                </select>
+		                </section>
+						<div class="main_item1">
+							<table id="inquiry_list">
+								<tr>
+									<th>문의번호</th>
+									<th>문의제목</th>
+									<th>문의날짜</th>
+									<th>문의상태</th>
+								</tr>
+								<c:forEach var="list" items="${list}">
+									<tr class="inquiry_item${list.inquiryCode} item_box">
+										<td class="codebox">${list.inquiryCode}</td>
+										<td >${list.inquiryTitle}</td>
+										<td>${list.createDate}</td>
+										<td class="state_val">${list.inquiryState}</td>
+									</tr>	
+									
+									<script type="text/javascript">
+										 $('.inquiry_item${list.inquiryCode}').on("click",function(){
+											location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail/${list.inquiryCode}";
+										 });
+					
+										 $('.state').on("change", function(){
+											 $('.inquiry_item${list.inquiryCode}').show();
+								        		if($('.state').val() == "답변대기"){
+								        			if('${list.inquiryState}' == '답변완료'){
+								        				$('.inquiry_item${list.inquiryCode}').hide();
+								        			}
+								        		}else if($('.state').val() == "답변완료"){
+								        			if('${list.inquiryState}' == '답변대기'){
+								        				$('.inquiry_item${list.inquiryCode}').hide();
+								        			}
+								        		}else{
+								        			$('.inquiry_item${list.inquiryCode}').show();
+								        		}
+								        	});
+									</script>
+								</c:forEach>
+									<c:if test="${list[0] eq null }">
+										<tr>
+											<td colspan="4">
+												<h1 id="hidden">문의 내역이 없습니다.</h1>
+											</td>
+										</tr>
+									</c:if>
 								
-								<script type="text/javascript">
-									 $('.inquiry_item${list.inquiryCode}').on("click",function(){
-										location.href = "${pageContext.request.contextPath}/myPage/inquiry_detail/${list.inquiryCode}";
-									 });
-				
-									 $('.state').on("change", function(){
-										 $('.inquiry_item${list.inquiryCode}').show();
-							        		if($('.state').val() == "답변대기"){
-							        			if('${list.inquiryState}' == '답변완료'){
-							        				$('.inquiry_item${list.inquiryCode}').hide();
-							        			}
-							        		}else if($('.state').val() == "답변완료"){
-							        			if('${list.inquiryState}' == '답변대기'){
-							        				$('.inquiry_item${list.inquiryCode}').hide();
-							        			}
-							        		}else{
-							        			$('.inquiry_item${list.inquiryCode}').show();
-							        		}
-							        	});
-								</script>
-							</c:forEach>
-								<c:if test="${list[0] eq null }">
-									<tr>
-										<td colspan="4">
-											<h1 id="hidden">문의 내역이 없습니다.</h1>
-										</td>
-									</tr>
-								</c:if>
-							
-<!-- 							<tr> -->
-<!-- 								<td>2</td> -->
-<!-- 								<td>고객 문의를 왜쓰는거야</td> -->
-<!-- 								<td>2022-11-04</td> -->
-<!-- 								<td>대기중</td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>3</td> -->
-<!-- 								<td>살려주세요 사람있어요</td> -->
-<!-- 								<td>2022-11-05</td> -->
-<!-- 								<td>대기중</td> -->
-<!-- 							</tr> -->
-						</table>
-					</div>
+	<!-- 							<tr> -->
+	<!-- 								<td>2</td> -->
+	<!-- 								<td>고객 문의를 왜쓰는거야</td> -->
+	<!-- 								<td>2022-11-04</td> -->
+	<!-- 								<td>대기중</td> -->
+	<!-- 							</tr> -->
+	<!-- 							<tr> -->
+	<!-- 								<td>3</td> -->
+	<!-- 								<td>살려주세요 사람있어요</td> -->
+	<!-- 								<td>2022-11-05</td> -->
+	<!-- 								<td>대기중</td> -->
+	<!-- 							</tr> -->
+							</table>
+						</div>
+					</div>						
 <%-- 					</c:if> --%>
 
 					<div class="main_item2">
@@ -432,7 +449,6 @@ footer {
 					
 					<div class="btn_box">
 						<button id="inquiry">문의하기</button>
-						<button id="btn">뒤로가기</button>
 					</div>
 				</div>
             </div>
