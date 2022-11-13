@@ -24,12 +24,13 @@
  	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
  	<style>
  	.sub_con{
-	    grid-area: sub;
+		grid-area: sub;
 	    justify-content: center;
-	    width: 100%;
+	    width: 95%;
 	    border-radius: 20px;
-	    box-shadow: 5px 5px 10px 10px #ddd;
+    	box-shadow: 0px 0px 20px 10px #e3e3e366;
 	    padding: 60px;
+	    margin-top: 30px;
 	}
 	/* 매치작성 제목 */
 	.title{
@@ -93,7 +94,7 @@
 /* 매치 날짜 */
 .date {
     display: flex;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     color: #525252;
     padding-bottom: 20px;
@@ -117,7 +118,7 @@
     width: 100%;
     height: 40px;
     border-radius: 10px;
-    padding-left : 10px;
+    padding-left: 15px;
     font-size: 12px;
     border : 1px solid #C0C0C0;
 }
@@ -127,7 +128,7 @@
     font-size: 14px;
     font-weight: bold;
     color: #525252;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
 }
 
 .matchp p{
@@ -207,7 +208,7 @@
     top: 0px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 125%;
     display: none;
     background-color: rgba(0, 0, 0, 0.4);
 }
@@ -234,6 +235,9 @@
 
   transform: translateX(-50%) translateY(-50%);
   overflow : hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
@@ -241,10 +245,11 @@
 	background-color : #26a563;
 	color : white;
 	font-weight : 700;
+	
 }
-#mapcontent{
-	overflow : scroll;
-}
+/* #mapcontent{ */
+/* 	overflow : scroll; */
+/* } */
 
 
 #map{
@@ -314,7 +319,7 @@
 
 #gameTime{
      width: 100%; /* 원하는 너비설정 */
-	 padding : 0 10px;
+     padding: 0 15px;
      background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
      background-size : 20%;
      background-color : white; 
@@ -370,7 +375,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding: 30px 0px;
 }
 .innersubt1{
     width: 32%;
@@ -468,17 +473,17 @@
 
 #mTeamName{
     width: 100%;
-    height: 50px;
+    height: 40px;
     background-color: #f9f9f9;
     border: 1px solid #EDEDED;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    padding-left: 10px;
+	padding-left: 15px;
 }
 .sbutton{
     width: 20%;
     background-color: #26a563;
-    height: 50px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -492,7 +497,7 @@
 .rbutton{
     width: 18%;
     background-color: #26a563;
-    height: 50px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -508,12 +513,12 @@
 
 .submit{
     width: 100%;
-    height: 50px;   
-    margin-top: 20px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 15px;
+    margin: 75px 0px 0px 0px;
 }
 .submit #subtn{	 
   	border: none;
@@ -539,12 +544,9 @@
     position: absolute;
     top: 0;
     left: 0;
-
     width: 100%;
-    height: 100%;
-
+	height: 125%;
     display: none;
-
     background-color: rgba(0, 0, 0, 0.4);
   }
 
@@ -561,9 +563,7 @@
     height: 600px;
 
     padding: 40px;
-
-    text-align: center;
-
+    
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
@@ -574,29 +574,45 @@
     flex-direction: column;
     
   }
+  
+  .modal_body h2 {
+  	color: black;
+    margin-bottom: 15px;
+  }
+  
   .modal_inner_box{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
 
   }
   .modal_inner_box input {
-      height: 30px;
+	height: 38px;
     margin-right: 10px;
-    padding-left : 10px;
-    border-radius : 10px;
+    padding-left: 15px;
+    border-radius: 10px;
+    border: 1px solid #cdcdcd;
+    width: 100%;
+  }
+  
+  .modal_team_search {
+  	width: 80%;
+    margin-right: 10px;
   }
  
   .modal_search_button{
     background-color: #26a563;
     display: flex;
-    justify-content : center;
-    align-items : center;
-    width: 40px;
-    height: 30px;
-    border-radius : 10px;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    border-radius: 10px;
+    width: 20%;
     
   }
+  
   .modal_search_button span{
   	color : white;
   	font-weight : 700;
@@ -619,7 +635,8 @@
    	height : 100%;
    	overflow : auto;
    	margin : 0 auto;
-   	width : 72%;
+    width: 97%;
+   	text-align: center;
    }
 
 
@@ -746,7 +763,7 @@
     height: 50px;
     border-radius: 10px;
     padding-left: 10px;
-    margin-right: 20px;
+	margin-right: 10px;
     border: 1px solid #c0c0c0;
 	}
 	.calbox{
@@ -757,13 +774,15 @@
 		width: 32%;
 	}
 	.gameinfo{
-		font-size: 14px;
+    	font-size: 15px;
 		font-weight: bold;
 		color: #525252;
 	}
+	
 	#adbox{
-		padding-bottom: 20px;
+    	padding: 0px 0px 20px 0px;
 	}
+	
 	.ntitlebox{
 		display: flex;
 	    align-items:center;
@@ -791,12 +810,26 @@
     .paybox{
     	display: flex;
     	justify-content: flex-end;
-    	padding-top: 10px;
+    	padding-top: 20px;
     }
     .paybox span{
     	font-size: 14px;
     	font-weight: bold;
     }
+    
+    .bottom_banner {
+        width:100%;
+        height:235px;
+    	margin-top: 100px;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+    footer {
+    	margin-top: 120px;
+    }
+
  	</style>
 	
 
@@ -907,11 +940,10 @@
 				      	
 				      		
 							<div class="search_area">
-								<input type="text" name="search" id="search1" placeholder="구장주소의 지역이름을 정확히 입력해주세요(ex)전라도,경상도,서울)" />
-								
+								<input type="text" name="search" id="search1" placeholder="구장주소의 지역이름을 정확히 입력해주세요. ex) 전라도,경상도,서울" />
 							</div>
 							<div class="search_button">
-								<span id="searcha"  >검색</span>
+								<span id="searcha">검색</span>
 							</div>
 							
 							<div class="search_button">
@@ -927,7 +959,16 @@
 				    <span class="btn-open-popup22">지도 검색</span>
 					</div>
                    <script type="text/javascript">
-                 
+	           		// 엔터키 활성화
+	           		let search1 = document.getElementById("search1");
+	           		let search_btn = document.getElementById("searcha");
+	           		
+	           		search1.addEventListener("keyup", function (e) {
+	           	        if (e.keyCode === 13) {
+	           	            e.preventDefault();
+	           	            search_btn.click();
+	           	        }
+	           	    });
                    
                     document.getElementById("searcha").addEventListener("click", function(){
                         			const address = document.getElementById("search1").value;
@@ -976,6 +1017,7 @@
                         						p.innerText = "구장주소 : "+comment.fieldAddress;
                         						const a = document.createElement("a");
                         						a.innerText = "선택";
+                        						a.style.color = "#ff6262";
                         						
                         						
                         						div.append(h4);
@@ -1226,6 +1268,18 @@
                                 </div>
                                 <div id="modaldata"></div>
                                 <script type="text/javascript">
+                                
+                                let modalText = document.getElementById("modalText");
+                                let modalsearch_btn = document.getElementById("modalsearchbutton");
+                                
+                                modalText.addEventListener("keyup", function (e) {
+            	           	        if (e.keyCode === 13) {
+            	           	            e.preventDefault();
+            	           	         modalsearch_btn.click();
+            	           	        }
+            	           	    });
+                                
+                                
                                 document.getElementById("modalsearchbutton").addEventListener("click", function(){
                         			let teamName = document.getElementById("modalText").value;
                         			const mteamName = document.getElementById("mTeamName");
@@ -1245,26 +1299,25 @@
                         					
                         					comdiv.innerHTML="";
                         					for(let comment of data){
-                        						console.log("팀팀팀팀티밈 : "+data);
                         						const div = document.createElement("div");
                         						div.setAttribute("id","teamSelect");
-                        						div.style.border = "1px solid black";
-                        						div.style.width = "180px";
-                        						div.style.backgroundColor = "#F8EDE3";
-                        						div.style.lineHeight = "5px";
+                        						div.style.border = "1px solid #d7d7d7";
+                        						div.style.width = "100%";
+                        						div.style.backgroundColor = "rgb(249 249 249)";
+                        						div.style.lineHeight = "28px";
                         						div.style.height= "20%";
+                        						div.style.color= "#2c2c2c";
+                        						div.style.marginBottom = "3px";
 
                         						if(gameMacth1 == "6vs6"){
-                        							console.log("????1111111");
 														div.addEventListener("click",function(){
-															if(comment.tmember6 != ''){
-			                         							mteamName.value = comment.teamName; 
-			                         							teamCode.value = comment.teamCode;
-			                         							body.style.overflow="scroll";
-			                         							
-															}else {
-																alert("5명이서 참가할 수 없습니다.");
-																body.style.overflow="scroll";
+																if(comment.tmember6 != ''){
+																	mteamName.value = comment.teamName;
+																	teamCode.value = comment.teamCode;
+																	body.style.overflow="scroll";
+																}else {
+																	alert("6vs6 경기이므로 5명팀은 참여할수없습니다.");
+																	body.style.overflow="scroll";
 																}
 							
                         							const modal = document.querySelector('.modal');
@@ -1276,18 +1329,17 @@
                         							}
 														});
                         						}else if(gameMacth1 == "5vs5"){
-                        							console.log("????2222222");
+
 													div.addEventListener("click",function(){
-														if(comment.tmember6 == ''){
-		                         							mteamName.value = comment.teamName; 
-		                         							teamCode.value = comment.teamCode;
-		                         							body.style.overflow="scroll";
-		                         							
-														}else {
-															alert("6명이서 참가할 수 없습니다.");
+															if(comment.tmember6 == ''){
+															mteamName.value = comment.teamName;
+															teamCode.value = comment.teamCode;
+															body.style.overflow="scroll";
+
+															}else {
+															alert("5vs5 경기이므로 6명팀은 참여할수없습니다.");
 															body.style.overflow="scroll";
 															}
-				
                     							const modal = document.querySelector('.modal');
               							      
 										        modal.classList.toggle('show');
@@ -1304,6 +1356,7 @@
                         						p.innerText = "팀이름 :"+comment.teamName;
                         						const a = document.createElement("a");
                         						a.innerText = "선택";
+                        						a.style.color = "#ff6262";
                         						
                         						
                         						div.append(h4);
@@ -1329,7 +1382,7 @@
 	                	<input type="hidden" name="teamCode" id="teamCode"/>
 	                </div>
                     <div class="rbutton">
-                        <a class="tbtn" href="${pageContext.request.contextPath}/team/register">팀 등록</a>
+                        <a class="tbtn" id="tbt">팀 등록</a>
                     </div>
                 </div>
          
@@ -1343,13 +1396,24 @@
       	
       	
         <div class="submit">
-            <button type="submit" id="subtn">매치 작성 완료</button>
+            <button type="button" id="subtn">매치 작성 완료</button>
         </div>
          
         </form>
         </div>
     </div>
    </div>
+	<script type="text/javascript">
+		document.getElementById("tbt").addEventListener("click",function(){
+		if(${userVO.teamCode} == 0 ){
+		location.href = "${pageContext.request.contextPath}/team/register"
+		}else{
+		alert("가입한 팀이 있습니다.");
+		return;
+		}
+		});
+	
+	</script>
   
     <script type="text/javascript">
     /* 달력관련 script */
@@ -1479,6 +1543,10 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
+
+    <footer>
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
+    </footer>
 
 
 </body>
