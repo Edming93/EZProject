@@ -26,7 +26,6 @@
         border: 1px solid white;
         justify-content: center;
     	align-items: center;
-    	margin-top: 5%;
 /*     	background: url("${pageContext.request.contextPath}/image/backddd.jpg") no-repeat center; */
 /* 		background: url("${pageContext.request.contextPath}/image/backddd.png") no-repeat ; */
     
@@ -81,7 +80,7 @@
 	}
 	
 	.subtitle > span{
-		font-size: 10px;
+		font-size: 11px;
 		color: #FF6B6B;
 		padding-left: 10px;
 	}
@@ -318,15 +317,30 @@
     .confirm{
     	display : none;
     	flex-direction: row;
-    	flex-wrap : wrap;
-    	position : absolute;
-    	width: 298px;
+	    flex-wrap: wrap;
+	    position: absolute;
+	    width: 298px;
 	    height: 250px;
 	    background-color: white;
 	    border: 4px solid #26a563;
-    	padding-left : 4%;
-    	padding-top : 1%;
+	    padding-left: 4%;
+	    padding-top: 1%;
+	    top: 42%;
+	    right: 13%;
     }
+    
+    .bottom_banner {
+        width:100%;
+        height:235px;
+    	margin-top: 100px;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    footer {
+    	margin-top: 70px;
+    }
+    
     </style>
     
 </head>
@@ -591,6 +605,10 @@
 			location.href="${pageContext.request.contextPath}";
 		});
 	</script>
+   	
+    <footer>
+        <jsp:include page="../etc/footer.jsp"></jsp:include>
+    </footer>
    	
 </body>
 </html>
