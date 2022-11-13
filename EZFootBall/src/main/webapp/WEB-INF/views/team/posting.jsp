@@ -862,7 +862,7 @@
      <div class="container">
     	
         <div class="sub_con">
-        <form action="${pageContext.request.contextPath }/team/postingFinish" method="post">
+        <form name="form1" action="${pageContext.request.contextPath }/team/postingFinish" method="post">
         	<div class="title">
 	            <p>매치 작성하기</p>
         	</div>
@@ -1343,7 +1343,7 @@
       	
       	
         <div class="submit">
-            <button type="submit" id="subtn">매치 작성 완료</button>
+            <button type="button" id="subtn">매치 작성 완료</button>
         </div>
          
         </form>
@@ -1479,7 +1479,26 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
-
+	<script type="text/javascript">
+		form_post = document.form1;
+		document.getElementById("subtn").addEventListener("click",function(){
+			
+		console.log(form_post.gameGender.value);
+			
+		if(form_post.gameGender.value == "" || form_post.gamePlace.value == "" || form_post.gameTime.value == "" ||
+			form_post.fieldName.value == "" || form_post.fieldAddress.value == "" || form_post.gameMacth.value == "" ||
+			form_post.gamePay.value == "" || form_post.fieldCode.value == "" || form_post.mTeamName.value == "" ||
+			form_post.uteamPay.value == "" ){
+			alert("작성하지 않은 값이 있습니다. 확인해주세요");
+			return;
+		}else{
+			
+			alert("작성완료 되었습니다.");
+			form_post.submit();
+		}
+		});
+	
+	</script>
 
 </body>
 <style type="text/css">

@@ -604,17 +604,25 @@
       IMP.init('imp26017217'); // <-- 본인 가맹점 식별코드 삽입
 
       function requestPay() {
-
-         IMP.init('imp26017217'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
-         IMP.request_pay({
-            pg: "html5_inicis",
-            pay_method: "card",
-            merchant_uid: 'merchant_' + new Date().getTime(),
-            name: '${field.fieldName}',
-            amount: '100',
-            buyer_email: '${sessionScope.sessionVO.userEmail1}${sessionScope.sessionVO.userEmail2}',
-            buyer_name: '${sessionScope.sessionVO.userName}',
-            buyer_addr: '${sessionScope.sessionVO.userAddress}',
+    	  var Name ='';
+    	  if(${sessionScope.GlistVO.gameType eq 'T'}){
+     	  	  Name = '${sessionScope.GlistVO.fieldName}'; 
+			
+          }else{
+          	Name = '${field.fieldName}';            
+          }
+    	  
+	   	     IMP.init('imp26017217'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+	         IMP.request_pay({
+	            pg: "html5_inicis",
+	            pay_method: "card",
+	            merchant_uid: 'merchant_' + new Date().getTime(),
+	           	name : Name,
+	            amount: '100',
+	            buyer_email: '${sessionScope.sessionVO.userEmail1}${sessionScope.sessionVO.userEmail2}',
+	            buyer_name: '${sessionScope.sessionVO.userName}',
+	            buyer_addr: '${sessionScope.sessionVO.userAddress}',
+         
             /*  
             모바일 결제시,
             결제가 끝나고 랜딩되는 URL을 지정 
@@ -623,17 +631,17 @@
 //             m_redirect_url: '${pageContext.request.contextPath}/myPage/rentalList'
          }, function (rsp) { // callback
             if (rsp.success) {
-//             	var msg = '결제에 성공하셨습니다!'; 
-//             	 msg += '고유ID : ' + rsp.imp_uid;
-//                  msg += '상점 거래ID : ' + rsp.merchant_uid;
-//                  msg += '결제 금액 : ' + rsp.paid_amount;
-//                  msg += '카드 승인번호 : ' + rsp.apply_num;
+            	var msg = '결제에 성공하셨습니다!'; 
+            	 msg += '고유ID : ' + rsp.imp_uid;
+                 msg += '상점 거래ID : ' + rsp.merchant_uid;
+                 msg += '결제 금액 : ' + rsp.paid_amount;
+                 msg += '카드 승인번호 : ' + rsp.apply_num;
 
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
              	if(${sessionScope.GlistVO.gameType eq 'T'}) { // 팀매치 예약일 경우
-            		alert("결제에 성공하셨습니다.");
-            		location.href ="${pageContext.request.contextPath}/rental/resultTeam";
+            		alert(msg);
+            		location.href ="${pageContext.request.contextPath}/rental/resultTeam?payCode="+rsp.imp_uid+"&storeCode="+rsp.merchant_uid+"&userPayment="+rsp.paid_amount+"&cardCode="+rsp.apply_num;
             	}else { // 구장예약일 경우
 //                   	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}"+
 //                   			"&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}"+
@@ -677,7 +685,7 @@
 //    	 	location.href = "${pageContext.request.contextPath}/rental/resultTeam";
        	  if(${sessionScope.GlistVO.gameType eq 'T'}){
       		 // location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
-      		  location.href = "${pageContext.request.contextPath}/rental/resultTeam";
+      		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?payCode="+rsp.imp_uid+"&& storeCode="+rsp.merchant_uid+"&& userPayment="+rsp.paid_amount+"&&cardCode="+rsp.apply_num;
       	  }else{
       		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G&gamePlace=${field.gamePlace}";
       	  }

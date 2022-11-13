@@ -191,8 +191,15 @@ public class RentalController {
 		rvo1.setGameCode(Gnum);
 		rvo1.setUserPayment(gvo.getUteamPay());
 		rvo1.setTeamCode(Tnum);
+		rvo1.setPayCode(rvo.getPayCode());
+		rvo1.setStoreCode(rvo.getStoreCode());
+		rvo1.setCardCode(rvo.getCardCode());
+		System.out.println("페이코드" + rvo.getPayCode());
+		System.out.println("상점코드" + rvo.getStoreCode());
+		System.out.println("카드코드" + rvo.getCardCode());
 		System.out.println("제발제발 : "+Tnum);
-		
+		System.out.println(rvo1.getUserCode());
+		System.out.println(rvo1.getFieldAddress());
 		Tservice.insertFieldRVT(rvo1);
 		
 		session.removeAttribute("GlistVO");
@@ -200,7 +207,7 @@ public class RentalController {
 		session.removeAttribute("Gnum");
 		session.removeAttribute("FRVO");
 		
-		return "rental/resultTeam";
+		return "myPage/rentalList";
 		}
 		return "rental/rentalPayment";
 	}

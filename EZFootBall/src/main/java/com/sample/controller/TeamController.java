@@ -183,8 +183,9 @@ public class TeamController {
 ///--------------------정욱 10.24 ----------------------------------	
 	// 글쓰기 눌렀을 경우 매치 작성페이지로 이동
 	@GetMapping("/posting")
-	public String movePostingPage(Model model) {
-		
+	public String movePostingPage(Model model,HttpSession session) {
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		model.addAttribute("userVO",uvo);
 		return "team/posting";
 	}
 	
