@@ -73,7 +73,8 @@ public interface RentalDAO {
 	public void GameSignUpCancelUpdate(String rvCode);
 
 
-
+	//환불
+	public int refund(int rvCode);
 
 
 

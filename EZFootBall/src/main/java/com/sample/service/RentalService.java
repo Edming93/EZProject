@@ -58,4 +58,9 @@ public class RentalService {
 		dao.insertRvInGameList(fvo);
 	}
 	
+	//환불
+	public void refund (int rvCode) {
+		dao.refund(rvCode);
+	}
+	
 }

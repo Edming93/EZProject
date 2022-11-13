@@ -134,7 +134,6 @@
 						<option value="gameDay">매치날짜</option>
 						<option value="gameTime">매치시간</option>
 						<option value="fieldCode">구장번호</option>
-						<option value="fieldName">구장이름</option>
 						<option value="fieldRentalfee">대여비</option>
 						<option value="userPayment">결제금액</option>
 						<option value="payCode">결제코드</option>
@@ -163,10 +162,10 @@
 						<th><input type="checkbox" name="allCheck" id="allCheck"/></th>
 						<th>예약번호</th>
 						<th>예약형태</th>
+						<th>상태</th>
 						<th>매치날짜</th>						
 						<th>매치시간</th>
-						<th>구장번호</th>						
-						<th>구장이름</th>
+						<th>구장번호</th>		
 						<th>대여비</th>
 						<th>결제금액</th>
 						<th>게임코드</th>
@@ -193,10 +192,10 @@
 							<c:if test="${item.rvType eq 'TS'}">
 							<td class="rvType">T신청</td>
 							</c:if>
+							<td class="rvState">${item.rvState}</td>
 							<td class="gameDay">${item.gameDay}</td>
 							<td class="gameTime">${item.gameTime}</td>
 							<td class="fieldCode">${item.fieldCode}</td>
-							<td class="fieldName">${item.fieldName}</td>
 							<td class="fieldRentalfee"><fmt:formatNumber value="${item.fieldRentalfee}" pattern="#,###"/></td>
 							<td class="userPayment"><fmt:formatNumber value="${item.userPayment}" pattern="#,###"/></td>
 							<td class="gameCode">${item.gameCode}</td>

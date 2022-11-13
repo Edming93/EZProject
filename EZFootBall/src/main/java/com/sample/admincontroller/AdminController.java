@@ -43,7 +43,8 @@ public class AdminController {
 	private ManagerService managerService;
 
 	@GetMapping("/admin")
-	public String admin() {
+	public String admin(HttpSession session) {
+		session.setAttribute("count", service.refundsub());
 		return "adminPage/adminMain";
 	}
 

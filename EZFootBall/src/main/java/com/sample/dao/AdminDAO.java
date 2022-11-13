@@ -22,6 +22,9 @@ import com.sample.vo.UserVO;
 
 @Mapper
 public interface AdminDAO {
+	
+	//취소신청
+	public int refundsub();
 
 	//신청관리
 	public List<GlistVO> allgame();

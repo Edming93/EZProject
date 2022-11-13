@@ -232,7 +232,7 @@
 		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code
-		where a.rv_state='예약완료' or a.rv_state='신청완료'
+		where a.rv_state='예약완료' or a.rv_state='신청완료' or a.rv_state='취소신청'
 		ORDER BY a.rv_code DESC
 	</select>
 	<!-- 환불 내역 List 출력 -->
@@ -278,7 +278,7 @@
 			<if test="rvCode != null">rv_state = '신청취소'</if>
 			,cancel_day = now()
 		</set>
-		where rv_code = #{rvCode} and rv_state = '신청완료'
+		where rv_code = #{rvCode} and (rv_state = '신청완료' or rv_state = '취소신청')
 	</update>
 	<!-- 결제내역 관리에서 구장예약 팀 구장예약에 대한 강제 결제 취소시 -->
 	<update id="payCancelUpdate">
@@ -287,8 +287,14 @@
 			<if test="rvCode != null">rv_state = '예약취소'</if>
 				,cancel_day = now()
 		</set>
-		where rv_code = #{rvCode} and rv_state = '예약완료'
+		where rv_code = #{rvCode} and (rv_state = '예약완료'  or rv_state = '취소신청')
 	</update>
 	
+	<!-- 환불 -->
+	<update id="refund">
+		update field_reservation
+		set rv_state = '취소신청'
+		where rv_code = #{rvCode}
+	</update>
 	
 </mapper>

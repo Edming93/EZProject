@@ -190,7 +190,7 @@
     justify-content: space-between;
     list-style-type: none;
     text-align: left;
-    height: 100px;
+    height: 85px;
     padding-right: 40px;
 }
 
@@ -351,6 +351,20 @@ td > a{
 	    color: #4e4e4e;
 	    font-size: 27px;
 	    margin-left: 15px;
+    }
+    .refund{
+    	height: 35px;
+    	width : 80%;
+    	margin: 0 auto;
+    	display: flex;
+    	justify-content: flex-end;
+    	padding-bottom: 10px;
+    }
+    .refundbtn{
+    	background-color: white;
+    	border: 2px solid #26A653;
+    	font-size: 12px;
+    	border-radius: 40px;
     }
 </style>
 </head>
@@ -537,6 +551,7 @@ td > a{
         	table.style.display = "none";
         	// 목록 받아오기
         	window.addEventListener("DOMContentLoaded", function(){
+        		let rvcode = "";
 					$.ajax({
 						url: "${pageContext.request.contextPath}/myPage/getMatchList",
 						type: "GET",
@@ -553,10 +568,12 @@ td > a{
 								const tr2 = document.createElement("tr");
 								const tr3 = document.createElement("tr");
 								const td1 = document.createElement("td");
-								const newtd = document.createElement("td");
+								let newtd = document.createElement("td");
 								newtd.className = "statebox";
 								newtd.innerText = list.rvState;
-
+								
+								rvcode = list.rvCode;
+								
 								tr1.innerHTML = 
 									"<td class='rvcodebox'>"+"<div class='downbox'>▽</div>"+"<div> <p>예약번호</p> <p class='rvcodep'>"+list.rvCode+"</p></div></td>"+
 									"<td>"+list.fieldType+"</td>"+
@@ -564,17 +581,26 @@ td > a{
 									"<td>"+list.gameDay+" 매치 </td>"+
 									"<td>"+list.gameTime1+" ~ "+list.gameTime2+"</td>";
 								tr1.append(newtd);
-									if(list.rvState == '신청취소'){
+									if(list.rvState == '신청취소' || list.rvState == '취소신청'){
 										newtd.style.color = "#CDCDCD";
+										td1.innerHTML = "<div class='infobox'><div class='daybox'>"+list.rvDay+" 예약 </div><ul>"+
+										"<li><p class='namebox'>구장주소</p><p>"+list.fieldAddress+"</p></li>"+
+										"<li style='padding-right: 80px;'><p class='namebox'>예약자</p><p>"+data.userName+"</p></li>"+
+										"<li style='padding-right: 80px;'><p class='namebox'>예약타입</p><p>"+list.rvType+"</p></li>"+
+										"<li><p class='namebox'>결제정보</p><p>총 결제금액</p></li>"+
+										"<li><p class='namebox'>　</p><p class='paybox'>"+list.userPayment.toLocaleString()+"원</p></li>"+
+										"</ul> <div class='refund' style='visibility: hidden;'> <button class='refundbtn'>신청 취소</button> </div>";
+									}else{
+										td1.innerHTML = "<div class='infobox'><div class='daybox'>"+list.rvDay+" 예약 </div><ul>"+
+										"<li><p class='namebox'>구장주소</p><p>"+list.fieldAddress+"</p></li>"+
+										"<li style='padding-right: 80px;'><p class='namebox'>예약자</p><p>"+data.userName+"</p></li>"+
+										"<li style='padding-right: 80px;'><p class='namebox'>예약타입</p><p>"+list.rvType+"</p></li>"+
+										"<li><p class='namebox'>결제정보</p><p>총 결제금액</p></li>"+
+										"<li><p class='namebox'>　</p><p class='paybox'>"+list.userPayment.toLocaleString()+"원</p></li>"+
+										"</ul> <div class='refund' style='visibility: visible;'> <button class='refundbtn'>신청 취소</button> </div>";
 									}
 									
-								td1.innerHTML = "<div class='infobox'><div class='daybox'>"+list.rvDay+" 예약 </div><ul>"+
-									"<li><p class='namebox'>구장주소</p><p>"+list.fieldAddress+"</p></li>"+
-									"<li style='padding-right: 80px;'><p class='namebox'>예약자</p><p>"+data.userName+"</p></li>"+
-									"<li style='padding-right: 80px;'><p class='namebox'>예약타입</p><p>"+list.rvType+"</p></li>"+
-									"<li><p class='namebox'>결제정보</p><p>총 결제금액</p></li>"+
-									"<li><p class='namebox'>　</p><p class='paybox'>"+list.userPayment.toLocaleString()+"원</p></li>"+
-									"</ul></div>";
+								
 									
 									
 								tr3.className = "marginbox";
@@ -629,6 +655,31 @@ td > a{
 					        			tr1.style.display = "table-row";
 					        		}
 								});
+								
+							//  취소
+					        	$('.refundbtn').on("click",function(){
+					        		console.log("환불");
+					        		console.log(rvcode);
+					        	 	let params = {rvCode:rvcode};
+					        	 	$.ajax({
+					      		      url:"${pageContext.request.contextPath}/myPage/refund",
+					      		      type:"POST",
+					      		      contentType:"application/json; charset=utf-8",
+					      		      dataType : "json",
+					      		      data:JSON.stringify(params), 
+					      		      success: function(data) {
+					      		    	if(data ==1){
+					      		    		console.log("성공");
+					      		    		newtd.innerText = '취소신청';
+					      		    	}
+					      		    	  
+					      		      },
+					      		      error: function() {
+					      		          alert("에러 발생");
+					      		      }
+					      		  })
+					        		
+					        	});
 							}
 								// list 누르면 아래 박스추가
 					        	$('.rantal_item').on("click",function(){
@@ -641,6 +692,8 @@ td > a{
 									}
 					        		$(this).next().show();
 					        	});
+								
+					        	
 							
 						},
 						error: function(e){

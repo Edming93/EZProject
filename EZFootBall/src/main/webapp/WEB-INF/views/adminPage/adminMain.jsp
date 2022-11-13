@@ -4,11 +4,15 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String select = null;
+	int count = 0;
 	if(session.getAttribute("select") != null) {
 		select = (String)session.getAttribute("select");
+		count = 0;
 	}else {
 		select = "userAdmin";
+		count = (Integer)session.getAttribute("count");
 	}
+	
 	
 %> 	
 <!DOCTYPE html>
@@ -207,5 +211,13 @@
         </div>
         </div>
     </div>
+    <script type="text/javascript">
+    window.onload = function(e) {
+    	if(<%=count%> > 0){
+    		alert("취소신청이" + <%=count%> + "건 있습니다");
+    	}
+    }
+    	
+    </script>
 </body>
 </html>

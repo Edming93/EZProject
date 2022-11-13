@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String payselect = null;
+	int count = (Integer)session.getAttribute("count");
 	if(request.getParameter("payselect") != null) {
 		payselect = (String)request.getParameter("payselect");
 	}else {
@@ -78,5 +79,11 @@
         %>
     </div>
 </div>
+<script type="text/javascript">
+if(<%=count%> > 0){
+	alert("취소신청이" + <%=count%> + "건 있습니다");
+}
+    	
+</script>
 </body>
 </html>

@@ -26,6 +26,12 @@ public class AdminService {
       super();
       this.dao = dao;
    }
+   
+   //취소신청
+   public int refundsub() {
+	   return dao.refundsub();
+   }
+   
    //신청관리
    public List<GlistVO> allgame(){
       return dao.allgame();

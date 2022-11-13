@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.dao.AdminDAO">
+	<!-- 취소 신청 가져오기 -->
+	<select id="refundsub" resultType="int">
+		select count(*)
+		from field_reservation
+		where rv_state = '취소신청'
+	</select>
+
 	<!-- 신청 관리 -->
 	<select id="allgame" resultType="GlistVO">
 		select game_code,game_type,game_day,game_gender,
