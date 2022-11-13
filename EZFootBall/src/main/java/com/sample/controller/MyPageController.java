@@ -252,8 +252,7 @@ public class MyPageController {
 		return "redirect:/myPage/manager";
 	}
 
-	
-	//예약/신청 취소
+	// 예약/신청 취소
 	@PostMapping("/refund")
 	@ResponseBody
 	public int refund(@RequestBody FieldReservationVO fieldReservationVO, HttpSession session) {
@@ -261,5 +260,12 @@ public class MyPageController {
 		System.out.println(fieldReservationVO.getRvCode());
 		rentalService.refund(fieldReservationVO.getRvCode());
 		return 1;
+	}
+
+	@GetMapping("/changeinfo")
+	public String changeinfo(UserVO userVO, HttpSession session, Model model) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		model.addAttribute("userVO", userVO);
+		return "/myPage/changeinfo";
 	}
 }

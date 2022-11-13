@@ -521,7 +521,7 @@ footer {
 					<section class="main_right3">
 						<h3>내 정보</h3>
 						<ul>
-							<li><div class="border_div"><a class="right_btn" href="#">내 정보 수정</a></div></li>
+							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/changeinfo">내 정보 수정</a></div></li>
 							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></div></li>
 							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/inquiry">내 문의</a></div></li>							
 							<li><div class="no_border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></div></li>
