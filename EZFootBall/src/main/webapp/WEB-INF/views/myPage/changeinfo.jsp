@@ -143,7 +143,7 @@
 	    margin-top: 35px;
 	}
     
-    #btn, #return {
+    #change_btn, #return {
 	    display: inline-block;
 	    width: 30%;
 	    padding: 10px 0;
@@ -166,13 +166,17 @@
 		font-size: 12px;
     	color: #989898;
 	}
+	
+	.email_box{
+		display: flex;
+	}
 
     
     .input{
 	    border: 1px solid #D7D7D7;
 	    background-color: #fff;
 	    padding: 8px;
-	    width: 100%;
+	    width: 80%;
 	    height: 38px;
 	    border-radius: 7px;
 	    color: #000000;
@@ -196,12 +200,12 @@
 	    color: #000;
 	}
 	
-	.ck_btn{
+	.ck_btn, .ck_btn1{
 		display: inline-block;
 	    width: 20%;
 	    padding: 10px 0;
 	    text-decoration: none;
-	    margin: 20px 0;
+/* 	    margin: 20px 0; */
 	    color: #fff;
 	    font-weight: bold;
 	    font-size: 13px;
@@ -209,6 +213,7 @@
 	    text-align: center;
 	    background-color: #26a653;
 	    border-radius: 27px;
+	    height: 39px;
 	}
     
     .user_birth_year {
@@ -231,6 +236,14 @@
 	    border-radius: 10px;
 	   	padding: 8px;
 	    padding-left: 10px;
+	}
+	
+	#email1 {
+		width: 35%;
+	}
+	
+	#email2 {
+		width: 45%;
 	}
 
     .bottom_banner {
@@ -352,11 +365,21 @@
 			<h4>내 정보 수정</h4>
 				<form action="${pageContext.request.contextPath}/myPage/changeinfo/result" id="change" method="post">
 					<div class="title">이름</div>
-					<input type="text" class="input" name="name" id="name" value="${userVO.userName }" disabled="disabled"/>
+					<div><input type="text" class="input" name="userName" id="name" value="${userVO.userName }" disabled="disabled"/><button class="ck_btn" id="name_change">수정하기</button></div>
 					<div class="title">아이디</div>
-					<input type="text" class="input" name="id" id="id" value="${userVO.userId}" disabled="disabled"/>
+					<div><input type="text" class="input" name="userId" id="id" value="${userVO.userId}" disabled="disabled"/><button class="ck_btn" id="id_change">수정하기</button></div>
 					<div class="title">이메일</div>
-					<input type="text" class="input" name="email1" id="email1" value="${userVO.userEmail1}${userVO.userEmail2}" disabled="disabled"/>					
+					<div class="email_box">
+					<input type="text" class="input" name="userEmail1" id="email1" value="${userVO.userEmail1}" disabled="disabled"/>
+					<select class="input email_control" name="userEmail2" id="email2" disabled="disabled">
+							<option>@naver.com</option>
+							<option>@daum.net</option>
+							<option>@gmail.com</option>
+							<option>@hanmail.com</option>
+							<option>@yahoo.co.kr</option>
+						</select>
+					<button class="ck_btn" id="email_change">수정하기</button>
+					</div>					
 				<div class="title">지역</div>
 				    <select class="input local" id="userLocal1" name="userLocal" onchange="itemChange(this.value)">
 				        <option value="">시/도 선택</option> 
@@ -382,10 +405,10 @@
 				        <option value="">선택하세요.</option>
 				    </select>
 				    <div class="title">주소</div>
-				    <div class="title" id="address">(현재주소 : ${userVO.userAddress })</div>
-			           <div><input type="text" class="input address" id="address" name="userAddress1" value="${userVO.userAddress}" readonly /><button class="ck_btn" id="address_kakao">주소찾기</button></div>
+				    <div class="title" id="address1">(현재주소 : ${userVO.userAddress })</div>
+			           <div><input type="text" class="input address" id="address" name="userAddress1" value="${userVO.userAddress}" readonly /><button class="ck_btn1" id="address_kakao">주소찾기</button></div>
 			        <div class="title">상세 주소</div>
-			           <div><input type="text" class="input address_detail" name="userAddress2" value="${userVO.userAddress}"/></div>
+			           <div><input type="text" class="input address_detail" name="userAddress2" value=""/></div>
 			           <div class="title"> 생년월일</div>
 			        <div><input class="input user_birth_year" type="text" name="userBirthYear" placeholder="년(4자)" maxlength=4 required>
 			            <select class="user_birth_month" name="userBirthMonth">
@@ -432,7 +455,7 @@
 			        </div>
 			        <div class="title">성별</div>
 			        <div>
-				        <select class="input" name="userGender" id="gender">
+				        <select class="input" name="userGender" id="gender" >
 				            <option selected disabled>성별</option>
 				            <option value="남성">남자</option>
 				            <option value="여성">여자</option>
@@ -440,7 +463,7 @@
 			       	</div>
 				</form>
 				<div id="btnbox">
-					<button id="btn" type="submit">변경하기</button>
+					<button id="change_btn" type="submit">변경하기</button>
 					<button id="return" type="submit">취소</button>
 				</div>
 			</div>
@@ -463,71 +486,7 @@
 	});
 </script>
 
-<script type="text/javascript">
-	
-		$('#btn').click(function(){
-			if(($('#new_pw1').val().length < 8 || $('#new_pw1').val().length > 16) || ($('#new_pw2').val().length < 8 || $('#new_pw2').val().length > 16) ){
-				// alert("비밀번호는 8~16 크기의 숫자, 영문자로 이루어져야 합니다.");
-				return;
-			}else if($('#new_pw1').val() != $('#new_pw2').val()){
-				Swal.fire(
-						'비밀번호를 확인해주세요',
-						'비밀번호와 비밀번호확인이 다릅니다. 다시 입력해주세요.',
-						'warning'
-					)
-				// alert("비밀번호와 비밀번호확인이 다릅니다. 다시 입력해주세요.");
-				return;
-			}else if($('#pw1').val() == $('#new_pw1').val() && $('#pw1').val() == $('#new_pw2').val()) {
-				Swal.fire(
-						'비밀번호가 동일합니다.',
-						'기존 비밀번호에 입력한 값과 변경할 비밀번호를 동일하게 설정할 수 없습니다. 다시 입력해주세요.',
-						'warning'
-					)
-				return;
-			}
-			for(let i=0; i < $('#new_pw1').val().length; i++){
-				const pw1 = $('#new_pw1').val().charAt(i);
-				if((pw1 < "a" || pw1 > "z") && (pw1 < "A" || pw1 > "Z") && (pw1 < "0" || pw1 > "9")){
-					Swal.fire(
-							'비밀번호를 확인해주세요',
-							'비밀번호는 숫자, 영문자로 이루어져야 합니다.',
-							'warning'
-						)
-					// alert("비밀번호는 숫자, 영문자로 이루어져야 합니다.");
-					return;
-				}
-			}
-		
-			// 현재비밀번호가 입력된 pw와 동일한지 확인
-// 			$("#btn").on("click", function(){
-				
-				const data1 = { "pass1" : $('#pw1').val() };
-				$.ajax({
-					type : 'post',
-					url: "${pageContext.request.contextPath}/myPage/changePw/isPassword",
-// 					contentType: "application/json; charset=utf-8",
-// 					dataType: "json",
-					data: data1,
-					async: false,
-					success : function (data) {
-						console.dir("data : " +  data);
-						console.log(data.state);
-						if(data.state == "ok"){
-
-	 						setTimeout(formStart, 2000);
-						}else if(data.state == "no"){
-
-						}
-					}			
-				}); // end ajax
-				
-				
-				
-				function formStart(){
-					$('#change').submit();
-				}
-		});
-		
+	<script type="text/javascript">
 		$('#return').click(function(){
 			$(location).attr("href","${pageContext.request.contextPath}/myPage/myPage");
 		});
@@ -657,7 +616,9 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		window.onload = function(){
-		    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+		    document.getElementById("address_kakao").addEventListener("click", function(e){ //주소입력칸을 클릭하면
+		    	e.preventDefault();
+		    
 		        //카카오 지도 발생
 		        new daum.Postcode({
 		            oncomplete: function(data) { //선택시 입력값 세팅
@@ -665,21 +626,115 @@
 		                document.querySelector("input[name=userAddress1]").focus(); //상세입력 포커싱
 		            }
 		        }).open();
+		        
+		        
 		    });
 		}
 	</script>
 	<script type="text/javascript">
 		let birth = '${userVO.userBirth}'.split('-');
-		console.log(birth);
-		console.log(birth[0]);
-		console.log(birth[1]);
-		console.log(birth[2]);
 		
 		$('.user_birth_year').val(birth[0]);
 		$('.user_birth_month').val(birth[1]);
 		$('.user_birth_day').val(birth[2]);
 		
 		$('#gender').val('${userVO.userGender}');
+		
+		$('#email2').val('${userVO.userEmail2}');
+		
+		let add_detail = $('#address').val().split(',');
+		
+		
+// 		add_detail = add_detail.replace('경기 고양시 덕양구 가양대로 110', "");
+		
+		$('.address').val(add_detail[0]);
+		
+		$('.address_detail').val($.trim(add_detail[1]));
+		var arr = new Array();
+		<c:forEach items = '${userList}' var = 'item'>
+			arr.push({userid: '${item.userId}',
+					email1: '${item.userEmail1}',
+					email2: '${item.userEmail2}'
+				});
+		</c:forEach>
+		let id_val = document.getElementById("id").value;
+		let email = document.getElementById("email1").value+document.getElementById("email2").value;
+		$('.ck_btn').click(function(e){
+			e.preventDefault();
+			if($(this).text()== "수정완료"){
+// 				let leng = $('#id').val().length > $('#email1').val().length ? $('#id').val().length : $('#email1').val().length;   
+				for(let i=0; i < $('#id').val().length; i++){
+					const id1 = $('#id').val().charAt(i);
+					if((id1 < "a" || id1 > "z") && (id1 < "A" || id1 > "Z") && (id1 < "0" || id1 > "9")){
+						alert("아이디는 숫자, 영문자로 이루어져야 합니다.");
+						return;
+					}
+				}
+				
+				for(let i=0; i < $('#email1').val().length; i++){
+					const email1 = $('#email1').val().charAt(i);
+					if((email1 < "a" || email1 > "z") && (email1 < "A" || email1 > "Z") && (email1 < "0" || email1 > "9")){
+						alert("이메일은 숫자, 영문자로 이루어져야 합니다.");
+						return;
+					}
+				}
+				
+				
+			
+				for (var i = 0; i < arr.length; i++) {
+				
+					if(($('#id').val() != id_val) && ($('#id').val() ==  arr[i].userid)){
+						alert('이미 사용중인 아이디입니다.');	
+						$(this).siblings().attr("disabled", false).focus();
+						$(this).css('background-color', '#ccc').css('border', '#ccc');
+						$(this).text("수정완료");
+						return false;
+					}else if($('#id').val() == null || $('#id').val() == ""){
+						alert('아이디를 확인해주세요!');	
+						$(this).siblings().attr("disabled", false).focus();
+						$(this).css('background-color', '#ccc').css('border', '#ccc');
+						$(this).text("수정완료");
+						return false;
+					}else if((($('#email1').val()+$('#email2').val()) != email) && (($('#email1').val()+$('#email2').val()) ==  arr[i].email1+arr[i].email2)){
+						alert('이미 사용중인 이메일입니다');	
+						$(this).siblings().attr("disabled", false).focus();
+						$(this).css('background-color', '#ccc').css('border', '#ccc');
+						$(this).text("수정완료");
+						return false;
+					}else{
+						$(this).siblings().attr("disabled", true);
+						$(this).css('background-color', '#26a653').css('border', '#26a653');
+						$(this).text("수정하기");
+					}
+				};
+// 				$(this).siblings().attr("disabled", true);
+// 				$(this).('ck_btn').text("수정하기");
+				return;
+			}else{
+				$(this).siblings().attr("disabled", false).focus();
+				$(this).css('background-color', '#ccc').css('border', '#ccc');
+				$(this).text("수정완료");
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		$('#change_btn').on("click", function(){
+			if($('#name_change').text() == '수정완료' || $('#id_change').text() == '수정완료' || $('#email_change').text() == '수정완료'){
+				alert("수정을 완료하고 변경을 눌러주세요");
+				return;
+			}else if ($('.user_birth_year').val() == ""){
+				alert("날짜를 입력해주세요");
+				$('.user_birth_year').focus();
+				return;
+			}
+			$(':input').attr("disabled", false);
+			
+			var confirm_val = confirm("정말 수정하시겠습니까?");
+			 
+			if(confirm_val) {
+				$('#change').submit();	
+			}
+		});
 	</script>
 </div>
 </body>

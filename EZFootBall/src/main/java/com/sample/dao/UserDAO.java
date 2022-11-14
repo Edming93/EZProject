@@ -26,7 +26,11 @@ public interface UserDAO {
 
 	public void newPassword(UserVO vo);
 
-
 	// 유저 레벨, 승률 조회 사용
 	public UinVO getUserAbil(int userCode);
+
+	// 내 정보 수정 사용
+	public List<UserVO> userinfoList();
+
+	public void changeUserinfo(UserVO vo);
 }

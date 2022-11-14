@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.FindService;
 import com.sample.service.GlistService;
+import com.sample.service.InfoService;
 import com.sample.service.InquiryService;
 import com.sample.service.LoginService;
 import com.sample.service.ManagerService;
@@ -41,10 +42,11 @@ public class MyPageController {
 	private GlistService glistService;
 	private InquiryService inquiryService;
 	private ManagerService managerService;
+	private InfoService infoService;
 
 	public MyPageController(LoginService loginService, UinService uinService, FindService findService,
 			RentalService rentalService, GlistService glistService, InquiryService inquiryService,
-			ManagerService managerService) {
+			ManagerService managerService, InfoService infoService) {
 		super();
 		this.loginService = loginService;
 		this.uinService = uinService;
@@ -53,6 +55,7 @@ public class MyPageController {
 		this.glistService = glistService;
 		this.inquiryService = inquiryService;
 		this.managerService = managerService;
+		this.infoService = infoService;
 	}
 
 	@GetMapping("myPage")
@@ -265,7 +268,28 @@ public class MyPageController {
 	@GetMapping("/changeinfo")
 	public String changeinfo(UserVO userVO, HttpSession session, Model model) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
+		List<UserVO> list = infoService.userinfoList();
 		model.addAttribute("userVO", userVO);
+		model.addAttribute("userList", list);
 		return "/myPage/changeinfo";
+	}
+
+	@PostMapping("/changeinfo/result")
+	public String changeinfoResult(String userName, String userId, String userEmail1, String userEmail2,
+			String userLocal, String userDistrict, String userAddress1, String userAddress2, String userBirthYear,
+			String userBirthMonth, String userBirthDay, String userGender, UserVO userVO, HttpSession session) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		System.out.println(userVO.getUserCode());
+		userVO.setUserName(userName);
+		userVO.setUserId(userId);
+		userVO.setUserEmail1(userEmail1);
+		userVO.setUserEmail2(userEmail2);
+		userVO.setUserLocal(userLocal);
+		userVO.setUserDistrict(userDistrict);
+		userVO.setUserAddress(userAddress1 + "," + userAddress2);
+		userVO.setUserBirth(userBirthYear + "-" + userBirthMonth + "-" + userBirthDay);
+		userVO.setUserGender(userGender);
+		infoService.changeUserinfo(userVO);
+		return "redirect:/myPage/myPage";
 	}
 }

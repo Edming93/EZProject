@@ -44,5 +44,15 @@
 		WHERE user_code = #{userCode}
 	</select>
 	
+	<select id="userinfoList" resultType="UserVO">
+		SELECT user_id, user_email1, user_email2
+		FROM user_info
+	</select>
+	
+	<update id="changeUserinfo">
+		UPDATE user_info set user_name = #{userName}, user_id = #{userId}, user_email1 = #{userEmail1}, user_email2 = #{userEmail2},
+		user_birth = #{userBirth}, user_gender = #{userGender}, user_local = #{userLocal}, user_district = #{userDistrict}, user_address = #{userAddress}
+		WHERE user_code = #{userCode}
+	</update>
 </mapper>
 
