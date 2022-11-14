@@ -87,6 +87,9 @@ public class AdminController {
 		// 결제내역 정보
 		session.setAttribute("rvListAll", fdService.FieldReservationListAll());
 		
+		model.addAttribute("fieldList", fdService.getFieldListAll());
+		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
+		model.addAttribute("managerList", managerService.getManagerList());
 		session.setAttribute("userList", service.UInfoList());
 		session.setAttribute("team", service.joinList());
 		session.setAttribute("userListB", service.UInfoListB());
