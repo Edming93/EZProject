@@ -28,7 +28,7 @@
 <style>
 	
 	
-		#searchbox {
+		#searchbox1 {
 		display: flex;
 		height: 80px;
 		align-items: center;
@@ -373,7 +373,7 @@
 	
     
 	<div id="out">
-		<div id="searchbox">
+		<div id="searchbox1">
 			<select name="" id="select">
 				<option value="null">카테고리</option>
 				<option value="subname">신청자</option>
