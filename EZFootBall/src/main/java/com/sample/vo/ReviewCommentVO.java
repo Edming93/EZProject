@@ -14,7 +14,6 @@ public class ReviewCommentVO {
 
   
   
-  
   public int getUserCode() {
 	return userCode;
 }

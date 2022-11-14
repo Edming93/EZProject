@@ -464,7 +464,6 @@ table th {
   
  a:link {color:black; text-decoration: none;}
  a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
 
 </style>
 </head>
