@@ -10,11 +10,14 @@
  	<select id="getListPaging" resultType="BlacklistVO">
        	select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local, blackuser_code,
 		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
-                from blacklist order by blacklist_code desc
+                from blacklist 
+                where is_delete = 0
+                order by blacklist_code desc
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
         limit #{skip},#{amount}
     
     </select>
+    
 
 	  <!-- 게시물 총 개수 -->
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -141,7 +142,12 @@ public class BlacklistController {
 		bvo.setUserCode(uvo.getUserCode());
 
 		System.out.println(bvo.getBlackuserCode());
-		
+		service.deleteuserBlack(bvo);
+		//먼저 기존값을 받아서 딜리트 로직을 진행하고
+		bvo.setBlacklistCode(0);
+		// 초기화를 진행하고
+		//아래 삭제로직에서 새로 받아서 진행한것처럼 새값을 넣어준다 
+		//bvo.setBlackuserCode(Integer.parseInt(blackCode));
 		service.adduserBlack(bvo);
 		if (service.editBlackList(bvo)) {
 			return "redirect:/blacklist/blacklistmain";
@@ -152,12 +158,12 @@ public class BlacklistController {
 
 	// 페이지 삭제
 	@GetMapping("/blacklistmain/deletebbs/{blacklistCode}")
-	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, Model model,
+	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, Model model, @RequestParam("blackCode") String blackCode,
 			@ModelAttribute("BlacklistVO") BlacklistVO bvo, @PathVariable("blacklistCode") String blacklistCode) {
-		
+		//get방식으로 보낸 blackCode를 @RequestParam으로 받아서 이걸 setblackusercode에 integet변환해서 넣음
 		bvo.setUserCode(uvo.getUserCode());
 		bvo.getBlackuserCode();
-		
+		bvo.setBlackuserCode(Integer.parseInt(blackCode));
 		System.out.println(bvo.getBlackuserCode());
 		
 		service.deleteuserBlack(bvo);

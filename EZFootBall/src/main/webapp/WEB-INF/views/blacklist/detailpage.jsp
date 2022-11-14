@@ -798,7 +798,7 @@ let play_btn = document.querySelector(".fa-play");
 			<h4>제목 :</h4>
 			<h4>${BlacklistVO.blacklistTitle}</h4>
 			<h4>신고유저코드 :</h4>
-			<h4>${BlacklistVO.blackuserCode}</h4>
+			<h4 class="black_code">${BlacklistVO.blackuserCode}</h4>
 		</div>
 		<div class="maindetail">
 			<p>${BlacklistVO.blacklistContent}</p>
@@ -1209,9 +1209,11 @@ document.getElementById("deletebtn").addEventListener("click",function(){
 	
 	let isDelete = confirm("정말로 삭제하시겠습니까?");
 	if(isDelete){ 
-		
+		let black_code = $('.black_code').text();
+		//클래스 안 text값을 let에 넣어서
 	
-		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}";
+		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}?blackCode="+black_code;
+		//get방식으로 같이 보냄
 	}
 });
 
