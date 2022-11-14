@@ -215,6 +215,20 @@
 	    border-radius: 27px;
 	    height: 39px;
 	}
+	
+	#email_btn{
+		display: inline-block;
+	    width: 20%;
+	    height: 39px;
+	    background-color: #26a653;
+	    border-radius: 27px;
+	    color: #fff;
+	    font-weight: bold;
+	    font-size: 13px;
+	    text-decoration: none;
+	    border: 1px solid #26a653;
+	    text-align: center;
+	}
     
     .user_birth_year {
 	    width: 30%;
@@ -238,12 +252,27 @@
 	    padding-left: 10px;
 	}
 	
-	#email1 {
+	#userEmail1 {
 		width: 35%;
 	}
 	
-	#email2 {
+	#userEmail2 {
 		width: 45%;
+	}
+	
+	#mail_check_warn{
+		display:inline-block;
+	    font-size: 12px;
+    	color: #989898;
+	}
+	
+	.authentication{
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.hid{
+		display: none;
 	}
 
     .bottom_banner {
@@ -370,8 +399,8 @@
 					<div><input type="text" class="input" name="userId" id="id" value="${userVO.userId}" disabled="disabled"/><button class="ck_btn" id="id_change">수정하기</button></div>
 					<div class="title">이메일</div>
 					<div class="email_box">
-					<input type="text" class="input" name="userEmail1" id="email1" value="${userVO.userEmail1}" disabled="disabled"/>
-					<select class="input email_control" name="userEmail2" id="email2" disabled="disabled">
+					<input type="text" class="input" name="userEmail1" id="userEmail1" value="${userVO.userEmail1}" disabled="disabled"/>
+					<select class="input email_control" name="userEmail2" id="userEmail2" disabled="disabled">
 							<option>@naver.com</option>
 							<option>@daum.net</option>
 							<option>@gmail.com</option>
@@ -379,7 +408,16 @@
 							<option>@yahoo.co.kr</option>
 						</select>
 					<button class="ck_btn" id="email_change">수정하기</button>
-					</div>					
+					</div>
+					<section class="hid">
+					<div class="authentication">
+					<input class="input form_control mail_check_input" name="mail_check_input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+					<button id="email_btn">인증하기</button>
+					</div>
+					<span id="mail_check_warn">이메일이 변경되었습니다. 인증을 다시 받아주세요.
+					</section>
+
+					</span>					
 				<div class="title">지역</div>
 				    <select class="input local" id="userLocal1" name="userLocal" onchange="itemChange(this.value)">
 				        <option value="">시/도 선택</option> 
@@ -640,7 +678,7 @@
 		
 		$('#gender').val('${userVO.userGender}');
 		
-		$('#email2').val('${userVO.userEmail2}');
+		$('#userEmail2').val('${userVO.userEmail2}');
 		
 		let add_detail = $('#address').val().split(',');
 		
@@ -658,7 +696,7 @@
 				});
 		</c:forEach>
 		let id_val = document.getElementById("id").value;
-		let email = document.getElementById("email1").value+document.getElementById("email2").value;
+		let email1 = document.getElementById("userEmail1").value+document.getElementById("userEmail2").value;
 		$('.ck_btn').click(function(e){
 			e.preventDefault();
 			if($(this).text()== "수정완료"){
@@ -671,8 +709,8 @@
 					}
 				}
 				
-				for(let i=0; i < $('#email1').val().length; i++){
-					const email1 = $('#email1').val().charAt(i);
+				for(let i=0; i < $('#userEmail1').val().length; i++){
+					const email1 = $('#userEmail1').val().charAt(i);
 					if((email1 < "a" || email1 > "z") && (email1 < "A" || email1 > "Z") && (email1 < "0" || email1 > "9")){
 						alert("이메일은 숫자, 영문자로 이루어져야 합니다.");
 						return;
@@ -695,7 +733,7 @@
 						$(this).css('background-color', '#ccc').css('border', '#ccc');
 						$(this).text("수정완료");
 						return false;
-					}else if((($('#email1').val()+$('#email2').val()) != email) && (($('#email1').val()+$('#email2').val()) ==  arr[i].email1+arr[i].email2)){
+					}else if((($('#userEmail1').val()+$('#userEmail2').val()) != email1) && (($('#userEmail1').val()+$('#userEmail2').val()) ==  arr[i].email1+arr[i].email2)){
 						alert('이미 사용중인 이메일입니다');	
 						$(this).siblings().attr("disabled", false).focus();
 						$(this).css('background-color', '#ccc').css('border', '#ccc');
@@ -709,12 +747,17 @@
 				};
 // 				$(this).siblings().attr("disabled", true);
 // 				$(this).('ck_btn').text("수정하기");
+				if(email1 != ($('#userEmail1').val()+$('#userEmail2').val())){
+					alert('이메일이 변경되었습니다. 인증을 다시 받아주세요');
+					$('.hid').show();
+				}
 				return;
 			}else{
 				$(this).siblings().attr("disabled", false).focus();
 				$(this).css('background-color', '#ccc').css('border', '#ccc');
 				$(this).text("수정완료");
 			}
+			
 		});
 	</script>
 	<script type="text/javascript">
@@ -726,6 +769,9 @@
 				alert("날짜를 입력해주세요");
 				$('.user_birth_year').focus();
 				return;
+			}else if($('#mail_check_warn').text() != '인증번호가 일치합니다.' && $('.hid').css('display') == 'block'){
+				alert("이메일과 인증번호를 확인해주세요!");
+				return;
 			}
 			$(':input').attr("disabled", false);
 			
@@ -735,6 +781,75 @@
 				$('#change').submit();	
 			}
 		});
+		
+		$('#email_btn').click(function(e){
+			e.preventDefault();
+			if($(this).text() == '인증하기'){
+				
+			userId = $('#Id').val();
+			email_1 = $('#userEmail1').val();
+			email_2 = $('#userEmail2').val();
+			email = email_1 + email_2;
+			const checkInput = $('.mail_check_input'); // 인증번호 입력하는곳 
+			
+			$.ajax({
+				type : 'get',
+				url: "${pageContext.request.contextPath}/myPage/mailCheck?email="+email,
+				success : function (data) {
+					console.log("data : " +  data);
+					if(data == 0){
+						alert('가입하신 정보가 맞지 않습니다. '+'확인후 다시 입력해주세요');
+						return;
+					}
+					checkInput.attr('disabled',false);
+					code = data;
+					alert('인증번호가 전송되었습니다.');
+				}			
+			}); // end ajax
+			$(this).text('전송완료').css('background-color', '#ccc').css('border', '#ccc').attr('disabled','true');
+			
+			}
+		});
+		
+		$('.mail_check_input').blur(function () {
+			const inputCode = $(this).val();
+			const $resultMsg = $('#mail_check_warn');
+			
+			if(inputCode === code){
+				email1 = $('#userEmail1').val() + $('#userEmail2').val();
+				console.log(email1);
+				if(email1 == email || email1 == undefined){
+				
+					$resultMsg.html('인증번호가 일치합니다.');
+					$resultMsg.css('color','green');
+					$('#mail_check_btn').attr('disabled',true);
+					$('#userEamil1').attr('readonly',true);
+					$('#userEamil2').attr('readonly',true);
+					$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+			        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+			        
+					$('#userEmail1').bind('input',function() {
+						email1 = $('#userEmail1').val() + $('#userEmail2').val();
+						console.log("email: "+email +" email1: "+email1);
+						console.log(email != email1);
+						if(email != email1){
+							$resultMsg.html('이메일 아이디가 불일치 합니다. 다시 확인해주세요!.');
+							$resultMsg.css('color','red');
+
+						}else{
+							$resultMsg.html('인증번호가 일치합니다.');
+							$resultMsg.css('color','green');
+						}
+					});
+				}
+				return;
+			}else{
+				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+				$resultMsg.css('color','red');
+				return;
+			}
+		});
+		
 	</script>
 </div>
 </body>

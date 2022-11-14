@@ -21,6 +21,7 @@ import com.sample.service.GlistService;
 import com.sample.service.InfoService;
 import com.sample.service.InquiryService;
 import com.sample.service.LoginService;
+import com.sample.service.MailSendService;
 import com.sample.service.ManagerService;
 import com.sample.service.RentalService;
 import com.sample.service.UinService;
@@ -43,10 +44,11 @@ public class MyPageController {
 	private InquiryService inquiryService;
 	private ManagerService managerService;
 	private InfoService infoService;
+	private MailSendService mailService;
 
 	public MyPageController(LoginService loginService, UinService uinService, FindService findService,
 			RentalService rentalService, GlistService glistService, InquiryService inquiryService,
-			ManagerService managerService, InfoService infoService) {
+			ManagerService managerService, InfoService infoService, MailSendService mailService) {
 		super();
 		this.loginService = loginService;
 		this.uinService = uinService;
@@ -56,6 +58,7 @@ public class MyPageController {
 		this.inquiryService = inquiryService;
 		this.managerService = managerService;
 		this.infoService = infoService;
+		this.mailService = mailService;
 	}
 
 	@GetMapping("myPage")
@@ -289,7 +292,17 @@ public class MyPageController {
 		userVO.setUserAddress(userAddress1 + "," + userAddress2);
 		userVO.setUserBirth(userBirthYear + "-" + userBirthMonth + "-" + userBirthDay);
 		userVO.setUserGender(userGender);
+//		session.setAttribute("sessionVO", userVO);
 		infoService.changeUserinfo(userVO);
 		return "redirect:/myPage/myPage";
+	}
+
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(UserVO userVO, String userId, @RequestParam("email") String email, Model model) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println(email);
+		return mailService.joinEmail(email);
+
 	}
 }
