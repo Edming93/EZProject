@@ -1,3 +1,4 @@
+<%@page import="com.sample.vo.UserVO"%>
 <%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,6 +13,7 @@
 		select = "userAdmin";
 		count = (Integer)session.getAttribute("count");
 	}
+	UserVO uvo= (UserVO)session.getAttribute("sessionVO");
 	
 	
 %> 	
@@ -142,7 +144,7 @@
                             </div>
                         </div>
                         <div class="pright">
-                        <p>'김은진'관리자님</p>
+                        <p>'<%=uvo.getUserName() %>'관리자님</p>
                         <p>환영합니다</p>
                         </div>
                     </div>

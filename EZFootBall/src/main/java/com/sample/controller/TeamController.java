@@ -293,7 +293,6 @@ public class TeamController {
 	@PostMapping("/usercode")
 	@ResponseBody
 	public List<UinVO> Usercode(@RequestBody UinVO vo) {
-		
 		return service.getUserList(vo);
 	}
 	

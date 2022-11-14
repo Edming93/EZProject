@@ -776,7 +776,7 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	 					});
 	 				} else {
 	 					console.log(${userVO.teamCode});
-	 					if(${userVO.teamCode} == 0 ){
+	 					if('${userVO.teamCode}' == 0 ){
 	 						
 	 						location.href="${pageContext.request.contextPath}/team/register";
 	 					}else{
