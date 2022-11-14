@@ -8,11 +8,9 @@
     <!-- 게시물 목록(페이징) -->
   
  	<select id="getListPaging" resultType="BlacklistVO">
-    
-        select * from (
-                select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local, blackuser_code,
+       	select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local, blackuser_code,
 		date_format(blacklist_create_date, '%Y-%m-%d %H:%i') blacklist_create_date
-                from blacklist order by blacklist_code desc) as T1 
+                from blacklist order by blacklist_code desc
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
         limit #{skip},#{amount}
     

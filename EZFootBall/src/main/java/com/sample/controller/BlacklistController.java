@@ -95,36 +95,6 @@ public class BlacklistController {
 		}
 
 	}
-	
-	
-	/*
-	@GetMapping("/blacklistmain/setbbs")
-	public String setBBS(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
-			Model model) {
-		System.out.println(uvo);
-		try {
-		if (uvo != null) {
-			
-				String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
-				model.addAttribute("blacklistLocal", cateList);
-				return "blacklist/setbbs";
-		}
-				else {
-					return "redirect:/loginPage/login";
-				}
-				
-				
-			} catch (Exception e) {
-				
-				return "redirect:/blacklist/blacklistmain";
-			}
-			
-		}
-
-	*/	
-
-	
-	
 
 	// 페이지 상세
 	@PostMapping("/blacklistmain/setbbs")

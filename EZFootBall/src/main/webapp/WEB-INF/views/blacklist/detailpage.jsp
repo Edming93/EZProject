@@ -809,13 +809,7 @@ let play_btn = document.querySelector(".fa-play");
 		<button id="deletebtn">삭제</button>
 		<button id="editbtn">수정</button>
 		</c:if>
-		<form id="infoForm" action="${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}" method="get">
 		
-		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
-		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
-		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>		
-		
-		</form>
 		</div>
 		
 		
@@ -832,20 +826,6 @@ let play_btn = document.querySelector(".fa-play");
 	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>	
 	<script type="text/javascript">
-	
-	
-	let form = $("#infoForm");
-	
-	$("#backbtn").on("click", function(e){
-		form.find("#bno").remove();
-		form.attr("action", "/EZFootBall/blacklist/blacklistmain");
-		form.submit();
-	});
-	
-	$("#editbtn").on("click", function(e){
-		form.attr("action", "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}");
-		form.submit();
-	});	
 	
 	
 	
@@ -1225,26 +1205,12 @@ document.getElementById("editbtn").addEventListener("click",function(){
 
 document.getElementById("deletebtn").addEventListener("click",function(){
 	
-	const data = 
-		{blackuserCode : ${BlacklistVO.blackuserCode}}
-		
-
+	
+	
 	let isDelete = confirm("정말로 삭제하시겠습니까?");
 	if(isDelete){ 
 		
-		/* $.ajax({
-			url : "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}",
-			type : "GET",
-			contentType:"application/json; charset=utf-8",
-			dataType : "json",
-			data : JSON.stringify(data),
-			console.log(data);
-			success : function(data){
-
-			
-		}
-		});
-		 */
+	
 		location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}";
 	}
 });

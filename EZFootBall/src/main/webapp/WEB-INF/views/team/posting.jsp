@@ -22,6 +22,7 @@
     <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/jquery-ui.js"></script>
  	<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+ 	 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65331bb5f71196e87528297b0af9ceb4&libraries=services"></script>
  	<style>
  	.sub_con{
 		grid-area: sub;
@@ -958,6 +959,7 @@
 				    <div class="fbutton">
 				    <span class="btn-open-popup22">지도 검색</span>
 					</div>
+					
                    <script type="text/javascript">
 	           		// 엔터키 활성화
 	           		let search1 = document.getElementById("search1");
@@ -1105,7 +1107,7 @@
             <script type="text/javascript">
             	
             document.getElementById("gameTime").addEventListener("click",function(){
-            			
+            	
             			let res1 = document.getElementById("reservation1").value;
             			let res2 = document.getElementById("reservation2").value;
             			let res3 = document.getElementById("reservation3").value;
@@ -1267,6 +1269,7 @@
                                     
                                 </div>
                                 <div id="modaldata"></div>
+                                
                                 <script type="text/javascript">
                                 
                                 let modalText = document.getElementById("modalText");
@@ -1331,6 +1334,7 @@
                         						}else if(gameMacth1 == "5vs5"){
 
 													div.addEventListener("click",function(){
+														console.log("팀선택");
 															if(comment.tmember6 == ''){
 															mteamName.value = comment.teamName;
 															teamCode.value = comment.teamCode;
@@ -1348,6 +1352,9 @@
             							          body.style.overflow = 'hidden';
                     							}
 													});
+                    						}else{
+                    							alert("경기장을 선택해주세요");
+                    							break;
                     						}						
 
                         						const h4 = document.createElement("h4");
@@ -1430,10 +1437,18 @@
     	  yearSuffix: '년'
     	});
     
+    
         $(function() {
             console.log("dsjfdlsfhdslf");
+            $('#txtDate').click(function(){
+            	if(document.getElementById("fieldName").value == "")
+            	  alert("경기장을 선택 해 주세요");
+            	else{
+            		$('#txtDate').datepicker({ minDate: 0});
+            	}
+            });
             
-            $('#txtDate').datepicker({ minDate: 0});
+            
         });
    
 	/* 팀 검색 modal창 script */
@@ -1494,7 +1509,6 @@
      
       </script>
 		
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65331bb5f71196e87528297b0af9ceb4&libraries=services"></script>
       <script type="text/javascript">
 		/* 지도표시 script */
 
@@ -1543,7 +1557,8 @@
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
-<<<<<<< HEAD
+
+
 	<script type="text/javascript">
 		form_post = document.form1;
 		document.getElementById("subtn").addEventListener("click",function(){

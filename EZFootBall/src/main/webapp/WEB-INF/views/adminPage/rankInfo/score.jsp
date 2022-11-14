@@ -251,8 +251,8 @@
                 <li><p>이름 : </p> <p id="inuserName"></p> </li>
                 <li><p>레벨 : </p> <input type="text" class="inbox" name="userLevel" id="inuserLevel" autocomplete='off'> </li>
                 <li><p>점수 : </p> <p id="inscore"></p> </li>
-                <li><p>점수추가 : </p> <input type="text" class="inbox" name="plus" id="plus" autocomplete='off'> </li>
-                <li><p>점수차감 : </p> <input type="text" class="inbox" name="minus" id="minus" autocomplete='off'> </li>
+                <li><p>점수추가 : </p> <input type="text" class="inbox" name="plus" id="plus" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> </li>
+                <li><p>점수차감 : </p> <input type="text" class="inbox" name="minus" id="minus" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> </li>
                 
                 
             </ul>
