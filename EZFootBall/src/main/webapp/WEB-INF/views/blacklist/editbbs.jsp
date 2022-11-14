@@ -774,7 +774,7 @@ let play_btn = document.querySelector(".fa-play");
 				<h4>제목 :</h4>
 			<form:input path="blacklistTitle" placeholder ="제목을 입력해 주세요"/>
 			<h4>신고유저코드 : </h4>
-			<form:input path="blackuserCode" placeholder ="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)"/>
+			<form:input path="blackuserCode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder ="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)"/>
 			</div>
 			<div class="main">
 				<form:textarea path="blacklistContent" placeholder ="신고할 내용을 입력해 주세요"/>

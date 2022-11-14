@@ -838,7 +838,7 @@ let play_btn = document.querySelector(".fa-play");
 						const updateinput = document.createElement("textarea");
 						updateinput.cols = "40";
 						updateinput.rows = "10";
-						updateinput.placeholder="수정할 내용을 입력하세요"
+						updateinput.innerText = content;
 						const updatebtn = document.createElement("button");
 						updatebtn.innerText = "수정완료";
 						
@@ -921,6 +921,8 @@ let play_btn = document.querySelector(".fa-play");
 			
 		});
 		
+		document.getElementById("content").value='';
+		
 	});
 	
 	
@@ -989,7 +991,7 @@ let play_btn = document.querySelector(".fa-play");
 								const updateinput = document.createElement("textarea");
 								updateinput.cols = "30";
 								updateinput.rows = "10";
-								updateinput.placeholder="수정할 내용을 입력하세요"
+								updateinput.innerText = comment.content;
 								const updatebtn = document.createElement("button");
 								updatebtn.innerText = "수정완료";
 								updatebtn.style.borderRadius = "5px";
@@ -1002,8 +1004,7 @@ let play_btn = document.querySelector(".fa-play");
 								 updateform.append(updatebtn);
 								
 								div.append(updateform);
-						
-								//수정버튼 연속 클릭시 연속 생성 제한거는 함수 찾기
+
 								
 								//수정완료 버튼 클릭시 수정된 내용으로 수정
 								 updatebtn.addEventListener("click", function(){		
@@ -1028,6 +1029,7 @@ let play_btn = document.querySelector(".fa-play");
 								 					var now = moment(createDate).format("YYYY-MM-DD HH:mm");
 								 					cdate.innerText = now;
 								 					updateform.remove();
+								 					
 								 				}
 											
 											}
