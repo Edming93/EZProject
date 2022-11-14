@@ -16,6 +16,7 @@
 	<insert id="insertComment" keyProperty="reviewCode">
 		insert into review(user_name, content) values(#{userName}, #{content})
 	</insert>
+	
 	<update id="updateComment">
    		update review SET content = #{content}, create_date = now() WHERE review_code = #{reviewCode}
 	</update>

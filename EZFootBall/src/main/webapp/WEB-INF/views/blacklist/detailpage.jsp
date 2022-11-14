@@ -884,9 +884,7 @@ let play_btn = document.querySelector(".fa-play");
  					   	  	
  					   }
  					});
- 				} else {
- 					location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/setbbs";
- 				}
+ 				} 
 			}
  		});
 	});
