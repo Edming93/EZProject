@@ -444,7 +444,7 @@ table th {
      
       
   .pageInfo{
- 	padding-left: 23%;
+ 	padding-left: 20%;
     list-style : none;
     display: flex;
     margin: 50px 0 0 100px;      

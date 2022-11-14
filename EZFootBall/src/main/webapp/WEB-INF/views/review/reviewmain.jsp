@@ -883,6 +883,11 @@ let play_btn = document.querySelector(".fa-play");
 					
 					//삭제 버튼 이벤트 리스너
 					btn2.addEventListener("click", function(){
+
+						let isDelete = confirm("정말로 삭제하시겠습니까?");
+						if(isDelete){ 
+							
+						
 						const reviewCode = data.vo.reviewCode;
 						const simple_data = {reviewCode};
 						document.getElementById("input").style.display = "block";
@@ -902,8 +907,12 @@ let play_btn = document.querySelector(".fa-play");
 			
 							}
 						});
-					});
-					
+						
+						
+						}
+						
+						
+					});	
 				}
 			},
 				error : function(e){
@@ -1028,6 +1037,9 @@ let play_btn = document.querySelector(".fa-play");
 							
 							//삭제 버튼 이벤트
 							btn2.addEventListener("click", function(){
+
+								let isDelete = confirm("정말로 삭제하시겠습니까?");
+								if(isDelete){ 
 								const reviewCode = comment.reviewCode;
 								const simple_data = {reviewCode};
 								document.getElementById("input").style.display = "block";
@@ -1040,6 +1052,7 @@ let play_btn = document.querySelector(".fa-play");
 									success : function(data){
 										if(data.state == "ok"){	
 											div.remove();
+											
 										}
 									},
 									 error : function(e){
@@ -1049,6 +1062,7 @@ let play_btn = document.querySelector(".fa-play");
 //	 							        alert("status : " + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 //	 								}
 								});
+								}
 							});
 							div3.append(btn1);
 							div3.append(btn2);

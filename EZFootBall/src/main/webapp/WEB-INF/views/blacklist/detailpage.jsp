@@ -1191,7 +1191,7 @@ document.getElementById("deletebtn").addEventListener("click",function(){
 		
 
 	let isDelete = confirm("정말로 삭제하시겠습니까?");
-	if(isDelete){
+	if(isDelete){ 
 		
 		/* $.ajax({
 			url : "${pageContext.request.contextPath}/blacklist/blacklistmain/deletebbs/${BlacklistVO.blacklistCode}",
