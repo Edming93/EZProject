@@ -23,10 +23,7 @@
 	<select id="getTotal" resultType="int">
 		select count(*) from blacklist;
 	</select>
-	
-	
-	
-	
+		
 	
 	<select id="selectBlackList" resultType="BlacklistVO">
 		select blacklist_code, user_id, buser_name, blacklist_title, blacklist_content, blacklist_local,
