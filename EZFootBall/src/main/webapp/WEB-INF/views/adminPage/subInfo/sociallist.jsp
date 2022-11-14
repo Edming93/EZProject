@@ -205,7 +205,7 @@
     <div id="modal">
         <h3>신청자 추가</h3>
             <ul id="flist">
-                <li><p>경기번호 : </p> <input type="text" name="" id="ingameCode" class="inbox"></li>
+                <li><p>경기번호 : </p> <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="" id="ingameCode" class="inbox"></li>
                 <li><p></p><ul id="gclist" class="listbox">
                     	<%
                     		for(int i=0; i<gamelist.size(); i++) {
@@ -231,7 +231,7 @@
                     </ul>
                     </li>
                     
-                <li><p>신청자코드 : </p> <input type="text" name="" id="inuserCode" class="inbox"></li>
+                <li><p>신청자코드 : </p> <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="" id="inuserCode" class="inbox"></li>
                 <li><p></p><ul id="uclist" class="listbox">
                     	<%
                     	for(int i=0; i<userlist.size(); i++) {

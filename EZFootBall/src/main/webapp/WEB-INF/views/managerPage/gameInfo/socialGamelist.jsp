@@ -261,7 +261,7 @@
         <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/sadd">
         <input type="hidden" name="select" value="gameAdmin">
             <ul id="flist">
-                <li><p>경기장코드 : </p> <input type="text" name="fieldCode" id="infieldCode" class="inbox" autocomplete='off'></li>
+                <li><p>경기장코드 : </p> <input type="text" name="fieldCode" id="infieldCode" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p id="pbox" style="display: none;"> </p><ul id="fclist" class="listbox">
                     	<%
                     	for(int i=0; i<allfield.size(); i++) {
@@ -273,7 +273,7 @@
                     </ul>
                     </li>
                     
-                <li><p>경기날짜 : </p> <input type="text" name="gameDay" id="txtDate" value="" autocomplete='off'></li>
+                <li><p>경기날짜 : </p> <input type="text" name="gameDay" id="txtDate" value="" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p>경기시간 : </p> <select name="gameTime" id="timeselect">
                 						<option value="null">시간을 선택해 주세요</option>
                 						<option value="08:00" id="08:00">08:00</option>
@@ -304,10 +304,10 @@
                 						<option value="5vs5">5vs5</option>
                 						<option value="6vs6">6vs6</option>
                 					</select></li> -->
-                <li><p>최소인원 : </p> <input type="text" name="gameMinp" id="minp" class="inbox" autocomplete='off'></li>
-                <li><p>최대인원 : </p> <input type="text" name="gameMaxp" id="maxp" class="inbox" autocomplete='off'></li>
+                <li><p>최소인원 : </p> <input type="text" name="gameMinp" id="minp" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
+                <li><p>최대인원 : </p> <input type="text" name="gameMaxp" id="maxp" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p>매니저 : </p> <input type="text" name="gameMag" id="mag" class="inbox" autocomplete='off'></li>
-                <li><p>참가비 : </p> <input type="text" name="gamePay" id="pay" class="inbox" autocomplete='off'></li>
+                <li><p>참가비 : </p> <input type="text" name="gamePay" id="pay" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 
             </ul>
             <button id="addbtn">등록</button>

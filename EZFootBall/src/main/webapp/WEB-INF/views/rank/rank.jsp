@@ -129,11 +129,11 @@
 		    	  
 		    	  //document.getElementsByClassName("lediv")[i].innerText = data.userLevel;
 		    	  if(lv == '프로'){
-		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-g' style='color: #ffd233;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = '<iconify-icon icon="emojione-monotone:letter-s" style="color: #db4455;" width="30" height="30"></iconify-icon>' +　data.userLevel;
 		    	  }else if (lv == '아마추어') {
-		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-s' style='color: #ccc;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = '<iconify-icon icon="emojione-monotone:letter-a" style="color: #4b89dc;" width="30" height="30"></iconify-icon>' +　data.userLevel;
 		    	  }else if(lv == '루키'){
-		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-b' style='color: #a95608;' width='30' height='30'></iconify-icon>　" +　data.userLevel;
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = '<iconify-icon icon="emojione-monotone:letter-r" style="color: #26a653;" width="30" height="30"></iconify-icon>' +　data.userLevel;
 		    	  }else{
 		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-n' style='color: #26a653;' width='30' height='30'></iconify-icon>　";
 		    	  }

@@ -203,7 +203,7 @@
         <input type="hidden" name="ty" value="add" id="ty">
         <input type="hidden" name="resultCode" value="-1" id="rcode">
             <ul id="flist">
-                <li><p>경기번호 : </p> <input type="text" name="gameCode" id="ingameCode" class="inbox" autocomplete='off'></li>
+                <li><p>경기번호 : </p> <input type="text" name="gameCode" id="ingameCode" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p id="pgbox" style="display: none;"></p><ul id="gclist" class="listbox" style="display: none;">
                     	<%
                     		for(int i=0; i<gamelist.size(); i++) {
@@ -216,7 +216,7 @@
                     </ul>
                     </li>
                     
-                <li><p>신청자코드 : </p> <input type="text" name="userCode" id="inuserCode" class="inbox" autocomplete='off'></li>
+                <li><p>신청자코드 : </p> <input type="text" name="userCode" id="inuserCode" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p id="pcbox" style="display: none;"></p><ul id="uclist" class="listbox" style="display: none;">
                     	<%
                     	for(int i=0; i<userlist.size(); i++) {
@@ -228,7 +228,7 @@
                     </ul>
                     </li>
                     
-                <li><p>팀코드 : </p> <input type="text" name="teamCode" id="inteamCode" class="inbox" autocomplete='off'></li>
+                <li><p>팀코드 : </p> <input type="text" name="teamCode" id="inteamCode" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p id="ptbox" style="display: none;"></p><ul id="tclist" class="listbox" style="display: none;">
                     	<%
                     	for(int i=0; i<teamlist.size(); i++) {
@@ -240,8 +240,8 @@
                     </ul>
                     </li>
                 <li><p>결과 : </p> <input type="text" class="inbox" name="result" id="inresult" autocomplete='off'> </li>
-                <li><p>득점 : </p> <input type="text" class="inbox" name="score" id="inscore" autocomplete='off'> </li>
-                <li><p>어시스트 : </p> <input type="text" class="inbox" name="assitst" id="inassist" autocomplete='off'> </li>
+                <li><p>득점 : </p> <input type="text" class="inbox" name="score" id="inscore" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> </li>
+                <li><p>어시스트 : </p> <input type="text" class="inbox" name="assitst" id="inassist" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> </li>
                 
             </ul>
             <button id="addbtn">등록</button>
