@@ -43,8 +43,12 @@ public class AdminController {
 	private ManagerService managerService;
 
 	@GetMapping("/admin")
-	public String admin(HttpSession session) {
+	public String admin(HttpSession session,Model model) {
 		session.setAttribute("count", service.refundsub());
+		// 유저 정보 출력하기
+				model.addAttribute("userList", service.UInfoList());
+				model.addAttribute("team", service.joinList());
+				model.addAttribute("userListB", service.UInfoListB());
 		return "adminPage/adminMain";
 	}
 
@@ -86,10 +90,6 @@ public class AdminController {
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		model.addAttribute("managerList", managerService.getManagerList());
-		// 유저 정보 출력하기
-		model.addAttribute("userList", service.UInfoList());
-		model.addAttribute("team", service.joinList());
-		model.addAttribute("userListB", service.UInfoListB());
 		return "adminPage/adminMain";
 	}
 
