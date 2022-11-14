@@ -806,5 +806,10 @@ let play_btn = document.querySelector(".fa-play");
 		location.href="${pageContext.request.contextPath}";
 	});
 </script>
+
+<script type="text/javascript">
+	$('#blackuserCode').val("");
+</script>
+
 </body>
 </html>
