@@ -744,7 +744,7 @@
          </div>
          
          <div class="list_content" id="list_content">
-        	
+        	<h3>신청자가 없습니다</h3>
         </div>
       </div>
       
@@ -891,6 +891,7 @@
 	    	  	      	        	divlist.append(divv);
 	    	  	      	        	divlist.append(divl);
 	    	  	      	        	
+	    	  	      	        	document.getElementById("list_content").innerHTML = " ";
 	    	  	      	        	document.getElementById("list_content").append(divlist);
 	    	  	      	        	
 	    	  	      	        	list.push(data4[name2].userCode); 

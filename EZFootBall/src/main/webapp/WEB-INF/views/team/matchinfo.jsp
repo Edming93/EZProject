@@ -805,7 +805,7 @@
          </div>
          
          <div class="list_content" id="list_content">
-        	
+        	<h3>신청팀이 없습니다.</h3>
         </div>
       </div>
       
@@ -896,6 +896,7 @@
 	        	      }).then(response => response.json()) 
 	        	      
 	        	      .then(data3 => {
+	        	    	 
 	        	         for ( let name in data3) {
 	        	        	 list.push(data3[name]);
 	        	        	 const divlist = document.createElement("div");
@@ -953,7 +954,7 @@
 	        	      	      }).catch(error => {
 	        	      	         console.log("error");
 	        	      	      });
-	        	        	 
+	        	        	 document.getElementById("list_content").innerHTML = " ";
 	        	        	 document.getElementById("list_content").append(divlist);
 	        	        	 
 	        	         }
@@ -1169,6 +1170,8 @@
 					}
 					else if('<%=ugen%>' == '${matchinfo.gameGender}' && genum == 1){
 						if(cntmem != gamecnt){
+							console.log(cntmem);
+							console.log(gamecnt);
 							alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
 						}else{
 							if(cnt > 0) {
@@ -1179,6 +1182,7 @@
 						}
 					}else if('${matchinfo.gameGender}' == '혼성' && genum == 2){
 						if(cntmem != gamecnt){
+							console.log("durl22222");
 							alert("이 게임은" + '${matchinfo.gameMacth}' + "매치로 인원 수가 맞지 않아 신청 할 수 없습니다");
 						}else{
 							if(cnt > 0) {
@@ -1188,6 +1192,7 @@
 							}
 						}
 					}else{
+						console.log("durl333");
 						alert("이 게임은" + '${matchinfo.gameGender}' + "매치 게임으로 신청 할 수 없습니다");
 					}
 					
