@@ -87,7 +87,7 @@
 	
 	.content {
 		display: flex;
-   		justify-content: space-between;
+   		justify-content: space-around;
    		width: 100%;
 	}
 	.content1{
@@ -108,7 +108,7 @@
 		border : 1px solid #D7D7D7;
 		height : 40px;
 		border-radius : 10px;
-		padding-left : 5px;
+		padding-left: 15px;
 		width: 100%;
 		margin-bottom: 10px;
 	}
@@ -131,7 +131,7 @@
 		height: 40px;
     	margin-bottom: 10px;
 		border-radius : 7px;
-		padding-left : 5px;
+		padding-left: 15px;
 		color : #26A653;
 		font-size:12px;
 		width: 100%;
@@ -163,7 +163,7 @@
 	    width: 100%;
 	    height: 50px;
 	    border-radius: 10px;
-	    padding-left: 5px;
+		padding-left: 15px;
 	    border: 1px solid #D7D7D7;
     }
     .submit_button{
@@ -311,19 +311,20 @@
         margin-left:10px;
     }
     .confirm{
-    	display : none;
-    	flex-direction: row;
+	    display: none;
+	    flex-direction: column;
 	    flex-wrap: wrap;
 	    position: absolute;
-	    width: 298px;
-	    height: 250px;
+	    width: 214px;
+	    height: 260px;
 	    background-color: white;
-	    border: 4px solid #26a563;
-	    padding-left: 4%;
-	    padding-top: 1%;
-	    top: 42%;
-	    right: 13%;
-    }
+	    top: 50%;
+	    right: 23%;
+	    box-shadow: 0px 0px 10px 5px #dfdfdf;
+	    align-items: center;
+	    border-radius: 20px;
+	    padding: 20px;
+	}
     
     .bottom_banner {
         width:100%;
@@ -336,6 +337,19 @@
     footer {
     	margin-top: 70px;
     }
+    
+    .Dcheck {
+	    border: 1px solid lightgrey;
+	    width: 96%;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    flex-direction: column;
+	    margin-bottom: 3px;
+	    cursor: pointer;
+    }
+    
+    
     
     </style>
     
@@ -528,7 +542,7 @@
 							
 							comdiv.classList.toggle('show');
 							if(comdiv.classList.contains('show')){
-								comdiv.style.display = "block";
+								comdiv.style.display = "flex";
 							}
 							console.log("ehsmsrj"+data.length);
 
@@ -540,8 +554,6 @@
 									const div1 = document.createElement("div");
 									
 									div1.setAttribute("class","Dcheck");
-									div1.style.border = "1px solid black";
-									div1.style.width = "160px";
 								
 									const p1 = document.createElement("p");
 									p1.innerText = "유저이름 : "+data[x].userName;
