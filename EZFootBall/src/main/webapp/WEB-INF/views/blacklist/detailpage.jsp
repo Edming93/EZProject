@@ -1198,7 +1198,11 @@ let play_btn = document.querySelector(".fa-play");
 	});
 
 document.getElementById("editbtn").addEventListener("click",function(){
-	location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}";
+	let isedit = confirm("수정하시겠습니까?");
+	if(isedit){ 
+		let black_code = $('.black_code').text();
+	location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/editbbs/${BlacklistVO.blacklistCode}?blackCode="+black_code;
+	}
 });
 
 

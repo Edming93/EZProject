@@ -121,10 +121,13 @@ public class BlacklistController {
 
 	// 페이지 수정
 	@GetMapping("/blacklistmain/editbbs/{blacklistCode}")
-	public String editBBS(@SessionAttribute("sessionVO") UserVO uvo, Model model,
-			@PathVariable("blacklistCode") String blacklistCode) {
+	public String editBBS(@SessionAttribute("sessionVO") UserVO uvo, Model model, @RequestParam("blackCode") String blackCode,
+			@PathVariable("blacklistCode") String blacklistCode, @ModelAttribute("BlacklistVO") BlacklistVO bvo) {
+		bvo.setBlackuserCode(Integer.parseInt(blackCode));
+		System.out.println(bvo.getBlackuserCode());
+		service.deleteuserBlack(bvo);
 		if (uvo != null) {
-			service.getBlackListContent(model, blacklistCode);
+			service.getBlackListContent(model, blacklistCode);	
 			String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
 			model.addAttribute("blacklistLocal", cateList);
 			return "blacklist/editbbs";
@@ -135,19 +138,21 @@ public class BlacklistController {
 
 	// 페이지 수정 로직
 	@PostMapping("/blacklistmain/editbbs")
-	public String editBBSResult(@SessionAttribute("sessionVO") UserVO uvo,
+	public String editBBSResult(@SessionAttribute("sessionVO") UserVO uvo, @RequestParam("blackuserCode") String blackuserCode,
 			@ModelAttribute("BlacklistVO") BlacklistVO bvo) {
 		bvo.setUserId(uvo.getUserId());
 		bvo.setBuserName(uvo.getUserName());
 		bvo.setUserCode(uvo.getUserCode());
-
-		System.out.println(bvo.getBlackuserCode());
-		service.deleteuserBlack(bvo);
+		/* System.out.println(bvo.getBlackuserCode()); */
+		/* service.deleteuserBlack(bvo); */
 		//먼저 기존값을 받아서 딜리트 로직을 진행하고
-		bvo.setBlacklistCode(0);
+		/* bvo.setBlackuserCode(0); */
 		// 초기화를 진행하고
 		//아래 삭제로직에서 새로 받아서 진행한것처럼 새값을 넣어준다 
-		//bvo.setBlackuserCode(Integer.parseInt(blackCode));
+		/*
+		 * bvo.setBlackuserCode(Integer.parseInt(blackuserCode));
+		 * System.out.println(bvo.getBlackuserCode());
+		 */
 		service.adduserBlack(bvo);
 		if (service.editBlackList(bvo)) {
 			return "redirect:/blacklist/blacklistmain";
