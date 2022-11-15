@@ -30,16 +30,23 @@
 	
 	#searchbox {
 		position: absolute;
-		right: 0;
-		width: 45vw;
-		max-width: 500px;
-		height: 500px;
-		max-height: 500px;
-		background: #fff;
-		overflow: auto;
-		display: none;
-		z-index: 1;
+	    right: -45px;
+	    width: 45vw;
+	    max-width: 480px;
+	    height: 500px;
+	    max-height: 500px;
+	    background: #fff;
+	    overflow: auto;
+	    display: none;
+	    z-index: 1;
+	    box-shadow: 3px 3px 10px 5px #bbbbbb;
+	    top: 40px;
 	}
+	#searchbox::-webkit-scrollbar {
+		display:none;
+	}
+	
+	
 	#keyword{
 		padding: 15px;
 		width: 100%;
@@ -51,19 +58,29 @@
 		margin-bottom: 5px;
 	}
 	
+	#keywords {
+		display: flex;
+	}
+	
 	#keywords > li {
 		list-style-type: none;
-		display: inline-block;
-		padding: 2px 5px;
-		background-color: #eee;
-		color: #000;
-		border-radius: 15px;
-		font-size: 12px;
-		margin: 0 5px;
+	    display: flex;
+	    padding: 2px 5px;
+	    background-color: #eee;
+	    color: #000;
+	    border-radius: 15px;
+	    font-size: 12px;
+	    margin: 0 5px;
+	    width: 55px;
+	    height: 25px;
+	    justify-content: center;
+	    align-items: center;
 	}
 	
 	#keywords > li > span:nth-child(2) {
 		cursor: pointer;
+		margin-left: 4px;
+    	margin-bottom: 1px;
 	}
 	section.sch {
 		padding: 15px;
@@ -74,28 +91,29 @@
 	}
 	
 	.schheader{
-		padding: 20px 0;
+		padding: 7px 0;
+	    font-size: 16px;
 	}
 	
 	.schmain {
-		display: flex;
-		flex-wrap: wrap;
-   		justify-content: space-between;
-   		align-items: center;
-   		text-align: center;
-   		height: 80px;
+	    display: flex;
+	    flex-wrap: wrap;
+	    justify-content: space-between;
+	    align-items: center;
+	    text-align: center;
+	    height: 80px;
 	}
 	
 	.schmain > a {
-	    display: flex;
+		display: flex;
 	    flex-direction: column;
 	    justify-content: center;
 	    text-decoration: none;
 	    color: #fff;
 	    width: 33%;
-	    height: 100%;
-	    background: #0071C3;
-	    font-size: 18px;
+	    height: 70%;
+		background: #26a653;
+	    font-size: 16px;
 	    font-weight: bold;
 	}
 	.schmain > a:nth-child(1) {
@@ -197,16 +215,17 @@
 	
 	#search_result_box {
 		position: absolute;
-		right: 0;
-		width: 45vw;
-		max-width: 500px;
-		height: 500px;
-		max-height: 500px;
-		background: #fff;
-		overflow: auto;
-		display: none;
-		z-index: 1;
-		
+	    right: -45px;
+	    width: 45vw;
+	    max-width: 480px;
+	    height: 500px;
+	    max-height: 500px;
+	    background: #fff;
+	    overflow: auto;
+	    display: none;
+	    z-index: 1;
+	    box-shadow: 3px 3px 10px 5px #bbbbbb;
+	    top: 40px;
 	}
 	
 	#search_result_box_inner {

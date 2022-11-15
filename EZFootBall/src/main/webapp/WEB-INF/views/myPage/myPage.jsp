@@ -175,8 +175,11 @@
 }
 
 .email_area {
-	padding-top: 5px;
-    padding-left: 8px;
+    padding-top: 5px;
+    font-size: 19px;
+    color: #26a653;
+    padding-left: 35px;
+    font-weight: bold;
 }
 
 
@@ -189,6 +192,14 @@
 .info_small_size {
 	font-size: 14px;
 }
+
+.email_font {
+    color: #959595;
+    margin-top: 5px;
+    margin-left: 1px;
+}
+
+
 
 .main_left2 {
     width: 100%;
@@ -268,7 +279,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 2px solid #d5d5d5;
+    border: 1px solid #d5d5d5;
     border-radius: 20px;
     overflow: hidden;
 }
@@ -288,6 +299,14 @@
 .main_right1 > ul > li:hover, .main_right2 > ul > li:hover, .main_right3 > ul > li:hover {
 	background-color:#d6d6d6;
 	font-weight: bold;
+} 
+
+.main_right1 > ul > li:hover div span, .main_right2 > ul > li:hover a, .main_right3 > ul > li:hover a{
+	color:white;
+}
+
+.main_right1 > ul > li:hover .right_btn, .main_right2 > ul > li:hover .right_btn, .main_right3 > ul > li:hover .right_btn {
+	padding-left:15px;
 } 
 
 .main_right1 > ul > li:hover div span, .main_right2 > ul > li:hover a, .main_right3 > ul > li:hover a{
@@ -477,9 +496,9 @@ footer {
 								<li class="info_margin"><img src="${pageContext.request.contextPath}/image/profile_photo.png">
 									<div class="name_area">
 										<h3 class="name1">${userVO.userName }</h3>
-										<span class="info_small_size">#${userVO.userCode}</span>
+										<span class="info_small_size email_font">${userVO.userEmail1}${userVO.userEmail2}</span>
 									</div>
-									<span class="email_area">${userVO.userEmail1}${userVO.userEmail2}</span>
+									<span class="email_area">#${userVO.userCode}</span>
 								</li>
 <%-- 								<li>주소 : ${userVO.userLocal }</li> --%>
 								<li><span class="info_bold">Team</span> <span class="info_small_size">${uinVO.userGroup }</span></li>

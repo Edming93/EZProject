@@ -27,7 +27,7 @@
  	.sub_con{
 		grid-area: sub;
 	    justify-content: center;
-	    width: 95%;
+    	width: 50%;
 	    border-radius: 20px;
     	box-shadow: 0px 0px 20px 10px #e3e3e366;
 	    padding: 60px;
@@ -82,7 +82,7 @@
 #gameGender{
      width: 25%; /* 원하는 너비설정 */
 	 padding : 0 10px;
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background: url(${pageContext.request.contextPath}/image/arrow.svg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
      background-size : 25%;
      background-color : white; 
      border: 1px solid #D7D7D7;
@@ -146,7 +146,7 @@
 #gameplace{
      width: 25%; /* 원하는 너비설정 */
 	 padding : 0 10px;
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background: url(${pageContext.request.contextPath}/image/arrow.svg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
      background-size : 25%;
      background-color : white; 
      border: 1px solid #D7D7D7;
@@ -321,7 +321,7 @@
 #gameTime{
      width: 100%; /* 원하는 너비설정 */
      padding: 0 15px;
-     background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+     background: url(${pageContext.request.contextPath}/image/arrow.svg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
      background-size : 20%;
      background-color : white; 
      border: 1px solid #D7D7D7;
@@ -1397,7 +1397,7 @@
       
       	<div class="subt">
             <div class="dinput paybox">
-            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="우리팀이 지불할 금액을 입력하세요"/> <span>원</span>
+            	 <input type="text" name="uteamPay" id="uteamPay" placeholder="우리팀이 지불할 금액"/> <span>원</span>
             </div>
       	</div>
       	

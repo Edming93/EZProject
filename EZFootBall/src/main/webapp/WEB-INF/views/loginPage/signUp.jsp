@@ -69,7 +69,7 @@
 
 
         .input{
-			border: 1px solid #2a2a2a;
+    		border: 1px solid #b1b1b1;
 		    background-color: #fff;
 		    padding: 8px;
 		    width: 100%;
@@ -77,6 +77,13 @@
 		    border-radius: 7px;
 		    color: #000000;
             padding-left: 20px;
+        }
+        .input:focus {
+        	outline: none;
+        }
+        .address_area {
+        	display: flex;
+    		justify-content: space-between;
         }
         .address {
     		width: 77%;
@@ -90,14 +97,14 @@
         }
         .email_group {
             display: flex;
+            justify-content: space-between;
         }
         .ck_btn {
         	width: 22%;
 		    height: 50px;
 		    background: #fff;
 		    border-radius: 7px;
-		    border: 1px solid #000;
-		    
+    		border: 1px solid #b1b1b1;
         }
         .mail_check_input {
 		    width: 100%;
@@ -331,7 +338,7 @@
         	
         	
 		<div class="title">주소</div>
-           <div><input type="text" class="input address" id="address" name="userAddress1" readonly /><button class="ck_btn" id="address_kakao">주소찾기</button></div>
+           <div class="address_area"><input type="text" class="input address" id="address" name="userAddress1" readonly /><button class="ck_btn" id="address_kakao">주소찾기</button></div>
         <div class="title">상세 주소</div>
            <div><input type="text" class="input address_detail" name="userAddress2" /></div>
            

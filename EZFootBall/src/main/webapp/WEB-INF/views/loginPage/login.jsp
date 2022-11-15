@@ -102,7 +102,7 @@
 			width: 350px;
    			height: 55px;
 			margin: 5px 0px;
-			border: 1px solid #000;
+    		border: 1px solid #898989;
 			background-color: #fff;
 			padding: 8px 17px;
 			border-radius: 5px;
