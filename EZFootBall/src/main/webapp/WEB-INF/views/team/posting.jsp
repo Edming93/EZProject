@@ -27,7 +27,7 @@
  	.sub_con{
 		grid-area: sub;
 	    justify-content: center;
-    	width: 50%;
+    	width: 65%;
 	    border-radius: 20px;
     	box-shadow: 0px 0px 20px 10px #e3e3e366;
 	    padding: 60px;
@@ -933,7 +933,7 @@
          
         <div class="subt">
                 <div class="matchf_in">
-                <input type="text" name="fieldName" id="fieldName" placeholder="경기장">
+                <input type="text" name="fieldName" id="fieldName" placeholder="경기장" readonly>
                     <div class="modal22">
 				      <div class="modal22_body22"><strong style="font-size : 30px">지도 검색하기</strong>
 				      
@@ -1005,6 +1005,11 @@
                         							
                         							fieldName.value = comment.fieldName; 
                         							fieldAddress.value = comment.fieldAddress;
+                        							
+                        							document.getElementById("txtDate").value ="";
+                        							document.getElementById("gameTime").value ="";
+                        							
+                        							
                         							fieldCode.value = comment.fieldCode;
                         							gamePay.value = comment.fieldRentalfee;
                         							gameMacth.value = comment.fieldType;
@@ -1081,6 +1086,7 @@
                 </div>
             
         </div>
+        
         <div class="subt">
             <div class="date">
                 <p>경기 날짜</p>
