@@ -113,6 +113,10 @@ public interface TeamDAO {
 			public void deleteT(TeamMemberVO vo);
 			
 			public void updatePerson1(Map<String, Object> map);
+			
+			public int upUserAbil(UserVO vo);
+			
+			public int upUserInfo(UserVO vo);
 
 		//-----------------------------------------------
 }

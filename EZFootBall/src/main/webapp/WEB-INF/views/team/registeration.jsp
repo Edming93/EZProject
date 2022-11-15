@@ -531,17 +531,20 @@
 						for(let comment of data){
 							if(data.length == 1){
 								if(comment.teamCode == null|| comment.teamCode == 0 || comment.teamCode == 'null'){
-									for(var j=0; j<=i; j++){
+									var cnt =0;
+									for(var j=0; j<i; j++){
 										if(document.getElementsByClassName("userCode")[j].value == comment.userCode){
 											alert("이미 존재합니다");
 											document.getElementsByClassName("tmem")[i].value = "";
 											document.getElementsByClassName("tmem")[i].focus();
+											cnt++;
 											break;
-										}else{
-											userCode.value = comment.userCode;
-											console.log(data[0].userCode);
-											console.log(data[0].teamCode);
 										}
+									}
+									if(cnt == 0){
+										userCode.value = comment.userCode;
+										console.log(data[0].userCode);
+										console.log(data[0].teamCode);
 									}
 									
 								}else{

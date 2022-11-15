@@ -221,5 +221,13 @@ public class TeamService {
 				dao.updatePerson1(map);
 			}
 			
+			public void upUserAbil(UserVO vo) {
+				dao.upUserAbil(vo);
+			}
+			
+			public void upUserInfo(UserVO vo) {
+				dao.upUserInfo(vo);
+			}
+			
 			//-----------------------------------------------------
 }

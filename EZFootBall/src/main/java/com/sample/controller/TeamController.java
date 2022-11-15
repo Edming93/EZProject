@@ -278,8 +278,35 @@ public class TeamController {
 			int LTC = service.getLastTeamC();
 			vo.setTeamCode(LTC);
 			UserVO uvo = (UserVO)session.getAttribute("sessionVO");
-			service.updateUserAbil(vo);
-			service.updateUserInfo(vo);
+			
+			UserVO user1 = new UserVO();
+			user1.setTeamCode(LTC);
+			user1.setUserCode(Integer.parseInt(vo.getUserCode1()));
+			service.upUserAbil(user1);
+			service.upUserInfo(user1);
+			UserVO user2 = new UserVO();
+			user2.setTeamCode(LTC);
+			user2.setUserCode(Integer.parseInt(vo.getUserCode2()));
+			service.upUserAbil(user2);
+			service.upUserInfo(user2);
+			UserVO user3 = new UserVO();
+			user3.setTeamCode(LTC);
+			user3.setUserCode(Integer.parseInt(vo.getUserCode3()));
+			service.upUserAbil(user3);
+			service.upUserInfo(user3);
+			UserVO user4 = new UserVO();
+			user4.setTeamCode(LTC);
+			user4.setUserCode(Integer.parseInt(vo.getUserCode4()));
+			service.upUserAbil(user4);
+			service.upUserInfo(user4);
+			UserVO user5 = new UserVO();
+			user5.setTeamCode(LTC);
+			user5.setUserCode(Integer.parseInt(vo.getUserCode5()));
+			service.upUserAbil(user5);
+			service.upUserInfo(user5);
+			
+			//service.updateUserAbil(vo);
+			//service.updateUserInfo(vo);
 			uvo.setTeamCode(LTC);
 			session.setAttribute("sessionVO", uvo );
 			model.addAttribute("userVO", uvo);
