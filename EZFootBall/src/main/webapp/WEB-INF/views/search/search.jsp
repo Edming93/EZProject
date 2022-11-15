@@ -97,14 +97,23 @@
 					}
 				});
 			</script>
-
+			
+			<script type="text/javascript">
+			$('#search').on("keypress", function(e){
+				if(e.keyCode==13){
+					e.preventDefault();
+				}	
+			});
+			
+			</script>
 
 
 			<script type="text/javascript">
 				/* 인풋창 입력시 데이터 실시간 받아오기 */
 				$("#search").on("change keyup", react);
-				function react() {
-					// textarea 입력된 글자수 길이 확인
+				function react(e) {
+				
+					// textarea 입력된 글자수 길이 확인	
 					var inputLength = $(this).val().trim().length;
 
 					// textarea 에 작성된 전체 데이터 확인
@@ -125,7 +134,7 @@
 					}
 
 
-					// if (e.keyCode != 8 && !e.altKey && !e.ctrlKey && e.keyCode != 16 && e.keyCode != 17 && e.keyCode != 18 && e.keyCode != 19 && e.keyCode != 20 && e.keyCode != 27 && e.keyCode != 37 && e.keyCode != 39) {
+// 					if (e.keyCode != 8 && !e.altKey && !e.ctrlKey && e.keyCode != 16 && e.keyCode != 17 && e.keyCode != 18 && e.keyCode != 19 && e.keyCode != 20 && e.keyCode != 27 && e.keyCode != 37 && e.keyCode != 39) {
 					const searchText = document.getElementById("search").value;
 					const simple_data1 = { searchText };
 

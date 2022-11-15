@@ -43,12 +43,12 @@ public class AdminController {
 	private ManagerService managerService;
 
 	@GetMapping("/admin")
-	public String admin(HttpSession session,Model model) {
+	public String admin(HttpSession session, Model model) {
 		session.setAttribute("count", service.refundsub());
 		// 유저 정보 출력하기
-				model.addAttribute("userList", service.UInfoList());
-				model.addAttribute("team", service.joinList());
-				model.addAttribute("userListB", service.UInfoListB());
+		model.addAttribute("userList", service.UInfoList());
+		model.addAttribute("team", service.joinList());
+		model.addAttribute("userListB", service.UInfoListB());
 		return "adminPage/adminMain";
 	}
 
@@ -86,9 +86,9 @@ public class AdminController {
 		session.setAttribute("fieldList", fdService.getFieldListAll());
 		// 결제내역 정보
 		session.setAttribute("rvListAll", fdService.FieldReservationListAll());
-		//취소요청
+		// 취소요청
 		session.setAttribute("count", service.refundsub());
-		
+
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		model.addAttribute("managerList", managerService.getManagerList());
@@ -568,7 +568,7 @@ public class AdminController {
 		return "redirect:/admin/select?select=" + session.getAttribute("select");
 	}
 
-	//커뮤니티 페이지
+	// 커뮤니티 페이지
 	@GetMapping("/comuselect")
 	public String comuselect(@RequestParam("comuselect") String comuselect, HttpSession session, Model model) {
 		service.getBlackList(model);
@@ -579,38 +579,36 @@ public class AdminController {
 		return "adminPage/adminMain";
 	}
 
-	//리뷰 검색
+	// 리뷰 검색
 	@PostMapping("/reviewselect")
-	public String reviewselect(@RequestParam("reviewcode") int reviewcode,
-			Model model, ReviewCommentVO vo) {
+	public String reviewselect(@RequestParam("reviewcode") int reviewcode, Model model, ReviewCommentVO vo) {
 		vo.setUserCode(reviewcode);
 		List<ReviewCommentVO> list = service.selectCommentList(vo);
 		model.addAttribute("review", list);
 		System.out.println(list.get(0));
 		return "adminPage/adminMain";
 	}
-	
-	//블랙리스트 검색
-		@PostMapping("/blackselect")
-		public String blacklistselect(Model model, BlacklistVO vo, @RequestParam("blacklocal") String blacklocal,
-				@RequestParam("search") String search) {
 
-			if (blacklocal.equals("local")) {
-				vo.setBlacklistLocal(search);
-			} else if (blacklocal.equals("buserName")) {
-				vo.setBuserName(search);
-			} else if (blacklocal.equals("userCode")) {
-				vo.setSuserCode(search);
-			} else if (blacklocal.equals("blackuserCode")) {
-				vo.setSblackuserCode(search);
-			} 
-			model.addAttribute("list", service.joinblackList(vo));
+	// 블랙리스트 검색
+	@PostMapping("/blackselect")
+	public String blacklistselect(Model model, BlacklistVO vo, @RequestParam("blacklocal") String blacklocal,
+			@RequestParam("search") String search) {
 
-			return "adminPage/adminMain";
+		if (blacklocal.equals("local")) {
+			vo.setBlacklistLocal(search);
+		} else if (blacklocal.equals("buserName")) {
+			vo.setBuserName(search);
+		} else if (blacklocal.equals("userCode")) {
+			vo.setSuserCode(search);
+		} else if (blacklocal.equals("blackuserCode")) {
+			vo.setSblackuserCode(search);
 		}
-	
-	
-	//리뷰 삭제
+		model.addAttribute("list", service.joinblackList(vo));
+
+		return "adminPage/adminMain";
+	}
+
+	// 리뷰 삭제
 	@PostMapping("/reviewdelete")
 	@ResponseBody
 	public int reviewdelete(HttpSession session, @RequestParam(value = "reviewChkCode[]") List<String> chArr,
@@ -629,8 +627,8 @@ public class AdminController {
 
 		return result;
 	}
-	
-	//블랙 리스트 삭제
+
+	// 블랙 리스트 삭제
 	@PostMapping("/blacklistdelete")
 	@ResponseBody
 	public int blacklistdelete(HttpSession session, @RequestParam(value = "blackChkCode[]") List<String> chArr,
@@ -649,15 +647,14 @@ public class AdminController {
 
 		return result;
 	}
-	
-	
-	//블랙리스트 등록
+
+	// 블랙리스트 등록
 	@PostMapping("/blackcheck")
 	@ResponseBody
 	public int blackCheckList(HttpSession session, @RequestParam(value = "blakcChkCode[]") List<String> chArr,
 			BlacklistVO vo) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-		String userId = uvo.getUserId();		
+		String userId = uvo.getUserId();
 		int result = 0;
 
 		if (uvo != null) {
@@ -669,14 +666,14 @@ public class AdminController {
 
 		return result;
 	}
-	
-	//블랙리스트 해제
+
+	// 블랙리스트 해제
 	@PostMapping("/blackclear")
 	@ResponseBody
 	public int blackClearList(HttpSession session, @RequestParam(value = "blakcChkCode[]") List<String> chArr,
 			BlacklistVO vo) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-		String userId = uvo.getUserId();	
+		String userId = uvo.getUserId();
 		int result = 0;
 
 		if (uvo != null) {
@@ -690,30 +687,30 @@ public class AdminController {
 	}
 
 	@GetMapping("/payselect")
-	public String payselect(@RequestParam("payselect") String payselect, Model model,HttpSession session,
-							HttpServletRequest request) {
+	public String payselect(@RequestParam("payselect") String payselect, Model model, HttpSession session,
+			HttpServletRequest request) {
 		String chBox[] = request.getParameterValues("chBox");
-		//취소요청
+		// 취소요청
 		session.setAttribute("count", service.refundsub());
-		
-		if(payselect.equals("pay")) {
+
+		if (payselect.equals("pay")) {
 			model.addAttribute("rvListAll", fdService.FieldReservationListAll());
-		}else if(payselect.equals("cancel")){
+		} else if (payselect.equals("cancel")) {
 			model.addAttribute("rfListAll", fdService.FieldRefundListAll());
-		}else if(payselect.equals("pay_cancel")) {
-			for(int i=0; i<chBox.length; i++) {
+		} else if (payselect.equals("pay_cancel")) {
+			for (int i = 0; i < chBox.length; i++) {
 				DataVO dvo = new DataVO();
-				
-				if(fdService.selectRvType(chBox[i]).equals("S") || fdService.selectRvType(chBox[i]).equals("TS")) {
-					if(fdService.selectRvType(chBox[i]).equals("TS")) {
+
+				if (fdService.selectRvType(chBox[i]).equals("S") || fdService.selectRvType(chBox[i]).equals("TS")) {
+					if (fdService.selectRvType(chBox[i]).equals("TS")) {
 						dvo.setGameCode(Integer.parseInt(fdService.selectGameCode(chBox[i])));
 						dvo.setTeamCode(Integer.parseInt(fdService.selectTeamCode(chBox[i])));
 						fdService.TeamFieldReservationCancelUpdate(dvo);
-					}else {
+					} else {
 						System.out.println("몇번와?");
 						fdService.GameSignUpCancelUpdate(chBox[i]);
 					}
-				}else {
+				} else {
 					System.out.println("여긴 몇번와?");
 					fdService.payCancelUpdate(chBox[i]);
 					fdService.TGRCancelUpdate(fdService.selectGameCode(chBox[i]));
@@ -722,7 +719,7 @@ public class AdminController {
 			model.addAttribute("rfListAll", fdService.FieldRefundListAll());
 			return "redirect:/admin/payselect?payselect=cancel";
 		}
-		
+
 		model.addAttribute("payselect", payselect);
 		return "adminPage/adminMain";
 	}
@@ -747,7 +744,7 @@ public class AdminController {
 	public String inquiryAdd(String detail, String answer, Model model, InquiryVO inquiryVO) {
 		inquiryVO.setInquiryCode(Integer.parseInt(detail));
 		inquiryVO.setAnswerContent(answer);
-		inquiryService.InquiryAdd(inquiryVO);
+		inquiryService.InquiryAdd2(inquiryVO);
 		model.addAttribute("adminselect", "qna");
 		return "redirect:/admin/adminselect";
 	}

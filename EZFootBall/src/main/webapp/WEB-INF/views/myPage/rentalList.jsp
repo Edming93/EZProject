@@ -628,7 +628,7 @@ td > a{
 									tr1.style.display = "table-row";
 									$('.collapsible').hide();
 					        		if($('.state').val() == "예약완료"){
-					        			if(list.rvState == '신청취소'){
+					        			if(list.rvState == '취소신청' || list.rvState == '예약취소'){
 					        				tr1.style.display = "none";
 					        			}
 					        		}else if($('.state').val() == "신청취소"){
