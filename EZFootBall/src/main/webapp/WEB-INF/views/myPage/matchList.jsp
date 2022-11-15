@@ -561,6 +561,7 @@ td > a{
 						success: function(data){				
 							console.log(data);
 							for (const list of data.list) {
+								console.log(list)
 								$('#npc').hide();
 								table.style.display = "inline-table";
 								console.log(data.userName);
@@ -571,6 +572,7 @@ td > a{
 								let newtd = document.createElement("td");
 								newtd.className = "statebox";
 								newtd.innerText = list.rvState;
+								newtd.id = "stat" + list.rvCode;
 								
 								rvcode = list.rvCode;
 								
@@ -597,7 +599,8 @@ td > a{
 										"<li style='padding-right: 80px;'><p class='namebox'>예약타입</p><p>"+list.rvType+"</p></li>"+
 										"<li><p class='namebox'>결제정보</p><p>총 결제금액</p></li>"+
 										"<li><p class='namebox'>　</p><p class='paybox'>"+list.userPayment.toLocaleString()+"원</p></li>"+
-										"</ul> <div class='refund' style='visibility: visible;'> <button class='refundbtn'>신청 취소</button> </div>";
+										"</ul> <div class='refund' style='visibility: visible;'> <button class='refundbtn' id=" + list.rvCode + ">신청 취소</button> </div>";
+									
 									}
 									
 								
@@ -657,11 +660,19 @@ td > a{
 								});
 								
 							//  취소
+							
 					        	$('.refundbtn').on("click",function(){
 					        		console.log("환불");
 					        		console.log(rvcode);
-					        	 	let params = {rvCode:rvcode};
-					        	 	$.ajax({
+					        	 	
+					        	 	var numse = $(this).prop("id");
+					        	 	console.log($(this).prop("id"));
+					        	 	console.log($(this).prop("id"));
+					        	 	var select = "#stat"+numse;
+					        	 	console.log($(select).text());
+					        	 	
+					        	 	let params = {rvCode:numse};
+					        	 	 $.ajax({
 					      		      url:"${pageContext.request.contextPath}/myPage/refund",
 					      		      type:"POST",
 					      		      contentType:"application/json; charset=utf-8",
@@ -670,7 +681,8 @@ td > a{
 					      		      success: function(data) {
 					      		    	if(data ==1){
 					      		    		console.log("성공");
-					      		    		newtd.innerText = '취소신청';
+					      		    		console.log(this);
+					      		    		$(select).text("취소신청");
 					      		    	}
 					      		    	  
 					      		      },
@@ -680,12 +692,22 @@ td > a{
 					      		  })
 					        		
 					        	});
+					        	
+					        	
+					        	//취소
+								/* for(var i=0; i<data.length; i++){
+									document.getElementsByClassName("refundbtn")[i].addEventListener("click",function(){
+										console.log(this);
+		        					});
+								} */
+					        	
 							}
 								// list 누르면 아래 박스추가
 					        	$('.rantal_item').on("click",function(){
 									$(this).next().nextAll('.collapsible').hide();
 									$(this).next().prevAll('.collapsible').hide();
 										console.log($(this).next().css('display'));
+										console.log($(this).text());
 									if($(this).next().css('display') == "table-row"){
 										$(this).next().hide();
 										return;

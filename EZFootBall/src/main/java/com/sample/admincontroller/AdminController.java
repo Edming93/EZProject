@@ -86,6 +86,8 @@ public class AdminController {
 		session.setAttribute("fieldList", fdService.getFieldListAll());
 		// 결제내역 정보
 		session.setAttribute("rvListAll", fdService.FieldReservationListAll());
+		//취소요청
+		session.setAttribute("count", service.refundsub());
 		
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
@@ -691,6 +693,8 @@ public class AdminController {
 	public String payselect(@RequestParam("payselect") String payselect, Model model,HttpSession session,
 							HttpServletRequest request) {
 		String chBox[] = request.getParameterValues("chBox");
+		//취소요청
+		session.setAttribute("count", service.refundsub());
 		
 		if(payselect.equals("pay")) {
 			model.addAttribute("rvListAll", fdService.FieldReservationListAll());
