@@ -266,6 +266,7 @@
     	display: flex;
     	justify-content: center;
     	align-items: center;
+    	overflow: hidden;
     }
 
     .header_icon {

@@ -264,19 +264,14 @@ td > a{
 
     .bottom_banner {
         width:100%;
-        height:235px;
         background-color: #26A653;
     	margin-top: 100px;
     	display: flex;
     	justify-content: center;
     	align-items: center;
+    	margin-top: 100px;
     }
-     .bottom_banner {
-        width:100%;
-        height:205px;
-        background-color: #26A653;
-       margin-top: 100px;
-        }
+
         footer {
             width: 100%;
           

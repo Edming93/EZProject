@@ -151,7 +151,7 @@ display: flex;
 }
 
 #inquiry_list th {
-	background-color: #26a653;
+	background-color: #404040;
 	color: #fff;
 	border-bottom: 1px solid black;
 }
