@@ -15,15 +15,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #contain * {
-            /* border: 1px solid black; */
-        }
+
         #contain{
             display: flex;
             flex-direction: column;
             width: 98%;
             margin: 0 auto;
-            height: 98vh;
+            height: 100%;
+        }
+        #submenu_area {
+        	border-bottom: 2px solid #26a653;
         }
         #submenu{
             display: flex;
@@ -41,15 +42,12 @@
             height: 100%;
             min-width: 100px;
             text-decoration: none;
-            color: black;
-            border: 1px solid black;
             display: flex;
-          align-items: center;
-          justify-content: center;
+          	align-items: center;
+          	justify-content: center;
         }
         #maincontent{
             width: 100%;
-            border: 1px solid black;
         }
         
         .menu1_a {
@@ -63,9 +61,9 @@
 </head>
 <body>
 <div id="contain">
-    <div>
+    <div id="submenu_area">
         <ul id="submenu">
-            <a class="score_menu" href="${pageContext.request.contextPath}/manager/manager?page=ranking&rankPage=rank1"><li>점수관리</li></a>
+            <a class="score_menu sub_menu1" href="${pageContext.request.contextPath}/manager/manager?page=ranking&rankPage=rank1"><li>점수관리</li></a>
         </ul>
     </div>
     <div id="maincontent">

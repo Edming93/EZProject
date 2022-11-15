@@ -26,69 +26,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	
-	
-		#searchbox1 {
+	#searchbox1 {
 		display: flex;
 		height: 80px;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 30px;
 
 	}
 	
 	#upside{
 		display: flex;
 		justify-content: space-between;
-    	padding: 0 15px;
+    	font-size: 15px;
+    	margin-bottom:10px;
     	
 	}
 	
-	 #select{
-        	width: 10%;
-    		height: 30px;
-    		border: 2px solid #26a563;
-   			border-radius: 10px;
-        }
         #saerch{
-        	width: 50%;
-    		height: 30px;
+			width: 50%;
+		    height: 30px;
+		    display: flex;	
+		    justify-content: flex-end;
         }
         #inputbox{
         	width : 85%;
-        	height : 30px;
-        }
-        #sbtn{
-        	width: 13%;
 		    height: 30px;
-		    border: 2px solid #BDD2B6;
-		    border-radius: 10px;
-		    background-color: #BDD2B6;
-		    color: white;
-		    font-weight: 700;
+		    background-color: #fff;
+		    border: 1px solid #e5e5e5;
+		    padding-left: 18px;
+		    margin-right:10px;
         }
-        #sbtn:hover {
-        	cursor : pointer;
-        	background-color : red;
-        }
-        #add{
-        	border: 1px solid #BDD2B6;;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #del{
-        	border: 1px solid #BDD2B6;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #upd{
-        	border: 1px solid #BDD2B6;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
+        
+
         #list{
     		display: flex;
     		justify-content: center;
@@ -100,33 +69,82 @@
         	background-color : #D2D79F;
         }
        #list table tr th{
-       		width: 120px;
+		    width: 120px;
 		    height: 50px;
-		    border-bottom: 2px solid #D2D79F;
-		    background-color: #F8EDE3;
+		    background-color: #e4e4e4;
+		}
+		#list table tbody tr {
+			border-bottom: 1px dotted #c3c3c3;
 		}
        		
-       }
        #list table tr th:first-child{
        		width : 50px;
        }
        #list table tr td{
        		height: 40px;
 		    text-align: center;
-		    border-bottom: 2px dotted #D2D79F;
        }
        #Cbox{
        		width : 18px;
        		height : 18px;
        }
+       
+       .searchbox1_area {
+       	 	display: flex;
+       	 	flex-direction: row;
+       }
+       #select{
+		    height: 30px;
+		    border: 1px solid #cfcfcf;
+		    background-color: #F5F5F5;
+		    color: #8E8E8E;
+		    font-weight: bold;
+		    text-align: center;
+		    margin-right:20px;
+     	}
        .checkbox{
        		width : 18px;
        		height : 18px;
        }
-       .nev{
-           display: flex;
-    		justify-content: center;
+        .sub_menu1 {
+		    background-color: #26a653;
+		    color: white;
+		    border-radius: 10px 10px 0px 0px;
+		}
+		.sub_menu2 {
+			font-weight: 100;
+		}		
+		.sub_menu3 {
+			font-weight: 100;
+		}
+	    .nev{
+		    display: flex;
+		    justify-content: center;
+		    margin-top: 30px;
+		    font-weight: bold;
+		    color: #525252;		
     	}
+        
+        .box_css {
+		    height: 30px;
+		    border: 1px solid #cfcfcf;
+		    background-color: #F5F5F5;
+		    color: #8E8E8E;
+		    font-weight: bold;
+		    text-align: center;
+		    cursor : pointer;
+        }
+        
+        .page_btn {
+        	color: #525252;
+        	margin: 0px 6px 0px 6px;
+        	cursor: pointer;
+        }
+        
+        .listnum {
+        	margin: 0px 7px 0px 7px;
+        	cursor: pointer;
+        }
 	
 	
 	
@@ -374,7 +392,8 @@
     
 	<div id="out">
 		<div id="searchbox1">
-			<select name="" id="select">
+			<div class="searchbox1_area">
+				<select name="" id="select" class="box_css">
 				<option value="null">카테고리</option>
 				<option value="subname">신청자</option>
 				<option value="gamecode">경기번호</option>
@@ -383,22 +402,21 @@
 				<option value="fieldtype">매치형태</option>
 				<option value="gender">성별</option>
 				<option value="mag">매니저</option>
-			</select>
-
-
+				</select>
+				<div id="btnbox">
+					<button id="add" class="box_css">추가</button>
+					<button id="del" class="box_css">삭제</button>
+				</div>
+			</div>
 			<div id="saerch">
 				<input type="text" name="" id="inputbox" placeholder="검색어를 입력하세요">
-				<button id="sbtn">검색</button>
+				<button id="sbtn" class="box_css">검색</button>
 			</div>
 		</div>
 
 		<div id="result">
 			<div id="upside">
-				<div>총 <%=sgamelist.size() %>건</div>
-				<div id="btnbox">
-					<button id="add">추가</button>
-					<button id="del">삭제</button>
-				</div>
+				<div>총 <%=gamelist.size() %>건</div>
 			</div>
 			<div id="list">
 				<table>
@@ -498,7 +516,7 @@
 			if((sgamelist.size()/15)>=1){
 				for(int i=1; i<=sgamelist.size()/15+1; i++){
 			%>
-				<a href="#" id="<%=i%>"> <%out.print(i); %> </a>
+				<a href="#" id="<%=i%>" class="listnum"> <%out.print(i); %> </a>
 			<%
 				}
 			}else{

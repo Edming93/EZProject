@@ -26,70 +26,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	
-	#searchbox1{
+	#searchbox1 {
 		display: flex;
-    	justify-content: space-between;
-    	margin: 2% 0;
+		height: 80px;
+		align-items: center;
+		justify-content: space-between;
+
 	}
 	
 	#upside{
 		display: flex;
 		justify-content: space-between;
-    	padding: 0 15px;
+    	font-size: 15px;
+    	margin-bottom:10px;
     	
 	}
-	#out{
-		
-	}
 	
-	
-	 #select{
-        	width: 10%;
-    		height: 30px;
-    		border: 2px solid black;
-   			border-radius: 10px;
-   			margin-left: 2%;
-        }
         #saerch{
-        	width: 50%;
-    		height: 30px;
+			width: 50%;
+		    height: 30px;
+		    display: flex;	
+		    justify-content: flex-end;
         }
         #inputbox{
         	width : 85%;
-        	height : 30px;
-        }
-        #sbtn{
-        	width: 13%;
 		    height: 30px;
-		    border: 2px solid #BDD2B6;
-		    border-radius: 10px;
-		    background-color: #BDD2B6;
-		    color: white;
-		    font-weight: 700;
+		    background-color: #fff;
+		    border: 1px solid #e5e5e5;
+		    padding-left: 18px;
+		    margin-right:10px;
         }
-        #sbtn:hover {
-        	cursor : pointer;
-        	background-color : red;
-        }
-        #add{
-        	border: 1px solid #BDD2B6;;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #del{
-        	border: 1px solid #BDD2B6;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
-        #upd{
-        	border: 1px solid #BDD2B6;
-    		background: #BDD2B6;
-    		color: white;
-    		border-radius: 5px;
-        }
+        
+
         #list{
     		display: flex;
     		justify-content: center;
@@ -101,48 +69,100 @@
         	background-color : #D2D79F;
         }
        #list table tr th{
-       		width: 120px;
+		    width: 120px;
 		    height: 50px;
-		    border-bottom: 2px solid #D2D79F;
-		    background-color: #F8EDE3;
+		    background-color: #e4e4e4;
+		}
+		#list table tbody tr {
+			border-bottom: 1px dotted #c3c3c3;
 		}
        		
-       }
        #list table tr th:first-child{
        		width : 50px;
        }
        #list table tr td{
        		height: 40px;
 		    text-align: center;
-		    border-bottom: 2px dotted #D2D79F;
        }
        #Cbox{
        		width : 18px;
        		height : 18px;
        }
+       
+       .searchbox1_area {
+       	 	display: flex;
+       	 	flex-direction: row;
+       }
+       #select{
+		    height: 30px;
+		    border: 1px solid #cfcfcf;
+		    background-color: #F5F5F5;
+		    color: #8E8E8E;
+		    font-weight: bold;
+		    text-align: center;
+		    margin-right:20px;
+     	}
        .checkbox{
        		width : 18px;
        		height : 18px;
        }
-       .nev{
-           display: flex;
-    		justify-content: center;
+        .sub_menu3 {
+		    background-color: #26a653;
+		    color: white;
+		    border-radius: 10px 10px 0px 0px;
+		}
+		.sub_menu1 {
+			font-weight: 100;
+		}		
+		.sub_menu2 {
+			font-weight: 100;
+		}
+	    .nev{
+		    display: flex;
+		    justify-content: center;
+		    margin-top: 30px;
+		    font-weight: bold;
+		    color: #525252;		
     	}
+        
+        .box_css {
+		    height: 30px;
+		    border: 1px solid #cfcfcf;
+		    background-color: #F5F5F5;
+		    color: #8E8E8E;
+		    font-weight: bold;
+		    text-align: center;
+		    cursor : pointer;
+        }
+        
+        .page_btn {
+        	color: #525252;
+        	margin: 0px 6px 0px 6px;
+        	cursor: pointer;
+        }
+        
+        .listnum {
+        	margin: 0px 7px 0px 7px;
+        	cursor: pointer;
+        	text-decoration: none;
+        	color:#525252;
+        }
 </style>
 </head>
 <body>
 	<div id="out">
 		<div id="searchbox1">
-			<select name="" id="select">
-				<option value="subname">신청자</option>
-				<option value="gamecode">경기번호</option>
-				<option value="gday">경기일자</option>
-				<option value="fieldname">경기장소</option>
-				<option value="gender">성별</option>
-				<option value="mag">매니저</option>
-			</select>
+			<div class="searchbox1_area">
+				<select name="" id="select">
+					<option value="subname">신청자</option>
+					<option value="gamecode">경기번호</option>
+					<option value="gday">경기일자</option>
+					<option value="fieldname">경기장소</option>
+					<option value="gender">성별</option>
+					<option value="mag">매니저</option>
+				</select>
 
-
+			</div>
 			<div id="saerch">
 				<input type="text" name="" id="inputbox" placeholder="검색어를 입력하세요">
 				<button id="sbtn">검색</button>
@@ -252,7 +272,7 @@
 			if((cgamelist.size()/15)>=1){
 				for(int i=1; i<=cgamelist.size()/15+1; i++){
 			%>
-				<a href="#" id="<%=i%>"> <%out.print(i); %> </a>
+				<a href="#" id="<%=i%>" class="listnum"> <%out.print(i); %> </a>
 			<%
 				}
 			}else{

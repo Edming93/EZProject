@@ -15,16 +15,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-        #contain * {
-            /* border: 1px solid black; */
-        }
-        #contain{
-            display: flex;
-            flex-direction: column;
-            width: 98%;
-            margin: 0 auto;
-            height: 98vh;
-        }
+
         #submenu{
             display: flex;
             align-items: center;
@@ -36,43 +27,58 @@
             padding:5px 0 0 0;
             text-align: center;
         }
-        .score_menu{
-            width: 50%;
-            height: 100%;
-            min-width: 100px;
-            text-decoration: none;
-            color: black;
-            border: 1px solid black;
-            display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+        .sub_menu1 {
+		    background-color: #26a653;
+		    color: white;
+		    border-radius: 10px 10px 0px 0px;
+		    font-weight: bold;
+		}
         #maincontent{
             width: 100%;
-            border: 1px solid black;
         }
         
         
         
-           .TCRcontainer{
+   .TCRcontainer{
       margin-top: 1%;
    }
    .TCRHcon{
-      display: flex;
+       display: flex;
        width: 100%;
        height: 30px;
        justify-content: space-between;
        margin-bottom: 1%;
-       padding: 10px 0px;
+       padding: 15px 0px;
        box-sizing: content-box;
    }
+       .box_css {
+	    height: 30px;
+	    border: 1px solid #cfcfcf;
+	    background-color: #F5F5F5;
+	    color: #8E8E8E;
+	    font-weight: bold;
+	    text-align: center;
+	    cursor: pointer;
+	    width: 65px;
+		    
+        }
+          #select{
+		    height: 30px;
+		    border: 1px solid #cfcfcf;
+		    background-color: #F5F5F5;
+		    color: #8E8E8E;
+		    font-weight: bold;
+		    text-align: center;
+		    margin-right:20px;
+     	}
    .TCRselectMenu{
       width: 10%;
        display: flex;
    }
    .TCRoption {
-      display: flex;
-      width:70%;
+	display: flex;
+    width: 70%;
+    align-items: center;
    }
    #Tselect{
       width: 100%;
@@ -86,26 +92,32 @@
        width: 50%;
    }
    #Tsearch{
-      width: 100%;
-       height: 30px;
-       border: 1px solid black;
-       padding-left : 15px;
+        	width : 100%;
+		    height: 30px;
+		    background-color: #fff;
+		    border: 1px solid #e5e5e5;
+		    padding-left: 18px;
+		    margin-right:10px;
    }
 
    table {
       border-collapse : collapse;
       
    }
-   table tr th {
-      width : 120px;
-      height : 50px;
-      border-bottom : 2px solid #D2D79F;
-      background-color : #F8EDE3;
+   table thead tr{
+        background-color : #D2D79F;
    }
+   table tr th {
+		    width: 120px;
+		    height: 50px;
+		    background-color: #e4e4e4;
+   }
+	table tbody tr {
+		border-bottom: 1px dotted #c3c3c3;
+	}   
    table tr td {
       height : 40px;
       text-align : center;
-      border-bottom : 2px dotted #D2D79F;
    }
    
    table tr th:nth-child(1){
@@ -128,53 +140,40 @@
        height: 30px;
    }
    .nev{
-           display: flex;
-          justify-content: center;
+		    display: flex;
+		    justify-content: center;
+		    margin-top: 30px;
+		    font-weight: bold;
+		    color: #525252;	
        }
       
    .TCRbutton{
-      height: 30px;
-       justify-content: center;
-       display: flex;
-       align-items: center;
-         width: 125px;
-       margin-left: 1%;
-   }
-   #TCRbtn{
-       color: black;
-       height: 30px;
-       background-color: #BDD2B6;
-       border: none;
-       border-radius: 10px;
-       width: 100%;
-   }
-   #TCRbtn:hover{
-      cursor : pointer;
-      background-color : #42855B;
-      font-weight : 700;
-      color:white;
+	    height: 30px;
+	    justify-content: center;
+	    display: flex;
+	    align-items: center;
+	    /* width: 68px; */
+	    margin-left: 1%;
    }
    
-   .Tdeletebtn{
-       background-color: #BDD2B6;
-       border: 0px;
-       border-radius: 10px;
-       margin-bottom: 1%;
-       width: 100%;
-       height: 100%;
-   }
-   .Tdeletebtn:hover {
-      font-weight : 700;
-      background-color : #42855B;
-      cursor : pointer;
-      color:white;
-   }
    .TcontentCon{
        display: flex;
        justify-content: center;
        width: 100%;
        flex-direction: column;
     }
+    
+        .page_btn {
+        	color: #525252;
+        	margin: 0px 6px 0px 6px;
+        	cursor: pointer;
+        }
+        
+        .listnum {
+        	margin: 0px 7px 0px 7px;
+        	cursor: pointer;
+        	color:#525252;
+        }    
     /* 모달 */
    
    
@@ -279,13 +278,13 @@
             </div>
             <div class="TCRoption">
                <div class="TCRsearch">
-                  <input type="text" name="Tsearch" id="Tsearch" placeholder="카테고리에 맞게 단어를 검색하세요" />
+                  <input type="text" name="Tsearch" id="Tsearch" box_css placeholder="카테고리에 맞게 단어를 검색하세요" />
                </div>
                <div class="TCRbutton">
-                  <button id="TCRbtn">검색</button>
+                  <button id="TCRbtn" class="box_css">검색</button>
                </div>
                <div class="TCRbutton">
-                  <button class="Tdeletebtn" id="ubtn">수정</button>
+                  <button class="Tdeletebtn box_css" id="ubtn">수정</button>
                </div>            
             </div>   
          </div>
@@ -339,7 +338,7 @@
       </div>
       
       <div id="nev"class="nev">
-         <a id="pre"> 이전 </a>
+		<a id="pre" class="page_btn"> ◀ </a>
          <%
          if(rankall.size()%15 == 0 ) {
             for(int i=1; i<=rankall.size()/15;i++){
@@ -373,22 +372,22 @@
          }
             
          %>
-         <a id="next"> 다음 </a>
+		<a id="next" class="page_btn"> ▶ </a>
          </div>
          
          
          <div id="snev" style="display: none;" class="nev">
-         <a id="spre"> 이전 </a>
+		<a id="spre" class="page_btn"> ◀ </a>
          <%
          if(rankall.size()%15 == 0 ) {
             for(int i=1; i<=rankall.size()/15;i++){
                if(i>15) {
                   %>
-                  <a id="num<%=i%>" style="display: none;"> <% out.print(i); %></a>
+                  <a id="num<%=i%>" style="display: none;" class="listnum"> <% out.print(i); %></a>
                   <%
                }else{
                   %>
-                  <a id="num<%=i%>"> <% out.print(i); %> </a>
+                  <a id="num<%=i%>" class="listnum"> <% out.print(i); %> </a>
                   <%
                }
             }
@@ -396,11 +395,11 @@
             for(int i=1; i<=rankall.size()/15 + 1;i++){
                if(i>15) {
                   %>
-                  <a id="num<%=i%>" style="display: none;"> <% out.print(i); %></a>
+                  <a id="num<%=i%>" style="display: none;" class="listnum"> <% out.print(i); %></a>
                   <%
                }else{
                   %>
-                  <a id="num<%=i%>"> <% out.print(i); %> </a>
+                  <a id="num<%=i%>" class="listnum"> <% out.print(i); %> </a>
                   <%
                }
             }
@@ -412,7 +411,7 @@
          }
             
          %>
-         <a id="snext"> 다음 </a>
+		<a id="snext" class="page_btn"> ▶ </a>
          </div>
 
     </div>

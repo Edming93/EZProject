@@ -24,7 +24,10 @@
             flex-direction: column;
             width: 98%;
             margin: 0 auto;
-            height: 98vh;
+    		height: 100%;
+        }
+        #submenu_area {
+        	border-bottom: 2px solid #26a653;
         }
         #submenu{
             display: flex;
@@ -43,14 +46,13 @@
             min-width: 100px;
             text-decoration: none;
             color: black;
-            border: 1px solid black;
             display: flex;
     		align-items: center;
     		justify-content: center;
+    		font-weight: bold;
         }
         #maincontent{
             width: 100%;
-            border: 1px solid black;
         }
         .menu3_a {
 	        font-weight: bold;
@@ -63,11 +65,11 @@
 </head>
 <body>
 <div id="contain">
-    <div>
+    <div id="submenu_area">
         <ul id="submenu">
-            <a class="sub_menu" href="${pageContext.request.contextPath}/manager/manager?page=gameMain&gamePage=game1"><li>소셜매치</li></a>
-            <a class="sub_menu" href="${pageContext.request.contextPath}/manager/manager?page=gameMain&gamePage=game2"><li>팀매치</li></a>
-            <a class="sub_menu" href="${pageContext.request.contextPath}/manager/manager?page=gameMain&gamePage=game3"><li>게임결과</li></a>
+            <a class="sub_menu sub_menu1" href="${pageContext.request.contextPath}/manager/manager?page=gameMain&gamePage=game1"><li>소셜매치</li></a>
+            <a class="sub_menu sub_menu2" href="${pageContext.request.contextPath}/manager/manager?page=gameMain&gamePage=game2"><li>팀매치</li></a>
+            <a class="sub_menu sub_menu3" href="${pageContext.request.contextPath}/manager/manager?page=gameMain&gamePage=game3"><li>게임결과</li></a>
         </ul>
     </div>
     <div id="maincontent">
