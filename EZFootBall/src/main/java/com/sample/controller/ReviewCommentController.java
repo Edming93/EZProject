@@ -60,6 +60,7 @@ public class ReviewCommentController {
         UserVO vo2 = (UserVO) session.getAttribute("sessionVO");
         System.out.println(vo2.getUserName());
 		System.out.println(vo.getContent());
+		vo.setUserCode(vo2.getUserCode());
 		vo.setUserName(vo2.getUserName());
 		return service.setComment(vo);
 	}

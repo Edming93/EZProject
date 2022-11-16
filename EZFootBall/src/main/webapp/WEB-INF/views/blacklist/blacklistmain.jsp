@@ -407,7 +407,8 @@ main {
 table {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 100%;
+	margin-left: 5%;
+    width: 90%;
 }
 
 table td, table th {

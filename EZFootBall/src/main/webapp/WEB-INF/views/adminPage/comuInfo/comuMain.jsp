@@ -6,7 +6,7 @@
 	if(request.getParameter("comuselect") != null) {
 		comuselect = (String)request.getParameter("comuselect");
 	}else {
-		comuselect = "후기";
+		comuselect = "review";
 	}
 		
 %>

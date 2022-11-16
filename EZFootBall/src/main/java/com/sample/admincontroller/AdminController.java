@@ -88,13 +88,17 @@ public class AdminController {
 		session.setAttribute("rvListAll", fdService.FieldReservationListAll());
 		// 취소요청
 		session.setAttribute("count", service.refundsub());
-
+		
 		model.addAttribute("fieldList", fdService.getFieldListAll());
 		model.addAttribute("inquiryList", inquiryService.inquiryListAdmin());
 		model.addAttribute("managerList", managerService.getManagerList());
 		session.setAttribute("userList", service.UInfoList());
 		session.setAttribute("team", service.joinList());
 		session.setAttribute("userListB", service.UInfoListB());
+		model.addAttribute("review", service.reviewCommentList());
+		service.getBlackList(model);
+		
+		
 		return "adminPage/adminMain";
 	}
 

@@ -14,7 +14,7 @@
 	</select>
 
 	<insert id="insertComment" keyProperty="reviewCode">
-		insert into review(user_name, content) values(#{userName}, #{content})
+		insert into review(user_name, content, user_code) values(#{userName}, #{content}, #{userCode})
 	</insert>
 	
 	<update id="updateComment">
