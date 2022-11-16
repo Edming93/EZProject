@@ -933,7 +933,7 @@
          
         <div class="subt">
                 <div class="matchf_in">
-                <input type="text" name="fieldName" id="fieldName" placeholder="경기장" readonly>
+                <input type="text" name="fieldName" id="fieldName" placeholder="경기장" autocomplete="off"  readonly>
                     <div class="modal22">
 				      <div class="modal22_body22"><strong style="font-size : 30px">지도 검색하기</strong>
 				      
@@ -1094,7 +1094,7 @@
             <div class="dinput">
             	<div class="calbox">
             	<span class="dicon"><iconify-icon icon="ic:round-date-range" style="color: #26a653;"  width="30" height="30"></iconify-icon></span>
-            	<input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭" autocomplete="off">
+            	<input type="text" name="gameDay" id="txtDate" class="gameDay" placeholder="더블클릭" autocomplete="off"  readonly>
             	</div>
             	<div class="option" id="daybox">
                 <select name="gameTime" id="gameTime">

@@ -43,12 +43,13 @@ public class SubController {
 	@GetMapping("tdel")
 	public String tdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("teamCode") int[] teamCode,
 						@RequestParam("gameCode") int[] gameCode,HttpSession session) {
-	
 		for(int i=0; i<teamCode.length; i++) {
+			
 			DataVO vo = new DataVO();
 			
 			vo.setTeamCode(teamCode[i]);
 			vo.setGameCode(gameCode[i]);
+			System.out.println("cnlthcnlthclthcltnclhtlch"+teamCode[i]+":"+gameCode[i]);
 			service.delete(vo);
 			service.tdelete(vo);
 			service.delupdate(gameCode[i]);

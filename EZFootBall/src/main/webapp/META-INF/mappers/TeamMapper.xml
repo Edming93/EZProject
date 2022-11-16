@@ -102,8 +102,8 @@
 	
 	
 	<insert id="newreser" parameterType="TlistVO">
-		INSERT `field_reservation` (`rv_type`, `rv_state`,`field_code`, `field_name`, `field_address`, `field_type`, `user_code`, `user_payment`, `game_day`, `game_time` , `game_code`, `pay_code`, `store_code`,`card_code`) 
-		VALUES('TS','신청완료',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, #{gamePay}, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode},#{payCode}, #{storeCode}, #{cardCode});
+		INSERT `field_reservation` (`rv_type`, `rv_state`,`field_code`, `field_name`, `field_address`, `field_type`, `user_code`, `team_code`,`user_payment`, `game_day`, `game_time` , `game_code`, `pay_code`, `store_code`,`card_code`) 
+		VALUES('TS','신청완료',#{fieldCode}, #{fieldName}, #{fieldAddress}, #{gameMacth}, #{userCode}, #{teamCode},#{gamePay}, #{gameDay},  STR_TO_DATE(#{gameTime}, '%H'), #{gameCode},#{payCode}, #{storeCode}, #{cardCode});
 	</insert>
 	
 	<insert id="newresult" parameterType="TlistVO">

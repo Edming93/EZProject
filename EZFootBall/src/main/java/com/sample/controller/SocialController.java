@@ -188,7 +188,6 @@ public class SocialController {
 			service.newresult(vo);
 		}else {
 			int num = Integer.parseInt((String)session.getAttribute("tnum"));
-			System.out.println("wjs"+fvo.getPayCode());
 			UinVO uvo = (UinVO)session.getAttribute("urabil");
 			int team_code = uvo.getTeamCode();
 			dvo.setGame_code(num);
@@ -196,9 +195,9 @@ public class SocialController {
 			tservice.info(num, model);
 			TlistVO vo = (TlistVO)model.getAttribute("matchinfo");
 			List<UinVO> tvo = tservice.joininfo(team_code);
-			System.out.println("111111111111111111111");
+			System.out.println("111111111111111111111"+team_code);
 			if(vo.getGameMaxp() - vo.getGamePnum() == 1) {
-				System.out.println("22222222222222222222222");
+				System.out.println("22222222222222222222222"+team_code);
 				tservice.setslist(dvo);
 				tservice.maxgame(num);
 				for(int i=0; i<tvo.size(); i++) {
@@ -232,7 +231,7 @@ public class SocialController {
 					}
 				}
 			}else {
-				System.out.println("555555555555555555555555555555");
+				System.out.println("555555555555555555555555555555"+team_code);
 				tservice.setslist(dvo);
 				tservice.subgame(num);
 				for(int i=0; i<tvo.size(); i++) {

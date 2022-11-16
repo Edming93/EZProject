@@ -320,6 +320,7 @@ public class TeamController {
 	@PostMapping("/usercode")
 	@ResponseBody
 	public List<UinVO> Usercode(@RequestBody UinVO vo) {
+		System.out.println("dddd"+service.getUserList(vo).size());
 		return service.getUserList(vo);
 	}
 	
