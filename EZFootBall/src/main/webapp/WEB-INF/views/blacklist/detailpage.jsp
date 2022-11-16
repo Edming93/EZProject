@@ -955,7 +955,7 @@ let play_btn = document.querySelector(".fa-play");
 						const updateinput = document.createElement("textarea");
 						updateinput.cols = "40";
 						updateinput.rows = "10";
-						updateinput.placeholder="수정할 내용을 입력하세요"
+						updateinput.innerText = ccontent.innerText;
 						const updatebtn = document.createElement("button");
 						updatebtn.innerText = "수정완료";
 						
@@ -1100,7 +1100,7 @@ let play_btn = document.querySelector(".fa-play");
 								const updateinput = document.createElement("textarea");
 								updateinput.cols = "30";
 								updateinput.rows = "10";
-								updateinput.placeholder="수정할 내용을 입력하세요"
+								updateinput.innerText = ccontent.innerText;
 								const updatebtn = document.createElement("button");
 								updatebtn.innerText = "수정완료";
 								updatebtn.style.borderRadius = "5px";

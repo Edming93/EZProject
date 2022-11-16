@@ -838,7 +838,7 @@ let play_btn = document.querySelector(".fa-play");
 						const updateinput = document.createElement("textarea");
 						updateinput.cols = "40";
 						updateinput.rows = "10";
-						updateinput.innerText = content;
+						updateinput.innerText = ccontent.innerText;
 						const updatebtn = document.createElement("button");
 						updatebtn.innerText = "수정완료";
 						
@@ -991,7 +991,8 @@ let play_btn = document.querySelector(".fa-play");
 								const updateinput = document.createElement("textarea");
 								updateinput.cols = "30";
 								updateinput.rows = "10";
-								updateinput.innerText = comment.content;
+								console.log(ccontent.innerText);
+								updateinput.innerText = ccontent.innerText;
 								const updatebtn = document.createElement("button");
 								updatebtn.innerText = "수정완료";
 								updatebtn.style.borderRadius = "5px";
