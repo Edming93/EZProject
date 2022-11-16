@@ -92,6 +92,7 @@ font-family: 'Gowun Dodum', sans-serif;
 }
 
 
+
 .container {
 	width: 100%;
 	margin: 0 auto;
@@ -706,7 +707,10 @@ let play_btn = document.querySelector(".fa-play");
    
 </script>
 		<div id="div1">
+			<div id= "comment2"></div>
 			<div id="comment"></div>
+			
+			
 			<div id="input">
 				<!-- 작성자 :
 			<textarea name="name" id="name" cols="10" rows="3"></textarea>
@@ -781,7 +785,7 @@ let play_btn = document.querySelector(".fa-play");
 			success : function(data){
 				console.log(data);
 				if(data.state == "ok"){
-					const comdiv = document.getElementById("comment");
+					const comdiv = document.getElementById("comment2");
 					
 					const div = document.createElement("div");
 					div.style.display = "flex";
@@ -1080,7 +1084,7 @@ let play_btn = document.querySelector(".fa-play");
 					div.append(div3);
 					comdiv.append(div);
 					div.style.marginTop = "2%";
-					comdiv.style.marginTop = "3%";
+					/* comdiv.style.marginTop = "3%"; */
 					comdiv.style.marginBottom = "3%";
 					
 

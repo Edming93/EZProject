@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sample.dao.ReviewCommentDAO;
 import com.sample.dao.UserDAO;
+import com.sample.vo.Criteria;
+import com.sample.vo.PageMakerVO;
 import com.sample.vo.ReviewCommentVO;
+import com.sample.vo.ReviewPageVO;
 import com.sample.vo.UserVO;
 
 @Service
@@ -21,15 +24,14 @@ public class ReviewCommentService {
 	private ReviewCommentDAO reviewCommentDAO;
 	
 	
-	
-	
 	public ReviewCommentService(UserDAO userDAO, ReviewCommentDAO reviewCommentDAO) {
 		super();
 		this.userDAO = userDAO;
 		this.reviewCommentDAO = reviewCommentDAO;
 	}
 
-
+	
+	
 	public boolean isUser(UserVO vo, HttpSession session) {
 		UserVO rvo = userDAO.idPwCheck(vo);
 		if(rvo != null) {
@@ -96,6 +98,16 @@ public class ReviewCommentService {
        map.put("state", "error");
       }
 	  return map;
+	}
+	
+	
+	public ReviewPageVO recommentList(Criteria cri) {
+		ReviewPageVO dto = new ReviewPageVO();
+		
+		dto.setList(reviewCommentDAO.getCommentList(cri));
+		dto.setPageInfo(new PageMakerVO(cri, reviewCommentDAO.getCommentListTotal(cri.getReviewCode())));
+		
+		return dto;
 	}
 		
 }

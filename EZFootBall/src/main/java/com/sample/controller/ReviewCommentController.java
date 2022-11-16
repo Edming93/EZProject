@@ -1,5 +1,6 @@
 package com.sample.controller;
 
+import java.awt.PageAttributes.MediaType;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sample.service.ReviewCommentService;
+import com.sample.vo.Criteria;
 import com.sample.vo.ReviewCommentVO;
+import com.sample.vo.ReviewPageVO;
 import com.sample.vo.UserVO;
 
 
@@ -83,5 +86,14 @@ public class ReviewCommentController {
   public Map<String,String> deleteComment(HttpSession session, @RequestBody ReviewCommentVO vo){
     return service.deleteComment(vo);
   }
+  
+  	/* 댓글 페이징 */
+	/*
+  	@PostMapping(value="/list")
+	@ResponseBody
+	public ReviewPageVO replyListPOST(@RequestBody Criteria cri) {
+		return service.recommentList(cri);
+	}
+	*/
 
 }

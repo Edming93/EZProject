@@ -11,6 +11,8 @@ public class Criteria {
     /* 스킵 할 게시물 수( (pageNum-1) * amount ) */
     private int skip;
     
+    private int reviewCode;
+    
     /* 기본 생성자 -> 기본 세팅 : pageNum = 1, amount = 10 */
     public Criteria() {
         this(1,10);
@@ -54,11 +56,21 @@ public class Criteria {
 		this.skip = skip;
 	}
 
-	@Override
-	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + "]";
+	public int getReviewCode() {
+		return reviewCode;
 	}
 
+	public void setReviewCode(int reviewCode) {
+		this.reviewCode = reviewCode;
+	}
+
+	@Override
+	public String toString() {
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", reviewCode=" + reviewCode
+				+ "]";
+	}
+
+	
 	
     
     
