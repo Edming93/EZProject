@@ -572,13 +572,17 @@ table th {
 					<c:forEach var="vo" items="${list}">
 						<%-- <c:if test="${vo.isDelete == 1}"> --%>
 						<tr>
-							<td>${vo.blacklistCode}</td>
-							<td>${vo.buserName}</td>
+							<td><a
+								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistCode}</a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.buserName}</a></td>
 							<td><a
 								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistTitle}</a></td>
 					<!-- 	<td>${vo.blacklistContent}</td>  -->	
-							<td>${vo.blacklistLocal}</td>
-							<td>${vo.blacklistCreateDate}</td>
+							<td><a
+								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistLocal}</a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistCreateDate}</a></td>
 						</tr>
 						<%-- 	</c:if> --%>
 					</c:forEach>

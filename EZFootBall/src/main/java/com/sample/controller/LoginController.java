@@ -41,7 +41,7 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String postLogin(UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-
+		
 		// 소셜,팀매치 경기번호 세션 저장 여부에 따른 로그인 유효성검사 후 이동
 		if (session.getAttribute("snum") != null) {
 			String snum = (String) session.getAttribute("snum");
