@@ -556,6 +556,9 @@
       .change_text {
       	color:#C7C7C7;;
       }
+      .field_image{
+      	padding-right: 10px;
+      }
    </style>
 </head>
 
@@ -692,7 +695,7 @@
      	 
      	 <div class="match_content" id="match_content">
      	 	<div class="etc">
-     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime}
+     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime} : 00
      	 	</div>
      	 	<div class="etc">
      	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
@@ -814,9 +817,13 @@
 	            	    	}
 	            	    	
 	            	    	if(data.fieldType = '5vs5'){
-	            	    		document.getElementById("rental").innerText = "　" + (data.fieldRentalfee / 5);
+	            	    		let price = (data.fieldRentalfee / 5);
+	            	    		let result = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	            	    		document.getElementById("rental").innerText = "　" + result;
 	            	    	}else {
-	            	    		document.getElementById("rental").innerText = "　" +  (data.fieldRentalfee / 6);
+	            	    		let price = (data.fieldRentalfee / 6);
+	            	    		let result = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	            	    		document.getElementById("rental").innerText = "　" + result;
 	            	    	}
 	            	    	
 	            	    	

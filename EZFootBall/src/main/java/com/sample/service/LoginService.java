@@ -28,7 +28,10 @@ public class LoginService {
 	}
 
 	public boolean isUser(UserVO vo, HttpSession session) {
-		vo.setUserPw(encryptSHA256(vo.getUserPw()));
+		if(vo!=null) {
+			vo.setUserPw(encryptSHA256(vo.getUserPw()));
+		}
+		
 		UserVO uvo = dao.idPwCheck(vo);
 		if(uvo != null) {
 			session.setAttribute("sessionVO", uvo);
