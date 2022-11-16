@@ -55,6 +55,7 @@
 /* 	    width: 45%; */
 	    min-width:45px;
 	    cursor: pointer;
+	    font-size: 12px;
 	}
 	
 	#manager_List{

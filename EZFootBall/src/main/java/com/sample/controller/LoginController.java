@@ -1,6 +1,5 @@
 package com.sample.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sample.service.FindService;
 import com.sample.service.LoginService;
@@ -37,28 +35,28 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String getLogin(Model model) {
-		model.addAttribute("page","login");
+		model.addAttribute("page", "login");
 		return "loginPage/loginMain";
 	}
 
 	@PostMapping("/login")
 	public String postLogin(UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		
+
 		// 소셜,팀매치 경기번호 세션 저장 여부에 따른 로그인 유효성검사 후 이동
-		if(session.getAttribute("snum") != null) {
-			String snum =(String) session.getAttribute("snum");
-			return (service.isUser(vo, session)) ? "redirect:/msocial/info?num="+snum : "loginPage/login";
+		if (session.getAttribute("snum") != null) {
+			String snum = (String) session.getAttribute("snum");
+			return (service.isUser(vo, session)) ? "redirect:/msocial/info?num=" + snum : "loginPage/login";
 		}
-		if(session.getAttribute("tnum") != null) {
-			String tnum =(String) session.getAttribute("tnum");
-			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num="+tnum : "loginPage/login";
+		if (session.getAttribute("tnum") != null) {
+			String tnum = (String) session.getAttribute("tnum");
+			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num=" + tnum : "loginPage/login";
 		}
-	
-		String pageurl = (String)session.getAttribute("pageurl");
+
+		String pageurl = (String) session.getAttribute("pageurl");
 		String id_ck = request.getParameter("id_remem");
-		System.out.println("값모야?: "+pageurl);
-		
-		return service.rememId(id_ck,pageurl,vo,session,request,response);
+		System.out.println("값모야?: " + pageurl);
+
+		return service.rememId(id_ck, pageurl, vo, session, request, response);
 	}
 
 	@GetMapping("/logout")
@@ -78,13 +76,14 @@ public class LoginController {
 	@GetMapping("/signUp")
 	public String getSignUp(UserVO vo, Model model) {
 		service.getUserIdList(model);
-		model.addAttribute("page","signup");
+		model.addAttribute("page", "signup");
 		return "loginPage/loginMain";
 	}
 
 	@PostMapping("/signUp")
 	public String insertUser(UserVO vo) {
-		vo.setUserAddress(vo.getUserAddress1() + " " + vo.getUserAddress2());
+		vo.setUserAddress(vo.getUserAddress1() + ", " + vo.getUserAddress2());
+		System.out.println(vo.getUserAddress());
 		service.setUserInfo(vo);
 		return "redirect:/loginPage/login";
 	}

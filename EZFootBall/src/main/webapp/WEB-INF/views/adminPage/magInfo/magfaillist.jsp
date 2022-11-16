@@ -31,8 +31,10 @@
 	    background-color: #26a563;
 	    border: none;
 	    border-radius: 10px;
-	    width: 45%;
+/* 	    width: 45%; */
 	    cursor: pointer;
+	   	min-width: 50px;
+ 	    font-size: 12px;
 	}
 	
 	#manager_history{
