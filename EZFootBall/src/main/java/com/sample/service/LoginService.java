@@ -1,6 +1,8 @@
 package com.sample.service;
 
 import java.net.http.HttpRequest;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class LoginService {
 	}
 
 	public boolean isUser(UserVO vo, HttpSession session) {
+		vo.setUserPw(encryptSHA256(vo.getUserPw()));
 		UserVO uvo = dao.idPwCheck(vo);
 		if(uvo != null) {
 			session.setAttribute("sessionVO", uvo);
@@ -43,6 +46,8 @@ public class LoginService {
 			System.out.println("이미 존재하는 아이디 입니다."); 
 
 		}else {
+			System.out.println(encryptSHA256(vo.getUserPw()));
+			vo.setUserPw(encryptSHA256(vo.getUserPw()));
 			vo.setUserBirth(vo.getUserBirthYear()+vo.getUserBirthMonth()+vo.getUserBirthDay());
 			dao.insertUser(vo);
 			dao.insertGameStat(vo);
@@ -54,10 +59,28 @@ public class LoginService {
 		
 		model.addAttribute("userIdList",dao.userIdList());
 	}
-	
-//	public String isGameNum(HttpSession session, UserVO vo) {
-//
-//	}
+
+	public String encryptSHA256(String str)
+	{
+		String sha="";
+
+		try {
+			MessageDigest sh= MessageDigest.getInstance("SHA-256");
+			sh.update(str.getBytes());
+			byte[] byteData = sh.digest();
+			StringBuilder sb=new StringBuilder();
+			for (byte byteDatum : byteData) {
+				sb.append(Integer.toString((byteDatum & 0xff) + 0x100, 16).substring(1));
+			}
+
+			sha=sb.toString();
+
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("암호화 에러-NoSuchAlgorithmException");
+			sha=null;
+		}
+		return sha;
+	}
 	
 	public String rememId(String id_ck,String pageurl,UserVO vo,
 							HttpSession session,HttpServletRequest request,
