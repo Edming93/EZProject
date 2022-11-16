@@ -115,7 +115,7 @@ public class RentalController {
 		}
 			session.setAttribute("fieldData", fvo);
 			session.setAttribute("pageurl",pageurl);
-
+			System.out.println("11111111"+(UserVO)session.getAttribute("sessionVO"));
 		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session))? "redirect:/rental/rentalPayment":"redirect:/loginPage/login";
 	}
 	

@@ -15,6 +15,14 @@
 //          + "&redirect_uri=" + redirectURI
 //          + "&state=" + state;
 //     session.setAttribute("state", state);
+
+	String isUser = request.getParameter("isUser");
+	
+	System.out.println(isUser);
+// 	if(isUser == null){
+		
+// 	}
+	
  %>
     <%
     	request.setCharacterEncoding("utf-8");
@@ -44,6 +52,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
     <style>
         * {
@@ -197,6 +206,18 @@
 	                </div>
 	           	</div>
             </form>
+            
+            <script type="text/javascript">
+            console.log("<%=isUser%>");
+            
+            	if(<%=isUser%> == false) {
+            		Swal.fire(
+					"ID와 PW를 확인해주세요!"
+            		);
+            	}
+            	
+            </script>
+            
 <%--             <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a> --%>
 <!--             <a href="javascript:kakaoLogin()";> <img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style ="height:60px; width:auto;"/> </a>  -->
 		    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

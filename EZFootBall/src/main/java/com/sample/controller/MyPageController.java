@@ -86,10 +86,13 @@ public class MyPageController {
 	public String changePwResult(UserVO userVO, HttpSession session, @RequestParam("pw1") String pw,
 			@RequestParam("new_pw1") String pw1, Model model) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
+		userVO.setUserPw(loginService.encryptSHA256(userVO.getUserPw()));
 		System.out.println("pwpwpw : " + userVO.getUserPw());
+		
+		
 //		System.out.println("pwpwpwpw : " + pw1);
 //		if (userVO.getUserPw().equals(pw)) {
-		userVO.setUserPw(pw1);
+		userVO.setUserPw(loginService.encryptSHA256(pw1));
 		findService.setPassword(userVO);
 		return "redirect:/myPage/myPage";
 //		} else {
@@ -106,7 +109,7 @@ public class MyPageController {
 		System.out.println("upw : " + pass1);
 		Map<String, String> map = new HashMap<>();
 
-		if (uvo.getUserPw().equals(pass1)) {
+		if (uvo.getUserPw().equals(loginService.encryptSHA256(pass1))) {
 			map.put("state", "ok");
 
 		} else {

@@ -28,7 +28,7 @@ public class LoginService {
 	}
 
 	public boolean isUser(UserVO vo, HttpSession session) {
-		if(vo!=null) {
+		if(vo != null && session.getAttribute("sessionVO") == null) {
 			vo.setUserPw(encryptSHA256(vo.getUserPw()));
 		}
 		
@@ -121,7 +121,7 @@ public class LoginService {
 
 		}else {
 			request.setAttribute("page", "login");
-			url = "redirect:/loginPage/login?pageurl="+pageurl;
+			url = "redirect:/loginPage/login?pageurl="+pageurl+"&isUser="+isUser(vo,session);
 			
 		}
 		

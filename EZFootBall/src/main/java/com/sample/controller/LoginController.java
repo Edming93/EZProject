@@ -40,30 +40,32 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String postLogin(UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		
+	public String postLogin(UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response,Model model) {
 		// 소셜,팀매치 경기번호 세션 저장 여부에 따른 로그인 유효성검사 후 이동
-		if (session.getAttribute("snum") != null) {
-			String snum = (String) session.getAttribute("snum");
-			return (service.isUser(vo, session)) ? "redirect:/msocial/info?num=" + snum : "loginPage/login";
+		if(session.getAttribute("snum") != null) {
+			String snum =(String) session.getAttribute("snum");
+			return (service.isUser(vo, session)) ? "redirect:/msocial/info?num="+snum : "loginPage/login";
 		}
-		if (session.getAttribute("tnum") != null) {
-			String tnum = (String) session.getAttribute("tnum");
-			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num=" + tnum : "loginPage/login";
+		if(session.getAttribute("tnum") != null) {
+			String tnum =(String) session.getAttribute("tnum");
+			return (service.isUser(vo, session)) ? "redirect:/team/tinfo?num="+tnum : "loginPage/login";
 		}
-
-		String pageurl = (String) session.getAttribute("pageurl");
+		
+		String pageurl = (String)session.getAttribute("pageurl");
 		String id_ck = request.getParameter("id_remem");
-		System.out.println("값모야?: " + pageurl);
-
-		return service.rememId(id_ck, pageurl, vo, session, request, response);
+		System.out.println("값모야?: "+pageurl);
+		
+//		model.addAttribute("isUser", service.isUser(vo,session));
+//		System.out.println("로그인값 : "+service.isUser(vo,session));
+		return service.rememId(id_ck,pageurl,vo,session,request,response);
 	}
 
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) {
-		session.removeAttribute("sessionVO");
-		session.removeAttribute("fieldData");
-		session.removeAttribute("pageurl");
+//		session.removeAttribute("sessionVO");
+//		session.removeAttribute("fieldData");
+//		session.removeAttribute("pageurl");
+		session.invalidate();
 		return "redirect:/loginPage/login";
 	}
 
