@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.sample.vo.BlacklistVO;
 import com.sample.vo.Criteria;
+import com.sample.vo.UserVO;
 import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistPageVO;
 
@@ -56,7 +57,8 @@ public interface BlacklistDAO {
 	//게시판 댓글 보이기
 	public List<BlacklistCommentVO> selectComment(BlacklistCommentVO vo);
 	
-	//블랙 
+	//블랙
+	public List<UserVO>codelist(UserVO vo);
 	
 	//게시판 댓글 update
 	public int updateBlackListComment(BlacklistCommentVO vo);

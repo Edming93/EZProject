@@ -85,6 +85,8 @@ public class BlacklistController {
 	@GetMapping("/blacklistmain/setbbs")
 	public String setBBS(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
 			Model model) {
+		service.codelist(uvo);
+		System.out.println();
 		System.out.println(uvo);
 		if (uvo != null) {
 			String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
@@ -101,7 +103,7 @@ public class BlacklistController {
 	@PostMapping("/blacklistmain/setbbs")
 	public String setBBSResult(@SessionAttribute("sessionVO") UserVO uvo, BlacklistVO bvo, Model model) {
 		System.out.println(uvo);
-
+		
 		if (uvo != null) {
 			System.out.println(uvo.getUserCode());
 			bvo.setUserId(uvo.getUserId());

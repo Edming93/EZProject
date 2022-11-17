@@ -91,6 +91,11 @@ font-family: 'Gowun Dodum', sans-serif;
 	font-family: 'Gowun Dodum', sans-serif;
 }
 
+#comment2 {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Gowun Dodum', sans-serif;
+}
 
 
 .container {
@@ -414,11 +419,26 @@ font-family: 'Gowun Dodum', sans-serif;
     	border-left: 20px solid #26A653;
     	margin-bottom: 20px;
     	padding: 22px;
-    	display: flex;
-    	justify-content: space-between;
+    	/* display: flex; */
+    	/* justify-content: space-between; */
+    }
+    
+    .test{
+    	border-bottom: 1px solid #26A653;
+    	border-left: 20px solid #26A653;
+    	margin-bottom: 20px;
+    	padding: 22px;
+    }
+    
+    .test2{
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-top: 1%;
     }
     .rightbox{
     	display: flex;
+    	justify-content: flex-end;
     }
     .namebox{
     	font-size: 12px;
@@ -428,17 +448,22 @@ font-family: 'Gowun Dodum', sans-serif;
     	font-size: 20px;
     	font-weight: bold;
     	letter-spacing: 1.5px;
+    	margin-top: 1%;
     }
     .time{
     	font-size: 11px;
     	color : #ABABAB;
     	display: flex;
-        align-items: center;
-        padding-right: 20px;
+        align-items: flex-end;
+    	justify-content: flex-end;
+  	 	 padding-right: 20px;
+   		 font-size: 14px;
     }
     .just{
-    	display: flex;
-        align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2%;
     }
     .updatebtn{
     	font-size: 13px;
@@ -785,29 +810,45 @@ let play_btn = document.querySelector(".fa-play");
 			success : function(data){
 				console.log(data);
 				if(data.state == "ok"){
+					
 					const comdiv = document.getElementById("comment2");
 					
+					const leftdiv = document.createElement("div");
+					leftdiv.className = "leftbox";						
+					const rightdiv = document.createElement("div");
+					rightdiv.className = "rightbox";
+					
+					
 					const div = document.createElement("div");
+					div.className = "test";
+					div.append(leftdiv);
+					div.append(rightdiv);
+					
+					/* const div = document.createElement("div");
 					div.style.display = "flex";
 					div.style.flexDirection = "column";
 					div.classList.add('test');
-					div.style.borderTop = "1px solid black";
+					div.style.borderTop = "1px solid black"; */
 					
 					const div2 = document.createElement("div");
-					div2.classList.add('test2');
+					div2.className = "test2";
+					/* div2.classList.add('test2');
                 	div2.style.display = "flex";
                     div2.style.justifyContent = "center";
                     div2.style.fontSize = "25px";
-                    
+                     */
                     
                     const div3 = document.createElement("div");
-                    div3.style.flex = "1";
+                    div3.className = "just";
+                  /*   div3.style.flex = "1"; */
                     
 					const cname = document.createElement("p");
+					cname.className = "namebox";
 					cname.innerText = data.vo.userName;
 					const ccontent = document.createElement("p");
 					ccontent.innerText = content;
 					const cdate = document.createElement("p");
+					cdate.className = "time";
 					cdate.innerText = data.vo.createDate;
 					const btn1 = document.createElement("button");
 					btn1.id = "btnedit";
@@ -823,15 +864,22 @@ let play_btn = document.querySelector(".fa-play");
 					btn1.innerText = "수정"
 					btn2.innerText = "삭제"	
 					
-					div3.append(btn1);
-					div3.append(btn2);
-		 			div.append(cdate); 
-		 			div.append(cname);
-					div2.append(ccontent);
+					
+					/* leftdiv.append(cname);
+					leftdiv.append(div2);
+					rightdiv.append(cdate);
+					rightdiv.append(div3); */
+					div.append(cdate);
+					div.append(cname);
 					div.append(div2);
 					div.append(div3);
+					
+					div3.append(btn1);
+					div3.append(btn2);
+					
+					div2.append(ccontent);
 					comdiv.append(div);
-					div.style.marginTop = "2%";
+					div.style.marginTop = "2%"; 
 					
 					//수정 버튼 클릭시 수정폼 생성
 					btn1.addEventListener("click", function(){
@@ -846,7 +894,7 @@ let play_btn = document.querySelector(".fa-play");
 						const updatebtn = document.createElement("button");
 						updatebtn.innerText = "수정완료";
 						
-						document.getElementsByClassName("test2")[0].style.display = "none";
+						/* document.getElementsByClassName("test2")[0].style.display = "none"; */
 						updateform.append(updateinput);
 						updateform.append(updatebtn);
 						div.append(updateform);
@@ -917,6 +965,7 @@ let play_btn = document.querySelector(".fa-play");
 						
 						
 					});	
+					
 				}
 			},
 				error : function(e){
@@ -945,29 +994,52 @@ let play_btn = document.querySelector(".fa-play");
 				for(let comment of data){
 					console.log(comment);	
 				
+					const leftdiv = document.createElement("div");
+					leftdiv.className = "leftbox";						
+					const rightdiv = document.createElement("div");
+					rightdiv.className = "rightbox";
 					const div = document.createElement("div");
-					div.style.display = "flex";
+					div.className = "comentbox";
+					
+					div.append(leftdiv);
+					div.append(rightdiv);
+					/* div.style.display = "flex"; */
+					
+					/* const div = document.createElement("div");
 					div.style.flexDirection = "column";
 					div.style.borderTop = "1px solid black";
-					div.style.fontFamily = "Gowun Dodum";
+					div.style.fontFamily = "Gowun Dodum"; */
 					
 					
                     const div2 = document.createElement("div");
+					div2.className = "coment";
 
-                    div2.style.display = "flex";
+                   /*  div2.style.display = "flex";
                     div2.style.justifyContent = "center";
-                    div2.style.fontSize = "25px";
+                    div2.style.fontSize = "25px"; */
+                    
                     const div3 = document.createElement("div");
-                    div3.style.flex = "1";
+                    div3.className = "just";
+                    /* div3.style.flex = "1"; */
 
                     
 					
 					const cname = document.createElement("p");
+					cname.className = "namebox";
 					cname.innerText = comment.userName;
+					
 					const ccontent = document.createElement("P");
 					ccontent.innerText = comment.content;
+					
 					const cdate = document.createElement("p");
+					cdate.className = "time";
 					cdate.innerText = comment.createDate;
+					
+					leftdiv.append(cname);
+					leftdiv.append(div2);
+					rightdiv.append(cdate);
+					rightdiv.append(div3);
+					
 					/* const cid = document.createElement("h4");
 					cid.innerText = comment.id; */
 					if (username == comment.userName) {
@@ -1003,7 +1075,7 @@ let play_btn = document.querySelector(".fa-play");
 								updatebtn.style.backgroundColor = "#26A653";
 								updatebtn.style.color = "white";
 								updatebtn.style.border = "1px solid white";
-								document.getElementsByClassName("test3")[0].style.display = "none";
+								/* document.getElementsByClassName("test3")[0].style.display = "none"; */
 								/* updateinput.append(updatebtn); */
 								updateform.append(updateinput);
 								 updateform.append(updatebtn);
@@ -1071,6 +1143,7 @@ let play_btn = document.querySelector(".fa-play");
 								});
 								}
 							});
+							
 							div3.append(btn1);
 							div3.append(btn2);
 					}
@@ -1085,7 +1158,7 @@ let play_btn = document.querySelector(".fa-play");
 					comdiv.append(div);
 					div.style.marginTop = "2%";
 					/* comdiv.style.marginTop = "3%"; */
-					comdiv.style.marginBottom = "3%";
+					/* comdiv.style.marginBottom = "3%"; */
 					
 
 					

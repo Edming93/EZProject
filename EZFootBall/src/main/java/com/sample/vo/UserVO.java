@@ -44,6 +44,27 @@ public class UserVO {
 
 	private String tmember;
 	private int teamCode;
+	
+	//수빈 사용
+	private int gameCode;
+	private int resultCode;
+
+
+	public int getGameCode() {
+		return gameCode;
+	}
+
+	public void setGameCode(int gameCode) {
+		this.gameCode = gameCode;
+	}
+
+	public int getResultCode() {
+		return resultCode;
+	}
+
+	public void setResultCode(int resultCode) {
+		this.resultCode = resultCode;
+	}
 
 	public String getUserStatus() {
 		return userStatus;

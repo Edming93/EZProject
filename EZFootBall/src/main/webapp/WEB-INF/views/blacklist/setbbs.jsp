@@ -1,14 +1,14 @@
 <%@page import="com.sample.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.net.URL" %>
-<%@ page import="java.net.HttpURLConnection" %>
-<%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.io.InputStreamReader" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.net.URL"%>
+<%@ page import="java.net.HttpURLConnection"%>
+<%@ page import="java.io.BufferedReader"%>
+<%@ page import="java.io.InputStreamReader"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -29,16 +29,25 @@
 <head>
 <meta charset="UTF-8">
 <title>이지풋볼</title>
-<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
-<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
-<script src="https://kit.fontawesome.com/3a7191171a.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<link rel="icon"
+	href="${pageContext.request.contextPath}/image/ez_icon.svg">
+<script
+	src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<script src="https://kit.fontawesome.com/3a7191171a.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script
+	src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
+	rel="stylesheet">
 <style>
 * {
 	box-sizing: border-box;
@@ -46,35 +55,31 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-body{
-	
-	margin : 0 auto;
-	
+body {
+	margin: 0 auto;
 }
+
 .containersetbbs {
-	margin : 0 auto;
+	margin: 0 auto;
 	display: grid;
-    grid-template-columns: 12vh 1fr 12vh;
-   grid-template-rows: 3vh 7vh 5vh 53vh;
+	grid-template-columns: 12vh 1fr 12vh;
+	grid-template-rows: 3vh 7vh 5vh 53vh;
 	gap: 10px 10px;
 	grid-auto-flow: row;
 	grid-template-areas: ". . ." ". header ." ". . ." ". main ."
 		". footer .";
-	height: 80vh;	
+	height: 80vh;
 }
 
-  #div1 {
-  	font-family: 'Gowun Dodum', sans-serif;
-  	background-color: white;
+#div1 {
+	font-family: 'Gowun Dodum', sans-serif;
+	background-color: white;
 	margin: 0 auto;
 	width: 50%;
 	margin-top: 3%;
 	border-radius: 15px;
 	border: 3px solid rgb(38, 166, 83);
-	
 }
-
-
 
 .header {
 	grid-area: header;
@@ -97,18 +102,18 @@ body{
 textarea {
 	flex: 1;
 	width: 100%;
-	margin-top : 3vh;
+	margin-top: 3vh;
 	height: 50vh;
-  	background-color: #f9f9f9;
-  	border: 1px solid #e5e5e5;
-  	border-radius: 3px;
-  	-webkit-transition: 0.35s ease-in-out;
-  	-moz-transition: 0.35s ease-in-out;
-  	-o-transition: 0.35s ease-in-out;
-  	transition: 0.35s ease-in-out;
-  	transition: all 0.35s ease-in-out;
-  	resize: none;
-  	font-family: 'Gowun Dodum', sans-serif;
+	background-color: #f9f9f9;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	-webkit-transition: 0.35s ease-in-out;
+	-moz-transition: 0.35s ease-in-out;
+	-o-transition: 0.35s ease-in-out;
+	transition: 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
+	resize: none;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 
 .footer {
@@ -117,51 +122,45 @@ textarea {
 	flex-direction: row-reverse;
 }
 
-input{
-	
-  width: 100%;
-  padding: 1%;
-  line-height: 1.4;
-  background-color: #f9f9f9;
-  border: 1px solid #e5e5e5;
-  border-radius: 3px;
-  -webkit-transition: 0.35s ease-in-out;
-  -moz-transition: 0.35s ease-in-out;
-  -o-transition: 0.35s ease-in-out;
-  transition: 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-    margin-top: 5px;
-    font-family: 'Gowun Dodum', sans-serif;
-	
+input {
+	width: 100%;
+	padding: 1%;
+	line-height: 1.4;
+	background-color: #f9f9f9;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	-webkit-transition: 0.35s ease-in-out;
+	-moz-transition: 0.35s ease-in-out;
+	-o-transition: 0.35s ease-in-out;
+	transition: 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
+	margin-top: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 
-select{
-
-  width: 100%;
-  padding: 1%;
-  line-height: 1.4;
-  background-color: #f9f9f9;
-  border: 1px solid #e5e5e5;
-  border-radius: 3px;
-  -webkit-transition: 0.35s ease-in-out;
-  -moz-transition: 0.35s ease-in-out;
-  -o-transition: 0.35s ease-in-out;
-  transition: 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-margin-bottom: 5px;
-font-family: 'Gowun Dodum', sans-serif;
+select {
+	width: 100%;
+	padding: 1%;
+	line-height: 1.4;
+	background-color: #f9f9f9;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	-webkit-transition: 0.35s ease-in-out;
+	-moz-transition: 0.35s ease-in-out;
+	-o-transition: 0.35s ease-in-out;
+	transition: 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 
-button{
+button {
 	width: 60px;
-    border: 1px solid white;
-    height: 30px;
-    border-radius: 6px;
-    font-family: 'Gowun Dodum', sans-serif;
-    
-
+	border: 1px solid white;
+	height: 30px;
+	border-radius: 6px;
+	font-family: 'Gowun Dodum', sans-serif;
 }
-
 
 .header_container {
 	width: 100%;
@@ -240,8 +239,8 @@ button{
 .big_menu_area {
 	max-width: 1024px;
 	width: 1024px;
-    margin-bottom: 13px;
-    margin-top: 20px;
+	margin-bottom: 13px;
+	margin-top: 20px;
 }
 
 .big_menu_content {
@@ -252,12 +251,12 @@ button{
 
 .big_menu_content a {
 	font-size: 17px;
-    text-decoration: none;
-    color: black;
-    align-items: center;
-    display: flex;
-    width: 85px;
-    justify-content: center;
+	text-decoration: none;
+	color: black;
+	align-items: center;
+	display: flex;
+	width: 85px;
+	justify-content: center;
 }
 
 .menu1, .menu2, .menu3, .menu4, .menu5, .menu6 {
@@ -271,18 +270,22 @@ button{
 	padding-bottom: 5px;
 	border-bottom: 3px solid #26A653;
 }
-    .menu2_a {
-    	width: 80px !important;
-    }
-    .menu4 {
-    	width: 82px;
-    }
-    .menu4_a {
-    	width:70px !important;
-    }
-    .menu6 {
-    	margin-left: 10px;
-    }
+
+.menu2_a {
+	width: 80px !important;
+}
+
+.menu4 {
+	width: 82px;
+}
+
+.menu4_a {
+	width: 70px !important;
+}
+
+.menu6 {
+	margin-left: 10px;
+}
 
 .banner_container {
 	max-width: 1024px;
@@ -338,65 +341,73 @@ button{
 	align-items: center;
 }
 
-	.bottom_banner {
-        width:100%;
-        height:235px;
-        background-color: #26A653;
-    	margin-top: 100px;
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
-	}
-  footer {
-            width: 100%;
-          
-            height: 423px;
-            display: flex;
-            justify-content: space-evenly;   
-            padding: 30px;
-            background-color: #2a2a2a;
-        }
-        .footer_subcon{
-            max-width: 1024px;
-        }
-        .footer_left {
-            width:100%;
-            
-        }
-        .footer_left .footer_nav{
-            display: flex;
+.bottom_banner {
+	width: 100%;
+	height: 235px;
+	background-color: #26A653;
+	margin-top: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-        }
-        .footer_nav ul {
-            list-style-type: none;
-            line-height: 200%;
-        }
-        .footer_nav ul h3 {
-            color : rgba(255, 255, 255, 0.649);
-        }
-        .footer_nav ul li{
-            color :rgba(255, 255, 255, 0.348)
-        }
-        .footer_right {
-            width:30%;
-            padding-top: 14px;
+footer {
+	width: 100%;
+	height: 423px;
+	display: flex;
+	justify-content: space-evenly;
+	padding: 30px;
+	background-color: #2a2a2a;
+}
 
-        }
-        .footer_com{
-            line-height: 150%;
-        }
-        .footer_com h2{
-            color : rgba(255, 255, 255, 0.649);
-            border-bottom: 3px solid #26A653;
-            width: 32%;
-        }
-        .footer_com p{
-            color :rgba(255, 255, 255, 0.348);
-        }
-        .managermove a{
-            color : white;
-            text-decoration: none;
-        }
+.footer_subcon {
+	max-width: 1024px;
+}
+
+.footer_left {
+	width: 100%;
+}
+
+.footer_left .footer_nav {
+	display: flex;
+}
+
+.footer_nav ul {
+	list-style-type: none;
+	line-height: 200%;
+}
+
+.footer_nav ul h3 {
+	color: rgba(255, 255, 255, 0.649);
+}
+
+.footer_nav ul li {
+	color: rgba(255, 255, 255, 0.348)
+}
+
+.footer_right {
+	width: 30%;
+	padding-top: 14px;
+}
+
+.footer_com {
+	line-height: 150%;
+}
+
+.footer_com h2 {
+	color: rgba(255, 255, 255, 0.649);
+	border-bottom: 3px solid #26A653;
+	width: 32%;
+}
+
+.footer_com p {
+	color: rgba(255, 255, 255, 0.348);
+}
+
+.managermove a {
+	color: white;
+	text-decoration: none;
+}
 
 .login_icon {
 	margin-left: 15px;
@@ -464,60 +475,69 @@ button{
 .fa-play {
 	display: none;
 }
-    .header_icon {
-	    text-decoration: none;
-	    color: #4e4e4e;
-	    font-size: 27px;
-	    margin-left: 15px;
-    }
-    .comentbox{
-    	border-bottom: 1px solid #26A653;
-    	border-left: 20px solid #26A653;
-    	margin-bottom: 20px;
-    	padding: 22px;
-    	display: flex;
-    	justify-content: space-between;
-    }
-    .rightbox{
-    	display: flex;
-    }
-    .namebox{
-    	font-size: 12px;
-    	font-weight: bold;
-    }
-    .coment{
-    	font-size: 20px;
-    	font-weight: bold;
-    	letter-spacing: 1.5px;
-    }
-    .time{
-    	font-size: 11px;
-    	color : #ABABAB;
-    	display: flex;
-        align-items: center;
-        padding-right: 20px;
-    }
-    .just{
-    	display: flex;
-        align-items: center;
-    }
-    .updatebtn{
-    	font-size: 13px;
-    	font-weight: bold;
-    	background: none;
-    	border: none;
-        padding-right: 20px;
-    }
-    .deletebtn{
-    	font-size: 13px;
-    	font-weight: bold;
-    	background: none;
-    	border: none;
-    }
-    #input{
-    	display: flex;
-    	
-    }
+
+.header_icon {
+	text-decoration: none;
+	color: #4e4e4e;
+	font-size: 27px;
+	margin-left: 15px;
+}
+
+.comentbox {
+	border-bottom: 1px solid #26A653;
+	border-left: 20px solid #26A653;
+	margin-bottom: 20px;
+	padding: 22px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.rightbox {
+	display: flex;
+}
+
+.namebox {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.coment {
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 1.5px;
+}
+
+.time {
+	font-size: 11px;
+	color: #ABABAB;
+	display: flex;
+	align-items: center;
+	padding-right: 20px;
+}
+
+.just {
+	display: flex;
+	align-items: center;
+}
+
+.updatebtn {
+	font-size: 13px;
+	font-weight: bold;
+	background: none;
+	border: none;
+	padding-right: 20px;
+}
+
+.deletebtn {
+	font-size: 13px;
+	font-weight: bold;
+	background: none;
+	border: none;
+}
+
+#input {
+	display: flex;
+}
 </style>
 </head>
 <body>
@@ -526,60 +546,67 @@ button{
 			<div class="header_area">
 				<div class="header_content">
 					<div class="header_left main_logo"></div>
-               <div class="header_right login_btn etc_btn">
-                  <div class="search_input_area">
-  		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
-	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
-                  </div>
-                  <div class="adminMove">
-                  	<% if(authority.equals("관리자")){ %>
-                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%}else if(authority.equals("매니저")){%>
-				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%} %>
-                  </div>
-                  
-                  <div class="login_icon">
-                     <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
-                        <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<div class="header_right login_btn etc_btn">
+						<div class="search_input_area">
+							<jsp:include page="../search/search.jsp"></jsp:include>
+							<!--                   <input type="text" class="search_input"> -->
+							<iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
+						</div>
+						<div class="adminMove">
+							<% if(authority.equals("관리자")){ %>
+							<a class="header_icon admin_btn"
+								href="${pageContext.request.contextPath}/admin/admin"><iconify-icon
+									icon="clarity:administrator-solid"></iconify-icon></a>
+							<%}else if(authority.equals("매니저")){%>
+							<a class="header_icon manager_btn"
+								href="${pageContext.request.contextPath}/manager/manager"><iconify-icon
+									icon="clarity:administrator-solid"></iconify-icon></a>
+							<%} %>
+						</div>
+
+						<div class="login_icon">
+							<a href="${pageContext.request.contextPath}/loginPage/login">
+								<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
+								<svg width="25" height="28" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
-                              fill="#464A54" />
+										d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
+										fill="#464A54" />
                            <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M12 13.5C7.5502 13.5 5.07689 15.0054 3.93312 16.0093C3.22723 16.6288 3 17.4996 3 18.2447C3 20.3187 4.68132 22 6.75534 22H17.2447C19.3187 22 21 20.3187 21 18.2447C21 17.4996 20.7728 16.6288 20.0669 16.0093C18.9231 15.0054 16.4498 13.5 12 13.5ZM5.25244 17.5124C6.03934 16.8217 8.04626 15.5 12 15.5C15.9537 15.5 17.9607 16.8217 18.7476 17.5124C18.8856 17.6335 19 17.8668 19 18.2447C19 19.2141 18.2141 20 17.2447 20H6.75534C5.78589 20 5 19.2141 5 18.2447C5 17.8668 5.11441 17.6335 5.25244 17.5124Z"
-                              fill="#464A54" />
+										d="M12 13.5C7.5502 13.5 5.07689 15.0054 3.93312 16.0093C3.22723 16.6288 3 17.4996 3 18.2447C3 20.3187 4.68132 22 6.75534 22H17.2447C19.3187 22 21 20.3187 21 18.2447C21 17.4996 20.7728 16.6288 20.0669 16.0093C18.9231 15.0054 16.4498 13.5 12 13.5ZM5.25244 17.5124C6.03934 16.8217 8.04626 15.5 12 15.5C15.9537 15.5 17.9607 16.8217 18.7476 17.5124C18.8856 17.6335 19 17.8668 19 18.2447C19 19.2141 18.2141 20 17.2447 20H6.75534C5.78589 20 5 19.2141 5 18.2447C5 17.8668 5.11441 17.6335 5.25244 17.5124Z"
+										fill="#464A54" />
                         </svg>
-                     </a>
-                  </div>
-                  
-                  <% if(session.getAttribute("sessionVO") == null) { %>
-                  <div class="etc_icon">
-                     <a href="${pageContext.request.contextPath}/etc/etc">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							</a>
+						</div>
+
+						<% if(session.getAttribute("sessionVO") == null) { %>
+						<div class="etc_icon">
+							<a href="${pageContext.request.contextPath}/etc/etc"> <svg
+									width="28" height="28" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
                            <path
-                              d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
-                              fill="#464A54" />
+										d="M5.5 10.5C6.32843 10.5 7 11.1716 7 12C7 12.8284 6.32843 13.5 5.5 13.5C4.67157 13.5 4 12.8284 4 12C4 11.1716 4.67157 10.5 5.5 10.5Z"
+										fill="#464A54" />
                            <path
-                              d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
-                              fill="#464A54" />
+										d="M12 10.5C12.8284 10.5 13.5 11.1716 13.5 12C13.5 12.8284 12.8284 13.5 12 13.5C11.1716 13.5 10.5 12.8284 10.5 12C10.5 11.1716 11.1716 10.5 12 10.5Z"
+										fill="#464A54" />
                            <path
-                              d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
-                              fill="#464A54" />
+										d="M18.5 10.5C19.3284 10.5 20 11.1716 20 12C20 12.8284 19.3284 13.5 18.5 13.5C17.6716 13.5 17 12.8284 17 12C17 11.1716 17.6716 10.5 18.5 10.5Z"
+										fill="#464A54" />
                         </svg>
-                     </a>
-                  </div>
-                  <% } %>
-                  
-                  <% if(session.getAttribute("sessionVO") != null) { %>
-                  <div class="logout_icon">
-                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
-						<iconify-icon icon="codicon:sign-out"></iconify-icon>
-                     </a>
-                  </div>
-                  <%} %>
-               </div>
+							</a>
+						</div>
+						<% } %>
+
+						<% if(session.getAttribute("sessionVO") != null) { %>
+						<div class="logout_icon">
+							<a class="header_icon logout_btn"
+								href="${pageContext.request.contextPath}/loginPage/logout">
+								<iconify-icon icon="codicon:sign-out"></iconify-icon>
+							</a>
+						</div>
+						<%} %>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -615,39 +642,39 @@ button{
 		</div>
 
 
-<!-- 		<div class="pagination-area"> -->
-<!-- 			<div class="page_container"> -->
-<!-- 				<div class="pagination_controller"> -->
-<!-- 					<div class="index_num"> -->
-<!-- 						<span class="current_index">1</span> <span class="total_count">/ -->
-<!-- 							2</span> -->
-<!-- 					</div> -->
-<!-- 					<div class="control_wrapper"> -->
-<!-- 						<button class="control_previous_button e_previous_banner"> -->
-<!-- 							<i class="fa-solid fa-angle-left"></i> -->
-<!-- 						</button> -->
+		<!-- 		<div class="pagination-area"> -->
+		<!-- 			<div class="page_container"> -->
+		<!-- 				<div class="pagination_controller"> -->
+		<!-- 					<div class="index_num"> -->
+		<!-- 						<span class="current_index">1</span> <span class="total_count">/ -->
+		<!-- 							2</span> -->
+		<!-- 					</div> -->
+		<!-- 					<div class="control_wrapper"> -->
+		<!-- 						<button class="control_previous_button e_previous_banner"> -->
+		<!-- 							<i class="fa-solid fa-angle-left"></i> -->
+		<!-- 						</button> -->
 
-<!-- 						<button type="button" -->
-<!-- 							class="control_play_pause_button e_play_pause_swiper"> -->
-<!-- 							<svg class="fa-pause" width="14px" height="14px" -->
-<!-- 								enable-background="new 0 0 155.3 159.3" -->
-<!-- 								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"> -->
-<!-- 								<path fill="#ffffff" -->
-<!-- 									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path> -->
-<!-- 								<path fill="#ffffff" -->
-<!-- 									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg> -->
-<!-- 							<i class="fas fa-play"></i> -->
-<!-- 						</button> -->
+		<!-- 						<button type="button" -->
+		<!-- 							class="control_play_pause_button e_play_pause_swiper"> -->
+		<!-- 							<svg class="fa-pause" width="14px" height="14px" -->
+		<!-- 								enable-background="new 0 0 155.3 159.3" -->
+		<!-- 								viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"> -->
+		<!-- 								<path fill="#ffffff" -->
+		<!-- 									d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path> -->
+		<!-- 								<path fill="#ffffff" -->
+		<!-- 									d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg> -->
+		<!-- 							<i class="fas fa-play"></i> -->
+		<!-- 						</button> -->
 
-<!-- 						<button type="button" class="control_next_button e_next_banner"> -->
-<!-- 							<i class="fa-solid fa-angle-right"> </i> -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+		<!-- 						<button type="button" class="control_next_button e_next_banner"> -->
+		<!-- 							<i class="fa-solid fa-angle-right"> </i> -->
+		<!-- 						</button> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
 
-<script>
+		<script>
 
 let button_flag = true;
 var time_out;
@@ -760,38 +787,45 @@ let play_btn = document.querySelector(".fa-play");
 </script>
 
 
-	<div id="div1">
-	<form:form modelAttribute="BlacklistVO" action="${pageContext.request.contextPath}/blacklist/blacklistmain/setbbs" method="post">
-		<div class="containersetbbs">
-			<div class="header">
-				<h4>지역 :</h4>
-				<form:select path="blacklistLocal">
-					<form:options items="${blacklistLocal}"/>
-				</form:select>
-				<h4>제목 :</h4>
-				<form:input path="blacklistTitle" placeholder ="제목을 입력해 주세요"/>
-				<h4>신고유저코드 :</h4>
-				<form:input path="blackuserCode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder ="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)"/>
-			</div>
-			<div class="main">
-				<form:textarea path="blacklistContent" placeholder ="신고할 내용을 입력해 주세요"/>
-			</div>
-			<div class="footer">
-				<button id ="fotbtn">전송</button>
-			</div>
-		</div>
+		<div id="div1">
+			<form:form modelAttribute="BlacklistVO"
+				action="${pageContext.request.contextPath}/blacklist/blacklistmain/setbbs"
+				method="post">
+				<div class="containersetbbs">
+					<div class="header">
+						<h4>지역 :</h4>
+						<form:select path="blacklistLocal">
+							<form:options items="${blacklistLocal}" />
+						</form:select>
+						<h4>제목 :</h4>
+						<form:input path="blacklistTitle" placeholder="제목을 입력해 주세요" />
+						<h4>신고유저코드 :</h4>
+						<form:input path="blackuserCode"
+							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+							placeholder="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)" />
+					</div>
+					<div class="main">
+						<form:textarea path="blacklistContent"
+							placeholder="신고할 내용을 입력해 주세요" />
+					</div>
+					<div class="footer">
+						<button id="fotbtn">전송</button>
+					</div>
+				</div>
+
+			</form:form>
 		
-	</form:form >
-	</div>
-	  <div class="bottom_banner">
-    	<div class="banner_area">
-			<img src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
 		</div>
-    </div>
-    <footer>
-        <jsp:include page="../etc/footer.jsp"></jsp:include>
-    </footer>
-</div>
+		<div class="bottom_banner">
+			<div class="banner_area">
+				<img
+					src="${pageContext.request.contextPath}/image/index_bottom_banner.png">
+			</div>
+		</div>
+		<footer>
+			<jsp:include page="../etc/footer.jsp"></jsp:include>
+		</footer>
+	</div>
 	<script type="text/javascript">
 	
 	document.getElementById("fotbtn").addEventListener("click",function(){
@@ -807,7 +841,7 @@ let play_btn = document.querySelector(".fa-play");
 	});
 </script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	$('#blackuserCode').val("");
 </script>
 

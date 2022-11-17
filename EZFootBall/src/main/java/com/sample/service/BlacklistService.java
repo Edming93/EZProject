@@ -14,6 +14,7 @@ import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistPageVO;
 import com.sample.vo.BlacklistVO;
 import com.sample.vo.Criteria;
+import com.sample.vo.UserVO;
 
 
 
@@ -51,8 +52,9 @@ public class BlacklistService {
 		model.addAttribute("BlacklistVO", blackDAO.selectBlackListdetail(blacklistCode));
 	}
 	
+	
 	public boolean setBlackList(BlacklistVO vo) {
-		
+
 		int blackcount = blackDAO.blackCheck(vo);
 		
 		if(0 == blackcount){
@@ -60,6 +62,10 @@ public class BlacklistService {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean codelist(UserVO vo) {
+		return (blackDAO.codelist(vo) != null)?true:false;
 	}
 	
 	public boolean editBlackList(BlacklistVO vo) {
