@@ -96,9 +96,8 @@ public class LoginService {
 	public String rememId(String id_ck,String pageurl,UserVO vo,
 							HttpSession session,HttpServletRequest request,
 							HttpServletResponse response) {
-
-		String url = null;
 		int blackUser = dao.blackCheck(vo);
+		String url = null;
 		
 		if(id_ck == null) {
 			id_ck = "n";
@@ -130,7 +129,7 @@ public class LoginService {
 
 		}else {
 			request.setAttribute("page", "login");
-			url = "redirect:/loginPage/login?pageurl="+pageurl+"&isUser="+isUser(vo,session);
+			url = "redirect:/loginPage/login?pageurl="+pageurl+"&isUser="+isUser(vo,session)+"&black="+blackUser;
 			
 		}
 		

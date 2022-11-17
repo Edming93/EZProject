@@ -17,7 +17,10 @@
 //     session.setAttribute("state", state);
 
 	String isUser = request.getParameter("isUser");
+	String black = request.getParameter("black");
 	System.out.println(isUser);
+	System.out.println(black);
+	
 // 	if(isUser == null){
 		
 // 	}
@@ -208,14 +211,20 @@
             
             <script type="text/javascript">
             console.log("<%=isUser%>");
+            console.log("<%=black%>");
             
-        
-            	if(<%=isUser%> == false) {
+        		if(<%=black%> == 1){
+        			Swal.fire(
+        	        '블랙리스트 유저 입니다'
+                    	);
+        		
+        		}else if(<%=isUser%> == false) {
             		Swal.fire(
 					'으악!',
 					'아이디와 비밀번호를 확인해주세요'
             		);
-            	}
+        		}
+            	
             	
             </script>
             
