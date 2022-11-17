@@ -63,11 +63,11 @@ public class BlacklistService {
 		}
 		return false;
 	}
-	
+	/*
 	public boolean codelist(UserVO vo) {
 		return (blackDAO.codelist(vo) != null)?true:false;
 	}
-	
+	*/
 	public boolean editBlackList(BlacklistVO vo) {
 		return (blackDAO.updateBlackList(vo)>0)?true:false;
 	}
