@@ -28,18 +28,26 @@ public class LoginService {
 	}
 
 	public boolean isUser(UserVO vo, HttpSession session) {
-		if(vo != null && session.getAttribute("sessionVO") == null) {
+		if(vo!=null) {
 			vo.setUserPw(encryptSHA256(vo.getUserPw()));
 		}
+		int blackUser = dao.blackCheck(vo);
 		
 		UserVO uvo = dao.idPwCheck(vo);
-		if(uvo != null) {
-			session.setAttribute("sessionVO", uvo);
-			session.setMaxInactiveInterval(999999);
-			return true;
+		System.out.println("블랙유저코드 들어옴?"+blackUser);
+		if(blackUser == 0) {
+			
+			if(uvo != null) {
+				session.setAttribute("sessionVO", uvo);
+				session.setMaxInactiveInterval(999999);
+				return true;
+			}else {
+				return false;
+			}
 		}else {
 			return false;
 		}
+				
 	}
 	
 	public void setUserInfo(UserVO vo) {
@@ -90,6 +98,7 @@ public class LoginService {
 							HttpServletResponse response) {
 
 		String url = null;
+		int blackUser = dao.blackCheck(vo);
 		
 		if(id_ck == null) {
 			id_ck = "n";

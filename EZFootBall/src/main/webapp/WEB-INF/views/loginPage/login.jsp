@@ -17,7 +17,6 @@
 //     session.setAttribute("state", state);
 
 	String isUser = request.getParameter("isUser");
-	
 	System.out.println(isUser);
 // 	if(isUser == null){
 		
@@ -210,6 +209,7 @@
             <script type="text/javascript">
             console.log("<%=isUser%>");
             
+        
             	if(<%=isUser%> == false) {
             		Swal.fire(
 					'으악!',

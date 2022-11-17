@@ -10,6 +10,8 @@ import com.sample.vo.UserVO;
 @Mapper
 public interface UserDAO {
 	public UserVO idPwCheck(UserVO vo);
+	
+	public int blackCheck(UserVO vo);
 
 	public String userId(String id);
 
