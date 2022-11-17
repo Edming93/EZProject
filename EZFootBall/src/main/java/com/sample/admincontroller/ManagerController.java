@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.adminservice.AdminService;
 import com.sample.adminservice.GameService;
@@ -244,7 +246,6 @@ public class ManagerController {
         return "redirect:/manager/manager";
     }
     
-    
     @PostMapping("/gupdate")
     public String update(GlistVO vo,HttpSession session) {
         gaservice.update(vo);
@@ -285,7 +286,6 @@ public class ManagerController {
         
         return "redirect:/manager/manager";
     }
-    
     
     @GetMapping("/newgame")
     public String newgame(HttpSession session) {
@@ -335,4 +335,27 @@ public class ManagerController {
    
         return "redirect:/manager/manager";
     }
+
+    @PostMapping("/sociallist")
+	@ResponseBody
+    public List<GlistVO> sociallist (@RequestBody GlistVO vo){
+    	System.out.println("컨트롤러");
+    	System.out.println(vo.getGameCode());
+    	return gaservice.sociallist(vo);
+    }
+    
+    @PostMapping("/sociallistcnt")
+	@ResponseBody
+    public int sociallistcnt (@RequestBody GlistVO vo){
+    	System.out.println("컨트롤러");
+    	System.out.println(vo.getGameCode());
+    	return gaservice.sociallistcnt(vo);
+    }
+    
+    @GetMapping("/returnpage")
+    public String returmpage(@RequestParam int num, HttpSession session) {
+    	session.setAttribute("pagenum", num);
+    	return "redirect:/manager/manager?page=gameMain";
+    }
+    
 }

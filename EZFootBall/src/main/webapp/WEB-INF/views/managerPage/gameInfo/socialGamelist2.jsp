@@ -10,6 +10,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	UserVO myvo = (UserVO)session.getAttribute("sessionVO");
 	List<UserVO>userlist = null;
 	List<GlistVO> gamelist = new ArrayList<GlistVO>();
 	List<GameFieldInfoVO> allfield = (List<GameFieldInfoVO>)session.getAttribute("allfield");
@@ -20,7 +21,7 @@
 	if(session.getAttribute("gamelist") !=null) {
 		List<GlistVO> allgamelist = (List<GlistVO>)session.getAttribute("gamelist");
 		for(int i=0; i<allgamelist.size(); i++){
-			if(allgamelist.get(i).getGameType().equals("T")){
+			if(allgamelist.get(i).getGameType().equals("S")){
 				gamelist.add(allgamelist.get(i));
 			}
 		}
@@ -29,6 +30,18 @@
 	LocalTime now = LocalTime.now();
 	int hour = now.getHour();
 	LocalDate nday = LocalDate.now();
+	
+	
+	LocalDate nowd = LocalDate.now();
+	int year = nowd.getYear();
+	int month = nowd.getMonthValue();
+	
+	String dateset ="";
+	if(month == 12) {
+		dateset = year + "-" + (01) + "-17";
+	}else {
+		dateset = year + "-" + (month+1) + "-17";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -120,17 +133,17 @@
        		width : 18px;
        		height : 18px;
        }
-        .sub_menu2 {
+        .sub_menu1 {
 		    background-color: #26a653;
 		    color: white;
 		    border-radius: 10px 10px 0px 0px;
 		}
-		.sub_menu1 {
+		.sub_menu2 {
 			font-weight: 100;
-		}		
+		}
 		.sub_menu3 {
 			font-weight: 100;
-		}		
+		}				
 	    .nev{
 		    display: flex;
 		    justify-content: center;
@@ -159,7 +172,7 @@
         	margin: 0px 7px 0px 7px;
         	cursor: pointer;
         }
-	
+
 	
 	
 	/* 모달 */
@@ -253,6 +266,7 @@
         #upul > li > input{
             background: none;
         }
+        
 
 </style>
 </head>
@@ -261,7 +275,7 @@
 <div id="modalout"></div>
     <div id="modal">
         <h3>게임 추가</h3>
-        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/tadd">
+        <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/sadd">
         <input type="hidden" name="select" value="gameAdmin">
             <ul id="flist">
                 <li><p>경기장코드 : </p> <input type="text" name="fieldCode" id="infieldCode" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
@@ -294,17 +308,21 @@
                 						<option value="아마추어1">아마추어1</option>
                 						<option value="아마추어2">아마추어2</option>
                 						<option value="아마추어3">아마추어3</option>
-                						<option value="프로1">세미프로1</option>
-                						<option value="프로2">세미프로2</option>
-                						<option value="프로3">세미프로3</option>
+                						<option value="세미프로1">세미프로1</option>
+                						<option value="세미프로2">세미프로2</option>
+                						<option value="세미프로3">세미프로3</option>
                 					</select></li>
                 <li><p>경기성별 : </p> <select name="gameGender" id="genderselect">
                 						<option value="혼성">혼성</option>
                 						<option value="남성">남성</option>
                 						<option value="여성">여성</option>
                 					</select></li>
-                <li><p>최소팀 : </p> <input type="text" name="gameMinp" id="minp" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
-                <li><p>최대팀 : </p> <input type="text" name="gameMaxp" id="maxp" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
+                <!-- <li><p>경기형태 : </p> <select id="matchselect">
+                						<option value="5vs5">5vs5</option>
+                						<option value="6vs6">6vs6</option>
+                					</select></li> -->
+                <li><p>최소인원 : </p> <input type="text" name="gameMinp" id="minp" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
+                <li><p>최대인원 : </p> <input type="text" name="gameMaxp" id="maxp" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 <li><p>매니저 : </p> <input type="text" name="gameMag" id="mag" class="inbox" autocomplete='off'></li>
                 <li><p>참가비 : </p> <input type="text" name="gamePay" id="pay" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 
@@ -333,21 +351,21 @@
                 						<option value="20:00">20:00</option>
                 					</select>
                 <li><p>경기레벨 : </p><select name="level" id="uplevel">
-                						<option value="Rookie1">루키1</option>
-                						<option value="Rookie2">루키2</option>
-                						<option value="Rookie3">루키3</option>
-                						<option value="Amateur1">아마추어1</option>
-                						<option value="Amateur2">아마추어2</option>
-                						<option value="Amateur3">아마추어3</option>
-                						<option value="Semi_pro1">세미프로1</option>
-                						<option value="Semi_pro2">세미프로2</option>
-                						<option value="Semi_pro3">세미프로3</option>
+                						<option value="루키1">루키1</option>
+                						<option value="루키2">루키2</option>
+                						<option value="루키3">루키3</option>
+                						<option value="아마추어1">아마추어1</option>
+                						<option value="아마추어2">아마추어2</option>
+                						<option value="아마추어3">아마추어3</option>
+                						<option value="세미프로1">세미프로1</option>
+                						<option value="세미프로2">세미프로2</option>
+                						<option value="세미프로3">세미프로3</option>
                 					</select></li>
                 <!-- <li><p>경기형태 : </p><input type="text" name="gameMacth" id="upmatch"></li> -->
                 <li><p>마감여부 : </p><input type="text" name="close" id="upclose"></li>
-                <li><p>최소팀 : </p><input type="text" name="gameMinp" id="upmin"></li>
-                <li><p>최대팀 : </p><input type="text" name="gameMaxp" id="upmax"></li>
-                <li><p>신청팀 :</p><input type="text" name="gamePnum" id="upnum" readonly></li>
+                <li><p>최소인원 : </p><input type="text" name="gameMinp" id="upmin"></li>
+                <li><p>최대인원 : </p><input type="text" name="gameMaxp" id="upmax"></li>
+                <li><p>신청인원 :</p><input type="text" name="gamePnum" id="upnum" readonly></li>
                 <li><p>매니저 : </p><input type="text" name="gameMag" id="upmag"></li>
             </ul>
             <button id="upsub">수정</button>
@@ -445,19 +463,16 @@
 	<!-- 등록 -->
 	<script type="text/javascript">
 	document.getElementById("addbtn").addEventListener("click",function(){		
-		console.log(">>>");
 		let cnt=0;
 		for(let i=0; i<document.querySelectorAll("#flist li input").length; i++){
-			console.log(document.querySelectorAll("#flist li input")[i]);
 			if(document.querySelectorAll("#flist li input")[i].value == ""){
-				alert("값을 입력해 주세요1");
+				alert("값을 입력해 주세요");
 				document.querySelectorAll("#flist li input")[i].focus();
-				console.log(document.querySelectorAll("#flist li input")[i]);
 				cnt++;
 				break;
 			}
 			if( document.getElementById("timeselect").value == "null"){
-				alert("값을 입력해 주세요2");
+				alert("값을 입력해 주세요");
 				cnt++;
 				document.getElementById("timeselect").focus();
 				break;
@@ -494,7 +509,7 @@
 
 <div id="out">
 		<div id="searchbox1">
-			<div class="searchbox1_area">		
+			<div class="searchbox1_area">
 				<select name="" id="select" class="box_css">
 					<option value="null">카테고리</option>
 					<option value="gameCode">경기번호</option>
@@ -504,14 +519,13 @@
 					<option value="gameMacth">매치형태</option>
 					<option value="mag">매니저</option>
 				</select>
-
 				<div id="btnbox">
+					<button id="newgame" class="box_css">다음달 경기 일괄 생성</button>
 					<button id="add" class="box_css">추가</button>
 					<button id="del" class="box_css">삭제</button>
 					<button id="upd" class="box_css">수정</button>
 				</div>
 			</div>
-
 			<div id="saerch">
 				<input type="text" name="" id="inputbox" placeholder="검색어를 입력하세요">
 				<button id="sbtn" class="box_css">검색</button>
@@ -586,7 +600,6 @@
 					
 				</table>
 			</div>
-			</div>
 			<div id="nev"  class="nev"> 
 			<a id="pre" class="page_btn"> ◀ </a>
 			<%
@@ -633,7 +646,7 @@
 				for(int i=1; i<=gamelist.size()/15;i++){
 					if(i>15) {
 						%>
-						<a id="num<%=i%>" style="display: none;" class="page_btn"> <% out.print(i); %></a>
+						<a id="num<%=i%>" style="display: none;" class="listnum"> <% out.print(i); %></a>
 						<%
 					}else{
 						%>
@@ -645,11 +658,11 @@
 				for(int i=1; i<=gamelist.size()/15 + 1;i++){
 					if(i>15) {
 						%>
-						<a id="num<%=i%>" style="display: none;" class="page_btn"> <% out.print(i); %></a>
+						<a id="num<%=i%>" style="display: none;" class="listnum"> <% out.print(i); %></a>
 						<%
 					}else{
 						%>
-						<a id="num<%=i%>" class="page_btn"> <% out.print(i); %> </a>
+						<a id="num<%=i%>" class="listnum"> <% out.print(i); %> </a>
 						<%
 					}
 				}
@@ -714,6 +727,7 @@
 	
 	</script>
 
+	
 	<!-- 페이징 버튼 -->
 	<script type="text/javascript">
 	for(let i=0; i< document.getElementsByClassName("listnum").length; i++) {
@@ -778,6 +792,7 @@
 		
 		/* 경기번호 검색 */
 		if(document.getElementById("select").value == "gameCode"){
+			//페이징버튼 변경
 			document.getElementById("nev").style.display = "none";
 			document.getElementById("snev").style.display = "";
 			let cnt = 0;
@@ -1688,7 +1703,7 @@
          }
        });
 	</script>
-	
+
 	<!-- 추가 모달창 -->
 	<script>
         document.getElementById("add").addEventListener("click", function () {
@@ -1752,9 +1767,7 @@
 	 })
 	 
 	</script>
-
-	
-	
+  
 	<!-- 수정모달 -->
 	<script type="text/javascript">
 	document.getElementById("upd").addEventListener("click", function () {
@@ -1812,7 +1825,6 @@
 	});
 	</script>
 	
-	
 	<!-- 수정 -->
 	<script type="text/javascript">
 	document.getElementById("upsub").addEventListener("click", function () {
@@ -1825,7 +1837,6 @@
 		
 	})
 	</script>
-	
 	
 	<!-- 전체 체크박스 -->
 	<script type="text/javascript">
@@ -1843,6 +1854,29 @@
     });
 	</script>
 	
+	<!-- 일괄 -->
+	<script type="text/javascript">
+	document.getElementById("newgame").addEventListener("click", function () {
+	let dcnt =0;
+	for(let i=0; i<(<%=gamelist.size()%>); i++){
+		if(document.getElementsByClassName("gameDay")[i].innerText.trim() == '<%=dateset%>' && document.getElementsByClassName("gameMag")[i].innerText.trim() == '<%=myvo.getUserName()%>'){
+			alert("이미 등록 하셨습니다");
+			dcnt++;
+			break;
+		}
+	}
+	
+	if(dcnt == 0){
+		var newgame = confirm("경기성별과 레벨은 기본값으로 생성됩니다.\n 매니저는 경기장별 대표 매니저로 설정됩니다");
+		 if(newgame){
+			 location.href = "${pageContext.request.contextPath}/manager/newgame";
+		 }else{
+			 location.reload();
+		 } 
+	}
+	 
+	});
+	</script>
 	
 	</div>
 </body>

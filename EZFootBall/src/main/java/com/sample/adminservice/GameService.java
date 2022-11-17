@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sample.dao.GameDAO;
+import com.sample.dao.ManagerDAO;
 import com.sample.dao.SubDAO;
 import com.sample.vo.DataVO;
 import com.sample.vo.GameFieldInfoVO;
@@ -16,10 +17,12 @@ import com.sample.vo.ManagerVO;
 public class GameService {
 
 	private GameDAO dao;
+	private ManagerDAO mdao;
 
-	public GameService(GameDAO dao) {
+	public GameService(GameDAO dao, ManagerDAO mdao) {
 		super();
 		this.dao = dao;
+		this.mdao = mdao;
 	}
 
 	public List<GlistVO> all(String gameType) {
@@ -93,4 +96,15 @@ public class GameService {
 	public GameFieldInfoVO getfieldinfo (int fieldCode) {
 	    return dao.getfieldinfo(fieldCode);
 	}
+
+	public List<GlistVO> sociallist (GlistVO vo){
+		System.out.println("서비스");
+		return mdao.sociallist(vo);
+	}
+	
+	public int sociallistcnt (GlistVO vo) {
+		System.out.println("갯수서비스");
+		return mdao.sociallistcnt(vo);
+	}
+	
 }

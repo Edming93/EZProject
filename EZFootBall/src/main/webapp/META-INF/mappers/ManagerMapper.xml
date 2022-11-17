@@ -104,5 +104,67 @@
 		WHERE field_name = #{fieldName}
 	</select>
 
+
+	<!-- 소셜게임리스트 -->
+	<select id="sociallist" resultType="GlistVO" parameterType="GlistVO">
+		select game_code,game_day,game_gender,
+		DATE_FORMAT(game_time, '%H:%i') AS game_time,level,
+		game_macth,game_place,close,game_pnum,game_mag,field_name,
+		field_address,game_minp,game_maxp,field_code
+		from gamelist
+		<where>
+			<if test="gameCode != 0">
+				and game_code like CONCAT ('%',#{game_code},'%')
+			</if>
+			<if test="gameDay != null">
+				and DATE_FORMAT(game_day, '%Y-%m-%d') like  CONCAT ('%',#{gameDay},'%')
+			</if>
+			<if test="gameTime != null">
+				and game_time like  CONCAT ('%',#{gameTime},'%')
+			</if>
+			<if test="gameMag != null">
+				and game_mag like CONCAT ('%',#{gameMag},'%') 
+			</if>
+			<if test="level != null">
+				and level like CONCAT ('%',#{level},'%')
+			</if>
+			<if test="gameMacth != null">
+				and game_macth like CONCAT ('%',#{gameMacth},'%') 
+			</if>
+				and game_type = 's'
+		</where>
+		limit #{num},15
+	</select>
+	
+	
+	<select id="sociallistcnt" resultType="int" parameterType="GlistVO">
+		select COUNT(*)
+		from gamelist
+		<where>
+			<if test="gameCode != 0">
+				and game_code like CONCAT ('%',#{game_code},'%')
+			</if>
+			<if test="gameDay != null">
+				and DATE_FORMAT(game_day, '%Y-%m-%d') like  CONCAT ('%',#{gameDay},'%')
+			</if>
+			<if test="gameTime != null">
+				and game_time like  CONCAT ('%',#{gameTime},'%')
+			</if>
+			<if test="gameMag != null">
+				and game_mag like CONCAT ('%',#{gameMag},'%') 
+			</if>
+			<if test="level != null">
+				and level like CONCAT ('%',#{level},'%')
+			</if>
+			<if test="gameMacth != null">
+				and game_macth like CONCAT ('%',#{gameMacth},'%') 
+			</if>
+				and game_type = 's'
+		</where>
+		limit #{num},15
+	</select>
+	
+	
+	
 </mapper>
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sample.vo.GameFieldInfoVO;
+import com.sample.vo.GlistVO;
 import com.sample.vo.ManagerVO;
 import com.sample.vo.UserVO;
 
@@ -36,4 +37,8 @@ public interface ManagerDAO {
 	public List<UserVO> searchManager(UserVO vo);
 
 	public int getFieldCode(String fieldName);
+	
+	public List<GlistVO> sociallist(GlistVO vo);
+	
+	public int sociallistcnt (GlistVO vo);
 }
