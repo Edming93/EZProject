@@ -22,7 +22,11 @@
 		authority = "일반회원";
 		
 	}
+	String alert = request.getParameter("alert");
+	System.out.println(alert);
+	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -712,6 +716,17 @@ table th {
 	});
 </script>
 
+
+   <script type="text/javascript">
+           
+            console.log("<%=alert%>");
+            
+        		if(<%=alert%> == alert){
+        			Swal.fire('이미 신고한 유저 입니다');
+
+        		}
+	
+            </script>
 
 
 

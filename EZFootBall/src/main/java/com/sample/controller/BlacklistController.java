@@ -99,7 +99,7 @@ public class BlacklistController {
 
 	// 페이지 상세
 	@PostMapping("/blacklistmain/setbbs")
-	public String setBBSResult(@SessionAttribute("sessionVO") UserVO uvo, BlacklistVO bvo) {
+	public String setBBSResult(@SessionAttribute("sessionVO") UserVO uvo, BlacklistVO bvo, Model model) {
 		System.out.println(uvo);
 
 		if (uvo != null) {
@@ -112,7 +112,8 @@ public class BlacklistController {
 				
 				return "redirect:/blacklist/blacklistmain";
 			} else {
-				return "blacklist/setbbs";
+				model.addAttribute("alert", "alert");
+				return "redirect:/blacklist/blacklistmain";	
 			}
 		} else {
 			return "redirect:/loginPage/login";

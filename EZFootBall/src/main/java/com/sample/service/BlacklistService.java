@@ -52,7 +52,14 @@ public class BlacklistService {
 	}
 	
 	public boolean setBlackList(BlacklistVO vo) {
-		return (blackDAO.insertBlackList(vo)>0)?true:false;
+		
+		int blackcount = blackDAO.blackCheck(vo);
+		
+		if(0 == blackcount){
+			blackDAO.insertBlackList(vo);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean editBlackList(BlacklistVO vo) {

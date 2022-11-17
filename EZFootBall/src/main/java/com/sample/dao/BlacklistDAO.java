@@ -26,6 +26,9 @@ public interface BlacklistDAO {
 	//게시판 총 갯수
 	public int getTotal();
 	
+	//블랙리스트 중복 등록 방지
+	public int blackCheck(BlacklistVO vo);
+	
 	//게시판 insert
 	public int insertBlackList(BlacklistVO vo);
 	
