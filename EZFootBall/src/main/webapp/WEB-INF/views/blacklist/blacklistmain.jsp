@@ -56,6 +56,7 @@
 	
 }
 
+
 .sideicon:hover{
 	  transform: scale(1.1);
 	  box-shadow: 0px 10px 48px -4px rgba(0,0,0,0.75);
@@ -439,7 +440,9 @@ table th {
 	color: white;
 }       	
            
-           
+    p{
+    	font-size : 10px;
+    }
            
      
       

@@ -1065,7 +1065,7 @@ let play_btn = document.querySelector(".fa-play");
 
                     div2.style.display = "flex";
                     div2.style.justifyContent = "center";
-                    div2.style.fontSize = "1px";
+                    div2.style.fontSize = "15px";
                     const div3 = document.createElement("div");
                     div3.style.flex = "1";
 
@@ -1118,7 +1118,7 @@ let play_btn = document.querySelector(".fa-play");
 								
 								//수정완료 버튼 클릭시 수정된 내용으로 수정
 								 updatebtn.addEventListener("click", function(){		
-									 document.getElementById("insert").style.display = "block";
+									 document.getElementById("insert").style.display = "flex";
 								 	const target = document.getElementById('btnedit2');
 								 	target.disabled = false; 
 								 	document.getElementsByClassName("test3")[0].style.display = "flex";
@@ -1150,7 +1150,7 @@ let play_btn = document.querySelector(".fa-play");
 							btn2.addEventListener("click", function(){
 								const commentCode = comment.commentCode;
 								const simple_data = {commentCode};
-								document.getElementById("insert").style.display = "block";
+								document.getElementById("insert").style.display = "flex";
 								$.ajax({
 									url : "${pageContext.request.contextPath}/blacklist/comment/delete",
 									type : "delete",
