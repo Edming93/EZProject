@@ -8,7 +8,7 @@
 		}
 	System.out.println("서브메인 subPage값 :"+sub_p);
 
-	session.setAttribute("pagenum", 0);
+	session.removeAttribute("pagenum");
 %>
 <!DOCTYPE html>
 <html lang="en">

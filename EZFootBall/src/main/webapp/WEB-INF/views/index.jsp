@@ -20,6 +20,7 @@
 		authority = "일반회원";
 		
 	}
+	session.removeAttribute("pagenum");
 //     String clientId = "poD0EBSOvA7nhaA84Yi5";//애플리케이션 클라이언트 아이디값";
 //     String clientSecret = "16R_UFfDgk";//애플리케이션 클라이언트 시크릿값";
 //     String code = request.getParameter("code");

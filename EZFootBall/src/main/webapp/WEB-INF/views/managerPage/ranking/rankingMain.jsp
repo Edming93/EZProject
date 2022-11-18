@@ -7,7 +7,7 @@
 		rank_p="rank1";
 	}
 
-	session.setAttribute("pagenum", 0);
+	session.removeAttribute("pagenum");
 %>
 <!DOCTYPE html>
 <html lang="en">
