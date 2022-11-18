@@ -40,6 +40,7 @@ public class UserVO {
 
 	public static final long serialKey = 1231254653L;
 
+	
 	// 정욱 사용
 
 	private String tmember;

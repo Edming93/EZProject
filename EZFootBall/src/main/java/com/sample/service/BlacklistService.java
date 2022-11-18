@@ -63,13 +63,19 @@ public class BlacklistService {
 		}
 		return false;
 	}
-	
-	public boolean codelist(UserVO vo) {
-		return (blackDAO.codelist(vo) != null)?true:false;
+
+	public void getcode(Model model, UserVO vo) {
+		model.addAttribute("code", blackDAO.codelist(vo));
 	}
 	
 	public boolean editBlackList(BlacklistVO vo) {
-		return (blackDAO.updateBlackList(vo)>0)?true:false;
+		
+		int blackcount = blackDAO.blackCheck(vo);
+		if(0 == blackcount){
+		 blackDAO.updateBlackList(vo);
+		 return true;
+		}
+		return false;
 	}
 	
 	public boolean deleteBlackList(BlacklistVO vo) {

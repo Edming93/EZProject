@@ -14,6 +14,8 @@ import com.sample.vo.BlacklistPageVO;
 @Mapper
 public interface BlacklistDAO {
 	
+	//블랙
+	public List<UserVO> codelist(UserVO vo);
 	
 	//페이지 VIEW
 	public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
@@ -58,8 +60,6 @@ public interface BlacklistDAO {
 	public List<BlacklistCommentVO> selectComment(BlacklistCommentVO vo);
 	
 	
-	//블랙
-	public List<UserVO> codelist (UserVO vo);
 	
 	
 	//게시판 댓글 update

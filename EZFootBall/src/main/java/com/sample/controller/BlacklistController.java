@@ -85,16 +85,12 @@ public class BlacklistController {
 	@GetMapping("/blacklistmain/setbbs")
 	public String setBBS(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
 			Model model) {
-		/* service.codelist(uvo); */
-		System.out.println(uvo);
-		if (uvo != null) {
-			String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
-			model.addAttribute("blacklistLocal", cateList);
-			return "blacklist/setbbs";
-		}
-		else {
-			return "redirect:/loginPage/login";
-		}
+			System.out.println(uvo.getUserCode());
+			service.getcode(model, uvo);
+		
+		String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
+		model.addAttribute("blacklistLocal", cateList);
+		return "blacklist/setbbs";
 
 	}
 
@@ -128,6 +124,7 @@ public class BlacklistController {
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
 		System.out.println(bvo.getBlackuserCode());
 		service.deleteuserBlack(bvo);
+		service.getcode(model, uvo);
 		if (uvo != null) {
 			service.getBlackListContent(model, blacklistCode);	
 			String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
@@ -141,7 +138,7 @@ public class BlacklistController {
 	// 페이지 수정 로직
 	@PostMapping("/blacklistmain/editbbs")
 	public String editBBSResult(@SessionAttribute("sessionVO") UserVO uvo, @RequestParam("blackuserCode") String blackuserCode,
-			@ModelAttribute("BlacklistVO") BlacklistVO bvo) {
+			@ModelAttribute("BlacklistVO") BlacklistVO bvo, Model model) {
 		bvo.setUserId(uvo.getUserId());
 		bvo.setBuserName(uvo.getUserName());
 		bvo.setUserCode(uvo.getUserCode());
@@ -159,8 +156,12 @@ public class BlacklistController {
 		if (service.editBlackList(bvo)) {
 			return "redirect:/blacklist/blacklistmain";
 		} else {
-			return "redirect:/blacklist/editbbs/" + bvo.getBlacklistCode();
+			model.addAttribute("alert", "alert");
+			return "redirect:/blacklist/blacklistmain";
 		}
+		
+		
+		
 	}
 
 	// 페이지 삭제
