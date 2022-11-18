@@ -662,14 +662,9 @@ td > a{
 							//  취소
 							
 					        	$('.refundbtn').on("click",function(){
-					        		console.log("환불");
-					        		console.log(rvcode);
 					        	 	
 					        	 	var numse = $(this).prop("id");
-					        	 	console.log($(this).prop("id"));
-					        	 	console.log($(this).prop("id"));
 					        	 	var select = "#stat"+numse;
-					        	 	console.log($(select).text());
 					        	 	
 					        	 	let params = {rvCode:numse};
 					        	 	 $.ajax({
@@ -693,13 +688,6 @@ td > a{
 					        		
 					        	});
 					        	
-					        	
-					        	//취소
-								/* for(var i=0; i<data.length; i++){
-									document.getElementsByClassName("refundbtn")[i].addEventListener("click",function(){
-										console.log(this);
-		        					});
-								} */
 					        	
 							}
 								// list 누르면 아래 박스추가

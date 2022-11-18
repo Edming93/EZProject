@@ -6,7 +6,8 @@
 	if(rank_p == null ){
 		rank_p="rank1";
 	}
-      
+
+	session.setAttribute("pagenum", 0);
 %>
 <!DOCTYPE html>
 <html lang="en">

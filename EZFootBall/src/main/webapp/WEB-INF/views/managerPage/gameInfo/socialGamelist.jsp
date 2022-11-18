@@ -564,21 +564,24 @@
 						
 					</tbody>
 					
-				</table>
+				</table>				
 			</div>
+			<div></div>
 			
 		</div>
 	
 	
 	<script type="text/javascript">
+	/* 초기 리스트 */
 	window.onload = function(e) {
-		if(<%=gamelist.size()%15==0%>){
-			end = <%=gamelist.size()/15%>;
+		let num = 0;
+		if('<%=pagenum%>' <= 1){
+			num = 0
 		}else{
-			end = <%=gamelist.size()/15%> + 1;
+			num = (<%=pagenum%> - 1) * 15;
 		}
 		/* 초기 리스트 */
-		let params = {gameCode : null,gameDay : null,gameTime:null , gameMag:null , level:null, gameMacth : null,num:<%=pagenum%>};
+		let params = {gameCode : null,gameDay : null,gameTime:null , gameMag:null , level:null, gameMacth : null,num:num};
 		$.ajax({
 		      url:"${pageContext.request.contextPath}/manager/sociallist",
 		      type:"POST",
@@ -681,6 +684,8 @@
 		  
 		  /* 초기페이지 */
 		  let params2 = {gameCode : null,gameDay : null,gameTime:null , gameMag:null , level:null, gameMacth : null,num:0};
+		  var pagenum = 0;
+		  let setnum = <%=pagenum%>;
 			$.ajax({
 		      url:"${pageContext.request.contextPath}/manager/sociallistcnt",
 		      type:"POST",
@@ -700,11 +705,11 @@
 	    		  console.log(data2);
 	    		  var numcnt = data2;
 	    		  
-	    		  var pagenum = 0;
+	    		 
 	    		  if(numcnt / 15 == 0) {
 	    			  pagenum = numcnt / 15;
 	    		  }else {
-	    			  pagenum = (numcnt / 15) + 1;
+	    			  pagenum = Math.floor((numcnt / 15)) + 1;
 	    		  }
 	    		  
 		    	  for(var i=1; i<=pagenum; i++){
@@ -713,10 +718,32 @@
 		    		  listnum.href = "${pageContext.request.contextPath}/manager/returnpage?num="+i;
 		    		  listnum.id ="listnum"+i;
 		    		  listnum.className="listnum";
+		    		  listnum.style.display = "none";
 		    		  nev.append(listnum);
-		    		  if(i>15){
-		    			  listnum.style.display = "none";
+		    		  if(<%=pagenum%> == 0){
+		    			  if(i<=15){
+		    				  listnum.style.display = "";
+		    			  }
+		    			  
 		    		  }
+		    		  
+		    		  if(<%=pagenum%>+7 >= pagenum){
+		    			  console.log("zmek");
+		    			  if(i>pagenum-15 && i<=<%=pagenum%>+7){
+			    			  listnum.style.display = "";
+			    		  }
+		    		  }else if(<%=pagenum%>>=8){
+		    			  console.log("rlqhs");
+		    			  if(i>=<%=pagenum%>-7 && i<=<%=pagenum%>+7){
+			    			  listnum.style.display = "";
+			    		  }
+		    		  }else{
+		    			  console.log("dmdpd");
+		    			  if(i<=15){
+		    				  listnum.style.display = "";
+		    			  }
+		    		  }
+		    		  
 		    	  }
 		    	  
 		    	  let next =  document.createElement("a");
@@ -726,6 +753,86 @@
 	    		  nev.append(next);
 	    		  
 	    		  document.getElementById("result").append(nev);
+	    		  
+	    		  console.log(<%=pagenum%>);
+	    		  
+	    		  
+	    			// 이전 
+					$('#pre').on("click", function(){
+						console.log("이전");
+						 console.log(setnum);
+						 console.log(pagenum);
+						
+						 for(var i=1; i<=pagenum; i++){
+							 let listid = "#listnum"+i;
+							 $(listid).css('display', 'none');
+						 }
+						 
+						 if(setnum - 15 <=8){
+							 console.log("if");
+							 console.log(setnum);
+							 setnum = 8;
+							 for(var i=1; i<=15; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display', '');
+							 }
+						 }else{
+							 console.log("else");
+							 console.log(setnum);
+							 setnum = setnum-15;
+							 for(var i=setnum-7; i<=setnum+7; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display', '');
+							 }
+						 }
+						
+		        	});
+	    		  
+	    		  
+	    			// 다음 
+					$('#next').on("click", function(){
+						console.log("다음");
+						
+						
+						 for(var i=1; i<=pagenum; i++){
+							 let listid = "#listnum"+i;
+							 $(listid).css('display', 'none');							
+						 }
+						 
+						 console.log(setnum);
+						 console.log(pagenum);
+						 
+						 if(setnum+7 >=pagenum){
+							 console.log("if");
+							 console.log(setnum);
+							 setnum = pagenum-7;
+							 console.log(setnum);
+							 for(var i=setnum-7; i<=pagenum; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display','');
+							 }
+						 }else if(setnum == 0){
+							 setnum = 23;
+							 for(var i=setnum-7; i<=setnum+7; i++){
+								 let listid = "#listnum"+i;
+								 $(listid).css('display','');
+							 }
+							 
+						 }else{
+							 console.log("else");
+							 setnum = setnum+15;
+							 for(var i=setnum-7; i<=setnum+7; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display','');
+							 }
+							 
+						 }
+		        	});
+	    		  
 		    	  
 		      },
 		      error: function() {
