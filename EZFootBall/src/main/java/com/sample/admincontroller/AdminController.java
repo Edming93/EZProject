@@ -3,6 +3,8 @@ package com.sample.admincontroller;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.adminservice.AdminService;
 import com.sample.adminservice.FieldAdminService;
+import com.sample.adminservice.GameService;
 import com.sample.service.InquiryService;
 import com.sample.service.ManagerService;
+import com.sample.service.RentalService;
 import com.sample.vo.BlacklistVO;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
@@ -41,6 +45,20 @@ public class AdminController {
 	private FieldAdminService fdService;
 	private InquiryService inquiryService;
 	private ManagerService managerService;
+	private RentalService rtservice;
+	
+	
+	
+
+	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
+			ManagerService managerService, RentalService rtservice) {
+		super();
+		this.service = service;
+		this.fdService = fdService;
+		this.inquiryService = inquiryService;
+		this.managerService = managerService;
+		this.rtservice = rtservice;
+	}
 
 	@GetMapping("/admin")
 	public String admin(HttpSession session, Model model) {
@@ -50,15 +68,6 @@ public class AdminController {
 		model.addAttribute("team", service.joinList());
 		model.addAttribute("userListB", service.UInfoListB());
 		return "adminPage/adminMain";
-	}
-
-	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
-			ManagerService managerService) {
-		super();
-		this.service = service;
-		this.fdService = fdService;
-		this.inquiryService = inquiryService;
-		this.managerService = managerService;
 	}
 
 	@GetMapping("/select")
@@ -569,6 +578,49 @@ public class AdminController {
 		}
 
 		fdService.insertFieldInfo(vo);
+		
+		GameFieldInfoVO gfvo = rtservice.getfieldinfo(vo.getFieldCode());
+        
+        LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int today = now.getDayOfMonth();
+        int month = now.getMonthValue();
+        
+        String dateset ="";
+        if(month == 12) {
+            dateset = year + "-" + (01) + "-" +today;
+        }else {
+            dateset = year + "-" + (month) + "-" +today;
+        }
+        LocalDate day = LocalDate.parse(dateset);
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        LocalDate first = day.withDayOfMonth(1);
+        
+        for(int j=1; j<=day.lengthOfMonth(); j++) {
+            String setday = day.withDayOfMonth(j).format(formatter);
+            GlistVO gvo = new GlistVO();
+            gvo.setFieldName(gfvo.getFieldName());
+            gvo.setFieldAddress(gfvo.getFieldAddress());
+            gvo.setFieldCode(gfvo.getFieldCode());
+            gvo.setGameDay(setday); // 받아온날
+            gvo.setGamePlace(gfvo.getGamePlace());
+            gvo.setGameMacth(gfvo.getFieldType());
+            if(gfvo.getFieldType().equals("5vs5")) {
+            	gvo.setGameMinp(10);
+                gvo.setGameMaxp(15);
+            }else {
+            	gvo.setGameMinp(12);
+            	gvo.setGameMaxp(18);
+            }
+//            vo.setGameMag(uvo.getUserName());
+//            vo.setGameMagcode(uvo.getUserCode());
+            rtservice.newgame(gvo);
+           
+        }
+        
+
 		return "redirect:/admin/select?select=" + session.getAttribute("select");
 	}
 

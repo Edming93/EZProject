@@ -28,13 +28,12 @@ public class LoginService {
 	}
 
 	public boolean isUser(UserVO vo, HttpSession session) {
-		if(vo!=null) {
+		if(vo.getUserName() == null && vo!=null) {
 			vo.setUserPw(encryptSHA256(vo.getUserPw()));
 		}
 		int blackUser = dao.blackCheck(vo);
 		
 		UserVO uvo = dao.idPwCheck(vo);
-		System.out.println("블랙유저코드 들어옴?"+blackUser);
 		if(blackUser == 0) {
 			
 			if(uvo != null) {

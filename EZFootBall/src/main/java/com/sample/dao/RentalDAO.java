@@ -25,6 +25,10 @@ public interface RentalDAO {
 
 	public void insertFieldReservation(FieldReservationVO vo);
 	
+	public void newgame(GlistVO vo);
+	
+	public GameFieldInfoVO getfieldinfo(int fieldCode);
+	
 	public List<GlistVO> rvListSelect(GlistVO vo);
 
 	// 마이페이지 구장예약 리스트 불러오기

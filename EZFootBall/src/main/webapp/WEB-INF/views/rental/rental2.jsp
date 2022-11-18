@@ -338,7 +338,19 @@
             });
 </script>
    <div id="result">
-    
+   		<div class="result_content">
+   		<div class="title_area"><h3 class="field_title">${field.fieldName}</h3><span class="size_span">크기 ${field.fieldType}</span></div>
+   			<div class="rental_area">
+	   			<a class="time rental_span_able">8:00 - 10:00</a>
+	   			<a class="time rental_span_able">10:00 - 12:00</a>
+	   			<a class="time rental_span_able">12:00 - 14:00</a>
+	   			<a class="time rental_span_able">14:00 - 16:00</a>
+	   			<a class="time rental_span_able">16:00 - 18:00</a>
+	   			<a class="time rental_span_able">18:00 - 20:00</a>
+	   			<a class="time rental_span_able">20:00 - 22:00</a>
+	   			<a class="time rental_span_able">22:00 - 24:00</a>
+   			</div>
+   		</div>
    </div>
    
 <script type="text/javascript">
@@ -361,64 +373,70 @@
 
 		let fieldCode = ${field.fieldCode};
         let data = {day:day,code:fieldCode};
+        
+        
          
          fetch("${pageContext.request.contextPath}/rental/rvListSelect",{
             method : "POST",
             headers : {
                "Content-Type" : "application/json"},
             body : JSON.stringify(data)
-         }).then(response => response.json()) 
+         }).then(response => response.json())
          .then(list => {
-            const result = document.getElementById("result");
-               result.innerHTML = " ";
-            
-            for (let data of list) {
-	            const content_area = document.createElement("div"); // 가장 바깥
-	            content_area.className = "result_content";
-	            const title_div = document.createElement("div"); // 구장명 표기
-	            title_div.className = "title_area";
-	            const h3 = document.createElement("h3");
-	            h3.className = "field_title";
-	            h3.addEventListener("click",function() {
-	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
-	            });
-	            const match_type = document.createElement("span");
-	            match_type.className = "size_span";
-	            h3.innerHTML = data.fieldName;
-	            match_type.innerHTML = "크기 "+data.gameMacth;
+        	if(list.length > 0){
+	            const result = document.getElementById("result");
+	               result.innerHTML = " ";
 	            
-	            title_div.append(h3);
-	            title_div.append(match_type);
-	            content_area.append(title_div);
-	            result.append(content_area);
+	            for (let data of list) {
+		            const content_area = document.createElement("div"); // 가장 바깥
+		            content_area.className = "result_content";
+		            const title_div = document.createElement("div"); // 구장명 표기
+		            title_div.className = "title_area";
+		            const h3 = document.createElement("h3");
+		            h3.className = "field_title";
+		            h3.addEventListener("click",function() {
+		            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
+		            });
+		            const match_type = document.createElement("span");
+		            match_type.className = "size_span";
+		            h3.innerHTML = data.fieldName;
+		            match_type.innerHTML = "크기 "+data.gameMacth;
+		            
+		            title_div.append(h3);
+		            title_div.append(match_type);
+		            content_area.append(title_div);
+		            result.append(content_area);
+		
+		            const rental_area = document.createElement("div");
+		            rental_area.className = "rental_area";
+				
+					// 전체배열
+					var timeset = ["08","10","12","14","16","18","20","22"];
+					// db에서 불러온 배열
+					var game_time = (data.gameTime).split(',');
 	
-	            const rental_area = document.createElement("div");
-	            rental_area.className = "rental_area";
-			
-				// 전체배열
-				var timeset = ["08","10","12","14","16","18","20","22"];
-				// db에서 불러온 배열
-				var game_time = (data.gameTime).split(',');
-
-				for(let i=0; i<timeset.length; i++){
-					// true 혹은 false 반환
-					let rental_div = document.createElement("a");
-					let time = parseInt(timeset[i]);
-
-					if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
-
-						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
-					}else{
-						rental_div.className = "time rental_span_able";
-
-						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
-						rental_div.innerHTML = time+":00 - "+(time+2)+":00";
+					for(let i=0; i<timeset.length; i++){
+						// true 혹은 false 반환
+						let rental_div = document.createElement("a");
+						let time = parseInt(timeset[i]);
+	
+						if(game_time.includes(timeset[i]) || timeset[i] <= '<%=hour%>' ){
+	
+							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = time+":00 - "+(time+2)+":00";
+						}else{
+							rental_div.className = "time rental_span_able";
+	
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = time+":00 - "+(time+2)+":00";
+						}
+						rental_area.append(rental_div);
 					}
-					rental_area.append(rental_div);
-				}
-            	content_area.append(rental_area);
-            }
+	            	content_area.append(rental_area);
+	            }
+	        }
+        		
+        		
          }).catch(error => {
             console.log("무슨에러냐면! : " + error);
          });
@@ -480,61 +498,63 @@
           body : JSON.stringify(data)
        }).then(response => response.json())
        .then(list => {
-           const result = document.getElementById("result");
-           result.innerHTML = " ";
-        
-           for (let data of list) {
-	            const content_area = document.createElement("div"); // 가장 바깥
-	            content_area.className = "result_content";
-	            const title_div = document.createElement("div"); // 구장명 표기
-	            title_div.className = "title_area";
-	            const h3 = document.createElement("h3");
-	            h3.className = "field_title";
-	            h3.addEventListener("click",function() {
-	            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
-	            });
-	            const match_type = document.createElement("span");
-	            match_type.className = "size_span";
-	            h3.innerHTML = data.fieldName;
-	            match_type.innerHTML = "크기 "+data.gameMacth;
-	            
-	            title_div.append(h3);
-	            title_div.append(match_type);
-	            content_area.append(title_div);
-	            result.append(content_area);
+    	   
+       	if(list.length > 0){
+	           const result = document.getElementById("result");
+	           result.innerHTML = " ";
+	        
+	           for (let data of list) {
+		            const content_area = document.createElement("div"); // 가장 바깥
+		            content_area.className = "result_content";
+		            const title_div = document.createElement("div"); // 구장명 표기
+		            title_div.className = "title_area";
+		            const h3 = document.createElement("h3");
+		            h3.className = "field_title";
+		            h3.addEventListener("click",function() {
+		            	location.href = "${pageContext.request.contextPath}/rental/rentalDetail?fieldCode="+data.fieldCode;
+		            });
+		            const match_type = document.createElement("span");
+		            match_type.className = "size_span";
+		            h3.innerHTML = data.fieldName;
+		            match_type.innerHTML = "크기 "+data.gameMacth;
+		            
+		            title_div.append(h3);
+		            title_div.append(match_type);
+		            content_area.append(title_div);
+		            result.append(content_area);
+		
+		            const rental_area = document.createElement("div");
+		            rental_area.className = "rental_area";
+				
+					// 전체배열
+					var timeset = ["08","10","12","14","16","18","20","22"];
+					// db에서 불러온 배열
+					var game_time = (data.gameTime).split(',');
 	
-	            const rental_area = document.createElement("div");
-	            rental_area.className = "rental_area";
-			
-				// 전체배열
-				var timeset = ["08","10","12","14","16","18","20","22"];
-				// db에서 불러온 배열
-				var game_time = (data.gameTime).split(',');
-
-				for(let i=0; i<timeset.length; i++){
-					// true 혹은 false 반환
-					let rental_div = document.createElement("a");
-					let time = parseInt(timeset[i]);
-
-					
-					if(game_time.includes(timeset[i])){
-						rental_div.className = "time rental_span_disable";
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}else{
-						rental_div.className = "time rental_span_able";
-						rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
-						rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
-					}
-					
-					if(this.id == <%=today%>){
-						if(timeset[i] <= '<%=hour%>'){
+					for(let i=0; i<timeset.length; i++){
+						// true 혹은 false 반환
+						let rental_div = document.createElement("a");
+						let time = parseInt(timeset[i]);
+	
+						if(game_time.includes(timeset[i])){
 							rental_div.className = "time rental_span_disable";
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+						}else{
+							rental_div.className = "time rental_span_able";
+							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
+							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
 						}
+						
+						if(this.id == <%=today%>){
+							if(timeset[i] <= '<%=hour%>'){
+								rental_div.className = "time rental_span_disable";
+							}
+						}
+						rental_area.append(rental_div);
 					}
-					rental_area.append(rental_div);
-				}
-        	content_area.append(rental_area);
-        }
+	        	content_area.append(rental_area);
+	        }
+       	}
      }).catch(error => {
         console.log("무슨에러냐면! : " + error);
      });

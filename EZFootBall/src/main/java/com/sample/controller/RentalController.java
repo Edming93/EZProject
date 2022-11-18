@@ -22,6 +22,7 @@ import com.sample.service.RentalService;
 import com.sample.service.TeamService;
 import com.sample.vo.DataVO;
 import com.sample.vo.FieldReservationVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.UserVO;
 
@@ -85,7 +86,7 @@ public class RentalController {
 	
 	@PostMapping("/rvListSelect")
 	@ResponseBody
-	public List<GlistVO> rvListSelect(@RequestBody DataVO dvo,GlistVO gvo){
+	public List<GlistVO> rvListSelect(@RequestBody DataVO dvo,GlistVO gvo,Model model){
 		gvo.setGameDay(dvo.getDay());
 		gvo.setFieldCode(dvo.getCode());
 		return service.rvListSelect(gvo);
@@ -115,7 +116,7 @@ public class RentalController {
 		}
 			session.setAttribute("fieldData", fvo);
 			session.setAttribute("pageurl",pageurl);
-			System.out.println("11111111"+(UserVO)session.getAttribute("sessionVO"));
+
 		return (Lservice.isUser((UserVO)session.getAttribute("sessionVO"), session))? "redirect:/rental/rentalPayment":"redirect:/loginPage/login";
 	}
 	

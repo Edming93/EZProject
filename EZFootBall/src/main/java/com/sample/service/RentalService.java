@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.sample.dao.RentalDAO;
 import com.sample.vo.FieldReservationVO;
+import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 
 @Service
@@ -38,10 +39,20 @@ public class RentalService {
 		dao.insertFieldReservation(vo);
 	}
 	
+	public GameFieldInfoVO getfieldinfo (int fieldCode) {
+	    return dao.getfieldinfo(fieldCode);
+	}
+	
+	public void newgame(GlistVO vo) {
+		dao.newgame(vo);
+	}
+	
 
 	public List<GlistVO> rvListSelect(GlistVO vo) {
 		return dao.rvListSelect(vo);
-	}	
+	}
+	
+	
 
 	// 마이페이지 구장예약 정보 불러오기
 	public List<FieldReservationVO> getFieldReservationVO(int userCode) {

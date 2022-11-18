@@ -78,7 +78,6 @@
 				GROUP BY field_name, game_day
 	</select>
 	
-	
 	<select id="rvCheck" resultType="int">
 		select count(*) from field_reservation
 		where user_code = #{userCode}
@@ -195,9 +194,23 @@
 	
 	
 	<!-- 구장 추가 -->
-	<insert id="insertFieldInfo" parameterType="GameFieldInfoVO">
+	<insert id="insertFieldInfo" parameterType="GameFieldInfoVO" keyProperty="fieldCode">
 		insert into gamefield_info (game_place,field_name,field_address,field_call,field_rentalfee,field_type,field_img1,field_img2,field_img3,field_img4,field_img5,field_size,field_in_out,field_grass) 
 		values(#{gamePlace},#{fieldName},#{fieldAddress},#{fieldCall},#{fieldRentalfee},#{fieldType},#{fieldImg1},#{fieldImg2},#{fieldImg3},#{fieldImg4},#{fieldImg5},#{fieldSize},#{fieldInOut},#{fieldGrass})
+	</insert>
+	
+	<select id="getfieldinfo" resultType="GameFieldInfoVO">
+		select *
+		from gamefield_info
+		where field_code = #{fieldCode}
+	</select>
+	
+	<insert id="newgame" parameterType="GlistVO">
+		INSERT INTO `gamelist` (`game_type`, `field_name`, `field_address`, `field_code`, `game_day`, `game_time`, `level`, `game_gender`, `game_place`, `game_macth`, `close`, `game_minp`, `game_maxp`, `game_pnum`, `game_mag`, `game_magcode`,`game_pay`, `uteam_pay`) 
+		VALUES	('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '08:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL),
+				('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '10:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL),
+				('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '16:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL),
+				('S', #{fieldName}, #{fieldAddress}, #{fieldCode}, #{gameDay}, '20:00:00', '프로1', '남성', #{gamePlace}, #{gameMacth}, 'true', #{gameMinp}, #{gameMaxp}, 0, #{gameMag},#{gameMagcode}, 10000, NULL)
 	</insert>
 	
 	<!-- 구장 예약 현황 List -->
