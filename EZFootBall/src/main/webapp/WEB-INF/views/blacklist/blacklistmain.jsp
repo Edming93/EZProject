@@ -445,10 +445,10 @@ table th {
      
       
   .pageInfo{
- 	padding-left: 20%;
-    list-style : none;
+    list-style: none;
     display: flex;
-    margin: 50px 0 0 100px;      
+    margin: 50px;
+    justify-content: center;    
   }
   
   .pageInfo li{
@@ -465,6 +465,10 @@ table th {
   
  a:link {color:black; text-decoration: none;}
  a:visited {color:black; text-decoration: none;}
+ 
+ .pageInfo_area{
+ 	display : "flex";
+ }
 
 </style>
 </head>
@@ -597,7 +601,6 @@ table th {
 					<div class="pageInfo_wrap">
 						<div class="pageInfo_area">
 							<ul id ="pageInfo" class="pageInfo">
-							
 							  <!-- 이전페이지 버튼 -->
 				                <c:if test="${pageMaker.prev}">
 				                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">◀</a></li>
