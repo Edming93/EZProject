@@ -45,7 +45,6 @@
 * {
 	box-sizing: border-box;
 	margin: 0px;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 textarea {
@@ -59,7 +58,7 @@ textarea {
 }
 
 div{
-	font-family: 'Gowun Dodum', sans-serif;
+	
 }
 textarea::placeholder {
   color: #26A653;
@@ -80,9 +79,6 @@ textarea::placeholder {
 	border : #26A653;
 	
 	
-}
-p{
-font-family: 'Gowun Dodum', sans-serif;
 }
 
 #comment {

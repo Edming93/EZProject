@@ -46,7 +46,7 @@
     * {
         box-sizing: border-box;
         margin: 0px;
-        font-family: 'Noto Sans KR', sans-serif;
+      
     }
     
     #div1 {
@@ -440,9 +440,7 @@ table th {
 	color: white;
 }       	
            
-    p{
-    	font-size : 10px;
-    }
+  
            
      
       
