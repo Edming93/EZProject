@@ -339,7 +339,7 @@ public class ManagerController {
     @PostMapping("/sociallist")
 	@ResponseBody
     public List<GlistVO> sociallist (@RequestBody GlistVO vo){
-    	System.out.println("컨트롤러");
+    	System.out.println("컨트롤러aaaa");
     	System.out.println(vo.getGameCode());
     	return gaservice.sociallist(vo);
     }
@@ -347,14 +347,20 @@ public class ManagerController {
     @PostMapping("/sociallistcnt")
 	@ResponseBody
     public int sociallistcnt (@RequestBody GlistVO vo){
-    	System.out.println("컨트롤러");
+    	System.out.println("컨트롤러ssss");
     	System.out.println(vo.getGameCode());
     	return gaservice.sociallistcnt(vo);
     }
     
     @GetMapping("/returnpage")
-    public String returmpage(@RequestParam int num, HttpSession session) {
+    public String returmpage(HttpSession session,@RequestParam int num,@RequestParam String serch,@RequestParam String select) {
+    	System.out.println("flsjx");
+    	System.err.println(num);
+    	System.out.println(serch);
+    	System.out.println(select);
     	session.setAttribute("pagenum", num);
+    	session.setAttribute("serch", serch);
+    	session.setAttribute("select", select);
     	return "redirect:/manager/manager?page=gameMain";
     }
     

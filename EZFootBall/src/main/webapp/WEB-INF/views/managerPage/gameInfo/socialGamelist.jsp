@@ -47,6 +47,15 @@
 	if(session.getAttribute("pagenum") != null){
 		pagenum = (Integer)session.getAttribute("pagenum");
 	}
+	String serch = null;
+	if(session.getAttribute("serch") != null){
+		serch = (String)session.getAttribute("serch");
+	}
+	String select = null;
+	if(session.getAttribute("select") != null){
+		select = (String)session.getAttribute("select");
+	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -516,13 +525,13 @@
 		<div id="searchbox1">
 			<div class="searchbox1_area">
 				<select name="" id="select" class="box_css">
-					<option value="null">카테고리</option>
-					<option value="gameCode">경기번호</option>
-					<option value="gameDay">경기날짜</option>
-					<option value="gameTime">경기시간</option>
-					<option value="level">경기레벨</option>
-					<option value="gameMacth">매치형태</option>
-					<option value="mag">매니저</option>
+					<option value="null" id="nullop">카테고리</option>
+					<option value="gameCode" id="gameCodeop">경기번호</option>
+					<option value="gameDay" id="gameDayop">경기날짜</option>
+					<option value="gameTime" id="gameTimeop">경기시간</option>
+					<option value="level" id="levelop">경기레벨</option>
+					<option value="gameMacth" id="gameMacthop">매치형태</option>
+					<option value="mag" id="magop">매니저</option>
 				</select>
 				<div id="btnbox">
 					<button id="newgame" class="box_css">다음달 경기 일괄 생성</button>
@@ -535,6 +544,18 @@
 				<input type="text" name="" id="inputbox" placeholder="검색어를 입력하세요">
 				<button id="sbtn" class="box_css">검색</button>
 			</div>
+			<script type="text/javascript">
+			
+				if('<%=serch%>' != 'null'){
+					document.getElementById("inputbox").value = '<%=serch%>';
+				}
+				if('<%=select%>' != 'null'){
+					var ch = '<%=select%>'+"op";
+					console.log(ch);
+					console.log(document.getElementById(ch));
+					document.getElementById(ch).selected="true";
+				}
+			</script>
 		</div>
 
 		<div id="result">
@@ -570,18 +591,35 @@
 			
 		</div>
 	
-	
+	<!-- 초기 리스트 -->
 	<script type="text/javascript">
+	let num = 0;
+	if('<%=pagenum%>' <= 1){
+		num = 0
+	}else{
+		num = (<%=pagenum%> - 1) * 15;
+	}
+	
 	/* 초기 리스트 */
 	window.onload = function(e) {
-		let num = 0;
-		if('<%=pagenum%>' <= 1){
-			num = 0
-		}else{
-			num = (<%=pagenum%> - 1) * 15;
-		}
 		/* 초기 리스트 */
-		let params = {gameCode : null,gameDay : null,gameTime:null , gameMag:null , level:null, gameMacth : null,num:num};
+		let params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:num};
+		let gacd = document.getElementById("inputbox").value;
+		if(document.getElementById("select").value == "gameCode"){
+			console.log("게임코드");
+			 
+			params = {gameCode : gacd, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "gameDay"){
+			params = {gameCode : null, gameDay : gacd, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "gameTime"){
+			params = {gameCode : null, gameDay : null, gameTime: gacd , gameMag : null , level : null, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "level"){
+			params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : gacd, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "gameMacth"){
+			params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : gacd, num:num};
+		}else if(document.getElementById("select").value == "mag"){
+			params = {gameCode : null, gameDay : null, gameTime : null , gameMag : gacd , level : null, gameMacth : null,num:num};
+		}
 		$.ajax({
 		      url:"${pageContext.request.contextPath}/manager/sociallist",
 		      type:"POST",
@@ -594,12 +632,14 @@
 		    		  ntr.className = "trbox";
 		    		  ntr.id = "tr"+name;
 		    		  		    		  
+		    		  let tbc =  document.createElement("td");
 		    		  let nin = document.createElement("input");
+		    		  tbc.append(nin);
 		    		  nin.type = "checkbox";
 		    		  nin.className="checkbox";
 		    		  
 		    		  
-		    		  ntr.append(nin);
+		    		  ntr.append(tbc);
 		    		  
 		    		  
 		    		  let ngc =  document.createElement("td");
@@ -683,7 +723,24 @@
 		  })
 		  
 		  /* 초기페이지 */
-		  let params2 = {gameCode : null,gameDay : null,gameTime:null , gameMag:null , level:null, gameMacth : null,num:0};
+		  let params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:0};
+	
+		
+		if(document.getElementById("select").value == "gameCode"){
+			console.log("게임코드");
+			 
+			params2 = {gameCode : gacd, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:0};
+		}else if(document.getElementById("select").value == "gameDay"){
+			params2 = {gameCode : null, gameDay : gacd, gameTime:null , gameMag : null , level : null, gameMacth : null,num:0};
+		}else if(document.getElementById("select").value == "gameTime"){
+			params2 = {gameCode : null, gameDay : null, gameTime: gacd , gameMag : null , level : null, gameMacth : null,num:0};
+		}else if(document.getElementById("select").value == "level"){
+			params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : gacd, gameMacth : null,num:0};
+		}else if(document.getElementById("select").value == "gameMacth"){
+			params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : gacd, num:0};
+		}else if(document.getElementById("select").value == "mag"){
+			params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : gacd , level : null, gameMacth : null,num:0};
+		}
 		  var pagenum = 0;
 		  let setnum = <%=pagenum%>;
 			$.ajax({
@@ -715,7 +772,8 @@
 		    	  for(var i=1; i<=pagenum; i++){
 		    		  let listnum =  document.createElement("a");
 		    		  listnum.innerText = i;
-		    		  listnum.href = "${pageContext.request.contextPath}/manager/returnpage?num="+i;
+		    		  listnum.href = "${pageContext.request.contextPath}/manager/returnpage?num="+i+"&serch="+document.getElementById("inputbox").value+"&select="+document.getElementById("select").value;
+		    		  listnum.id ="listnum"+i;
 		    		  listnum.id ="listnum"+i;
 		    		  listnum.className="listnum";
 		    		  listnum.style.display = "none";
@@ -842,6 +900,313 @@
 	}
 	</script>
 	
+	<!-- 검색 -->
+	<script type="text/javascript">
+	document.getElementById("sbtn").addEventListener("click",function(){
+		<%pagenum = 0;%>
+		let gacn = document.getElementById("inputbox").value;
+		console.log("검색")
+		console.log(gacn);
+		let params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:num};
+		
+		if(document.getElementById("select").value == "gameCode"){
+			console.log("게임코드");
+			params = {gameCode : gacn, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "gameDay"){
+			params = {gameCode : null, gameDay : gacn, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "gameTime"){
+			params = {gameCode : null, gameDay : null, gameTime: gacn , gameMag : null , level : null, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "level"){
+			params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : gacn, gameMacth : null,num:num};
+		}else if(document.getElementById("select").value == "gameMacth"){
+			params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : gacn, num:num};
+		}else if(document.getElementById("select").value == "mag"){
+			params = {gameCode : null, gameDay : null, gameTime : null , gameMag : gacn , level : null, gameMacth : null,num:num};
+		}
+		
+		
+		
+		$.ajax({
+		      url:"${pageContext.request.contextPath}/manager/sociallist",
+		      type:"POST",
+		      contentType:"application/json; charset=utf-8",
+		      dataType : "json",
+		      data:JSON.stringify(params), 
+		      success: function(data) {
+		    	  document.getElementById("tbody").innerHTML="";
+		    	  for ( let name in data){
+		    		  let ntr =  document.createElement("tr");
+		    		  ntr.className = "trbox";
+		    		  ntr.id = "tr"+name;
+		    		  		    		  
+		    		  let tbc =  document.createElement("td");
+		    		  let nin = document.createElement("input");
+		    		  tbc.append(nin);
+		    		  nin.type = "checkbox";
+		    		  nin.className="checkbox";
+		    		  
+		    		  
+		    		  ntr.append(tbc);
+		    		  
+		    		  
+		    		  let ngc =  document.createElement("td");
+		    		  ngc.className = "gameCode";
+		    		  ngc.id = "gc"+name;
+		    		  ngc.innerText = data[name].gameCode;
+		    		  ntr.append(ngc);
+		    		  
+		    		  let ngd =  document.createElement("td");
+		    		  ngd.className = "gameDay";
+		    		  ngd.id = "gd"+name;
+		    		  ngd.innerText = data[name].gameDay;
+		    		  ntr.append(ngd);
+		    		  
+		    		  let ngt = document.createElement("td");
+		    		  ngt.className = "gameTime";
+		    		  ngt.id = "gt"+name;
+		    		  ngt.innerText = data[name].gameTime;
+		    		  ntr.append(ngt);
+		    		  
+		    		  let ngl = document.createElement("td");
+		    		  ngl.className = "gameLevel";
+		    		  ngl.id = "gl"+name;
+		    		  ngl.innerText = data[name].level;
+		    		  ntr.append(ngl);
+		    		  
+		    		  let nge = document.createElement("td");
+		    		  nge.className = "gameType";
+		    		  nge.id = "ge"+name;
+		    		  nge.innerText = data[name].gameMacth;
+		    		  ntr.append(nge);
+		    		  
+		    		  let ngo = document.createElement("td");
+		    		  ngo.className = "gameClose";
+		    		  ngo.id = "go"+name;
+		    		  if(data[name].close == "true"){
+		    			  ngo.innerText = "신청가능";
+		    		  }else{
+		    			  ngo.innerText = "마감";
+		    		  }
+		    		  ntr.append(ngo);
+		    		  
+		    		  let ngn = document.createElement("td");
+		    		  ngn.className = "numMin";
+		    		  ngn.id = "gn"+name;
+		    		  ngn.innerText = data[name].gameMinp;
+		    		  ntr.append(ngn);
+		    		  
+		    		  let ngx = document.createElement("td");
+		    		  ngx.className = "numMax";
+		    		  ngx.id = "gx"+name;
+		    		  ngx.innerText = data[name].gameMaxp;
+		    		  ntr.append(ngx);
+		    		  
+		    		  let ngp = document.createElement("td");
+		    		  ngp.className = "numP";
+		    		  ngp.id = "gp"+name;
+		    		  ngp.innerText = data[name].gamePnum;
+		    		  ntr.append(ngp);
+		    		  
+		    		  let ngm = document.createElement("td");
+		    		  ngm.className = "gameMag";
+		    		  ngm.id = "gm"+name;
+		    		  ngm.innerText = data[name].gameMag;
+		    		  ntr.append(ngm);
+		    		  
+		    		  let ngy = document.createElement("td");
+		    		  ngy.className = "gamePay";
+		    		  ngy.id = "gy"+name;
+		    		  ngy.innerText = data[name].gamePay;
+		    		  ntr.append(ngy);
+		    		  		    		  
+		    		  document.getElementById("tbody").append(ntr);
+		    		  	    		  
+		    	  }
+		    	  
+		      },
+		      error: function() {
+		          alert("에러 발생");
+		      }
+		  })
+		  
+		  /* 검색페이지 */
+		  var pagenum = 0;
+		  let setnum = <%=pagenum%>;
+		  
+		  let params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:0};
+			
+			if(document.getElementById("select").value == "gameCode"){
+				console.log("게임코드");
+				 
+				params2 = {gameCode : gacn, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:0};
+			}else if(document.getElementById("select").value == "gameDay"){
+				params2 = {gameCode : null, gameDay : gacn, gameTime:null , gameMag : null , level : null, gameMacth : null,num:0};
+			}else if(document.getElementById("select").value == "gameTime"){
+				params2 = {gameCode : null, gameDay : null, gameTime: gacn , gameMag : null , level : null, gameMacth : null,num:0};
+			}else if(document.getElementById("select").value == "level"){
+				params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : gacn, gameMacth : null,num:0};
+			}else if(document.getElementById("select").value == "gameMacth"){
+				params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : gacn, num:0};
+			}else if(document.getElementById("select").value == "mag"){
+				params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : gacn , level : null, gameMacth : null,num:0};
+			}
+			$.ajax({
+		      url:"${pageContext.request.contextPath}/manager/sociallistcnt",
+		      type:"POST",
+		      contentType:"application/json; charset=utf-8",
+		      dataType : "json",
+		      data:JSON.stringify(params2), 
+		      success: function(data2) {
+		    	  document.getElementById("nev").remove();
+		    	  let nev =  document.createElement("div");
+	    		  nev.id ="nev";
+	    		  nev.className="nev";
+	    		  
+	    		  let pre =  document.createElement("a");
+	    		  pre.innerText = " ◀ ";
+	    		  pre.id ="pre";
+	    		  pre.className="page_btn";
+	    		  nev.append(pre);
+	    		  console.log(data2);
+	    		  var numcnt = data2;
+	    		  
+	    		 
+	    		  if(numcnt / 15 == 0) {
+	    			  pagenum = numcnt / 15;
+	    		  }else {
+	    			  pagenum = Math.floor((numcnt / 15)) + 1;
+	    		  }
+	    		  
+		    	  for(var i=1; i<=pagenum; i++){
+		    		  let listnum =  document.createElement("a");
+		    		  listnum.innerText = i;
+		    		  let sser = document.getElementById("inputbox").value;
+		    		  listnum.href = "${pageContext.request.contextPath}/manager/returnpage?num="+i+"&serch="+document.getElementById("inputbox").value+"&select="+document.getElementById("select").value;
+		    		  listnum.id ="listnum"+i;
+		    		  listnum.className="listnum";
+		    		  listnum.style.display = "none";
+		    		  nev.append(listnum);
+		    		  if(<%=pagenum%> == 0){
+		    			  if(i<=15){
+		    				  listnum.style.display = "";
+		    			  }
+		    			  
+		    		  }
+		    		  
+		    		  if(<%=pagenum%>+7 >= pagenum){
+		    			  console.log("zmek");
+		    			  if(i>pagenum-15 && i<=<%=pagenum%>+7){
+			    			  listnum.style.display = "";
+			    		  }
+		    		  }else if(<%=pagenum%>>=8){
+		    			  console.log("rlqhs");
+		    			  if(i>=<%=pagenum%>-7 && i<=<%=pagenum%>+7){
+			    			  listnum.style.display = "";
+			    		  }
+		    		  }else{
+		    			  console.log("dmdpd");
+		    			  if(i<=15){
+		    				  listnum.style.display = "";
+		    			  }
+		    		  }
+		    		  
+		    	  }
+		    	  
+		    	  let next =  document.createElement("a");
+		    	  next.innerText =" ▶ "
+		    	  next.id ="next";
+		    	  next.className="page_btn";
+	    		  nev.append(next);
+	    		  
+	    		  document.getElementById("result").append(nev);
+	    		  
+	    		  console.log(<%=pagenum%>);
+	    		  
+	    		  
+	    			// 이전 
+					$('#pre').on("click", function(){
+						console.log("이전");
+						 console.log(setnum);
+						 console.log(pagenum);
+						
+						 for(var i=1; i<=pagenum; i++){
+							 let listid = "#listnum"+i;
+							 $(listid).css('display', 'none');
+						 }
+						 
+						 if(setnum - 15 <=8){
+							 console.log("if");
+							 console.log(setnum);
+							 setnum = 8;
+							 for(var i=1; i<=15; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display', '');
+							 }
+						 }else{
+							 console.log("else");
+							 console.log(setnum);
+							 setnum = setnum-15;
+							 for(var i=setnum-7; i<=setnum+7; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display', '');
+							 }
+						 }
+						
+		        	});
+	    		  
+	    		  
+	    			// 다음 
+					$('#next').on("click", function(){
+						console.log("다음");
+						
+						
+						 for(var i=1; i<=pagenum; i++){
+							 let listid = "#listnum"+i;
+							 $(listid).css('display', 'none');							
+						 }
+						 
+						 console.log(setnum);
+						 console.log(pagenum);
+						 
+						 if(setnum+7 >=pagenum){
+							 console.log("if");
+							 console.log(setnum);
+							 setnum = pagenum-7;
+							 console.log(setnum);
+							 for(var i=setnum-7; i<=pagenum; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display','');
+							 }
+						 }else if(setnum == 0){
+							 setnum = 23;
+							 for(var i=setnum-7; i<=setnum+7; i++){
+								 let listid = "#listnum"+i;
+								 $(listid).css('display','');
+							 }
+							 
+						 }else{
+							 console.log("else");
+							 setnum = setnum+15;
+							 for(var i=setnum-7; i<=setnum+7; i++){
+								 console.log(i);
+								 let listid = "#listnum"+i;
+								 $(listid).css('display','');
+							 }
+							 
+						 }
+		        	});
+	    		  
+		    	  
+		      },
+		      error: function() {
+		          alert("에러 발생");
+		      }
+		  })
+	})
+	</script>
 	
 	<!-- 엔터키 검색 -->
 	<script type="text/javascript">

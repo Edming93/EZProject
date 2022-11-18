@@ -114,7 +114,7 @@
 		from gamelist
 		<where>
 			<if test="gameCode != 0">
-				and game_code like CONCAT ('%',#{game_code},'%')
+				and game_code like CONCAT ('%',#{gameCode},'%')
 			</if>
 			<if test="gameDay != null">
 				and DATE_FORMAT(game_day, '%Y-%m-%d') like  CONCAT ('%',#{gameDay},'%')
@@ -142,7 +142,7 @@
 		from gamelist
 		<where>
 			<if test="gameCode != 0">
-				and game_code like CONCAT ('%',#{game_code},'%')
+				and game_code like CONCAT ('%',#{gameCode},'%')
 			</if>
 			<if test="gameDay != null">
 				and DATE_FORMAT(game_day, '%Y-%m-%d') like  CONCAT ('%',#{gameDay},'%')
