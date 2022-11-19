@@ -60,8 +60,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=user"><li>계정</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/idselect?idselect=blackList"><li>블랙리스트</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/idselect?idselect=user"><li>계정</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/idselect?idselect=blackList"><li>블랙리스트</li></a>
         </ul>
     </div>
     <div id="maincontent">

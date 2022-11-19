@@ -61,9 +61,9 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/gameselect?gameselect=socialGame"><li>소셜매치</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/gameselect?gameselect=teamGame"><li>팀매치</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/gameselect?gameselect=resultGame"><li>게임결과</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/gameselect?gameselect=socialGame"><li>소셜매치</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/gameselect?gameselect=teamGame"><li>팀매치</li></a>
+            <a class="menu menu3" href="${pageContext.request.contextPath}/admin/gameselect?gameselect=resultGame"><li>게임결과</li></a>
         </ul>
     </div>
     <div id="maincontent">

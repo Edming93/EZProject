@@ -198,6 +198,10 @@
         	height: 30px;
         	width: 170px;
         }
+        
+        .menu1 {
+			background-color: #f8ede3;
+		}
 </style>
 </head>
 <body>

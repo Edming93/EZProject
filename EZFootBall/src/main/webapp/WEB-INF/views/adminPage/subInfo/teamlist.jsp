@@ -199,6 +199,9 @@
         	height: 30px;
         	width: 170px;
         }
+        .menu2 {
+			background-color: #f8ede3;
+		}
 </style>
 </head>
 <body>

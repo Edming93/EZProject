@@ -61,7 +61,7 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/rankselect?rankselect=score"><li>점수관리</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/rankselect?rankselect=score"><li>점수관리</li></a>
         </ul>
     </div>
     <div id="maincontent">

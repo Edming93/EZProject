@@ -60,8 +60,8 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qna"><li>문의대기</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qnafinish"><li>문의완료</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qna"><li>문의대기</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/adminselect?adminselect=qnafinish"><li>문의완료</li></a>
         </ul>
     </div>
     <div id="maincontent">

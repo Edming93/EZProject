@@ -249,8 +249,15 @@
 	        if(select_cnt < 1){
 	        	alert("선택 된 결제 내역이 없습니다.");
 	        	select_cnt = 0;
-	        }   	
-			this.type ="submit";
+	        	return;
+	        }else{
+	        	if(confirm("결제를 취소하시겠습니까?")){
+					this.type ="submit";
+	        	}else {
+	        		return;
+	        	}
+	        }
+
 	    });
 
 		let content = document.querySelectorAll(".content");

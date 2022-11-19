@@ -31,6 +31,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	.menu3 {
+		background-color: #f8ede3;
+	}
 	#searchbox {
 		display: flex;
 		height: 80px;

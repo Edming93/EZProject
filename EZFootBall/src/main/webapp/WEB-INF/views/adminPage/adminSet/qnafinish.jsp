@@ -184,6 +184,9 @@
 .btn_box button:hover {
 	opacity: 0.8;
 }
+	.menu2 {
+		background-color: #f8ede3;
+	}
 </style>
 <body>
 	<div id="main_controller">

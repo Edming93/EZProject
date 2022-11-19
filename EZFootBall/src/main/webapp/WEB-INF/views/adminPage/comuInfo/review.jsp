@@ -99,6 +99,9 @@ height: 4vh;
 input{
 	width : 100%;
 }
+	.menu1 {
+		background-color: #f8ede3;
+	}
 </style>
 
 

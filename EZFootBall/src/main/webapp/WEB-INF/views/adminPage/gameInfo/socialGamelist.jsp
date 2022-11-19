@@ -52,7 +52,10 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <title>Insert title here</title>
 <style>
-#searchbox {
+	.menu1 {
+		background-color: #f8ede3;
+	}
+	#searchbox {
 		display: flex;
 		height: 80px;
 		align-items: center;

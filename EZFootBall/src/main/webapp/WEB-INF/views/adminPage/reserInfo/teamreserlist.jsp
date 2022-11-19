@@ -7,6 +7,9 @@
 <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
 <title>팀 매치 예약 현황</title>
 <style type="text/css">
+	.menu1 {
+		background-color: #f8ede3;
+	}
 	.TCRcontainer{
 		margin-top: 1%;
 	}

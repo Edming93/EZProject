@@ -13,7 +13,9 @@
 		box-sizing: border-box;
 		margin: 0;
 	}
-	
+    .menu1 {
+		background-color: #f8ede3;
+	}
 	#main_container{
 		position:relative;
 		display: flex;

@@ -53,6 +53,7 @@
             width: 100%;
             border: 1px solid black;
         }
+        
     </style>
     <title>Document</title>
 </head>
@@ -60,9 +61,9 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=review"><li>후기</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=black"><li>블랙</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=signUp"><li>신고</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=review"><li>후기</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=black"><li>블랙</li></a>
+            <a class="menu menu3" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=signUp"><li>신고</li></a>
         </ul>
     </div>
     <div id="maincontent">

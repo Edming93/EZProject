@@ -9,6 +9,9 @@
 <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+	.menu4 {
+		background-color: #f8ede3;
+	}
 	.Gcontainer{
 		margin-top: 1%;
 	}

@@ -18,6 +18,9 @@
         #contain * {
             /* border: 1px solid black; */
         }
+        .menu1 {
+		background-color: #f8ede3;
+		}
         #contain{
             display: flex;
             flex-direction: column;

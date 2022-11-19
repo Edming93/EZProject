@@ -60,9 +60,9 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/magselect?magselect=magList"><li>매니저리스트</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/magselect?magselect=magSignUpList"><li>매니저 신청 리스트</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/magselect?magselect=magFailList"><li>매니저 불합격 리스트</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/magselect?magselect=magList"><li>매니저리스트</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/magselect?magselect=magSignUpList"><li>매니저 신청 리스트</li></a>
+            <a class="menu menu3" href="${pageContext.request.contextPath}/admin/magselect?magselect=magFailList"><li>매니저 불합격 리스트</li></a>
         </ul>
     </div>
     <div id="maincontent">

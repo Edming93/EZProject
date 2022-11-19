@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
+<style>
+	.menu3 {
+		background-color: #f8ede3;
+	}
+</style>
 </head>
 <body>
 	<div class="container">

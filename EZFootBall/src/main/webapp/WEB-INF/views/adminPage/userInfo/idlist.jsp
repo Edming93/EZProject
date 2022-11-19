@@ -118,6 +118,9 @@
 		cursor : pointer;
 		color:white;
 	}
+	.menu1 {
+		background-color: #f8ede3;
+	}
 </style>
 </head>
 <body>

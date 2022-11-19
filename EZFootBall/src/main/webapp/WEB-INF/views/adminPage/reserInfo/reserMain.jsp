@@ -63,10 +63,10 @@
 <div id="contain">
     <div>
         <ul id="submenu">
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=teamMatch"><li>팀매치 예약현황</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=Tcancel"><li>팀매치 예약취소</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=rvField"><li>구장 예약현황</li></a>
-            <a class="menu" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=Gcancel"><li>구장 예약취소</li></a>
+            <a class="menu menu1" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=teamMatch"><li>팀매치 예약현황</li></a>
+            <a class="menu menu2" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=Tcancel"><li>팀매치 예약취소</li></a>
+            <a class="menu menu3" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=rvField"><li>구장 예약현황</li></a>
+            <a class="menu menu4" href="${pageContext.request.contextPath}/admin/reserselect?reserselect=Gcancel"><li>구장 예약취소</li></a>
         </ul>
     </div>
     <div id="maincontent">
