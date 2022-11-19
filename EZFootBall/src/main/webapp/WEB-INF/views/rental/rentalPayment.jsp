@@ -398,8 +398,6 @@
 
          </div>
       </div>
-		<h1>${sessionScope.GlistVO.fieldCode}</h1>
-		<h1>${sessionScope.GlistVO.uteamPay }</h1>
       <div class="rv_info_container">
          <div class="rv_day">
             <h3>
@@ -450,11 +448,11 @@
                       	<span class="rv_result">${sessionScope.GlistVO.gameMacth} <span class="result_match">매치</span></span>
                      </c:if>
                   </div>
-                  <c:if test="${sessionScope.GlistVO.gameType eq 'T'}">
-                  	<div class="rv_result_area">
-                     	<span class="rv_result">레벨 </span>
-                    </div>
-                  </c:if>
+<%--                   <c:if test="${sessionScope.GlistVO.gameType eq 'T'}"> --%>
+<!--                   	<div class="rv_result_area"> -->
+<!--                      	<span class="rv_result">레벨 </span> -->
+<!--                     </div> -->
+<%--                   </c:if> --%>
 <%--                      <span class="rv_result">${match.level}</span> --%>
                   
                </div>
@@ -584,15 +582,6 @@
          </div>
 
       </div>
-      			<style>
-      				#ming {
-      					width:200px;
-      					height:100px;
-      					border:1px solid black;
-      				}
-      			</style>
-                     <button id="ming">ming~</button>
-
    
    </div>
 
@@ -682,21 +671,6 @@
       }
 	  </script>
 	  
-	  <script type="text/javascript">
-      document.getElementById("ming").addEventListener("click",function(e){
-  	  	e.preventDefault();
-			
-//    	 	location.href = "${pageContext.request.contextPath}/rental/resultTeam";
-       	  if(${sessionScope.GlistVO.gameType eq 'T'}){
-      		 // location.href = "${pageContext.request.contextPath}/rental/resultTeam?fieldCode=${match.fieldCode}&fieldName=${match.fieldName}&fieldAddress=${match.fieldAddress}&fieldRentalfee=${match.gamePay}&fieldType=${match.gameMacth}&gameDay=${match.gameDay}&gameTime=${match.gameTime}:00:00&rvType=${match.gameType}&gameCode=${match.gameCode}&userPayment=${match.uteamPay}";
-      		  location.href = "${pageContext.request.contextPath}/rental/resultTeam?payCode="+rsp.imp_uid+"&& storeCode="+rsp.merchant_uid+"&& userPayment="+rsp.paid_amount+"&&cardCode="+rsp.apply_num;
-      	  }else{
-      		  location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}&fieldName=${field.fieldName}&fieldAddress=${field.fieldAddress}&fieldRentalfee=${field.fieldRentalfee}&fieldType=${field.fieldType}&gameDay=${sessionScope.fieldData.gameDay}&gameTime=${sessionScope.fieldData.gameTime}:00:00&rvType=G&gamePlace=${field.gamePlace}";
-      	  }
-
-    });
-    
-	  </script>
 	  
 </body>
 </html>

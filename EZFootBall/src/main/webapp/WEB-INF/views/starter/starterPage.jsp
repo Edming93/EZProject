@@ -42,7 +42,14 @@
         ::-webkit-scrollbar {
             display: none !important;
         }   
-        
+        .social_btn a {
+        	text-decoration: none;
+        	color:#fff;
+        }
+        .team_btn a {
+        	text-decoration: none;
+        	color:#000;
+        }
         .path {
             fill: none;
             stroke:rgb(116, 116, 116);
@@ -138,16 +145,23 @@
         .title5 {
             font-size:45px;
         }
+        .title3 {
+            top: 285px;
+    		right: 350px;
+        }
         
         .content {
             margin-top: 25px;
-            font-size:16px;
+            font-size:20px;
             font-family: 'LeferiPoint-WhiteObliqueA';
         }
         .content_margin {
         	margin-top: 50px;
+        	margin-bottom: 45px;
         }
-        
+        .ez_title {
+        	font-size: 80px;
+        }
         .content div a {
             color:rgb(78, 78, 78);
         }
@@ -166,6 +180,7 @@
             font-weight: 700;
             font-family: 'sans-serif';
             text-align: center;
+            cursor: pointer;
         }
         .social_btn {
             color:#fff;
@@ -181,10 +196,10 @@
         }
 
         .ez_title {
-            color: #9dffdf;
+            color: #fff;
         }
         .title6 div span {
-            color: #e0fff5;
+            color: #000000;
         }
 
         .mainpage_btn {
@@ -232,14 +247,15 @@
             }
 
             .btn {
-               width: 225px;
-               height: 26px;
-               font-size: 14px;
-               background: #fff;
-               border-radius: 34px;
-               font-weight: 700;
-               font-family: 'sans-serif';
-               text-align: center;
+			    width: 250px;
+			    height: 35px;
+			    font-size: 18px;
+			    background: #fff;
+			    border-radius: 34px;
+			    font-weight: 700;
+			    font-family: 'sans-serif';
+			    text-align: center;
+			    line-height: 1px;
             }
             .social_btn {
                color: #fff;
@@ -480,7 +496,7 @@
                 </div>
 
                 <button class="btn social_btn">
-                    소셜 매치 Let's go
+                    <a href="${pageContext.request.contextPath}/home">소셜 매치 Let's go</a> 
                 </button>
             </div>
             <div class="vector_area">
@@ -508,7 +524,7 @@
                 </div>
 
                 <button class="btn team_btn">
-                    팀 매치 Let's go
+                    <a href="${pageContext.request.contextPath}/team/team">팀 매치 Let's go</a>
                 </button>
             </div>
                 
@@ -544,7 +560,7 @@
                 <div>확인하세요!</div>
 
                 <div class="content content_margin">
-                    <div><a href="#">랭킹시스템 확인</a></div>
+                    <div><a href="${pageContext.request.contextPath}/rank/rank">랭킹시스템 확인</a></div>
                 </div>
 
                 <div>레벨을 통해 </div>
@@ -552,7 +568,7 @@
                 <div>만날 수 있어요!</div>
 
                 <div class="content">
-                    <div><a href="#">레벨시스템 확인</a></div>
+                    <div><a href="${pageContext.request.contextPath}/myPage/rankGuide">레벨시스템 확인</a></div>
                 </div>
             </div>
  
@@ -588,7 +604,7 @@
 
             <div class="title title6">
                 <div class="ez_title">E<span>asy</span></div>
-                <div class="ez_title">&nbsp&nbsp&nbsp&nbsp&nbsp Z<span>one</span></div>
+                <div class="ez_title">&nbsp&nbsp&nbsp Z<span>one</span></div>
                 <div class="ez_title">&nbspFootball</div>
 
                 <div class="content">
