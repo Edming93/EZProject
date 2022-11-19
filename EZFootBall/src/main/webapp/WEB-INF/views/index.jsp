@@ -532,10 +532,6 @@ let play_btn = document.querySelector(".fa-play");
   var slider_width = slider_area.clientWidth; // container의 width
   var slide_index = 0;
 
-  let top_pagination_btn = document.getElementsByClassName("swiper_pagination_bullet");
-  let more_pagination_btn = document.getElementsByClassName("pagination_bullet");
-
-
   top_btn_right.addEventListener("click", function () {
     clearTimeout(time_out);
     console.log("right:"+slide_index);

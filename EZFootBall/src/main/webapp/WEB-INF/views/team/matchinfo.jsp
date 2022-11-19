@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.sample.vo.UinVO"%>
 <%@page import="com.sample.vo.UserVO"%>
 <%@page import="com.sample.vo.GlistVO"%>
@@ -186,6 +187,7 @@
          display: flex;
          justify-content: center;
          background-color: #fafafa;
+         overflow: hidden;
       }
 
       .banner_content_area {
@@ -193,7 +195,7 @@
          display: flex;
          justify-content: center;
          align-items: center;
-         overflow: hidden;
+         transition: all 0.5s;
       }
 
       .banner_content {
@@ -333,7 +335,7 @@
       
       .field_info_area {
          display: flex;
-         width:70%;
+         width:60%;
          flex-direction: column;
       }
 
@@ -345,16 +347,17 @@
       }
 
       .field_info {
-         width:70%;
+         width:60%;
       }
       .plant_info {
-         width:25%;
+         width:40%;
       }
 
       .field_image {
          width:165px;
          height:100px;
          margin-bottom: 20px;
+         padding-right: 10px;
       }
       
       .content_field_name {
@@ -370,7 +373,7 @@
 
       .field_etc_area {
          display: flex;
-         width: 25%;
+         width: 40%;
          flex-direction: column;
          
       }
@@ -402,10 +405,10 @@
         
       }
       .match_left{
-      	width: 70%;
+      	width: 60%;
       }
       .match_right{
-      	width: 25%;
+      	width: 40%;
       }
       .subbtn{
          width: 100px;
@@ -771,11 +774,6 @@
             		<a href="#" class="field_plant menu_title">시설</a>
             	</div>
             </div>
-            <div class="menu_name">
-                <div class="menu_title_area2">
-            		<a href="#" class="field_reservation menu_title2">구장 예약</a>
-            	</div>
-            </div>
          </div>
       </div>
       
@@ -823,7 +821,7 @@
      	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
      	 	</div>
      	 	<div class="etc">
-     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gamePay} / 팀당
+     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon>　<fmt:formatNumber value="${matchinfo.gamePay}" pattern="#,###"/> / 팀당
      	 		<!-- <script type="text/javascript">
      	 			if(${matchinfo.gameMacth} == '5vs5'){
      	 				document.getElementById("pay").innerText = "20000";
@@ -953,6 +951,63 @@
 	            	    	
 	            	    	document.getElementById("content_field_info").innerText = data.fieldSize + " / " + data.fieldInOut + " / " + data.fieldGrass;
 	        	         
+	            			let button_flag = true;
+	            			var time_out;
+	            			
+	            			let page_num = document.querySelector(".current_index");
+	            			            
+	            			let pause_btn = document.querySelector(".fa-pause");
+	            			let play_btn = document.querySelector(".fa-play");
+	            			
+	            			  // translate 먹일곳
+	            			  let top_banner = document.querySelector('.banner_content_area');
+	            			  let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
+	            			
+	            			  // 최상단 디브
+	            			  let slider_area = document.querySelector(".banner_container");
+	            			
+	            			  var slider_width = slider_area.clientWidth; // container의 width
+	            			  var slide_index = 0;
+	            	
+	            	              show_slides();
+	            	
+	            	
+	            	              function show_slides() {
+	            	            	slide_index++;
+	            	                top_banner.style.transform = 'translate(' + (-(1028 * (slide_index - 1))-4*(slide_index-1)) + 'px';
+	            	                console.log(slide_index);
+	            	                
+	            					console.log(slide_photo_cnt);
+	            	                if (slide_index === slide_photo_cnt) {  
+	            	                slide_index = 0;
+	            	
+	            	                }
+	            	
+	            	                if (button_flag == true) {
+	            	                  time_out = setTimeout(show_slides, 5000);
+	            	                  
+	            	                }
+	            	
+	            	              }
+	            	              
+	            	              let mapbtn = document.getElementById("mapbtn");
+	            	          	
+	            	              mapbtn.addEventListener("click", function () {
+	            	              	let banner_area = document.querySelector(".picture_area");
+	            	                  const map_picture = document.querySelector(".map_picture");
+	            	                  map_picture.classList.toggle("map_toggle");
+	            	              	
+	            	                  mapbtn.classList.toggle("change_text");
+	            	                  if(mapbtn.classList.contains("change_text")){
+	            	                  	mapbtn.innerText="지도 닫기";
+	            	                  	top_banner.style.transform = 'translate(0px)';
+	            	                  	clearTimeout(time_out);
+	            	                  }else {
+	            	                  	mapbtn.innerText="지도 보기";
+	            	                  	banner_area.style.display ="block";
+	            	                  	show_slides();
+	            	                  }
+	            	              });
 	        	      }).catch(error => {
 	        	         console.log("error");
 	        	      });
@@ -1324,21 +1379,21 @@
     
     <!--지도 버튼  -->
     <script type="text/javascript">
-    	let mapbtn = document.getElementById("mapbtn");
+//     	let mapbtn = document.getElementById("mapbtn");
     	
-    	mapbtn.addEventListener("click", function () {
-        	let banner_area = document.querySelector(".banner_content");
+//     	mapbtn.addEventListener("click", function () {
+//         	let banner_area = document.querySelector(".banner_content");
         	
-            const map_picture = document.querySelector(".map_picture");
-            map_picture.classList.toggle("map_toggle");
+//             const map_picture = document.querySelector(".map_picture");
+//             map_picture.classList.toggle("map_toggle");
 			
-            mapbtn.classList.toggle("change_text");
-            if(mapbtn.classList.contains("change_text")){
-            	mapbtn.innerText="지도 닫기";
-            }else {
-            	mapbtn.innerText="지도 보기";
-            }
-        });
+//             mapbtn.classList.toggle("change_text");
+//             if(mapbtn.classList.contains("change_text")){
+//             	mapbtn.innerText="지도 닫기";
+//             }else {
+//             	mapbtn.innerText="지도 보기";
+//             }
+//         });
     </script>
    </div>
 </body>

@@ -160,6 +160,7 @@ if(session.getAttribute("sessionVO") != null) {
          display: flex;
          justify-content: center;
          background-color: #fafafa;
+         overflow: hidden;         
       }
 
       .banner_content_area {
@@ -167,7 +168,10 @@ if(session.getAttribute("sessionVO") != null) {
          display: flex;
          justify-content: center;
          align-items: center;
-         overflow: hidden;
+         white-space: nowrap;
+         width: 100%;
+         height: 100%;
+         transition: all 0.5s;
       }
 
       .banner_content {
@@ -468,11 +472,21 @@ if(session.getAttribute("sessionVO") != null) {
 			   		<div id="map"></div>
 			   </div>
 			   <div class="picture_area">
+			   <c:if test="${field.fieldImg1 != null}">
 	               <img class="banner_image img1" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg1}" alt="">
+	           </c:if>
+	           <c:if test="${field.fieldImg2 != null}">
 	               <img class="banner_image img2" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg2}" alt="">
+	           </c:if>
+	           <c:if test="${field.fieldImg3 != null}">
 	               <img class="banner_image img3" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg3}" alt="">
+	           </c:if>
+	           <c:if test="${field.fieldImg4 != null}">
 	               <img class="banner_image img4" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg4}" alt="">
+	           </c:if>
+	           <c:if test="${field.fieldImg5 != null}">
 	               <img class="banner_image img5" src="${pageContext.request.contextPath}/image/ground/${field.fieldImg5}" alt="">
+	           </c:if>
 	           </div>
             </div>
          </div>
@@ -486,6 +500,68 @@ if(session.getAttribute("sessionVO") != null) {
             </div>
          </div>
       </div>
+      
+      <!-- 자동슬라이드 및 지도버튼 -->
+		<script>
+			let button_flag = true;
+			var time_out;
+			
+			let page_num = document.querySelector(".current_index");
+			            
+			let pause_btn = document.querySelector(".fa-pause");
+			let play_btn = document.querySelector(".fa-play");
+			
+			  // translate 먹일곳
+			  let top_banner = document.querySelector('.banner_content_area');
+			  let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
+			
+			  // 최상단 디브
+			  let slider_area = document.querySelector(".banner_container");
+			
+			  var slider_width = slider_area.clientWidth; // container의 width
+			  var slide_index = 0;
+
+              show_slides();
+
+
+              function show_slides() {
+                slide_index++;
+                top_banner.style.transform = 'translate(' + (-(1028 * (slide_index - 1))-4*slide_index) + 'px';
+                console.log(4*slide_index);
+
+
+                if (slide_index === slide_photo_cnt) {  
+                slide_index = 0;
+
+                }
+
+                if (button_flag == true) {
+                  time_out = setTimeout(show_slides, 5000);
+                  
+                }
+
+              }
+   
+              
+              let mapbtn = document.getElementById("mapbtn");
+
+              mapbtn.addEventListener("click", function () {
+              	let banner_area = document.querySelector(".picture_area");
+                  const map_picture = document.querySelector(".map_picture");
+                  map_picture.classList.toggle("map_toggle");
+              	
+                  mapbtn.classList.toggle("change_text");
+                  if(mapbtn.classList.contains("change_text")){
+                  	mapbtn.innerText="지도 닫기";
+                  	top_banner.style.transform = 'translate(0px)';
+                  	clearTimeout(time_out);
+                  }else {
+                  	mapbtn.innerText="지도 보기";
+                  	banner_area.style.display ="block";
+                  	show_slides();
+                  }
+              });
+		</script>
 
       <script type="text/javascript">
 
@@ -585,23 +661,7 @@ if(session.getAttribute("sessionVO") != null) {
             }
         });   
     </script>
-    <script type="text/javascript">
-    	let mapbtn = document.getElementById("mapbtn");
-    	
-    	mapbtn.addEventListener("click", function () {
-        	let banner_area = document.querySelector(".banner_content");
-        	
-            const map_picture = document.querySelector(".map_picture");
-            map_picture.classList.toggle("map_toggle");
-			
-            mapbtn.classList.toggle("change_text");
-            if(mapbtn.classList.contains("change_text")){
-            	mapbtn.innerText="지도 닫기";
-            }else {
-            	mapbtn.innerText="지도 보기";
-            }
-        });
-    </script>
+
    </div>
 </body>
 
