@@ -728,8 +728,7 @@ let play_btn = document.querySelector(".fa-play");
    
 </script>
 		<div id="div1">
-			<div id= "comment2"></div>
-			<div id="comment"></div>
+			
 			
 			
 			<div id="input">
@@ -741,6 +740,8 @@ let play_btn = document.querySelector(".fa-play");
 						test="${empty requestScope.userdata}">로그인이 필요합니다.</c:if></textarea>
 				<button id="submit">등록</button>
 			</div>
+			
+			<div id="comment"></div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -1151,7 +1152,9 @@ let play_btn = document.querySelector(".fa-play");
 					div2.append(ccontent);
 					div.append(div2);
 					div.append(div3);
+					//comdiv.after(document.getElementById("input"));
 					comdiv.append(div);
+					
 					div.style.marginTop = "2%";
 					/* comdiv.style.marginTop = "3%"; */
 					/* comdiv.style.marginBottom = "3%"; */
@@ -1177,7 +1180,7 @@ let play_btn = document.querySelector(".fa-play");
     <footer>
         <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
-</div>
+
 	<script type="text/javascript">
 	let main_logo = document.querySelector(".main_logo");
 	
