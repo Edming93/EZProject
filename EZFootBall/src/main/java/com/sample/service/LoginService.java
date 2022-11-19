@@ -28,7 +28,7 @@ public class LoginService {
 	}
 
 	public boolean isUser(UserVO vo, HttpSession session) {
-		if(vo.getUserName() == null && vo!=null) {
+		if( vo!=null && vo.getUserName() == null) {
 			vo.setUserPw(encryptSHA256(vo.getUserPw()));
 		}
 		int blackUser = dao.blackCheck(vo);
