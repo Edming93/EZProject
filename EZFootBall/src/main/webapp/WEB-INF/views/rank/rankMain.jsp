@@ -173,9 +173,13 @@
         align-items: center;
         padding: 15px;
     }
+    .banner_content {
+	    height: 335px;
+	    width: 100%;
+    }
     .banner_image {
         width: 100%;
-        height: 90%;
+        height: 100%;
         border-radius: 23px;
     }
 
@@ -454,7 +458,7 @@
         <div class="banner_container">
             <div class="banner_content_area">
                 <div class="banner_content">
-                    <img class="banner_image" src="../image/banner-new_stadium_pc_cnh_rental2.png" alt="">
+                    <img class="banner_image" src="../image/rankBanner1.jpg" alt="">
                 </div>
             </div>
         </div>

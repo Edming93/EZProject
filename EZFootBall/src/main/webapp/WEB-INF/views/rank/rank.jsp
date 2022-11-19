@@ -25,7 +25,7 @@
     		margin: 0 auto;
     		margin-bottom: 20px;
             padding: 20px 20px;
-            border: 3px solid #26A653;
+            border: 3px solid #00000014;
             border-radius: 25px;
         }
         .rankdiv > div {
@@ -87,6 +87,11 @@
             font-size: 15px;
             padding-right: 20px;
         }
+        .rank_num {
+        	width:50px;
+        	height: 50px;
+        
+        }
 
     </style>
 </head>
@@ -95,7 +100,7 @@
 <%int num=1; %>
 	<c:forEach var="rank" items="${rank}" > 
 		<div id="rank<%=num%>" class="rankdiv">
-			<div class="numdiv"><div><%=num%></div></div>
+			<div class="numdiv"><div class="rank_num_div"><%=num%></div></div>
 			<div class="innerdiv">
 				<div class="namediv">${rank.userName}</div>
 				<div class="scorediv">${rank.userScore} 점</div>
@@ -129,11 +134,11 @@
 		    	  
 		    	  //document.getElementsByClassName("lediv")[i].innerText = data.userLevel;
 		    	  if(lv == '프로'){
-		    		  document.getElementsByClassName("lediv")[i].innerHTML = '<iconify-icon icon="emojione-monotone:letter-s" style="color: #db4455;" width="30" height="30"></iconify-icon>' +　data.userLevel;
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<img src='${pageContext.request.contextPath}/image/rank-p.png' width='30' height='30'>" +　data.userLevel;
 		    	  }else if (lv == '아마추어') {
-		    		  document.getElementsByClassName("lediv")[i].innerHTML = '<iconify-icon icon="emojione-monotone:letter-a" style="color: #4b89dc;" width="30" height="30"></iconify-icon>' +　data.userLevel;
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<img src='${pageContext.request.contextPath}/image/rank-a.png' width='30' height='30'>" +　data.userLevel;
 		    	  }else if(lv == '루키'){
-		    		  document.getElementsByClassName("lediv")[i].innerHTML = '<iconify-icon icon="emojione-monotone:letter-r" style="color: #26a653;" width="30" height="30"></iconify-icon>' +　data.userLevel;
+		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<img src='${pageContext.request.contextPath}/image/rank-r.png' width='30' height='30'>" +　data.userLevel;
 		    	  }else{
 		    		  document.getElementsByClassName("lediv")[i].innerHTML = "<iconify-icon icon='emojione-monotone:letter-n' style='color: #26a653;' width='30' height='30'></iconify-icon>　";
 		    	  }
@@ -190,9 +195,16 @@
 	<!-- 1위 테두리 변경 -->
 	<script type="text/javascript">
 		document.getElementById("rank1").style.backgroundColor = "rgba(253, 242, 204, 0.66)";
-		document.getElementById("rank1").style.borderColor = "#ffd233";
+		document.getElementById("rank1").style.borderColor = "rgb(249 234 182)";
 		document.getElementById("rank1").style.height = "170px";
 		document.getElementById("rank1").style.width = "99%";
+		var imgTag = document.createElement("img");
+		imgTag.src = "${pageContext.request.contextPath}/image/medal1.png";
+		var div = document.getElementsByClassName("rank_num_div")[0];
+		div.innerText ="";
+		imgTag.style.width = "50px";
+		imgTag.style.height = "50px";
+		div.append(imgTag);
 		document.getElementsByClassName("numdiv")[0].style.fontSize = "30px";
 		document.getElementsByClassName("numdiv")[0].style.fontWeight = "600";
 		document.getElementsByClassName("namediv")[0].style.fontSize = "23px";
@@ -206,9 +218,16 @@
 	<!-- 2위 테두리 변경 -->
 	<script type="text/javascript">
 		document.getElementById("rank2").style.backgroundColor = "rgba(233, 233, 233, 0.58)";
-		document.getElementById("rank2").style.borderColor = "#BBBBBB";
+		document.getElementById("rank2").style.borderColor = "rgb(233 233 233)";
 		document.getElementById("rank2").style.height = "150px";
 		document.getElementById("rank2").style.width = "95%";
+		var imgTag = document.createElement("img");
+		imgTag.src = "${pageContext.request.contextPath}/image/medal2.png";
+		var div = document.getElementsByClassName("rank_num_div")[1];
+		div.innerText ="";
+		imgTag.style.width = "46px";
+		imgTag.style.height = "46px";
+		div.append(imgTag);
 		document.getElementsByClassName("numdiv")[1].style.fontSize = "28px";
 		document.getElementsByClassName("numdiv")[1].style.fontWeight = "400";
 		document.getElementsByClassName("namediv")[1].style.fontSize = "18px";
@@ -222,9 +241,16 @@
 	<!-- 3위 테두리 변경 -->
 	<script type="text/javascript">
 		document.getElementById("rank3").style.backgroundColor = "rgba(150, 99, 53, 0.39)";
-		document.getElementById("rank3").style.borderColor = "#A95608";
+		document.getElementById("rank3").style.borderColor = "rgb(169 86 8 / 14%)";
 		document.getElementById("rank3").style.height = "100px";
 		document.getElementById("rank3").style.width = "91%";
+		var imgTag = document.createElement("img");
+		imgTag.src = "${pageContext.request.contextPath}/image/medal3.png";
+		var div = document.getElementsByClassName("rank_num_div")[2];
+		div.innerText ="";
+		imgTag.style.width = "43px";
+		imgTag.style.height = "43px";
+		div.append(imgTag);
 	</script>
 
 </div>
