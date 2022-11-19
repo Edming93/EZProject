@@ -524,7 +524,7 @@
 	                    <input type="text" name="tmember3" id="t3"class="tmem" placeholder="이름을 입력하세요">
 	                    <input type="text" name="tmember4" id="t4" class="tmem"  placeholder="이름을 입력하세요">
 	                    <input type="text" name="tmember5" id="t5" class="tmem"  placeholder="이름을 입력하세요">
-	                    <input type="text" name="tmember6" class="tmem" onchange="inputValueChange()" placeholder="이름을 입력하세요">
+	                    <input type="text" name="tmember6" id="t6" class="tmem" placeholder="이름을 입력하세요">
               		</div>
               		
               		<div class="content2">

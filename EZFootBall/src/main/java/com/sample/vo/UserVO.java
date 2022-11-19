@@ -49,7 +49,19 @@ public class UserVO {
 	//수빈 사용
 	private int gameCode;
 	private int resultCode;
+	
+	private String userGroup;
+	
+	
 
+
+	public String getUserGroup() {
+		return userGroup;
+	}
+
+	public void setUserGroup(String userGroup) {
+		this.userGroup = userGroup;
+	}
 
 	public int getGameCode() {
 		return gameCode;

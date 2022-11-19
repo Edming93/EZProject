@@ -172,7 +172,7 @@ footer {
     
     .teambox2{
     	width: 40%;
-	    height: 330px;
+	    height: 360px;
 	    padding: 20px;
 	    border-radius: 10px;
 	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);

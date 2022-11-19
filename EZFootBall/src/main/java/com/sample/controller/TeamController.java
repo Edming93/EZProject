@@ -276,6 +276,7 @@ public class TeamController {
 	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo, HttpSession session, Model model) {
 	
 		if(service.TeamMemberList(vo)) {
+			System.out.println("여섯"+Integer.parseInt(vo.getUserCode6()));
 			int LTC = service.getLastTeamC();
 			vo.setTeamCode(LTC);
 			UserVO uvo = (UserVO)session.getAttribute("sessionVO");
@@ -283,33 +284,48 @@ public class TeamController {
 			UserVO user1 = new UserVO();
 			user1.setTeamCode(LTC);
 			user1.setUserCode(Integer.parseInt(vo.getUserCode1()));
+			user1.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user1);
 			service.upUserInfo(user1);
 			UserVO user2 = new UserVO();
 			user2.setTeamCode(LTC);
 			user2.setUserCode(Integer.parseInt(vo.getUserCode2()));
+			user2.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user2);
 			service.upUserInfo(user2);
 			UserVO user3 = new UserVO();
 			user3.setTeamCode(LTC);
 			user3.setUserCode(Integer.parseInt(vo.getUserCode3()));
+			user3.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user3);
 			service.upUserInfo(user3);
 			UserVO user4 = new UserVO();
 			user4.setTeamCode(LTC);
 			user4.setUserCode(Integer.parseInt(vo.getUserCode4()));
+			user4.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user4);
 			service.upUserInfo(user4);
 			UserVO user5 = new UserVO();
 			user5.setTeamCode(LTC);
 			user5.setUserCode(Integer.parseInt(vo.getUserCode5()));
+			user5.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user5);
 			service.upUserInfo(user5);
+			
+			if(Integer.parseInt(vo.getUserCode6()) > 1) {
+				UserVO user6 = new UserVO();
+				user6.setTeamCode(LTC);
+				user6.setUserCode(Integer.parseInt(vo.getUserCode6()));
+				user6.setUserGroup(vo.getTeamName());
+				service.upUserAbil(user6);
+				service.upUserInfo(user6);
+			}
 			
 			//service.updateUserAbil(vo);
 			//service.updateUserInfo(vo);
 			uvo.setTeamCode(LTC);
-			session.setAttribute("sessionVO", uvo );
+			//session.setAttribute("sessionVO", uvo );
+			session.setAttribute("sessionVO", service.userVO(uvo.getUserCode()));
 			model.addAttribute("userVO", uvo);
 			
 			return "team/teamMain";

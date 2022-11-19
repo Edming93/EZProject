@@ -220,7 +220,7 @@
 	</update>
 	
 	<update id="upUserAbil" parameterType="UserVO">
-		update user_abil set team_code =#{teamCode}
+		update user_abil set team_code =#{teamCode},user_group=#{userGroup}
 		where user_code =#{userCode}
 	</update>
 	
