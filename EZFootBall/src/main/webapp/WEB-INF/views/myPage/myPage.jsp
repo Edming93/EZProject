@@ -569,9 +569,16 @@ footer {
         document.getElementById("MTbtn").addEventListener("click",function(){
         	if(${userVO.teamCode == 0} || ${userVO.teamCode} == null){
         		alert("팀이 존재하지 않습니다");
-//         		location.href = "${pageContext.request.contextPath}/myPage/myPage";
         	}else{
         		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
+        	}
+        });
+        
+        document.getElementById("MTbtn2").addEventListener("click",function(){
+        	if(${userVO.teamCode == 0} || ${userVO.teamCode} == null){
+        		alert("팀이 존재하지 않습니다");
+        	}else{
+        		location.href = "${pageContext.request.contextPath}/team/teaminfo";
         	}
         });
         </script>

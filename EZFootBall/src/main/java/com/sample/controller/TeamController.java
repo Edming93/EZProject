@@ -196,8 +196,6 @@ public class TeamController {
 	@PostMapping("/getTeam")
 	@ResponseBody
 	public List<TeamMemberVO> getTeamNameList(@RequestBody TeamMemberVO vo){
-		System.out.println("getTEam :" + vo.getTeamName());
-		System.out.println("getTEam :" + vo.getTeamCode());
 		return service.getTeamNameListSer(vo);
 	}
 	
@@ -225,24 +223,9 @@ public class TeamController {
 			vo.setGameMaxp(two);
 			vo.setGamePnum(one);
 			session.setAttribute("GlistVO", vo);
-			System.out.println(vo.getGamePay());
-			System.out.println("넘어오나?? :"+vo.getUteamPay());
-			System.out.println(vo.getGameType());
-			System.out.println(vo.getGameMinp());
-			System.out.println("이거없을?:"+vo.getFieldCode());
-			System.out.println("이거는? :"+vo.getGameMacth());
-			
-			
-			
-		//	service.gameTJoinList(vo1);
-			
-		//	service.matchInfo(vo,model);
 			
 			return "rental/rentalPayment";
-		//}else {
-			
-		//	return "team/posting";
-		//}
+	
 	}
 	
 	// 지도에서 주소 입력후 검색 눌렀을때
@@ -250,8 +233,6 @@ public class TeamController {
 	@ResponseBody
 	public List<SearchVO> getMapInfo(@RequestBody SearchVO vo){
 		
-		System.out.println("맵컨트롤러" + vo.getFieldName());
-		System.out.println(service.getGameMap(vo));
 		return service.getGameMap(vo); 
 	}
 	
@@ -261,8 +242,6 @@ public class TeamController {
 	@GetMapping("/register")
 	public String register(HttpSession Session,  Model model) {
 		UserVO uvo = (UserVO)Session.getAttribute("sessionVO");
-		System.out.println("세션세션 : "+uvo.getUserCode());
-		System.out.println("아이디아이디 : "+uvo.getUserId());
 		
 		service.getUserInfo(uvo.getUserId(), model);
 		
@@ -276,7 +255,7 @@ public class TeamController {
 	public String Teamupdate(@ModelAttribute("TeamMemberVO") TeamMemberVO vo, HttpSession session, Model model) {
 	
 		if(service.TeamMemberList(vo)) {
-			System.out.println("여섯"+Integer.parseInt(vo.getUserCode6()));
+			
 			int LTC = service.getLastTeamC();
 			vo.setTeamCode(LTC);
 			UserVO uvo = (UserVO)session.getAttribute("sessionVO");
@@ -337,7 +316,6 @@ public class TeamController {
 	@PostMapping("/usercode")
 	@ResponseBody
 	public List<UinVO> Usercode(@RequestBody UinVO vo) {
-		System.out.println("dddd"+service.getUserList(vo).size());
 		return service.getUserList(vo);
 	}
 	
@@ -353,15 +331,10 @@ public class TeamController {
 	@GetMapping("/teamDetailInfo")
 	public String teamDetailInfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-//		System.out.println(uvo.getUserId());
-//		userVO = service.getAllUserInfo(uvo.getUserId());
-//		System.out.println(userVO.getTeamCode());
+
 		uinVO = service.getAllAbil(uvo.getUserCode());
 		tmVO = service.getAllTeamMem(uvo.getTeamCode());
-		System.out.println("커커커커커커커컼커ㅓ-----");
-		System.out.println(uvo.getTeamCode());
-		System.out.println(tmVO.getTmember6());
-		System.out.println(tmVO.getTmember5());
+
 		model.addAttribute("user", uvo);
 		model.addAttribute("uinVO", uinVO);
 		model.addAttribute("tmVO", tmVO);
@@ -369,20 +342,29 @@ public class TeamController {
 		return "myPage/teamDetailInfo";
 	}
 	
+	@GetMapping("/teaminfo")
+	public String teaminfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO) {
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		uinVO = service.getAllAbil(uvo.getUserCode());
+		tmVO = service.getAllTeamMem(uvo.getTeamCode());
+		model.addAttribute("user", uvo);
+		model.addAttribute("uinVO", uinVO);
+		model.addAttribute("tmVO", tmVO);
+		
+		return "myPage/teaminfo";
+	}
+	
 	@GetMapping("/deleteT")
 	public String deleteTeam(@ModelAttribute TeamMemberVO vo, HttpSession session) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		uvo.setTeamCode(0);
-		System.out.println(vo.getTeamCode());
-		System.out.println(vo.getTmember3());
-		System.out.println(vo.getTeamName());
-		System.out.println(vo.getTmember5());
+	
 		service.updateTNoUserAbil(vo);
-		System.out.println("실행되는거야?");
+;
 		service.updateTNoUserInfo(vo);
-		System.out.println("실행되는거야?12");
+	
 		service.deleteT(vo);
-		System.out.println("젭라베잘버레저라머램ㄹ머닒니ㅏㅓㅇㅁ니ㅏㅓㅇ");
+		
 		session.setAttribute("sessionVO", uvo);
 		
 		return "redirect:/myPage/myPage";
@@ -416,8 +398,8 @@ public class TeamController {
 	
 	@GetMapping("/outteam")
 	public String outteam(@RequestParam int teamCode,@RequestParam String userCode,HttpSession session) {
-		System.out.println("팀추방");
-		System.out.println(teamCode);
+		
+	
 		TeamMemberVO vo = service.getAllTeamMem(teamCode);
 		service.deleteT(vo);
 		TeamMemberVO nvo = new TeamMemberVO();
@@ -484,7 +466,7 @@ public class TeamController {
 			nvo.setUserCode5(usercode.get(4));
 		}
 		
-		System.out.println(nvo.getTeamCode());
+	
 		service.outmem(nvo);
 		service.outabil(Integer.parseInt(userCode));
 		service.outinfo(Integer.parseInt(userCode));
