@@ -108,7 +108,7 @@
         game_day, game_time, DATE_FORMAT(game_time, '%H:%i') game_time1, DATE_FORMAT(DATE_ADD(game_time, INTERVAL 2 HOUR), '%H:%i') game_time2 
         FROM field_reservation
 		WHERE (user_code = #{userCode}) AND (rv_type = 'S' OR rv_type = 'TS')
-		ORDER BY game_day, game_time
+		ORDER BY rv_code desc,game_day, game_time
 	</select>
 	
 </mapper>

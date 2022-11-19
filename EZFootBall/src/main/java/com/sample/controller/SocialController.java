@@ -273,7 +273,7 @@ public class SocialController {
 		session.removeAttribute("snum");
 		session.removeAttribute("tnum");
 		session.removeAttribute("urabil");
-		return "/myPage/matchList";
+		return "redirect:/myPage/matchList";
 	}
 	
 	@PostMapping("/joinlist")

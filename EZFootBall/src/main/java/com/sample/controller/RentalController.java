@@ -209,7 +209,7 @@ public class RentalController {
 		session.removeAttribute("Gnum");
 		session.removeAttribute("FRVO");
 		
-		return "myPage/rentalList";
+		return "redirect:/myPage/rentalList";
 		}
 		return "rental/rentalPayment";
 	}
