@@ -61,7 +61,8 @@
     	}
        
     </style>
-    <title>Document</title>
+    <title>매니저페이지</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 </head>
 <body>
 <div id="contain">

@@ -27,6 +27,7 @@ import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistVO;
 import com.sample.vo.Criteria;
 import com.sample.vo.PageMakerVO;
+import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
 
 @Controller
@@ -40,15 +41,25 @@ public class BlacklistController {
 		this.service = service;
 	}
 
-	/* 페이지 이동
-	@GetMapping("/blacklistmain")
-	public String move(HttpSession session, Model model) {
+	@PostMapping("/blacklistselect")
+	public String reviewselect(HttpSession session, @RequestParam("blacklistLocal") String blacklistLocal, Model model, BlacklistVO bvo, Criteria cri) {
+		bvo.setBlacklistLocal(blacklistLocal);
+		service.serachBlackList(model);
+		
+		
 		UserVO vo = (UserVO) session.getAttribute("sessionVO");
 		model.addAttribute("userdata", vo);
-		service.getBlackList(model);
+		
+		model.addAttribute("list", service.getListPaging(cri));
+		
+		 int total = service.getTotal();
+		 
+		 PageMakerVO pageMake = new PageMakerVO(cri, total);
+		 
+		 model.addAttribute("pageMaker", pageMake);
+		
 		return "/blacklist/blacklistmain";
 	}
-	*/
 	
 	// 페이지 이동
 		@GetMapping("/blacklistmain")

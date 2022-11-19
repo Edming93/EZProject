@@ -48,10 +48,25 @@
         margin: 0px;
       
     }
+    .head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 2%;
+    }
+    
+    h1{
+    font-family: 'Gowun Dodum', sans-serif
+    }
+    
+    h2{
+    font-family: 'Gowun Dodum', sans-serif
+    }
     
     #div1 {
 	margin: 0 auto;
-	width: 60%;
+	width: 50%;
 	margin-top: 5%;
 	
 }
@@ -65,6 +80,11 @@
 
 th,td{
 font-family: 'Gowun Dodum', sans-serif;
+}
+
+td{
+	
+	height : 90px;
 }
 
 .sideicon{
@@ -412,21 +432,21 @@ main {
 table {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
+	border-spacing: 0;
 	margin-left: 5%;
     width: 90%;
+    height : 20%;
+ 	border-bottom: 1px solid black;
 }
 
 table td, table th {
-	border: 1px solid #ddd;
+	border-top: 1px solid black;
 	padding: 8px;
 	white-space: no-wrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-table tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
 
 table tr:hover {
 	background-color: #ddd;
@@ -440,9 +460,6 @@ table th {
 	color: white;
 }       	
            
-  
-           
-     
       
   .pageInfo{
     list-style: none;
@@ -469,7 +486,41 @@ table th {
  .pageInfo_area{
  	display : "flex";
  }
-
+ 
+ .ta{
+ 	
+ }
+	
+	.ta1{	
+		    padding-left: 3%;
+	}
+	
+	.ta2{
+		text-align: end;
+		 padding-right: 3%;
+	}
+	
+	.span2{
+		display : block;
+		font-weight: bold;
+		
+	}
+	
+	.span1{
+	display : block;
+	font-size : 20px;
+	
+	}
+	
+	.span3{
+		font-weight: bold;
+		
+	}
+	
+	.span4{
+	
+		
+	}
 </style>
 </head>
 <body>
@@ -563,39 +614,31 @@ table th {
         </div>
 
  	<div id = "div1">
+ 	<iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="30" height="30"></iconify-icon>
+ 		<div class = "head"><h1>블랙리스트 / 신고게시판</h1>
+ 							<h2>악의적인 행동을 반복하는 유저를 신고해주세요</h2>
+ 							<form action="${pageContext.request.contextPath}/blacklist/blacklistselect" id="form1" method="post">
+ 							 <input type="text" name="blacklistLocal" id="blacklistLocal" placeholder="찾으시는 유저코드를 입력하세요" />
+                        	<button id="chbtn">검색</button>
+ 							</form>
+ 		</div>
+ 	
 		<div class="containermain">
 		<main>
 			<table>
-				<thead>
-					<tr>
-						<th>글 번호</th>
-						<th>글쓴이</th>
-						<th>제목</th>
-					<!-- 	<th>내용</th>  -->
-						<th>지역</th>
-						<th>작성일/작성시간</th>
-					</tr>
-				</thead>
-				<tbody>
-
+				<tbody class ="ta">
 					<c:forEach var="vo" items="${list}">
 						<%-- <c:if test="${vo.isDelete == 1}"> --%>
 						<tr>
-							<td><a
-								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistCode}</a></td>
-							<td><a
-								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.buserName}</a></td>
-							<td><a
-								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistTitle}</a></td>
-					<!-- 	<td>${vo.blacklistContent}</td>  -->	
-							<td><a
-								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistLocal}</a></td>
-							<td><a
-								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}">${vo.blacklistCreateDate}</a></td>
+						<td class = "ta1"><a
+								href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}"><span class ="span1">${vo.blacklistTitle}</span>   <span class ="span3">작성자 : ${vo.buserName}</span> </a></td>
+						<td class ="ta2"><a
+							href="${pageContext.request.contextPath}/blacklist/blacklistmain/${vo.blacklistCode}"><span class ="span2">${vo.blacklistLocal}</span>   ${vo.blacklistCreateDate}</a></td>
+
 						</tr>
 						<%-- 	</c:if> --%>
 					</c:forEach>
-				</tbody>
+					</tbody>
 			</table>
 
 					<div class="pageInfo_wrap">
@@ -631,6 +674,13 @@ table th {
 		</div>
 	</div>
 	<script type="text/javascript">
+	
+
+	/*검색 버튼*/
+		$("#chbtn").click(function(){
+			
+		});
+	
 	
 	let moveForm = $("#moveForm");
 	

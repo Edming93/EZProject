@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이지풋볼</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 </head>
 <body>
     <style>

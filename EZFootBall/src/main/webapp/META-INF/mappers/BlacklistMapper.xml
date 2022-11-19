@@ -51,6 +51,19 @@
 		order by blacklist_code desc
 		limit #{start}, #{cntPerPage}
 	</select>
+	
+	<select id="searchBlackList" resultType="BlacklistVO">
+		select blacklist_code,
+		user_id, buser_name, blacklist_title, blacklist_content,
+		blacklist_local,
+		date_format(blacklist_create_date, '%Y-%m-%d %H:%i')
+		blacklist_create_date, blackuser_code
+		from blacklist
+		where blacklist_local = #{blacklistLocal} and is_delete = 0
+		order by blacklist_code desc
+		limit #{start}, #{cntPerPage}
+	</select>
+	
 
 	<select id="selectBlackListdetail" resultType="BlacklistVO">
 		select

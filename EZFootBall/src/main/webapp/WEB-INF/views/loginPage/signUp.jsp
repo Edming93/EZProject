@@ -16,6 +16,8 @@
 <head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
     <meta charset="utf-8">
+    <title>회원 가입</title>
+	<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
     <style>
         * {
             box-sizing: border-box;

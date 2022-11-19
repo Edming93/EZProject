@@ -20,6 +20,9 @@ public interface BlacklistDAO {
 	//페이지 VIEW
 	public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
 	
+	//페이지 VIEW 검색
+	public List<BlacklistVO> searchBlackList();
+	
 	//상세 페이지 view
 	public BlacklistVO selectBlackListdetail(String blacklistCode);
 	

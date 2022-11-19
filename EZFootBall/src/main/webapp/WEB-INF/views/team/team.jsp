@@ -38,7 +38,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이지풋볼</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

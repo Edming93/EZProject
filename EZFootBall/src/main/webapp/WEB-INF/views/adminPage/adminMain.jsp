@@ -22,6 +22,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <style>
      *{
         box-sizing: border-box;

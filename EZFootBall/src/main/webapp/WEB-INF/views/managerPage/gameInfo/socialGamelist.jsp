@@ -65,7 +65,8 @@
 <script src="${pageContext.request.contextPath }/js/jquery-3.6.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/jquery-ui.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
-<title>Insert title here</title>
+ <title>매니저페이지</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <style>
 	#searchbox1 {
 		display: flex;

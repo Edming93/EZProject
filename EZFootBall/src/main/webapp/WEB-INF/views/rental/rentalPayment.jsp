@@ -20,6 +20,8 @@
    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+   <title>이지풋볼</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
    <style>
       * {
          margin: 0;

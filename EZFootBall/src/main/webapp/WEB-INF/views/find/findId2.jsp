@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ID 찾기</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

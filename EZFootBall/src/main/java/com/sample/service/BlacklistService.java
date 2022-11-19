@@ -14,6 +14,7 @@ import com.sample.vo.BlacklistCommentVO;
 import com.sample.vo.BlacklistPageVO;
 import com.sample.vo.BlacklistVO;
 import com.sample.vo.Criteria;
+import com.sample.vo.ReviewCommentVO;
 import com.sample.vo.UserVO;
 
 
@@ -46,7 +47,14 @@ public class BlacklistService {
 		vo.setStart(0);
 		vo.setCntPerPage(15);
 		model.addAttribute("list", blackDAO.selectBlackList(vo));
+		
 	}
+	
+	public void serachBlackList(Model model) {
+
+		model.addAttribute("list", blackDAO.searchBlackList());
+		
+	}   
 	
 	public void getBlackListContent(Model model, String blacklistCode) {
 		model.addAttribute("BlacklistVO", blackDAO.selectBlackListdetail(blacklistCode));

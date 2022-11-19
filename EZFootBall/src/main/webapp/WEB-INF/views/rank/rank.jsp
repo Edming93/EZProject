@@ -7,7 +7,7 @@
 <head>
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+
  <style>
         #out {
        	 	padding-top: 20px;

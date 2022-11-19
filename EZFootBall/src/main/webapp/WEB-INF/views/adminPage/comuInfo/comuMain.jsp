@@ -63,7 +63,7 @@
         <ul id="submenu">
             <a class="menu menu1" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=review"><li>후기</li></a>
             <a class="menu menu2" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=black"><li>블랙</li></a>
-            <a class="menu menu3" href="${pageContext.request.contextPath}/admin/comuselect?comuselect=signUp"><li>신고</li></a>
+            
         </ul>
     </div>
     <div id="maincontent">
@@ -75,10 +75,6 @@
         	}else if(comuselect.equals("black")){
         		%>
 	    		  <jsp:include page="./black.jsp"></jsp:include>
-	    		<%
-        	}else if(comuselect.equals("signUp")){
-        		%>
-	    		  <jsp:include page="./report.jsp"></jsp:include>
 	    		<%
         	}
         %>

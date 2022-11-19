@@ -149,7 +149,6 @@ input{
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
     margin-top: 5px;
-    font-family: 'Gowun Dodum', sans-serif;
 	
 }
 
@@ -816,6 +815,7 @@ let play_btn = document.querySelector(".fa-play");
 			<div class="footer">
 				<button>전송</button>
 			</div>
+			
 			
 			
 			

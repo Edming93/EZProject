@@ -42,7 +42,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+ <title>구장예약</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <style>
        #out{
        	margin: 0 auto;

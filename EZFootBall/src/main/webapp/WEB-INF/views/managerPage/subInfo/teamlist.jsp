@@ -28,7 +28,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+ <title>매니저페이지</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/ez_icon.svg">
 <style>
 	#searchbox1 {
 		display: flex;

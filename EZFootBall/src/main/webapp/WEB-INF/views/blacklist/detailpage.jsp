@@ -185,7 +185,6 @@ input{
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
     margin-top: 5px;
-    font-family: 'Gowun Dodum', sans-serif;
 	
 }
 
