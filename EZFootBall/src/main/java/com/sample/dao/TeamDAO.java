@@ -117,6 +117,20 @@ public interface TeamDAO {
 			public int upUserAbil(UserVO vo);
 			
 			public int upUserInfo(UserVO vo);
+			
+			public int dtteamcode (int teamCode);
+			
+			public int dateamcode (int teamCode);
+			
+			public int diteamcode (int teamCode);
+			
+			public int outmem (TeamMemberVO vo);
+			
+			public int outinfo (int userCode);
+			
+			public int outabil (int userCode);
+			
+			public UserVO userVO (int userCode);
 
 		//-----------------------------------------------
 }

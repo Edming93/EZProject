@@ -229,5 +229,33 @@ public class TeamService {
 				dao.upUserInfo(vo);
 			}
 			
+			public void dtteamcode (int teamCode) {
+				dao.dtteamcode(teamCode);
+			}
+			
+			public void dateamcode (int teamCode) {
+				dao.dateamcode(teamCode);
+			}
+			
+			public void diteamcode (int teamCode) {
+				dao.diteamcode(teamCode);
+			}
+			
+			public void outmem (TeamMemberVO vo) {
+				dao.outmem(vo);
+			}
+			
+			public void outabil (int userCode) {
+				dao.outabil(userCode);
+			}
+			
+			public void outinfo (int userCode) {
+				dao.outinfo(userCode);
+			}
+			
+			public UserVO userVO (int userCode) {
+				return dao.userVO(userCode);
+			}
+			
 			//-----------------------------------------------------
 }

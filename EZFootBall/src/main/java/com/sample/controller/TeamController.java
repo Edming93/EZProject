@@ -1,5 +1,6 @@
 package com.sample.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -353,7 +354,7 @@ public class TeamController {
 	}
 	
 	@GetMapping("/deleteT")
-		public String deleteTeam(@ModelAttribute TeamMemberVO vo, HttpSession session) {
+	public String deleteTeam(@ModelAttribute TeamMemberVO vo, HttpSession session) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		uvo.setTeamCode(0);
 		System.out.println(vo.getTeamCode());
@@ -387,5 +388,93 @@ public class TeamController {
 //		return "team/ddd";
 //	}
 	
-	//------------------------------------------------------			
+	//------------------------------------------------------	
+	
+	@GetMapping("/alltdal")
+	public String alltdal(@RequestParam int teamCode) {
+		service.dtteamcode(teamCode);
+		service.diteamcode(teamCode);
+		service.dateamcode(teamCode);
+		return "redirect:/myPage/myPage";
+	}
+	
+	@GetMapping("/outteam")
+	public String outteam(@RequestParam int teamCode,@RequestParam String userCode,HttpSession session) {
+		System.out.println("팀추방");
+		System.out.println(teamCode);
+		TeamMemberVO vo = service.getAllTeamMem(teamCode);
+		service.deleteT(vo);
+		TeamMemberVO nvo = new TeamMemberVO();
+		nvo.setTeamCode(teamCode);
+		nvo.setTeamName(vo.getTeamName());
+		List<String> name = new ArrayList<String>();
+		List<String> usercode = new ArrayList<String>();
+		if(!vo.getUserCode1().equals(userCode) && vo.getUserCode1() != null) {
+			name.add(vo.getTmember1());
+			usercode.add(vo.getUserCode1());
+		}
+		if(!vo.getUserCode2().equals(userCode) && vo.getUserCode2() != null) {
+			name.add(vo.getTmember2());
+			usercode.add(vo.getUserCode2());
+		}
+		if(!vo.getUserCode3().equals(userCode) && vo.getUserCode3() != null) {
+			name.add(vo.getTmember3());
+			usercode.add(vo.getUserCode3());
+		}
+		if(!vo.getUserCode4().equals(userCode) && vo.getUserCode4() != null) {
+			name.add(vo.getTmember4());
+			usercode.add(vo.getUserCode4());
+		}
+		if(!vo.getUserCode5().equals(userCode) && vo.getUserCode5() != null) {
+			name.add(vo.getTmember5());
+			usercode.add(vo.getUserCode5());
+		}
+		if(vo.getUserCode6() != null && !vo.getUserCode6().equals(userCode)) {
+			name.add(vo.getTmember6());
+			usercode.add(vo.getUserCode6());
+		}
+		
+		if(name.size()==2) {
+			nvo.setTmember1(name.get(0));
+			nvo.setUserCode1(usercode.get(0));
+			nvo.setTmember2(name.get(1));
+			nvo.setUserCode2(usercode.get(1));
+		}else if(name.size()==3) {
+			nvo.setTmember1(name.get(0));
+			nvo.setUserCode1(usercode.get(0));
+			nvo.setTmember2(name.get(1));
+			nvo.setUserCode2(usercode.get(1));
+			nvo.setTmember3(name.get(2));
+			nvo.setUserCode3(usercode.get(2));
+		}else if(name.size()==4) {
+			nvo.setTmember1(name.get(0));
+			nvo.setUserCode1(usercode.get(0));
+			nvo.setTmember2(name.get(1));
+			nvo.setUserCode2(usercode.get(1));
+			nvo.setTmember3(name.get(2));
+			nvo.setUserCode3(usercode.get(2));
+			nvo.setTmember4(name.get(3));
+			nvo.setUserCode4(usercode.get(3));
+		}else if(name.size()==5) {
+			nvo.setTmember1(name.get(0));
+			nvo.setUserCode1(usercode.get(0));
+			nvo.setTmember2(name.get(1));
+			nvo.setUserCode2(usercode.get(1));
+			nvo.setTmember3(name.get(2));
+			nvo.setUserCode3(usercode.get(2));
+			nvo.setTmember4(name.get(3));
+			nvo.setUserCode4(usercode.get(3));
+			nvo.setTmember5(name.get(4));
+			nvo.setUserCode5(usercode.get(4));
+		}
+		
+		System.out.println(nvo.getTeamCode());
+		service.outmem(nvo);
+		service.outabil(Integer.parseInt(userCode));
+		service.outinfo(Integer.parseInt(userCode));
+		session.setAttribute("sessionVO", service.userVO(Integer.parseInt(userCode)));
+		
+		return "redirect:/myPage/myPage";
+	}
+	
 }

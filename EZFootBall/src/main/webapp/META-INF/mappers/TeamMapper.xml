@@ -276,15 +276,57 @@
 		user_name =#{tmember3} or user_name =#{tmember4} or
 		user_name =#{tmember5} or user_name=#{tmember6}
 	</update>
+	
 	<update id="updateTNoUserAbil">
 		update user_abil set team_code=0, user_group=''
 		where user_name =#{tmember1} or user_name =#{tmember2} or
 		user_name =#{tmember3} or user_name =#{tmember4} or
 		user_name =#{tmember5} or user_name=#{tmember6}
 	</update>
+	
 	<delete id="deleteT">
 		delete from team_member
 		where team_code=#{teamCode}
 	</delete>
+	
+	<delete id="dtteamcode">
+		delete from team_member
+		where team_code=#{teamCode}
+	</delete>
+	
+	<update id="dateamcode">
+		update user_abil set team_code=null, user_group=''
+		where team_code=#{teamCode}
+	</update>
+	
+	<update id="diteamcode">
+		update user_info set team_code=null
+		where team_code=#{teamCode}
+	</update>
+	
+	<insert id="outmem" parameterType="TeamMemberVO">
+		insert into team_member
+		(team_code,team_name, tmember1, tmember2, tmember3, tmember4, tmember5, tmember6, 
+		 user_code1, user_code2, user_code3, user_code4, user_code5, user_code6)
+		values
+		(#{teamCode},#{teamName},#{tmember1},#{tmember2},#{tmember3},#{tmember4},#{tmember5},#{tmember6},
+		 #{userCode1},#{userCode2},#{userCode3},#{userCode4},#{userCode5},#{userCode6})
+	</insert>
+	
+	<update id="outinfo">
+		update user_info set team_code=null
+		where user_code=#{userCode}
+	</update>
+	
+	<update id="outabil">
+		update user_abil set team_code=null,user_group=''
+		where user_code=#{userCode}
+	</update>
+	
+	<select id="userVO" resultType="UserVO">
+		select *
+		from user_info
+		where user_code = #{userCode}
+	</select>
 	
 </mapper>

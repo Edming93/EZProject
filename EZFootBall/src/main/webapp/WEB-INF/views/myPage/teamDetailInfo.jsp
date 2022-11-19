@@ -109,136 +109,9 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
+    padding-top: 50px;
 }
 
-.main_area {
-	display:flex;
-    width: 1024px;
-    height: 900px;
-/*     background-color: #ffaaaa; */
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    
-}
-
-.main_content1 {
-	display: flex;
-	flex-direction: column;
-	width: 36%;
-	/* height: 98%; */
-	height:90%;
-/* 	background-color: #fff; */
-}
-
-.main_content2 {
-	width: 62%;
-	height:90%;
-	background-color: #fff;
-	padding: 0 30px;
-}
-
-.main_left1 {
-	width: 100%;
-	height: 35%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
-}
-
-#user_info > ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-#user_info > ul > li{
-	padding: 10px 0;
-}
-
-.main_left2 {
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-/* 	background-color: #fff; */
-}
-
-.main_right1 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-radius: 15px 15px 0 0;
-/* 	background-color: #fffaec; */
-	
-}
-
-.main_right2 {
-	width: 100%;
-	height: 50%;
-	padding: 15px;
-	border: 5px solid #26a653;
-	border-top: none;
-	border-radius: 0 0 15px 15px;
-/* 	background-color: #fffaec; */
-	
-}
-
-.name1 {
-	display: inline-block;
-}
-
-.main_left2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_left2 > ul > li {
-	margin-bottom: 30px;
-}
-
-.main_left2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 30px 0;
-	background-color: #fffaec;
-}
-
-.main_right1 > ul, .main_right2 > ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.main_right1 > ul > li, .main_right2 > ul > li {
-	margin-bottom: 10px;
-}
-
-.main_right1 > ul > li > a, .main_right2 > ul > li > a {
-	display:inline-block;
-	text-decoration: none;
-/* 	border: 1px solid black; */
-	border-radius: 20px;
-	color: #000;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	padding: 20px 0;
-	background-color: #fffaec;
-}
 
 
 .bottom_banner {
@@ -273,51 +146,47 @@ footer {
 	margin-left: 10px;
 }
 
-.teamlist{
-	border: 2px solid #26a563;
-    border-radius: 10px;
-    line-height: 2.5;
-    width: 40%;
-}
-.teamInfo h4{
-	line-height : 55px;
-}
-.main_right1 h3{
-	line-height : 50px;
-} 
-
-#Dbtn{
-	    text-decoration: none;
-    color: red;
-    font-size: 25px;
-    background-color: yellow;
-    width: 25%;
-    border-radius: 10px;
-    text-align: center;
-    padding: 10px;
-}
-.deleteT{
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.deleteT .hh{
-	font-size : 15px;
-}
-.teamlistcon{
-	display: flex;
-    justify-content: space-between;
-}
-.teamlist input{
-	margin-left : 10px;
-}
     .header_icon {
 	    text-decoration: none;
 	    color: #4e4e4e;
 	    font-size: 27px;
 	    margin-left: 15px;
     }
+    .teambox{
+    	width: 40%;
+	    height: 290px;
+	    padding: 20px;
+	    border-radius: 10px;
+	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
+    }
+    .teamInfo {
+    	padding-top: 10px;
+    }
+    .teamlist > ol > li {
+    	padding-top: 10px;
+    }
+    #out{
+    	padding-top: 10px;
+    }
+    
+    
+    .teambox2{
+    	width: 40%;
+	    height: 330px;
+	    padding: 20px;
+	    border-radius: 10px;
+	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
+    }
+    .teambox2 > .teamInfo > h3{
+    	padding-top: 10px;
+    }
+    #Mdel{
+    	padding-top: 10px;
+    }
+    #Tdel{
+    	padding-top: 10px;
+    }
+        
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -387,123 +256,159 @@ footer {
 
 			</div>
 		</div>
-        <div id="main_container">
-            <div class="main_area">
-			<h1 class="main_title">나의 EZ - Team 관리</h1>
-				<div class="main_content1">
-					<section class="main_left1">
-						<div id="user_info">
-							<ul>
-								<li><h3 class="name1">${user.userName }</h3><span>(유저코드:${user.userCode })</span></li>
-								<li>지역 : ${user.userLocal }</li>
-								<li>Email : ${user.userEmail1}${user.userEmail2 }</li>
-								<li>랭크 : ${uinVO.userLevel }</li>
-								<li>승률 : <fmt:formatNumber value="${(user.userWin/(user.userWin+user.userLose))*100}" pattern=".0"/>% <span>(${user.userWin+user.userLose}전 ${user.userWin}승 ${user.userLose}패)</span></li>
-								<li>Team : ${uinVO.userGroup }</li>
-							</ul>
-						</div>
-					</section>
-					<section class="main_left2">
-						<ul>
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">랭킹시스템 소개</a></li>
-							<li><a href="#">EZ풋볼 규칙설명</a></li>
-							<li><a href="#">대충 머시기 있지않을까..?</a></li>
-						</ul>
-					</section>
-				</div>
-				<div class="main_content2">
-					<section class="main_right1">
-						<h3>팀 정보</h3>
-						<c:if test="${user.userCode != tmVO.userCode1}">
-							<div class="teamInfo">
-								<h4>팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 : ${tmVO.teamCode})</span></h4>
-							</div>
-							<div class="teamlist">
-								<ol>
-									
-									<li>${tmVO.tmember1}</li>
-									<li>${tmVO.tmember2}</li>
-									<li>${tmVO.tmember3}</li>
-									<li>${tmVO.tmember4}</li>
-									<li>${tmVO.tmember5}</li>
-									<c:if test="${tmVO.tmember6} != null">
-										<li>${tmVO.tmember6}</li>
-									</c:if>
-								</ol>
-							</div>
-<!-- 							<div class="deleteTM"> -->
-<!-- 							<h3>팀을 탈퇴하시겠습니까?</h3> -->
-<%-- 							<a href="${pageContext.request.contextPath}/team/person1?teamCode=${tmVO.teamCode}&&teamName=${tmVO.teamName}&&tmember1=${tmVO.tmember1}&&tmember2=${tmVO.tmember2}&&tmember3=${tmVO.tmember3}&&tmember4=${tmVO.tmember4}&&tmember5=${tmVO.tmember5}&&tmember6=${tmVO.tmember6}" id="person">팀 탈퇴</a> --%>
-<!-- 							</div> -->
-						</c:if>
-						<c:if test="${user.userCode == tmVO.userCode1 }">
-							<div class="teamInfo">
-								<h4>팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 : ${tmVO.teamCode})</span></h4>
-								<h3>당신은 주장 입니다${tmVO.tmember6}</h3>
-							</div>
-							<div class=teamlistcon>
-								<div class="teamlist">
-		
-									<ol>
-										
-										<li>${tmVO.tmember1}<input type="checkbox" name="tmember1" value="${tmVO.tmember1}"></li>
-										<li>${tmVO.tmember2}<input type="checkbox" name="tmember2" value="${tmVO.tmember2}"></li>
-										<li>${tmVO.tmember3}<input type="checkbox" name="tmember3" value="${tmVO.tmember3}"></li>
-										<li>${tmVO.tmember4}<input type="checkbox" name="tmember4" value="${tmVO.tmember4}"></li>
-										<li>${tmVO.tmember5}<input type="checkbox" name="tmember5" value="${tmVO.tmember5}"></li>
-										<c:if test="${tmVO.tmember6} != null ">
-											<li>${tmVO.tmember6}<input type="checkbox" name="tmember6" value="${tmVO.tmember6}"></li>
-										</c:if>
-									</ol>
-								</div>
-	<!-- 							<div class="deleteTM"> -->
-	<!-- 								<h3>선택한 팀원을 추방하시겠습니까?</h3> -->
-	<!-- 								<button id="DTbtn">팀원 추방</button> -->
-	<!-- 							</div> -->
-								<div class="deleteT">
-									<h3>팀을 해체하시겠습니까?</h3>
-									<h3 class="hh">해체하시면 팀원들도 소속된 팀이 없어집니다.</h3>
-									<a href="${pageContext.request.contextPath}/team/deleteT?teamCode=${tmVO.teamCode}&&teamName=${tmVO.teamName}&&tmember1=${tmVO.tmember1}&&tmember2=${tmVO.tmember2}&&tmember3=${tmVO.tmember3}&&tmember4=${tmVO.tmember4}&&tmember5=${tmVO.tmember5}&&tmember6=${tmVO.tmember6}" id="Dbtn"> 해체</a>
-								</div>
-							</div>
-						</c:if>
-					</section>
-					<section class="main_right2">
-						<h3>더보기</h3>
-						<ul>
-							<li><a href="">고객문의</a></li>
-							<li><a href="">자주 묻는 질문 (Q&A)</a></li>
-							<li><a href="">매니저 지원</a></li>
-							<li><a href="">구장제휴</a></li>
-						</ul>
-					</section>
-				</div>
-            </div>
-        </div>
 
+		<div id="main_container">
+			
+			<c:if test="${user.userCode != tmVO.userCode1}">
+			<div class="teambox">
+				<h3>팀 정보</h3>
+				
+					<div class="teamInfo">
+						<h4>
+							팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 :	${tmVO.teamCode})</span>
+						</h4>
+					</div>
+					
+					<div class="teamlist">
+						<ol>
+
+							<li>${tmVO.tmember1}</li>
+							<c:if test="${not empty tmVO.tmember2}">
+								<li>${tmVO.tmember2}</li>
+							</c:if>
+							<c:if test="${not empty tmVO.tmember3}">
+								<li>${tmVO.tmember3}</li>
+							</c:if>
+							<c:if test="${not empty tmVO.tmember4}">
+								<li>${tmVO.tmember4}</li>
+							</c:if>
+							<c:if test="${not empty tmVO.tmember5}">
+								<li>${tmVO.tmember5}</li>
+							</c:if>
+							<c:if test="${not empty tmVO.tmember6}">
+								<li>${tmVO.tmember6}</li>
+							</c:if>
+						</ol>
+					</div>
+					<div id="out">
+						팀나가기
+					</div>
+				</div>
+			</c:if>
+			
+			
+			<c:if test="${user.userCode == tmVO.userCode1 }">
+				<div class="teambox2">
+					<div class="teamInfo">
+						<h4>
+							팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 :	${tmVO.teamCode})</span>
+						</h4>
+						<h3>당신은 주장 입니다</h3>
+					</div>
+					
+					<div class=teamlistcon>
+						<div class="teamlist">
+
+							<ol>
+								<li>${tmVO.tmember1}</li>
+								<c:if test="${not empty tmVO.tmember2}">
+									<li> <label for="tmember2" class="tmember">${tmVO.tmember2}</label> <input type="checkbox" id="tmember2" class="checkbox" name="tmember2" value="${tmVO.userCode2}"></li>
+								</c:if>
+								<c:if test="${not empty tmVO.tmember3}">
+									<li> <label for="tmember3" class="tmember">${tmVO.tmember3}</label> <input type="checkbox" id="tmember3" class="checkbox" name="tmember3" value="${tmVO.userCode3}"></li>
+								</c:if>
+								<c:if test="${not empty tmVO.tmember4}">
+									<li> <label for="tmember4" class="tmember">${tmVO.tmember4}</label> <input type="checkbox" id="tmember4" class="checkbox" name="tmember4" value="${tmVO.userCode4}"></li>
+								</c:if>
+								<c:if test="${not empty tmVO.tmember5}">
+									<li> <label for="tmember5" class="tmember">${tmVO.tmember5}</label> <input type="checkbox" id="tmember5" class="checkbox" name="tmember5" value="${tmVO.userCode5}"></li>
+								</c:if>
+								<c:if test="${not empty tmVO.tmember6}">
+									<li> <label for="tmember6" class="tmember">${tmVO.tmember6}</label> <input type="checkbox" id="tmember6" class="checkbox" name="tmember5" value="${tmVO.userCode6}"></li>									
+								</c:if>
+							</ol>
+						</div>
+						
+						<div id="Mdel">
+							팀에서 추방
+						</div>
+						<div id="Tdel">
+							팀 해체
+						</div>
+					</div>
+				</div>
+			</c:if>
+
+		</div>
+
+
+	<!-- 팀 나가기 -->
+	<script type="text/javascript">
+	if(${user.userCode} != ${tmVO.userCode1}){
+		document.getElementById("out").addEventListener("click",function(){
+			var del = confirm("정말 나가겠습니까?");
+			 if(del){
+				 location.href="${pageContext.request.contextPath}/team/outteam?teamCode="+${tmVO.teamCode}+"&userCode="+${user.userCode};
+			 }else{
+				 location.reload();
+			 }
+	    });
+	}
+	
+	</script>
+	
+	
+	<!-- 팀원삭제 -->
+	<script type="text/javascript">
+	if(${user.userCode} == ${tmVO.userCode1}){
 		
-        
-    <footer>
+	document.getElementById("Mdel").addEventListener("click",function(){
+		var usec = 0;
+		var del = confirm("정말 추방 하시겠습니까?");
+		 if(del){
+			 for(var i=0; i<document.getElementsByClassName("checkbox").length; i++){
+				 if(document.getElementsByClassName("checkbox")[i].checked == true){
+					 usec = document.getElementsByClassName("checkbox")[i].value;
+				 }
+			 }
+			 location.href="${pageContext.request.contextPath}/team/outteam?teamCode="+${tmVO.teamCode}+"&userCode="+usec;
+		 }else{
+			 location.reload();
+		 }
+    });
+	}
+	</script>
+	
+	<!-- 팀 해체 -->
+	<script type="text/javascript">
+	if(${user.userCode} == ${tmVO.userCode1}){
+	document.getElementById("Tdel").addEventListener("click",function(){
+		var del = confirm("정말 해체 하시겠습니까?");
+		 if(del){
+			 location.href="${pageContext.request.contextPath}/team/alltdal?teamCode="+${tmVO.teamCode};
+		 }else{
+			 location.reload();
+		 }
+    });
+	}
+	</script>
+
+
+	<footer>
         <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
+    
+    <!-- 로고 -->
+    <script type="text/javascript">
+			let main_logo = document.querySelector(".main_logo");
 
-		<script type="text/javascript">
-            let main_logo = document.querySelector(".main_logo");
-            
-            main_logo.addEventListener("click",function() {
-                location.href="${pageContext.request.contextPath}";
-            });
-        </script>
-        <script type="text/javascript">
-        	console.log(${tmVO.tmember6});
-        	document.getElementById("Dbtn").addEventListener("click", function(){
-        		if(${tmVO.teamCode == null || tmVO == null}){
-        			alert("팀이 없어 해당 페이지는 사용 불가합니다.");
-        		};
-        	});
-        </script>
-        
+			main_logo.addEventListener("click", function() {
+				location.href = "${pageContext.request.contextPath}";
+			});
+	</script>
+
+		
+
 
 	</div>
 </body>
