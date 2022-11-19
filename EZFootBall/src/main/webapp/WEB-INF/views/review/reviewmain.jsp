@@ -45,6 +45,7 @@
 * {
 	box-sizing: border-box;
 	margin: 0px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 textarea {
@@ -58,7 +59,7 @@ textarea {
 }
 
 div{
-	
+	font-family: 'Gowun Dodum', sans-serif;
 }
 textarea::placeholder {
   color: #26A653;
@@ -79,6 +80,9 @@ textarea::placeholder {
 	border : #26A653;
 	
 	
+}
+p{
+font-family: 'Gowun Dodum', sans-serif;
 }
 
 #comment {
@@ -728,9 +732,7 @@ let play_btn = document.querySelector(".fa-play");
    
 </script>
 		<div id="div1">
-			
-			
-			
+		
 			<div id="input">
 				<!-- 작성자 :
 			<textarea name="name" id="name" cols="10" rows="3"></textarea>
@@ -740,8 +742,10 @@ let play_btn = document.querySelector(".fa-play");
 						test="${empty requestScope.userdata}">로그인이 필요합니다.</c:if></textarea>
 				<button id="submit">등록</button>
 			</div>
-			
+		
+			<div id= "comment2"></div>
 			<div id="comment"></div>
+			
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -898,7 +902,7 @@ let play_btn = document.querySelector(".fa-play");
 						
 						//수정완료 버튼 클릭시 수정된 내용으로 수정
 						 updatebtn.addEventListener("click", function(){						 
-							 document.getElementById("input").style.display = "block";
+							 document.getElementById("input").style.display = "flex";
 						 	const target = document.getElementById('btnedit');
 						 	target.disabled = false;
 						 	document.getElementsByClassName("test2")[0].style.display = "flex";
@@ -939,7 +943,7 @@ let play_btn = document.querySelector(".fa-play");
 						
 						const reviewCode = data.vo.reviewCode;
 						const simple_data = {reviewCode};
-						document.getElementById("input").style.display = "block";
+						document.getElementById("input").style.display = "flex";
 						$.ajax({
 							url : "${pageContext.request.contextPath}/review/comment/delete",
 							type : "delete",
@@ -1082,7 +1086,7 @@ let play_btn = document.querySelector(".fa-play");
 								
 								//수정완료 버튼 클릭시 수정된 내용으로 수정
 								 updatebtn.addEventListener("click", function(){		
-									 document.getElementById("input").style.display = "block";
+									 document.getElementById("input").style.display = "flex";
 								 	const target = document.getElementById('btnedit2');
 								 	target.disabled = false; 
 								 	document.getElementsByClassName("test3")[0].style.display = "flex";
@@ -1118,7 +1122,7 @@ let play_btn = document.querySelector(".fa-play");
 								if(isDelete){ 
 								const reviewCode = comment.reviewCode;
 								const simple_data = {reviewCode};
-								document.getElementById("input").style.display = "block";
+								document.getElementById("input").style.display = "flex";
 								$.ajax({
 									url : "${pageContext.request.contextPath}/review/comment/delete",
 									type : "delete",
@@ -1152,9 +1156,7 @@ let play_btn = document.querySelector(".fa-play");
 					div2.append(ccontent);
 					div.append(div2);
 					div.append(div3);
-					//comdiv.after(document.getElementById("input"));
 					comdiv.append(div);
-					
 					div.style.marginTop = "2%";
 					/* comdiv.style.marginTop = "3%"; */
 					/* comdiv.style.marginBottom = "3%"; */
@@ -1180,7 +1182,7 @@ let play_btn = document.querySelector(".fa-play");
     <footer>
         <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
-
+</div>
 	<script type="text/javascript">
 	let main_logo = document.querySelector(".main_logo");
 	
