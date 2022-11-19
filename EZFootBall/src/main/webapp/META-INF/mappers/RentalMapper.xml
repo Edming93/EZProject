@@ -242,11 +242,11 @@
 	
 	<!-- 결제 내역 List 출력 -->
 	<select id="FieldReservationListAll" resultType="FieldReservationVO">
-		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment
+		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment,a.refund_state 
 		FROM field_reservation a
 		inner JOIN user_info b ON a.user_code = b.user_code
 		where a.rv_state='예약완료' or a.rv_state='신청완료' or a.rv_state='취소신청'
-		ORDER BY a.rv_code DESC
+		ORDER BY a.refund_state ASC, a.rv_code DESC
 	</select>
 	<!-- 환불 내역 List 출력 -->
 	<select id="FieldRefundListAll" resultType="FieldReservationVO">
@@ -306,7 +306,7 @@
 	<!-- 환불 -->
 	<update id="refund">
 		update field_reservation
-		set rv_state = '취소신청'
+		set rv_state = '취소신청' ,refund_state ='C'
 		where rv_code = #{rvCode}
 	</update>
 	

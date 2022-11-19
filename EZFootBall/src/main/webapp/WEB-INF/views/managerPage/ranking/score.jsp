@@ -183,16 +183,18 @@
             top: 30%;
             left: 36%;
             width: 400px;
-            height: 300px;
-            background-color: #b7e1c6;
-            padding: 10px;
+            height: 305px;
+            background-color: #fff;
+            border-radius:25px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px 10px #ddd;
 
         }
 
         #modalout {
             position: absolute;
-            width: 64%;
-          height: 77%;
+            width: 1024px;
+          	height: 100%;
             background-color: gray;
             display: none;
         }
@@ -203,20 +205,21 @@
 
         #flist {
             list-style: none;
-            margin: 0;
-            padding: 0;
+    		margin: 0;
+    		margin-top: 5px;
         }
 
         #flist>li {
             display: flex;
             align-items: center;
             width: 100%;
+            padding-top: 5px;
         }
 
         #flist>li>p {
             width: 120px;
-            font-size: 20px;
-            height: 30px;
+            font-size: 15px;
+            height: 25px;
         }
         .listbox{
            list-style: none
@@ -232,6 +235,22 @@
         .inbox{
            height: 30px;
            width: 170px;
+        }
+        #btnbox{
+        	display: flex;
+    		justify-content: center;
+    		padding-top: 15px;
+        }
+        #btnbox * {
+        	background: #26A653;
+        	border: none;
+        	border-radius: 20px;
+        	color:#fff;
+        	width: 50px;
+        	font-size: 15px;
+        	text-align: center;
+        	margin-right: 10px;
+        	
         }
        
     </style>
@@ -255,9 +274,13 @@
                 
                 
             </ul>
-            <button id="addbtn">등록</button>
+            <div id="btnbox">
+            	<button id="addbtn">등록</button>
+            	<div id="close">닫기</div>
+            </div>
+            
         </form>
-            <button id="close">닫기</button>
+            <!-- <button id="close">닫기</button> -->
 
 </div>
 

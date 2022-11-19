@@ -243,7 +243,7 @@ public class ManagerController {
         for(int i=0; i<gameCode.length;i++) {
             gaservice.del(gameCode[i]);
         }
-        return "redirect:/manager/manager";
+        return "redirect:/manager/manager?page=gameMain";
     }
     
     @PostMapping("/gupdate")

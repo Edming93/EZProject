@@ -660,31 +660,38 @@ td > a{
 								});
 								
 							//  취소
-							
-					        	$('.refundbtn').on("click",function(){
+							     	$('.refundbtn').on("click",function(){
+							     		var del = confirm("정말취소하시겠습니까?");
+										 if(del){
+											 var numse = $(this).prop("id");
+								        	 	var select = "#stat"+numse;
+								        	 	
+								        	 	let params = {rvCode:numse};
+								        	 	 $.ajax({
+								      		      url:"${pageContext.request.contextPath}/myPage/refund",
+								      		      type:"POST",
+								      		      contentType:"application/json; charset=utf-8",
+								      		      dataType : "json",
+								      		      data:JSON.stringify(params), 
+								      		      success: function(data) {
+								      		    	if(data ==1){
+								      		    		location.reload();
+								      		    		/* console.log("성공");
+								      		    		console.log(this);
+								      		    		$(select).text("취소신청");
+								      		    		$(select).css('color','#CDCDCD');
+								      		    		$(numse).css('visibility','#hidden'); */
+								      		    	}
+								      		    	  
+								      		      },
+								      		      error: function() {
+								      		          alert("에러 발생");
+								      		      }
+								      		  })
+										 }else{
+											 location.reload();
+										 } 
 					        	 	
-					        	 	var numse = $(this).prop("id");
-					        	 	var select = "#stat"+numse;
-					        	 	
-					        	 	let params = {rvCode:numse};
-					        	 	 $.ajax({
-					      		      url:"${pageContext.request.contextPath}/myPage/refund",
-					      		      type:"POST",
-					      		      contentType:"application/json; charset=utf-8",
-					      		      dataType : "json",
-					      		      data:JSON.stringify(params), 
-					      		      success: function(data) {
-					      		    	if(data ==1){
-					      		    		console.log("성공");
-					      		    		console.log(this);
-					      		    		$(select).text("취소신청");
-					      		    	}
-					      		    	  
-					      		      },
-					      		      error: function() {
-					      		          alert("에러 발생");
-					      		      }
-					      		  })
 					        		
 					        	});
 					        	

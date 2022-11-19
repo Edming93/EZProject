@@ -153,28 +153,26 @@
 	/* 모달 */
 	
 	
-	 #modal {
+	  #modal {
             display: none;
             position: absolute;
             top: 30%;
             left: 36%;
             width: 400px;
-            height: 300px;
-            background-color: #b7e1c6;
-            padding: 10px;
+            height: 305px;
+            background-color: #fff;
+            border-radius:25px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px 10px #ddd;
 
         }
 
         #modalout {
             position: absolute;
-            width: 64%;
-    		height: 77%;
+            width: 1024px;
+          	height: 100%;
             background-color: gray;
             display: none;
-        }
-
-        #modal * {
-            /* border: 1px solid black; */
         }
 
         #flist {
@@ -184,6 +182,7 @@
         }
 
         #flist>li {
+            padding-top: 10px;
             display: flex;
             align-items: center;
             width: 100%;
@@ -191,7 +190,7 @@
 
         #flist>li>p {
             width: 120px;
-            font-size: 20px;
+            font-size: 15px;
             height: 30px;
         }
         .listbox{
@@ -200,7 +199,7 @@
             padding: 0;
             /* background-color: white; */
             width: 170px;
-            height: 100px;
+            height: 50px;
             overflow-y: scroll;
             overflow-x: hidden;
             visibility: hidden;
@@ -215,6 +214,22 @@
         .inbox{
         	height: 30px;
         	width: 170px;
+        }
+        #btnbox2{
+        	display: flex;
+    		justify-content: center;
+    		padding-top: 15px;
+        }
+        #btnbox2 * {
+        	background: #26A653;
+        	border: none;
+        	border-radius: 20px;
+        	color:#fff;
+        	width: 50px;
+        	font-size: 15px;
+        	text-align: center;
+        	margin-right: 10px;
+        	
         }
 </style>
 </head>
@@ -263,8 +278,11 @@
                     
                 
             </ul>
-            <button id="addbtn">등록</button>
-            <button id="close">닫기</button>
+            
+            <div id="btnbox2">
+            	<button id="addbtn">등록</button>
+            	<div id="close">닫기</div>
+            </div>
 
     </div>
     

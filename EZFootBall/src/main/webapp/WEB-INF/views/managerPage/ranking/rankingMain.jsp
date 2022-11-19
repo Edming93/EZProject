@@ -8,6 +8,8 @@
 	}
 
 	session.removeAttribute("pagenum");
+	session.removeAttribute("serch");
+	session.removeAttribute("select");
 %>
 <!DOCTYPE html>
 <html lang="en">

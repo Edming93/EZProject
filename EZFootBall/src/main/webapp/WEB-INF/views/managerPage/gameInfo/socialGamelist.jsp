@@ -185,6 +185,8 @@
         .listnum {
         	margin: 0px 7px 0px 7px;
         	cursor: pointer;
+        	text-decoration: none;
+        	color:black;
         }
 
 	
@@ -192,28 +194,26 @@
 	/* 모달 */
 	
 	
-	 #modal {
+	  #modal {
             display: none;
             position: absolute;
             top: 30%;
             left: 36%;
             width: 400px;
-            height: 300px;
-            background-color: #b7e1c6;
-            padding: 10px;
+            height: 350px;
+            background-color: #fff;
+            border-radius:25px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px 10px #ddd;
 
         }
 
         #modalout {
             position: absolute;
-            width: 64%;
-    		height: 77%;
+            width: 1024px;
+          	height: 100%;
             background-color: gray;
             display: none;
-        }
-
-        #modal * {
-            border: 1px solid black;
         }
         
         #ui-datepicker-div{
@@ -221,6 +221,7 @@
         }
         #flist > li {
         	display: flex;
+        	padding-top: 5px;
         }
          #flist > li > p {
          	width: 100px;
@@ -243,42 +244,56 @@
         
         /* 수정 모달 */
          #upmodal {
+            display: none;
             position: absolute;
             top: 30%;
             left: 36%;
             width: 400px;
-            height: 400px;
-            background-color: #b7e1c6;
-            padding: 10px;
-            display: none;
+            height: 350px;
+            background-color: #fff;
+            border-radius:25px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px 10px #ddd;
 
         }
 
         #updiv {
             position: absolute;
-            width: 90%;
-            height: 90%;
+            width: 1024px;
+          	height: 100%;
             background-color: gray;
             display: none;
         }
-
-        #upmodal * {
-            border: 1px solid black;
-        }
         #upul{
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
         #upul > li{
             display: flex;
+        	padding-top: 5px;
         }
         #upul > li > p{
+        	width: 100px;
             padding: 0;
             margin: 0;
         }
         #upul > li > input{
             background: none;
+        }
+        #btnbox2{
+        	display: flex;
+    		justify-content: center;
+    		padding-top: 15px;
+        }
+        #btnbox2 * {
+        	background: #26A653;
+        	border: none;
+        	border-radius: 20px;
+        	color:#fff;
+        	width: 50px;
+        	font-size: 15px;
+        	text-align: center;
+        	margin-right: 10px;
+        	
         }
         
 
@@ -341,15 +356,18 @@
                 <li><p>참가비 : </p> <input type="text" name="gamePay" id="pay" class="inbox" autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
                 
             </ul>
-            <button id="addbtn">등록</button>
+            <div id="btnbox2">
+            	<button id="addbtn">등록</button>
+            	<div id="close">닫기</div>
+            </div>
             </form>
-            <button id="close">닫기</button>
 
     </div>
     
     
 <div id="updiv"></div>
     <div id="upmodal">
+    <h3>게임 수정</h3>
         <form method="post" id="newadd" role="form" action="${pageContext.request.contextPath}/manager/gupdate">
             <ul id="upul">
                 <li><p>경기번호 : </p><input type="text" name="gameCode" id="upcode" readonly></li>
@@ -382,9 +400,11 @@
                 <li><p>신청인원 :</p><input type="text" name="gamePnum" id="upnum" readonly></li>
                 <li><p>매니저 : </p><input type="text" name="gameMag" id="upmag"></li>
             </ul>
-            <button id="upsub">수정</button>
+            <div id="btnbox2">
+            	<button id="upsub">등록</button>
+            	<div id="upcbtn">닫기</div>
+            </div>
         </form>
-        <button id="upcbtn">닫기</button>
     </div> 
     
     
@@ -779,6 +799,9 @@
 		    		  listnum.style.display = "none";
 		    		  nev.append(listnum);
 		    		  if(<%=pagenum%> == 0){
+		    			  if(i==1){
+		    				  listnum.style.color="blue";
+		    			  }
 		    			  if(i<=15){
 		    				  listnum.style.display = "";
 		    			  }
@@ -800,6 +823,9 @@
 		    			  if(i<=15){
 		    				  listnum.style.display = "";
 		    			  }
+		    		  }
+		    		  if(i==<%=pagenum%>){
+		    			  listnum.style.color="blue";
 		    		  }
 		    		  
 		    	  }
@@ -1087,6 +1113,9 @@
 		    		  listnum.style.display = "none";
 		    		  nev.append(listnum);
 		    		  if(<%=pagenum%> == 0){
+		    			  if(i==1){
+		    				  listnum.style.color="blue";
+		    			  }
 		    			  if(i<=15){
 		    				  listnum.style.display = "";
 		    			  }
@@ -1108,6 +1137,9 @@
 		    			  if(i<=15){
 		    				  listnum.style.display = "";
 		    			  }
+		    		  }
+		    		  if(i==<%=pagenum%>){
+		    			  listnum.style.color="blue";
 		    		  }
 		    		  
 		    	  }
@@ -1246,7 +1278,7 @@
 		 var gclist = "gameCode=0";
 		 let ttcnt=0;
 		 let delcnt=0;
-		 for(let i=0; i<<%=gamelist.size()%>; i++){
+		 for(let i=0; i< document.getElementsByClassName("checkbox").length; i++){
 			 if(document.getElementsByClassName("checkbox")[i].checked == true){
 				 console.log(i);
 				 delcnt++;
@@ -1289,7 +1321,7 @@
 		
 		let senum = 0;
 		let sgcode = 0;
-		 for(let i=0; i<<%=gamelist.size()%>; i++){
+		 for(let i=0; i< document.getElementsByClassName("checkbox").length; i++){
 			 if(document.getElementsByClassName("checkbox")[i].checked == true){
 				 senum++;
 				 //sgcode=document.getElementsByClassName("gameCode")[i].innerText;
@@ -1315,10 +1347,10 @@
 			 document.getElementById(ckckck).selected = true; */
 			 /* document.getElementById("uplevel").value = document.getElementsByClassName("level")[sgcode].innerText; */
 			/*  document.getElementById("upmatch").value = document.getElementsByClassName("gameMacth")[sgcode].innerText; */
-			 document.getElementById("upclose").value = document.getElementsByClassName("close")[sgcode].innerText;
-			 document.getElementById("upmin").value = document.getElementsByClassName("gameMinp")[sgcode].innerText;
-			 document.getElementById("upmax").value = document.getElementsByClassName("gameMaxp")[sgcode].innerText;
-			 document.getElementById("upnum").value = document.getElementsByClassName("gamePnum")[sgcode].innerText;
+			 document.getElementById("upclose").value = document.getElementsByClassName("gameClose")[sgcode].innerText;
+			 document.getElementById("upmin").value = document.getElementsByClassName("numMin")[sgcode].innerText;
+			 document.getElementById("upmax").value = document.getElementsByClassName("numMax")[sgcode].innerText;
+			 document.getElementById("upnum").value = document.getElementsByClassName("numP")[sgcode].innerText;
 			 document.getElementById("upmag").value = document.getElementsByClassName("gameMag")[sgcode].innerText;
 			
 			 	 
