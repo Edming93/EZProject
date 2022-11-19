@@ -31,7 +31,6 @@
 }
 
 
-        
         body {
             margin:0;
             box-sizing: border-box;
@@ -44,7 +43,7 @@
         }   
         .social_btn a {
         	text-decoration: none;
-        	color:#fff;
+    		color: #3a3a3a;
         }
         .team_btn a {
         	text-decoration: none;
@@ -52,24 +51,22 @@
         }
         .path {
             fill: none;
-            stroke:rgb(116, 116, 116);
+            stroke:white;
             stroke-width: 3px;
         }
-        .path2 , .path4, .path5, .path6, .path7 {
-            stroke:rgb(116, 116, 116);
+        .pate1, path2 , .path4, .path7 {
+            stroke:white;
         }
 
         .path1 {
             stroke-dasharray: 8578;
             animation: drawPath1 1s linear, floating 2.2s linear infinite;
-            stroke: #fff;
         }
         .path4 {
             animation: floating 2.2s linear infinite;
-            stroke:#fff;
         }
-        .path2, .path7 {
-            stroke:#fff;
+        .path5, .path6 {
+            stroke: #383838;
         }
 
         #container {
@@ -77,7 +74,7 @@
             width:100%;
         }
         .header {
-            background-color: #2980b9;
+            background-color: #2d89c5;
             overflow: hidden;
         }
 
@@ -86,14 +83,24 @@
             background-color: #fff;
         }
         .screen1 {
-            background: -webkit-linear-gradient(to bottom, #2980B9, #6DD5FA, #FFFFFF);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to bottom, #2980B9, #6DD5FA, #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/*             background: -webkit-linear-gradient(to bottom, #2980B9, #6DD5FA, #FFFFFF); */
+/*             background: linear-gradient(to bottom, #2980B9, #6DD5FA, #ffffff); */
+            background: url("image/starterBg/starter_back1.jpg");
+        }
+        .screen2 {
+            background: url("image/starterBg/starter_back2.jpg");
         }
         .screen3 {
-            background: url("image/back1.jpg");
+            background: url("image/starterBg/starter_back3.jpg");
+        }
+        .screen4 {
+            background: url("image/starterBg/starter_back4.jpg");
+        }
+        .screen5 {
+            background: url("image/starterBg/starter_back5.jpg");
         }
         .screen6 {
-            background: url("image/groundback1.jpg");
+            background: url("image/starterBg/groundback1.jpg");
         }
 
 
@@ -125,35 +132,67 @@
             font-weight: bold;   
             font-family: 'BMDOHYEON';
         }
+        
         .title3,.title4, .title5 ,.title6 {
-            color:#000;
+            color: #fff;
         }
         .title4, .title6 {
             color:#fff;
         }
 
-
         .title1, .title3, .title5 {
-            top: 180px;
+    		top: 280px;
             right: 350px;
         }
         .title2, .title4, .title6 {
-            top: 225px;;
-            left: 400px;
+		    top: 280px;
+		    left: 360px;
         }
         
         .title5 {
-            font-size:45px;
+		    font-size: 45px;
+		    color: #fff;
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
         }
-        .title3 {
-            top: 285px;
-    		right: 350px;
+        
+        .title5_content_area {
+        	display: flex;        
+        }
+        .title5_content_left , .title5_content_right {
+			border: 1px solid white;
+		    display: flex;
+		    justify-content: center;
+		    flex-direction: column;
+		    align-items: center;
+		    padding: 12px 28px;
+		    border-radius: 20px;
+		    white-space: nowrap;
+        }
+        .title5_content_left {
+        	margin-right:45px;
+        }
+       
+       .title5_content_bottom {
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+		    margin-top: 45px;
+       		
+       }
+        
+        .title5_top {
+    		margin-left: 100px;
         }
         
         .content {
             margin-top: 25px;
             font-size:20px;
             font-family: 'LeferiPoint-WhiteObliqueA';
+            display: flex;
+    		flex-direction: column;
         }
         .content_margin {
         	margin-top: 50px;
@@ -172,27 +211,28 @@
         }
 
         .btn {
-            width: 250px;
-            height: 30px;
-            font-size: 18px;
-            background: #fff;
-            border-radius: 34px;
-            font-weight: 700;
-            font-family: 'sans-serif';
-            text-align: center;
-            cursor: pointer;
+		    width: 250px;
+		    height: 30px;
+		    font-size: 16px;
+		    background: #fff;
+		    border-radius: 34px;
+		    font-weight: 700;
+		    font-family: 'sans-serif';
+		    text-align: center;
+		    cursor: pointer;
         }
         .social_btn {
-            color:#fff;
-            border: 1px solid #fff;
-            background-color: #8bdefb;
+			color: #fff;
+		    border: 1px solid #fff;
+		    background-color: #ffffff;
         }
         .team_btn {
             color:#000;
             border: 1px solid #000;
         }
         .content span {
-            color:rgb(78, 78, 78);
+		    color: rgb(255 255 255);
+		    font-size: 15px;
         }
 
         .ez_title {
@@ -203,18 +243,19 @@
         }
 
         .mainpage_btn {
-            width: 125px;
-            height: 50px;
-            background-color: transparent;
-            border: 0;
-            border-radius: 25px;
-            box-shadow: 2px 4px 7px 0px #000c;
-            position: fixed;
-            top: 3%;
-            left: 2%;
-            color: white;
-            z-index: 10;
-            cursor: pointer;
+		    width: 115px;
+		    height: 50px;
+		    background-color: transparent;
+		    border: 0;
+		    border-radius: 14px;
+		    box-shadow: 0px 0px 10px 0px #000000cc;
+		    position: fixed;
+		    top: 3%;
+		    left: 2%;
+		    color: white;
+		    z-index: 10;
+		    cursor: pointer;
+		    font-weight: bold;
         }
 
         /* top-down방식 : 아래로 내려가면서 바뀜 1200px->1024px->800px 이하로 줄어들 경우 배경을 바꾸어라 */
@@ -249,7 +290,7 @@
             .btn {
 			    width: 250px;
 			    height: 35px;
-			    font-size: 18px;
+				font-size: 16px;
 			    background: #fff;
 			    border-radius: 34px;
 			    font-weight: 700;
@@ -492,7 +533,7 @@
 
                 <div class="content">
                     <div>레벨 시스템을 기준으로 매칭!</div>
-                    <div>게임시작 30분전에 팀 정보를 알 수 있어요!</div>
+                    <div>게임시작 전에 팀 정보를 알 수 있어요!</div>
                 </div>
 
                 <button class="btn social_btn">
@@ -555,20 +596,23 @@
                 </svg>
             </div>   
             <div class="title title5">
-                <div>소셜 매치를 통해</div>
-                <div>나의 성장을</div>
-                <div>확인하세요!</div>
-
-                <div class="content content_margin">
-                    <div><a href="${pageContext.request.contextPath}/rank/rank">랭킹시스템 확인</a></div>
+            	<div class="title5_top">
+	                <div>소셜 매치를 통해</div>
+	                <div>나의 성장을</div>
+	                <div>확인하세요!</div>
+	                <div class="content content_margin">
+                    	<div><a href="${pageContext.request.contextPath}/rank/rank">랭킹시스템 확인</a></div>
+                	</div>
                 </div>
 
-                <div>레벨을 통해 </div>
-                <div>비슷한 실력의 유저를 </div>
-                <div>만날 수 있어요!</div>
 
-                <div class="content">
-                    <div><a href="${pageContext.request.contextPath}/myPage/rankGuide">레벨시스템 확인</a></div>
+            	<div class="title5_bottom">
+	                <div>레벨을 통해 </div>
+	                <div>비슷한 실력의 유저를 </div>
+	                <div>만날 수 있어요!</div>
+	                <div class="content">
+                    	<div><a href="${pageContext.request.contextPath}/myPage/rankGuide">레벨시스템 확인</a></div>
+                	</div>
                 </div>
             </div>
  
@@ -580,12 +624,20 @@
                 <div>5v5 , 6v6 게임!</div>
 
                 <div class="content">
-                    <div>2팀으로 8쿼터 진행하는 2파전! <span>(3쿼터 후, 1쿼터 휴식)</span></div>
-                    <div>3팀으로 9쿼터 로테이션 진행하는 3파전! <span>(2쿼터 후, 1쿼터 휴식)</span></div>
-                    <br>
-                    <div>골키퍼와 휴식을 공평하게 돌아가면서 해요</div>
-                    <div>한명이 다하면 불공평하잖아요 :)</div>
-
+                	<div class="title5_content_area">
+	                	<div class="title5_content_left">
+		                    <div>2팀, 8쿼터로 진행되는 2파전!</div>
+		                    <span>(3쿼터 후, 1쿼터 휴식)</span>
+	                    </div>
+	                    <div class="title5_content_right">
+		                    <div>3팀, 9쿼터로 로테이션 3파전!</div>
+		                    <span>(2쿼터 후, 1쿼터 휴식)</span>
+	                    </div>
+                    </div>
+                    <div class="title5_content_bottom">
+	                    <div>골키퍼와 휴식을 공평하게 돌아가면서 해요</div>
+	                    <div>한명이 다하면 불공평하잖아요 :)</div>
+                    </div>
                 </div>
             </div>
             <div class="vector_area">
@@ -624,13 +676,9 @@
 
     <script>
         window.onload = function() {
-
-        setTimeout (function () {
-
-        scrollTo(0,0);
-
-        },100);
-
+	        setTimeout (function () {
+	        scrollTo(0,0);
+	        },100);
         }
 
         const content1 = document.querySelector('.screen1');
@@ -720,16 +768,17 @@ var colorIndex = 0;
 var scrollValue = 0;
 
 function changeColor(e) {
-    console.log("scrollTop : " +(window.scrollY || document.documentElement.scrollTop));
+    // console.log("scrollTop : " +(window.scrollY || document.documentElement.scrollTop));
 
     scrollValue += e.deltaY * 0.01;
+    console.log("scrollValue : "+scrollValue);
     if(scrollValue < 0){
         scrollValue = 0;
     }else if(scrollValue > 59){
         scrollValue = 59;
     }
-    if (scrollValue > 19 && scrollValue < 29 || scrollValue >38 && scrollValue <59) { // 내릴때, 8이라는 숫자는
-        mainpage_btn.style.color = "black";
+    if (scrollValue >38 && scrollValue <59) { // 내릴때, 8이라는 숫자는
+        mainpage_btn.style.color = "#565656";
     }else if(scrollValue > 0) {
         mainpage_btn.style.color = "white";
 
