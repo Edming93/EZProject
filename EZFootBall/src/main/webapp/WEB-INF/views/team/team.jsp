@@ -100,6 +100,7 @@
 		    border-radius: 71px;
 		    border: 1px solid #e1e1e1;
 		    color: #c7c7c7;
+		    cursor: pointer;
         }
         .idaydiv{
         }
@@ -239,6 +240,7 @@
     	.select_border {
    			border: 1px solid #A9A9A9;
    			font-size: 12px;
+   			cursor: pointer;
    		}
     	.active {
 		   background-color:#26A653;

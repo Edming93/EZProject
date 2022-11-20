@@ -494,7 +494,7 @@
 						<p>통신판매업 신고 2022-서울강서-0000</p>
 						<p>Copyright EZ ALL rights reserved</p>
 					</div>
-	            	<h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
+<%-- 	            	<h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3> --%>
 	        	</div>
         	</div>
     	</div>
