@@ -51,9 +51,9 @@
     .head{
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
+    padding-left: 8%;
     }
     
     h1{
@@ -73,9 +73,7 @@
 
 
 .sideicon:hover{
-	  transform: scale(1.1);
-	  box-shadow: 0px 10px 48px -4px rgba(0,0,0,0.75);
-      transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+	 cursor: pointer;
 }
 
 th,td{
@@ -88,16 +86,17 @@ td{
 }
 
 .sideicon{
-  			display: flex;
-            position: fixed;
-            right: 100px;
-            width: 120px;
-            height:120px;
-            bottom: 100px;
-            background: #FFFFFF;
-            border-radius: 60px;
-            justify-content: center;
-       		align-items: center;
+  		    display: flex;
+    /* position: fixed; */
+    right: 100px;
+  width: 160px;
+    /* height: 120px; */
+    bottom: 100px;
+    background: #FFFFFF;
+    border-radius: 60px;
+    /* justify-content: center; */
+    align-items: center;
+    margin-left: 25%;
 
 }
 td > a{
@@ -521,13 +520,19 @@ table th {
 	
 		
 	}
+	
+	.asd{
+		display: flex;
+	}
+	
+	#btn2{
+		margin-left: 5%;
+	}
 </style>
 </head>
 <body>
 <div class="container">
-<div class="sideicon">
-			<span><iconify-icon icon="fluent:clipboard-text-edit-20-filled" id="btn1" style="color: #05f;" width="100" height="100"><button>버튼</button></iconify-icon></span>	
-		</div>
+
     <div class="header_container">
         <div class="header_area">
             <div class="header_content">
@@ -614,15 +619,18 @@ table th {
         </div>
 
  	<div id = "div1">
- 	<iconify-icon icon="fluent:pen-24-filled" style="color: #26a563;" width="30" height="30"></iconify-icon>
- 		<div class = "head"><h1>블랙리스트 / 신고게시판</h1>
- 							<h2>악의적인 행동을 반복하는 유저를 신고해주세요</h2>
- 							<form action="${pageContext.request.contextPath}/blacklist/blacklistselect" id="form1" method="post">
- 							 <input type="text" name="blacklistLocal" id="blacklistLocal" placeholder="찾으시는 유저코드를 입력하세요" />
-                        	<button id="chbtn">검색</button>
- 							</form>
+ 		
+ 		<div class = "asd">
+ 		<div class = "head">
+ 		<h1>블랙리스트 / 신고게시판</h1>
+ 		<h2>악의적인 행동을 반복하는 유저를 신고해주세요</h2>
  		</div>
- 	
+ 		<div class="sideicon">
+ 		<iconify-icon icon="fluent:pen-24-filled" id= "btn1" style="color: #26a563;" width="30" height="30"></iconify-icon>
+ 		<span id= "btn2">블랙리스트 등록</span>
+ 		</div>
+ 		</div>
+ 		
 		<div class="containermain">
 		<main>
 			<table>
@@ -746,6 +754,48 @@ table th {
  		});
 	});
 		
+	
+	document.getElementById("btn2").addEventListener("click",function(){
+
+		$.ajax({
+ 			url : "${pageContext.request.contextPath}/loginPage/logincheck",
+ 			type : "GET",
+ 			contentType:"application/json; charset=utf-8",
+ 			dataType : "json",
+ 			data : JSON.stringify(),
+ 			success : function(data){
+ 
+ 				if(data==false){
+ 					Swal.fire({
+ 					   title: '글쓰기를 위해 로그인 해주세요!',
+ 					   text: '로그인 페이지로 이동하시겠습니까?',
+ 					   icon: 'warning',
+ 					   
+ 					   
+ 					   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+ 					   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+ 					   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+ 					   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+ 					   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+ 					   
+	 					   
+ 					   reverseButtons: false, // 버튼 순서 거꾸로
+ 					   
+ 					}).then(result => {
+ 					   // 만약 Promise리턴을 받으면,
+ 					   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+ 					   
+ 						  location.href="${pageContext.request.contextPath}/loginPage/login";
+ 					   	  	
+ 					   }
+ 					});
+ 				} else {
+ 					location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain/setbbs";
+ 				}
+			}
+ 		});
+	});
+	
 	</script>
 
 

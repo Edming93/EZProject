@@ -28,6 +28,16 @@ public class BlacklistPageVO {
 	// 블록 당 페이지
 	private int cntPerBlock;
 
+	private String blacklistLocal;
+	
+	public String getBlacklistLocal() {
+		return blacklistLocal;
+	}
+
+	public void setBlacklistLocal(String blacklistLocal) {
+		this.blacklistLocal = blacklistLocal;
+	}
+
 	public int getNowPage() {
 		return nowPage;
 	}

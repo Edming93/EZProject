@@ -51,8 +51,10 @@ public class BlacklistService {
 	}
 	
 	public void serachBlackList(Model model) {
-
-		model.addAttribute("list", blackDAO.searchBlackList());
+		BlacklistPageVO vo = new BlacklistPageVO();
+		vo.setStart(0);
+		vo.setCntPerPage(15);
+		model.addAttribute("list", blackDAO.searchBlackList(vo));
 		
 	}   
 	

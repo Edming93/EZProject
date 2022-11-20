@@ -43,19 +43,16 @@ public class BlacklistController {
 
 	@PostMapping("/blacklistselect")
 	public String reviewselect(HttpSession session, @RequestParam("blacklistLocal") String blacklistLocal, Model model, BlacklistVO bvo, Criteria cri) {
+
+		UserVO vo = (UserVO) session.getAttribute("sessionVO");
+		model.addAttribute("userdata", vo);
 		bvo.setBlacklistLocal(blacklistLocal);
 		service.serachBlackList(model);
 		
 		
-		UserVO vo = (UserVO) session.getAttribute("sessionVO");
-		model.addAttribute("userdata", vo);
-		
 		model.addAttribute("list", service.getListPaging(cri));
-		
 		 int total = service.getTotal();
-		 
 		 PageMakerVO pageMake = new PageMakerVO(cri, total);
-		 
 		 model.addAttribute("pageMaker", pageMake);
 		
 		return "/blacklist/blacklistmain";
