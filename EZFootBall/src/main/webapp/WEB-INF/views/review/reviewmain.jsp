@@ -431,7 +431,7 @@ font-family: 'Gowun Dodum', sans-serif;
     }
     
     .test2{
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     letter-spacing: 1.5px;
     margin-top: 1%;

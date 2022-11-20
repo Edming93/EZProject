@@ -142,10 +142,13 @@ body{
 }
 
 .insert {
-	grid-area: insert;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+
+    grid-area: insert;
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    margin-left: 8%;
+    justify-content: space-between;
 }
 
 .insert>textarea {
@@ -579,6 +582,10 @@ button{
     #input{
     	display: flex;
     	
+    }
+    #comment{
+    width: 85%;
+    margin-left: 8%;
     }
 </style>
 </head>
