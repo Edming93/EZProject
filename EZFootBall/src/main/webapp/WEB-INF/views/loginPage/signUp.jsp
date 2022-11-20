@@ -7,10 +7,6 @@
     		request.setCharacterEncoding("UTF-8");
     		
     		ArrayList<UserVO> bean = (ArrayList<UserVO>)request.getAttribute("userIdList");
-/*     		for(UserVO i : bean){
-    		System.out.print(i.getUserId() + " ");
-    		}
-    		System.out.println(); */
     %>
 <html>
 <head>
@@ -512,13 +508,11 @@
 			});
 			
 			// 유효성 검사
-		
 			let able_id = document.querySelector(".able_id");
 			let input_id = document.getElementById("input_id");
 			let click_btn = document.getElementById("click_btn");
 			
 			input_id.addEventListener("input",function() {
-				
 	            for (i=0; i<input_id.value.length; i++){
 	            	//문자를 반환(정수형), 범위 검사 가능
 	                   var ch = input_id.value.charAt(i);
@@ -554,8 +548,6 @@
 			});
 			
 
-
-			
 			let input_pw = document.getElementById("input_pw");
 			let input_pwck = document.getElementById("input_pwck");
 			let able_pw = document.querySelector(".able_pw");
@@ -597,16 +589,6 @@
 			
 			
 			sign_up.addEventListener("click",function(){
-			console.log("가입하기 버튼 누늘면 :"+email);
-			console.log(form_ck.userEmail1.value.trim()+form_ck.userEmail2.value.trim());
-// 		    	var pattern_num = /[0-9]/;	// 숫자 
-		
-// 		    	var pattern_eng = /[a-zA-Z]/;	// 문자 
-		
-// 		    	var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-		
-// 		    	var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
-		
 				<% for(UserVO i : bean) { %>
 				
 					if(input_id.value == ''){

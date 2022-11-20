@@ -826,19 +826,14 @@
         const path6Length = path6.getTotalLength();
         path1.style.strokeDasharray  = path1Length + ' ' + path1Length;
         path1.style.strokeDashoffset = calcDashoffset(window.innerHeight * 0.8, content1, path1Length);
-        
         path2.style.strokeDasharray  = path2Length + ' ' + path2Length;
         path2.style.strokeDashoffset = path2Length;
-        
         path3.style.strokeDasharray  = path3Length + ' ' + path3Length;
         path3.style.strokeDashoffset = calcDashoffset(window.innerHeight * 0.8, content3, path3Length);
-
         path4.style.strokeDasharray  = path4Length + ' ' + path4Length;
         path4.style.strokeDashoffset = path4Length;
-
         path5.style.strokeDasharray  = path5Length + ' ' + path5Length;
         path5.style.strokeDashoffset = path5Length;
-
         path6.style.strokeDasharray  = path6Length + ' ' + path6Length;
         path6.style.strokeDashoffset = path6Length;
   
@@ -852,7 +847,6 @@
             const ratio = (scrollY - element.offsetTop-200) / element.offsetHeight;
             const value = length - (length * ratio);
             return value < 0 ? 0 : value > length ? length : value;
-
         }
           const ratio = (scrollY - element.offsetTop) / element.offsetHeight;
           const value = length - (length * ratio);
@@ -869,10 +863,8 @@
           path5.style.strokeDashoffset = calcDashoffset(scrollY, content5, path5Length);
           path6.style.strokeDashoffset = calcDashoffset(scrollY2, content6, path6Length);
         }
-  
         window.addEventListener('scroll', scrollHandler);
-
-
+        // 배경색이 바뀜에 따라 로고 글자색 변화주기 (어두운 배경일 경우 white, 밝은 배경일 경우 black)
         window.addEventListener("scroll", function() {
             let mainpage_btn = document.querySelector(".mainpage_btn");
             let screen = document.querySelectorAll(".screen");
@@ -883,49 +875,32 @@
                 };
             });
         })
-
-var wrapper = document.querySelector('.screen2');
-let mainpage_btn = document.querySelector(".mainpage_btn");
-
-document.onwheel = changeColor;
-
-var colorIndex = 0;
-var scrollValue = 0;
-
-function changeColor(e) {
-    // console.log("scrollTop : " +(window.scrollY || document.documentElement.scrollTop));
-
-    scrollValue += e.deltaY * 0.01;
-    console.log("scrollValue : "+scrollValue);
-    if(scrollValue < 0){
-        scrollValue = 0;
-    }else if(scrollValue > 59){
-        scrollValue = 59;
-    }
-    if (scrollValue >38 && scrollValue <59) { // 내릴때, 8이라는 숫자는
-        mainpage_btn.style.color = "#565656";
-    }else if(scrollValue > 0) {
-        mainpage_btn.style.color = "white";
-
-    }
-
-
-    // let location = window.scrollY ||document.documentElement.scrollTop;
-
-    // if(location > 1700 && location < 2800 || location >3900 && location <= 5700){
-    //     mainpage_btn.style.color = "black";
-    // }else {
-    //     mainpage_btn.style.color = "white";
-    // }
-
- }
-
- mainpage_btn.addEventListener("click",function() {
-    location.href="${pageContext.request.contextPath}/home";
-
- });
-
-
+		var wrapper = document.querySelector('.screen2');
+		let mainpage_btn = document.querySelector(".mainpage_btn");
+		document.onwheel = changeColor;
+		
+		var colorIndex = 0;
+		var scrollValue = 0;
+		
+		function changeColor(e) {
+		    scrollValue += e.deltaY * 0.01;
+		    console.log("scrollValue : "+scrollValue);
+		    if(scrollValue < 0){
+		        scrollValue = 0;
+		    }else if(scrollValue > 59){
+		        scrollValue = 59;
+		    }
+		    if (scrollValue >38 && scrollValue <59) { // 내릴때, 8이라는 숫자는
+		        mainpage_btn.style.color = "#565656";
+		    }else if(scrollValue > 0) {
+		        mainpage_btn.style.color = "white";
+		    }
+		 }
+		
+		 mainpage_btn.addEventListener("click",function() {
+		    location.href="${pageContext.request.contextPath}/home";
+		
+		 });
     </script>
 </body>
 </html>

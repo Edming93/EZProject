@@ -17,8 +17,7 @@ public class MailSendService {
 	@Autowired
 	private JavaMailSenderImpl mailSender;
 	private int authNumber; 
-	// 난수 발생(여러분들 맘대러)
-	
+	// 난수 발생
 		public void makeRandomNumber() {
 			// 난수의 범위 111111 ~ 999999 (6자리 난수)
 			Random r = new Random();
@@ -28,7 +27,7 @@ public class MailSendService {
 			authNumber = checkNum;
 		}
 	
-				//이메일 보낼 양식! 
+		//이메일 보낼 양식! 
 		public String joinEmail(String email) {
 			makeRandomNumber();
 			String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
@@ -51,14 +50,8 @@ public class MailSendService {
 			String subject = "이지풋볼 인증번호 입니다";
 			
 			// 보내는 사람
-			String from = "dragon695@naver.com";
+			String from = "gd52smtp@naver.com";
 			
-			// 받는 사람
-//			String[] to = new String[1];
-//			to[0] = toMail;
-//			to[1] = "mute3489@naver.com";
-			
-//			System.out.println("to에 이메일 들어와? : " +to[0]);
 			try {
 				// 메일 내용 넣을 객체와, 이를 도와주는 Helper 객체 생성
 				MimeMessage mail = mailSender.createMimeMessage();

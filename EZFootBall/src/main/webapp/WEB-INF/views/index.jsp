@@ -233,6 +233,74 @@
     }
 
 
+.page_container {
+	position: relative;
+	display: grid;
+	height: 100%;
+	max-height: 100%;
+	cursor: default;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.pagination-area {
+	position: absolute;
+	bottom: 35px;
+}
+
+.pagination_controller {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+	width: 135px;
+	height: 36px;
+	font-size: .875rem;
+	color: #fff;
+	border-radius: 20px;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.index_num {
+	margin-right: auto;
+}
+
+.control_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 50px;
+}
+
+.control_previous_button, .control_play_pause_button,
+	.control_next_button {
+	padding: 0;
+	background: none;
+	border: 0;
+	color: #fff;
+	cursor: pointer;
+}
+
+.control_play_pause_button {
+	display: flex;
+	align-items: center;
+	max-height: 10px;
+}
+
+.fa-pause {
+	display: block;
+	font-size: 12px;
+}
+
+.fa-play {
+	display: none;
+}
+
+
+
+
+
     .match_list_container {
 	    width: 100%;
 	    height: 100%;
@@ -494,7 +562,7 @@
 						<p>통신판매업 신고 2022-서울강서-0000</p>
 						<p>Copyright EZ ALL rights reserved</p>
 					</div>
-<%-- 	            	<h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3> --%>
+	            	<h3 class="managermove"><a href="${pageContext.request.contextPath}/admin/admin">관리자페이지 이동</a></h3>
 	        	</div>
         	</div>
     	</div>
