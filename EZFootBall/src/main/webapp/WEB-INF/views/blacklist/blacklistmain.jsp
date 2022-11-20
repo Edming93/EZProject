@@ -612,9 +612,7 @@ table th {
 
     <div class="banner_container">
             <div class="banner_content_area">
-                <div class="banner_content">
-                    <img class="banner_image" src="../image/Reviewbanner.png" alt="">
-                </div>
+               
             </div>
         </div>
 
