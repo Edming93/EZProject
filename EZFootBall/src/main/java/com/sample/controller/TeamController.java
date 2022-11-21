@@ -489,7 +489,8 @@ public class TeamController {
 		service.outmem(nvo);
 		service.outabil(Integer.parseInt(userCode));
 		service.outinfo(Integer.parseInt(userCode));
-		session.setAttribute("sessionVO", service.userVO(Integer.parseInt(userCode)));
+		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
+		session.setAttribute("sessionVO", service.userVO(uvo.getUserCode()));
 		
 		return "redirect:/myPage/myPage";
 	}
