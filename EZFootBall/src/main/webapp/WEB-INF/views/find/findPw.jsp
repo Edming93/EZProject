@@ -86,13 +86,10 @@
 .main_title{
 	display: block;
 	width: 100%;
-/* 	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat; */
-/* 	background-size: contain; */
 	padding: 10px 0;
 	margin: 20px 0;
 	align-self: end;
 	text-align: center;
-/* 	text-indent: -9999px; */
 }
 
 #main_container {
@@ -100,28 +97,21 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
 }
 
 .main_area {
  	display:flex;
     width: 1024px;
     height: 900px;
-/*     background-color: #ffaaaa; */
     justify-content: space-evenly;
-/*     align-items: center; */
     flex-wrap: wrap;
-/*     border: 1px solid black; */
 }
 
 .main_content1 {
  	display: flex;
  	flex-direction: column; 
 	width: 40%;
-	/* height: 98%; */
 	height:50%;
-/* 	justify-content: center; */
-/* 	background-color: #fff; */
 }
 
 #btnbox{
@@ -241,12 +231,10 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -287,8 +275,6 @@ footer {
     	<div class="title"> 아이디</div> 
         <div><input class="input" id="userId" type="text" name="userId" method="post" autofocus required></div>
         <span class="able able_id"></span>
-    	<!-- <label for="email">이메일</label>
-    	<input type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)?$/i"><br /> -->
     	<div class="form_group email_form">
 			<div class="title">이메일</div>
 				<div class="email_group">
@@ -341,14 +327,12 @@ footer {
 			email_1 = $('#userEmail1').val();
 			email_2 = $('#userEmail2').val();
 			email = email_1 + email_2;
-			console.log('완성된 이메일 : ' + email_1 + email_2); // 이메일 오는지 확인
 			const checkInput = $('.mail_check_input'); // 인증번호 입력하는곳 
 			
 			$.ajax({
 				type : 'get',
 				url: "${pageContext.request.contextPath}/loginPage/mailCheck2?email1="+email_1+"&email2="+email_2+"&userId="+userId,
 				success : function (data) {
-					console.log("data : " +  data);
 					if(data == 0){
 						alert('가입하신 정보가 맞지 않습니다. '+'확인후 다시 입력해주세요');
 						return;
@@ -374,7 +358,6 @@ footer {
 			
 			if(inputCode === code){
 				email1 = $('#userEmail1').val() + $('#userEmail2').val();
-				console.log(email1);
 				if(email1 == email || email1 == undefined){
 				
 					$resultMsg.html('인증번호가 일치합니다.');
@@ -387,8 +370,6 @@ footer {
 			        
 					$('#userEmail1').bind('input',function() {
 						email1 = $('#userEmail1').val() + $('#userEmail2').val();
-						console.log("email: "+email +" email1: "+email1);
-						console.log(email != email1);
 						if(email != email1){
 							$resultMsg.html('이메일 아이디가 불일치 합니다. 다시 확인해주세요!.');
 							$resultMsg.css('color','red');
@@ -414,7 +395,6 @@ footer {
 						'이메일과 인증번호를 다시 확인해주세요!',
 						'warning'
 				)
-				/* alert("이메일과 인증번호를 확인해주세요!"); */
 				return;
 			}else if($('#userId').val() != userId){
 				Swal.fire(
@@ -422,7 +402,6 @@ footer {
 						'아이디를 알맞게 다시 입력해주세요.',
 						'warning'
 				)
-				/* alert("아이디가 불일치합니다 다시 입력해주세요"); */
 				return;
 			}else{
 				$('#form1').submit();

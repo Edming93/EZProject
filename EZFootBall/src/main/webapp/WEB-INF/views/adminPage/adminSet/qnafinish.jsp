@@ -43,7 +43,6 @@
 	background-color: #26a563;
 	border: none;
 	border-radius: 10px;
-/* 	width: 45%; */
 	min-width:45px;
 	cursor: pointer;
 }
@@ -162,10 +161,6 @@
     resize: none;
 }
 
-/* .select_box { */
-/* 	align-self: flex-end; */
-/* } */
-
 .btn_box button, #add {
 	display: inline-block;
 	width: 40%;
@@ -190,13 +185,6 @@
 </style>
 <body>
 	<div id="main_controller">
-<!-- 		<section class="select_box"> -->
-<!-- 			<select class="state"> -->
-<!-- 				<option value="전체상태">전체상태</option> -->
-<!-- 				<option value="답변대기">답변대기</option> -->
-<!-- 				<option value="답변완료">답변완료</option> -->
-<!-- 			</select> -->
-<!-- 		</section> -->
 		<c:if test="${detail eq null }">
 		<div class="header_box">
 				<div class="search_bar">
@@ -237,21 +225,6 @@
 						if('${list.inquiryState}' == '답변대기'){
 		        			$('.inquiry_item${list.inquiryCode}').hide();
 		        		}
-						
-// 						$('.state').on("change", function(){
-// 							$('.inquiry_item${list.inquiryCode}').show();
-// 				        	if($('.state').val() == "답변대기"){
-// 				        		if('${list.inquiryState}' == '답변완료'){
-// 				        			$('.inquiry_item${list.inquiryCode}').hide();
-// 				        		}
-// 				        	}else if($('.state').val() == "답변완료"){
-// 				        		if('${list.inquiryState}' == '답변대기'){
-// 				        			$('.inquiry_item${list.inquiryCode}').hide();
-// 				        		}
-// 				        	}else{
-// 				        		$('.inquiry_item${list.inquiryCode}').show();
-// 				        	}
-// 			        	});
 					</script>
 				</c:forEach>
 
@@ -283,7 +256,7 @@
 						</section>
 					</div>
 				</div>
-				<!-- 관리자 답변 들어갈곳 -->
+
 				<c:if test="${inquiryVO.inquiryState eq '답변완료'}">
 					<div class="main_item2">
 						<div class="detail_header">

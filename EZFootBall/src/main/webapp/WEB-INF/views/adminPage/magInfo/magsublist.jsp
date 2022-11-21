@@ -33,7 +33,6 @@
 	    background-color: #26a563;
 	    border: none;
 	    border-radius: 10px;
-/* 	    width: 45%; */
 	    cursor: pointer;
 	    min-width: 50px;
  	    font-size: 12px;
@@ -79,7 +78,6 @@
 				<th>신청일</th>
 				<th>유저코드</th>
 				<th>유저이름</th>
-<!-- 				<th>문의상태</th> -->
 			</tr>
 			<c:forEach var="list" items="${managerVO}">
 			<tr class="item_box">
@@ -90,7 +88,6 @@
 				<td>${list.mgrDate}</td>
 				<td>${list.userCode}</td>
 				<td>${list.userName}</td>
-<%-- 				<td>${list.mgrState}</td> --%>
 			</tr>				
 			</c:forEach>
 		</table>

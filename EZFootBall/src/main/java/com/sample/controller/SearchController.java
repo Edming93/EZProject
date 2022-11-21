@@ -33,13 +33,11 @@ public class SearchController {
 	public List<SearchVO> searchBar(SearchVO searchVO, Model model) {
 		List<SearchVO> list = searchService.selectList();
 		model.addAttribute("list", list);
-//		System.out.println("list : " + list.get(0).getFieldName());
 		return list;
 	}
 
 	@GetMapping("/stadium/{id}")
 	public String stadium(@PathVariable("id") int id, Model model) {
-
 		searchService.fieldNum(model, id);
 		return "/search/result";
 	}
@@ -56,7 +54,6 @@ public class SearchController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		if (uvo != null) {
 			recentVO.setUserCode(uvo.getUserCode());
-//			System.out.println("받아오기: " + recentVO.getUserCode());
 		} else {
 			recentVO.setUserCode(0);
 		}
@@ -69,7 +66,6 @@ public class SearchController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		if (uvo != null) {
 			recentVO.setUserCode(uvo.getUserCode());
-//			System.out.println("post :" + recentVO.getSearchData());
 		} else {
 			recentVO.setUserCode(0);
 		}
@@ -82,7 +78,6 @@ public class SearchController {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		if (uvo != null) {
 			recentVO.setUserCode(uvo.getUserCode());
-//			System.out.println("post :" + recentVO.getSearchData());
 		} else {
 			recentVO.setUserCode(0);
 		}
@@ -92,25 +87,6 @@ public class SearchController {
 	@PostMapping("/recent_list")
 	@ResponseBody
 	public List<SearchVO> setSearch(@RequestBody SearchVO searchVO) {
-
-		/*
-		 * System.out.println("post :" + searchDataVO.getSearchText());
-		 * 
-		 * System.out.println("return1 : " + searchService.SearchAll(searchDataVO));
-		 * System.out.println("return2 : " +
-		 * searchService.SearchAll(searchDataVO).get(0).getFieldName());
-		 */
-
 		return searchService.SearchAll(searchVO);
 	}
-
-	/*
-	 * @GetMapping("/recent_list")
-	 * 
-	 * @ResponseBody public List<SearchDataVO> getSearchAll() {
-	 * System.out.println("get :" +
-	 * searchService.getSearchList().get(0).getFieldName()); return
-	 * searchService.getSearchList(); }
-	 */
-
 }

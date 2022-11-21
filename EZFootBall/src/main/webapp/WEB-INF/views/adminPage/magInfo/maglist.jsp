@@ -45,7 +45,6 @@
 	
 	.btn_box{
 		width:15%;
-/* 		align-self: flex-end; */
 	}
 	
 	.btn{
@@ -54,7 +53,6 @@
 	    background-color: #26a563;
 	    border: none;
 	    border-radius: 10px;
-/* 	    width: 45%; */
 	    min-width:45px;
 	    cursor: pointer;
 	    font-size: 12px;
@@ -125,10 +123,6 @@
 		background: #fff;
 		cursor: pointer;
 	}
-	
-/* 	.select_box{ */
-/* 		align-self: flex-end; */
-/* 	} */
 	
 </style>
 <body>

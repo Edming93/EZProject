@@ -31,9 +31,6 @@
 		FROM inquiry AS i INNER JOIN user_info AS u
 		ON i.user_code = u.user_code
 		WHERE NOT inquiry_code = ""
-<!-- 			<if test="inquiryState != null"> -->
-<!-- 				AND inquiry_state = #{inquiryState} -->
-<!-- 			</if> -->
 			<if test="inquiryCode != 0 and inquiryCode != null">
 				AND inquiry_code like concat('%',#{inquiryCode},'%')
 			</if>

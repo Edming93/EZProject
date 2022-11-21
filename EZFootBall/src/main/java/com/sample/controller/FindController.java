@@ -52,18 +52,13 @@ public class FindController {
 	@PostMapping("/searchPw")
 	public String searchPw(UserVO userVO, HttpSession session) {
 		session.setAttribute("userVO", findService.searchUser2(userVO));
-		System.out.println(findService.searchUser2(userVO).getUserId());
 		return "/find/searchPw";
 	}
 
 	@PostMapping("/newPw")
 	public String newPw(UserVO userVO, String pw1, String pw2, HttpSession session) {
 		userVO = (UserVO) session.getAttribute("userVO");
-		System.out.println("id : " + userVO.getUserId());
 		userVO.setUserPw(pw1);
-		System.out.println("pw1 : " + pw1);
-		System.out.println("pw2 : " + pw2);
-		System.out.println(userVO.getUserPw());
 		findService.setPassword(userVO);
 		return "/loginPage/login";
 	}

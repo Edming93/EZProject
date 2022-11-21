@@ -64,11 +64,7 @@ public class MyPageController {
 	@GetMapping("myPage")
 	public String move(UserVO userVO, UinVO uinVO, HttpSession session, Model model) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
-//		int userCode = userVO.getUserCode();
-//		System.out.println("useCode ::: " + userCode);
 		uinVO = uinService.getUserAbil(userVO.getUserCode());
-//		System.out.println("level : " + uinVO.getUserLevel());
-//		System.out.println("controller : " + uinService.getUserAbil(userCode).getUserGroup());
 		model.addAttribute("uinVO", uinVO);
 		model.addAttribute("userVO", userVO);
 
@@ -87,17 +83,9 @@ public class MyPageController {
 			@RequestParam("new_pw1") String pw1, Model model) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
 		userVO.setUserPw(loginService.encryptSHA256(userVO.getUserPw()));
-		System.out.println("pwpwpw : " + userVO.getUserPw());
-		
-		
-//		System.out.println("pwpwpwpw : " + pw1);
-//		if (userVO.getUserPw().equals(pw)) {
 		userVO.setUserPw(loginService.encryptSHA256(pw1));
 		findService.setPassword(userVO);
 		return "redirect:/myPage/myPage";
-//		} else {
-//			return "redirect:/myPage/changePw";
-//		}
 	}
 
 	// 현재비밀번호 비교
@@ -149,7 +137,6 @@ public class MyPageController {
 	@ResponseBody
 	public Map<String, Object> getRentalList(UserVO userVO, HttpSession session, Model model) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
-		System.out.println("구장예약자 이름 : " + userVO.getUserName() + userVO.getUserCode());
 		int userCode = userVO.getUserCode();
 		Map<String, Object> map = new HashMap<>();
 		List<FieldReservationVO> list = rentalService.getFieldReservationVO(userCode);
@@ -160,19 +147,16 @@ public class MyPageController {
 
 	@GetMapping("/guide1")
 	public String guide1() {
-
 		return "/myPage/guide1";
 	}
 
 	@GetMapping("/notice")
 	public String notice() {
-
 		return "/myPage/notice";
 	}
 
 	@GetMapping("/rankGuide")
 	public String rankGuide() {
-
 		return "/myPage/rankGuide";
 	}
 
@@ -199,7 +183,6 @@ public class MyPageController {
 
 	@GetMapping("/inquiry_detail/{inquiryCode}")
 	public String inquiryDetail(@PathVariable("inquiryCode") String inquiryCode, InquiryVO inquiryVO, Model model) {
-		System.out.println("dkdkdkkd" + inquiryCode);
 		inquiryVO.setInquiryCode(Integer.parseInt(inquiryCode));
 		model.addAttribute("inquiryVO", inquiryService.inquiryDetail(inquiryVO));
 		return "/myPage/inquiry_detail";
@@ -222,23 +205,12 @@ public class MyPageController {
 		return "redirect:/myPage/inquiry";
 	}
 
-//	@ResponseBody
-//	@GetMapping("/inquiry_list")
-//	public List<InquiryVO> inquiryList(HttpSession session, InquiryVO inquiryVO) {
-//		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
-//		inquiryVO.setUserCode(uvo.getUserCode());
-//		List<InquiryVO> list = inquiryService.inquiryAll(inquiryVO);
-//
-//		return list;
-//	}
-
 	@GetMapping("/manager")
 	public String manager(HttpSession session, Model model, ManagerVO managerVO) {
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		int UserCode = uvo.getUserCode();
 		managerVO = managerService.isManager(UserCode);
 		List<GameFieldInfoVO> list = managerService.getGameFieldInfo();
-		System.out.println("manager :::" + managerVO);
 		if (managerVO != null) {
 			model.addAttribute("managerVO", managerVO);
 		}
@@ -250,10 +222,8 @@ public class MyPageController {
 	@PostMapping("/manager_app")
 	public String managerApp(@RequestParam("area") String fieldName, @RequestParam("manager_content") String content,
 			HttpSession session, ManagerVO managerVO) {
-		System.out.println("content : " + content);
 		managerVO.setPreferArea(fieldName);
 		managerVO.setFieldCode(managerService.getFieldCode(fieldName));
-		System.out.println(managerVO.getFieldCode());
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		managerVO.setUserCode(uvo.getUserCode());
 		managerVO.setMgrContent(content);
@@ -265,8 +235,6 @@ public class MyPageController {
 	@PostMapping("/refund")
 	@ResponseBody
 	public int refund(@RequestBody FieldReservationVO fieldReservationVO, HttpSession session) {
-		System.out.println("환불");
-		System.out.println(fieldReservationVO.getRvCode());
 		rentalService.refund(fieldReservationVO.getRvCode());
 		return 1;
 	}
@@ -285,7 +253,6 @@ public class MyPageController {
 			String userLocal, String userDistrict, String userAddress1, String userAddress2, String userBirthYear,
 			String userBirthMonth, String userBirthDay, String userGender, UserVO userVO, HttpSession session) {
 		userVO = (UserVO) session.getAttribute("sessionVO");
-		System.out.println(userVO.getUserCode());
 		userVO.setUserName(userName);
 		userVO.setUserId(userId);
 		userVO.setUserEmail1(userEmail1);
@@ -295,7 +262,6 @@ public class MyPageController {
 		userVO.setUserAddress(userAddress1 + "," + userAddress2);
 		userVO.setUserBirth(userBirthYear + "-" + userBirthMonth + "-" + userBirthDay);
 		userVO.setUserGender(userGender);
-//		session.setAttribute("sessionVO", userVO);
 		infoService.changeUserinfo(userVO);
 		return "redirect:/myPage/myPage";
 	}
@@ -308,11 +274,10 @@ public class MyPageController {
 		return mailService.joinEmail(email);
 
 	}
-	
 
 	@PostMapping("/teamselect")
 	@ResponseBody
-	public UinVO teamselect (@RequestBody UinVO vo) {
+	public UinVO teamselect(@RequestBody UinVO vo) {
 		return glistService.teamselect(vo.getUserCode());
 	}
 }

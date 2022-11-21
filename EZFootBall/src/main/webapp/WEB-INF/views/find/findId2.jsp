@@ -49,21 +49,18 @@
 			email_1 = $('#userEmail1').val();
 			email_2 = $('#userEmail2').val();
 			email = email_1 + email_2;
-			console.log('완성된 이메일 : ' + email_1 + email_2); // 이메일 오는지 확인
 			const checkInput = $('.mail_check_input'); // 인증번호 입력하는곳 
 			
 			$.ajax({
 				type : 'get',
 				url: "${pageContext.request.contextPath}/loginPage/mailCheck1?email1="+email_1+"&email2="+email_2+"&name="+name,
 				success : function (data) {
-					console.log("data : " +  data);
 					if(data == 0){
 						Swal.fire(
 							'가입정보가 일치하지 않습니다.',
 							'가입자의 이름과 이메일을 확인 후 다시 입력해주세요!',
 							'warning'
 						)
-						/* alert('가입하신 정보의 아이디가 없습니다. '+'확인후 다시 입력해주세요'); */
 						return;
 					}
 					checkInput.attr('disabled',false);
@@ -87,7 +84,6 @@
 			
 			if(inputCode === code){
 				email1 = $('#userEmail1').val() + $('#userEmail2').val();
-				console.log(email1);
 				if(email1 == email || email1 == undefined){
 				
 					$resultMsg.html('인증번호가 일치합니다.');
@@ -100,8 +96,6 @@
 			        
 					$('#userEmail1').bind('input',function() {
 						email1 = $('#userEmail1').val() + $('#userEmail2').val();
-						console.log("email: "+email +" email1: "+email1);
-						console.log(email != email1);
 						if(email != email1){
 							$resultMsg.html('이메일 아이디가 불일치 합니다. 다시 확인해주세요!.');
 							$resultMsg.css('color','red');
@@ -127,7 +121,6 @@
 						'이메일과 인증번호를 다시 확인해주세요!',
 						'warning'
 				)
-				/* alert("이메일과 인증번호를 확인해주세요!"); */
 				return;
 			}else if($('#userName').val() != name){
 				Swal.fire(
@@ -135,7 +128,6 @@
 						'이름을 알맞게 다시 입력해주세요.',
 						'warning'
 				)
-				/* alert("이름이 불일치합니다 다시 입력해주세요"); */
 				return;
 			}else{
 				$('#form1').submit();

@@ -15,7 +15,5 @@
 		<button>로그인</button>
 	</form>
 	<a href="${pageContext.request.contextPath}/findInfo">ID/PW찾기</a>
-	<%-- <a href="${pageContext.request.contextPath}/Searchid">아이디 찾기</a><br />
-	<a href="${pageContext.request.contextPath}/Searchpw">비밀번호 찾기</a><br /> --%>
 </body>
 </html>
