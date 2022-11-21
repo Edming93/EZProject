@@ -626,11 +626,20 @@
                  msg += '상점 거래ID : ' + rsp.merchant_uid;
                  msg += '결제 금액 : ' + rsp.paid_amount;
                  msg += '카드 승인번호 : ' + rsp.apply_num;
+                 
+                 if (rsp.apply_num == '' || rsp.apply_num == null){
+                	 
+                	 rsp.apply_num = "0";
+                }else{
+                	 rsp.apply_num = rsp.apply_num;
+                }
+                 console.log(rsp.apply_num);
 
             	/* 구장예약 , 매치내역경로 이동 */
             	/* 임시경로 설정 */
              	if(${sessionScope.GlistVO.gameType eq 'T'}) { // 팀매치 예약일 경우
             		alert(msg);
+             		
             		location.href ="${pageContext.request.contextPath}/rental/resultTeam?payCode="+rsp.imp_uid+"&storeCode="+rsp.merchant_uid+"&userPayment="+rsp.paid_amount+"&cardCode="+rsp.apply_num;
             	}else { // 구장예약일 경우
 //                   	location.href = "${pageContext.request.contextPath}/rental/resultField?fieldCode=${field.fieldCode}"+

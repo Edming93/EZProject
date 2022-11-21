@@ -387,42 +387,41 @@
 	
 	<!-- 블랙리스트 만들때 동시에 일어나는 기능 -->
 	<!-- 1. field_reservation rv.state '예약취소' 업데이트 -->
-	<update id="UpdateFRstate">
-		update field_reservation
-		set rv_state = '예약취소'
-		where user_code = #{userCode}
-	</update>
+<!-- 	<update id="UpdateFRstate"> -->
+<!-- 		update field_reservation -->
+<!-- 		set rv_state = '예약취소' -->
+<!-- 		where user_code = #{userCode} -->
+<!-- 	</update> -->
 	<!-- 2.game_list pnum-1, false > true update -->
-	<update id="UpdateGLPnum">
-		UPDATE gamelist AS a INNER JOIN game_result AS b
-		ON a.game_code = b.game_code
-		SET a.game_pnum = a.game_pnum-1
-		WHERE b.user_code = #{userCode}
-	</update>
+<!-- 	<update id="UpdateGLPnum"> -->
+<!-- 		UPDATE gamelist AS a INNER JOIN game_result AS b -->
+<!-- 		ON a.game_code = b.game_code -->
+<!-- 		SET a.game_pnum = a.game_pnum-1 -->
+<!-- 		WHERE b.user_code = #{userCode} -->
+<!-- 	</update> -->
 	
-	<update id="UpdateGLClose" parameterType="int">
-		UPDATE gamelist AS a INNER JOIN game_result AS b
-		ON a.game_code = b.game_code
-		<set> 
-			<if test="userCode != null">
-				a.close = 'true'
-			</if>
+<!-- 	<update id="UpdateGLClose" parameterType="int"> -->
+<!-- 		UPDATE gamelist AS a INNER JOIN game_result AS b -->
+<!-- 		ON a.game_code = b.game_code -->
+<!-- 		<set>  -->
+<!-- 			<if test="userCode != null"> -->
+<!-- 				a.close = 'true' -->
+<!-- 			</if> -->
 			
-		</set>	
-		WHERE b.user_code = #{userCode} and a.close = 'false'
-	</update>
+<!-- 		</set>	 -->
+<!-- 		WHERE b.user_code = #{userCode} and a.close = 'false' -->
+<!-- 	</update> -->
 	
 	<!-- 3.game_sjoinlist 삭제 -->
-	<delete id="DeleteGSList">
-		delete from game_sjoinlist
-		where user_code = #{userCode}
-	</delete>
-	<!-- 4.game_result 삭제 -->
-	<delete id="DeleteGR">
-		delete from game_result
-		where user_code = #{userCode}
-	</delete>
-	
+<!-- 	<delete id="DeleteGSList"> -->
+<!-- 		delete from game_sjoinlist -->
+<!-- 		where user_code = #{userCode} -->
+<!-- 	</delete> -->
+ 	<!-- 4.game_result 삭제 --> 
+<!-- 	<delete id="DeleteGR"> -->
+<!-- 		delete from game_result -->
+<!-- 		where user_code = #{userCode} -->
+<!-- 	</delete> -->
 	
 	<!-- 블랙리스트 유저 복귀  -->
 	<update id="RUInfoList">

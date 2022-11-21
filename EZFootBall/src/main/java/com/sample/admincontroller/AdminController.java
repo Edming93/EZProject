@@ -202,13 +202,6 @@ public class AdminController {
 				vo.setUserCode(userCode);
 				service.UUInfoList(userCode);
 
-				service.UpdateFRstate(userCode);
-				service.UpdateGLPnum(userCode);
-				service.UpdateGLClose(userCode);
-				service.DeleteGR(userCode);
-
-				service.DeleteGSList(userCode);
-
 			}
 			result = 1;
 		}
@@ -514,7 +507,8 @@ public class AdminController {
 				if (!file.getOriginalFilename().isEmpty() || file.getOriginalFilename() != null) {
 					// 해당 파일의 이름을 첨부한 상태로 저장하겠다.
 					Path path = Paths
-							.get("C:/Users/GDJ 52/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
+							//.get("C:/Users/GDJ 52/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
+							.get("C:/Users/에드밍/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
 									+ file.getOriginalFilename());
 					file.transferTo(path);
 					imglist.add(file.getOriginalFilename());

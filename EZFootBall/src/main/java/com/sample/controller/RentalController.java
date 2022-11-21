@@ -169,6 +169,7 @@ public class RentalController {
 			Tservice.matchInfo(gvo);
 		session.setAttribute("GlistVO", gvo);
 		
+
 			
 		FieldReservationVO rvo1 = (FieldReservationVO)session.getAttribute("FRVO");
 		
@@ -186,7 +187,11 @@ public class RentalController {
 		rvo1.setTeamCode(Tnum);
 		rvo1.setPayCode(rvo.getPayCode());
 		rvo1.setStoreCode(rvo.getStoreCode());
-		rvo1.setCardCode(rvo.getCardCode());
+		if(rvo.getCardCode() == 0) {
+			rvo1.setCardCode(0);
+		}else if(rvo.getCardCode() > 0) {
+			rvo1.setCardCode(rvo.getCardCode());
+		}
 
 		Tservice.insertFieldRVT(rvo1);
 		

@@ -179,8 +179,8 @@
                 <label for="field_type">구장형태 : </label>
                 <select name="fieldType" id="field_type" class="select" required="required">
                 	<option id="default" value="5v5">구장형태 선택</option>
-                    <option id="5v5" value="5v5">5v5</option>
-                    <option id="6v6" value="6v6">6v6</option>
+                    <option id="5v5" value="5vs5">5vs5</option>
+                    <option id="6v6" value="6vs6">6vs6</option>
                 </select><br>
                 <label for="field_size">구장크기 : </label>
                 <select name="fieldSize" id="field_size" class="select" required="required">
