@@ -61,14 +61,30 @@ body {
 
 .containersetbbs {
 	margin: 0 auto;
+    display: grid;
+    grid-template-columns: 12vh 1fr 12vh;
+    grid-template-rows: 3vh 11vh 1vh 1vh 1vh 60vh 5vh;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        ". . ."
+        ". header ."
+        ". . ."
+        ". popup ."
+        ". . ."
+        ". main ."
+        ". footer .";
+    height: 90vh;
+}
+
+.popup{
+	grid-area: popup;
 	display: grid;
-	grid-template-columns: 12vh 1fr 12vh;
-	grid-template-rows: 3vh 7vh 5vh 53vh;
-	gap: 10px 10px;
-	grid-auto-flow: row;
-	grid-template-areas: ". . ." ". header ." ". . ." ". main ."
-		". footer .";
-	height: 80vh;
+	grid-template-columns: 130px 1fr;
+	grid-template-rows: 30px 30px;
+	align-items: center;
+	gap: 10px;
+
 }
 
 #div1 {
@@ -103,7 +119,7 @@ textarea {
 	flex: 1;
 	width: 100%;
 	margin-top: 3vh;
-	height: 50vh;
+	height: 54vh;
 	background-color: #f9f9f9;
 	border: 1px solid #e5e5e5;
 	border-radius: 3px;
@@ -135,7 +151,6 @@ input {
 	transition: 0.35s ease-in-out;
 	transition: all 0.35s ease-in-out;
 	margin-top: 5px;
-	font-family: 'Gowun Dodum', sans-serif;
 }
 
 select {
@@ -538,6 +553,17 @@ footer {
 #input {
 	display: flex;
 }
+
+
+*{margin:0; padding:0;}
+a{text-decoration:none;}
+.wrap{padding:10px;}
+
+.btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:rgb(38, 166, 83); color:#fff; width:170px; height:30px; border-radius: 5px;}
+.pop_wrap{position:fixed; top:0; left:0; right:0; bottom:0; font-size:0; text-align:center;}
+.pop_wrap:after{display:inline-block; height:100%; vertical-align:middle; content:'';}
+.pop_wrap .pop_inner{display:inline-block; padding:20px 30px; background:#fff; width:250px; vertical-align:middle; font-size:15px;}
+
 </style>
 </head>
 <body>
@@ -800,21 +826,36 @@ let play_btn = document.querySelector(".fa-play");
 						<h4>제목 :</h4>
 						<form:input path="blacklistTitle" placeholder="제목을 입력해 주세요" />
 						<h4>신고유저코드 :</h4>
-						<form:input path="blackuserCode"
-							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-							placeholder="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)" />
-					</div>
+						<form:input path="blackuserCode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+							placeholder="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)" class="code" />
+						
+						</div>
+						<div class ="popup">
+						<a href="#pop_info_1" class="btn_open">최근 매칭 유저 찾기</a>
+						</div>	
 					<div class="main">
 						<form:textarea path="blacklistContent"
 							placeholder="신고할 내용을 입력해 주세요" />
 					</div>
 					<div class="footer">
-						<button id="fotbtn">전송</button>
+   						<button id="fotbtn">전송</button>	
 					</div>
+				
+
+  <div id="pop_info_1" class="pop_wrap" style="display:none;">
+    <div class="pop_inner">
+    	<c:forEach var="vo" items="${code}">
+				<p ><span class="ppp">${vo.userCode}</span> : ${vo.userName}</p>
+		</c:forEach>
+      <button type="button" class="btn_close">닫기</button>
+    </div>
+  </div>
+
+				
 				</div>
 
 			</form:form>
-		
+
 		</div>
 		<div class="bottom_banner">
 			<div class="banner_area">
@@ -827,12 +868,35 @@ let play_btn = document.querySelector(".fa-play");
 		</footer>
 	</div>
 	<script type="text/javascript">
+	var target = document.querySelectorAll('.btn_open');
+	var btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
+	var targetID;
+
+	// 팝업 열기
+	for(var i = 0; i < target.length; i++){
+	  target[i].addEventListener('click', function(){
+	    targetID = this.getAttribute('href');
+	    document.querySelector(targetID).style.display = 'block';
+	  });
+	}
+
+	// 팝업 닫기
+	for(var j = 0; j < target.length; j++){
+	  btnPopClose[j].addEventListener('click', function(){
+	    this.parentNode.parentNode.style.display = 'none';
+	  });
+	}
 	
-	document.getElementById("fotbtn").addEventListener("click",function(){
-		
 	
 	
-	)};
+	$('.ppp').click(function(){
+		$('.code').val($(this).text());
+		$('#pop_info_1').hide();
+	});
+	
+	
+	
+
 	
 	let main_logo = document.querySelector(".main_logo");
 	
