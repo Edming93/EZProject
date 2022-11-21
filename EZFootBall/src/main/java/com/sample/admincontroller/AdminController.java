@@ -235,7 +235,6 @@ public class AdminController {
 				userCode = Integer.parseInt(i);
 				vo.setUserCode(userCode);
 				service.RUInfoList(userCode);
-
 			}
 			result = 1;
 		}

@@ -45,8 +45,7 @@ public class LoginService {
 			}
 		}else {
 			return false;
-		}
-				
+		}	
 	}
 	
 	public void setUserInfo(UserVO vo) {

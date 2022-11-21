@@ -218,7 +218,7 @@
 	<script type="text/javascript">
 	 $(".Udeletebtn").click(function(){
 		
-		  var confirm_val = confirm("정말 삭제하시겠습니까?");
+		  var confirm_val = confirm("블랙리스트로 등록 하시겠습니까?");
 		 
 		  if(confirm_val) {
 		   var checkArr = new Array();

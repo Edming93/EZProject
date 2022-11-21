@@ -218,7 +218,7 @@
 	<script type="text/javascript">
 	 $(".Udeletebtn").click(function(){
 		
-		  var confirm_val = confirm("정말 삭제하시겠습니까?");
+		  var confirm_val = confirm("블랙리스트 해제하시겠습니까?");
 		 
 		  if(confirm_val) {
 		   var checkArr = new Array();
@@ -233,12 +233,13 @@
 		   
 		   var chbox = new Array();
 		   $.ajax({
-		    url : "${pageContext.request.contextPath}/admin/TdeleteList",
+		    url : "${pageContext.request.contextPath}/admin/RUInfoList",
 		    type : "POST",
 		  
 		    data : { chbox : checkArr },
 		    success : function(result){
 	    	 if(result == 1) {          
+	    		 console.log("아악!!!!!!!!!!!!!!!!!!!!!");
 // 	    		   location.href = "${pageContext.request.contextPath}/admin/magselect";
     		  } else {
     		   alert("삭제 실패");

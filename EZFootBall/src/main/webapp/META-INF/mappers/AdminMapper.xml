@@ -283,13 +283,6 @@
 		where a.rv_type = 'G'
 		ORDER BY a.rv_code DESC
 		
-
-<!-- 	select a.rv_code, a.rv_type, a.rv_day, a.field_name, a.field_type, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name
-		FROM field_reservation a
-		inner JOIN user_info b ON a.user_code = b.user_code
-		where a.rv_type = 'T'
-		ORDER BY a.rv_code DESC
- -->	
 	</select>
 	
 	<delete id="deleteFieldReservation">
@@ -305,7 +298,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_status = '활성' and user_reports != 3
+		 from user_info where user_status = '활성' and user_reports &lt; 3
 	</select>
 	<!-- 조건부 유저리스트 뽑기 -->
 	<select id="UInfoList1" resultType="UserVO">
@@ -313,7 +306,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_status = '활성' and user_reports != 3
+		 from user_info where user_status = '활성' and user_reports &lt; 3
 
 		 	<if test="userCode != null">
 		 		and user_code like concat ('%',#{userCode},'%')
@@ -347,7 +340,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_reports = 3
+		 from user_info where user_reports &gt; 2
 	</select>
 	<!-- 블랙리스트 조건부 출력 -->
 	<select id="UInfoListB1" resultType="UserVO">
@@ -355,7 +348,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_reports = 3
+		 from user_info where user_reports &gt; 2
 
 		 	<if test="userCode != null">
 		 		and user_code like concat ('%',#{userCode},'%')
@@ -387,7 +380,7 @@
 	<!-- 블랙리스트 유저만들기 -->
 	<update id="UUInfoList">
 		update user_info 
-		set user_black ='O', user_reports = 3
+		set user_black ='O', user_reports = 3, user_status ='비활성'
 		where user_code = #{userCode}
 	</update>
 	

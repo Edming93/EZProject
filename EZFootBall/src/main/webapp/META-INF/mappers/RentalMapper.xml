@@ -239,7 +239,6 @@
 		ORDER BY a.rv_code DESC
 	</select>
 	
-	
 	<!-- 결제 내역 List 출력 -->
 	<select id="FieldReservationListAll" resultType="FieldReservationVO">
 		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment,a.refund_state 
@@ -248,6 +247,7 @@
 		where a.rv_state='예약완료' or a.rv_state='신청완료' or a.rv_state='취소신청'
 		ORDER BY a.refund_state ASC, a.rv_code DESC
 	</select>
+	
 	<!-- 환불 내역 List 출력 -->
 	<select id="FieldRefundListAll" resultType="FieldReservationVO">
 		select a.rv_code, a.rv_state, a.rv_type, a.rv_day,a.field_code, a.field_name, a.field_rentalfee, a.game_day, date_format(a.game_time, '%H:%m') as game_time, a.game_code, a.user_code, b.user_name, a.pay_code,a.card_code,a.user_payment,date_format(a.cancel_day, '%Y.%m.%d %T') as cancel_day
