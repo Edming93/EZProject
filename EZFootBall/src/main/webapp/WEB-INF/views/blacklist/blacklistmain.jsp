@@ -529,6 +529,10 @@ table th {
 	#btn2{
 		margin-left: 5%;
 	}
+	
+	button:hover{
+	cursor : pointer;
+}
 </style>
 </head>
 <body>

@@ -587,6 +587,10 @@ button{
     	display: flex;
     	
     }
+    
+    button:hover{
+	cursor : pointer;
+}
 </style>
 </head>
 <body>
@@ -1230,6 +1234,10 @@ document.getElementById("deletebtn").addEventListener("click",function(){
 });
 
 
+document.getElementById("backbtn").addEventListener("click",function(){
+	location.href = "${pageContext.request.contextPath}/blacklist/blacklistmain";
+	
+});
 </script>
 
 	</div>

@@ -610,6 +610,10 @@ a {
 .btn_close:hover{
 	cursor : pointer;
 }
+
+button:hover{
+	cursor : pointer;
+}
 </style>
 </head>
 <body>
