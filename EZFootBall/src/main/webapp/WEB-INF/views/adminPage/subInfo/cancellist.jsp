@@ -297,12 +297,10 @@
 	            if(i==<%=cgamelist.size()/15%>){
 	            	for(let k=j; k<<%=cgamelist.size()%>; k++){
 		            	document.getElementById("tablelist").children[k].style.display = "";
-		            	console.log("gma");
 		            }
 	            }else{
 	            	for(let k=j; k<j+15; k++){
 		            	document.getElementById("tablelist").children[k].style.display = "";
-		            	console.log("durl");
 		            }
 	            }
 	            
@@ -313,7 +311,6 @@
 	<!-- 검색 -->
 	<script type="text/javascript">
 	document.getElementById("sbtn").addEventListener("click",function(){
-		console.log("으악");
 		/* 카테고리 */
 		if(document.getElementById("select").value == "null"){
 			
@@ -324,7 +321,6 @@
 			}
 			
 			let num = Math.round((cnt / 15))+1;
-			console.log(num);
 			for(let i=num; i<<%=cgamelist.size()/15+1%>; i++){
 				document.getElementById("nev").children[i].style.display = "none";
 			}
@@ -347,7 +343,6 @@
 			}
 			
 			let num = Math.round((cnt / 15))+1;
-			console.log(num);
 			for(let i=num; i<<%=cgamelist.size()/15+1%>; i++){
 				document.getElementById("nev").children[i].style.display = "none";
 			}

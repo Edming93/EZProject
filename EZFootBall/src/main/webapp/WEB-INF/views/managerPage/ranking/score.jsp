@@ -1536,7 +1536,7 @@
 <!-- 추가 모달 닫기 -->
     <script type="text/javascript">
     document.getElementById("close").addEventListener("click", function () {
-       console.log("닫기");
+       //console.log("닫기");
        for(let i=0; i<document.getElementsByClassName("userCode").length; i++){
             document.getElementsByClassName("chBox")[i].checked = false;
        }
@@ -1585,7 +1585,7 @@
 <!-- 수정 -->
    <script type="text/javascript">
    document.getElementById("addbtn").addEventListener("click",function(){
-      console.log("zmfflr")
+      //console.log("zmfflr")
       let intext = document.getElementById("inuserLevel").value.trim();
        if(intext.length < 1){
           document.getElementById("inuserLevel").focus();

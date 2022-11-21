@@ -1198,12 +1198,9 @@
                     	let fieldName = document.getElementById("fieldName").value;
                     	let gameDay = document.getElementById("txtDate").value;
                     	
-                    	console.log(fieldName);
-            			console.log(gameDay);
             			const simple_data = {gameDay, fieldName};
             			
             			
-            			console.log("11111111111111");
             			$.ajax({
             				url : "${pageContext.request.contextPath}/team/timeListR",
             				type : "POST",
@@ -1211,8 +1208,6 @@
             				dataType : "json",
             	 			data : JSON.stringify(simple_data),
             				success : function(data){
-            					console.log(data);
-            					console.log("2222222222222")
             					
             				
             					for(let comment of data){
@@ -1411,7 +1406,6 @@
                         						}else if(gameMacth1 == "5vs5"){
 
 													div.addEventListener("click",function(){
-														console.log("팀선택");
 															if(comment.tmember6 == ''){
 															mteamName.value = comment.teamName;
 															teamCode.value = comment.teamCode;
@@ -1516,7 +1510,6 @@
     
     
         $(function() {
-            console.log("dsjfdlsfhdslf");
             $('#txtDate').click(function(){
             	if(document.getElementById("fieldName").value == "")
             	  alert("경기장을 선택 해 주세요");
@@ -1640,7 +1633,6 @@
 		form_post = document.form1;
 		document.getElementById("subtn").addEventListener("click",function(){
 			
-		console.log(form_post.gameGender.value);
 			
 		if(form_post.gameGender.value == "" || form_post.gamePlace.value == "" || form_post.gameTime.value == "" ||
 			form_post.fieldName.value == "" || form_post.fieldAddress.value == "" || form_post.gameMacth.value == "" ||

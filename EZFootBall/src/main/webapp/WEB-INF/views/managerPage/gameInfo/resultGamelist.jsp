@@ -698,7 +698,7 @@
 			 let ortext = document.getElementsByClassName("gnumlist")[i].innerText.trim();
 			 if(intext.length >= 3 ){
 				 if(ortext.indexOf(intext) != -1){
-					 console.log("dmdkr");
+					 //console.log("dmdkr");
 					 document.getElementById("pgbox").style.display = "block";
 					 document.getElementById("gclist").style.display = "block";
 					 document.getElementsByClassName("gnumlist")[i].style.display = "";
@@ -778,8 +778,8 @@
 	<!-- 추가 모달 등록 버튼 -->
 	<script type="text/javascript">
 	document.getElementById("addbtn").addEventListener("click",function(){
-		console.log("등록");
-		console.log(document.getElementById("inteamCode").value.trim());
+		//console.log("등록");
+		//console.log(document.getElementById("inteamCode").value.trim());
 		let cnt = 0;
 		
 		for(let i=0; i<document.querySelectorAll("#flist li input").length; i++){
@@ -795,7 +795,7 @@
 		if(document.getElementById("inteamCode").value.trim().length >=1 && document.getElementById("inteamCode").value>1){
 			for(let i=0; i <<%=gamelist.size()%>; i++){
 				if(document.getElementsByClassName("gnumlist")[i].innerText.trim()==document.getElementById("ingameCode").value.trim()){
-					console.log("durl");
+					//console.log("durl");
 					if(document.getElementsByClassName("gamet")[i].innerText.trim() != 'T'){
 						alert("해당 경기는 소셜매치입니다");
 						cnt++;
@@ -807,7 +807,7 @@
 		if(document.getElementById("inuserCode").value.trim().length >=4 && document.getElementById("inteamCode").value == 0){
 			for(let i=0; i <<%=gamelist.size()%>; i++){
 				if(document.getElementsByClassName("gnumlist")[i].innerText.trim()==document.getElementById("ingameCode").value.trim()){
-					console.log("durl");
+					//console.log("durl");
 					if(document.getElementsByClassName("gamet")[i].innerText.trim() != 'S'){
 						alert("해당 경기는 팀매치입니다");
 						cnt++;
