@@ -773,13 +773,15 @@
 					if(day == today){
 						// 예약되어있는 시간이거나, 전체 배열안에 있는 값이 현재 시간보다 작은경우 예약 불가능한 시간 표시
 						if(game_time.includes(timeset[i]) || timeset[i] <= <%=hour%>){
-							let rental_div = document.createElement("div");
+							console.log("11111111");
+							let rental_div = document.createElement("a");
 							rental_div.className = "time rental_span_disable";
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
 							rental_area.append(rental_div);
 						// 예약되어있는 시간이 아니거나, 현재 시간보다 값이 큰 경우
 						}else {
-								let rental_div = document.createElement("div");
+							console.log("22222222");
+								let rental_div = document.createElement("a");
 								rental_div.className = "time rental_span_able";
 								rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 								rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
@@ -789,28 +791,33 @@
 					}else {
 						// 예약되어있는 시간일 경우, 예약 불가능한 시간 표시
 						if(game_time.includes(timeset[i])){
-							let rental_div = document.createElement("div");
+							console.log("33333333");
+							let rental_div = document.createElement("a");
 							rental_div.className = "time rental_span_disable";
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
 							rental_area.append(rental_div);
 						// 예약되어있는 시간이 아닐경우
 						}else {
-								let rental_div = document.createElement("div");
+							console.log("444444444");
+								let rental_div = document.createElement("a");
 								rental_div.className = "time rental_span_able";
 								rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
-								rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
+								rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00";
 								rental_area.append(rental_div);
 						}
 					}
 				// 체크 되어있고, 예약 되어있는 시간일 경우 아무것도 하지 않음
 				}else if(type_input == true && game_time.includes(timeset[i])){
-				
+					console.log("55555555");
 				// 체크 되어있고, 예약 되어있지 않은 시간일 경우
 				}else{
+					console.log("66666666");
 					// 만약 오늘 날짜와 선택한 날짜가 같을 경우
 					if(day == today){
+						console.log("77777777");
 						if(timeset[i] >= <%=hour%>){
-							let rental_div = document.createElement("div");
+							console.log("88888888");
+							let rental_div = document.createElement("a");
 							rental_div.className = "time rental_span_able";
 							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
@@ -818,7 +825,8 @@
 						}
 					// 만약 오늘 날짜와 선택한 날짜가 다를 경우
 					}else {
-							let rental_div = document.createElement("div");
+						console.log("99999999");
+							let rental_div = document.createElement("a");
 							rental_div.className = "time rental_span_able";
 							rental_div.href = "${pageContext.request.contextPath}/rental/paymentInter?pageurl=redirect:/rental/rentalPayment&fieldCode="+data.fieldCode+"&gameDay="+day+"&gameTime="+time;
 							rental_div.innerHTML = parseInt(timeset[i])+":00 - "+(parseInt(timeset[i])+2)+":00"; 
