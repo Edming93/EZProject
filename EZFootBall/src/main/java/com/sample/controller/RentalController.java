@@ -135,12 +135,6 @@ public class RentalController {
 	@ResponseBody
 	public Map<String,String> fieldResultMove(@RequestBody FieldReservationVO fvo,Model model,
 								@SessionAttribute("sessionVO") UserVO uvo, HttpSession session) {
-		System.out.println("-----------------------------------------");
-		System.out.println(fvo.getPayCode());
-		System.out.println(fvo.getStoreCode());
-		System.out.println(fvo.getUserPayment());
-		System.out.println(fvo.getCardCode());
-		
 		fvo.setUserCode(uvo.getUserCode());
 		fvo.setUserPayment(fvo.getFieldRentalfee());
 
@@ -162,13 +156,10 @@ public class RentalController {
 		session.setAttribute("FRVO", rvo);
 		GlistVO gvo = (GlistVO)session.getAttribute("GlistVO");
 		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
-		System.out.println("이거있는데.? :" + gvo.getGamePlace());
 		
 		if(Tservice.putTeamMatchGlist(gvo)) {
 			int Gnum =	Tservice.getTeamMatchGlist();
 			vo1.setGameCode(Gnum);
-			
-			System.out.println("컨트롤러--포스팅 : "+Gnum);
 		
 			int Tnum = Tservice.getTeamNameT(gvo);
 			vo1.setTeamCode(Tnum);
@@ -196,12 +187,7 @@ public class RentalController {
 		rvo1.setPayCode(rvo.getPayCode());
 		rvo1.setStoreCode(rvo.getStoreCode());
 		rvo1.setCardCode(rvo.getCardCode());
-		System.out.println("페이코드" + rvo.getPayCode());
-		System.out.println("상점코드" + rvo.getStoreCode());
-		System.out.println("카드코드" + rvo.getCardCode());
-		System.out.println("제발제발 : "+Tnum);
-		System.out.println(rvo1.getUserCode());
-		System.out.println(rvo1.getFieldAddress());
+
 		Tservice.insertFieldRVT(rvo1);
 		
 		session.removeAttribute("GlistVO");
@@ -213,27 +199,12 @@ public class RentalController {
 		}
 		return "rental/rentalPayment";
 	}
-	// 결제코드 확인중 .. 지우지말 것
-//	@GetMapping("/resultTeam")
-//	public String teamResultMove(FieldReservationVO rvo, HttpSession session, @RequestParam("merchant") String merchant) {
-//		UserVO uvo = (UserVO)session.getAttribute("sessionVO"); 
-//		System.out.println("컨트롤러 :"+merchant);
-//		rvo.setPayCode(merchant);
-//		rvo.setUserCode(uvo.getUserCode());
-//		rvo.setUserPayment(rvo.getFieldRentalfee()/2);
-//		Tservice.insertFieldRVT(rvo);
-//		return "rental/resultTeam";
-//	}
 		
 	@PostMapping("refundPay")
 	@ResponseBody
 	public String refundPay(@RequestParam("merchant_uid") String merchant_uid) {
-		System.out.println(merchant_uid);
-		
 		FieldReservationVO fvo = new FieldReservationVO();
-		
 
-		
 		return "myPage/success";
 	}
 	

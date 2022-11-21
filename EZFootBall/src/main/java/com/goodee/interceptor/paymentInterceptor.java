@@ -16,12 +16,10 @@ public boolean preHandle(HttpServletRequest request, HttpServletResponse respons
 		HttpSession session = request.getSession();
 	
 		if (session.getAttribute("sessionVO") == null) {
-			System.out.println("paymentInterceptor : 세션없을때");
 			response.sendRedirect(request.getContextPath() + "/loginPage/login");
 			return true;
 	
 		} else {
-			System.out.println("paymentInterceptor : 세션있을때");
 			response.sendRedirect(request.getContextPath() + "/rental/rentalPayment");
 			return false;
 		}

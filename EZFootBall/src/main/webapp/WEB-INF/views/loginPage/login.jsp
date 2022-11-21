@@ -211,9 +211,6 @@
             </form>
             
             <script type="text/javascript">
-            console.log("<%=isUser%>");
-            console.log("<%=black%>");
-            
         		if(<%=black%> == 1){
         			Swal.fire(
         	        '블랙리스트 유저 입니다'

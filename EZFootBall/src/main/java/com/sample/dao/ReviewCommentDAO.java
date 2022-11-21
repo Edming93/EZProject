@@ -16,14 +16,9 @@ public interface ReviewCommentDAO {
 	
 	public List<ReviewCommentVO> CommentList();
 	
-	/* 댓글 페이징 */
 	public List<ReviewCommentVO> getCommentList(Criteria cri);
 	
-	/* 댓글 총 갯수(페이징) */
 	public int getCommentListTotal(int reviewCode);	
-	
-	/* 댓글 페이징 */
-	public ReviewPageVO reviewList(Criteria cri);
 	
 	public int insertComment(ReviewCommentVO vo);
 	

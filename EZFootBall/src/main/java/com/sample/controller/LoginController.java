@@ -53,18 +53,12 @@ public class LoginController {
 		
 		String pageurl = (String)session.getAttribute("pageurl");
 		String id_ck = request.getParameter("id_remem");
-		System.out.println("값모야?: "+pageurl);
 		
-//		model.addAttribute("isUser", service.isUser(vo,session));
-//		System.out.println("로그인값 : "+service.isUser(vo,session));
 		return service.rememId(id_ck,pageurl,vo,session,request,response);
 	}
 
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) {
-//		session.removeAttribute("sessionVO");
-//		session.removeAttribute("fieldData");
-//		session.removeAttribute("pageurl");
 		session.invalidate();
 		return "redirect:/loginPage/login";
 	}
@@ -85,7 +79,6 @@ public class LoginController {
 	@PostMapping("/signUp")
 	public String insertUser(UserVO vo) {
 		vo.setUserAddress(vo.getUserAddress1() + ", " + vo.getUserAddress2());
-		System.out.println(vo.getUserAddress());
 		service.setUserInfo(vo);
 		return "redirect:/loginPage/login";
 	}
@@ -93,15 +86,12 @@ public class LoginController {
 	@GetMapping("/mailCheck")
 	@ResponseBody
 	public String mailCheck(@RequestParam("email") String email) {
-		System.out.println("이메일 인증 요청이 들어옴!");
-		System.out.println("이메일 인증 이메일 : " + email);
 		return mailService.joinEmail(email);
 	}
 
 	@GetMapping("/mailCheck1")
 	@ResponseBody
 	public String mailCheck1(UserVO userVO, String name, String email1, String email2, String email, Model model) {
-		System.out.println("이메일 인증 요청이 들어옴!");
 		userVO.setUserName(name);
 		userVO.setUserEmail1(email1);
 		userVO.setUserEmail2(email2);
@@ -118,7 +108,6 @@ public class LoginController {
 	@GetMapping("/mailCheck2")
 	@ResponseBody
 	public String mailCheck2(UserVO userVO, String userId, String email1, String email2, String email, Model model) {
-		System.out.println("이메일 인증 요청이 들어옴!");
 		userVO.setUserId(userId);
 		userVO.setUserEmail1(email1);
 		userVO.setUserEmail2(email2);

@@ -527,8 +527,6 @@ if(session.getAttribute("sessionVO") != null) {
               function show_slides() {
                 slide_index++;
                 top_banner.style.transform = 'translate(' + (-(1028 * (slide_index - 1))-4*slide_index) + 'px';
-                console.log(4*slide_index);
-
 
                 if (slide_index === slide_photo_cnt) {  
                 slide_index = 0;

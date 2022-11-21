@@ -17,11 +17,9 @@ public class SocialInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 
 		if(session.getAttribute("sessionVO") == null) {
-			System.out.println("SocialInter : 세션없을때");
 			response.sendRedirect(request.getContextPath() + "/loginPage/login");
 			return true;
 		}else {
-			System.out.println("SocialInter : 세션있을때");
 			response.sendRedirect(request.getContextPath() + "/msocial/socialpayment");
 			return false;
 		}

@@ -46,9 +46,7 @@ public class AdminController {
 	private InquiryService inquiryService;
 	private ManagerService managerService;
 	private RentalService rtservice;
-	
-	
-	
+
 
 	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
 			ManagerService managerService, RentalService rtservice) {
@@ -167,8 +165,6 @@ public class AdminController {
 	@PostMapping("/idselect1")
 	public String idselect1(HttpSession session, Model model, UserVO vo, @RequestParam("Uselect") String Uselect,
 			@RequestParam("Usearch") String Usearch) {
-		System.out.println(Uselect);
-		System.out.println(Usearch);
 		if (Uselect.equals("userCode")) {
 			vo.setUserCode(Integer.parseInt(Usearch));
 		} else if (Uselect.equals("userName")) {
@@ -526,7 +522,7 @@ public class AdminController {
 				} else {
 				}
 			} catch (Exception e) {
-				System.out.println("여기가 문제");
+				System.out.println("구장추가 예외에러");
 			}
 
 		}

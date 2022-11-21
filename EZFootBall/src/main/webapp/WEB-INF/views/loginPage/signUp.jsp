@@ -441,7 +441,6 @@
 // 				emailInput.attr('disabled',true);
 				email = $('#userEmail1').val() + $('#userEmail2').val();
 				
-				console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
 				const checkInput = $('.mail_check_input'); // 인증번호 입력하는곳 
 				
 				$.ajax({
@@ -450,7 +449,6 @@
 					// url : '<c:url value ="${pageContext.request.contextPath}/loginPage/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
 					url: "${pageContext.request.contextPath}/loginPage/mailCheck?email="+email,
 					success : function (data) {
-						console.log("data : " +  data);
 						checkInput.attr('disabled',false);
 						code =data;
 						alert('인증번호가 전송되었습니다.')
@@ -468,7 +466,6 @@
 				
 				if(inputCode === code){
 					email1 = $('#userEmail1').val() + $('#userEmail2').val();
-					console.log(email1);
 					if(email1 == email || email1 == undefined){
 					
 						$resultMsg.html('인증번호가 일치합니다.');
@@ -481,8 +478,6 @@
 				        
 						$('#userEmail1').bind('input',function() {
 							email1 = $('#userEmail1').val() + $('#userEmail2').val();
-							console.log("email: "+email +" email1: "+email1);
-							console.log(email != email1);
 							if(email != email1){
 								$resultMsg.html('이메일 아이디가 불일치 합니다. 다시 확인해주세요!.');
 								$resultMsg.css('color','red');

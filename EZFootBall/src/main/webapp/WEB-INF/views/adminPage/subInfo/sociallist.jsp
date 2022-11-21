@@ -318,7 +318,6 @@
     document.getElementById("addbtn").addEventListener("click",function(){
     	let ingameCode = document.getElementById("ingameCode").value;
     	let inuserCode = document.getElementById("inuserCode").value;
-    	console.log(document.getElementsByClassName("userCode").length);
     	let cnt =0;
     	
     	let pnum=0;
@@ -343,8 +342,6 @@
     		
     		var max = false;
     		if(cnt == 0 ){
-    			console.log("신청"+pnum);
-    			console.log("최대"+document.getElementsByClassName("GameMaxp")[index].innerText.trim());
     			if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText.trim()){
         			var confirmflag = confirm("최대 신청자 수 이상입니다 신청 하시겠습니까?");
         			 if(confirmflag){
@@ -547,12 +544,10 @@
 	            if(i==<%=sgamelist.size()/15%>){
 	            	for(let k=j; k<<%=sgamelist.size()%>; k++){
 		            	document.getElementById("tablelist").children[k].style.display = "";
-		            	console.log("gma");
 		            }
 	            }else{
 	            	for(let k=j; k<j+15; k++){
 		            	document.getElementById("tablelist").children[k].style.display = "";
-		            	console.log("durl");
 		            }
 	            }
 	            
@@ -563,7 +558,6 @@
 	<!-- 검색 -->
 	<script type="text/javascript">
 		document.getElementById("sbtn").addEventListener("click",function(){
-		console.log(document.getElementById("select").value);
 		
 		
 		/* 카테고리 */
@@ -576,7 +570,6 @@
 			}
 			
 			let num = Math.round((cnt / 15))+1;
-			console.log(num);
 			for(let i=num; i<<%=sgamelist.size()/15+1%>; i++){
 				document.getElementById("nev").children[i].style.display = "none";
 			}
@@ -597,7 +590,6 @@
 			}
 			
 			let num = Math.round((cnt / 15))+1;
-			console.log(num);
 			for(let i=num; i<<%=sgamelist.size()/15+1%>; i++){
 				document.getElementById("nev").children[i].style.display = "none";
 			}
@@ -737,7 +729,6 @@
 	<script type="text/javascript">
 	 var input = document.getElementById("inputbox");
 	 input.addEventListener("keyup", function (event) {
-		 console.log("dlqfur");
          if (event.keyCode === 13) {
            event.preventDefault();
            document.getElementById("sbtn").click();
@@ -755,15 +746,11 @@
 			 for(var i=0; i< <%=sgamelist.size()%>; i++){
 				 if(document.getElementsByClassName("checkbox")[i].checked == true){
 					 
-					 console.log(document.getElementsByClassName("rvCode")[i].innerText);
 					 cklist = cklist + "&rvCode=" + document.getElementsByClassName("rvCode")[i].innerText;
 					 uclist = uclist + "&userCode=" + document.getElementsByClassName("userCode")[i].innerText;
 					 gclist = gclist + "&gameCode=" + document.getElementsByClassName("gameCode")[i].innerText;
 				 }
 			 }
-			 console.log(cklist);
-			 console.log(gclist);
-			 console.log(uclist);
 			 
 			 var del = confirm("정말삭제하시겠습니까?");
 			 if(del){

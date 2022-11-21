@@ -225,9 +225,8 @@
 		   
 		   $("input[class='chBox']:checked").each(function(){
 		    checkArr.push($(this).attr("data-gameCode"));
-		    console.log(checkArr);
+
 		   });
-		   console.log("123131231"); 
 		   
 		   var chbox = new Array();
 		   $.ajax({

@@ -20,11 +20,6 @@ public class MainInterceptor implements HandlerInterceptor{
 			UserVO vo = (UserVO)session.getAttribute("userVO");
 			session.removeAttribute("snum");
 			session.removeAttribute("tnum");
-//			if(vo.getSerialkey() == 1231254653L) {				
-//				System.out.println("MainInter 세션있고 시리얼키값 맞을때");
-//			}else {
-//				return false;
-//			}
 			return true;
 		}else {
 

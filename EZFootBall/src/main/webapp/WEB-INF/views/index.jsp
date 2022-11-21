@@ -602,7 +602,7 @@ let play_btn = document.querySelector(".fa-play");
 
   top_btn_right.addEventListener("click", function () {
     clearTimeout(time_out);
-    console.log("right:"+slide_index);
+
     if (slide_index > 0 && slide_index < slide_photo_cnt) {
       top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px)';
 
@@ -621,23 +621,18 @@ let play_btn = document.querySelector(".fa-play");
 
     button_flag = false;
     clearTimeout(time_out);
-    console.log("left:"+slide_index);
 
     if (slide_index > 1 && slide_index <= slide_photo_cnt) {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
       slide_index--;
 
-      console.log("if");
-
     } else {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
 
       slide_index = slide_photo_cnt;
-      console.log("else");
     }
     
     page_num.innerHTML = slide_index;
-    console.log(slide_index);
 
    })
 
@@ -668,7 +663,6 @@ let play_btn = document.querySelector(".fa-play");
                 slide_index++;
             
                 top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
-                console.log(slide_index);
 
                 page_num.innerHTML = slide_index;
 

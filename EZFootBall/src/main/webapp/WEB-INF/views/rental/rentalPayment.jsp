@@ -657,7 +657,7 @@
 							location.href="${pageContext.request.contextPath}/rental/rentalPayment";
 						}
                      }).catch(error => {
-                        console.log("무슨에러냐면! : " + error);
+                        console.log("결제 error : " + error);
                      });
             	}
             } else {

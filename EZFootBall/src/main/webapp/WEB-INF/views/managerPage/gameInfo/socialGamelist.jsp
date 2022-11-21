@@ -572,8 +572,8 @@
 				}
 				if('<%=select%>' != 'null'){
 					var ch = '<%=select%>'+"op";
-					console.log(ch);
-					console.log(document.getElementById(ch));
+					//console.log(ch);
+					//console.log(document.getElementById(ch));
 					document.getElementById(ch).selected="true";
 				}
 			</script>
@@ -627,7 +627,7 @@
 		let params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:num};
 		let gacd = document.getElementById("inputbox").value;
 		if(document.getElementById("select").value == "gameCode"){
-			console.log("게임코드");
+			//console.log("게임코드");
 			 
 			params = {gameCode : gacd, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
 		}else if(document.getElementById("select").value == "gameDay"){
@@ -748,7 +748,7 @@
 	
 		
 		if(document.getElementById("select").value == "gameCode"){
-			console.log("게임코드");
+			//console.log("게임코드");
 			 
 			params2 = {gameCode : gacd, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:0};
 		}else if(document.getElementById("select").value == "gameDay"){
@@ -780,7 +780,7 @@
 	    		  pre.id ="pre";
 	    		  pre.className="page_btn";
 	    		  nev.append(pre);
-	    		  console.log(data2);
+	    		  //console.log(data2);
 	    		  var numcnt = data2;
 	    		  
 	    		 
@@ -810,17 +810,17 @@
 		    		  }
 		    		  
 		    		  if(<%=pagenum%>+7 >= pagenum){
-		    			  console.log("zmek");
+		    			  //console.log("zmek");
 		    			  if(i>pagenum-15 && i<=<%=pagenum%>+7){
 			    			  listnum.style.display = "";
 			    		  }
 		    		  }else if(<%=pagenum%>>=8){
-		    			  console.log("rlqhs");
+		    			  //console.log("rlqhs");
 		    			  if(i>=<%=pagenum%>-7 && i<=<%=pagenum%>+7){
 			    			  listnum.style.display = "";
 			    		  }
 		    		  }else{
-		    			  console.log("dmdpd");
+		    			  //console.log("dmdpd");
 		    			  if(i<=15){
 		    				  listnum.style.display = "";
 		    			  }
@@ -839,14 +839,14 @@
 	    		  
 	    		  document.getElementById("result").append(nev);
 	    		  
-	    		  console.log(<%=pagenum%>);
+	    		  //console.log(<%=pagenum%>);
 	    		  
 	    		  
 	    			// 이전 
 					$('#pre').on("click", function(){
-						console.log("이전");
-						 console.log(setnum);
-						 console.log(pagenum);
+						//console.log("이전");
+						 //console.log(setnum);
+						 //console.log(pagenum);
 						
 						 for(var i=1; i<=pagenum; i++){
 							 let listid = "#listnum"+i;
@@ -854,20 +854,20 @@
 						 }
 						 
 						 if(setnum - 15 <=8){
-							 console.log("if");
-							 console.log(setnum);
+							 //console.log("if");
+							 //console.log(setnum);
 							 setnum = 8;
 							 for(var i=1; i<=15; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display', '');
 							 }
 						 }else{
-							 console.log("else");
-							 console.log(setnum);
+							 //console.log("else");
+							 //console.log(setnum);
 							 setnum = setnum-15;
 							 for(var i=setnum-7; i<=setnum+7; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display', '');
 							 }
@@ -878,7 +878,7 @@
 	    		  
 	    			// 다음 
 					$('#next').on("click", function(){
-						console.log("다음");
+						//console.log("다음");
 						
 						
 						 for(var i=1; i<=pagenum; i++){
@@ -886,16 +886,16 @@
 							 $(listid).css('display', 'none');							
 						 }
 						 
-						 console.log(setnum);
-						 console.log(pagenum);
+						 //console.log(setnum);
+						 //console.log(pagenum);
 						 
 						 if(setnum+7 >=pagenum){
-							 console.log("if");
-							 console.log(setnum);
+							 //console.log("if");
+							 //console.log(setnum);
 							 setnum = pagenum-7;
-							 console.log(setnum);
+							 //console.log(setnum);
 							 for(var i=setnum-7; i<=pagenum; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display','');
 							 }
@@ -907,10 +907,10 @@
 							 }
 							 
 						 }else{
-							 console.log("else");
+							 //console.log("else");
 							 setnum = setnum+15;
 							 for(var i=setnum-7; i<=setnum+7; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display','');
 							 }
@@ -932,12 +932,12 @@
 	document.getElementById("sbtn").addEventListener("click",function(){
 		<%pagenum = 0;%>
 		let gacn = document.getElementById("inputbox").value;
-		console.log("검색")
-		console.log(gacn);
+		//console.log("검색")
+		//console.log(gacn);
 		let params = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:num};
 		
 		if(document.getElementById("select").value == "gameCode"){
-			console.log("게임코드");
+			//console.log("게임코드");
 			params = {gameCode : gacn, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
 		}else if(document.getElementById("select").value == "gameDay"){
 			params = {gameCode : null, gameDay : gacn, gameTime:null , gameMag : null , level : null, gameMacth : null,num:num};
@@ -1063,7 +1063,7 @@
 		  let params2 = {gameCode : null, gameDay : null, gameTime : null , gameMag : null , level : null, gameMacth : null,num:0};
 			
 			if(document.getElementById("select").value == "gameCode"){
-				console.log("게임코드");
+				//console.log("게임코드");
 				 
 				params2 = {gameCode : gacn, gameDay : null, gameTime:null , gameMag : null , level : null, gameMacth : null,num:0};
 			}else if(document.getElementById("select").value == "gameDay"){
@@ -1094,7 +1094,7 @@
 	    		  pre.id ="pre";
 	    		  pre.className="page_btn";
 	    		  nev.append(pre);
-	    		  console.log(data2);
+	    		  //console.log(data2);
 	    		  var numcnt = data2;
 	    		  
 	    		 
@@ -1124,17 +1124,17 @@
 		    		  }
 		    		  
 		    		  if(<%=pagenum%>+7 >= pagenum){
-		    			  console.log("zmek");
+		    			  //console.log("zmek");
 		    			  if(i>pagenum-15 && i<=<%=pagenum%>+7){
 			    			  listnum.style.display = "";
 			    		  }
 		    		  }else if(<%=pagenum%>>=8){
-		    			  console.log("rlqhs");
+		    			  //console.log("rlqhs");
 		    			  if(i>=<%=pagenum%>-7 && i<=<%=pagenum%>+7){
 			    			  listnum.style.display = "";
 			    		  }
 		    		  }else{
-		    			  console.log("dmdpd");
+		    			  //console.log("dmdpd");
 		    			  if(i<=15){
 		    				  listnum.style.display = "";
 		    			  }
@@ -1153,14 +1153,14 @@
 	    		  
 	    		  document.getElementById("result").append(nev);
 	    		  
-	    		  console.log(<%=pagenum%>);
+	    		  //console.log(<%=pagenum%>);
 	    		  
 	    		  
 	    			// 이전 
 					$('#pre').on("click", function(){
-						console.log("이전");
-						 console.log(setnum);
-						 console.log(pagenum);
+						//console.log("이전");
+						 //console.log(setnum);
+						 //console.log(pagenum);
 						
 						 for(var i=1; i<=pagenum; i++){
 							 let listid = "#listnum"+i;
@@ -1168,20 +1168,20 @@
 						 }
 						 
 						 if(setnum - 15 <=8){
-							 console.log("if");
-							 console.log(setnum);
+							 //console.log("if");
+							 //console.log(setnum);
 							 setnum = 8;
 							 for(var i=1; i<=15; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display', '');
 							 }
 						 }else{
-							 console.log("else");
-							 console.log(setnum);
+							 //console.log("else");
+							 //console.log(setnum);
 							 setnum = setnum-15;
 							 for(var i=setnum-7; i<=setnum+7; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display', '');
 							 }
@@ -1192,7 +1192,7 @@
 	    		  
 	    			// 다음 
 					$('#next').on("click", function(){
-						console.log("다음");
+						//console.log("다음");
 						
 						
 						 for(var i=1; i<=pagenum; i++){
@@ -1200,16 +1200,16 @@
 							 $(listid).css('display', 'none');							
 						 }
 						 
-						 console.log(setnum);
-						 console.log(pagenum);
+						 //console.log(setnum);
+						 //console.log(pagenum);
 						 
 						 if(setnum+7 >=pagenum){
-							 console.log("if");
-							 console.log(setnum);
+							 //console.log("if");
+							 //console.log(setnum);
 							 setnum = pagenum-7;
-							 console.log(setnum);
+							 //console.log(setnum);
 							 for(var i=setnum-7; i<=pagenum; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display','');
 							 }
@@ -1221,10 +1221,10 @@
 							 }
 							 
 						 }else{
-							 console.log("else");
+							 //console.log("else");
 							 setnum = setnum+15;
 							 for(var i=setnum-7; i<=setnum+7; i++){
-								 console.log(i);
+								 //console.log(i);
 								 let listid = "#listnum"+i;
 								 $(listid).css('display','');
 							 }
@@ -1275,13 +1275,13 @@
     <!-- 삭제 -->
 	<script type="text/javascript">
 	 document.getElementById("del").addEventListener("click", function () {
-		 console.log("dhkdghkfds");
+		 //console.log("dhkdghkfds");
 		 var gclist = "gameCode=0";
 		 let ttcnt=0;
 		 let delcnt=0;
 		 for(let i=0; i< document.getElementsByClassName("checkbox").length; i++){
 			 if(document.getElementsByClassName("checkbox")[i].checked == true){
-				 console.log(i);
+				 //console.log(i);
 				 delcnt++;
 				 if(document.getElementsByClassName("gameDay")[i].innerText == '<%=nday%>'){
 					 if(document.getElementsByClassName("gameTime")[i].innerText <= '<%=hour%>:00')
@@ -1340,11 +1340,11 @@
 			 document.getElementById("updiv").style.opacity="0.1";
 			 document.getElementById("upmodal").style.display="block";
 			 
-			 console.log(document.getElementsByClassName("gameCode")[sgcode].innerText);
+			 //console.log(document.getElementsByClassName("gameCode")[sgcode].innerText);
 			 document.getElementById("upcode").value = document.getElementsByClassName("gameCode")[sgcode].innerText;
 			 document.getElementById("upday").value = document.getElementsByClassName("gameDay")[sgcode].innerText;
 			 /* var ckckck = document.getElementsByClassName("gameTime")[sgcode].innerText;
-			 console.log(ckckck);
+			 //console.log(ckckck);
 			 document.getElementById(ckckck).selected = true; */
 			 /* document.getElementById("uplevel").value = document.getElementsByClassName("level")[sgcode].innerText; */
 			/*  document.getElementById("upmatch").value = document.getElementsByClassName("gameMacth")[sgcode].innerText; */
@@ -1367,7 +1367,7 @@
 		for(let i=0; i<document.getElementsByClassName("gameCode").length; i++){
          	document.getElementsByClassName("checkbox")[i].checked = false;
 		 }
-		console.log("ddddd");
+		//console.log("ddddd");
 		document.getElementById("updiv").style.display = "none";
 		document.getElementById("upmodal").style.display = "none";
 	});

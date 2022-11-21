@@ -822,7 +822,7 @@ table th {
 
    <script type="text/javascript">
            
-            console.log("<%=alert%>");
+           
             
         		if(<%=alert%> == alert){
         			Swal.fire('이미 신고한 유저 입니다');

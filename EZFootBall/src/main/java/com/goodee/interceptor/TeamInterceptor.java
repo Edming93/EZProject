@@ -17,12 +17,10 @@ public class TeamInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 
 		if(session.getAttribute("sessionVO") == null) {
-			System.out.println("TeamInter : 세션없을때");
 			response.sendRedirect(request.getContextPath() + "/loginPage/login");
 			return true;
 
 		}else {
-			System.out.println("TeamInter : 세션있을때");
 			response.sendRedirect(request.getContextPath() + "/msocial/socialpayment");
 			return false;
 		}

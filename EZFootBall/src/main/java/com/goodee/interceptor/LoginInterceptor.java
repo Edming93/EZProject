@@ -14,12 +14,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("sessionVO") == null) {
-			System.out.println("loginInterceptor : 세션없을때");
 			session.removeAttribute("sessionVO");
 			return true;
 
 		} else {
-			System.out.println("loginInterceptor : 세션있을때");
 			response.sendRedirect(request.getContextPath() + "/myPage/myPage");
 			return false;
 		}
