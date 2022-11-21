@@ -380,7 +380,7 @@
 	<!-- 블랙리스트 유저만들기 -->
 	<update id="UUInfoList">
 		update user_info 
-		set user_black ='O', user_reports = 3, user_status ='비활성'
+		set user_black ='O', user_status ='비활성'
 		where user_code = #{userCode}
 	</update>
 	
