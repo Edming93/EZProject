@@ -977,7 +977,7 @@
 	        	      
 	        	      
 	        	      let data3 = {game_code:${matchinfo.gameCode}};
-	     	  		 
+	        	      document.getElementById("list_content").innerHTML = " ";
 	    	  	      fetch("${pageContext.request.contextPath}/msocial/joinlist",{
 	    	  	         method : "POST", // PUT, PATCH, DELETE
 	    	  	         headers : {
@@ -1036,7 +1036,7 @@
 	    	  	      	        	divlist.append(divv);
 	    	  	      	        	divlist.append(divl);
 	    	  	      	        	
-	    	  	      	        	document.getElementById("list_content").innerHTML = " ";
+	    	  	      	        	//document.getElementById("list_content").innerHTML = " ";
 	    	  	      	        	document.getElementById("list_content").append(divlist);
 	    	  	      	        	
 	    	  	      	        	list.push(data4[name2].userCode); 

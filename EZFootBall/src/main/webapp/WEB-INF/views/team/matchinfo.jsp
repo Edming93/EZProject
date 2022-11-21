@@ -1017,7 +1017,7 @@
 	        	      
 	        	      
 	        	      let data3 = {gameCode:${matchinfo.gameCode}};
-	        			 
+	        	      document.getElementById("list_content").innerHTML = " "; 
 	        	      fetch("${pageContext.request.contextPath}/team/joinlist",{
 	        	         method : "POST", // PUT, PATCH, DELETE
 	        	         headers : {
@@ -1084,7 +1084,7 @@
 	        	      	      }).catch(error => {
 	        	      	         console.log("error");
 	        	      	      });
-	        	        	 document.getElementById("list_content").innerHTML = " ";
+	        	        	 //document.getElementById("list_content").innerHTML = " ";
 	        	        	 document.getElementById("list_content").append(divlist);
 	        	        	 
 	        	         }
