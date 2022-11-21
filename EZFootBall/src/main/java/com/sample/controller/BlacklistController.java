@@ -41,22 +41,7 @@ public class BlacklistController {
 		this.service = service;
 	}
 
-	@PostMapping("/blacklistselect")
-	public String reviewselect(HttpSession session, @RequestParam("blacklistLocal") String blacklistLocal, Model model, BlacklistVO bvo, Criteria cri) {
 
-		UserVO vo = (UserVO) session.getAttribute("sessionVO");
-		model.addAttribute("userdata", vo);
-		bvo.setBlacklistLocal(blacklistLocal);
-		service.serachBlackList(model);
-		
-		
-		model.addAttribute("list", service.getListPaging(cri));
-		 int total = service.getTotal();
-		 PageMakerVO pageMake = new PageMakerVO(cri, total);
-		 model.addAttribute("pageMaker", pageMake);
-		
-		return "/blacklist/blacklistmain";
-	}
 	
 	// 페이지 이동
 		@GetMapping("/blacklistmain")
@@ -129,14 +114,14 @@ public class BlacklistController {
 	public String editBBS(@SessionAttribute("sessionVO") UserVO uvo, Model model, @RequestParam("blackCode") String blackCode,
 			@PathVariable("blacklistCode") String blacklistCode, @ModelAttribute("BlacklistVO") BlacklistVO bvo) {
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
-		System.out.println(bvo.getBlackuserCode());
-		service.deleteuserBlack(bvo);
+		System.out.println(bvo.getBlackuserCode());	
 		service.getcode(model, uvo);
 		if (uvo != null) {
 			service.getBlackListContent(model, blacklistCode);	
 			String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
 			model.addAttribute("blacklistLocal", cateList);
-			return "blacklist/editbbs";
+			service.deleteuserBlack(bvo);
+			return "blacklist/editbbs";		
 		} else {
 			return "redirect:/loginPage/login";
 		}

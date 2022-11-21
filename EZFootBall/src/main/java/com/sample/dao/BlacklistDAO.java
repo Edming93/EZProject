@@ -14,14 +14,13 @@ import com.sample.vo.BlacklistPageVO;
 @Mapper
 public interface BlacklistDAO {
 	
-	//블랙
+	//최근 같이한 경기유저
 	public List<UserVO> codelist(UserVO vo);
 	
 	//페이지 VIEW
 	public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
 	
-	//페이지 VIEW 검색
-	public List<BlacklistVO> searchBlackList(BlacklistPageVO vo);
+
 	
 	//상세 페이지 view
 	public BlacklistVO selectBlackListdetail(String blacklistCode);
