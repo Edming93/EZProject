@@ -137,17 +137,7 @@ public class BlacklistController {
 		bvo.setUserId(uvo.getUserId());
 		bvo.setBuserName(uvo.getUserName());
 		bvo.setUserCode(uvo.getUserCode());
-		/* System.out.println(bvo.getBlackuserCode()); */
-		/* service.deleteuserBlack(bvo); */
-		// 먼저 기존값을 받아서 딜리트 로직을 진행하고
-		/* bvo.setBlackuserCode(0); */
-		// 초기화를 진행하고
-		// 아래 삭제로직에서 새로 받아서 진행한것처럼 새값을 넣어준다
-		/*
-		 * bvo.setBlackuserCode(Integer.parseInt(blackuserCode));
-		 * System.out.println(bvo.getBlackuserCode());
-		 */
-		System.out.println("받는 더미 블랙 유저 코드" + bvo.getDumblackuserCode());
+	
 		System.out.println("받는 블랙 유저 코드" + bvo.getBlackuserCode());
 		if (service.editBlackList(bvo)) {
 			service.adduserBlack(bvo);
