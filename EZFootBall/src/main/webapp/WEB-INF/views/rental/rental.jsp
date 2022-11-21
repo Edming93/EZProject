@@ -445,7 +445,7 @@
             	content_area.append(rental_area);
             }
          }).catch(error => {
-            console.log("무슨에러냐면! : " + error);
+            console.log("fetch error 처음로딩 : " + error);
          });
    };
    
@@ -581,7 +581,7 @@
         	content_area.append(rental_area);
         }
      }).catch(error => {
-        console.log("무슨에러냐면! : " + error);
+        console.log("fetch error 날짜선택 : " + error);
      });
       
        
@@ -659,7 +659,6 @@
 				var timeset = ["08","10","12","14","16","18","20","22"];
 				// db에서 불러온 배열
 				var game_time = (data.gameTime).split(',');
-				console.log(game_time);
 
 				for(let i=0; i<timeset.length; i++){
 					// true 혹은 false 반환
@@ -690,7 +689,7 @@
        	content_area.append(rental_area);
        }
     }).catch(error => {
-       console.log("무슨에러냐면! : " + error);
+       console.log("fetch error 지역 : " + error);
     });
      
       
@@ -765,8 +764,6 @@
 			// db에서 불러온 배열
 			var game_time = (data.gameTime).split(',');
 			
-			console.log(day == today);
-			
 			for(let i=0; i<timeset.length; i++){
 				// true 혹은 false 반환
 				let time = parseInt(timeset[i]);
@@ -832,7 +829,7 @@
        	content_area.append(rental_area);
        }
     }).catch(error => {
-       console.log("무슨에러냐면! : " + error);
+       console.log("예약가능여부 error : " + error);
     });
      
       
@@ -931,7 +928,7 @@
       	content_area.append(rental_area);
       }
    }).catch(error => {
-      console.log("무슨에러냐면! : " + error);
+      console.log("크기 error! : " + error);
    });
     
   });
@@ -1021,7 +1018,7 @@
           	content_area.append(rental_area);
           }
        }).catch(error => {
-          console.log("무슨에러냐면! : " + error);
+          console.log("초기화 error! : " + error);
        });
         
          

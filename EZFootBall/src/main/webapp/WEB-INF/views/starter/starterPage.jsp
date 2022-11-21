@@ -884,7 +884,6 @@
 		
 		function changeColor(e) {
 		    scrollValue += e.deltaY * 0.01;
-		    console.log("scrollValue : "+scrollValue);
 		    if(scrollValue < 0){
 		        scrollValue = 0;
 		    }else if(scrollValue > 59){
