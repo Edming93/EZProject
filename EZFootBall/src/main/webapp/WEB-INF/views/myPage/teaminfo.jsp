@@ -524,9 +524,15 @@ footer {
 									</div>
 									<span class="email_area">#${userVO.userCode}</span>
 								</li>
-								<li><span class="info_bold">Team</span> <span class="info_small_size">${uinVO.userGroup }</span></li>
+								<li><span class="info_bold">Team</span>
+								  	<c:if test="${uinVO.userGroup ne '없음'}"><span class="info_small_size">${uinVO.userGroup }</span></c:if>
+								  	<c:if test="${uinVO.userGroup eq '없음'}"><span class="info_small_size">팀이 없습니다.</span></c:if>
+								 </li>
 								<li><span class="info_bold">랭크</span>  <span class="info_small_size">${uinVO.userLevel }</span></li>
-								<li><span class="info_bold">승률</span> <span class="info_small_size"><fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>%&nbsp;<span>(${userVO.userWin}승 ${userVO.userLose}패)</span></span></li>
+								<li><span class="info_bold">승률</span>
+									<c:if test="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100 ne 'NaN'}"> <span class="info_small_size">  <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% &nbsp;<span>(${userVO.userWin}승 ${userVO.userLose}패)</span></span></c:if>
+									<c:if test="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100 eq 'NaN'}"> <span class="info_small_size">경기 기록이 없습니다.</span></c:if>
+								</li>
 							</ul>
 						</div>
 					</section>

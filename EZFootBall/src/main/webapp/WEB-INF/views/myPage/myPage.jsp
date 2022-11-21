@@ -119,7 +119,6 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
 }
 
 .main_area {
@@ -487,8 +486,8 @@ footer {
 									<span class="email_area">#${userVO.userCode}</span>
 								</li>
 								<li><span class="info_bold">Team</span>
-								  	<c:if test="${uinVO.userGroup ne '0'}"><span class="info_small_size">${uinVO.userGroup }</span></c:if>
-								  	<c:if test="${uinVO.userGroup eq '0'}"><span class="info_small_size">팀이 없습니다.</span></c:if>
+								  	<c:if test="${uinVO.userGroup ne '없음'}"><span class="info_small_size">${uinVO.userGroup }</span></c:if>
+								  	<c:if test="${uinVO.userGroup eq '없음'}"><span class="info_small_size">팀이 없습니다.</span></c:if>
 								 </li>
 								<li><span class="info_bold">랭크</span>  <span class="info_small_size">${uinVO.userLevel }</span></li>
 								<li><span class="info_bold">승률</span>
