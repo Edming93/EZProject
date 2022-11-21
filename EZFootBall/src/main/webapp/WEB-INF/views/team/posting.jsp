@@ -1032,6 +1032,7 @@
 					</div>
 					
                    <script type="text/javascript">
+                   let gameMacth1= "";
 	           		// 엔터키 활성화
 	           		let search1 = document.getElementById("search1");
 	           		let search_btn = document.getElementById("searcha");
@@ -1084,6 +1085,7 @@
                         							fieldCode.value = comment.fieldCode;
                         							gamePay.value = comment.fieldRentalfee;
                         							gameMacth.value = comment.fieldType;
+                        							gameMacth1 = comment.fieldType;
                         							
                         							
                         							modal2.classList.remove('show');
@@ -1358,7 +1360,7 @@
                                 document.getElementById("modalsearchbutton").addEventListener("click", function(){
                         			let teamName = document.getElementById("modalText").value;
                         			const mteamName = document.getElementById("mTeamName");
-                        			let gameMacth1 = document.getElementById("gameMacth").value;
+                        			//let gameMacth1 = document.getElementById("gameMacth").value;
                         			let teamCode = document.getElementById("teamCode");
                         			const comdiv = document.getElementById("modaldata");
   
