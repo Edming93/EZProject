@@ -142,13 +142,10 @@ body{
 }
 
 .insert {
-
-    grid-area: insert;
-    display: flex;
-    flex-direction: row;
-    width: 85%;
-    margin-left: 8%;
-    justify-content: space-between;
+	grid-area: insert;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .insert>textarea {
@@ -188,6 +185,7 @@ input{
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
     margin-top: 5px;
+    font-family: 'Gowun Dodum', sans-serif;
 	
 }
 
@@ -582,10 +580,6 @@ button{
     #input{
     	display: flex;
     	
-    }
-    #comment{
-    width: 85%;
-    margin-left: 8%;
     }
 </style>
 </head>

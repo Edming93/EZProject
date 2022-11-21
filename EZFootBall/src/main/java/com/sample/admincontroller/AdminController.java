@@ -46,9 +46,7 @@ public class AdminController {
 	private InquiryService inquiryService;
 	private ManagerService managerService;
 	private RentalService rtservice;
-	
-	
-	
+
 
 	public AdminController(AdminService service, FieldAdminService fdService, InquiryService inquiryService,
 			ManagerService managerService, RentalService rtservice) {

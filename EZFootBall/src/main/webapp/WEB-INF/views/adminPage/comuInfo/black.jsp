@@ -240,7 +240,7 @@ margin: 5px;
 		   
 		   $("input[class='blackChkCode']:checked").each(function(){
 		    checkArr.push($(this).attr("value"));
-		    console.log(checkArr);
+		    
 		   });
 		   
 		   var blackChkCode = new Array();

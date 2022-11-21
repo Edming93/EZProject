@@ -96,29 +96,16 @@
         justify-content: center;
         align-items: center;
       }
-    
-/*     .main_title{ */
-/* 		display: block; */
-/* 		width: 100%; */
-/* 		background: url("${pageContext.request.contextPath}/image/myPage3.png") no-repeat 10px; */
-/* 		background-size: contain; */
-/* 	 	padding: 8px 0; */
-/* 		text-indent: -9999px; */
-/* 	} */
 
     #main_container{
     	width: 100%;
     	height: 100%;
     	display: flex;
     	justify-content: center;
-/*     	background-color: #ccc; */
     }
     
     .main_area {
     	width: 1024px;
-/*     	min-height: 900px; */
-/*     	margin-top: 50px; */
-/*     	background-color: #ffaaaa; */
     }
     
     .main_content {
@@ -205,7 +192,6 @@
 	    width: 20%;
 	    padding: 10px 0;
 	    text-decoration: none;
-/* 	    margin: 20px 0; */
 	    color: #fff;
 	    font-weight: bold;
 	    font-size: 13px;
@@ -332,7 +318,6 @@
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -345,7 +330,6 @@
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -682,9 +666,6 @@
 		
 		let add_detail = $('#address').val().split(',');
 		
-		
-// 		add_detail = add_detail.replace('경기 고양시 덕양구 가양대로 110', "");
-		
 		$('.address').val(add_detail[0]);
 		
 		$('.address_detail').val($.trim(add_detail[1]));
@@ -700,7 +681,6 @@
 		$('.ck_btn').click(function(e){
 			e.preventDefault();
 			if($(this).text()== "수정완료"){
-// 				let leng = $('#id').val().length > $('#email1').val().length ? $('#id').val().length : $('#email1').val().length;   
 				for(let i=0; i < $('#id').val().length; i++){
 					const id1 = $('#id').val().charAt(i);
 					if((id1 < "a" || id1 > "z") && (id1 < "A" || id1 > "Z") && (id1 < "0" || id1 > "9")){
@@ -745,8 +725,6 @@
 						$(this).text("수정하기");
 					}
 				};
-// 				$(this).siblings().attr("disabled", true);
-// 				$(this).('ck_btn').text("수정하기");
 				if(email1 != ($('#userEmail1').val()+$('#userEmail2').val())){
 					alert('이메일이 변경되었습니다. 인증을 다시 받아주세요');
 					$('.hid').show();
@@ -796,7 +774,6 @@
 				type : 'get',
 				url: "${pageContext.request.contextPath}/myPage/mailCheck?email="+email,
 				success : function (data) {
-					console.log("data : " +  data);
 					if(data == 0){
 						alert('가입하신 정보가 맞지 않습니다. '+'확인후 다시 입력해주세요');
 						return;
@@ -805,7 +782,7 @@
 					code = data;
 					alert('인증번호가 전송되었습니다.');
 				}			
-			}); // end ajax
+			});
 			$(this).text('전송완료').css('background-color', '#ccc').css('border', '#ccc').attr('disabled','true');
 			
 			}
@@ -817,7 +794,6 @@
 			
 			if(inputCode === code){
 				email1 = $('#userEmail1').val() + $('#userEmail2').val();
-				console.log(email1);
 				if(email1 == email || email1 == undefined){
 				
 					$resultMsg.html('인증번호가 일치합니다.');
@@ -830,8 +806,6 @@
 			        
 					$('#userEmail1').bind('input',function() {
 						email1 = $('#userEmail1').val() + $('#userEmail2').val();
-						console.log("email: "+email +" email1: "+email1);
-						console.log(email != email1);
 						if(email != email1){
 							$resultMsg.html('이메일 아이디가 불일치 합니다. 다시 확인해주세요!.');
 							$resultMsg.css('color','red');

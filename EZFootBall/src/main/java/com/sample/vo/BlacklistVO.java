@@ -20,9 +20,17 @@ public class BlacklistVO {
 	
 	private String suserCode;
 	private String sblackuserCode;
-
+	
+	private int dumblackuserCode;
 	
 	
+	
+	public int getDumblackuserCode() {
+		return dumblackuserCode;
+	}
+	public void setDumblackuserCode(int dumblackuserCode) {
+		this.dumblackuserCode = dumblackuserCode;
+	}
 	public String getSuserCode() {
 		return suserCode;
 	}

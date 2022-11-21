@@ -95,29 +95,16 @@
         justify-content: center;
         align-items: center;
       }
-    
-/*     .main_title{ */
-/* 		display: block; */
-/* 		width: 100%; */
-/* 		background: url("${pageContext.request.contextPath}/image/myPage3.png") no-repeat 10px; */
-/* 		background-size: contain; */
-/* 	 	padding: 8px 0; */
-/* 		text-indent: -9999px; */
-/* 	} */
 
     #main_container{
     	width: 100%;
     	height: 100%;
     	display: flex;
     	justify-content: center;
-/*     	background-color: #ccc; */
     }
     
     .main_area {
     	width: 1024px;
-/*     	min-height: 900px; */
-/*     	margin-top: 50px; */
-/*     	background-color: #ffaaaa; */
     }
     
     .main_content {
@@ -245,7 +232,6 @@
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -258,7 +244,6 @@
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -345,7 +330,6 @@
 					'비밀번호는 8~16 크기의 숫자, 영문자로 이루어져야 합니다.',
 					'warning'
 				)
-				// alert("비밀번호는 8~16 크기의 숫자, 영문자로 이루어져야 합니다.");
 				return;
 			}else if($('#new_pw1').val() != $('#new_pw2').val()){
 				Swal.fire(
@@ -353,7 +337,6 @@
 						'비밀번호와 비밀번호확인이 다릅니다. 다시 입력해주세요.',
 						'warning'
 					)
-				// alert("비밀번호와 비밀번호확인이 다릅니다. 다시 입력해주세요.");
 				return;
 			}else if($('#pw1').val() == $('#new_pw1').val() && $('#pw1').val() == $('#new_pw2').val()) {
 				Swal.fire(
@@ -371,25 +354,18 @@
 							'비밀번호는 숫자, 영문자로 이루어져야 합니다.',
 							'warning'
 						)
-					// alert("비밀번호는 숫자, 영문자로 이루어져야 합니다.");
 					return;
 				}
 			}
 		
 			// 현재비밀번호가 입력된 pw와 동일한지 확인
-// 			$("#btn").on("click", function(){
-				
 				const data1 = { "pass1" : $('#pw1').val() };
 				$.ajax({
 					type : 'post',
 					url: "${pageContext.request.contextPath}/myPage/changePw/isPassword",
-// 					contentType: "application/json; charset=utf-8",
-// 					dataType: "json",
 					data: data1,
 					async: false,
 					success : function (data) {
-						console.dir("data : " +  data);
-						console.log(data.state);
 						if(data.state == "ok"){
 							Swal.fire({
 								  position: 'center',
@@ -409,26 +385,8 @@
 							});
 						}
 					}			
-				}); // end ajax
-				
-				
-				
-				
-				
-				
-// 			});
-	
-// 				Swal.fire({
-// 					  position: 'center',
-// 					  icon: 'success',
-// 					  title: '비밀번호가 성공적으로 설정되었습니다.',
-// 					  showConfirmButton: false,
-// 					  timer: 2000
-// 				});
+				});
 
-// 				setTimeout(formStart, 2000);
-
-				// alert("비밀번호가 성공적으로 설정되었습니다.");
 				function formStart(){
 					$('#change').submit();
 				}

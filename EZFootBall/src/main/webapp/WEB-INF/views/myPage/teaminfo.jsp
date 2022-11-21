@@ -119,7 +119,6 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
 }
 
 .main_area {
@@ -318,17 +317,6 @@
     width: 90%;
 }
 
-/* .main_right1 > ul > li > a, .main_right2 > ul > li > a { */
-/* 	display:inline-block; */
-/* 	text-decoration: none; */
-/* 	border-radius: 20px; */
-/* 	color: #000; */
-/* 	width: 100%; */
-/* 	height: 100%; */
-/* 	padding: 20px 0; */
-/* } */
-
-
 .bottom_banner {
         width:100%;
         height:235px;
@@ -432,7 +420,6 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -445,7 +432,6 @@ footer {
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -527,8 +513,6 @@ footer {
 		
         <div id="main_container">
             <div class="main_area">
-<!-- 			<h1 class="main_title">나의 EZ</h1> -->
-			
 				<div class="main_content1">
 					<section class="main_left1">
 						<div id="user_info">
@@ -540,7 +524,6 @@ footer {
 									</div>
 									<span class="email_area">#${userVO.userCode}</span>
 								</li>
-<%-- 								<li>주소 : ${userVO.userLocal }</li> --%>
 								<li><span class="info_bold">Team</span> <span class="info_small_size">${uinVO.userGroup }</span></li>
 								<li><span class="info_bold">랭크</span>  <span class="info_small_size">${uinVO.userLevel }</span></li>
 								<li><span class="info_bold">승률</span> <span class="info_small_size"><fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>%&nbsp;<span>(${userVO.userWin}승 ${userVO.userLose}패)</span></span></li>

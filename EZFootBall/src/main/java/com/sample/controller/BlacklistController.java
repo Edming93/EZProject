@@ -41,25 +41,23 @@ public class BlacklistController {
 		this.service = service;
 	}
 
-
-	
 	// 페이지 이동
-		@GetMapping("/blacklistmain")
-		public String move(HttpSession session, Model model, Criteria cri) {
-			UserVO vo = (UserVO) session.getAttribute("sessionVO");
-			model.addAttribute("userdata", vo);
-			service.getBlackList(model);
-			
-			model.addAttribute("list", service.getListPaging(cri));
-			
-			 int total = service.getTotal();
-			 
-			 PageMakerVO pageMake = new PageMakerVO(cri, total);
-			 
-			 model.addAttribute("pageMaker", pageMake);
-			
-			return "/blacklist/blacklistmain";
-		}
+	@GetMapping("/blacklistmain")
+	public String move(HttpSession session, Model model, Criteria cri) {
+		UserVO vo = (UserVO) session.getAttribute("sessionVO");
+		model.addAttribute("userdata", vo);
+		service.getBlackList(model);
+
+		model.addAttribute("list", service.getListPaging(cri));
+
+		int total = service.getTotal();
+
+		PageMakerVO pageMake = new PageMakerVO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+
+		return "/blacklist/blacklistmain";
+	}
 
 	// 상세 페이지 이동
 	@GetMapping("/blacklistmain/{blacklistCode}")
@@ -78,9 +76,9 @@ public class BlacklistController {
 	@GetMapping("/blacklistmain/setbbs")
 	public String setBBS(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
 			Model model) {
-			System.out.println(uvo.getUserCode());
-			service.getcode(model, uvo);
-		
+		System.out.println(uvo.getUserCode());
+		service.getcode(model, uvo);
+
 		String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
 		model.addAttribute("blacklistLocal", cateList);
 		return "blacklist/setbbs";
@@ -91,7 +89,7 @@ public class BlacklistController {
 	@PostMapping("/blacklistmain/setbbs")
 	public String setBBSResult(@SessionAttribute("sessionVO") UserVO uvo, BlacklistVO bvo, Model model) {
 		System.out.println(uvo);
-		
+
 		if (uvo != null) {
 			System.out.println(uvo.getUserCode());
 			bvo.setUserId(uvo.getUserId());
@@ -102,7 +100,7 @@ public class BlacklistController {
 				return "redirect:/blacklist/blacklistmain";
 			} else {
 				model.addAttribute("alert", "alert");
-				return "redirect:/blacklist/blacklistmain";	
+				return "redirect:/blacklist/blacklistmain";
 			}
 		} else {
 			return "redirect:/loginPage/login";
@@ -111,17 +109,20 @@ public class BlacklistController {
 
 	// 페이지 수정
 	@GetMapping("/blacklistmain/editbbs/{blacklistCode}")
-	public String editBBS(@SessionAttribute("sessionVO") UserVO uvo, Model model, @RequestParam("blackCode") String blackCode,
-			@PathVariable("blacklistCode") String blacklistCode, @ModelAttribute("BlacklistVO") BlacklistVO bvo) {
+	public String editBBS(@SessionAttribute("sessionVO") UserVO uvo, Model model,
+			@RequestParam("blackCode") String blackCode, @PathVariable("blacklistCode") String blacklistCode,
+			@ModelAttribute("BlacklistVO") BlacklistVO bvo) {
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
-		System.out.println(bvo.getBlackuserCode());	
+		System.out.println(bvo.getBlackuserCode());
+		System.out.println(bvo.getDumblackuserCode());
+		int a = bvo.getBlackuserCode();
+
 		service.getcode(model, uvo);
 		if (uvo != null) {
-			service.getBlackListContent(model, blacklistCode);	
+			service.getBlackListContent(model, blacklistCode);
 			String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
 			model.addAttribute("blacklistLocal", cateList);
-			service.deleteuserBlack(bvo);
-			return "blacklist/editbbs";		
+			return "blacklist/editbbs";
 		} else {
 			return "redirect:/loginPage/login";
 		}
@@ -129,47 +130,51 @@ public class BlacklistController {
 
 	// 페이지 수정 로직
 	@PostMapping("/blacklistmain/editbbs")
-	public String editBBSResult(@SessionAttribute("sessionVO") UserVO uvo, @RequestParam("blackuserCode") String blackuserCode,
-			@ModelAttribute("BlacklistVO") BlacklistVO bvo, Model model) {
+	public String editBBSResult(@SessionAttribute("sessionVO") UserVO uvo,
+			@RequestParam("blackuserCode") String blackuserCode, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
+			Model model) {
+
 		bvo.setUserId(uvo.getUserId());
 		bvo.setBuserName(uvo.getUserName());
 		bvo.setUserCode(uvo.getUserCode());
 		/* System.out.println(bvo.getBlackuserCode()); */
 		/* service.deleteuserBlack(bvo); */
-		//먼저 기존값을 받아서 딜리트 로직을 진행하고
+		// 먼저 기존값을 받아서 딜리트 로직을 진행하고
 		/* bvo.setBlackuserCode(0); */
 		// 초기화를 진행하고
-		//아래 삭제로직에서 새로 받아서 진행한것처럼 새값을 넣어준다 
+		// 아래 삭제로직에서 새로 받아서 진행한것처럼 새값을 넣어준다
 		/*
 		 * bvo.setBlackuserCode(Integer.parseInt(blackuserCode));
 		 * System.out.println(bvo.getBlackuserCode());
 		 */
-		service.adduserBlack(bvo);
+		System.out.println("받는 더미 블랙 유저 코드" + bvo.getDumblackuserCode());
+		System.out.println("받는 블랙 유저 코드" + bvo.getBlackuserCode());
 		if (service.editBlackList(bvo)) {
+			service.adduserBlack(bvo);
 			return "redirect:/blacklist/blacklistmain";
 		} else {
+
 			model.addAttribute("alert", "alert");
 			return "redirect:/blacklist/blacklistmain";
 		}
-		
-		
-		
+
 	}
 
 	// 페이지 삭제
 	@GetMapping("/blacklistmain/deletebbs/{blacklistCode}")
-	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, Model model, @RequestParam("blackCode") String blackCode,
-			@ModelAttribute("BlacklistVO") BlacklistVO bvo, @PathVariable("blacklistCode") String blacklistCode) {
-		//get방식으로 보낸 blackCode를 @RequestParam으로 받아서 이걸 setblackusercode에 integet변환해서 넣음
+	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, Model model,
+			@RequestParam("blackCode") String blackCode, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
+			@PathVariable("blacklistCode") String blacklistCode) {
+		// get방식으로 보낸 blackCode를 @RequestParam으로 받아서 이걸 setblackusercode에 integet변환해서 넣음
 		bvo.setUserCode(uvo.getUserCode());
 		bvo.getBlackuserCode();
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
 		System.out.println(bvo.getBlackuserCode());
-		
+
 		service.deleteuserBlack(bvo);
-		
+
 		if (service.deleteBlackList(bvo)) {
-		
+
 			return "redirect:/blacklist/blacklistmain";
 		} else {
 			return "redirect:/blacklist/deletebbs/" + bvo.getBlacklistCode();
@@ -179,45 +184,44 @@ public class BlacklistController {
 	// 댓글 view
 	@PostMapping("/comment/{blackCode}")
 	@ResponseBody
-	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode") int blackCode,HttpSession session, Model model) {
-		UserVO vo = (UserVO)session.getAttribute("sessionVO");
+	public List<BlacklistCommentVO> getComments(@PathVariable("blackCode") int blackCode, HttpSession session,
+			Model model) {
+		UserVO vo = (UserVO) session.getAttribute("sessionVO");
 		model.addAttribute("userdata", vo);
 		return service.getCommentList(blackCode);
 	}
 
 	// 댓글 작성
 	// 커멘트를 저장
-		@PostMapping("/comment/save")
-		@ResponseBody
-		public Map<String, Object> setComments(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO bvo) {
-			bvo.setUserCode(uvo.getUserCode());
-			bvo.setUserName(uvo.getUserName());
+	@PostMapping("/comment/save")
+	@ResponseBody
+	public Map<String, Object> setComments(HttpSession session, @SessionAttribute("sessionVO") UserVO uvo,
+			@RequestBody BlacklistCommentVO bvo) {
+		bvo.setUserCode(uvo.getUserCode());
+		bvo.setUserName(uvo.getUserName());
 
-			return service.setBlacklistComment(bvo);
+		return service.setBlacklistComment(bvo);
 
-		}
-		
-		
-		// 댓글 수정
-		@PutMapping("/comment/edit")
-		@ResponseBody
-		public Map<String,String> editblacklistComment(HttpSession session,@SessionAttribute("sessionVO") UserVO uvo, @RequestBody BlacklistCommentVO vo
-				,@ModelAttribute("BlacklistVO") BlacklistVO bvo){
-			
-			vo.setUserCode(uvo.getUserCode());
-			vo.setUserName(uvo.getUserName());
-			
-			return service.editBlackListComment(vo);
-			
-		}
+	}
 
-			
-		  //댓글 삭제
-		  @DeleteMapping("/comment/delete")
-		  @ResponseBody
-		  public Map<String,String> deleteblacklistComment(HttpSession session, @RequestBody BlacklistCommentVO vo){
-		    return service.deleteBlackListComment(vo);
-		  }
-		
-		
+	// 댓글 수정
+	@PutMapping("/comment/edit")
+	@ResponseBody
+	public Map<String, String> editblacklistComment(HttpSession session, @SessionAttribute("sessionVO") UserVO uvo,
+			@RequestBody BlacklistCommentVO vo, @ModelAttribute("BlacklistVO") BlacklistVO bvo) {
+
+		vo.setUserCode(uvo.getUserCode());
+		vo.setUserName(uvo.getUserName());
+
+		return service.editBlackListComment(vo);
+
+	}
+
+	// 댓글 삭제
+	@DeleteMapping("/comment/delete")
+	@ResponseBody
+	public Map<String, String> deleteblacklistComment(HttpSession session, @RequestBody BlacklistCommentVO vo) {
+		return service.deleteBlackListComment(vo);
+	}
+
 }

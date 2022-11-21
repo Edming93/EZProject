@@ -112,18 +112,14 @@
     height: 100%;
     justify-content: center;
     padding-top: 50px;
-/*     background-color: #ccc; */
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
-/*     height: 900px; */
     min-height: 500px;
-/*     background-color: #ffaaaa; */
     align-items: center;
     flex-wrap: wrap;
-/*     border: 1px solid black; */
 }
 
 .main_content1 {
@@ -137,8 +133,6 @@
 	width: 100%;
 	height: 100%;
 	padding: 15px;
-/* 	background-color: #fffaec; */
-/* 	color: #fff; */
 }
 
 
@@ -146,7 +140,6 @@
 	display: block;
 	width: 100%;
 	height: 50%;
-/* 	border: 1px solid black; */
 }
 
 
@@ -154,7 +147,6 @@
 	width: 100%;
 	border-collapse: collapse;
 	font-size: 0.8rem;
-	/* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
 }
 
 #rantal_list th, td {
@@ -198,15 +190,6 @@
 .infobox > ul > li {
 	display: flex;
     flex-direction: column;
-	/* display: inline-block;
-	padding: 15px 5px;
-	margin-right: 20px;
-	background-color: #fff;
-	border-radius: 15px; */
-}
-
-.rantal_item:nth-child(4n) {
-   /*  background-color: #ddd; */
 }
 
 .rantal_item td:last-child {
@@ -382,7 +365,6 @@ td > a{
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -395,7 +377,6 @@ td > a{
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -457,7 +438,6 @@ td > a{
 						<div id="rantal_nav">
 							<h1 id="npc">예약 내역이 없습니다.</h1>
 							<table id="rantal_list">
-								<!-- <thead> -->
 									<tr style="display: none;">
 										<th>예약번호</th>
 										<th>매치타입</th>
@@ -466,62 +446,8 @@ td > a{
 										<th>매치시간</th>
 										<th>상태</th>
 									</tr>
-									
-								<!-- </thead> -->
-								<!-- <tbody> -->
-<!-- 									<tr class="rantal_item"> -->
-<!-- 										<td>111111</td> -->
-<!-- 										<td>대충 어딘가 경기장</td> -->
-<!-- 										<td>대충어디도 어디시 어디동 11</td> -->
-<!-- 										<td>2022-01-02</td> -->
-<!-- 										<td>14:00 ~ 16:00</td> -->
-<!-- 										<td>예약완료</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr class="collapsible"> -->
-<!-- 										<td class="rantal_content" colspan="10" height="100px"> -->
-<!-- 											<ul> -->
-<!-- 												<li>매치종류 : 구장예약</li> -->
-<!-- 												<li>매치형태 : 6:6</li> -->
-<!-- 												<li>예약자 : 사람1</li> -->
-<!-- 												<li>예약신청일 : 2022-01-01</li> -->
-<!-- 												<li>결제금액 : 120,000</li> -->
-<!-- 											</ul> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr class="rantal_item"> -->
-<!-- 										<td>222222</td> -->
-<!-- 										<td>대충 어딘가 경기장</td> -->
-<!-- 										<td>대충어디도 어디시 어디동 11</td> -->
-<!-- 										<td>2022-01-02</td> -->
-<!-- 										<td>14:00 ~ 16:00</td> -->
-<!-- 										<td>예약완료</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr class="collapsible"> -->
-<!-- 										<td class="rantal_content" colspan="10" height="100px"> -->
-<!-- 											<ul> -->
-<!-- 												<li>매치종류 : 팀예약</li> -->
-<!-- 												<li>매치형태 : 6:6</li> -->
-<!-- 												<li>예약자 : 사람1</li> -->
-<!-- 												<li>예약신청일 : 2022-01-01</li> -->
-<!-- 												<li>결제금액 : 120,000</li> -->
-<!-- 											</ul> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
-								<!-- </tbody> -->
 							</table>
 						</div>
-<!-- 										<li>예약번호 : 111111</li> -->
-<!-- 										<li>예약일자 : 2022-01-01</li> -->
-<!-- 										<li>예약구장 : 대충어딘가경기장</li> -->
-<!-- 										<li>구장위치 : 대충어디도 어디시 어디동 11</li> -->
-<!-- 										<li>매치타입 : 6:6</li> -->
-<!-- 										<li>구장비용 : 120,000원</li> -->
-<!-- 										<li>예약자 : 사람1</li> -->
-<!-- 										<li>결제금액 : 120,000원</li> -->
-<!-- 										<li>매치(대여)일자 : 2022-01-02</li> -->
-<!-- 										<li>매치시간 : 09:00:00</li> -->
-<!-- 										<li>상태 : 예약완료</li> -->
-							
 					</section>
 				</div>
 					<div class="btn_box">
@@ -551,7 +477,7 @@ td > a{
         <script type="text/javascript">
         	const table = document.getElementById("rantal_list");
         	table.style.display = "none";
-        	// 목록 받아오기
+
         	window.addEventListener("DOMContentLoaded", function(){
         		let rvcode = "";
 					$.ajax({
@@ -561,11 +487,9 @@ td > a{
 						dataType: "json",
 						async: false,
 						success: function(data){				
-							console.log(data);
 							for (const list of data.list) {
 								$('#npc').hide();
 								table.style.display = "inline-table";
-								console.log(data.userName);
 								const tr1 = document.createElement("tr");
 								const tr2 = document.createElement("tr");
 								const tr3 = document.createElement("tr");
@@ -624,7 +548,6 @@ td > a{
 								table.append(tr2);
 								table.append(tr3);
 								
-								// select 박스 예약상태 확인 
 								$('.state').on("change", function(){
 									tr1.style.display = "table-row";
 									$('.collapsible').hide();
@@ -658,7 +581,7 @@ td > a{
 								});
 								
 							}
-						//  취소
+
 							$('.refundbtn').on("click",function(){
 					     		var del = confirm("정말취소하시겠습니까?");
 								 if(del){
@@ -675,11 +598,6 @@ td > a{
 						      		      success: function(data) {
 						      		    	if(data ==1){
 						      		    		location.reload();
-						      		    		/* console.log("성공");
-						      		    		console.log(this);
-						      		    		$(select).text("취소신청");
-						      		    		$(select).css('color','#CDCDCD');
-						      		    		$(numse).css('visibility','#hidden'); */
 						      		    	}
 						      		    	  
 						      		      },
@@ -694,12 +612,9 @@ td > a{
 			        		
 			        	});
 							
-							
-								// list 누르면 아래 박스추가
 					        	$('.rantal_item').on("click",function(){
 									$(this).next().nextAll('.collapsible').hide();
 									$(this).next().prevAll('.collapsible').hide();
-										console.log($(this).next().css('display'));
 									if($(this).next().css('display') == "table-row"){
 										$(this).next().hide();
 										return;

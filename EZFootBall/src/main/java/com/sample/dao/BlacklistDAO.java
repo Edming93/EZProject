@@ -21,7 +21,6 @@ public interface BlacklistDAO {
 	public List<BlacklistVO> selectBlackList(BlacklistPageVO vo);
 	
 
-	
 	//상세 페이지 view
 	public BlacklistVO selectBlackListdetail(String blacklistCode);
 	
@@ -60,8 +59,6 @@ public interface BlacklistDAO {
 	
 	//게시판 댓글 보이기
 	public List<BlacklistCommentVO> selectComment(BlacklistCommentVO vo);
-	
-	
 	
 	
 	//게시판 댓글 update

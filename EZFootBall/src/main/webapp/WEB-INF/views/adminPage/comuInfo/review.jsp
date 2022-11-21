@@ -204,7 +204,7 @@ input{
 		   
 		   $("input[class='reviewChkCode']:checked").each(function(){
 		    checkArr.push($(this).attr("value"));
-		    console.log(checkArr);
+		   
 		   });
 		   
 		   var reviewChkCode = new Array();

@@ -19,98 +19,81 @@ import com.sample.vo.UserVO;
 
 @Service
 public class ReviewCommentService {
-	
+
 	private UserDAO userDAO;
 	private ReviewCommentDAO reviewCommentDAO;
-	
-	
+
 	public ReviewCommentService(UserDAO userDAO, ReviewCommentDAO reviewCommentDAO) {
 		super();
 		this.userDAO = userDAO;
 		this.reviewCommentDAO = reviewCommentDAO;
 	}
 
-	
-	
 	public boolean isUser(UserVO vo, HttpSession session) {
 		UserVO rvo = userDAO.idPwCheck(vo);
-		if(rvo != null) {
+		if (rvo != null) {
 			session.setAttribute("userVO", rvo);
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
-
-	public List<ReviewCommentVO> getCommentAllList(){
+	public List<ReviewCommentVO> getCommentAllList() {
 		return reviewCommentDAO.selectCommentList();
 	}
-	
-	//저장
-	//스트링 스트링을 스트링 오브젝트로 변경하기
-	public Map<String, Object> setComment(ReviewCommentVO vo){
-		Map<String, Object> map = new HashMap<String,Object>();
-		System.out.println();
-		System.out.println("before : " + vo);
+
+	// 저장
+	// 스트링 스트링을 스트링 오브젝트로 변경하기
+	public Map<String, Object> setComment(ReviewCommentVO vo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		int a = reviewCommentDAO.insertComment(vo);
-		System.out.println("after : "+vo);
-		
-		if(a > 0) {
+
+		if (a > 0) {
 			map.put("state", "ok");
 			map.put("vo", reviewCommentDAO.selectComment(vo));
-			 
-		}else {
+
+		} else {
 			map.put("state", "error");
 		}
 
 		return map;
-		//모델로 보냄
 	}
-	
-	
-	
+
 	public Map<String, String> editComment(ReviewCommentVO vo) {
-	  Map<String, String> map = new HashMap<String,String>();
-	  System.out.println(vo);
-	  
-	  try {
-		  
-		  reviewCommentDAO.updateComment(vo);
-        map.put("state", "ok");        
-      } catch (Exception e) {
-       e.printStackTrace();
-       map.put("state", "error");
-      }
-    return map;
-}
-	
-	
+		Map<String, String> map = new HashMap<String, String>();
+
+		try {
+
+			reviewCommentDAO.updateComment(vo);
+			map.put("state", "ok");
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("state", "error");
+		}
+		return map;
+	}
 
 	public Map<String, String> deleteComment(ReviewCommentVO vo) {
-	Map<String, String> map = new HashMap<String,String>();
-	  System.out.println(vo);
-	  try {
-		  reviewCommentDAO.deleteComment(vo);
-        map.put("state", "ok");        
-      } catch (Exception e) {
-       e.printStackTrace();
-       map.put("state", "error");
-      }
-	  return map;
+		Map<String, String> map = new HashMap<String, String>();
+		try {
+			reviewCommentDAO.deleteComment(vo);
+			map.put("state", "ok");
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("state", "error");
+		}
+		return map;
 	}
-	
-	
+
 	public ReviewPageVO recommentList(Criteria cri) {
 		ReviewPageVO dto = new ReviewPageVO();
-		
+
 		dto.setList(reviewCommentDAO.getCommentList(cri));
 		dto.setPageInfo(new PageMakerVO(cri, reviewCommentDAO.getCommentListTotal(cri.getReviewCode())));
-		
+
 		return dto;
 	}
-		
+
 }
-	
-
-
