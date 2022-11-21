@@ -52,20 +52,16 @@ public class LoginService {
 		String userId = dao.userId(vo.getUserId());
 		
 		if(vo.getUserId().equals(userId)) {
-			System.out.println("이미 존재하는 아이디 입니다."); 
 
 		}else {
-			System.out.println(encryptSHA256(vo.getUserPw()));
 			vo.setUserPw(encryptSHA256(vo.getUserPw()));
 			vo.setUserBirth(vo.getUserBirthYear()+vo.getUserBirthMonth()+vo.getUserBirthDay());
 			dao.insertUser(vo);
 			dao.insertGameStat(vo);
-			System.out.println("가입에 성공하셨습니다!");
 		}
 	}
 	
 	public void getUserIdList(Model model) {
-		
 		model.addAttribute("userIdList",dao.userIdList());
 	}
 

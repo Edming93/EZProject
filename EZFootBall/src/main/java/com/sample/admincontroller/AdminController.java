@@ -524,7 +524,7 @@ public class AdminController {
 				} else {
 				}
 			} catch (Exception e) {
-				System.out.println("여기가 문제");
+				System.out.println("구장추가 예외에러");
 			}
 
 		}
