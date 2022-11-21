@@ -295,11 +295,9 @@ public class TeamController {
 			user5.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user5);
 			service.upUserInfo(user5);
-			System.out.println("왓더");
 			
 			try {
 				if(Integer.parseInt(vo.getUserCode6()) > 1) {
-					System.out.println("DDDDDD");
 					UserVO user6 = new UserVO();
 					user6.setTeamCode(LTC);
 					user6.setUserCode(Integer.parseInt(vo.getUserCode6()));
@@ -310,7 +308,6 @@ public class TeamController {
 				
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("오류남");
 			}
 			
 			
