@@ -648,7 +648,7 @@ let play_btn = document.querySelector(".fa-play");
 
   top_btn_right.addEventListener("click", function () {
     clearTimeout(time_out);
-    console.log("right:"+slide_index);
+    
     if (slide_index > 0 && slide_index < slide_photo_cnt) {
       top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px)';
 
@@ -667,23 +667,23 @@ let play_btn = document.querySelector(".fa-play");
 
     button_flag = false;
     clearTimeout(time_out);
-    console.log("left:"+slide_index);
+    
 
     if (slide_index > 1 && slide_index <= slide_photo_cnt) {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
       slide_index--;
 
-      console.log("if");
+      
 
     } else {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
 
       slide_index = slide_photo_cnt;
-      console.log("else");
+     
     }
     
     page_num.innerHTML = slide_index;
-    console.log(slide_index);
+    
 
    })
 
@@ -714,7 +714,7 @@ let play_btn = document.querySelector(".fa-play");
                 slide_index++;
             
                 top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
-                console.log(slide_index);
+                
 
                 page_num.innerHTML = slide_index;
 
@@ -799,7 +799,7 @@ let play_btn = document.querySelector(".fa-play");
 	document.getElementById("submit").addEventListener("click", function(){
 		let content = document.getElementById("content").value;
 		const simple_data = {content};
-		console.log(simple_data);
+		
 		//댓글 작성
 		$.ajax({
 			url : "${pageContext.request.contextPath}/review/comment/save",
@@ -809,7 +809,7 @@ let play_btn = document.querySelector(".fa-play");
 			data : JSON.stringify(simple_data),
 			/* anync : false, */
 			success : function(data){
-				console.log(data);
+				
 				if(data.state == "ok"){
 					
 					const comdiv = document.getElementById("comment2");
@@ -909,7 +909,7 @@ let play_btn = document.querySelector(".fa-play");
 						 	const content = updateinput.value;
 						 	const reviewCode = data.vo.reviewCode;
 						 	const createDate = new Date();
-						 	console.log(createDate);
+						 	
 						 	const simple_data = {reviewCode, content, createDate};
 						 	
 						 	$.ajax({
@@ -919,16 +919,16 @@ let play_btn = document.querySelector(".fa-play");
 						 			dataType : "json",
 						 			data : JSON.stringify(simple_data),
 						 			success : function(data){
-						 				console.log(data);
+						 				
 						 				if(data.state == "ok"){
 						 					ccontent.innerText = content;
 						 					updateform.remove();
 						 					var now = moment(createDate).format("YYYY-MM-DD HH:mm");
 						 					cdate.innerText = now;
-						 					console.log(now);
+						 					
 						 					
 						 				}
-										console.log(simple_data);
+										
 									}
 						 		});
 						 	});
@@ -983,7 +983,7 @@ let play_btn = document.querySelector(".fa-play");
 	//db에서 댓글 가져오기
 	window.addEventListener("DOMContentLoaded", function(){
 		let username = "${userdata.userName}";
-		console.log(username);
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/review/comment",
 			type : "POST",
@@ -993,7 +993,7 @@ let play_btn = document.querySelector(".fa-play");
 				const comdiv = document.getElementById("comment");
 				
 				for(let comment of data){
-					console.log(comment);	
+						
 				
 					const leftdiv = document.createElement("div");
 					leftdiv.className = "leftbox";						
@@ -1067,8 +1067,7 @@ let play_btn = document.querySelector(".fa-play");
 								const updateform = document.createElement("div");
 								const updateinput = document.createElement("textarea");
 								updateinput.cols = "30";
-								updateinput.rows = "10";
-								console.log(ccontent.innerText);
+								updateinput.rows = "10";					
 								updateinput.innerText = ccontent.innerText;
 								const updatebtn = document.createElement("button");
 								updatebtn.innerText = "수정완료";

@@ -58,8 +58,6 @@ public class ReviewCommentController {
 	@ResponseBody
 	public Map<String, Object> setComment(HttpSession session, @RequestBody ReviewCommentVO vo) {
         UserVO vo2 = (UserVO) session.getAttribute("sessionVO");
-        System.out.println(vo2.getUserName());
-		System.out.println(vo.getContent());
 		vo.setUserCode(vo2.getUserCode());
 		vo.setUserName(vo2.getUserName());
 		return service.setComment(vo);
@@ -71,12 +69,6 @@ public class ReviewCommentController {
 	@ResponseBody
 	public Map<String,String> editComment(HttpSession session, @RequestBody ReviewCommentVO vo){
 		UserVO vo2 = (UserVO)session.getAttribute("sessionVO");
-		System.out.println(vo.getUserName());
-		System.out.println(vo2.getUserName());
-		/*
-		 * if (vo.getUserName() == vo2.getUserName()) { return service.editComment(vo);
-		 * }
-		 */
 		return service.editComment(vo);
 	}
 
@@ -88,13 +80,5 @@ public class ReviewCommentController {
     return service.deleteComment(vo);
   }
   
-  	/* 댓글 페이징 */
-	/*
-  	@PostMapping(value="/list")
-	@ResponseBody
-	public ReviewPageVO replyListPOST(@RequestBody Criteria cri) {
-		return service.recommentList(cri);
-	}
-	*/
 
 }

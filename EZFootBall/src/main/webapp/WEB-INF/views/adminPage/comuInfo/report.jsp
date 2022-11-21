@@ -93,7 +93,7 @@
 		   
 		   $("input[class='blakcChkCode']:checked").each(function(){
 		    checkArr.push($(this).attr("value"));
-		    console.log(checkArr);
+		    
 		   });
 		   
 		   var reviewChkCode = new Array();
@@ -130,7 +130,7 @@
 		   
 		   $("input[class='blakcChkCode']:checked").each(function(){
 		    checkArr.push($(this).attr("value"));
-		    console.log(checkArr);
+		    
 		   });
 		   
 		   var reviewChkCode = new Array();

@@ -705,7 +705,7 @@ let play_btn = document.querySelector(".fa-play");
 
   top_btn_right.addEventListener("click", function () {
     clearTimeout(time_out);
-    console.log("right:"+slide_index);
+    
     if (slide_index > 0 && slide_index < slide_photo_cnt) {
       top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px)';
 
@@ -724,23 +724,23 @@ let play_btn = document.querySelector(".fa-play");
 
     button_flag = false;
     clearTimeout(time_out);
-    console.log("left:"+slide_index);
+    
 
     if (slide_index > 1 && slide_index <= slide_photo_cnt) {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
       slide_index--;
 
-      console.log("if");
+      
 
     } else {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
 
       slide_index = slide_photo_cnt;
-      console.log("else");
+      
     }
     
     page_num.innerHTML = slide_index;
-    console.log(slide_index);
+    
 
    })
 
@@ -771,7 +771,7 @@ let play_btn = document.querySelector(".fa-play");
                 slide_index++;
             
                 top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
-                console.log(slide_index);
+                
 
                 page_num.innerHTML = slide_index;
 
@@ -801,7 +801,7 @@ let play_btn = document.querySelector(".fa-play");
 				<form:select path="blacklistLocal">
 					<form:options items="${blacklistLocal}"/>
 				</form:select>
-				<h4>제목 :</h4>
+				<h4>제목 : </h4>
 			<form:input path="blacklistTitle" placeholder ="제목을 입력해 주세요"/>
 			<h4>신고유저코드 : </h4>
 			<form:input path="blackuserCode" class="black_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder ="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)"/>
@@ -868,7 +868,7 @@ let play_btn = document.querySelector(".fa-play");
 	});
 
 	
-	 console.log("<%=alert%>");
+	 
      
 		if(<%=alert%> == alert){
 			Swal.fire('이미 신고한 유저 입니다');
