@@ -115,8 +115,8 @@ public class BlacklistController {
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
 		System.out.println(bvo.getBlackuserCode());
 		System.out.println(bvo.getDumblackuserCode());
-		int a = bvo.getBlackuserCode();
-
+		
+		service.deleteuserBlack(bvo);
 		service.getcode(model, uvo);
 		if (uvo != null) {
 			service.getBlackListContent(model, blacklistCode);
