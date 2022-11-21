@@ -1072,7 +1072,7 @@
 	        	      	        	divinlist.append(divn);
 	        	      	        	divinlist.append(divd);
 	        	      	        	/* divinlist.append(divg); */
-	        	      	        	divinlist.append(divv);
+	        	      	        	//divinlist.append(divv);
 	        	      	        	divinlist.append(divl);
 	        	      	        	
 	        	      	        	divlist.append(divinlist);
@@ -1292,7 +1292,7 @@
 	  		if( '<%=nday%>' == '${matchinfo.gameDay}'&& ntime >= gtime){
 	  			alert("지난 경기는 신청 할 수 없습니다");
 	  		}else{
-	  			if('<%=td%>' == 0) {
+	  			if('<%=td%>' <= 1) {
 					alert("소속된 팀이 없으면 신청 할 수 없습니다.");
 				}else {
 					if('<%=ugen%>' == '무'){

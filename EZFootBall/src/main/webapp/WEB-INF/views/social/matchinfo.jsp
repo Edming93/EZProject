@@ -1033,7 +1033,7 @@
 	    	  	      	        	divlist.append(divn);
 	    	  	      	        	divlist.append(divd);
 	    	  	      	        	divlist.append(divg);
-	    	  	      	        	divlist.append(divv);
+	    	  	      	        	//divlist.append(divv);
 	    	  	      	        	divlist.append(divl);
 	    	  	      	        	
 	    	  	      	        	//document.getElementById("list_content").innerHTML = " ";
