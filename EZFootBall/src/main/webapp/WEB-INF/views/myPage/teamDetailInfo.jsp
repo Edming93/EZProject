@@ -379,27 +379,37 @@ footer {
 	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
     }
     .teamInfo {
-    	padding-top: 10px;
+    	padding-top: 18px;
     	display: flex;
     	justify-content: space-between;
+    	align-items: center;
     }
     .teamlist > ul {
     	list-style: none;
+    	padding-left:0px;
+    	display: flex;
+    	flex-direction: column;
+    	align-items: center;
     }
     .teamlist > ul > li {
-    	padding: 20px;
-     	margin-top : 15px;
-     	width: 60%;
-     	border: 1px solid #26A653;
-     	border-radius: 25px;
-    }
+	    padding: 20px 40px 20px 40px;
+	    margin-top: 15px;
+	    width: 95%;
+	    border: 1px solid #26A653;
+	    border-radius: 15px;
+	}
+	.checkbox {
+	    width: 20px;
+	    height: 20px;
+	}
+
     .teambox2{
     	width: 60%;
-	    padding: 20px;
+	    padding: 30px;
 	    border-radius: 10px;
 	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
     }
-    .teambox2 > .teamInfo > h3{
+    .teambox2 > .teamInfo > h3	{
     	padding-top: 10px;
     }
     #out{
@@ -413,16 +423,27 @@ footer {
     	padding: 8px;
     	background: none;
     	border: 1px solid #26A653;
-     	border-radius: 25px;
+     	border-radius: 7px;
      	cursor: pointer; 
     }
     #Tdel{
     	padding: 8px;
     	background: none;
     	border: 1px solid #26A653;
-     	border-radius: 25px;
+     	border-radius: 7px;
      	cursor: pointer; 
     }
+    .member_area {
+    	display: flex;
+    	justify-content: space-between;
+    }
+    
+  	.member_h4 {
+  		margin-bottom:10px;
+  	}
+  	#subInfo {
+  		font-weight: 100;
+  	}
 
 </style>
 </head>
@@ -610,10 +631,10 @@ footer {
 		
 		<c:if test="${user.userCode == tmVO.userCode1 }">
 				<div class="teambox2">
-					<h3>당신은 주장 입니다</h3>
+					<h2>당신은 주장 입니다</h2>
 					<div class="teamInfo">
 						<h4>
-							팀이름 : ${tmVO.teamName } <span id="subInfo">(팀코드 :	${tmVO.teamCode})</span>
+							TeamName : ${tmVO.teamName } <span id="subInfo">(TeamCode :	${tmVO.teamCode})</span>
 						</h4>
 						<div>
 						<button id="Mdel">
@@ -629,21 +650,51 @@ footer {
 						<div class="teamlist">
 
 							<ul>
-								<li class="m1"></li>
+								<li class="m1">
+									<h4 class="member_h4">주장</h4>
+								</li>
 								<c:if test="${not empty tmVO.tmember2}">
-									<li class="m2"><input type="checkbox" id="tmember2" class="checkbox" name="tmember2" value="${tmVO.userCode2}"></li>
+									<li class="m2">
+										<div class="member_area">
+											<h4 class="member_h4">팀원1</h4>
+											<input type="checkbox" id="tmember2" class="checkbox" name="tmember2" value="${tmVO.userCode2}">
+										</div>
+									</li>
 								</c:if>
 								<c:if test="${not empty tmVO.tmember3}">
-									<li class="m3"><input type="checkbox" id="tmember3" class="checkbox" name="tmember3" value="${tmVO.userCode3}"></li>
+									<li class="m3">
+										<div class="member_area">
+											<h4 class="member_h4">팀원2</h4>
+											<input type="checkbox" id="tmember3" class="checkbox" name="tmember3" value="${tmVO.userCode3}">
+										</div>
+										</li>
 								</c:if>
 								<c:if test="${not empty tmVO.tmember4}">
-									<li class="m4"><input type="checkbox" id="tmember4" class="checkbox" name="tmember4" value="${tmVO.userCode4}"></li>
+									<li class="m4">
+										<div class="member_area">
+											<h4 class="member_h4">팀원3</h4>
+											<input type="checkbox" id="tmember4" class="checkbox" name="tmember4" value="${tmVO.userCode4}">
+										</div>
+									</li>
+
 								</c:if>
 								<c:if test="${not empty tmVO.tmember5}">
-									<li class="m5"><input type="checkbox" id="tmember5" class="checkbox" name="tmember5" value="${tmVO.userCode5}"></li>
+
+									<li class="m5">
+										<div class="member_area">
+											<h4 class="member_h4">팀원4</h4>
+											<input type="checkbox" id="tmember5" class="checkbox" name="tmember5" value="${tmVO.userCode5}">
+										</div>
+									</li>
+
 								</c:if>
 								<c:if test="${not empty tmVO.tmember6}">
-									<li class="m6"><input type="checkbox" id="tmember6" class="checkbox" name="tmember5" value="${tmVO.userCode6}"></li>									
+									<li class="m6">
+										<div class="member_area">
+											<h4 class="member_h4">팀원5</h4>
+											<input type="checkbox" id="tmember6" class="checkbox" name="tmember5" value="${tmVO.userCode6}">
+										</div>
+									</li>									
 								</c:if>
 							</ul>
 						</div>
