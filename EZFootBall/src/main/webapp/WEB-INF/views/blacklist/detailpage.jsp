@@ -142,13 +142,10 @@ body{
 }
 
 .insert {
-
-    grid-area: insert;
-    display: flex;
-    flex-direction: row;
-    width: 85%;
-    margin-left: 8%;
-    justify-content: space-between;
+	grid-area: insert;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .insert>textarea {
@@ -188,6 +185,7 @@ input{
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
     margin-top: 5px;
+    font-family: 'Gowun Dodum', sans-serif;
 	
 }
 
@@ -583,10 +581,6 @@ button{
     	display: flex;
     	
     }
-    #comment{
-    width: 85%;
-    margin-left: 8%;
-    }
 </style>
 </head>
 <body>
@@ -713,7 +707,7 @@ let play_btn = document.querySelector(".fa-play");
 
   top_btn_right.addEventListener("click", function () {
     clearTimeout(time_out);
-    
+    console.log("right:"+slide_index);
     if (slide_index > 0 && slide_index < slide_photo_cnt) {
       top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px)';
 
@@ -732,23 +726,23 @@ let play_btn = document.querySelector(".fa-play");
 
     button_flag = false;
     clearTimeout(time_out);
-    
+    console.log("left:"+slide_index);
 
     if (slide_index > 1 && slide_index <= slide_photo_cnt) {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
       slide_index--;
 
-      
+      console.log("if");
 
     } else {
       top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
 
       slide_index = slide_photo_cnt;
-      
+      console.log("else");
     }
     
     page_num.innerHTML = slide_index;
-    
+    console.log(slide_index);
 
    })
 
@@ -779,7 +773,7 @@ let play_btn = document.querySelector(".fa-play");
                 slide_index++;
             
                 top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
-                
+                console.log(slide_index);
 
                 page_num.innerHTML = slide_index;
 
@@ -886,9 +880,9 @@ let play_btn = document.querySelector(".fa-play");
 		let content = document.getElementById("inittext").value;
 		const blackCode = ${BlacklistVO.blacklistCode}
 		const commentCode = ${BlacklistcommentVO.comentCode}
-		
+		console.log(blackCode);
 		const simple_data = {content,blackCode};
-		
+		console.log(simple_data);
 		//댓글 작성
 		$.ajax({
 			url : "${pageContext.request.contextPath}/blacklist/comment/save",
@@ -898,7 +892,7 @@ let play_btn = document.querySelector(".fa-play");
 			data : JSON.stringify(simple_data),
 			/* anync : false, */
 			success : function(data){
-				
+				console.log(data);
 				if(data.state == "ok"){
 					
 					const comdiv = document.getElementById("comment");
@@ -980,7 +974,7 @@ let play_btn = document.querySelector(".fa-play");
 						 	const content = updateinput.value;
 						 	const commentCode = data.vo.commentCode;
 						 	const bcomentCreateDate = new Date();
-						 	
+						 	console.log(createDate);
 						 	const simple_data = {commentCode, content, bcomentCreateDate};
 
 						 	$.ajax({
@@ -990,18 +984,18 @@ let play_btn = document.querySelector(".fa-play");
 						 			dataType : "json",
 						 			data : JSON.stringify(simple_data),
 						 			success : function(data){
-						 				
+						 				console.log(data);
 						 				if(data.state == "ok"){
 						 					ccontent.innerText = content;
 						 					updateform.remove();
 						 					var now = moment(bcomentCreateDate).format("YYYY-MM-DD HH:mm");
 						 					cdate.innerText = now;
-						 					
+						 					console.log(now);
 						 					updateform.remove();
 						 					
 						 					
 						 				}
-										
+										console.log(simple_data);
 									}
 						 		});
 						 	});
@@ -1049,7 +1043,7 @@ let play_btn = document.querySelector(".fa-play");
 	//db에서 댓글 가져오기
 	window.addEventListener("DOMContentLoaded", function(){
 		let username = "${userdata.userName}";
-		
+		console.log(username);
 		$.ajax({
 			url : "${pageContext.request.contextPath}/blacklist/comment/${BlacklistVO.blacklistCode}",
 			type : "POST",
@@ -1059,7 +1053,7 @@ let play_btn = document.querySelector(".fa-play");
 				const comdiv = document.getElementById("comment");
 				
 				for(let comment of data){
-						
+					console.log(comment);	
 				
 					const div = document.createElement("div");
 					div.style.display = "flex";
