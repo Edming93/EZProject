@@ -221,7 +221,7 @@ button{
 #ibtn{
 	display: flex;
 	margin-top: 3vh;
-    flex: 0.14;
+    width: 80px;
     justify-content: center;
     align-items: center;
 }

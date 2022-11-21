@@ -96,7 +96,7 @@ td{
     border-radius: 60px;
     /* justify-content: center; */
     align-items: center;
-    margin-left: 25%;
+      margin-left: 20%;
 
 }
 td > a{
@@ -463,8 +463,9 @@ table th {
   .pageInfo{
     list-style: none;
     display: flex;
-    margin: 50px;
-    justify-content: center;    
+    margin-top: 50px;
+    margin-right: 50px;
+    justify-content: center;
   }
   
   .pageInfo li{
