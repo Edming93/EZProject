@@ -11,17 +11,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%
-	request.setCharacterEncoding("utf-8");
-	
-	String authority = null;
-	if(session.getAttribute("sessionVO") != null) {
-		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
-		authority = uvo.getUserAuthority();
-		
-	}else {
-		authority = "일반회원";
-		
-	}
+request.setCharacterEncoding("utf-8");
+
+String authority = null;
+if (session.getAttribute("sessionVO") != null) {
+	UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+	authority = uvo.getUserAuthority();
+
+} else {
+	authority = "일반회원";
+
+}
 %>
 
 <!DOCTYPE html>
@@ -61,30 +61,23 @@ body {
 
 .containersetbbs {
 	margin: 0 auto;
-    display: grid;
-    grid-template-columns: 12vh 1fr 12vh;
-    grid-template-rows: 3vh 11vh 1vh 1vh 1vh 60vh 5vh;
-    gap: 10px 10px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        ". . ."
-        ". header ."
-        ". . ."
-        ". popup ."
-        ". . ."
-        ". main ."
-        ". footer .";
-    height: 90vh;
+	display: grid;
+	grid-template-columns: 12vh 1fr 12vh;
+	grid-template-rows: 3vh 11vh 1vh 1vh 1vh 60vh 5vh;
+	gap: 10px 10px;
+	grid-auto-flow: row;
+	grid-template-areas: ". . ." ". header ." ". . ." ". popup ." ". . ."
+		". main ." ". footer .";
+	height: 90vh;
 }
 
-.popup{
+.popup {
 	grid-area: popup;
 	display: grid;
 	grid-template-columns: 130px 1fr;
 	grid-template-rows: 30px 30px;
 	align-items: center;
 	gap: 10px;
-
 }
 
 #div1 {
@@ -554,15 +547,59 @@ footer {
 	display: flex;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+}
 
-*{margin:0; padding:0;}
-a{text-decoration:none;}
-.wrap{padding:10px;}
+a {
+	text-decoration: none;
+}
 
-.btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:rgb(38, 166, 83); color:#fff; width:170px; height:30px; border-radius: 5px;}
-.pop_wrap{position:fixed; top:0; left:0; right:0; bottom:0; font-size:0; text-align:center;}
-.pop_wrap:after{display:inline-block; height:100%; vertical-align:middle; content:'';}
-.pop_wrap .pop_inner{display:inline-block; padding:20px 30px; background:#fff; width:250px; vertical-align:middle; font-size:15px;}
+.wrap {
+	padding: 10px;
+}
+
+.btn_open {
+	font-weight: bold;
+	margin: 5px;
+	padding: 4px 6px;
+	background: rgb(38, 166, 83);
+	color: #fff;
+	width: 170px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+.pop_wrap {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 0;
+	text-align: center;
+}
+
+.pop_wrap:after {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	content: '';
+}
+
+.pop_wrap .pop_inner {
+	display: inline-block;
+	padding: 20px 30px;
+	background: #fff;
+	width: 250px;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+.ppp:hover{
+	cursor : pointer;
+}
 
 </style>
 </head>
@@ -579,15 +616,21 @@ a{text-decoration:none;}
 							<iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
 						</div>
 						<div class="adminMove">
-							<% if(authority.equals("관리자")){ %>
+							<%
+							if (authority.equals("관리자")) {
+							%>
 							<a class="header_icon admin_btn"
 								href="${pageContext.request.contextPath}/admin/admin"><iconify-icon
 									icon="clarity:administrator-solid"></iconify-icon></a>
-							<%}else if(authority.equals("매니저")){%>
+							<%
+							} else if (authority.equals("매니저")) {
+							%>
 							<a class="header_icon manager_btn"
 								href="${pageContext.request.contextPath}/manager/manager"><iconify-icon
 									icon="clarity:administrator-solid"></iconify-icon></a>
-							<%} %>
+							<%
+							}
+							%>
 						</div>
 
 						<div class="login_icon">
@@ -605,7 +648,9 @@ a{text-decoration:none;}
 							</a>
 						</div>
 
-						<% if(session.getAttribute("sessionVO") == null) { %>
+						<%
+						if (session.getAttribute("sessionVO") == null) {
+						%>
 						<div class="etc_icon">
 							<a href="${pageContext.request.contextPath}/etc/etc"> <svg
 									width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -622,16 +667,22 @@ a{text-decoration:none;}
                         </svg>
 							</a>
 						</div>
-						<% } %>
+						<%
+						}
+						%>
 
-						<% if(session.getAttribute("sessionVO") != null) { %>
+						<%
+						if (session.getAttribute("sessionVO") != null) {
+						%>
 						<div class="logout_icon">
 							<a class="header_icon logout_btn"
 								href="${pageContext.request.contextPath}/loginPage/logout">
 								<iconify-icon icon="codicon:sign-out"></iconify-icon>
 							</a>
 						</div>
-						<%} %>
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</div>
@@ -701,116 +752,115 @@ a{text-decoration:none;}
 		<!-- 		</div> -->
 
 		<script>
+			let button_flag = true;
+			var time_out;
 
-let button_flag = true;
-var time_out;
+			let page_num = document.querySelector(".current_index");
 
-let page_num = document.querySelector(".current_index");
-            
-let pause_btn = document.querySelector(".fa-pause");
-let play_btn = document.querySelector(".fa-play");
+			let pause_btn = document.querySelector(".fa-pause");
+			let play_btn = document.querySelector(".fa-play");
 
-  // translate 먹일곳
-  let top_banner = document.querySelector('.banner_content_area');
-  let top_btn_right = document.querySelector(".e_next_banner");
-  let top_btn_left = document.querySelector(".e_previous_banner");
-  let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
+			// translate 먹일곳
+			let top_banner = document.querySelector('.banner_content_area');
+			let top_btn_right = document.querySelector(".e_next_banner");
+			let top_btn_left = document.querySelector(".e_previous_banner");
+			let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
 
-  // 최상단 디브
-  let slider_area = document.querySelector(".banner_container");
+			// 최상단 디브
+			let slider_area = document.querySelector(".banner_container");
 
-  var slider_width = slider_area.clientWidth; // container의 width
-  var slide_index = 0;
+			var slider_width = slider_area.clientWidth; // container의 width
+			var slide_index = 0;
 
-  let top_pagination_btn = document.getElementsByClassName("swiper_pagination_bullet");
-  let more_pagination_btn = document.getElementsByClassName("pagination_bullet");
+			let top_pagination_btn = document
+					.getElementsByClassName("swiper_pagination_bullet");
+			let more_pagination_btn = document
+					.getElementsByClassName("pagination_bullet");
 
+			top_btn_right.addEventListener("click", function() {
+				clearTimeout(time_out);
+				console.log("right:" + slide_index);
+				if (slide_index > 0 && slide_index < slide_photo_cnt) {
+					top_banner.style.transform = 'translate('
+							+ (-(1024 * (slide_index - 1))) + 'px)';
 
-  top_btn_right.addEventListener("click", function () {
-    clearTimeout(time_out);
-    console.log("right:"+slide_index);
-    if (slide_index > 0 && slide_index < slide_photo_cnt) {
-      top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px)';
+					// slide_index++;
+				} else {
+					top_banner.style.transform = 'translateX(0vw)';
+					slide_index = 0;
+				}
+				show_slides();
+			})
 
+			top_btn_left.addEventListener("click", function() {
+				pause_btn.style.display = "none";
+				play_btn.style.display = "block";
 
-      // slide_index++;
-    } else {
-      top_banner.style.transform = 'translateX(0vw)';
-      slide_index = 0;
-    }
-    show_slides();
-  })
+				button_flag = false;
+				clearTimeout(time_out);
+				console.log("left:" + slide_index);
 
-  top_btn_left.addEventListener("click", function () {
-    pause_btn.style.display = "none";
-    play_btn.style.display = "block";
+				if (slide_index > 1 && slide_index <= slide_photo_cnt) {
+					top_banner.style.transform = 'translateX('
+							+ (-1024 * (slide_index - 2)) + 'px)';
+					slide_index--;
 
-    button_flag = false;
-    clearTimeout(time_out);
-    console.log("left:"+slide_index);
+					console.log("if");
 
-    if (slide_index > 1 && slide_index <= slide_photo_cnt) {
-      top_banner.style.transform = 'translateX(' + (-1024 * (slide_index - 2)) + 'px)';
-      slide_index--;
+				} else {
+					top_banner.style.transform = 'translateX('
+							+ (-1024 * (slide_photo_cnt - 1)) + 'px)';
 
-      console.log("if");
+					slide_index = slide_photo_cnt;
+					console.log("else");
+				}
 
-    } else {
-      top_banner.style.transform = 'translateX(' + (-1024 * (slide_photo_cnt - 1)) + 'px)';
+				page_num.innerHTML = slide_index;
+				console.log(slide_index);
 
-      slide_index = slide_photo_cnt;
-      console.log("else");
-    }
-    
-    page_num.innerHTML = slide_index;
-    console.log(slide_index);
+			})
 
-   })
+			// Top banner pagination bar
 
+			pause_btn.addEventListener("click", function() {
+				pause_btn.style.display = "none";
+				play_btn.style.display = "block";
 
-              // Top banner pagination bar
+				button_flag = false;
+				clearTimeout(time_out);
+			});
 
-              pause_btn.addEventListener("click", function () {
-                pause_btn.style.display = "none";
-                play_btn.style.display = "block";
+			play_btn.addEventListener("click", function() {
+				pause_btn.style.display = "block";
+				play_btn.style.display = "none";
 
-                button_flag = false;
-                clearTimeout(time_out);
-              });
+				button_flag = true;
+				show_slides();
+			});
 
-              play_btn.addEventListener("click", function () {
-                pause_btn.style.display = "block";
-                play_btn.style.display = "none";
+			show_slides();
 
-                button_flag = true;
-                show_slides();
-              });
+			function show_slides() {
+				slide_index++;
 
+				top_banner.style.transform = 'translate('
+						+ (-(1024 * (slide_index - 1))) + 'px';
+				console.log(slide_index);
 
-              show_slides();
+				page_num.innerHTML = slide_index;
 
+				if (slide_index === slide_photo_cnt) {
+					slide_index = 0;
 
-              function show_slides() {
-                slide_index++;
-            
-                top_banner.style.transform = 'translate(' + (-(1024 * (slide_index - 1))) + 'px';
-                console.log(slide_index);
+				}
 
-                page_num.innerHTML = slide_index;
+				if (button_flag == true) {
+					time_out = setTimeout(show_slides, 5000);
 
-                if (slide_index === slide_photo_cnt) {  
-                slide_index = 0;
+				}
 
-                }
-
-                if (button_flag == true) {
-                  time_out = setTimeout(show_slides, 5000);
-                  
-                }
-
-              }
-   
-</script>
+			}
+		</script>
 
 
 		<div id="div1">
@@ -826,32 +876,35 @@ let play_btn = document.querySelector(".fa-play");
 						<h4>제목 :</h4>
 						<form:input path="blacklistTitle" placeholder="제목을 입력해 주세요" />
 						<h4>신고유저코드 :</h4>
-						<form:input path="blackuserCode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+						<form:input path="blackuserCode"
+							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 							placeholder="신고할 유저코드를 입력해 주세요(숫자만 입력가능합니다)" class="code" />
-						
-						</div>
-						<div class ="popup">
+
+					</div>
+					<div class="popup">
 						<a href="#pop_info_1" class="btn_open">최근 매칭 유저 찾기</a>
-						</div>	
+					</div>
 					<div class="main">
 						<form:textarea path="blacklistContent"
 							placeholder="신고할 내용을 입력해 주세요" />
 					</div>
 					<div class="footer">
-   						<button id="fotbtn">전송</button>	
+						<button id="fotbtn">전송</button>
 					</div>
-				
 
-  <div id="pop_info_1" class="pop_wrap" style="display:none;">
-    <div class="pop_inner">
-    	<c:forEach var="vo" items="${code}">
-				<p ><span class="ppp">${vo.userCode}</span> : ${vo.userName}</p>
-		</c:forEach>
-      <button type="button" class="btn_close">닫기</button>
-    </div>
-  </div>
 
-				
+					<div id="pop_info_1" class="pop_wrap" style="display: none;">
+						<div class="pop_inner">
+							<c:forEach var="vo" items="${code}">
+								<p class ="sss">
+									<span class="ppp">${vo.userCode}</span> : ${vo.userName}
+								</p>
+							</c:forEach>
+							<button type="button" class="btn_close">닫기</button>
+						</div>
+					</div>
+
+
 				</div>
 
 			</form:form>
@@ -868,46 +921,40 @@ let play_btn = document.querySelector(".fa-play");
 		</footer>
 	</div>
 	<script type="text/javascript">
-	var target = document.querySelectorAll('.btn_open');
-	var btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
-	var targetID;
+		var target = document.querySelectorAll('.btn_open');
+		var btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
+		var targetID;
 
-	// 팝업 열기
-	for(var i = 0; i < target.length; i++){
-	  target[i].addEventListener('click', function(){
-	    targetID = this.getAttribute('href');
-	    document.querySelector(targetID).style.display = 'block';
-	  });
-	}
+		// 팝업 열기
+		for (var i = 0; i < target.length; i++) {
+			target[i].addEventListener('click', function() {
+				targetID = this.getAttribute('href');
+				document.querySelector(targetID).style.display = 'block';
+			});
+		}
 
-	// 팝업 닫기
-	for(var j = 0; j < target.length; j++){
-	  btnPopClose[j].addEventListener('click', function(){
-	    this.parentNode.parentNode.style.display = 'none';
-	  });
-	}
-	
-	
-	
-	$('.ppp').click(function(){
-		$('.code').val($(this).text());
-		$('#pop_info_1').hide();
-	});
-	
-	
-	
+		// 팝업 닫기
+		for (var j = 0; j < target.length; j++) {
+			btnPopClose[j].addEventListener('click', function() {
+				this.parentNode.parentNode.style.display = 'none';
+			});
+		}
 
-	
-	let main_logo = document.querySelector(".main_logo");
-	
-	main_logo.addEventListener("click",function() {
-		location.href="${pageContext.request.contextPath}";
-	});
-</script>
+		$('.ppp').click(function() {
+			$('.code').val($(this).text());
+			$('#pop_info_1').hide();
+		});
+
+		let main_logo = document.querySelector(".main_logo");
+
+		main_logo.addEventListener("click", function() {
+			location.href = "${pageContext.request.contextPath}";
+		});
+	</script>
 
 	<script type="text/javascript">
-	$('#blackuserCode').val("");
-</script>
+		$('#blackuserCode').val("");
+	</script>
 
 
 
