@@ -601,6 +601,15 @@ a {
 	cursor : pointer;
 }
 
+.pop_inner {
+	border: 2px solid rgb(38, 166, 83);
+	border-radius: 10px;
+	
+}   
+
+.btn_close:hover{
+	cursor : pointer;
+}
 </style>
 </head>
 <body>
