@@ -323,17 +323,6 @@
     width: 90%;
 }
 
-/* .main_right1 > ul > li > a, .main_right2 > ul > li > a { */
-/* 	display:inline-block; */
-/* 	text-decoration: none; */
-/* 	border-radius: 20px; */
-/* 	color: #000; */
-/* 	width: 100%; */
-/* 	height: 100%; */
-/* 	padding: 20px 0; */
-/* } */
-
-
 .bottom_banner {
         width:100%;
         height:235px;
@@ -393,7 +382,6 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -406,7 +394,6 @@ footer {
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -488,8 +475,6 @@ footer {
 		</div>
         <div id="main_container">
             <div class="main_area">
-<!-- 			<h1 class="main_title">나의 EZ</h1> -->
-			
 				<div class="main_content1">
 					<section class="main_left1">
 						<div id="user_info">
@@ -501,7 +486,6 @@ footer {
 									</div>
 									<span class="email_area">#${userVO.userCode}</span>
 								</li>
-<%-- 								<li>주소 : ${userVO.userLocal }</li> --%>
 								<li><span class="info_bold">Team</span>
 								  	<c:if test="${uinVO.userGroup ne '0'}"><span class="info_small_size">${uinVO.userGroup }</span></c:if>
 								  	<c:if test="${uinVO.userGroup eq '0'}"><span class="info_small_size">팀이 없습니다.</span></c:if>
@@ -511,7 +495,6 @@ footer {
 									<c:if test="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100 ne 'NaN'}"> <span class="info_small_size">  <fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>% &nbsp;<span>(${userVO.userWin}승 ${userVO.userLose}패)</span></span></c:if>
 									<c:if test="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100 eq 'NaN'}"> <span class="info_small_size">경기 기록이 없습니다.</span></c:if>
 								</li>
-								
 							</ul>
 						</div>
 					</section>
@@ -552,7 +535,6 @@ footer {
 							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/changePw">비밀번호 변경</a></div></li>
 							<li><div class="border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/inquiry">내 문의</a></div></li>							
 							<li><div class="no_border_div"><a class="right_btn" href="${pageContext.request.contextPath}/myPage/manager">매니저 지원</a></div></li>
-<!-- 							<li><a href="#" class="qna">자주 묻는 질문 (Q&A)</a></li> -->
 						</ul>
 					</section>
 				</div>
@@ -573,22 +555,21 @@ footer {
             });
         </script>
          <script type="text/javascript">
-         console.log(${userVO.teamCode});
-        document.getElementById("MTbtn").addEventListener("click",function(){
-        	if(${userVO.teamCode == 0} || ${userVO.teamCode} == null){
-        		alert("팀이 존재하지 않습니다");
-        	}else{
-        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
-        	}
-        });
+        	document.getElementById("MTbtn").addEventListener("click",function(){
+	        	if(${userVO.teamCode == 0} || ${userVO.teamCode} == null){
+	        		alert("팀이 존재하지 않습니다");
+	        	}else{
+	        		location.href = "${pageContext.request.contextPath}/team/teamDetailInfo";
+	        	}
+	        });
         
-        document.getElementById("MTbtn2").addEventListener("click",function(){
-        	if(${userVO.teamCode == 0} || ${userVO.teamCode} == null){
-        		alert("팀이 존재하지 않습니다");
-        	}else{
-        		location.href = "${pageContext.request.contextPath}/team/teaminfo";
-        	}
-        });
+	        document.getElementById("MTbtn2").addEventListener("click",function(){
+	        	if(${userVO.teamCode == 0} || ${userVO.teamCode} == null){
+	        		alert("팀이 존재하지 않습니다");
+	        	}else{
+	        		location.href = "${pageContext.request.contextPath}/team/teaminfo";
+	        	}
+	        });
         </script>
         
         <script type="text/javascript">

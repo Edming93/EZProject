@@ -109,7 +109,6 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
 }
 
 .main_area {
@@ -125,10 +124,8 @@
 	display: flex;
 	flex-direction: column;
 	width: 70%;
-	/* height: 98%; */
 	height:90%;
 	background-color: #fff;
-/* 	border: 1px solid black; */
 	padding: 20px;
 }
 
@@ -270,7 +267,6 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -283,7 +279,6 @@ footer {
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -374,8 +369,6 @@ footer {
         	});
         	
         	$('#writing').on("click", function(){
-        		console.log($.trim($('#inquiry_content').val()).length);
-        		console.log($('#inquiry_title').val() == "");
         		if($.trim($('#inquiry_title').val()) == ""){
         			alert("제목이 비었습니다.");
         			return;
@@ -394,7 +387,6 @@ footer {
         </script>
         
         <script type="text/javascript">
-        	// 제목 작성 엔터키 막기
         	$('#inquiry_title').on("keypress", function(e){
         		if(e.keyCode == 13){
         			event.returnValue=false;

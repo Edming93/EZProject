@@ -109,16 +109,12 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
 }
 
 .main_area {
 	display:flex;
     width: 1024px;
     min-height: 1700px;
-/*     background-color: #ffaaaa; */
-/*     justify-content: space-evenly; */
-/*     align-items: center; */
     flex-wrap: wrap;
 	margin-top: 65px;
     margin-bottom: 100px;
@@ -126,9 +122,7 @@
 
 .main_content1 {
 	width: 100%;
-	/* height: 98%; */
 	height:500px;
-/* 	background-color: #fff; */
 	background: url("${pageContext.request.contextPath}/image/guide1.png") no-repeat center;
     background-size: contain;
 }
@@ -136,9 +130,7 @@
 .main_content2 {
 	display: flex;
 	width: 100%;
-	/* height: 98%; */
 	height: 75%;
-/*  	background-color: #eee; */
  	padding: 20px;
  	flex-direction: column;
     justify-content: space-between;
@@ -232,7 +224,6 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -245,7 +236,6 @@ footer {
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"

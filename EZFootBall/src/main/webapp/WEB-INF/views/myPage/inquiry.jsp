@@ -197,8 +197,6 @@ display: flex;
 
 .up_down{
 	position: relative;
-/* 	float: right; */
-/*     margin: 0 20px 0 0; */
 }
 
 .up_down:after {
@@ -216,7 +214,6 @@ display: flex;
 .up_down2{
 	display:none;
 	position: relative;
-/* 	float: right; */
     margin: 8px 0 0 0;
 }
 
@@ -315,7 +312,6 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -328,7 +324,6 @@ footer {
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -426,27 +421,11 @@ footer {
 											</td>
 										</tr>
 									</c:if>
-								
-	<!-- 							<tr> -->
-	<!-- 								<td>2</td> -->
-	<!-- 								<td>고객 문의를 왜쓰는거야</td> -->
-	<!-- 								<td>2022-11-04</td> -->
-	<!-- 								<td>대기중</td> -->
-	<!-- 							</tr> -->
-	<!-- 							<tr> -->
-	<!-- 								<td>3</td> -->
-	<!-- 								<td>살려주세요 사람있어요</td> -->
-	<!-- 								<td>2022-11-05</td> -->
-	<!-- 								<td>대기중</td> -->
-	<!-- 							</tr> -->
 							</table>
 						</div>
 					</div>						
-<%-- 					</c:if> --%>
-
 					<div class="main_item2">
 					</div>
-					
 					<div class="btn_box">
 						<button id="inquiry">문의하기</button>
 					</div>

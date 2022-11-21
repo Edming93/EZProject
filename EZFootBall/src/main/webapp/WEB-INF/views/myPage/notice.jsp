@@ -111,7 +111,6 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-/*     background-color: #ccc; */
 	font-family: NotoSansM, sans-serif;
 	
 }
@@ -120,11 +119,7 @@
 	display:flex;
     width: 1024px;
     min-height: 500px;
-/*     background-color: #ffaaaa; */
-/*     justify-content: space-evenly; */
-/*     align-items: center; */
     flex-wrap: wrap;
-/*     border: 1px solid black; */
 }
 
 .main_content1 {
@@ -148,7 +143,6 @@
 	display: none;
 	width: 100%;
 	min-height: 400px;
-/* 	border: 1px solid black; */
 	padding: 30px 15px;
 	font-size: 15px;
 	opacity: 0.8;
@@ -263,7 +257,6 @@ footer {
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
   		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
                   <div class="adminMove">
@@ -276,7 +269,6 @@ footer {
                   
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
-<!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
                         <svg width="25" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7Z"
@@ -328,8 +320,6 @@ footer {
 								<i class="up_down"></i>
 								<i class="up_down2"></i>
 							</p>
-<!-- 							<i class="up_down"></i> -->
-<!-- 							<i class="up_down2"></i> -->
 							<div class="notice_item">
 							<pre>
 EZ풋볼에 오신걸 환영합니다! 
@@ -453,7 +443,6 @@ EZ풋볼 소셜경기의 경기 매니저로서 참가자들이 즐겁게 운동
         </script>
         
         <script type="text/javascript">
-	     	// list 누르면 아래 박스추가
 	    	$('.notice_title').on("click",function(){
 				$(this).parent().nextAll().children('.notice_item').hide();
 				$(this).parent().prevAll().children('.notice_item').hide();
@@ -461,8 +450,6 @@ EZ풋볼 소셜경기의 경기 매니저로서 참가자들이 즐겁게 운동
 				$(this).prev().children('.up_down').show();
 				$(this).next().children('.up_down2').hide();
 				$(this).prev().children('.up_down2').hide();
-					console.log($(this).parent().next().children('.notice_item'));
-					console.log($(this).next('.notice_item').css('display'));
 				if($(this).next('.notice_item').css('display') == 'block'){
 					$(this).next('.notice_item').stop().slideUp(300);
 					$(this).children('.up_down').show();
