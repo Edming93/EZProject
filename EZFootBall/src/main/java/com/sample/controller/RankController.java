@@ -47,8 +47,6 @@ public class RankController {
 	@PostMapping("selevel")
 	@ResponseBody
 	public UinVO selevel(@RequestBody DataVO vo) {
-		System.out.println("컨트롤러q");
-		System.out.println(vo.getUserCode());
 		int usercode = vo.getUserCode();
 		return service.selevel(usercode);
 	}
@@ -57,7 +55,6 @@ public class RankController {
 	@PostMapping("/result")
 	@ResponseBody
 	public int result(@RequestBody GameResultVO vo) {
-		System.out.println("컨트롤러w");
 		return service.result(vo);
 	}
 	
@@ -65,7 +62,6 @@ public class RankController {
 	@PostMapping("/lose")
 	@ResponseBody
 	public int lose(@RequestBody GameResultVO vo) {
-		System.out.println("컨트롤러lolololo");
 		return service.lose(vo);
 	}
 	

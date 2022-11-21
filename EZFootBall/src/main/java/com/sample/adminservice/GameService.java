@@ -98,12 +98,10 @@ public class GameService {
 	}
 
 	public List<GlistVO> sociallist (GlistVO vo){
-		System.out.println("서비스");
 		return mdao.sociallist(vo);
 	}
 	
 	public int sociallistcnt (GlistVO vo) {
-		System.out.println("갯수서비스");
 		return mdao.sociallistcnt(vo);
 	}
 	

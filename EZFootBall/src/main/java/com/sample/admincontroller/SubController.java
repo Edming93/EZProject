@@ -49,7 +49,6 @@ public class SubController {
 			
 			vo.setTeamCode(teamCode[i]);
 			vo.setGameCode(gameCode[i]);
-			System.out.println("cnlthcnlthclthcltnclhtlch"+teamCode[i]+":"+gameCode[i]);
 			service.delete(vo);
 			service.tdelete(vo);
 			service.delupdate(gameCode[i]);

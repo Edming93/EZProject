@@ -111,4 +111,11 @@
 		ORDER BY rv_code desc,game_day, game_time
 	</select>
 	
+	
+	<select id="teamselect" resultType="UinVO">
+		select *
+		from user_abil
+		where user_code = #{userCode}
+	</select>
+	
 </mapper>

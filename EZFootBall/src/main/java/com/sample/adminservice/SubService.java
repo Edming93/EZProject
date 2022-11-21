@@ -38,7 +38,6 @@ public class SubService {
 	}
 	
 	public void add(GlistVO vo) {
-		System.out.println("더하기");
 		dao.add(vo);
 	}
 	

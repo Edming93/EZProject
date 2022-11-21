@@ -10,6 +10,7 @@ import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.SjoinVO;
 import com.sample.vo.UinVO;
+import com.sample.vo.UserVO;
 
 @Mapper
 public interface GlistDAO {
@@ -37,4 +38,6 @@ public interface GlistDAO {
 	public List<FieldReservationVO> getMatchList(FieldReservationVO vo);
 
 	public int newresult(GlistVO vo);
+	
+	public UinVO teamselect(int userCode);
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.service.LoginService;
 import com.sample.service.TeamService;
+import com.sample.service.UinService;
 import com.sample.vo.DataVO;
 import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
@@ -34,12 +35,16 @@ public class TeamController {
 	
 	private TeamService service;
 	private LoginService Lservice;
+	private UinService uinService;
 	
-	public TeamController(TeamService service, LoginService lservice) {
+	
+	public TeamController(TeamService service, LoginService lservice, UinService uinService) {
 		super();
 		this.service = service;
 		Lservice = lservice;
+		this.uinService = uinService;
 	}
+
 
 	@GetMapping("/team")
 	public String moveRental(HttpSession session, Model model) {
@@ -329,7 +334,9 @@ public class TeamController {
 	
 	
 	@GetMapping("/teamDetailInfo")
-	public String teamDetailInfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO) {
+	public String teamDetailInfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO,UserVO userVO) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		model.addAttribute("userVO", userVO);
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 
 		uinVO = service.getAllAbil(uvo.getUserCode());
@@ -343,7 +350,11 @@ public class TeamController {
 	}
 	
 	@GetMapping("/teaminfo")
-	public String teaminfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO) {
+	public String teaminfo(HttpSession session,Model model,  UinVO uinVO, TeamMemberVO tmVO,UserVO userVO) {
+		userVO = (UserVO) session.getAttribute("sessionVO");
+		model.addAttribute("userVO", userVO);
+		
+		
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		uinVO = service.getAllAbil(uvo.getUserCode());
 		tmVO = service.getAllTeamMem(uvo.getTeamCode());

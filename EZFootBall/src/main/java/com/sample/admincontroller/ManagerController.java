@@ -125,9 +125,7 @@ public class ManagerController {
     @GetMapping("tdel")
     public String tdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("teamCode") int[] teamCode,
                         @RequestParam("gameCode") int[] gameCode,HttpSession session) {
-        System.out.println("팀삭제");
         for(int i=0; i<teamCode.length; i++) {
-            System.out.println("여긴");
             DataVO vo = new DataVO();
             
             vo.setTeamCode(teamCode[i]);
@@ -143,13 +141,10 @@ public class ManagerController {
     @GetMapping("sdel")
     public String sdelete(@RequestParam("rvCode") int[] rvCode,@RequestParam("userCode") int[] userCode,
             @RequestParam("gameCode") int[] gameCode,HttpSession session) {
-        System.out.println("삭제");
         for(int i=0; i<rvCode.length; i++) {
-            System.out.println(rvCode[i]);
             subservice.rdelete(rvCode[i]);
         }
         for(int i=0; i<userCode.length; i++) {
-            System.out.println("여긴");
             DataVO vo = new DataVO();
             
             vo.setUserCode(userCode[i]);
@@ -163,7 +158,6 @@ public class ManagerController {
     
     @GetMapping("/sadd")
     public String add(HttpSession session,@RequestParam("userCode") int userCode, @RequestParam("gameCode") int gameCode) {
-        System.out.println("추가컨트롤러");
         GlistVO vo = new GlistVO();
         vo = subservice.all(gameCode);
         vo.setUserCode(userCode);
@@ -177,7 +171,6 @@ public class ManagerController {
     
     @GetMapping("/tadd")
     public String tadd(HttpSession session,@RequestParam("teamCode") int teamCode, @RequestParam("gameCode") int gameCode) {
-        System.out.println("추가컨트롤러");
         List<Integer> ucList = new ArrayList<Integer>();
         ucList = subservice.usercode(teamCode);
         for(int i=0; i<ucList.size(); i++) {
@@ -254,7 +247,6 @@ public class ManagerController {
     
     @GetMapping("rdel")
     public String rdel(@RequestParam("resultCode")int[] resultCode,HttpSession session) {
-        System.out.println("삭제");
         for(int i=0; i< resultCode.length; i++) {
             gaservice.rdel(resultCode[i]);
         }
@@ -339,25 +331,18 @@ public class ManagerController {
     @PostMapping("/sociallist")
 	@ResponseBody
     public List<GlistVO> sociallist (@RequestBody GlistVO vo){
-    	System.out.println("컨트롤러aaaa");
-    	System.out.println(vo.getGameCode());
     	return gaservice.sociallist(vo);
     }
     
     @PostMapping("/sociallistcnt")
 	@ResponseBody
     public int sociallistcnt (@RequestBody GlistVO vo){
-    	System.out.println("컨트롤러ssss");
-    	System.out.println(vo.getGameCode());
     	return gaservice.sociallistcnt(vo);
     }
     
     @GetMapping("/returnpage")
     public String returmpage(HttpSession session,@RequestParam int num,@RequestParam String serch,@RequestParam String select) {
-    	System.out.println("flsjx");
-    	System.err.println(num);
-    	System.out.println(serch);
-    	System.out.println(select);
+    
     	session.setAttribute("pagenum", num);
     	session.setAttribute("serch", serch);
     	session.setAttribute("select", select);

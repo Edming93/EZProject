@@ -78,7 +78,6 @@ public class GameController {
 	
 	@GetMapping("rdel")
 	public String rdel(@RequestParam("resultCode")int[] resultCode,HttpSession session) {
-		System.out.println("삭제");
 		for(int i=0; i< resultCode.length; i++) {
 			service.rdel(resultCode[i]);
 		}

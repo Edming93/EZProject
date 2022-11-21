@@ -16,6 +16,7 @@
 		
 	}
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +51,12 @@
         width: 1024px;
         height: 100%;
         padding-top: 20px;
+    }
+    .header_icon {
+	    text-decoration: none;
+	    color: #4e4e4e;
+	    font-size: 27px;
+	    margin-left: 15px;
     }
 
     .header_content {
@@ -101,7 +108,10 @@
 .main_title{
 	display: block;
 	width: 100%;
-	margin: 10px 0; 
+	background: url("${pageContext.request.contextPath}/image/myPageTitle.jpg") no-repeat;
+	background-size: contain;
+	padding: 10px 0;
+	text-indent: -9999px;
 }
 
 #main_container {
@@ -109,15 +119,224 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    padding-top: 50px;
+/*     background-color: #ccc; */
+}
+
+.main_area {
+    display: flex;
+    width: 1024px;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 75px;
+}
+
+.main_content1 {
+	display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+
+.main_content2 h3 {
+	margin-bottom:15px;
+	color: #2c2c2c;
+}
+
+.main_left1 {
+	width: 100%;
+    height: 35%;
+    padding: 20px 0px 30px 20px;
+    border-radius: 15px;
+    box-shadow: 6px 6px 20px 0px #00000010;
+}
+
+#user_info > ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#user_info > ul > li{
+    padding: 11px 0;
+    display: flex;
+    align-items: flex-start;
+}
+.info_margin {
+	margin-bottom:7px;
+}
+.name_area {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 15px 0px 15px;
+}
+
+.email_area {
+    padding-top: 5px;
+    font-size: 19px;
+    color: #26a653;
+    padding-left: 35px;
+    font-weight: bold;
 }
 
 
 
-.bottom_banner {
+.info_bold {
+    font-weight: bold;
+    margin: 0px 0px 0px 15px;
+    width: 60px;
+}
+.info_small_size {
+	font-size: 14px;
+}
+
+.email_font {
+    color: #959595;
+    margin-top: 5px;
+    margin-left: 1px;
+}
+
+
+
+.main_left2 {
+    width: 100%;
+    height: 65%;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 340px;
+}
+
+.main_right1 {
 	width: 100%;
-	height: 205px;
-	background-color: #cef8e8;
+	height: 62%;
+	padding: 15px;
+	border-radius: 15px 15px 0 0;
+	font-size: 18px;
+	padding-top: 0px;
+}
+
+.main_right2 {
+	width: 100%;
+	height: 38%;
+	padding: 15px;
+	border-top: none;
+	border-radius: 0 0 15px 15px;
+	font-size: 18px;	
+}
+
+.main_right3 {
+	width: 100%;
+    height: 38%;
+    padding: 15px;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    font-size: 18px;
+}
+
+.name1 {
+	display: inline-block;
+}
+
+.main_left2 > ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 90%;
+}
+
+.main_left2 > ul > li {
+	color: #929292;
+	font-size: 11px;
+}
+
+.main_left2 > ul > li > a {
+	display: inline-block;
+    text-decoration: none;
+    border-radius: 20px;
+    color: #929292;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+}
+
+.main_right1 > ul, .main_right2 > ul, .main_right3 > ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #d5d5d5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.main_right1 > ul > li, .main_right2 > ul > li, .main_right3 > ul > li {
+	font-size: 16px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+}
+.main_right1 > ul > li > div {
+	cursor: pointer;
+}
+
+.main_right1 > ul > li:hover, .main_right2 > ul > li:hover, .main_right3 > ul > li:hover {
+	background-color:#d6d6d6;
+	font-weight: bold;
+} 
+
+.main_right1 > ul > li:hover div span, .main_right2 > ul > li:hover a, .main_right3 > ul > li:hover a{
+	color:white;
+}
+
+.main_right1 > ul > li:hover .right_btn, .main_right2 > ul > li:hover .right_btn, .main_right3 > ul > li:hover .right_btn {
+	padding-left:15px;
+} 
+
+.main_right1 > ul > li:hover div span, .main_right2 > ul > li:hover a, .main_right3 > ul > li:hover a{
+	color:white;
+}
+
+
+.border_div {
+	border-bottom: 1px solid #d6d6d6;
+    width: 90%;
+}
+.no_border_div {
+    width: 90%;
+}
+
+/* .main_right1 > ul > li > a, .main_right2 > ul > li > a { */
+/* 	display:inline-block; */
+/* 	text-decoration: none; */
+/* 	border-radius: 20px; */
+/* 	color: #000; */
+/* 	width: 100%; */
+/* 	height: 100%; */
+/* 	padding: 20px 0; */
+/* } */
+
+
+.bottom_banner {
+        width:100%;
+        height:235px;
+        background-color: #26A653;
+    	margin-top: 100px;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
 }
 
 footer {
@@ -145,48 +364,35 @@ footer {
 .etc_icon {
 	margin-left: 10px;
 }
+.right_btn {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 20px;
+    color: #4e4e4e;
+    width: 100%;
+    height: 100%;
+    padding: 20px 10px;
+}
+.main_content2{
+    	width: 60%;
+	    padding: 20px;
+	    border-radius: 10px;
+	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
+    }
+    .main_content2 > .teamInfo > h3{
+    	padding-top: 10px;
+    }
+   .teamlist > ul{
+   	list-style: none;
+    }
+     .teamlist > ul > li {
+     	padding: 20px;
+     	margin-top : 15px;
+     	width: 60%;
+     	border: 1px solid #26A653;
+     	border-radius: 25px;
+     }
 
-    .header_icon {
-	    text-decoration: none;
-	    color: #4e4e4e;
-	    font-size: 27px;
-	    margin-left: 15px;
-    }
-    .teambox{
-    	width: 40%;
-	    height: 290px;
-	    padding: 20px;
-	    border-radius: 10px;
-	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
-    }
-    .teamInfo {
-    	padding-top: 10px;
-    }
-    .teamlist > ol > li {
-    	padding-top: 10px;
-    }
-    #out{
-    	padding-top: 10px;
-    }
-    
-    
-    .teambox2{
-    	width: 40%;
-	    height: 360px;
-	    padding: 20px;
-	    border-radius: 10px;
-	    box-shadow: 2px 5px 10px 0 rgb(34 36 38 / 15%);
-    }
-    .teambox2 > .teamInfo > h3{
-    	padding-top: 10px;
-    }
-    #Mdel{
-    	padding-top: 10px;
-    }
-    #Tdel{
-    	padding-top: 10px;
-    }
-        
 </style>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.min.js"></script>
@@ -252,13 +458,88 @@ footer {
                   </div>
                   <%} %>
                </div>
+            </div>
+            <script type="text/javascript">
+				if(document.querySelector(".admin_btn")){
+					let admin_btn = document.querySelector(".admin_btn");
+					admin_btn.addEventListener("click",function() {
+	     				if(confirm("관리자 페이지로 이동 하시겠습니까?")){
+	     					admin_btn.href="${pageContext.request.contextPath}/admin/admin";
+	     				}else{
+	     					admin_btn.href="#";
+	     				}
+	            	});
+				}	
+            
+				if(document.querySelector(".manager_btn")){
+					let manager_btn = document.querySelector(".manager_btn");
+					manager_btn.addEventListener("click",function() {
+	     				if(confirm("매니저 페이지로 이동 하시겠습니까?")){
+	     					manager_btn.href="${pageContext.request.contextPath}/manager/manager";
+	     				}else{
+	     					manager_btn.href="#";
+	     				}
+	            	});
+				}	
+            
+            
+            	if(document.querySelector(".logout_btn")){
+            	let logout_btn = document.querySelector(".logout_btn");
+
+					logout_btn.addEventListener("click",function() {
+	     				if(confirm("로그아웃 하시겠습니까?")){
+	     					alert("로그아웃 되었습니다.");
+	     					logout_btn.href="${pageContext.request.contextPath}/loginPage/logout";
+	     				}else{
+	     					alert("로그아웃을 취소하셨습니다.");
+	     					logout_btn.href="#";
+	     				}
+	            	});
+            	}
+            </script>
 				</div>
-
-			</div>
 		</div>
-
-		<div id="main_container">
-			<div class="teambox">
+		
+        <div id="main_container">
+            <div class="main_area">
+<!-- 			<h1 class="main_title">나의 EZ</h1> -->
+			
+				<div class="main_content1">
+					<section class="main_left1">
+						<div id="user_info">
+							<ul>
+								<li class="info_margin"><img src="${pageContext.request.contextPath}/image/profile_photo.png">
+									<div class="name_area">
+										<h3 class="name1">${userVO.userName }</h3>
+										<span class="info_small_size email_font">${userVO.userEmail1}${userVO.userEmail2}</span>
+									</div>
+									<span class="email_area">#${userVO.userCode}</span>
+								</li>
+<%-- 								<li>주소 : ${userVO.userLocal }</li> --%>
+								<li><span class="info_bold">Team</span> <span class="info_small_size">${uinVO.userGroup }</span></li>
+								<li><span class="info_bold">랭크</span>  <span class="info_small_size">${uinVO.userLevel }</span></li>
+								<li><span class="info_bold">승률</span> <span class="info_small_size"><fmt:formatNumber value="${(userVO.userWin/(userVO.userWin+userVO.userLose))*100}" pattern=".0"/>%&nbsp;<span>(${userVO.userWin}승 ${userVO.userLose}패)</span></span></li>
+							</ul>
+						</div>
+					</section>
+					<section class="main_left2">
+						<div class="left2_image_area">
+							<img src="${pageContext.request.contextPath}/image/EZ_image.png">
+						</div>
+						<ul>
+							<li><a href="${pageContext.request.contextPath}/loginPage/logout">로그아웃</a></li>
+							<li>|</li>
+							<li><a href="${pageContext.request.contextPath}/myPage/notice">공지사항</a></li>
+							<li>|</li>
+							<li><a href="${pageContext.request.contextPath}/myPage/rankGuide">랭킹소개</a></li>
+							<li>|</li>
+							<li><a href="${pageContext.request.contextPath}/myPage/guide1">소셜가이드</a></li>
+						</ul>
+					</section>
+				</div>
+				
+				
+				<div class="main_content2">
 				<h3>팀 정보</h3>
 				
 					<div class="teamInfo">
@@ -268,49 +549,305 @@ footer {
 					</div>
 					
 					<div class="teamlist">
-						<ol>
+						<ul>
 
-							<li>${tmVO.tmember1}</li>
+							<li id="m1"></li>
 							<c:if test="${not empty tmVO.tmember2}">
-								<li>${tmVO.tmember2}</li>
+								<li id="m2"></li>
 							</c:if>
 							<c:if test="${not empty tmVO.tmember3}">
-								<li>${tmVO.tmember3}</li>
+								<li id="m3"></li>
 							</c:if>
 							<c:if test="${not empty tmVO.tmember4}">
-								<li>${tmVO.tmember4}</li>
+								<li id="m4"></li>
 							</c:if>
 							<c:if test="${not empty tmVO.tmember5}">
-								<li>${tmVO.tmember5}</li>
+								<li id="m5"></li>
 							</c:if>
 							<c:if test="${not empty tmVO.tmember6}">
-								<li>${tmVO.tmember6}</li>
+								<li id="m6"></li>
 							</c:if>
-						</ol>
+						</ul>
 					</div>
 				</div>
+            </div>
+        </div>
+        
+        <!-- 1번 -->
+        <script type="text/javascript">
+        let data = {userCode : ${tmVO.userCode1}};
+   	   	fetch("${pageContext.request.contextPath}/myPage/teamselect",{
+ 	         method : "POST",
+ 	         headers : {
+ 	            "Content-Type" : "application/json"},
+ 	         body : JSON.stringify(data)
+ 	      }).then(response => response.json()) 
+ 	      .then(data => {  
+ 	    	  	
+	        	var divn = document.createElement("div");
+	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data.userName;
+	        	divn.className = "listno";
+	        	
+	        	var divd = document.createElement("div");
+	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data.userGender;
+	        	divd.className = "listno";
+	        	
+	        	var divg = document.createElement("div");
+	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data.userGroup;
+	        	divg.className = "listno";
+	        	
+	        	var divl = document.createElement("div");
+	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data.userLevel;
+	        	divl.className = "listno";
+	        	
+	        	
+	        	document.getElementById("m1").append(divn);
+	        	document.getElementById("m1").append(divd);
+	        	document.getElementById("m1").append(divg);
+	        	document.getElementById("m1").append(divl);
+	        	
+ 	      }).catch(error => {
+ 	         console.log("error");
+ 	      });
+        	
+        </script>
+        
+         <!-- 2번 -->
+        <script type="text/javascript">
+        if('${tmVO.userCode2}' > 1){
+        let data2 = {userCode : '${tmVO.userCode2}'};
+   	   	fetch("${pageContext.request.contextPath}/myPage/teamselect",{
+ 	         method : "POST",
+ 	         headers : {
+ 	            "Content-Type" : "application/json"},
+ 	         body : JSON.stringify(data2)
+ 	      }).then(response => response.json()) 
+ 	      .then(data2 => {  
+ 	    	  	
+	        	var divn = document.createElement("div");
+	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data2.userName;
+	        	divn.className = "listno";
+	        	
+	        	var divd = document.createElement("div");
+	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data2.userGender;
+	        	divd.className = "listno";
+	        	
+	        	var divg = document.createElement("div");
+	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data2.userGroup;
+	        	divg.className = "listno";
+	        	
+	        	var divl = document.createElement("div");
+	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data2.userLevel;
+	        	divl.className = "listno";
+	        	
+	        	
+	        	document.getElementById("m2").append(divn);
+	        	document.getElementById("m2").append(divd);
+	        	document.getElementById("m2").append(divg);
+	        	document.getElementById("m2").append(divl);
+	        	
+ 	      }).catch(error => {
+ 	         console.log("error");
+ 	      });
+        }
+        </script>
+        
+        
+        
+        
+        <!-- 3번 -->
+        <script type="text/javascript">
+        if('${tmVO.userCode3}' > 1){
+        	
+        let data3 = {userCode : '${tmVO.userCode3}'};
+   	   	fetch("${pageContext.request.contextPath}/myPage/teamselect",{
+ 	         method : "POST",
+ 	         headers : {
+ 	            "Content-Type" : "application/json"},
+ 	         body : JSON.stringify(data3)
+ 	      }).then(response => response.json()) 
+ 	      .then(data3 => {  
+ 	    	  	
+	        	var divn = document.createElement("div");
+	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data3.userName;
+	        	divn.className = "listno";
+	        	
+	        	var divd = document.createElement("div");
+	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data3.userGender;
+	        	divd.className = "listno";
+	        	
+	        	var divg = document.createElement("div");
+	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data3.userGroup;
+	        	divg.className = "listno";
+	        	
+	        	var divl = document.createElement("div");
+	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data3.userLevel;
+	        	divl.className = "listno";
+	        	
+	        	
+	        	document.getElementById("m3").append(divn);
+	        	document.getElementById("m3").append(divd);
+	        	document.getElementById("m3").append(divg);
+	        	document.getElementById("m3").append(divl);
+	        	
+ 	      }).catch(error => {
+ 	         console.log("error");
+ 	      });
+
+        }
+        	
+        </script>
+        
+        
+         <!-- 4번 -->
+        <script type="text/javascript">
+        if('${tmVO.userCode4}' > 1){
+        	
+        let data4 = {userCode : '${tmVO.userCode4}'};
+   	   	fetch("${pageContext.request.contextPath}/myPage/teamselect",{
+ 	         method : "POST",
+ 	         headers : {
+ 	            "Content-Type" : "application/json"},
+ 	         body : JSON.stringify(data4)
+ 	      }).then(response => response.json()) 
+ 	      .then(data4 => {  
+ 	    	  	
+	        	var divn = document.createElement("div");
+	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data4.userName;
+	        	divn.className = "listno";
+	        	
+	        	var divd = document.createElement("div");
+	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data4.userGender;
+	        	divd.className = "listno";
+	        	
+	        	var divg = document.createElement("div");
+	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data4.userGroup;
+	        	divg.className = "listno";
+	        	
+	        	var divl = document.createElement("div");
+	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data4.userLevel;
+	        	divl.className = "listno";
+	        	
+	        	
+	        	document.getElementById("m4").append(divn);
+	        	document.getElementById("m4").append(divd);
+	        	document.getElementById("m4").append(divg);
+	        	document.getElementById("m4").append(divl);
+	        	
+ 	      }).catch(error => {
+ 	         console.log("error");
+ 	      });
+
+        }
+        	
+        </script>
+        
+        
+        
+        
+        
+        <!-- 5번 -->
+        <script type="text/javascript">
+        if('${tmVO.userCode5}' > 1){
+        	
+        let data5 = {userCode : '${tmVO.userCode5}'};
+   	   	fetch("${pageContext.request.contextPath}/myPage/teamselect",{
+ 	         method : "POST",
+ 	         headers : {
+ 	            "Content-Type" : "application/json"},
+ 	         body : JSON.stringify(data5)
+ 	      }).then(response => response.json()) 
+ 	      .then(data5 => {  
+ 	    	  	
+	        	var divn = document.createElement("div");
+	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data5.userName;
+	        	divn.className = "listno";
+	        	
+	        	var divd = document.createElement("div");
+	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data5.userGender;
+	        	divd.className = "listno";
+	        	
+	        	var divg = document.createElement("div");
+	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data5.userGroup;
+	        	divg.className = "listno";
+	        	
+	        	var divl = document.createElement("div");
+	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data5.userLevel;
+	        	divl.className = "listno";
+	        	
+	        	
+	        	document.getElementById("m5").append(divn);
+	        	document.getElementById("m5").append(divd);
+	        	document.getElementById("m5").append(divg);
+	        	document.getElementById("m5").append(divl);
+	        	
+ 	      }).catch(error => {
+ 	         console.log("error");
+ 	      });
+
+        }
+        	
+        </script>
+        
+        
+        
+        <!-- 6번 -->
+        <script type="text/javascript">
+        if('${tmVO.userCode6}' != ''){
+        	
+        let data6 = {userCode : '${tmVO.userCode6}'};
+   	   	fetch("${pageContext.request.contextPath}/myPage/teamselect",{
+ 	         method : "POST",
+ 	         headers : {
+ 	            "Content-Type" : "application/json"},
+ 	         body : JSON.stringify(data6)
+ 	      }).then(response => response.json()) 
+ 	      .then(data6 => {  
+ 	    	  	
+	        	var divn = document.createElement("div");
+	        	divn.innerHTML = "<iconify-icon icon='ic:twotone-drive-file-rename-outline' style='color: #26a563;' width='27' height='27'></iconify-icon>"+ "　" +data6.userName;
+	        	divn.className = "listno";
+	        	
+	        	var divd = document.createElement("div");
+	        	divd.innerHTML = "<iconify-icon class='icon_size' icon='ic:sharp-transgender' style='color: #26a653;' width='27' height='27'></iconify-icon>" + "　" + data6.userGender;
+	        	divd.className = "listno";
+	        	
+	        	var divg = document.createElement("div");
+	        	divg.innerHTML = "<iconify-icon icon='tabler:tournament' style='color: #26a563;' width='27' height='27' rotate='270deg'></iconify-icon>" +"　" + data6.userGroup;
+	        	divg.className = "listno";
+	        	
+	        	var divl = document.createElement("div");
+	        	divl.innerHTML = "<iconify-icon class='icon_size' icon='icon-park-twotone:level' style='color: #26a563;' width='27' height='27'></iconify-icon>" + "　" + data6.userLevel;
+	        	divl.className = "listno";
+	        	
+	        	
+	        	document.getElementById("m6").append(divn);
+	        	document.getElementById("m6").append(divd);
+	        	document.getElementById("m6").append(divg);
+	        	document.getElementById("m6").append(divl);
+	        	
+ 	      }).catch(error => {
+ 	         console.log("error");
+ 	      });
+
+        }
+        	
+        </script>
+
 		
-
-		</div>
-
-
-
-	<footer>
+        
+    <footer>
         <jsp:include page="../etc/footer.jsp"></jsp:include>
     </footer>
-    
-    <!-- 로고 -->
-    <script type="text/javascript">
-			let main_logo = document.querySelector(".main_logo");
 
-			main_logo.addEventListener("click", function() {
-				location.href = "${pageContext.request.contextPath}";
-			});
-	</script>
-
-		
-
-
+		<script type="text/javascript">
+            let main_logo = document.querySelector(".main_logo");
+            
+            main_logo.addEventListener("click",function() {
+                location.href="${pageContext.request.contextPath}";
+            });
+        </script>
+      
 	</div>
 </body>
 </html>

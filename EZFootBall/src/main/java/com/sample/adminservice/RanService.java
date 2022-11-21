@@ -19,7 +19,6 @@ public class RanService {
    
    
    public void plus(UinVO vo) {
-      System.out.println(vo.getUserScore());
       dao.plus(vo);
    }
    

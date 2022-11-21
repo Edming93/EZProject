@@ -157,17 +157,12 @@ public class SocialController {
 	
 	@GetMapping("paying")
 	public String paying(HttpSession session,DataVO dvo,Model model,FieldReservationVO fvo) {
-		System.out.println(fvo.getPayCode());
-		System.out.println(fvo.getStoreCode());
-		System.out.println(fvo.getUserPayment());
-		System.out.println(fvo.getCardCode());
-		System.out.println("야야야양");
+		
 		UserVO lovi = (UserVO)session.getAttribute("sessionVO");
 		int user_code = lovi.getUserCode();
 		
 		dvo.setUser_code(user_code);
 		if(session.getAttribute("snum") != null) {
-			System.out.println(fvo.getPayCode());
 			int num = Integer.parseInt((String)session.getAttribute("snum"));
 			dvo.setGame_code(num);
 			service.info(num, model);
@@ -195,20 +190,16 @@ public class SocialController {
 			tservice.info(num, model);
 			TlistVO vo = (TlistVO)model.getAttribute("matchinfo");
 			List<UinVO> tvo = tservice.joininfo(team_code);
-			System.out.println("111111111111111111111"+team_code);
 			if(vo.getGameMaxp() - vo.getGamePnum() == 1) {
-				System.out.println("22222222222222222222222"+team_code);
 				tservice.setslist(dvo);
 				tservice.maxgame(num);
 				for(int i=0; i<tvo.size(); i++) {
 					if(uvo.getUserCode() == tvo.get(i).getUserCode()) {
-						System.out.println("333333333333333333333333");
 						tservice.info(num,model);
 						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 						vo1.setUserCode(tvo.get(i).getUserCode());
 						vo1.setTeamCode(team_code);
 						vo1.setUserCode(user_code);
-						System.out.println("akrka"+fvo.getPayCode());
 						vo1.setPayCode(fvo.getPayCode());;
 						vo1.setStoreCode(fvo.getStoreCode());
 						vo1.setUserPayment(fvo.getUserPayment());
@@ -216,7 +207,6 @@ public class SocialController {
 						tservice.newreser(vo1);
 						tservice.newresult(vo1);
 					}else {
-						System.out.println("44444444444444444444444");
 						tservice.info(num,model);
 						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 						vo1.setUserCode(tvo.get(i).getUserCode());
@@ -231,27 +221,22 @@ public class SocialController {
 					}
 				}
 			}else {
-				System.out.println("555555555555555555555555555555"+team_code);
 				tservice.setslist(dvo);
 				tservice.subgame(num);
 				for(int i=0; i<tvo.size(); i++) {
 					if(uvo.getUserCode() == tvo.get(i).getUserCode()) {
-						System.out.println("66666666666666666666666");
 						tservice.info(num,model);
 						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 						vo1.setUserCode(tvo.get(i).getUserCode());
 						vo1.setTeamCode(team_code);
 						vo1.setUserCode(user_code);
-						System.out.println("rid"+fvo.getPayCode());
 						vo1.setPayCode(fvo.getPayCode());
-						System.out.println(vo1.getPayCode());
 						vo1.setStoreCode(fvo.getStoreCode());
 						vo1.setUserPayment(fvo.getUserPayment());
 						vo1.setCardCode(fvo.getCardCode());
 						tservice.newreser(vo1);
 						tservice.newresult(vo1);
 					}else {
-						System.out.println("77777777777777777777777777777");
 						tservice.info(num,model);
 						TlistVO vo1 = (TlistVO)model.getAttribute("matchinfo");
 						vo1.setUserCode(tvo.get(i).getUserCode());

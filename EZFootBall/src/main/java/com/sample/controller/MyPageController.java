@@ -308,4 +308,11 @@ public class MyPageController {
 		return mailService.joinEmail(email);
 
 	}
+	
+
+	@PostMapping("/teamselect")
+	@ResponseBody
+	public UinVO teamselect (@RequestBody UinVO vo) {
+		return glistService.teamselect(vo.getUserCode());
+	}
 }

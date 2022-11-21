@@ -190,7 +190,6 @@ public class AdminController {
 	@PostMapping("/UUInfoList")
 	@ResponseBody
 	public int UUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, UserVO vo) {
-		System.out.println("오긴하나1111111??");
 
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		String userId = uvo.getUserId();
@@ -199,25 +198,16 @@ public class AdminController {
 		int userCode = 0;
 
 		if (uvo != null) {
-			System.out.println("제발~~~");
 
 			for (String i : chArr) {
 				userCode = Integer.parseInt(i);
 				vo.setUserCode(userCode);
-				System.out.println("오긴하나222222??");
-				System.out.println(userCode);
-				System.out.println("왜다지워짐? : " + userCode);
 				service.UUInfoList(userCode);
 
-				System.out.println("새로운기능1");
 				service.UpdateFRstate(userCode);
-				System.out.println("새로운기능2");
 				service.UpdateGLPnum(userCode);
-				System.out.println("새로운기능3");
 				service.UpdateGLClose(userCode);
-				System.out.println("새로운기능4");
 				service.DeleteGR(userCode);
-				System.out.println("새로운기능5");
 
 				service.DeleteGSList(userCode);
 
@@ -232,7 +222,6 @@ public class AdminController {
 	@PostMapping("/RUInfoList")
 	@ResponseBody
 	public int RUInfoList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, UserVO vo) {
-		System.out.println("오긴하나1111111??");
 
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		String userId = uvo.getUserId();
@@ -245,9 +234,6 @@ public class AdminController {
 			for (String i : chArr) {
 				userCode = Integer.parseInt(i);
 				vo.setUserCode(userCode);
-				System.out.println("오긴하나222222??");
-				System.out.println(userCode);
-				System.out.println("왜다지워짐? : " + userCode);
 				service.RUInfoList(userCode);
 
 			}
@@ -284,7 +270,6 @@ public class AdminController {
 	@ResponseBody
 	public int magPass(@RequestParam("chbox[]") List<String> chArr, ManagerVO managerVO, HttpSession session) {
 
-		System.out.println(chArr);
 		int result = 0;
 		for (String mgrCode : chArr) {
 			managerService.managerAdd(Integer.parseInt(mgrCode));
@@ -298,7 +283,6 @@ public class AdminController {
 	@ResponseBody
 	public int magFail(@RequestParam("chbox[]") List<String> chArr, ManagerVO managerVO, HttpSession session) {
 
-		System.out.println(chArr);
 		int result = 0;
 		for (String mgrCode : chArr) {
 			managerService.managerFail(Integer.parseInt(mgrCode));
@@ -337,7 +321,6 @@ public class AdminController {
 			Model model) {
 		List<GameFieldInfoVO> list2 = managerService.getGameFieldInfo();
 		model.addAttribute("fieldList", list2);
-		System.out.println(msearch);
 		UserVO userVO = new UserVO();
 		if (mselect.equals("유저코드")) {
 			userVO.setUserCode(Integer.parseInt(msearch));
@@ -422,7 +405,6 @@ public class AdminController {
 	@ResponseBody
 	public int TdeleteList(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
 			FieldReservationVO vo) {
-		System.out.println("오긴하나1111111??");
 
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		String userId = uvo.getUserId();
@@ -431,14 +413,10 @@ public class AdminController {
 		int gameCode = 0;
 
 		if (uvo != null) {
-			System.out.println("제발~~~");
 
 			for (String i : chArr) {
 				gameCode = Integer.parseInt(i);
 				vo.setGameCode(gameCode);
-				System.out.println("오긴하나222222??");
-				System.out.println(gameCode);
-				System.out.println("왜다지워짐? : " + gameCode);
 				service.TdeleteG(gameCode);
 				service.TupdateF(gameCode);
 			}
@@ -542,15 +520,12 @@ public class AdminController {
 							.get("C:/Users/GDJ 52/git/EZProject/EZFootBall/src/main/webapp/resources/image/ground/"
 									+ file.getOriginalFilename());
 					file.transferTo(path);
-					System.out.println(file.getOriginalFilename() + "저장 완료.");
 					imglist.add(file.getOriginalFilename());
 					cnt++;
 				} else {
-					System.out.println("에러가 발생했습니다.");
 				}
 			} catch (Exception e) {
 				System.out.println("여기가 문제");
-				System.out.println(cnt);
 			}
 
 		}
@@ -628,7 +603,6 @@ public class AdminController {
 	@GetMapping("/comuselect")
 	public String comuselect(@RequestParam("comuselect") String comuselect, HttpSession session, Model model) {
 		service.getBlackList(model);
-		System.out.println(service.getBlackUser());
 		model.addAttribute("black", service.getBlackUser());
 		model.addAttribute("review", service.reviewCommentList());
 		model.addAttribute("comuselect", comuselect);
@@ -641,7 +615,6 @@ public class AdminController {
 		vo.setUserCode(reviewcode);
 		List<ReviewCommentVO> list = service.selectCommentList(vo);
 		model.addAttribute("review", list);
-		System.out.println(list.get(0));
 		return "adminPage/adminMain";
 	}
 
@@ -669,7 +642,6 @@ public class AdminController {
 	@ResponseBody
 	public int reviewdelete(HttpSession session, @RequestParam(value = "reviewChkCode[]") List<String> chArr,
 			ReviewCommentVO vo) {
-		System.out.println(chArr);
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		String userId = uvo.getUserId();
 		int result = 0;
@@ -689,7 +661,6 @@ public class AdminController {
 	@ResponseBody
 	public int blacklistdelete(HttpSession session, @RequestParam(value = "blackChkCode[]") List<String> chArr,
 			BlacklistVO vo) {
-		System.out.println(chArr);
 		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
 		String userId = uvo.getUserId();
 		int result = 0;
@@ -763,11 +734,9 @@ public class AdminController {
 						dvo.setTeamCode(Integer.parseInt(fdService.selectTeamCode(chBox[i])));
 						fdService.TeamFieldReservationCancelUpdate(dvo);
 					} else {
-						System.out.println("몇번와?");
 						fdService.GameSignUpCancelUpdate(chBox[i]);
 					}
 				} else {
-					System.out.println("여긴 몇번와?");
 					fdService.payCancelUpdate(chBox[i]);
 					fdService.TGRCancelUpdate(fdService.selectGameCode(chBox[i]));
 				}
@@ -789,7 +758,6 @@ public class AdminController {
 
 	@GetMapping("/detail/{detail}")
 	public String inquiryDetail(@PathVariable("detail") int detail, Model model, InquiryVO inquiryVO) {
-		System.out.println("여기 타나??? :: " + detail);
 		inquiryVO.setInquiryCode(detail);
 		model.addAttribute("inquiryVO", inquiryService.inquiryDetail(inquiryVO));
 		model.addAttribute("adminselect", "qna");

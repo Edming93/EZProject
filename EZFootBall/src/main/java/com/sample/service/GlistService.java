@@ -14,6 +14,7 @@ import com.sample.vo.GameFieldInfoVO;
 import com.sample.vo.GlistVO;
 import com.sample.vo.SjoinVO;
 import com.sample.vo.UinVO;
+import com.sample.vo.UserVO;
 
 @Service
 public class GlistService {
@@ -72,7 +73,10 @@ public class GlistService {
 	}
 	
 	public void newresult (GlistVO vo) {
-		System.out.println(vo.getGameCode());
 		dao.newresult(vo);
+	}
+	
+	public UinVO teamselect (int userCode) {
+		return dao.teamselect(userCode);
 	}
 }
