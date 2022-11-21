@@ -814,8 +814,9 @@ let play_btn = document.querySelector(".fa-play");
 			<p>${BlacklistVO.blacklistContent}</p>
 		</div>
 		<div class="footerdetail">
-			<button id="backbtn">뒤로가기</button>
+			
 		<c:if test="${BlacklistVO.userId eq requestScope.userdata.userId}">
+		<button id="backbtn">뒤로가기</button>
 		<button id="deletebtn">삭제</button>
 		<button id="editbtn">수정</button>
 		</c:if>
