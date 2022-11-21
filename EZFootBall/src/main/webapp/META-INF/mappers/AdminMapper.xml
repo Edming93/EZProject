@@ -340,7 +340,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_reports &gt; 2
+		 from user_info where user_status = '비활성' and user_reports &gt; 2
 	</select>
 	<!-- 블랙리스트 조건부 출력 -->
 	<select id="UInfoListB1" resultType="UserVO">
@@ -348,7 +348,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_reports &gt; 2
+		 from user_info where user_status = '비활성' and user_reports &gt; 2
 
 		 	<if test="userCode != null">
 		 		and user_code like concat ('%',#{userCode},'%')
