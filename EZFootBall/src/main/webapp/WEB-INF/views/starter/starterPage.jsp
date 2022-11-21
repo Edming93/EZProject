@@ -257,7 +257,7 @@
 		    box-shadow: 0px 0px 5px 0px #000000cc;
 		    position: fixed;
 		    top: 2%;
-		    left: 1%;
+		    left: 1.2%;
 		    color: white;
 		    z-index: 10;
 		    cursor: pointer;
