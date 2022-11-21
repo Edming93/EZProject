@@ -23,16 +23,6 @@
 	}else {
 		lv = "null";
 	}
-	
-	String authority = null;
-	if(session.getAttribute("sessionVO") != null) {
-		UserVO uvo = (UserVO)session.getAttribute("sessionVO");
-		authority = uvo.getUserAuthority();
-		
-	}else {
-		authority = "일반회원";
-		
-	}
 
 	LocalTime now = LocalTime.now();
 	int hour = now.getHour();
@@ -109,10 +99,6 @@
          background-size: 95px 35px;
          cursor: pointer;
       }
-      .ez_icon {
-        width: 65px;
-        height:35px;
-    }
 
       .search_input_area {
       	 position: relative;
@@ -196,7 +182,6 @@
          display: flex;
          justify-content: center;
          background-color: #fafafa;
-         overflow: hidden;
       }
 
       .banner_content_area {
@@ -204,7 +189,7 @@
          display: flex;
          justify-content: center;
          align-items: center;
-         transition: all 0.5s;
+         overflow: hidden;
       }
 
       .banner_content {
@@ -321,7 +306,7 @@
       
       .field_info_area {
          display: flex;
-         width:60%;
+         width:70%;
          flex-direction: column;
       }
 
@@ -333,10 +318,10 @@
       }
 
       .field_info {
-         width:60%;
+         width:70%;
       }
       .plant_info {
-         width:40%;
+         width:25%;
       }
 
       .field_image {
@@ -358,7 +343,7 @@
 
       .field_etc_area {
          display: flex;
-         width: 40%;
+         width: 25%;
          flex-direction: column;
          
       }
@@ -390,10 +375,10 @@
         
       }
       .match_left{
-      	width: 60%;
+      	width: 70%;
       }
       .match_right{
-      	width: 40%;
+      	width: 25%;
       }
       .list_container{
          grid-area: list;
@@ -571,40 +556,22 @@
       .change_text {
       	color:#C7C7C7;;
       }
-      .field_image{
-      	padding-right: 10px;
-      }
-      .header_icon {
-	    text-decoration: none;
-	    color: #4e4e4e;
-	    font-size: 27px;
-	    margin-left: 15px;
-    }
    </style>
 </head>
 
 <body>
    <div class="container">
       <div class="header_container">
-        <div class="header_area">
+         <div class="header_area">
             <div class="header_content">
                <div class="header_left main_logo">
 
                </div>
                <div class="header_right login_btn etc_btn">
                   <div class="search_input_area">
-  		  			  <jsp:include page="../search/search.jsp"></jsp:include>
-<!--                   <input type="text" class="search_input"> -->
+	                  <jsp:include page="../search/search.jsp"></jsp:include>
 	                  <iconify-icon class="glass" icon="fa6-solid:magnifying-glass"></iconify-icon>
                   </div>
-                  <div class="adminMove">
-                  	<% if(authority.equals("관리자")){ %>
-                  		<a class="header_icon admin_btn" href="${pageContext.request.contextPath}/admin/admin"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%}else if(authority.equals("매니저")){%>
-				  		<a class="header_icon manager_btn" href="${pageContext.request.contextPath}/manager/manager"><iconify-icon icon="clarity:administrator-solid"></iconify-icon></a>
-				  	<%} %>
-                  </div>
-                  
                   <div class="login_icon">
                      <a href="${pageContext.request.contextPath}/loginPage/login">
 <!--                      <iconify-icon icon="akar-icons:person"></iconify-icon> -->
@@ -618,8 +585,6 @@
                         </svg>
                      </a>
                   </div>
-                  
-                  <% if(session.getAttribute("sessionVO") == null) { %>
                   <div class="etc_icon">
                      <a href="${pageContext.request.contextPath}/etc/etc">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -635,55 +600,8 @@
                         </svg>
                      </a>
                   </div>
-                  <% } %>
-                  
-                  <% if(session.getAttribute("sessionVO") != null) { %>
-                  <div class="logout_icon">
-                     <a class="header_icon logout_btn" href="${pageContext.request.contextPath}/loginPage/logout">
-						<iconify-icon icon="codicon:sign-out"></iconify-icon>
-                     </a>
-                  </div>
-                  <%} %>
                </div>
             </div>
-            <script type="text/javascript">
-				if(document.querySelector(".admin_btn")){
-					let admin_btn = document.querySelector(".admin_btn");
-					admin_btn.addEventListener("click",function() {
-	     				if(confirm("관리자 페이지로 이동 하시겠습니까?")){
-	     					admin_btn.href="${pageContext.request.contextPath}/admin/admin";
-	     				}else{
-	     					admin_btn.href="#";
-	     				}
-	            	});
-				}	
-            
-				if(document.querySelector(".manager_btn")){
-					let manager_btn = document.querySelector(".manager_btn");
-					manager_btn.addEventListener("click",function() {
-	     				if(confirm("매니저 페이지로 이동 하시겠습니까?")){
-	     					manager_btn.href="${pageContext.request.contextPath}/manager/manager";
-	     				}else{
-	     					manager_btn.href="#";
-	     				}
-	            	});
-				}	
-            
-            
-            	if(document.querySelector(".logout_btn")){
-            	let logout_btn = document.querySelector(".logout_btn");
-
-					logout_btn.addEventListener("click",function() {
-	     				if(confirm("로그아웃 하시겠습니까?")){
-	     					alert("로그아웃 되었습니다.");
-	     					logout_btn.href="${pageContext.request.contextPath}/loginPage/logout";
-	     				}else{
-	     					alert("로그아웃을 취소하셨습니다.");
-	     					logout_btn.href="#";
-	     				}
-	            	});
-            	}
-            </script>
 
          </div>
       </div>
@@ -774,13 +692,13 @@
      	 
      	 <div class="match_content" id="match_content">
      	 	<div class="etc">
-     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime} : 00
+     	 		<iconify-icon icon="uil:calender" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.gameDay} / ${matchinfo.gameTime}
      	 	</div>
      	 	<div class="etc">
      	 		<iconify-icon icon="mdi:map-marker-radius" style="color: #26a563;" width="27" height="27"></iconify-icon>　${matchinfo.fieldName} ${matchinfo.fieldAddress}
      	 	</div>
      	 	<div class="etc">
-     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon><p id="rental"></p>&nbsp;/ 인당
+     	 		<iconify-icon icon="fa-solid:won-sign" style="color: #26a563;" width="27" height="27"></iconify-icon><p id="rental"></p> / 인당
      	 		<!-- <script type="text/javascript">
      	 			if(${matchinfo.gameMacth} == '5vs5'){
      	 				document.getElementById("pay").innerText = "20000";
@@ -826,7 +744,7 @@
          </div>
          
          <div class="list_content" id="list_content">
-        	<h3>신청자가 없습니다</h3>
+        	
         </div>
       </div>
       
@@ -896,78 +814,15 @@
 	            	    	}
 	            	    	
 	            	    	if(data.fieldType = '5vs5'){
-	            	    		let price = (data.fieldRentalfee / 5);
-	            	    		let result = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	            	    		document.getElementById("rental").innerText = "　" + result;
+	            	    		document.getElementById("rental").innerText = "　" + (data.fieldRentalfee / 5);
 	            	    	}else {
-	            	    		let price = (data.fieldRentalfee / 6);
-	            	    		let result = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	            	    		document.getElementById("rental").innerText = "　" + result;
+	            	    		document.getElementById("rental").innerText = "　" +  (data.fieldRentalfee / 6);
 	            	    	}
 	            	    	
 	            	    	
 	            	    	
 	            	    	document.getElementById("content_field_info").innerText = data.fieldSize + " / " + data.fieldInOut + " / " + data.fieldGrass;
 	        	         
-	            	    	
-
-	            			let button_flag = true;
-	            			var time_out;
-	            			
-	            			let page_num = document.querySelector(".current_index");
-	            			            
-	            			let pause_btn = document.querySelector(".fa-pause");
-	            			let play_btn = document.querySelector(".fa-play");
-	            			
-	            			  // translate 먹일곳
-	            			  let top_banner = document.querySelector('.banner_content_area');
-	            			  let slide_photo_cnt = document.querySelectorAll(".banner_image").length;
-	            			
-	            			  // 최상단 디브
-	            			  let slider_area = document.querySelector(".banner_container");
-	            			
-	            			  var slider_width = slider_area.clientWidth; // container의 width
-	            			  var slide_index = 0;
-	            	
-	            	              show_slides();
-	            	
-	            	
-	            	              function show_slides() {
-	            	            	slide_index++;
-	            	                top_banner.style.transform = 'translate(' + (-(1028 * (slide_index - 1))-4*(slide_index-1)) + 'px';
-	            	                console.log(slide_index);
-	            	                
-	            					console.log(slide_photo_cnt);
-	            	                if (slide_index === slide_photo_cnt) {  
-	            	                slide_index = 0;
-	            	
-	            	                }
-	            	
-	            	                if (button_flag == true) {
-	            	                  time_out = setTimeout(show_slides, 5000);
-	            	                  
-	            	                }
-	            	
-	            	              }
-	            	              
-	            	              let mapbtn = document.getElementById("mapbtn");
-	            	          	
-	            	              mapbtn.addEventListener("click", function () {
-	            	              	let banner_area = document.querySelector(".picture_area");
-	            	                  const map_picture = document.querySelector(".map_picture");
-	            	                  map_picture.classList.toggle("map_toggle");
-	            	              	
-	            	                  mapbtn.classList.toggle("change_text");
-	            	                  if(mapbtn.classList.contains("change_text")){
-	            	                  	mapbtn.innerText="지도 닫기";
-	            	                  	top_banner.style.transform = 'translate(0px)';
-	            	                  	clearTimeout(time_out);
-	            	                  }else {
-	            	                  	mapbtn.innerText="지도 보기";
-	            	                  	banner_area.style.display ="block";
-	            	                  	show_slides();
-	            	                  }
-	            	              });
 	        	      }).catch(error => {
 	        	         console.log("error");
 	        	      });
@@ -1018,9 +873,9 @@
 	    	  	      	        	divg.className = "listno";
 	    	  	      	        	/* divg.innerText = name + "팀 : " + data4[name2].userGroup; */
 	    	  	      	        	
-	    	  	      	        	var divv = document.createElement("div");
-	    	  	      	        	divv.innerHTML ="<iconify-icon icon='fluent-emoji-flat:trophy' width='27' height='27'></iconify-icon>"+ "　　" + data4[name2].userVr;
-	    	  	      	        	divv.className = "listno";
+	    	  	      	        	//var divv = document.createElement("div");
+	    	  	      	        	//divv.innerHTML ="<iconify-icon icon='fluent-emoji-flat:trophy' width='27' height='27'></iconify-icon>"+ "　　" + data4[name2].userVr;
+	    	  	      	        	//divv.className = "listno";
 	    	  	      	        	/* divv.innerText = name + "승률 : " + data4[name2].userVr; */
 	    	  	      	        	
 	    	  	      	        	var divl = document.createElement("div");
@@ -1033,10 +888,9 @@
 	    	  	      	        	divlist.append(divn);
 	    	  	      	        	divlist.append(divd);
 	    	  	      	        	divlist.append(divg);
-	    	  	      	        	divlist.append(divv);
+	    	  	      	        	//divlist.append(divv);
 	    	  	      	        	divlist.append(divl);
 	    	  	      	        	
-	    	  	      	        	document.getElementById("list_content").innerHTML = " ";
 	    	  	      	        	document.getElementById("list_content").append(divlist);
 	    	  	      	        	
 	    	  	      	        	list.push(data4[name2].userCode); 
@@ -1290,6 +1144,24 @@
         });   
     </script>
     
+    <!--지도 버튼  -->
+    <script type="text/javascript">
+    	let mapbtn = document.getElementById("mapbtn");
+    	
+    	mapbtn.addEventListener("click", function () {
+        	let banner_area = document.querySelector(".banner_content");
+        	
+            const map_picture = document.querySelector(".map_picture");
+            map_picture.classList.toggle("map_toggle");
+			
+            mapbtn.classList.toggle("change_text");
+            if(mapbtn.classList.contains("change_text")){
+            	mapbtn.innerText="지도 닫기";
+            }else {
+            	mapbtn.innerText="지도 보기";
+            }
+        });
+    </script>
    </div>
 </body>
 

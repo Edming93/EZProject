@@ -30,6 +30,7 @@
 			</if>
 				and game_type = 'T'
 		</where>
+		ORDER BY game_time
 	</select>
 	
 	
@@ -154,8 +155,8 @@
 	
 	<!-- gamelist insert 쿼리 -->
 	<insert id="putTeamMatchGlist" parameterType="GlistVO">
-		insert into gamelist (game_macth, game_gender, field_name, field_address, game_type, game_day, game_time, game_pay, game_minp, game_maxp, game_pnum, game_place, close, field_code, uteam_pay)
-		values (#{gameMacth},#{gameGender}, #{fieldName}, #{fieldAddress}, 'T', #{gameDay}, #{gameTime}, (#{gamePay}-#{uteamPay}), 2, 2, 1, #{gamePlace}, 'true', #{fieldCode},#{uteamPay})
+		insert into gamelist (game_macth, game_gender, field_name, field_address, game_type, game_day, game_time, game_pay, game_minp, game_maxp, game_pnum, game_place, close, field_code, uteam_pay,level)
+		values (#{gameMacth},#{gameGender}, #{fieldName}, #{fieldAddress}, 'T', #{gameDay}, #{gameTime}, (#{gamePay}-#{uteamPay}), 2, 2, 1, #{gamePlace}, 'true', #{fieldCode},#{uteamPay},'팀전')
 	</insert>
 	
 	<!-- TjoinList에 insert 하기 -->
