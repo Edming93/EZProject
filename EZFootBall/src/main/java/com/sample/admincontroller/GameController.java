@@ -85,7 +85,8 @@ public class GameController {
 	}
 	
 	@PostMapping("radd")
-	public String rup(GameResultVO vo,HttpSession session,String ty) {
+	public String rup(GameResultVO vo,HttpSession session,String ty, @RequestParam String userCode2) {
+		GlistVO svo = new GlistVO();
 		if(vo.getUserCode()==0) {
 			vo.setGameType("T");
 			if(ty.equals("add")) {
@@ -93,17 +94,45 @@ public class GameController {
 				for(int i =0; i<mList.size(); i++) {
 					vo.setUserCode(mList.get(i));
 					service.radd(vo);
+					int win = service.wincnt(Integer.parseInt(userCode2));
+					int lose = service.losecnt(Integer.parseInt(userCode2));
+					svo.setNum(win);
+					svo.setUserCode(Integer.parseInt(userCode2));
+					service.winset(svo);
+					svo.setNum(lose);
+					service.loseset(svo);
 				}
 				
 			}else {
 				service.rup(vo);
+				int win = service.wincnt(Integer.parseInt(userCode2));
+				int lose = service.losecnt(Integer.parseInt(userCode2));
+				svo.setNum(win);
+				svo.setUserCode(Integer.parseInt(userCode2));
+				service.winset(svo);
+				svo.setNum(lose);
+				service.loseset(svo);
 			}
 		}else {
 			vo.setGameType("S");
 			if(ty.equals("add")) {
 				service.radd(vo);
+				int win = service.wincnt(vo.getUserCode());
+				int lose = service.losecnt(vo.getUserCode());
+				svo.setNum(win);
+				svo.setUserCode(vo.getUserCode());
+				service.winset(svo);
+				svo.setNum(lose);
+				service.loseset(svo);
 			}else {
 				service.rup(vo);
+				int win = service.wincnt(vo.getUserCode());
+				int lose = service.losecnt(vo.getUserCode());
+				svo.setNum(win);
+				svo.setUserCode(vo.getUserCode());
+				service.winset(svo);
+				svo.setNum(lose);
+				service.loseset(svo);
 			}
 		}
 		

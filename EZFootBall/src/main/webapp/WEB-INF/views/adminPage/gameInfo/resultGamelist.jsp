@@ -203,6 +203,7 @@
         <h3>경기 결과 추가</h3>
         <form action="${pageContext.request.contextPath}/game/radd" method="post">
         <input type="hidden" name="select" value="gameAdmin">
+        <input type="hidden" name="userCode2" value="0" id="userCode2">
         <input type="hidden" name="ty" value="add" id="ty">
         <input type="hidden" name="resultCode" value="-1" id="rcode">
             <ul id="flist">
@@ -620,6 +621,7 @@
                 	if(document.getElementsByClassName("checkbox")[i].checked == true){
                 		 document.getElementById("ingameCode").value = document.getElementsByClassName("gameCode")[i].innerText;
                 		 document.getElementById("inuserCode").value = document.getElementsByClassName("userCode")[i].innerText;
+                		 document.getElementById("userCode2").value = document.getElementsByClassName("userCode")[i].innerText;
                 		 document.getElementById("inteamCode").value = document.getElementsByClassName("teamCode")[i].innerText;
                 		 document.getElementById("inresult").value = document.getElementsByClassName("result")[i].innerText;
                 		 document.getElementById("inscore").value = document.getElementsByClassName("score")[i].innerText;
@@ -627,10 +629,10 @@
                 		 document.getElementById("rcode").value = document.getElementsByClassName("resultCode")[i].innerText;
                 		 document.getElementById("ty").value = "update";
                 		 if(document.getElementById("inteamCode").value > 0){
-                			 document.getElementById("inuserCode").readOnly = "true";
+                			 document.getElementById("inuserCode").disabled = "true";
                 			
                 		 }else if(document.getElementById("inuserCode").value > 0){
-                			 document.getElementById("inteamCode").readOnly = "true";
+                			 document.getElementById("inteamCode").disabled = "true";
                 			 document.getElementById("inteamCode").value = "0";
                 		 }
                 		 

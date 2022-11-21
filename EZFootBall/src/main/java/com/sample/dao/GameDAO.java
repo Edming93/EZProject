@@ -49,5 +49,13 @@ public interface GameDAO {
 	public int getcode (int userCode);
 	
 	public GameFieldInfoVO getfieldinfo (int fieldCode);
+	
+	public int wincnt (int userCode);
+	
+	public int losecnt (int userCode);
+	
+	public int winset (GlistVO vo);
+	
+	public int loseset (GlistVO vo);
 
 }

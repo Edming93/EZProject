@@ -105,4 +105,20 @@ public class GameService {
 		return mdao.sociallistcnt(vo);
 	}
 	
+	public int losecnt (int userCode) {
+		return dao.losecnt(userCode);
+	}
+	
+	public int wincnt (int userCode) {
+		return dao.wincnt(userCode);
+	}
+	
+	public void loseset (GlistVO vo) {
+		dao.loseset(vo);
+	}
+	
+	public void winset (GlistVO vo) {
+		dao.loseset(vo);
+	}
+	
 }
