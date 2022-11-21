@@ -306,7 +306,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_status = '활성' order by user_reports desc 
+		 from user_info where user_status = '활성'
 
 		 	<if test="userCode != null">
 		 		and user_code like concat ('%',#{userCode},'%')
@@ -332,7 +332,7 @@
 		 	<if test="userStatus != null">
 		 		and user_status like concat ('%',#{userStatus},'%')
 		 	</if>
-		 
+		 	 order by user_reports desc 
 	</select>
 	<!-- 블랙리스트 유저리스트 뽑기 -->
 	<select id="UInfoListB" resultType="UserVO">
@@ -348,7 +348,7 @@
 			user_gender, user_local, user_district, user_address, user_email1,
 			user_email2, user_authority, user_black, user_reports, user_score,
 			user_win, user_lose, user_status
-		 from user_info where user_status = '비활성' and user_reports &gt; 2 order by user_reports desc
+		 from user_info where user_status = '비활성' and user_reports &gt; 2 
 
 		 	<if test="userCode != null">
 		 		and user_code like concat ('%',#{userCode},'%')
@@ -374,7 +374,7 @@
 		 	<if test="userStatus != null">
 		 		and user_status like concat ('%',#{userStatus},'%')
 		 	</if>
-
+			order by user_reports desc
 	</select>
 	
 	<!-- 블랙리스트 유저만들기 -->
