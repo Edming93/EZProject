@@ -569,6 +569,7 @@ a {
 	width: 170px;
 	height: 30px;
 	border-radius: 5px;
+	text-align: center;
 }
 
 .pop_wrap {

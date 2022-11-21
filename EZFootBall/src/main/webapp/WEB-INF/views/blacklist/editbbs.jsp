@@ -542,7 +542,7 @@ button{
 a{text-decoration:none;}
 .wrap{padding:10px;}
 
-.btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:rgb(38, 166, 83); color:#fff; width:170px; height:30px; border-radius: 5px;}
+.btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:rgb(38, 166, 83); color:#fff; width:170px; height:30px; border-radius: 5px; text-align: center;}
 .pop_wrap{position:fixed; top:0; left:0; right:0; bottom:0; font-size:0; text-align:center;}
 .pop_wrap:after{display:inline-block; height:100%; vertical-align:middle; content:'';}
 .pop_wrap .pop_inner{display:inline-block; padding:20px 30px; background:#fff; width:250px; vertical-align:middle; font-size:15px;}
