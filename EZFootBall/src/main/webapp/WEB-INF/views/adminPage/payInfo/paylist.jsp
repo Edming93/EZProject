@@ -131,6 +131,7 @@
 						<option value="null">선택</option>
 						<option value="rvCode">예약번호</option>	
 						<option value="rvType">예약형태</option>	
+						<option value="rvState">예약상태</option>	
 						<option value="gameDay">매치날짜</option>
 						<option value="gameTime">매치시간</option>
 						<option value="fieldCode">구장번호</option>
@@ -276,7 +277,7 @@
 				}
 			}
 			
-			let select_box = ["rvCode","rvType","gameDay","gameTime","fieldCode","fieldName","fieldRentalfee","userPayment","payCode","userCode","userName","rvDay"];
+			let select_box = ["rvCode","rvType","rvState","gameDay","gameTime","fieldCode","fieldName","fieldRentalfee","userPayment","payCode","userCode","userName","rvDay"];
 			// 검색 로직
 			for(let j=0; j<select_box.length; j++){
 				if(select.value == select_box[j]){
