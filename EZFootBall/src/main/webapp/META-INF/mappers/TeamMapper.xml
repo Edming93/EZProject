@@ -294,9 +294,9 @@
 		delete from team_member
 		where team_code=#{teamCode}
 	</delete>
-	
+	<!-- 팀 진짜 해체 이게 진짜 해체 -->
 	<update id="dateamcode">
-		update user_abil set team_code=null, user_group=''
+		update user_abil set team_code=null, user_group='없음'
 		where team_code=#{teamCode}
 	</update>
 	

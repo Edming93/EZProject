@@ -201,6 +201,13 @@ public class AdminController {
 				userCode = Integer.parseInt(i);
 				vo.setUserCode(userCode);
 				service.UUInfoList(userCode);
+//
+//				service.UpdateFRstate(userCode);
+//				service.UpdateGLPnum(userCode);
+//				service.UpdateGLClose(userCode);
+//				service.DeleteGR(userCode);
+//
+//				service.DeleteGSList(userCode);
 
 			}
 			result = 1;
