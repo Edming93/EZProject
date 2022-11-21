@@ -295,15 +295,24 @@ public class TeamController {
 			user5.setUserGroup(vo.getTeamName());
 			service.upUserAbil(user5);
 			service.upUserInfo(user5);
+			System.out.println("왓더");
 			
-			if(Integer.parseInt(vo.getUserCode6()) > 1) {
-				UserVO user6 = new UserVO();
-				user6.setTeamCode(LTC);
-				user6.setUserCode(Integer.parseInt(vo.getUserCode6()));
-				user6.setUserGroup(vo.getTeamName());
-				service.upUserAbil(user6);
-				service.upUserInfo(user6);
+			try {
+				if(Integer.parseInt(vo.getUserCode6()) > 1) {
+					System.out.println("DDDDDD");
+					UserVO user6 = new UserVO();
+					user6.setTeamCode(LTC);
+					user6.setUserCode(Integer.parseInt(vo.getUserCode6()));
+					user6.setUserGroup(vo.getTeamName());
+					service.upUserAbil(user6);
+					service.upUserInfo(user6);
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("오류남");
 			}
+			
 			
 			//service.updateUserAbil(vo);
 			//service.updateUserInfo(vo);
@@ -400,10 +409,12 @@ public class TeamController {
 	//------------------------------------------------------	
 	
 	@GetMapping("/alltdal")
-	public String alltdal(@RequestParam int teamCode) {
+	public String alltdal(@RequestParam int teamCode,HttpSession session) {
 		service.dtteamcode(teamCode);
 		service.diteamcode(teamCode);
 		service.dateamcode(teamCode);
+		UserVO uvo = (UserVO) session.getAttribute("sessionVO");
+		session.setAttribute("sessionVO", service.userVO(uvo.getUserCode()));
 		return "redirect:/myPage/myPage";
 	}
 	
