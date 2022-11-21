@@ -380,9 +380,6 @@
         	datdata = <%=today%>;
         }
         var day = <%=year%> + "-" +<%=month%> +"-" +datdata;
-        console.log(<%=today%>);
-        console.log(datdata);
-        console.log(day);
         dayday = day;
 	      
 	      let data = {place:"null" ,close:"null",xgender:"null",ygender:"null",day:day};
@@ -778,7 +775,6 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
 	 					   }
 	 					});
 	 				} else {
-	 					console.log(${userVO.teamCode});
 	 					if('${userVO.teamCode}' == 0 ){
 	 						
 	 						location.href="${pageContext.request.contextPath}/team/register";

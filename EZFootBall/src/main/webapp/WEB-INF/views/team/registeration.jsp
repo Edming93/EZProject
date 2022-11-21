@@ -564,9 +564,6 @@
 			var t4 = document.getElementById("t4");
 			var t5 = document.getElementById("t5");
 			
-			console.log(t2.value);
-			console.log(t3.value);
-			console.log(t4.value);
 			
 			if(t2.value != '' && t3.value != '' && t4.value != '' && t5.value != '' ){
 				
@@ -608,9 +605,6 @@
 	 			data : JSON.stringify(simple_data),
 				success : function(data){
 					
-					console.log(data.length);
-					console.dir(data);
-					
 					let x = 0;
 					comdiv.innerHTML = "";
 						for(let comment of data){
@@ -628,8 +622,6 @@
 									}
 									if(cnt == 0){
 										userCode.value = comment.userCode;
-										console.log(data[0].userCode);
-										console.log(data[0].teamCode);
 									}
 									
 								}else{
@@ -643,12 +635,7 @@
 								if(comdiv.classList.contains('show')){
 									comdiv.style.display = "flex";
 								}
-								console.log("ehsmsrj"+data.length);
 
-										console.log("시작");
-										console.log(data[x].userName);
-										console.log(data[x].userCode);
-										console.log(data[x].teamCode);
 									
 										const div1 = document.createElement("div");
 										
@@ -664,14 +651,11 @@
 										div1.append(p1);
 										div1.append(p2);
 										comdiv.append(div1);
-										console.log(comment.teamCode);
 										div1.addEventListener("click",function(){
 											
 											
 											
-											console.log("왜안나와요,.? :"+comment.teamCode);
 											
-											console.log("data : "+ comment.userCode);
 											if(comment.teamCode != 0){
 												
 												alert("팀이 존재하여 추가할 수 없습니다.222222222");

@@ -335,10 +335,7 @@
     	if(lcnt > 0 && ccnt > 0 ){
     		for(let i=0; i<   document.getElementsByClassName("userCode").length; i++){
         		if(ingameCode == document.getElementsByClassName("gameCode")[i].innerText && inuserCode == document.getElementsByClassName("teamCode")[i].innerText){
-        			console.log(ingameCode);
-        			console.log(document.getElementsByClassName("gameCode")[i].innerText);
-        			console.log(inuserCode);
-        			console.log(document.getElementsByClassName("teamCode")[i].innerText);
+        			
         			alert("이미 존재하는 신청팀 입니다");
         			cnt++;
         			break;
@@ -347,8 +344,7 @@
     		var max = false;
     		if(cnt == 0){
     			if(pnum + 1 > document.getElementsByClassName("GameMaxp")[index].innerText.trim()){
-    				console.log(pnum);
-    				console.log("최대"+document.getElementsByClassName("GameMaxp")[index].innerText.trim())
+    				
         			var confirmflag = confirm("최대 신 팀 이상입니다 신청 하시겠습니까?");
         			 if(confirmflag){
         				 location.href = "${pageContext.request.contextPath}/sub/tadd?teamCode="+inuserCode+"&gameCode="+ingameCode;
@@ -560,12 +556,12 @@
 	            if(i==<%=stgamelist.size()/15%>){
 	            	for(let k=j; k<<%=stgamelist.size()%>; k++){
 		            	document.getElementById("tablelist").children[k].style.display = "";
-		            	console.log("gma");
+		            
 		            }
 	            }else{
 	            	for(let k=j; k<j+15; k++){
 		            	document.getElementById("tablelist").children[k].style.display = "";
-		            	console.log("durl");
+	
 		            }
 	            }
 	            
@@ -576,7 +572,7 @@
 	<!-- 검색 -->
 	<script type="text/javascript">
 	document.getElementById("sbtn").addEventListener("click",function(){
-		console.log("으악");
+
 		/* 카테고리 */
 		if(document.getElementById("select").value == "null"){
 			
@@ -587,7 +583,7 @@
 			}
 			
 			let num = Math.round((cnt / 15))+1;
-			console.log(num);
+			////console.log(num);
 			for(let i=num; i<<%=stgamelist.size()/15+1%>; i++){
 				document.getElementById("nev").children[i].style.display = "none";
 			}
@@ -610,7 +606,7 @@
 			}
 			
 			let num = Math.round((cnt / 15))+1;
-			console.log(num);
+			////console.log(num);
 			for(let i=num; i<<%=stgamelist.size()/15+1%>; i++){
 				document.getElementById("nev").children[i].style.display = "none";
 			}
@@ -766,15 +762,15 @@
 		 for(var i=0; i< <%=stgamelist.size()%>; i++){
 			 if(document.getElementsByClassName("checkbox")[i].checked == true){
 				 
-				 console.log(document.getElementsByClassName("rvCode")[i].innerText);
+				 //console.log(document.getElementsByClassName("rvCode")[i].innerText);
 				 cklist = cklist + "&rvCode=" + document.getElementsByClassName("rvCode")[i].innerText;
 				 tclist = tclist + "&teamCode=" + document.getElementsByClassName("teamCode")[i].innerText;
 				 gclist = gclist + "&gameCode=" + document.getElementsByClassName("gameCode")[i].innerText;
 			 }
 		 }
-		 console.log(cklist);
-		 console.log(tclist);
-		 console.log(gclist);
+		 //console.log(cklist);
+		 //console.log(tclist);
+		 //console.log(gclist);
 		 
 		 var del = confirm("정말삭제하시겠습니까?");
 		 if(del){

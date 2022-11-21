@@ -118,7 +118,6 @@
  	window.onload = function(e) {
 		for(let i=0; i< <%=num%>-1; i++) {
 			var userCode = document.getElementsByClassName("ucdiv")[i].innerText;
-			console.log(userCode);
 			var data = {userCode:userCode};
 			let icon = document.getElementsByClassName("licon")[i];
 			fetch("${pageContext.request.contextPath}/rank/selevel",{
@@ -152,7 +151,6 @@
 		/* 승 가져오기 */
 		for(let i=0; i< <%=num%>-1; i++) {
 			var userCode = document.getElementsByClassName("ucdiv")[i].innerText;
-			console.log(userCode);
 			var data = {userCode:userCode};
 			fetch("${pageContext.request.contextPath}/rank/result",{
 		         method : "POST", // PUT, PATCH, DELETE
@@ -172,7 +170,6 @@
 		/* 패 가져오기 */
 		for(let i=0; i< <%=num%>-1; i++) {
 			var userCode = document.getElementsByClassName("ucdiv")[i].innerText;
-			console.log(userCode);
 			var data = {userCode:userCode};
 			fetch("${pageContext.request.contextPath}/rank/lose",{
 		         method : "POST", // PUT, PATCH, DELETE

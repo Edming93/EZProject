@@ -330,9 +330,6 @@
         	datdata = <%=today%>;
         }
         var day = <%=year%> + "-" +<%=month%> +"-" +datdata;
-        console.log(<%=today%>);
-        console.log(datdata);
-        console.log(day);
         dayday = day;
 	      
 	      let data = {place:"null" ,close:"null",xgender:"null",ygender:"null",day:day};
@@ -1354,7 +1351,6 @@ for (var i = 0; i < document.getElementById("day").childElementCount; i++) {
   <!--초기화  -->
   <script type="text/javascript">
    document.getElementById("listreset").addEventListener("click",function(e){
-	   console.log(dayday);
 	      document.getElementById("local").value = null;
 	      document.getElementById("close").checked = false;
 	      document.getElementById("ygender").checked = false;

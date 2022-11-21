@@ -973,7 +973,6 @@
 	    	  	      	      }).then(response => response.json()) 
 	    	  	      	      .then(teamcode => {  
 	    	  	      	    	cntmem = teamcode;
-	    	  	      	    	console.log(cntmem);
 	    	  	      	         
 	    	  	      	      }).catch(error => {
 	    	  	      	         console.log("error");
@@ -991,7 +990,6 @@
     	  	      	      }).then(response => response.json()) 
     	  	      	      .then(teamcode2 => {  
     	  	      	    	genum = teamcode2;
-    	  	      	    	console.log(genum);
     	  	      	      }).catch(error => {
     	  	      	         console.log("error");
     	  	      	      });

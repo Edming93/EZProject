@@ -1711,13 +1711,13 @@
     <!-- 삭제 -->
 	<script type="text/javascript">
 	 document.getElementById("del").addEventListener("click", function () {
-		 console.log("dhkdghkfds");
+		 //console.log("dhkdghkfds");
 		 var gclist = "gameCode=0";
 		 let ttcnt=0;
 		 let delcnt=0;
 		 for(let i=0; i<<%=gamelist.size()%>; i++){
 			 if(document.getElementsByClassName("checkbox")[i].checked == true){
-				 console.log(i);
+				 //console.log(i);
 				 delcnt++;
 				 if(document.getElementsByClassName("gameDay")[i].innerText == '<%=nday%>'){
 					 if(document.getElementsByClassName("gameTime")[i].innerText <= '<%=hour%>:00')
@@ -1776,11 +1776,11 @@
 			 document.getElementById("updiv").style.opacity="0.1";
 			 document.getElementById("upmodal").style.display="block";
 			 
-			 console.log(document.getElementsByClassName("gameCode")[sgcode].innerText);
+			 //console.log(document.getElementsByClassName("gameCode")[sgcode].innerText);
 			 document.getElementById("upcode").value = document.getElementsByClassName("gameCode")[sgcode].innerText;
 			 document.getElementById("upday").value = document.getElementsByClassName("gameDay")[sgcode].innerText;
 			 /* var ckckck = document.getElementsByClassName("gameTime")[sgcode].innerText;
-			 console.log(ckckck);
+			 //console.log(ckckck);
 			 document.getElementById(ckckck).selected = true; */
 			 /* document.getElementById("uplevel").value = document.getElementsByClassName("level")[sgcode].innerText; */
 			/*  document.getElementById("upmatch").value = document.getElementsByClassName("gameMacth")[sgcode].innerText; */
@@ -1803,7 +1803,7 @@
 		for(let i=0; i<document.getElementsByClassName("gameCode").length; i++){
          	document.getElementsByClassName("checkbox")[i].checked = false;
 		 }
-		console.log("ddddd");
+		//console.log("ddddd");
 		document.getElementById("updiv").style.display = "none";
 		document.getElementById("upmodal").style.display = "none";
 	});
