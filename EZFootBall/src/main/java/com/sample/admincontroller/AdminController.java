@@ -154,7 +154,8 @@ public class AdminController {
 	}
 
 	@GetMapping("/idselect")
-	public String idselect(@RequestParam("idselect") String idselect, Model model) {
+	public String idselect(@RequestParam("idselect") String idselect, Model model,HttpSession session) {
+		session.setAttribute("select", "userAdmin");
 		model.addAttribute("idselect", idselect);
 
 		model.addAttribute("userList", service.UInfoList());
