@@ -127,6 +127,11 @@ body{
 	
 }
 
+#comment{
+	width: 80%;
+    margin-left: 8%;
+}
+
 .comment > div{
 	 border-radius: 3px;
 	 font-family: 'Gowun Dodum', sans-serif;
@@ -143,7 +148,6 @@ body{
 
 .insert {
     margin-left: 7%;
-    /* padding-left: 100px; */
     grid-area: insert;
     display: flex;
     flex-direction: row;
@@ -188,7 +192,6 @@ input{
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
     margin-top: 5px;
-    font-family: 'Gowun Dodum', sans-serif;
 	
 }
 
@@ -946,6 +949,7 @@ let play_btn = document.querySelector(".fa-play");
 					div.append(div3);
 					comdiv.append(div);
 					div.style.marginTop = "2%";
+					div.style.paddingLeft = "2%";
 					
 					
 					
@@ -1186,6 +1190,7 @@ let play_btn = document.querySelector(".fa-play");
 					div.append(div3);
 					comdiv.append(div);
 					div.style.marginTop = "2%";
+					div.style.paddingLeft = "2%";
 					comdiv.style.marginTop = "3%";
 					comdiv.style.marginBottom = "3%";
 					
