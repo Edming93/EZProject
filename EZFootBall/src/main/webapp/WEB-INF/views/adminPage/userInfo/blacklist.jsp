@@ -148,7 +148,7 @@
 						<button id="TCRbtn">검색</button>
 					</div>
 					<div class="TCRbutton">
-						<button class="Udeletebtn">블랙리스트해제</button>
+						<div class="Udeletebtn">블랙 해제</div>
 					</div>				
 				</div>	
 			</div>

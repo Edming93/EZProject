@@ -3,8 +3,8 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String idselect = null;
-	if(request.getParameter("idselect") != null) {
-		idselect = (String)request.getParameter("idselect");
+	if(session.getAttribute("idselect") != null) {
+		idselect = (String)session.getAttribute("idselect");
 	}else {
 		idselect = "user";
 	}

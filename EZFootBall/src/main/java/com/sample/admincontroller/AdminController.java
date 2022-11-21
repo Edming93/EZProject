@@ -156,7 +156,7 @@ public class AdminController {
 	@GetMapping("/idselect")
 	public String idselect(@RequestParam("idselect") String idselect, Model model,HttpSession session) {
 		session.setAttribute("select", "userAdmin");
-		model.addAttribute("idselect", idselect);
+		session.setAttribute("idselect", idselect);
 
 		model.addAttribute("userList", service.UInfoList());
 		model.addAttribute("userListB", service.UInfoListB());
@@ -167,7 +167,8 @@ public class AdminController {
 	@PostMapping("/idselect1")
 	public String idselect1(HttpSession session, Model model, UserVO vo, @RequestParam("Uselect") String Uselect,
 			@RequestParam("Usearch") String Usearch) {
-
+		System.out.println(Uselect);
+		System.out.println(Usearch);
 		if (Uselect.equals("userCode")) {
 			vo.setUserCode(Integer.parseInt(Usearch));
 		} else if (Uselect.equals("userName")) {
@@ -183,7 +184,7 @@ public class AdminController {
 		} else if (Uselect.equals("userReports")) {
 			vo.setUserReports(Usearch);
 		}
-		model.addAttribute("userList", service.UInfoListB1(vo));
+		model.addAttribute("userListB", service.UInfoListB1(vo));
 		return "adminPage/adminMain";
 	}
 
