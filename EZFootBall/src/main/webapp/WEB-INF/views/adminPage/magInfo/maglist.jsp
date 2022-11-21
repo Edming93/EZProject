@@ -152,7 +152,7 @@
 			    </div>
 				<div class="btn_box">
 					<button id="search_btn" class="btn">검색</button>
-					<button id="add" class="btn">추가</button>
+<!-- 					<button id="add" class="btn">추가</button> -->
 					<button id="delete" class="btn">삭제</button>
 				</div>
 			</div>
@@ -176,7 +176,8 @@
 				<td>${list.userName}</td>
 				<td>${list.userBirth}</td>
 				<td>${list.userGender}</td>
-				<td class="area">${list.preferArea}</td>
+				<c:if test="${list.preferArea ne null}"><td class="area">${list.preferArea}</td></c:if>
+				<c:if test="${list.preferArea eq null}"><td class="area">임시매니저</td></c:if>
 			</tr>
 				<script type="text/javascript">
 					$('.state').on("change", function(){

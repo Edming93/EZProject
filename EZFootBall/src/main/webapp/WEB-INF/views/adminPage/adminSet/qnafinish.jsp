@@ -256,7 +256,7 @@
 						</section>
 					</div>
 				</div>
-
+				<!-- 관리자 답변 들어갈곳 -->
 				<c:if test="${inquiryVO.inquiryState eq '답변완료'}">
 					<div class="main_item2">
 						<div class="detail_header">
