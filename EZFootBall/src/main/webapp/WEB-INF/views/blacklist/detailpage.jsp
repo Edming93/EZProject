@@ -142,10 +142,13 @@ body{
 }
 
 .insert {
-	grid-area: insert;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+    margin-left: 7%;
+    /* padding-left: 100px; */
+    grid-area: insert;
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    justify-content: space-between;
 }
 
 .insert>textarea {
