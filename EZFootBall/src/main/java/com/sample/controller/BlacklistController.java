@@ -112,9 +112,8 @@ public class BlacklistController {
 			bvo.setUserId(uvo.getUserId());
 			bvo.setBuserName(uvo.getUserName());
 			bvo.setUserCode(uvo.getUserCode());
-			service.adduserBlack(bvo);
 			if (service.setBlackList(bvo)) {
-				
+				service.adduserBlack(bvo);
 				return "redirect:/blacklist/blacklistmain";
 			} else {
 				model.addAttribute("alert", "alert");
