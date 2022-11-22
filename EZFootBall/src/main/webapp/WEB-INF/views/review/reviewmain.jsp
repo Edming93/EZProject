@@ -738,7 +738,7 @@ let play_btn = document.querySelector(".fa-play");
 			<textarea name="name" id="name" cols="10" rows="3"></textarea>
 			<hr /> -->
 
-				<textarea name="content" id="content" placeholder="댓글을 입력해 주세요"><c:if
+				<textarea name="content" id="content" placeholder="리뷰를 작성해 주세요"><c:if
 						test="${empty requestScope.userdata}">로그인이 필요합니다.</c:if></textarea>
 				<button id="submit">등록</button>
 			</div>
@@ -879,7 +879,7 @@ let play_btn = document.querySelector(".fa-play");
 					div3.append(btn2);
 					
 					div2.append(ccontent);
-					comdiv.append(div);
+					comdiv.prepend(div);
 					div.style.marginTop = "2%"; 
 					
 					//수정 버튼 클릭시 수정폼 생성
