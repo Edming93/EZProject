@@ -63,8 +63,7 @@ public class BlacklistController {
 	@GetMapping("/blacklistmain/{blacklistCode}")
 	public String getBlacklistItem(HttpSession session, Model model,
 			@PathVariable("blacklistCode") String blacklistCode, BlacklistVO bvo, Criteria cri) {
-		System.out.println(blacklistCode);
-		System.out.println(bvo.getBlacklistCode());
+
 		UserVO vo = (UserVO) session.getAttribute("sessionVO");
 		model.addAttribute("userdata", vo);
 		model.addAttribute("cri", cri);
@@ -76,7 +75,7 @@ public class BlacklistController {
 	@GetMapping("/blacklistmain/setbbs")
 	public String setBBS(@SessionAttribute("sessionVO") UserVO uvo, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
 			Model model) {
-		System.out.println(uvo.getUserCode());
+		
 		service.getcode(model, uvo);
 
 		String[] cateList = { "서울", "인천", "경기도", "강원도", "경상도", "전라도", "충청도", "제주도" };
@@ -88,10 +87,10 @@ public class BlacklistController {
 	// 페이지 상세
 	@PostMapping("/blacklistmain/setbbs")
 	public String setBBSResult(@SessionAttribute("sessionVO") UserVO uvo, BlacklistVO bvo, Model model) {
-		System.out.println(uvo);
+		
 
 		if (uvo != null) {
-			System.out.println(uvo.getUserCode());
+			
 			bvo.setUserId(uvo.getUserId());
 			bvo.setBuserName(uvo.getUserName());
 			bvo.setUserCode(uvo.getUserCode());
@@ -113,8 +112,7 @@ public class BlacklistController {
 			@RequestParam("blackCode") String blackCode, @PathVariable("blacklistCode") String blacklistCode,
 			@ModelAttribute("BlacklistVO") BlacklistVO bvo) {
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
-		System.out.println(bvo.getBlackuserCode());
-		System.out.println(bvo.getDumblackuserCode());
+		
 		
 		service.deleteuserBlack(bvo);
 		service.getcode(model, uvo);
@@ -138,7 +136,7 @@ public class BlacklistController {
 		bvo.setBuserName(uvo.getUserName());
 		bvo.setUserCode(uvo.getUserCode());
 	
-		System.out.println("받는 블랙 유저 코드" + bvo.getBlackuserCode());
+		
 		if (service.editBlackList(bvo)) {
 			service.adduserBlack(bvo);
 			return "redirect:/blacklist/blacklistmain";
@@ -155,11 +153,9 @@ public class BlacklistController {
 	public String deleteBBSResult(@SessionAttribute("sessionVO") UserVO uvo, Model model,
 			@RequestParam("blackCode") String blackCode, @ModelAttribute("BlacklistVO") BlacklistVO bvo,
 			@PathVariable("blacklistCode") String blacklistCode) {
-		// get방식으로 보낸 blackCode를 @RequestParam으로 받아서 이걸 setblackusercode에 integet변환해서 넣음
 		bvo.setUserCode(uvo.getUserCode());
 		bvo.getBlackuserCode();
 		bvo.setBlackuserCode(Integer.parseInt(blackCode));
-		System.out.println(bvo.getBlackuserCode());
 
 		service.deleteuserBlack(bvo);
 

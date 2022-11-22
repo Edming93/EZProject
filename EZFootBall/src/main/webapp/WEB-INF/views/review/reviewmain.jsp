@@ -812,7 +812,7 @@ let play_btn = document.querySelector(".fa-play");
 				
 				if(data.state == "ok"){
 					
-					const comdiv = document.getElementById("comment3");
+					const comdiv = document.getElementById("comment2");
 					
 					const leftdiv = document.createElement("div");
 					leftdiv.className = "leftbox";						

@@ -104,7 +104,7 @@ public class BlacklistService {
 		int a = blackDAO.insertBlackListComment(vo);
 		if(a>0) {
 			map.put("state", "ok");
-			/* map.put("vo", blackDAO.selectComment(vo)); */
+			
 		}else {
 			map.put("state", "error");
 		}
