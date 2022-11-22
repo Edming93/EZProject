@@ -178,7 +178,7 @@
     padding-top: 5px;
     font-size: 19px;
     color: #26a653;
-    padding-left: 35px;
+    padding-left: 10px;
     font-weight: bold;
 }
 
